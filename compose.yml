@@ -12,11 +12,12 @@ services:
       traefik.http.routers.boobstrap-org.rule: "Host(`boobstrap.org`) || Host(`www.boobstrap.org`)"
       traefik.http.routers.boobstrap-org.entrypoints: https
       traefik.http.routers.boobstrap-org.tls.certresolver: letsencrypt
-      traefik.http.routers.boobstrap-org.service: boobstrap-org
-      traefik.http.services.boobstrap-org.loadbalancer.server.port: "3000"
+      traefik.http.routers.boobstrap-org.service: boobstrap
+      traefik.http.services.boobstrap.loadbalancer.server.port: "3000"
       traefik.http.routers.boobstrap-org-http.rule: "Host(`boobstrap.org`) || Host(`www.boobstrap.org`)"
       traefik.http.routers.boobstrap-org-http.entrypoints: http
       traefik.http.routers.boobstrap-org-http.middlewares: "redirect-to-https@file"
+      traefik.http.routers.boobstrap-org-http.service: boobstrap
     ports:
       - "${PORT:-3000}:3000"
     read_only: true
