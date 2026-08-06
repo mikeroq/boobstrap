@@ -1,0 +1,27 @@
+.bs-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--bs-space-3);
+  padding: var(--bs-space-4);
+  color: var(--bs-color-text-muted);
+  background: rgb(255 255 255 / 2%);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-lg);
+}
+
+.bs-alert-title {
+  display: block;
+  margin-bottom: var(--bs-space-1);
+  color: var(--bs-color-text);
+  font-weight: 650;
+}
+
+.bs-alert-primary {
+  background: rgb(216 60 135 / 8%);
+  border-color: rgb(216 60 135 / 24%);
+}
+
+.bs-alert-success {
+  background: rgb(54 179 126 / 8%);
+  border-color: rgb(54 179 126 / 25%);
+}

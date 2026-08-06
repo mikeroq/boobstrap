@@ -6,6 +6,55 @@ Boobstrap is a lightweight, component-focused CSS framework designed to simplify
 
 Boobstrap is playful in name, but serious about usability, accessibility, consistency, and maintainable code.
 
+## Current Preview
+
+The first working framework slice is now included in this repository and is used to build the landing page in `index.html`.
+
+It currently ships:
+
+- Theme and design tokens
+- Reset and typography foundations
+- Responsive containers and a 12-column grid
+- Buttons, cards, badges, forms, alerts, and code windows
+- Flex, spacing, display, sizing, and typography utilities
+- Dark and light theme token sets
+- A standalone `dist/boobstrap.css` build
+
+Run the landing page locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Create the production site and standalone framework bundle:
+
+```bash
+npm run build
+```
+
+Run the desktop and mobile browser checks:
+
+```bash
+npm test
+```
+
+### Docker
+
+Build and host the production landing page with Docker Compose:
+
+```bash
+docker compose up --build -d
+```
+
+The site is available at `http://localhost:8080`. Set `PORT` when the host needs a different public port:
+
+```bash
+PORT=3000 docker compose up --build -d
+```
+
+The runtime container serves the production build from unprivileged Nginx on container port `8080` and includes a health check, immutable asset caching, SPA fallback, and baseline security headers.
+
 ## Why Boobstrap?
 
 Modern CSS is powerful, but building a consistent interface still requires a lot of repetitive work.
