@@ -1,0 +1,111 @@
+:root,
+[data-bs-theme="dark"] {
+  color-scheme: dark;
+
+  --bs-white: #ffffff;
+  --bs-brand-300: #f28abb;
+  --bs-brand-400: #ea5a9f;
+  --bs-brand-500: #d83c87;
+  --bs-brand-600: #b92f72;
+  --bs-brand-700: #922257;
+  --bs-plum-700: #452040;
+  --bs-plum-800: #32172f;
+  --bs-plum-900: #211021;
+  --bs-plum-950: #140a15;
+
+  --bs-color-background: var(--bs-plum-950);
+  --bs-color-surface: var(--bs-plum-900);
+  --bs-color-surface-raised: #2b1529;
+  --bs-color-surface-hover: var(--bs-plum-800);
+  --bs-color-text: #fff9fc;
+  --bs-color-text-muted: #c4b5bf;
+  --bs-color-text-subtle: #95858f;
+  --bs-color-primary: var(--bs-brand-500);
+  --bs-color-primary-hover: var(--bs-brand-400);
+  --bs-color-primary-active: var(--bs-brand-600);
+  --bs-color-success: #36b37e;
+  --bs-color-warning: #e6a23c;
+  --bs-color-danger: #e05268;
+  --bs-color-info: #618ee8;
+  --bs-color-border: rgb(255 255 255 / 10%);
+  --bs-color-border-strong: rgb(216 60 135 / 38%);
+
+  --bs-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --bs-font-display: "Plus Jakarta Sans", Inter, ui-sans-serif, system-ui, sans-serif;
+  --bs-font-mono: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+
+  --bs-font-size-xs: 0.75rem;
+  --bs-font-size-sm: 0.875rem;
+  --bs-font-size-md: 1rem;
+  --bs-font-size-lg: 1.125rem;
+  --bs-font-size-xl: 1.25rem;
+  --bs-font-size-2xl: 1.5rem;
+  --bs-font-size-3xl: 2rem;
+  --bs-font-size-4xl: 2.75rem;
+  --bs-font-size-5xl: 4rem;
+  --bs-font-size-6xl: clamp(4rem, 8vw, 7rem);
+  --bs-line-height-tight: 1.05;
+  --bs-line-height-heading: 1.2;
+  --bs-line-height-body: 1.6;
+  --bs-line-height-code: 1.7;
+
+  --bs-space-0: 0;
+  --bs-space-1: 0.25rem;
+  --bs-space-2: 0.5rem;
+  --bs-space-3: 0.75rem;
+  --bs-space-4: 1rem;
+  --bs-space-5: 1.25rem;
+  --bs-space-6: 1.5rem;
+  --bs-space-8: 2rem;
+  --bs-space-10: 2.5rem;
+  --bs-space-12: 3rem;
+  --bs-space-16: 4rem;
+  --bs-space-20: 5rem;
+  --bs-space-24: 6rem;
+  --bs-space-32: 8rem;
+
+  --bs-radius-xs: 0.25rem;
+  --bs-radius-sm: 0.5rem;
+  --bs-radius-md: 0.75rem;
+  --bs-radius-lg: 1rem;
+  --bs-radius-xl: 1.5rem;
+  --bs-radius-2xl: 2rem;
+  --bs-radius-pill: 9999px;
+
+  --bs-shadow-sm: 0 2px 8px rgb(8 2 9 / 18%);
+  --bs-shadow-md: 0 12px 30px rgb(8 2 9 / 28%);
+  --bs-shadow-lg: 0 24px 70px rgb(8 2 9 / 42%);
+  --bs-shadow-brand: 0 10px 34px rgb(216 60 135 / 22%);
+  --bs-gradient-brand: linear-gradient(135deg, var(--bs-brand-400), var(--bs-brand-500) 48%, var(--bs-brand-600));
+
+  --bs-container-sm: 40rem;
+  --bs-container-md: 48rem;
+  --bs-container-lg: 64rem;
+  --bs-container-xl: 76rem;
+  --bs-container-2xl: 90rem;
+
+  --bs-duration-fast: 120ms;
+  --bs-duration-normal: 200ms;
+  --bs-duration-slow: 360ms;
+  --bs-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --bs-ease-emphasized: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+[data-bs-theme="light"] {
+  color-scheme: light;
+  --bs-color-background: #fffafd;
+  --bs-color-surface: #ffffff;
+  --bs-color-surface-raised: #ffffff;
+  --bs-color-surface-hover: #f8edf3;
+  --bs-color-text: #2b1725;
+  --bs-color-text-muted: #715f6b;
+  --bs-color-text-subtle: #93828d;
+  --bs-color-border: #eadce4;
+  --bs-color-border-strong: #dcb7ca;
+  --bs-color-primary: #c93179;
+  --bs-color-primary-hover: #ae2868;
+  --bs-color-primary-active: #8f2057;
+  --bs-shadow-sm: 0 2px 8px rgb(72 31 55 / 8%);
+  --bs-shadow-md: 0 12px 30px rgb(72 31 55 / 12%);
+  --bs-shadow-lg: 0 24px 70px rgb(72 31 55 / 16%);
+}

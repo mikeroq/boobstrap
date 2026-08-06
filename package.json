@@ -1,0 +1,36 @@
+{
+  "name": "boobstrap",
+  "version": "0.1.0",
+  "description": "A cheeky CSS framework that still means business.",
+  "type": "module",
+  "files": [
+    "dist/boobstrap.css",
+    "src/boobstrap.css",
+    "src/base",
+    "src/components",
+    "src/layout",
+    "src/utilities"
+  ],
+  "style": "dist/boobstrap.css",
+  "exports": {
+    ".": "./dist/boobstrap.css"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build && npm run build:framework",
+    "build:framework": "node scripts/build-framework.mjs",
+    "preview": "vite preview",
+    "test": "node tests/smoke.mjs"
+  },
+  "keywords": [
+    "css",
+    "framework",
+    "components",
+    "utilities"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "playwright": "^1.62.1",
+    "vite": "^7.1.1"
+  }
+}
