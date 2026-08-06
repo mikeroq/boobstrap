@@ -1,4 +1,4 @@
-import "./boobstrap.css";
+import "boobstrap/dist/boobstrap.css";
 import "./site.css";
 
 const form = document.querySelector("[data-signup-form]");
