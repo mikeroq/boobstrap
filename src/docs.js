@@ -1,5 +1,5 @@
-import frameworkCss from "@mikeroq/boobstrap/dist/boobstrap.css?raw";
-import "@mikeroq/boobstrap/dist/boobstrap.css";
+import frameworkCss from "@boobstrap/boobstrap/dist/boobstrap.css?raw";
+import "@boobstrap/boobstrap/dist/boobstrap.css";
 import "./docs.css";
 
 const root = document.documentElement;

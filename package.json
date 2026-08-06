@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@mikeroq/boobstrap": "0.1.0"
+    "@boobstrap/boobstrap": "0.1.1"
   },
   "devDependencies": {
     "playwright": "^1.62.1",

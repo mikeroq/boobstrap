@@ -23,7 +23,7 @@ async function waitForServer() {
 
 const browser = await chromium.launch({ headless: true });
 const failures = [];
-const frameworkCss = await readFile("node_modules/@mikeroq/boobstrap/dist/boobstrap.css", "utf8");
+const frameworkCss = await readFile("node_modules/@boobstrap/boobstrap/dist/boobstrap.css", "utf8");
 const expectedClasses = new Set(
   [...frameworkCss.matchAll(/\.([a-z][a-z0-9-]*)/gi)]
     .map((match) => match[1])
