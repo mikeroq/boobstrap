@@ -11,7 +11,7 @@ npm install
 npm run dev
 ```
 
-The site imports `@mikeroq/boobstrap@0.1.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
+The site imports `@boobstrap/boobstrap@0.1.1` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
 Vite serves the landing page at `/` and the framework documentation at `/docs.html`. The documentation's class and design-token reference is generated in the browser from the exact compiled stylesheet installed by the site, preventing the reference from drifting from the shipped CSS.
 
