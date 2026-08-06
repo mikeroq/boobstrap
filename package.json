@@ -1,34 +1,23 @@
 {
-  "name": "boobstrap",
+  "name": "boobstrap-site",
   "version": "0.1.0",
-  "description": "A cheeky CSS framework that still means business.",
+  "description": "The official landing page for the Boobstrap CSS framework.",
+  "private": true,
   "type": "module",
-  "files": [
-    "dist/boobstrap.css",
-    "src/boobstrap.css",
-    "src/base",
-    "src/components",
-    "src/layout",
-    "src/utilities"
-  ],
-  "style": "dist/boobstrap.css",
-  "exports": {
-    ".": "./dist/boobstrap.css"
-  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build && npm run build:framework",
-    "build:framework": "node scripts/build-framework.mjs",
+    "build": "vite build",
     "preview": "vite preview",
     "test": "node tests/smoke.mjs"
   },
   "keywords": [
-    "css",
-    "framework",
-    "components",
-    "utilities"
+    "boobstrap",
+    "landing-page"
   ],
   "license": "MIT",
+  "dependencies": {
+    "boobstrap": "https://github.com/mikeroq/boobstrap-framework/archive/37bd952e430618055970920b8a079384ed81a4b2.tar.gz"
+  },
   "devDependencies": {
     "playwright": "^1.62.1",
     "vite": "^7.1.1"
