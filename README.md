@@ -47,13 +47,13 @@ Build and host the production landing page with Docker Compose:
 docker compose up --build -d
 ```
 
-The site is available at `http://localhost:8080`. Set `PORT` when the host needs a different public port:
+The site is available at `http://localhost:3000`. Set `PORT` when the host needs a different public port:
 
 ```bash
-PORT=3000 docker compose up --build -d
+PORT=8080 docker compose up --build -d
 ```
 
-The runtime container serves the production build from unprivileged Nginx on container port `8080` and includes a health check, immutable asset caching, SPA fallback, and baseline security headers.
+The runtime container serves the production build from unprivileged Nginx on container port `3000` and includes a health check, immutable asset caching, SPA fallback, and baseline security headers.
 
 ## Why Boobstrap?
 
