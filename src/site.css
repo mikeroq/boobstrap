@@ -315,6 +315,7 @@ html {
   .hero-tagline { font-size: clamp(1.45rem, 7vw, 2.1rem); }
   .hero-actions .bs-btn { width: 100%; }
   .product-stage { min-height: 43rem; margin-top: var(--bs-space-12); }
+  .stage-strap { top: 0; left: -1.5rem; }
   .code-preview { left: 0; width: 100%; }
   .code-preview .bs-code-body { min-height: 19rem; font-size: 0.67rem; }
   .phone-preview { top: 13.5rem; right: -0.4rem; width: 12rem; min-width: 0; height: 25rem; padding-inline: 0.85rem; border-width: 5px; border-radius: 2rem; }
