@@ -399,6 +399,7 @@ body.docs-page {
 
 .docs-footer { display: flex; align-items: center; justify-content: space-between; gap: var(--bs-space-4); padding-top: var(--bs-space-8); color: var(--bs-color-text-subtle); border-top: 1px solid var(--bs-color-border); font-size: var(--bs-font-size-sm); }
 .docs-footer p { margin: 0; }
+.docs-footer-links { display: flex; align-items: center; gap: var(--bs-space-4); }
 .docs-footer a { color: var(--bs-color-text-muted); }
 .docs-footer a:hover { color: var(--bs-color-primary-hover); }
 
