@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { mkdir } from "node:fs/promises";
+import { mkdir, readFile } from "node:fs/promises";
 import { chromium } from "playwright";
 
 const port = 4173;
@@ -23,6 +23,14 @@ async function waitForServer() {
 
 const browser = await chromium.launch({ headless: true });
 const failures = [];
+const frameworkCss = await readFile("node_modules/boobstrap/dist/boobstrap.css", "utf8");
+const expectedClasses = new Set(
+  [...frameworkCss.matchAll(/\.([a-z][a-z0-9-]*)/gi)]
+    .map((match) => match[1])
+    .filter((name) => name.startsWith("bs-")),
+);
+const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
+const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
 
 try {
   await waitForServer();
@@ -61,6 +69,55 @@ try {
     }
 
     await page.close();
+
+    const docsPage = await browser.newPage({ viewport });
+    const docsConsoleErrors = [];
+    docsPage.on("console", (message) => {
+      if (message.type() === "error") docsConsoleErrors.push(message.text());
+    });
+    docsPage.on("pageerror", (error) => docsConsoleErrors.push(error.message));
+
+    await docsPage.goto(`${baseUrl}/docs.html`, { waitUntil: "networkidle" });
+    await docsPage.screenshot({ path: `artifacts/docs-${viewport.name}.png`, fullPage: true });
+
+    const docsDimensions = await docsPage.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    const documentedClasses = await docsPage.locator("#class-reference .reference-row").count();
+    const documentedTokens = await docsPage.locator("#tokens .reference-row").count();
+
+    if (!await docsPage.getByRole("heading", { name: "All classes", level: 2 }).isVisible()) {
+      failures.push(`${viewport.name}: class reference heading is not visible`);
+    }
+    if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
+      failures.push(`${viewport.name}: docs horizontal overflow (${docsDimensions.scrollWidth}px > ${docsDimensions.clientWidth}px)`);
+    }
+    if (documentedClasses !== expectedClasses.size) {
+      failures.push(`${viewport.name}: docs list ${documentedClasses} of ${expectedClasses.size} framework classes`);
+    }
+    if (documentedTokens !== expectedTokens) {
+      failures.push(`${viewport.name}: docs list ${documentedTokens} of ${expectedTokens} framework tokens`);
+    }
+    if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs ${docsConsoleErrors.join("; ")}`);
+
+    if (viewport.name === "desktop") {
+      await docsPage.getByLabel("Filter classes").fill("bs-btn");
+      if (await docsPage.locator("#class-reference .reference-row").count() !== 7) {
+        failures.push("desktop: class filtering did not return the seven button classes");
+      }
+      await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
+      if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
+        failures.push("desktop: theme toggle did not enable light theme");
+      }
+    } else {
+      await docsPage.getByRole("button", { name: "Open documentation menu" }).click();
+      if (!await docsPage.locator("#docs-sidebar").isVisible()) {
+        failures.push("mobile: documentation menu did not open");
+      }
+    }
+
+    await docsPage.close();
   }
 } finally {
   await browser.close();
@@ -71,5 +128,5 @@ if (failures.length) {
   console.error(failures.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log("Smoke checks passed at 1680×940 and 390×844.");
+  console.log(`Smoke checks passed at 1680×940 and 390×844; documented ${expectedClasses.size} classes and ${expectedTokens} tokens.`);
 }

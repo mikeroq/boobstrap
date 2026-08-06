@@ -59,6 +59,8 @@ html {
 
 .release-badge { padding: 0.45rem 1rem; }
 .release-dot { width: 0.25rem; height: 0.25rem; background: currentColor; border-radius: 50%; opacity: 0.72; }
+.site-nav-link { color: var(--bs-color-text-muted); font-size: var(--bs-font-size-sm); font-weight: 650; }
+.site-nav-link:hover { color: var(--bs-color-text); }
 
 .hero {
   position: relative;
@@ -305,6 +307,7 @@ html {
 }
 
 @media (max-width: 47.99rem) {
+  .site-nav-link { display: none; }
   .release-badge span:not(.release-dot),
   .release-badge svg { display: none; }
   .release-badge { padding-inline: 0.75rem; }

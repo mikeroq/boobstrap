@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Complete Boobstrap documentation: installation, layout, components, utilities, themes, design tokens, and every framework class." />
+    <meta name="theme-color" content="#140a15" />
+    <title>Documentation — Boobstrap</title>
+    <script type="module" src="/src/docs.js"></script>
+  </head>
+  <body class="docs-page">
+    <a class="docs-skip-link" href="#docs-content">Skip to documentation</a>
+
+    <header class="docs-header">
+      <a class="docs-brand bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap home">
+        <svg class="docs-brand-mark" width="38" height="30" viewBox="0 0 56 42" aria-hidden="true">
+          <path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Z" fill="currentColor"/>
+          <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/>
+          <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/>
+        </svg>
+        <span>Boobstrap</span>
+        <span class="docs-version">v0.1.0</span>
+      </a>
+
+      <nav class="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
+        <a href="/" class="docs-header-link">Home</a>
+        <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
+        <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
+          <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+          <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
+        </button>
+        <button class="docs-menu-button docs-icon-button" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+        </button>
+      </nav>
+    </header>
+
+    <div class="docs-layout">
+      <aside class="docs-sidebar" id="docs-sidebar" data-sidebar>
+        <nav class="docs-nav" aria-label="Documentation sections">
+          <p class="docs-nav-label">Start</p>
+          <a href="#introduction">Introduction</a>
+          <a href="#installation">Installation</a>
+          <a href="#theming">Theming</a>
+
+          <p class="docs-nav-label">Foundations</p>
+          <a href="#typography">Typography</a>
+          <a href="#layout">Layout &amp; grid</a>
+
+          <p class="docs-nav-label">Components</p>
+          <a href="#buttons">Buttons</a>
+          <a href="#badges">Badges</a>
+          <a href="#cards">Cards</a>
+          <a href="#alerts">Alerts</a>
+          <a href="#forms">Forms</a>
+          <a href="#code-windows">Code windows</a>
+
+          <p class="docs-nav-label">Reference</p>
+          <a href="#utilities">Utilities</a>
+          <a href="#tokens">Design tokens</a>
+          <a href="#class-reference">All classes</a>
+          <a href="#accessibility">Accessibility</a>
+        </nav>
+      </aside>
+
+      <button class="docs-backdrop" type="button" data-menu-close aria-label="Close documentation menu"></button>
+
+      <main class="docs-main" id="docs-content">
+        <article class="docs-content">
+          <section class="docs-hero" id="introduction">
+            <span class="bs-badge bs-badge-primary">Documentation</span>
+            <h1>Look good.<br /><span class="bs-text-gradient">Ship fast.</span></h1>
+            <p class="bs-lead">Boobstrap is a lightweight, class-based CSS framework with responsive layout primitives, polished components, practical utilities, and themeable design tokens.</p>
+            <div class="docs-stat-row bs-flex bs-flex-wrap bs-gap-3">
+              <span><strong data-class-count>148</strong> classes</span>
+              <span><strong data-token-count>79</strong> tokens</span>
+              <span><strong>0</strong> JavaScript dependencies</span>
+            </div>
+          </section>
+
+          <section class="docs-section" id="installation">
+            <div class="docs-kicker">Get started</div>
+            <h2>Installation</h2>
+            <p>Install from GitHub, then import the compiled stylesheet once at your application entry point.</p>
+
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>Terminal</span><button type="button" data-copy="npm install github:mikeroq/boobstrap-framework">Copy</button></div>
+              <pre><code>npm install github:mikeroq/boobstrap-framework</code></pre>
+            </div>
+
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>JavaScript</span><button type="button" data-copy="import &quot;boobstrap/dist/boobstrap.css&quot;;">Copy</button></div>
+              <pre><code><span class="bs-code-keyword">import</span> <span class="bs-code-string">"boobstrap/dist/boobstrap.css"</span>;</code></pre>
+            </div>
+
+            <p>For a plain HTML project, copy <code>dist/boobstrap.css</code> into your assets and link it directly:</p>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;link rel="stylesheet" href="/assets/boobstrap.css" /&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/assets/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
+            </div>
+
+            <div class="docs-callout">
+              <strong>Prefix guarantee</strong>
+              <p>Every public framework class starts with <code>bs-</code>. Boobstrap does apply a small element reset and base typography, but component and utility styles stay namespaced.</p>
+            </div>
+          </section>
+
+          <section class="docs-section" id="theming">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Theming</h2>
+            <p>Dark mode is the default. Set <code>data-bs-theme="light"</code> on any ancestor to switch that subtree to the built-in light palette. Theme attributes can live on <code>&lt;html&gt;</code>, a page shell, or an individual preview.</p>
+
+            <div class="docs-demo theme-demo bs-grid bs-gap-4">
+              <div class="theme-panel bs-col-12 bs-col-md-6 bs-p-5" data-bs-theme="dark">
+                <span class="bs-badge bs-badge-primary">Dark</span>
+                <h3 class="bs-mt-4 bs-mb-2">Night by default</h3>
+                <p class="bs-card-text bs-mb-4">Deep plum surfaces with warm pink accents.</p>
+                <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Primary action</button>
+              </div>
+              <div class="theme-panel bs-col-12 bs-col-md-6 bs-p-5" data-bs-theme="light">
+                <span class="bs-badge bs-badge-primary">Light</span>
+                <h3 class="bs-mt-4 bs-mb-2">Bright when needed</h3>
+                <p class="bs-card-text bs-mb-4">The same semantic tokens, remapped for light surfaces.</p>
+                <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Primary action</button>
+              </div>
+            </div>
+
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;html data-bs-theme="light"&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;html</span> <span class="bs-code-attribute">data-bs-theme</span>=<span class="bs-code-string">"light"</span><span class="bs-code-tag">&gt;</span></code></pre>
+            </div>
+
+            <h3>Customize semantic tokens</h3>
+            <p>Override variables after importing Boobstrap. Components consume semantic tokens such as <code>--bs-color-primary</code>, so a small override updates the whole system.</p>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>CSS</span><button type="button" data-copy=":root {&#10;  --bs-color-primary: #8b5cf6;&#10;  --bs-color-primary-hover: #a78bfa;&#10;  --bs-radius-md: 0.5rem;&#10;}">Copy</button></div>
+              <pre><code><span class="bs-code-tag">:root</span> {
+  <span class="bs-code-attribute">--bs-color-primary</span>: <span class="bs-code-string">#8b5cf6</span>;
+  <span class="bs-code-attribute">--bs-color-primary-hover</span>: <span class="bs-code-string">#a78bfa</span>;
+  <span class="bs-code-attribute">--bs-radius-md</span>: <span class="bs-code-string">0.5rem</span>;
+}</code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section" id="typography">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Typography</h2>
+            <p>Headings and body copy receive sensible defaults. Use <code>.bs-display</code> for oversized hero text and <code>.bs-lead</code> for introductory copy.</p>
+            <div class="docs-demo typography-demo">
+              <p class="bs-display bs-text-gradient bs-mb-6">Boobstrap</p>
+              <h1>Heading one</h1>
+              <h2>Heading two</h2>
+              <h3>Heading three</h3>
+              <p class="bs-lead bs-mb-4">Lead copy introduces a section with a larger, muted treatment.</p>
+              <p class="bs-mb-0">Body copy inherits the framework text color and a comfortable <code>1.6</code> line height.</p>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;h1 class="bs-display bs-text-gradient"&gt;Build boldly.&lt;/h1&gt;&#10;&lt;p class="bs-lead"&gt;Thoughtful defaults, ready to ship.&lt;/p&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;h1</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-display bs-text-gradient"</span><span class="bs-code-tag">&gt;</span>Build boldly.<span class="bs-code-tag">&lt;/h1&gt;</span>
+<span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-lead"</span><span class="bs-code-tag">&gt;</span>Thoughtful defaults, ready to ship.<span class="bs-code-tag">&lt;/p&gt;</span></code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section" id="layout">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Layout &amp; grid</h2>
+            <p><code>.bs-container</code> centers content with a fluid gutter and a <code>90rem</code> ceiling. Add a size modifier for narrower content. <code>.bs-section</code> provides fluid vertical rhythm.</p>
+            <div class="docs-table-wrap">
+              <table class="docs-table">
+                <thead><tr><th>Class</th><th>Maximum width</th></tr></thead>
+                <tbody>
+                  <tr><td><code>.bs-container</code></td><td><code>--bs-container-2xl</code> · 90rem</td></tr>
+                  <tr><td><code>.bs-container-sm</code></td><td>40rem</td></tr>
+                  <tr><td><code>.bs-container-md</code></td><td>48rem</td></tr>
+                  <tr><td><code>.bs-container-lg</code></td><td>64rem</td></tr>
+                  <tr><td><code>.bs-container-xl</code></td><td>76rem</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3>12-column grid</h3>
+            <p>Use <code>.bs-grid</code> or its alias <code>.bs-row</code>, then assign column spans. Unprefixed columns work at every width; <code>md</code> begins at 48rem and <code>lg</code> at 64rem.</p>
+            <div class="docs-demo grid-demo">
+              <div class="bs-grid bs-gap-3">
+                <div class="bs-col-12 bs-col-md-6 bs-col-lg-4">12 / md 6 / lg 4</div>
+                <div class="bs-col-12 bs-col-md-6 bs-col-lg-4">12 / md 6 / lg 4</div>
+                <div class="bs-col-12 bs-col-lg-4">12 / lg 4</div>
+              </div>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-grid bs-gap-4"&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-4"&gt;...&lt;/div&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-8"&gt;...&lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-grid bs-gap-4"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-col-12 bs-col-md-6 bs-col-lg-4"</span><span class="bs-code-tag">&gt;</span>...<span class="bs-code-tag">&lt;/div&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-col-12 bs-col-md-6 bs-col-lg-8"</span><span class="bs-code-tag">&gt;</span>...<span class="bs-code-tag">&lt;/div&gt;</span>
+<span class="bs-code-tag">&lt;/div&gt;</span></code></pre>
+            </div>
+          </section>
+
+          <section class="docs-section" id="buttons">
+            <div class="docs-kicker">Components</div>
+            <h2>Buttons</h2>
+            <p>Start with <code>.bs-btn</code>, add one visual variant, and optionally add a size or icon modifier. The same classes work on buttons and links.</p>
+            <div class="docs-demo bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+              <button class="bs-btn bs-btn-primary" type="button">Primary</button>
+              <button class="bs-btn bs-btn-secondary" type="button">Secondary</button>
+              <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
+              <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Small</button>
+              <button class="bs-btn bs-btn-primary bs-btn-lg" type="button">Large</button>
+              <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Favorite">
+                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="bs-btn bs-btn-primary" type="button" disabled>Disabled</button>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;&lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read docs&lt;/a&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span><span class="bs-code-tag">&gt;</span>Save changes<span class="bs-code-tag">&lt;/button&gt;</span>
+<span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/docs"</span><span class="bs-code-tag">&gt;</span>Read docs<span class="bs-code-tag">&lt;/a&gt;</span></code></pre>
+            </div>
+            <div class="docs-note"><strong>Icon buttons:</strong> always provide an accessible name with <code>aria-label</code>. <code>.bs-btn-icon</code> only controls square sizing.</div>
+          </section>
+
+          <section class="docs-section" id="badges">
+            <div class="docs-kicker">Components</div>
+            <h2>Badges</h2>
+            <p>Badges are compact status and metadata labels. Use the base class alone for a neutral badge or add the primary modifier.</p>
+            <div class="docs-demo bs-flex bs-flex-wrap bs-gap-3">
+              <span class="bs-badge">Draft</span>
+              <span class="bs-badge bs-badge-primary">New release</span>
+              <span class="bs-badge bs-badge-primary"><span aria-hidden="true">♥</span> Loved</span>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;span class="bs-badge bs-badge-primary"&gt;New release&lt;/span&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;span</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-badge bs-badge-primary"</span><span class="bs-code-tag">&gt;</span>New release<span class="bs-code-tag">&lt;/span&gt;</span></code></pre></div>
+          </section>
+
+          <section class="docs-section" id="cards">
+            <div class="docs-kicker">Components</div>
+            <h2>Cards</h2>
+            <p>Cards establish a contained surface. Structure content with the body, title, and text classes; add <code>.bs-card-raised</code> when the card needs more visual elevation.</p>
+            <div class="docs-demo cards-demo bs-grid bs-gap-4">
+              <article class="bs-card bs-col-12 bs-col-md-6">
+                <div class="bs-card-body">
+                  <span class="bs-badge">Standard</span>
+                  <h3 class="bs-card-title bs-mt-4">A thoughtful default</h3>
+                  <p class="bs-card-text bs-mb-4">Contained content with a subtle border and surface treatment.</p>
+                  <a class="bs-btn bs-btn-ghost bs-p-0" href="#class-reference">Explore the API →</a>
+                </div>
+              </article>
+              <article class="bs-card bs-card-raised bs-col-12 bs-col-md-6">
+                <div class="bs-card-body">
+                  <span class="bs-badge bs-badge-primary">Raised</span>
+                  <h3 class="bs-card-title bs-mt-4">Extra elevation</h3>
+                  <p class="bs-card-text bs-mb-4">The raised modifier adds a stronger shadow without changing structure.</p>
+                  <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Take action</button>
+                </div>
+              </article>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;article class="bs-card bs-card-raised"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;h3 class="bs-card-title"&gt;Card title&lt;/h3&gt;&#10;    &lt;p class="bs-card-text"&gt;Supporting copy.&lt;/p&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-body"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span><span class="bs-code-tag">&gt;</span>Card title<span class="bs-code-tag">&lt;/h3&gt;</span>
+    <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-text"</span><span class="bs-code-tag">&gt;</span>Supporting copy.<span class="bs-code-tag">&lt;/p&gt;</span>
+  <span class="bs-code-tag">&lt;/div&gt;</span>
+<span class="bs-code-tag">&lt;/article&gt;</span></code></pre></div>
+          </section>
+
+          <section class="docs-section" id="alerts">
+            <div class="docs-kicker">Components</div>
+            <h2>Alerts</h2>
+            <p>Alerts communicate inline feedback. Pair <code>.bs-alert</code> with a state modifier and use <code>.bs-alert-title</code> for a clear lead-in.</p>
+            <div class="bs-stack bs-gap-3">
+              <div class="bs-alert bs-alert-primary" role="status"><span aria-hidden="true">✦</span><span><strong class="bs-alert-title">Heads up</strong>This preview is ready for your custom theme.</span></div>
+              <div class="bs-alert bs-alert-success" role="status"><span aria-hidden="true">✓</span><span><strong class="bs-alert-title">Saved</strong>Your changes were published successfully.</span></div>
+              <div class="bs-alert" role="status"><span aria-hidden="true">i</span><span><strong class="bs-alert-title">Neutral note</strong>The base alert works without a state modifier.</span></div>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-alert bs-alert-success" role="status"&gt;&#10;  &lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt;&#10;  Your changes were published.&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert bs-alert-success"</span> <span class="bs-code-attribute">role</span>=<span class="bs-code-string">"status"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;strong</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert-title"</span><span class="bs-code-tag">&gt;</span>Saved<span class="bs-code-tag">&lt;/strong&gt;</span>
+  Your changes were published.
+<span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
+          </section>
+
+          <section class="docs-section" id="forms">
+            <div class="docs-kicker">Components</div>
+            <h2>Forms</h2>
+            <p>Boobstrap styles native controls without replacing their semantics. Keep labels associated with controls and use <code>.bs-form-group</code> to establish consistent spacing.</p>
+            <div class="docs-demo">
+              <form class="docs-form" data-docs-form>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-name">Name</label>
+                  <input class="bs-input" id="docs-name" type="text" placeholder="Ada Lovelace" />
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-role">Role</label>
+                  <select class="bs-select" id="docs-role"><option>Designer</option><option>Developer</option><option>Founder</option></select>
+                </div>
+                <div class="bs-form-group docs-form-wide">
+                  <label class="bs-label" for="docs-message">Message</label>
+                  <textarea class="bs-textarea" id="docs-message" placeholder="Tell us what you're building…"></textarea>
+                </div>
+                <button class="bs-btn bs-btn-primary docs-form-wide" type="submit">Send message</button>
+              </form>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-form-group"&gt;&#10;  &lt;label class="bs-label" for="email"&gt;Email&lt;/label&gt;&#10;  &lt;input class="bs-input" id="email" type="email" placeholder="you@example.com" /&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-form-group"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;label</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-label"</span> <span class="bs-code-attribute">for</span>=<span class="bs-code-string">"email"</span><span class="bs-code-tag">&gt;</span>Email<span class="bs-code-tag">&lt;/label&gt;</span>
+  <span class="bs-code-tag">&lt;input</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-input"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-tag">/&gt;</span>
+<span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
+          </section>
+
+          <section class="docs-section" id="code-windows">
+            <div class="docs-kicker">Components</div>
+            <h2>Code windows</h2>
+            <p>The code-window family provides a complete presentation shell and optional syntax-color helpers. It does not perform syntax highlighting; apply the token classes in server-rendered or hand-authored markup.</p>
+            <div class="bs-code-window">
+              <div class="bs-code-toolbar"><div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div><span class="bs-text-xs bs-text-subtle">example.html</span></div>
+              <pre class="bs-code-body bs-m-0"><span class="bs-code-comment">&lt;!-- Build boldly --&gt;</span>
+<span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span><span class="bs-code-tag">&gt;</span>
+  Ship it
+<span class="bs-code-tag">&lt;/button&gt;</span>
+<span class="bs-code-keyword">const</span> ready = <span class="bs-code-string">true</span>;</pre>
+            </div>
+            <div class="docs-note"><strong>Composition:</strong> use <code>.bs-code-window</code> as the shell, <code>.bs-code-toolbar</code> for chrome, <code>.bs-code-dots</code> and three <code>.bs-code-dot</code> elements for the controls, and <code>.bs-code-body</code> on the <code>&lt;pre&gt;</code>.</div>
+          </section>
+
+          <section class="docs-section" id="utilities">
+            <div class="docs-kicker">Reference</div>
+            <h2>Utilities</h2>
+            <p>Utilities are single-purpose helpers designed for composition. Responsive display helpers use the <code>md</code> breakpoint at 48rem.</p>
+
+            <div class="docs-reference-grid">
+              <div class="docs-reference-card"><h3>Display &amp; flex</h3><p><code>.bs-block</code>, <code>.bs-inline-block</code>, <code>.bs-flex</code>, <code>.bs-inline-flex</code>, <code>.bs-hidden</code>, <code>.bs-stack</code>, <code>.bs-flex-wrap</code>, <code>.bs-flex-1</code>.</p></div>
+              <div class="docs-reference-card"><h3>Alignment</h3><p><code>.bs-items-start</code>, <code>.bs-items-center</code>, <code>.bs-items-end</code>, <code>.bs-justify-start</code>, <code>.bs-justify-center</code>, <code>.bs-justify-between</code>, <code>.bs-justify-end</code>, <code>.bs-self-center</code>.</p></div>
+              <div class="docs-reference-card"><h3>Sizing &amp; position</h3><p><code>.bs-w-full</code>, <code>.bs-h-full</code>, <code>.bs-relative</code>, <code>.bs-overflow-hidden</code>.</p></div>
+              <div class="docs-reference-card"><h3>Responsive display</h3><p><code>.bs-md-flex</code>, <code>.bs-md-block</code>, and <code>.bs-md-hidden</code> apply from 48rem upward.</p></div>
+              <div class="docs-reference-card"><h3>Gap</h3><p><code>.bs-gap-{n}</code> supports <code>1, 2, 3, 4, 5, 6, 8, 10, 12</code> and maps directly to spacing tokens.</p></div>
+              <div class="docs-reference-card"><h3>Margin</h3><p><code>.bs-m-0</code>, <code>.bs-mx-auto</code>, <code>.bs-mt-{n}</code> for <code>2, 3, 4, 6, 8, 10</code>, and <code>.bs-mb-{n}</code> for <code>0, 2, 4, 6</code>.</p></div>
+              <div class="docs-reference-card"><h3>Padding</h3><p><code>.bs-p-{n}</code> for <code>0, 2, 3, 4, 5, 6, 8</code>; <code>.bs-px-{n}</code> for <code>4, 6</code>; <code>.bs-py-{n}</code> for <code>2, 4, 6, 8</code>.</p></div>
+              <div class="docs-reference-card"><h3>Text</h3><p>Sizes <code>.bs-text-xs</code> through <code>.bs-text-3xl</code>; alignment, semantic colors, gradient text, font weights, italic, link decoration, and screen-reader-only helpers.</p></div>
+            </div>
+
+            <h3>Spacing scale</h3>
+            <div class="spacing-scale" data-spacing-scale></div>
+          </section>
+
+          <section class="docs-section" id="tokens">
+            <div class="docs-kicker">Reference</div>
+            <h2>Design tokens</h2>
+            <p>All framework decisions are exposed as CSS custom properties. Color tokens may be remapped by a theme; typography, spacing, radius, elevation, container, and motion tokens are shared.</p>
+            <div class="docs-filter-row">
+              <label for="token-filter">Filter tokens</label>
+              <input class="bs-input" id="token-filter" type="search" placeholder="Try color, space, radius…" data-token-filter />
+            </div>
+            <div class="docs-token-groups" data-token-reference></div>
+          </section>
+
+          <section class="docs-section" id="class-reference">
+            <div class="docs-kicker">Reference</div>
+            <h2>All classes</h2>
+            <p>This index is generated from the exact compiled stylesheet used by this site. It includes every public <code>bs-</code> selector and its core declaration.</p>
+            <div class="docs-filter-row">
+              <label for="class-filter">Filter classes</label>
+              <input class="bs-input" id="class-filter" type="search" placeholder="Try button, grid, text…" data-class-filter />
+            </div>
+            <div class="docs-class-groups" data-class-reference></div>
+          </section>
+
+          <section class="docs-section" id="accessibility">
+            <div class="docs-kicker">Guidance</div>
+            <h2>Accessibility</h2>
+            <p>Boobstrap supplies visible focus treatment, reduced-motion safeguards, accessible color foundations, and <code>.bs-sr-only</code>. Your markup still owns semantics and behavior.</p>
+            <ul class="docs-checklist">
+              <li>Use native elements first: <code>&lt;button&gt;</code> for actions and <code>&lt;a&gt;</code> for navigation.</li>
+              <li>Associate every form control with a visible <code>&lt;label&gt;</code>, or use <code>.bs-sr-only</code> when the visual design cannot accommodate one.</li>
+              <li>Add <code>aria-label</code> to icon-only buttons.</li>
+              <li>Use <code>role="status"</code> for non-urgent dynamic alerts and <code>role="alert"</code> for urgent messages.</li>
+              <li>Do not rely on color alone to communicate state; pair it with text or an icon.</li>
+              <li>When overriding tokens, re-check text and focus-ring contrast in both themes.</li>
+            </ul>
+            <div class="docs-callout"><strong>Motion preference built in</strong><p>The base reset reduces animation and transition durations when the user enables <code>prefers-reduced-motion: reduce</code>.</p></div>
+          </section>
+
+          <footer class="docs-footer">
+            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.1.0 · MIT licensed.</p>
+            <a href="https://github.com/mikeroq/boobstrap-framework">View the framework source →</a>
+          </footer>
+        </article>
+      </main>
+
+      <aside class="docs-on-this-page" aria-label="On this page">
+        <p class="docs-nav-label">On this page</p>
+        <nav data-page-nav></nav>
+      </aside>
+    </div>
+  </body>
+</html>
