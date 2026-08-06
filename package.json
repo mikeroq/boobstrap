@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "node tests/smoke.mjs"
+    "test": "npm run build && node tests/smoke.mjs"
   },
   "keywords": [
     "boobstrap",

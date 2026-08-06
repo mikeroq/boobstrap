@@ -2,7 +2,7 @@
 
 The official landing page for [Boobstrap](https://github.com/mikeroq/boobstrap-framework), a cheeky CSS framework that still means business.
 
-This repository contains only the marketing site, its responsive product illustration, browser tests, and production hosting configuration. The reusable framework source and distributable CSS live in the separate [`mikeroq/boobstrap-framework`](https://github.com/mikeroq/boobstrap-framework) repository.
+This repository contains the marketing site, the complete browsable framework documentation, browser tests, and production hosting configuration. The reusable framework source and distributable CSS live in the separate [`mikeroq/boobstrap-framework`](https://github.com/mikeroq/boobstrap-framework) repository.
 
 ## Development
 
@@ -13,6 +13,8 @@ npm run dev
 
 The site imports `boobstrap/dist/boobstrap.css` from a commit-pinned GitHub dependency, keeping local development and production builds reproducible.
 
+Vite serves the landing page at `/` and the framework documentation at `/docs.html`. The documentation's class and design-token reference is generated in the browser from the exact compiled stylesheet installed by the site, preventing the reference from drifting from the shipped CSS.
+
 ## Validation
 
 ```bash
@@ -20,7 +22,7 @@ npm run build
 npm test
 ```
 
-The smoke test exercises the production build in Chromium at desktop and mobile viewport sizes, checks for horizontal overflow and console errors, and verifies the signup interaction.
+The smoke test exercises both production pages in Chromium at desktop and mobile viewport sizes, checks for horizontal overflow and console errors, verifies the landing-page signup interaction, and confirms that the documentation enumerates every framework class and token.
 
 ## Docker
 
@@ -43,6 +45,9 @@ The runtime container serves the Vite production build from unprivileged Nginx o
 - Site composition and illustration: `src/site.css`
 - Site behavior: `src/main.js`
 - Landing page markup: `index.html`
+- Documentation markup: `docs.html`
+- Documentation behavior and source-derived API reference: `src/docs.js`
+- Documentation presentation: `src/docs.css`
 - Framework package: [mikeroq/boobstrap-framework](https://github.com/mikeroq/boobstrap-framework)
 
 ## License
