@@ -16,7 +16,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "boobstrap": "https://github.com/mikeroq/boobstrap-framework/archive/37bd952e430618055970920b8a079384ed81a4b2.tar.gz"
+    "@mikeroq/boobstrap": "0.1.0"
   },
   "devDependencies": {
     "playwright": "^1.62.1",
