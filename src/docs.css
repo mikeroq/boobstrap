@@ -234,6 +234,36 @@ body.docs-page {
   border-radius: var(--bs-radius-xl);
 }
 
+.docs-package-tabs {
+  display: flex;
+  width: fit-content;
+  max-width: 100%;
+  gap: var(--bs-space-1);
+  overflow-x: auto;
+  margin-top: var(--bs-space-5);
+  padding: 0.25rem;
+  background: rgb(255 255 255 / 3%);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-lg);
+}
+
+.docs-package-tab {
+  min-width: 4.25rem;
+  padding: 0.55rem 0.85rem;
+  color: var(--bs-color-text-muted);
+  background: transparent;
+  border: 0;
+  border-radius: var(--bs-radius-md);
+  font: inherit;
+  font-size: var(--bs-font-size-sm);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.docs-package-tab:hover { color: var(--bs-color-text); background: rgb(255 255 255 / 4%); }
+.docs-package-tab[aria-selected="true"] { color: #ffffff; background: var(--bs-color-primary); box-shadow: var(--bs-shadow-sm); }
+.docs-package-tab:focus-visible { outline: 3px solid var(--bs-color-focus); outline-offset: 2px; }
+
 .docs-code-block {
   overflow: hidden;
   margin-block: var(--bs-space-4);

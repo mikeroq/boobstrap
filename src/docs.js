@@ -60,6 +60,37 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   });
 });
 
+const packageTabs = [...document.querySelectorAll("[data-package-command]")];
+const packageCommandOutput = document.querySelector("[data-package-command-output]");
+const packageLabel = document.querySelector("[data-package-label]");
+const packageCopy = document.querySelector("[data-package-copy]");
+
+const selectPackageTab = (tab, moveFocus = false) => {
+  packageTabs.forEach((candidate) => {
+    const selected = candidate === tab;
+    candidate.setAttribute("aria-selected", String(selected));
+    candidate.tabIndex = selected ? 0 : -1;
+  });
+  packageCommandOutput.textContent = tab.dataset.packageCommand;
+  packageLabel.textContent = tab.dataset.packageName;
+  packageCopy.dataset.copy = tab.dataset.packageCommand;
+  if (moveFocus) tab.focus();
+};
+
+packageTabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => selectPackageTab(tab));
+  tab.addEventListener("keydown", (event) => {
+    let nextIndex = index;
+    if (event.key === "ArrowRight") nextIndex = (index + 1) % packageTabs.length;
+    else if (event.key === "ArrowLeft") nextIndex = (index - 1 + packageTabs.length) % packageTabs.length;
+    else if (event.key === "Home") nextIndex = 0;
+    else if (event.key === "End") nextIndex = packageTabs.length - 1;
+    else return;
+    event.preventDefault();
+    selectPackageTab(packageTabs[nextIndex], true);
+  });
+});
+
 document.querySelector("[data-docs-form]")?.addEventListener("submit", (event) => event.preventDefault());
 
 const classNames = [...new Set(

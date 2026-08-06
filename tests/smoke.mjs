@@ -62,7 +62,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.1.2 on npm" }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.1.3 on npm" }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -107,6 +107,9 @@ try {
     const docsFaviconUrl = await docsPage.locator('link[rel="icon"]').getAttribute("href");
     const docsOgImage = await docsPage.locator('meta[property="og:image"]').getAttribute("content");
     const docsNpmLinks = await docsPage.locator(`a[href="${npmPackageUrl}"]`).count();
+    const packageTabs = docsPage.getByRole("tab");
+    const selectedManager = viewport.name === "desktop" ? "pnpm" : "Bun";
+    const expectedCommand = viewport.name === "desktop" ? "pnpm add @boobstrap/boobstrap" : "bun add @boobstrap/boobstrap";
 
     if (!await docsPage.getByRole("heading", { name: "All classes", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: class reference heading is not visible`);
@@ -115,6 +118,17 @@ try {
     if (docsFaviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: docs favicon is incorrect`);
     if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
+    if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
+    await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
+    if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
+      failures.push(`${viewport.name}: ${selectedManager} command did not activate`);
+    }
+    if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
+      failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
+    }
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.3/dist/boobstrap.css" }).isVisible()) {
+      failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
+    }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: docs horizontal overflow (${docsDimensions.scrollWidth}px > ${docsDimensions.clientWidth}px)`);
     }
