@@ -32,10 +32,16 @@ const expectedClasses = new Set(
 const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
 const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
+const ogImageUrl = "https://boobstrap.org/og-image.jpg";
 
 try {
   await waitForServer();
   await mkdir("artifacts", { recursive: true });
+
+  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/og-image.jpg"]) {
+    const response = await fetch(`${baseUrl}${asset}`);
+    if (!response.ok) failures.push(`${asset}: returned HTTP ${response.status}`);
+  }
 
   for (const viewport of [
     { name: "desktop", width: 1680, height: 940 },
@@ -53,6 +59,9 @@ try {
 
     const titleVisible = await page.getByRole("heading", { name: "Boobstrap", level: 1 }).isVisible();
     const canonicalUrl = await page.locator('link[rel="canonical"]').getAttribute("href");
+    const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
+    const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
+    const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
     const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.1.2 on npm" }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
@@ -61,6 +70,9 @@ try {
 
     if (!titleVisible) failures.push(`${viewport.name}: hero title is not visible`);
     if (canonicalUrl !== "https://boobstrap.org/") failures.push(`${viewport.name}: landing canonical URL is incorrect`);
+    if (faviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: landing favicon is incorrect`);
+    if (ogImage !== ogImageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
+    if (twitterCard !== "summary_large_image") failures.push(`${viewport.name}: landing Twitter card is incorrect`);
     if (npmUrl !== npmPackageUrl) failures.push(`${viewport.name}: landing npm link is incorrect`);
     if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: horizontal overflow (${dimensions.scrollWidth}px > ${dimensions.clientWidth}px)`);
@@ -92,12 +104,16 @@ try {
     const documentedClasses = await docsPage.locator("#class-reference .reference-row").count();
     const documentedTokens = await docsPage.locator("#tokens .reference-row").count();
     const docsCanonicalUrl = await docsPage.locator('link[rel="canonical"]').getAttribute("href");
+    const docsFaviconUrl = await docsPage.locator('link[rel="icon"]').getAttribute("href");
+    const docsOgImage = await docsPage.locator('meta[property="og:image"]').getAttribute("content");
     const docsNpmLinks = await docsPage.locator(`a[href="${npmPackageUrl}"]`).count();
 
     if (!await docsPage.getByRole("heading", { name: "All classes", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: class reference heading is not visible`);
     }
     if (docsCanonicalUrl !== "https://boobstrap.org/docs.html") failures.push(`${viewport.name}: docs canonical URL is incorrect`);
+    if (docsFaviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: docs favicon is incorrect`);
+    if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: docs horizontal overflow (${docsDimensions.scrollWidth}px > ${docsDimensions.clientWidth}px)`);
