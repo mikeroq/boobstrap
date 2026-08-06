@@ -31,6 +31,7 @@ const expectedClasses = new Set(
 );
 const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
 const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
+const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
 
 try {
   await waitForServer();
@@ -51,12 +52,16 @@ try {
     await page.screenshot({ path: `artifacts/${viewport.name}.png` });
 
     const titleVisible = await page.getByRole("heading", { name: "Boobstrap", level: 1 }).isVisible();
+    const canonicalUrl = await page.locator('link[rel="canonical"]').getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.1.2 on npm" }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
     }));
 
     if (!titleVisible) failures.push(`${viewport.name}: hero title is not visible`);
+    if (canonicalUrl !== "https://boobstrap.org/") failures.push(`${viewport.name}: landing canonical URL is incorrect`);
+    if (npmUrl !== npmPackageUrl) failures.push(`${viewport.name}: landing npm link is incorrect`);
     if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: horizontal overflow (${dimensions.scrollWidth}px > ${dimensions.clientWidth}px)`);
     }
@@ -86,10 +91,14 @@ try {
     }));
     const documentedClasses = await docsPage.locator("#class-reference .reference-row").count();
     const documentedTokens = await docsPage.locator("#tokens .reference-row").count();
+    const docsCanonicalUrl = await docsPage.locator('link[rel="canonical"]').getAttribute("href");
+    const docsNpmLinks = await docsPage.locator(`a[href="${npmPackageUrl}"]`).count();
 
     if (!await docsPage.getByRole("heading", { name: "All classes", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: class reference heading is not visible`);
     }
+    if (docsCanonicalUrl !== "https://boobstrap.org/docs.html") failures.push(`${viewport.name}: docs canonical URL is incorrect`);
+    if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: docs horizontal overflow (${docsDimensions.scrollWidth}px > ${docsDimensions.clientWidth}px)`);
     }
