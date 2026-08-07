@@ -1,5 +1,6 @@
 import frameworkCss from "@boobstrap/boobstrap/dist/boobstrap.css?raw";
 import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
 
 const root = document.documentElement;
@@ -132,6 +133,40 @@ document.querySelectorAll("[data-component-example]").forEach((preview, index) =
   selectView("preview");
 });
 
+document.querySelectorAll("[data-framework-tabs]").forEach((switcher) => {
+  const tabs = [...switcher.querySelectorAll("[data-framework-tab]")];
+  const panels = [...switcher.querySelectorAll("[data-framework-panel]")];
+
+  const selectFramework = (tab, moveFocus = false) => {
+    const framework = tab.dataset.frameworkTab;
+    tabs.forEach((candidate) => {
+      const selected = candidate === tab;
+      candidate.setAttribute("aria-selected", String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((panel) => {
+      panel.hidden = panel.dataset.frameworkPanel !== framework;
+    });
+    if (moveFocus) tab.focus();
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectFramework(tab));
+    tab.addEventListener("keydown", (event) => {
+      let nextIndex;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectFramework(tabs[nextIndex], true);
+    });
+  });
+});
+
+initBoobstrap(document);
+
 const navFilter = document.querySelector("[data-nav-filter]");
 const navGroups = [...document.querySelectorAll("[data-nav-group]")];
 const navEmpty = document.querySelector("[data-nav-empty]");
@@ -234,6 +269,7 @@ const classCategory = (name) => {
   if (["bs-form-group", "bs-label", "bs-input", "bs-select", "bs-textarea"].includes(name)) return "Forms";
   if (name.startsWith("bs-alert")) return "Alerts";
   if (name.startsWith("bs-code")) return "Code windows";
+  if (name === "bs-collapse" || name.startsWith("bs-dropdown") || name.startsWith("bs-tab")) return "Interactions";
   if (name.startsWith("bs-gap") || /^bs-m[btxy-]/.test(name) || /^bs-p[xy-]/.test(name)) return "Spacing utilities";
   if (name.startsWith("bs-text") || name.startsWith("bs-font") || ["bs-italic", "bs-no-underline", "bs-sr-only"].includes(name)) return "Typography utilities";
   return "Layout utilities";

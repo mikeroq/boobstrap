@@ -77,7 +77,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.1.4 on npm" }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "Boobstrap v0.2.0 on npm" }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -138,12 +138,12 @@ try {
     if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
     if (starterDownloadLinks < 2) failures.push(`${viewport.name}: starter download is not prominent in docs`);
-    if (await componentExamples.count() !== 6) failures.push(`${viewport.name}: expected six rendered component examples`);
-    if (await componentCopyButtons.count() !== 6) failures.push(`${viewport.name}: expected six component copy controls`);
-    if (await docsPage.locator(".docs-example-guidance").count() !== 6) failures.push(`${viewport.name}: example guidance is incomplete`);
-    if (await docsPage.locator(".docs-example-guidance > div").count() !== 18) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
-    if (await docsPage.locator(".docs-api").count() !== 8) failures.push(`${viewport.name}: component API references are incomplete`);
-    if (await docsPage.locator("[data-example-shell]").count() !== 6) failures.push(`${viewport.name}: tabbed examples are incomplete`);
+    if (await componentExamples.count() !== 9) failures.push(`${viewport.name}: expected nine rendered component examples`);
+    if (await componentCopyButtons.count() !== 9) failures.push(`${viewport.name}: expected nine component copy controls`);
+    if (await docsPage.locator(".docs-example-guidance").count() !== 9) failures.push(`${viewport.name}: example guidance is incomplete`);
+    if (await docsPage.locator(".docs-example-guidance > div").count() !== 27) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
+    if (await docsPage.locator(".docs-api").count() !== 11) failures.push(`${viewport.name}: component API references are incomplete`);
+    if (await docsPage.locator("[data-example-shell]").count() !== 9) failures.push(`${viewport.name}: tabbed examples are incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -152,7 +152,7 @@ try {
     if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
       failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
     }
-    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.4/dist/boobstrap.css" }).isVisible()) {
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.0/dist/boobstrap.css" }).isVisible()) {
       failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
     }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
@@ -165,7 +165,7 @@ try {
       failures.push(`${viewport.name}: docs list ${documentedTokens} of ${expectedTokens} framework tokens`);
     }
     if (viewport.name === "desktop") {
-      for (const name of ["responsive-layout", "buttons", "navbar", "cards", "alerts", "forms"]) {
+      for (const name of ["responsive-layout", "buttons", "navbar", "cards", "alerts", "forms", "collapse", "dropdown", "tabs"]) {
         const exampleShell = docsPage.locator(`[data-example-shell="${name}"]`);
         await exampleShell.getByRole("tab", { name: "Code" }).click();
         const copyButton = exampleShell.locator(`[data-copy-example="${name}"]`);
@@ -176,10 +176,50 @@ try {
         await exampleShell.getByRole("tab", { name: "Preview" }).click();
         if (!await exampleShell.locator("[data-component-example]").isVisible()) failures.push(`desktop: ${name} preview did not restore`);
       }
+      const alpineTab = docsPage.getByRole("tab", { name: "Alpine.js", exact: true });
+      await alpineTab.click();
+      const alpinePanel = docsPage.locator('[data-framework-panel="alpine"]');
+      if (!await alpinePanel.isVisible()) failures.push("desktop: Alpine integration panel did not activate");
+      const alpineCopy = alpinePanel.locator("[data-copy]");
+      await alpineCopy.click();
+      const alpineSource = await docsPage.evaluate(() => navigator.clipboard.readText());
+      if (!alpineSource.includes('@boobstrap/alpine')) failures.push("desktop: Alpine setup did not copy its complete source");
+
+      const collapsePreview = docsPage.locator('[data-component-example="collapse"]');
+      const collapseToggle = collapsePreview.getByRole("button", { name: "Toggle details" });
+      await collapseToggle.click();
+      if (await collapseToggle.getAttribute("aria-expanded") !== "true" || !await collapsePreview.locator("#docs-collapse-panel").isVisible()) {
+        failures.push("desktop: collapse example did not reveal and synchronize its panel");
+      }
+
+      const dropdownPreview = docsPage.locator('[data-component-example="dropdown"]');
+      const dropdownToggle = dropdownPreview.getByRole("button", { name: "Actions" });
+      await dropdownToggle.focus();
+      await dropdownToggle.press("ArrowDown");
+      const editItem = dropdownPreview.getByRole("menuitem", { name: "Edit" });
+      if (!await dropdownPreview.getByRole("menu").isVisible() || !await editItem.evaluate((element) => element === document.activeElement)) {
+        failures.push("desktop: dropdown example did not open with keyboard focus");
+      }
+      await editItem.press("Escape");
+      if (await dropdownPreview.getByRole("menu").isVisible() || !await dropdownToggle.evaluate((element) => element === document.activeElement)) {
+        failures.push("desktop: dropdown example did not close and restore focus with Escape");
+      }
+
+      const tabsPreview = docsPage.locator('[data-component-example="tabs"]');
+      const profileTab = tabsPreview.getByRole("tab", { name: "Profile" });
+      const securityTab = tabsPreview.getByRole("tab", { name: "Security" });
+      await profileTab.focus();
+      await profileTab.press("ArrowRight");
+      if (await securityTab.getAttribute("aria-selected") !== "true" || !await tabsPreview.getByRole("tabpanel", { name: "Security" }).isVisible()) {
+        failures.push("desktop: tabs example did not activate the next panel from the keyboard");
+      }
+
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="#cards"]').isVisible()) failures.push("desktop: docs navigation filter hid its match");
       if (await docsPage.locator('.docs-nav a[href="#buttons"]').isVisible()) failures.push("desktop: docs navigation filter retained a non-match");
+      await docsPage.getByLabel("Filter documentation sections").fill("alpine");
+      if (!await docsPage.locator('.docs-nav a[href="#behavior-layers"]').isVisible()) failures.push("desktop: docs navigation filter could not find Alpine guidance");
       await docsPage.getByLabel("Filter documentation sections").press("Escape");
       await docsPage.getByLabel("Filter classes").fill("bs-btn");
       if (await docsPage.locator("#class-reference .reference-row").count() !== 7) {
