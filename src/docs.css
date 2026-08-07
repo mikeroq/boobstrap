@@ -472,6 +472,30 @@ body.docs-page {
 .interaction-demo { position: relative; min-height: 12rem !important; }
 .interaction-demo .bs-tab-panel { padding-top: var(--bs-space-5); }
 
+.docs-code-variant-tabs {
+  display: flex;
+  gap: var(--bs-space-1);
+  overflow-x: auto;
+  padding: var(--bs-space-2) var(--bs-space-4);
+  background: rgb(255 255 255 / 2%);
+  border-bottom: 1px solid rgb(255 255 255 / 8%);
+}
+.docs-code-variant-tabs button {
+  padding: 0.5rem 0.75rem;
+  color: #a996a2;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--bs-radius-md);
+  font: inherit;
+  font-size: var(--bs-font-size-xs);
+  font-weight: 700;
+  white-space: nowrap;
+}
+.docs-code-variant-tabs button:hover { color: #ffffff; background: rgb(255 255 255 / 5%); }
+.docs-code-variant-tabs button[aria-selected="true"] { color: #ffffff; background: rgb(216 60 135 / 14%); border-color: rgb(216 60 135 / 28%); }
+.docs-code-variant-tabs button:focus-visible { outline: 3px solid var(--bs-brand-400); outline-offset: 1px; }
+.docs-code-variant-panel > pre { margin: 0; }
+
 .starter-card { margin-top: var(--bs-space-6); }
 .starter-card-layout { align-items: center; }
 .starter-tree {

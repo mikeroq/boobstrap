@@ -144,6 +144,7 @@ try {
     if (await docsPage.locator(".docs-example-guidance > div").count() !== 27) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
     if (await docsPage.locator(".docs-api").count() !== 11) failures.push(`${viewport.name}: component API references are incomplete`);
     if (await docsPage.locator("[data-example-shell]").count() !== 9) failures.push(`${viewport.name}: tabbed examples are incomplete`);
+    if (await docsPage.locator("[data-code-variants]").count() !== 3) failures.push(`${viewport.name}: behavior code variants are incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -169,10 +170,32 @@ try {
         const exampleShell = docsPage.locator(`[data-example-shell="${name}"]`);
         await exampleShell.getByRole("tab", { name: "Code" }).click();
         const copyButton = exampleShell.locator(`[data-copy-example="${name}"]`);
-        const expectedMarkup = await copyButton.getAttribute("data-copy");
-        await copyButton.click();
-        const copiedMarkup = await docsPage.evaluate(() => navigator.clipboard.readText());
-        if (copiedMarkup !== expectedMarkup) failures.push(`desktop: ${name} copy control did not copy complete markup`);
+        if (["collapse", "dropdown", "tabs"].includes(name)) {
+          const jsTab = exampleShell.getByRole("tab", { name: "Boobstrap JS", exact: true });
+          const alpineTab = exampleShell.getByRole("tab", { name: "Alpine.js", exact: true });
+          await jsTab.click();
+          const jsMarkup = await exampleShell.locator('[data-code-variant-panel="js"]').getAttribute("data-copy-source");
+          await copyButton.click();
+          if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== jsMarkup || !jsMarkup.includes("data-bs")) {
+            failures.push(`desktop: ${name} Boobstrap JS variant did not copy complete markup`);
+          }
+          await alpineTab.click();
+          const alpineMarkup = await exampleShell.locator('[data-code-variant-panel="alpine"]').getAttribute("data-copy-source");
+          await copyButton.click();
+          if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== alpineMarkup || !alpineMarkup.includes("x-data")) {
+            failures.push(`desktop: ${name} Alpine variant did not copy complete markup`);
+          }
+          await jsTab.focus();
+          await jsTab.press("ArrowRight");
+          if (await alpineTab.getAttribute("aria-selected") !== "true" || !await alpineTab.evaluate((element) => element === document.activeElement)) {
+            failures.push(`desktop: ${name} behavior switcher is not keyboard accessible`);
+          }
+        } else {
+          const expectedMarkup = await copyButton.getAttribute("data-copy");
+          await copyButton.click();
+          const copiedMarkup = await docsPage.evaluate(() => navigator.clipboard.readText());
+          if (copiedMarkup !== expectedMarkup) failures.push(`desktop: ${name} copy control did not copy complete markup`);
+        }
         await exampleShell.getByRole("tab", { name: "Preview" }).click();
         if (!await exampleShell.locator("[data-component-example]").isVisible()) failures.push(`desktop: ${name} preview did not restore`);
       }

@@ -644,6 +644,8 @@ createIcons({ icons });</code></pre>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
             </div>
 
+            <p class="docs-package-note">Every interactive example below includes a Boobstrap JS / Alpine.js code switcher. The classes and accessibility contract stay consistent while the selected behavior layer owns state.</p>
+
             <div class="docs-framework-switcher" data-framework-tabs>
               <div class="docs-framework-tablist" role="tablist" aria-label="Behavior framework">
                 <button id="framework-vanilla-tab" type="button" role="tab" aria-selected="true" aria-controls="framework-vanilla-panel" data-framework-tab="vanilla">Boobstrap JS</button>
@@ -690,9 +692,14 @@ Alpine.start();</code></pre>
                 <div class="bs-card-body"><strong>Progressive by design.</strong><p class="bs-card-text bs-mb-0">The panel remains semantic HTML before and after enhancement.</p></div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="collapse" data-copy='&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="details"&gt;&#10;  Toggle details&#10;&lt;/button&gt;&#10;&#10;&lt;div class="bs-collapse" id="details" hidden&gt;&#10;  Progressive by design.&#10;&lt;/div&gt;'>Copy</button></div>
-              <pre><code>&lt;button class="bs-btn bs-btn-secondary" type="button"
+            <div class="docs-code-block" data-code-variants>
+              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="collapse" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs" role="tablist" aria-label="Collapse code framework">
+                <button id="collapse-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="collapse-js-code-panel" data-code-variant="js">Boobstrap JS</button>
+                <button id="collapse-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+              </div>
+              <div id="collapse-js-code-panel" role="tabpanel" aria-labelledby="collapse-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="details"&gt;&#10;  Toggle details&#10;&lt;/button&gt;&#10;&#10;&lt;div class="bs-collapse" id="details" hidden&gt;&#10;  Progressive by design.&#10;&lt;/div&gt;'>
+                <pre><code>&lt;button class="bs-btn bs-btn-secondary" type="button"
   data-bs-toggle="collapse" aria-controls="details"&gt;
   Toggle details
 &lt;/button&gt;
@@ -700,6 +707,19 @@ Alpine.start();</code></pre>
 &lt;div class="bs-collapse" id="details" hidden&gt;
   Progressive by design.
 &lt;/div&gt;</code></pre>
+              </div>
+              <div id="collapse-alpine-code-panel" role="tabpanel" aria-labelledby="collapse-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source='&lt;div x-data="bsCollapse"&gt;&#10;  &lt;button class="bs-btn bs-btn-secondary" type="button" x-bind="trigger" aria-controls="details"&gt;&#10;    Toggle details&#10;  &lt;/button&gt;&#10;&#10;  &lt;div class="bs-collapse" id="details" x-bind="panel" hidden&gt;&#10;    Progressive by design.&#10;  &lt;/div&gt;&#10;&lt;/div&gt;' hidden>
+                <pre><code>&lt;div x-data="bsCollapse"&gt;
+  &lt;button class="bs-btn bs-btn-secondary" type="button"
+    x-bind="trigger" aria-controls="details"&gt;
+    Toggle details
+  &lt;/button&gt;
+
+  &lt;div class="bs-collapse" id="details" x-bind="panel" hidden&gt;
+    Progressive by design.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
             </div>
             <div class="docs-example-guidance">
               <div><h3>Structure</h3><p>Give the panel a unique <code>id</code> and reference it from the trigger's <code>aria-controls</code>.</p></div>
@@ -727,9 +747,14 @@ Alpine.start();</code></pre>
                 </div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="dropdown" data-copy='&lt;div class="bs-dropdown" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
-              <pre><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
+            <div class="docs-code-block" data-code-variants>
+              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="dropdown" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs" role="tablist" aria-label="Dropdown code framework">
+                <button id="dropdown-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="dropdown-js-code-panel" data-code-variant="js">Boobstrap JS</button>
+                <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+              </div>
+              <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-dropdown" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>
+                <pre><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
   &lt;button class="bs-btn" id="actions-toggle" type="button"
     data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;
   &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu"
@@ -737,6 +762,19 @@ Alpine.start();</code></pre>
     &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+              </div>
+              <div id="dropdown-alpine-code-panel" role="tabpanel" aria-labelledby="dropdown-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source='&lt;div class="bs-dropdown" x-data="bsDropdown" x-bind="root"&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;' hidden>
+                <pre><code>&lt;div class="bs-dropdown" x-data="bsDropdown" x-bind="root"&gt;
+  &lt;button class="bs-btn" id="actions-toggle" type="button"
+    data-bs-toggle="dropdown" x-bind="trigger" aria-controls="actions-menu"&gt;
+    Actions
+  &lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu"
+    aria-labelledby="actions-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
             </div>
             <div class="docs-example-guidance">
               <div><h3>Structure</h3><p>Keep the toggle and menu in one <code>.bs-dropdown</code> root, and label the menu from its toggle.</p></div>
@@ -762,16 +800,38 @@ Alpine.start();</code></pre>
               <div class="bs-tab-panel" id="docs-profile-panel" role="tabpanel" aria-labelledby="docs-profile-tab">Profile settings</div>
               <div class="bs-tab-panel" id="docs-security-panel" role="tabpanel" aria-labelledby="docs-security-tab" hidden>Security settings</div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="tabs" data-copy='&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;&#10;  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;&#10;  &lt;button class="bs-tab" id="security-tab" type="button" role="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;&#10;&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel" aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;'>Copy</button></div>
-              <pre><code>&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
+            <div class="docs-code-block" data-code-variants>
+              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="tabs" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs" role="tablist" aria-label="Tabs code framework">
+                <button id="tabs-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="tabs-js-code-panel" data-code-variant="js">Boobstrap JS</button>
+                <button id="tabs-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+              </div>
+              <div id="tabs-js-code-panel" role="tabpanel" aria-labelledby="tabs-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;&#10;  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;&#10;  &lt;button class="bs-tab" id="security-tab" type="button" role="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;&#10;&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel" aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;'>
+                <pre><code>&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
   &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
     aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
   &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
     aria-controls="security-panel"&gt;Security&lt;/button&gt;
 &lt;/div&gt;
 &lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel"
-  aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;</code></pre>
+  aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel"
+  aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;</code></pre>
+              </div>
+              <div id="tabs-alpine-code-panel" role="tabpanel" aria-labelledby="tabs-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source='&lt;section x-data="bsTabs"&gt;&#10;  &lt;div class="bs-tabs" role="tablist" aria-label="Account" x-bind="tablist"&gt;&#10;    &lt;button class="bs-tab" id="profile-tab" type="button" role="tab" x-bind="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;&#10;    &lt;button class="bs-tab" id="security-tab" type="button" role="tab" x-bind="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;&#10;  &lt;/div&gt;&#10;  &lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab" x-bind="panel"&gt;Profile settings&lt;/div&gt;&#10;  &lt;div class="bs-tab-panel" id="security-panel" role="tabpanel" aria-labelledby="security-tab" x-bind="panel" hidden&gt;Security settings&lt;/div&gt;&#10;&lt;/section&gt;' hidden>
+                <pre><code>&lt;section x-data="bsTabs"&gt;
+  &lt;div class="bs-tabs" role="tablist" aria-label="Account" x-bind="tablist"&gt;
+    &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
+      x-bind="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
+    &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
+      x-bind="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel"
+    aria-labelledby="profile-tab" x-bind="panel"&gt;Profile settings&lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="security-panel" role="tabpanel"
+    aria-labelledby="security-tab" x-bind="panel" hidden&gt;Security settings&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+              </div>
             </div>
             <div class="docs-example-guidance">
               <div><h3>Structure</h3><p>Each tab's <code>aria-controls</code> and panel's <code>aria-labelledby</code> form a two-way relationship.</p></div>
