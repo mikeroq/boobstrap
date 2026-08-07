@@ -165,6 +165,47 @@ document.querySelectorAll("[data-framework-tabs]").forEach((switcher) => {
   });
 });
 
+document.querySelectorAll("[data-code-variants]").forEach((switcher) => {
+  const tabs = [...switcher.querySelectorAll("[data-code-variant]")];
+  const panels = [...switcher.querySelectorAll("[data-code-variant-panel]")];
+  const copyButton = switcher.querySelector("[data-copy-example]");
+  const codeLabel = switcher.querySelector("[data-code-label]");
+
+  const selectVariant = (tab, moveFocus = false) => {
+    const variant = tab.dataset.codeVariant;
+    const panel = panels.find((candidate) => candidate.dataset.codeVariantPanel === variant);
+    tabs.forEach((candidate) => {
+      const selected = candidate === tab;
+      candidate.setAttribute("aria-selected", String(selected));
+      candidate.tabIndex = selected ? 0 : -1;
+    });
+    panels.forEach((candidate) => {
+      candidate.hidden = candidate !== panel;
+    });
+    copyButton.dataset.copy = panel.dataset.copySource;
+    copyButton.dataset.copyVariant = variant;
+    codeLabel.textContent = `HTML · ${tab.textContent}`;
+    if (moveFocus) tab.focus();
+  };
+
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => selectVariant(tab));
+    tab.addEventListener("keydown", (event) => {
+      let nextIndex;
+      if (event.key === "ArrowRight") nextIndex = (index + 1) % tabs.length;
+      else if (event.key === "ArrowLeft") nextIndex = (index - 1 + tabs.length) % tabs.length;
+      else if (event.key === "Home") nextIndex = 0;
+      else if (event.key === "End") nextIndex = tabs.length - 1;
+      else return;
+      event.preventDefault();
+      selectVariant(tabs[nextIndex], true);
+    });
+  });
+
+  const selectedTab = tabs.find((tab) => tab.getAttribute("aria-selected") === "true") ?? tabs[0];
+  selectVariant(selectedTab);
+});
+
 initBoobstrap(document);
 
 const navFilter = document.querySelector("[data-nav-filter]");
