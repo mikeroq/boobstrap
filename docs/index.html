@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Complete Boobstrap documentation: installation, layout, components, utilities, themes, design tokens, and every framework class." />
+    <meta name="description" content="Complete Boobstrap documentation: CSS, optional JavaScript, Alpine integration, components, utilities, themes, and design tokens." />
     <meta name="theme-color" content="#140a15" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Documentation — Boobstrap" />
@@ -43,7 +43,7 @@
         <a href="/playground" class="docs-header-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
-        <span class="docs-version">v0.1.4</span>
+        <span class="docs-version">v0.2.0</span>
         <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -93,6 +93,14 @@
           </div>
 
           <div class="docs-nav-group" data-nav-group>
+            <p class="docs-nav-label">Interactivity</p>
+            <a href="#behavior-layers">JavaScript &amp; Alpine</a>
+            <a href="#collapse">Collapse</a>
+            <a href="#dropdown">Dropdown</a>
+            <a href="#tabs">Tabs</a>
+          </div>
+
+          <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Reference</p>
             <a href="#utilities">Utilities</a>
             <a href="#tokens">Design tokens</a>
@@ -109,9 +117,9 @@
         <article class="docs-content">
           <section class="docs-hero" id="introduction">
             <div class="docs-breadcrumb" aria-label="Breadcrumb"><span>Docs</span><span aria-hidden="true">/</span><span>Introduction</span></div>
-            <span class="bs-badge bs-badge-primary">Boobstrap v0.1.4</span>
+            <span class="bs-badge bs-badge-primary">Boobstrap v0.2.0</span>
             <h1>Build with <span class="bs-text-gradient">Boobstrap.</span></h1>
-            <p class="bs-lead">A CSS-only framework for responsive layouts, polished components, practical utilities, and themeable design tokens. Start with the package, copy a complete example, then customize through semantic variables.</p>
+            <p class="bs-lead">A CSS-first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add the official Alpine adapter.</p>
             <div class="docs-hero-actions bs-flex bs-flex-wrap bs-gap-3">
               <a class="bs-btn bs-btn-primary" href="/boobstrap-starter.zip" download>Download starter</a>
               <a class="bs-btn bs-btn-secondary" href="/playground">Open playground</a>
@@ -124,7 +132,8 @@
             <nav class="docs-quick-links" aria-label="Documentation shortcuts">
               <a href="#installation"><span>01</span><strong>Install the package</strong><small>npm, pnpm, Yarn, Bun, or CDN</small></a>
               <a href="#buttons"><span>02</span><strong>Browse components</strong><small>Semantic, copy-ready examples</small></a>
-              <a href="#tokens"><span>03</span><strong>Customize tokens</strong><small>Color, type, space, and motion</small></a>
+              <a href="#behavior-layers"><span>03</span><strong>Choose behavior</strong><small>Vanilla JS or Alpine</small></a>
+              <a href="#tokens"><span>04</span><strong>Customize tokens</strong><small>Color, type, space, and motion</small></a>
             </nav>
           </section>
 
@@ -153,8 +162,8 @@
             <h3>Use from a CDN</h3>
             <p>For a plain HTML project, load the version-pinned stylesheet directly from jsDelivr:</p>
             <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.4/dist/boobstrap.css" /&gt;'>Copy</button></div>
-              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.4/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
+              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.0/dist/boobstrap.css" /&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.0/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
             </div>
             <p>To self-host instead, copy <code>dist/boobstrap.css</code> from the installed package into your assets.</p>
 
@@ -624,6 +633,158 @@ createIcons({ icons });</code></pre>
             </div>
           </section>
 
+          <section class="docs-section" id="behavior-layers">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Choose your behavior layer</h2>
+            <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can bring their own state, initialize Boobstrap's dependency-free controllers, or let Alpine own the same component contract.</p>
+
+            <div class="docs-runtime-grid">
+              <article class="docs-runtime-card"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
+              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance collapse, dropdown, and tabs through explicit, tree-shakable controllers.</p></article>
+              <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
+            </div>
+
+            <div class="docs-framework-switcher" data-framework-tabs>
+              <div class="docs-framework-tablist" role="tablist" aria-label="Behavior framework">
+                <button id="framework-vanilla-tab" type="button" role="tab" aria-selected="true" aria-controls="framework-vanilla-panel" data-framework-tab="vanilla">Boobstrap JS</button>
+                <button id="framework-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="framework-alpine-panel" tabindex="-1" data-framework-tab="alpine">Alpine.js</button>
+              </div>
+              <div id="framework-vanilla-panel" role="tabpanel" aria-labelledby="framework-vanilla-tab" data-framework-panel="vanilla">
+                <p>Importing the stylesheet remains runtime-free. Initialize all supported controllers, or import one component from a dedicated subpath.</p>
+                <div class="docs-code-block">
+                  <div class="docs-code-label"><span>JavaScript · Boobstrap JS</span><button type="button" data-copy='npm install @boobstrap/boobstrap&#10;&#10;import "@boobstrap/boobstrap";&#10;import { initBoobstrap } from "@boobstrap/boobstrap/js";&#10;&#10;const boobstrap = initBoobstrap();'>Copy</button></div>
+                  <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap
+
+<span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
+<span class="bs-code-keyword">import</span> { initBoobstrap } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/boobstrap/js"</span>;
+
+<span class="bs-code-keyword">const</span> boobstrap = initBoobstrap();</code></pre>
+                </div>
+              </div>
+              <div id="framework-alpine-panel" role="tabpanel" aria-labelledby="framework-alpine-tab" data-framework-panel="alpine" hidden>
+                <p>The adapter registers <code>bsCollapse</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
+                <div class="docs-code-block">
+                  <div class="docs-code-label"><span>JavaScript · Alpine.js</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs&#10;&#10;import "@boobstrap/boobstrap";&#10;import Alpine from "alpinejs";&#10;import boobstrap from "@boobstrap/alpine";&#10;&#10;Alpine.plugin(boobstrap);&#10;Alpine.start();'>Copy</button></div>
+                  <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/alpine alpinejs
+
+<span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
+<span class="bs-code-keyword">import</span> Alpine <span class="bs-code-keyword">from</span> <span class="bs-code-string">"alpinejs"</span>;
+<span class="bs-code-keyword">import</span> boobstrap <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/alpine"</span>;
+
+Alpine.plugin(boobstrap);
+Alpine.start();</code></pre>
+                </div>
+                <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/alpine"><code>@boobstrap/alpine</code> on npm</a>. Alpine remains an application-level peer dependency and is never installed by the core framework.</p>
+              </div>
+            </div>
+            <div class="docs-note"><strong>Do not stack behavior layers.</strong> Use Boobstrap JS or an Alpine adapter on a component subtree, not both. React and Vue adapters will target this same state, event, and accessibility contract.</div>
+          </section>
+
+          <section class="docs-section" id="collapse">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Collapse</h2>
+            <p>Reveal supporting content without removing it from the document. The controller synchronizes the native <code>hidden</code> attribute, <code>aria-expanded</code>, and <code>data-bs-state</code>.</p>
+            <div class="docs-demo interaction-demo" data-component-example="collapse">
+              <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="docs-collapse-panel">Toggle details</button>
+              <div class="bs-collapse bs-card bs-mt-4" id="docs-collapse-panel" hidden>
+                <div class="bs-card-body"><strong>Progressive by design.</strong><p class="bs-card-text bs-mb-0">The panel remains semantic HTML before and after enhancement.</p></div>
+              </div>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="collapse" data-copy='&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="details"&gt;&#10;  Toggle details&#10;&lt;/button&gt;&#10;&#10;&lt;div class="bs-collapse" id="details" hidden&gt;&#10;  Progressive by design.&#10;&lt;/div&gt;'>Copy</button></div>
+              <pre><code>&lt;button class="bs-btn bs-btn-secondary" type="button"
+  data-bs-toggle="collapse" aria-controls="details"&gt;
+  Toggle details
+&lt;/button&gt;
+
+&lt;div class="bs-collapse" id="details" hidden&gt;
+  Progressive by design.
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>Give the panel a unique <code>id</code> and reference it from the trigger's <code>aria-controls</code>.</p></div>
+              <div><h3>State</h3><p><code>.bs-collapse</code> supplies the visual contract; <code>hidden</code> is the readable initial state.</p></div>
+              <div><h3>Accessibility</h3><p>Use a real button. The controller maintains <code>aria-expanded</code> and fires cancelable show/hide events.</p></div>
+            </div>
+            <div class="docs-api"><h3>Collapse API</h3><p>Import <code>Collapse</code> from <code>@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code>show()</code> / <code>hide()</code></td><td>Change visibility and synchronized public state.</td></tr>
+              <tr><td><code>toggle()</code></td><td>Invert the current panel state.</td></tr>
+              <tr><td><code>bs:collapse:*</code></td><td>Cancelable before-events and bubbling completed-events.</td></tr>
+            </tbody></table></div></div>
+          </section>
+
+          <section class="docs-section" id="dropdown">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Dropdown</h2>
+            <p>Dropdowns support pointer dismissal, item selection, <kbd>Escape</kbd>, <kbd>Tab</kbd>, arrow keys, <kbd>Home</kbd>, and <kbd>End</kbd>. Disabled items are skipped.</p>
+            <div class="docs-demo interaction-demo" data-component-example="dropdown">
+              <div class="bs-dropdown" data-bs-dropdown>
+                <button class="bs-btn bs-btn-secondary" id="docs-actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="docs-actions-menu">Actions</button>
+                <div class="bs-dropdown-menu" id="docs-actions-menu" role="menu" aria-labelledby="docs-actions-toggle" data-bs-dropdown-menu hidden>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Edit</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Duplicate</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem" disabled>Archive</button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="dropdown" data-copy='&lt;div class="bs-dropdown" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+              <pre><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
+  &lt;button class="bs-btn" id="actions-toggle" type="button"
+    data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu"
+    aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>Keep the toggle and menu in one <code>.bs-dropdown</code> root, and label the menu from its toggle.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-dropdown-menu-end</code> aligns the popup to the opposite inline edge when needed.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code>role="menu"</code> and <code>role="menuitem"</code> only for action menus, not ordinary site navigation.</p></div>
+            </div>
+            <div class="docs-api"><h3>Dropdown API</h3><p>Import <code>Dropdown</code> from <code>@boobstrap/boobstrap/js/dropdown</code>.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the menu; hide can optionally restore focus.</td></tr>
+              <tr><td><code>toggle()</code></td><td>Invert the current menu state.</td></tr>
+              <tr><td><code>bs:dropdown:*</code></td><td>Observe or cancel menu lifecycle transitions.</td></tr>
+            </tbody></table></div></div>
+          </section>
+
+          <section class="docs-section" id="tabs">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Tabs</h2>
+            <p>Tabs use automatic activation and a roving <code>tabindex</code>. Horizontal lists use Left/Right; vertical lists use Up/Down. Both support <kbd>Home</kbd> and <kbd>End</kbd>.</p>
+            <div class="docs-demo interaction-demo" data-component-example="tabs">
+              <div class="bs-tabs" role="tablist" aria-label="Account settings" data-bs-tabs>
+                <button class="bs-tab" id="docs-profile-tab" type="button" role="tab" aria-controls="docs-profile-panel" aria-selected="true">Profile</button>
+                <button class="bs-tab" id="docs-security-tab" type="button" role="tab" aria-controls="docs-security-panel">Security</button>
+              </div>
+              <div class="bs-tab-panel" id="docs-profile-panel" role="tabpanel" aria-labelledby="docs-profile-tab">Profile settings</div>
+              <div class="bs-tab-panel" id="docs-security-panel" role="tabpanel" aria-labelledby="docs-security-tab" hidden>Security settings</div>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · complete markup</span><button type="button" data-copy-example="tabs" data-copy='&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;&#10;  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;&#10;  &lt;button class="bs-tab" id="security-tab" type="button" role="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;&#10;&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel" aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;'>Copy</button></div>
+              <pre><code>&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
+  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
+    aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
+  &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
+    aria-controls="security-panel"&gt;Security&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel"
+  aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>Each tab's <code>aria-controls</code> and panel's <code>aria-labelledby</code> form a two-way relationship.</p></div>
+              <div><h3>State</h3><p>The selected tab gets <code>aria-selected="true"</code>; every inactive panel uses <code>hidden</code>.</p></div>
+              <div><h3>Accessibility</h3><p>Use tabs only when panels are peer views. Preserve meaningful headings inside complex panels.</p></div>
+            </div>
+            <div class="docs-api"><h3>Tabs API</h3><p>Import <code>Tabs</code> from <code>@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code>activate(tab)</code></td><td>Select a tab element and synchronize all controlled panels.</td></tr>
+              <tr><td><code>bs:tabs:change</code></td><td>Cancelable before-event with previous and next tab/panel detail.</td></tr>
+              <tr><td><code>bs:tabs:changed</code></td><td>Bubbling event after the completed transition.</td></tr>
+            </tbody></table></div></div>
+          </section>
+
           <section class="docs-section" id="utilities">
             <div class="docs-kicker">Reference</div>
             <h2>Utilities</h2>
@@ -682,7 +843,7 @@ createIcons({ icons });</code></pre>
           </section>
 
           <footer class="docs-footer">
-            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.1.4 · MIT licensed.</p>
+            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.2.0 · MIT licensed.</p>
             <div class="docs-footer-links">
               <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View on npm</a>
               <a href="https://github.com/mikeroq/boobstrap-framework">View source →</a>
