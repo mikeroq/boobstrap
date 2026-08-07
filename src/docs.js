@@ -60,6 +60,112 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
   });
 });
 
+document.querySelectorAll("[data-component-example]").forEach((preview, index) => {
+  const code = preview.nextElementSibling;
+  if (!code?.classList.contains("docs-code-block")) return;
+
+  const name = preview.dataset.componentExample;
+  const label = name.split("-").map((part) => part[0].toUpperCase() + part.slice(1)).join(" ");
+  const shell = document.createElement("div");
+  const toolbar = document.createElement("div");
+  const title = document.createElement("span");
+  const tablist = document.createElement("div");
+  const previewTab = document.createElement("button");
+  const codeTab = document.createElement("button");
+  const previewId = preview.id || `component-preview-${index}`;
+  const codeId = `component-code-${index}`;
+
+  preview.id = previewId;
+  code.id = codeId;
+  shell.className = "docs-example-shell";
+  shell.dataset.exampleShell = name;
+  toolbar.className = "docs-example-toolbar";
+  title.className = "docs-example-title";
+  title.textContent = `${label} example`;
+  tablist.className = "docs-example-tabs";
+  tablist.setAttribute("role", "tablist");
+  tablist.setAttribute("aria-label", `${label} example view`);
+
+  const configureTab = (tab, textContent, targetId, selected) => {
+    tab.type = "button";
+    tab.textContent = textContent;
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-controls", targetId);
+    tab.setAttribute("aria-selected", String(selected));
+    tab.tabIndex = selected ? 0 : -1;
+    tab.dataset.exampleView = textContent.toLowerCase();
+  };
+
+  configureTab(previewTab, "Preview", previewId, true);
+  configureTab(codeTab, "Code", codeId, false);
+  preview.setAttribute("role", "tabpanel");
+  preview.setAttribute("aria-label", `${label} preview`);
+  code.setAttribute("role", "tabpanel");
+  code.setAttribute("aria-label", `${label} code`);
+
+  const selectView = (view, moveFocus = false) => {
+    const showPreview = view === "preview";
+    previewTab.setAttribute("aria-selected", String(showPreview));
+    codeTab.setAttribute("aria-selected", String(!showPreview));
+    previewTab.tabIndex = showPreview ? 0 : -1;
+    codeTab.tabIndex = showPreview ? -1 : 0;
+    preview.hidden = !showPreview;
+    code.hidden = showPreview;
+    if (moveFocus) (showPreview ? previewTab : codeTab).focus();
+  };
+
+  previewTab.addEventListener("click", () => selectView("preview"));
+  codeTab.addEventListener("click", () => selectView("code"));
+  [previewTab, codeTab].forEach((tab) => {
+    tab.addEventListener("keydown", (event) => {
+      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
+      event.preventDefault();
+      const showPreview = event.key === "ArrowLeft" || event.key === "Home";
+      selectView(showPreview ? "preview" : "code", true);
+    });
+  });
+
+  preview.before(shell);
+  tablist.append(previewTab, codeTab);
+  toolbar.append(title, tablist);
+  shell.append(toolbar, preview, code);
+  selectView("preview");
+});
+
+const navFilter = document.querySelector("[data-nav-filter]");
+const navGroups = [...document.querySelectorAll("[data-nav-group]")];
+const navEmpty = document.querySelector("[data-nav-empty]");
+
+const filterNavigation = () => {
+  const query = navFilter.value.trim().toLowerCase();
+  let visibleCount = 0;
+  navGroups.forEach((group) => {
+    let groupCount = 0;
+    group.querySelectorAll('a[href^="#"]').forEach((link) => {
+      const visible = link.textContent.toLowerCase().includes(query);
+      link.hidden = !visible;
+      if (visible) groupCount += 1;
+    });
+    group.hidden = groupCount === 0;
+    visibleCount += groupCount;
+  });
+  navEmpty.hidden = visibleCount !== 0;
+};
+
+navFilter?.addEventListener("input", filterNavigation);
+navFilter?.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape") return;
+  navFilter.value = "";
+  filterNavigation();
+  navFilter.blur();
+});
+document.addEventListener("keydown", (event) => {
+  const target = event.target;
+  if (event.key !== "/" || target.matches("input, textarea, select") || target.isContentEditable) return;
+  event.preventDefault();
+  navFilter?.focus();
+});
+
 const packageTabs = [...document.querySelectorAll("[data-package-command]")];
 const packageCommandOutput = document.querySelector("[data-package-command-output]");
 const packageLabel = document.querySelector("[data-package-label]");
@@ -203,6 +309,15 @@ const headings = [...document.querySelectorAll(".docs-section > h2")];
 const pageNav = document.querySelector("[data-page-nav]");
 pageNav.innerHTML = headings.map((heading) => `<a href="#${heading.parentElement.id}">${escapeHtml(heading.textContent)}</a>`).join("");
 
+headings.forEach((heading) => {
+  const anchor = document.createElement("a");
+  anchor.className = "docs-heading-anchor";
+  anchor.href = `#${heading.parentElement.id}`;
+  anchor.setAttribute("aria-label", `Link to ${heading.textContent}`);
+  anchor.textContent = "#";
+  heading.append(anchor);
+});
+
 const sectionLinks = [...document.querySelectorAll('.docs-nav a[href^="#"], [data-page-nav] a[href^="#"]')];
 const setActiveSection = (id) => {
   sectionLinks.forEach((link) => {
@@ -230,6 +345,9 @@ const updateActiveSection = () => {
   }
 
   if (activeSection) setActiveSection(activeSection.id);
+  const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+  const readingProgress = document.querySelector("[data-reading-progress]");
+  if (readingProgress) readingProgress.value = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
   scrollUpdateQueued = false;
 };
 

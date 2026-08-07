@@ -51,6 +51,13 @@ try {
     if (!response.ok) failures.push(`${asset}: returned HTTP ${response.status}`);
   }
 
+  for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"]]) {
+    const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
+    if (response.status !== 308 || response.headers.get("location") !== cleanPath) {
+      failures.push(`${legacyPath}: expected a 308 redirect to ${cleanPath}`);
+    }
+  }
+
   for (const viewport of [
     { name: "desktop", width: 1680, height: 940 },
     { name: "mobile", width: 390, height: 844 },
@@ -103,7 +110,7 @@ try {
     });
     docsPage.on("pageerror", (error) => docsConsoleErrors.push(error.message));
 
-    await docsPage.goto(`${baseUrl}/docs.html`, { waitUntil: "networkidle" });
+    await docsPage.goto(`${baseUrl}/docs`, { waitUntil: "networkidle" });
     await docsPage.screenshot({ path: `artifacts/docs-${viewport.name}.png`, fullPage: true });
 
     const docsDimensions = await docsPage.evaluate(() => ({
@@ -119,14 +126,14 @@ try {
     const starterDownloadLinks = await docsPage.locator('a[href="/boobstrap-starter.zip"][download]').count();
     const componentExamples = docsPage.locator("[data-component-example]");
     const componentCopyButtons = docsPage.locator("[data-copy-example]");
-    const packageTabs = docsPage.getByRole("tab");
+    const packageTabs = docsPage.locator("[data-package-command]");
     const selectedManager = viewport.name === "desktop" ? "pnpm" : "Bun";
     const expectedCommand = viewport.name === "desktop" ? "pnpm add @boobstrap/boobstrap" : "bun add @boobstrap/boobstrap";
 
     if (!await docsPage.getByRole("heading", { name: "All classes", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: class reference heading is not visible`);
     }
-    if (docsCanonicalUrl !== "https://boobstrap.org/docs.html") failures.push(`${viewport.name}: docs canonical URL is incorrect`);
+    if (docsCanonicalUrl !== "https://boobstrap.org/docs") failures.push(`${viewport.name}: docs canonical URL is incorrect`);
     if (docsFaviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: docs favicon is incorrect`);
     if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
@@ -135,6 +142,8 @@ try {
     if (await componentCopyButtons.count() !== 6) failures.push(`${viewport.name}: expected six component copy controls`);
     if (await docsPage.locator(".docs-example-guidance").count() !== 6) failures.push(`${viewport.name}: example guidance is incomplete`);
     if (await docsPage.locator(".docs-example-guidance > div").count() !== 18) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
+    if (await docsPage.locator(".docs-api").count() !== 8) failures.push(`${viewport.name}: component API references are incomplete`);
+    if (await docsPage.locator("[data-example-shell]").count() !== 6) failures.push(`${viewport.name}: tabbed examples are incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -157,12 +166,21 @@ try {
     }
     if (viewport.name === "desktop") {
       for (const name of ["responsive-layout", "buttons", "navbar", "cards", "alerts", "forms"]) {
-        const copyButton = docsPage.locator(`[data-copy-example="${name}"]`);
+        const exampleShell = docsPage.locator(`[data-example-shell="${name}"]`);
+        await exampleShell.getByRole("tab", { name: "Code" }).click();
+        const copyButton = exampleShell.locator(`[data-copy-example="${name}"]`);
         const expectedMarkup = await copyButton.getAttribute("data-copy");
         await copyButton.click();
         const copiedMarkup = await docsPage.evaluate(() => navigator.clipboard.readText());
         if (copiedMarkup !== expectedMarkup) failures.push(`desktop: ${name} copy control did not copy complete markup`);
+        await exampleShell.getByRole("tab", { name: "Preview" }).click();
+        if (!await exampleShell.locator("[data-component-example]").isVisible()) failures.push(`desktop: ${name} preview did not restore`);
       }
+      await docsPage.keyboard.press("/");
+      await docsPage.getByLabel("Filter documentation sections").fill("cards");
+      if (!await docsPage.locator('.docs-nav a[href="#cards"]').isVisible()) failures.push("desktop: docs navigation filter hid its match");
+      if (await docsPage.locator('.docs-nav a[href="#buttons"]').isVisible()) failures.push("desktop: docs navigation filter retained a non-match");
+      await docsPage.getByLabel("Filter documentation sections").press("Escape");
       await docsPage.getByLabel("Filter classes").fill("bs-btn");
       if (await docsPage.locator("#class-reference .reference-row").count() !== 7) {
         failures.push("desktop: class filtering did not return the seven button classes");
@@ -203,7 +221,7 @@ try {
     });
     playgroundPage.on("pageerror", (error) => playgroundConsoleErrors.push(error.message));
 
-    await playgroundPage.goto(`${baseUrl}/playground.html`, { waitUntil: "networkidle" });
+    await playgroundPage.goto(`${baseUrl}/playground`, { waitUntil: "networkidle" });
     const playgroundDimensions = await playgroundPage.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -215,7 +233,7 @@ try {
     if (playgroundDimensions.scrollWidth > playgroundDimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: playground horizontal overflow (${playgroundDimensions.scrollWidth}px > ${playgroundDimensions.clientWidth}px)`);
     }
-    if (await playgroundPage.locator('link[rel="canonical"]').getAttribute("href") !== "https://boobstrap.org/playground.html") {
+    if (await playgroundPage.locator('link[rel="canonical"]').getAttribute("href") !== "https://boobstrap.org/playground") {
       failures.push(`${viewport.name}: playground canonical URL is incorrect`);
     }
 

@@ -13,7 +13,7 @@ npm run dev
 
 The site imports `@boobstrap/boobstrap@0.1.4` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/` and the framework documentation at `/docs.html`. The documentation's class and design-token reference is generated in the browser from the exact compiled stylesheet installed by the site, preventing the reference from drifting from the shipped CSS.
+Vite serves the landing page at `/`, the framework documentation at `/docs`, and the playground at `/playground`. The documentation's class and design-token reference is generated in the browser from the exact compiled stylesheet installed by the site, preventing the reference from drifting from the shipped CSS.
 
 ## Validation
 
@@ -45,9 +45,10 @@ The runtime container serves the Vite production build from unprivileged Nginx o
 - Site composition and illustration: `src/site.css`
 - Site behavior: `src/main.js`
 - Landing page markup: `index.html`
-- Documentation markup: `docs.html`
+- Documentation markup: `docs/index.html`
 - Documentation behavior and source-derived API reference: `src/docs.js`
 - Documentation presentation: `src/docs.css`
+- Playground markup: `playground/index.html`
 - Framework package: [mikeroq/boobstrap-framework](https://github.com/mikeroq/boobstrap-framework)
 
 ## License
