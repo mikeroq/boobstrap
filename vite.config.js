@@ -7,6 +7,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         docs: resolve(import.meta.dirname, "docs.html"),
+        playground: resolve(import.meta.dirname, "playground.html"),
       },
     },
   },
