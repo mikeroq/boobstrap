@@ -185,10 +185,21 @@ try {
           if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== alpineMarkup || !alpineMarkup.includes("x-data")) {
             failures.push(`desktop: ${name} Alpine variant did not copy complete markup`);
           }
+          const reactTab = exampleShell.getByRole("tab", { name: "React", exact: true });
+          await reactTab.click();
+          const reactMarkup = await exampleShell.locator('[data-code-variant-panel="react"]').getAttribute("data-copy-source");
+          await copyButton.click();
+          if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== reactMarkup || !reactMarkup.includes("use")) {
+            failures.push(`desktop: ${name} React variant did not copy complete markup`);
+          }
           await jsTab.focus();
           await jsTab.press("ArrowRight");
           if (await alpineTab.getAttribute("aria-selected") !== "true" || !await alpineTab.evaluate((element) => element === document.activeElement)) {
             failures.push(`desktop: ${name} behavior switcher is not keyboard accessible`);
+          }
+          await alpineTab.press("End");
+          if (await reactTab.getAttribute("aria-selected") !== "true" || !await reactTab.evaluate((element) => element === document.activeElement)) {
+            failures.push(`desktop: ${name} React variant is not keyboard accessible`);
           }
         } else {
           const expectedMarkup = await copyButton.getAttribute("data-copy");
@@ -207,6 +218,13 @@ try {
       await alpineCopy.click();
       const alpineSource = await docsPage.evaluate(() => navigator.clipboard.readText());
       if (!alpineSource.includes('@boobstrap/alpine')) failures.push("desktop: Alpine setup did not copy its complete source");
+      const reactTab = docsPage.getByRole("tab", { name: "React", exact: true });
+      await reactTab.click();
+      const reactPanel = docsPage.locator('[data-framework-panel="react"]');
+      if (!await reactPanel.isVisible()) failures.push("desktop: React integration panel did not activate");
+      await reactPanel.locator("[data-copy]").click();
+      const reactSource = await docsPage.evaluate(() => navigator.clipboard.readText());
+      if (!reactSource.includes('@boobstrap/react')) failures.push("desktop: React setup did not copy its complete source");
 
       const collapsePreview = docsPage.locator('[data-component-example="collapse"]');
       const collapseToggle = collapsePreview.getByRole("button", { name: "Toggle details" });

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Complete Boobstrap documentation: CSS, optional JavaScript, Alpine integration, components, utilities, themes, and design tokens." />
+    <meta name="description" content="Complete Boobstrap documentation: CSS, optional JavaScript, Alpine and React integrations, components, utilities, themes, and design tokens." />
     <meta name="theme-color" content="#140a15" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Documentation — Boobstrap" />
@@ -94,7 +94,7 @@
 
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Interactivity</p>
-            <a href="#behavior-layers">JavaScript &amp; Alpine</a>
+            <a href="#behavior-layers">JS, Alpine &amp; React</a>
             <a href="#collapse">Collapse</a>
             <a href="#dropdown">Dropdown</a>
             <a href="#tabs">Tabs</a>
@@ -119,7 +119,7 @@
             <div class="docs-breadcrumb" aria-label="Breadcrumb"><span>Docs</span><span aria-hidden="true">/</span><span>Introduction</span></div>
             <span class="bs-badge bs-badge-primary">Boobstrap v0.2.0</span>
             <h1>Build with <span class="bs-text-gradient">Boobstrap.</span></h1>
-            <p class="bs-lead">A CSS-first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add the official Alpine adapter.</p>
+            <p class="bs-lead">A CSS-first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add an official Alpine or React adapter.</p>
             <div class="docs-hero-actions bs-flex bs-flex-wrap bs-gap-3">
               <a class="bs-btn bs-btn-primary" href="/boobstrap-starter.zip" download>Download starter</a>
               <a class="bs-btn bs-btn-secondary" href="/playground">Open playground</a>
@@ -132,7 +132,7 @@
             <nav class="docs-quick-links" aria-label="Documentation shortcuts">
               <a href="#installation"><span>01</span><strong>Install the package</strong><small>npm, pnpm, Yarn, Bun, or CDN</small></a>
               <a href="#buttons"><span>02</span><strong>Browse components</strong><small>Semantic, copy-ready examples</small></a>
-              <a href="#behavior-layers"><span>03</span><strong>Choose behavior</strong><small>Vanilla JS or Alpine</small></a>
+              <a href="#behavior-layers"><span>03</span><strong>Choose behavior</strong><small>Boobstrap JS, Alpine, or React</small></a>
               <a href="#tokens"><span>04</span><strong>Customize tokens</strong><small>Color, type, space, and motion</small></a>
             </nav>
           </section>
@@ -636,20 +636,22 @@ createIcons({ icons });</code></pre>
           <section class="docs-section" id="behavior-layers">
             <div class="docs-kicker">Interactivity</div>
             <h2>Choose your behavior layer</h2>
-            <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can bring their own state, initialize Boobstrap's dependency-free controllers, or let Alpine own the same component contract.</p>
+            <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can initialize dependency-free controllers or let Alpine or React own the same component contract.</p>
 
             <div class="docs-runtime-grid">
               <article class="docs-runtime-card"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
               <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance collapse, dropdown, and tabs through explicit, tree-shakable controllers.</p></article>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
+              <article class="docs-runtime-card"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
             </div>
 
-            <p class="docs-package-note">Every interactive example below includes a Boobstrap JS / Alpine.js code switcher. The classes and accessibility contract stay consistent while the selected behavior layer owns state.</p>
+            <p class="docs-package-note">Every interactive example below includes Boobstrap JS, Alpine.js, and React variants. The classes and accessibility contract stay consistent while the selected behavior layer owns state.</p>
 
             <div class="docs-framework-switcher" data-framework-tabs>
               <div class="docs-framework-tablist" role="tablist" aria-label="Behavior framework">
                 <button id="framework-vanilla-tab" type="button" role="tab" aria-selected="true" aria-controls="framework-vanilla-panel" data-framework-tab="vanilla">Boobstrap JS</button>
                 <button id="framework-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="framework-alpine-panel" tabindex="-1" data-framework-tab="alpine">Alpine.js</button>
+                <button id="framework-react-tab" type="button" role="tab" aria-selected="false" aria-controls="react" tabindex="-1" data-framework-tab="react">React</button>
               </div>
               <div id="framework-vanilla-panel" role="tabpanel" aria-labelledby="framework-vanilla-tab" data-framework-panel="vanilla">
                 <p>Importing the stylesheet remains runtime-free. Initialize all supported controllers, or import one component from a dedicated subpath.</p>
@@ -678,8 +680,19 @@ Alpine.start();</code></pre>
                 </div>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/alpine"><code>@boobstrap/alpine</code> on npm</a>. Alpine remains an application-level peer dependency and is never installed by the core framework.</p>
               </div>
+              <div id="react" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden>
+                <p>The adapter provides SSR-safe <code>useCollapse</code>, <code>useDropdown</code>, and <code>useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
+                <div class="docs-code-block">
+                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useCollapse, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
+                  <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/react react
+
+<span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
+<span class="bs-code-keyword">import</span> { useCollapse, useDropdown, useTabs } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/react"</span>;</code></pre>
+                </div>
+                <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/react"><code>@boobstrap/react</code> on npm</a>. React is a peer dependency; the adapter never initializes Boobstrap JS on React-owned DOM.</p>
+              </div>
             </div>
-            <div class="docs-note"><strong>Do not stack behavior layers.</strong> Use Boobstrap JS or an Alpine adapter on a component subtree, not both. React and Vue adapters will target this same state, event, and accessibility contract.</div>
+            <div class="docs-note"><strong>Do not stack behavior layers.</strong> Use Boobstrap JS, Alpine, or React on a component subtree—not more than one. Vue will target this same state, event, and accessibility contract.</div>
           </section>
 
           <section class="docs-section" id="collapse">
@@ -697,6 +710,7 @@ Alpine.start();</code></pre>
               <div class="docs-code-variant-tabs" role="tablist" aria-label="Collapse code framework">
                 <button id="collapse-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="collapse-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="collapse-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+                <button id="collapse-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
               </div>
               <div id="collapse-js-code-panel" role="tabpanel" aria-labelledby="collapse-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="details"&gt;&#10;  Toggle details&#10;&lt;/button&gt;&#10;&#10;&lt;div class="bs-collapse" id="details" hidden&gt;&#10;  Progressive by design.&#10;&lt;/div&gt;'>
                 <pre><code>&lt;button class="bs-btn bs-btn-secondary" type="button"
@@ -719,6 +733,23 @@ Alpine.start();</code></pre>
     Progressive by design.
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+              </div>
+              <div id="collapse-react-code-panel" role="tabpanel" aria-labelledby="collapse-react-code-tab" data-code-variant-panel="react" data-copy-source='function Details() {&#10;  const collapse = useCollapse({ id: "details" });&#10;&#10;  return (&#10;    &lt;&gt;&#10;      &lt;button className="bs-btn bs-btn-secondary" {...collapse.getTriggerProps()}&gt;&#10;        Toggle details&#10;      &lt;/button&gt;&#10;      &lt;div className="bs-collapse" {...collapse.getPanelProps()}&gt;&#10;        Progressive by design.&#10;      &lt;/div&gt;&#10;    &lt;/&gt;&#10;  );&#10;}' hidden>
+                <pre><code>function Details() {
+  const collapse = useCollapse({ id: "details" });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn bs-btn-secondary"
+        {...collapse.getTriggerProps()}&gt;
+        Toggle details
+      &lt;/button&gt;
+      &lt;div className="bs-collapse" {...collapse.getPanelProps()}&gt;
+        Progressive by design.
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">
@@ -752,6 +783,7 @@ Alpine.start();</code></pre>
               <div class="docs-code-variant-tabs" role="tablist" aria-label="Dropdown code framework">
                 <button id="dropdown-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="dropdown-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+                <button id="dropdown-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
               </div>
               <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-dropdown" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>
                 <pre><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
@@ -774,6 +806,24 @@ Alpine.start();</code></pre>
     &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
+              </div>
+              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source='function Actions() {&#10;  const dropdown = useDropdown({ id: "actions-menu" });&#10;&#10;  return (&#10;    &lt;div className="bs-dropdown" {...dropdown.getRootProps()}&gt;&#10;      &lt;button className="bs-btn" {...dropdown.getTriggerProps()}&gt;Actions&lt;/button&gt;&#10;      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;&#10;        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;      &lt;/div&gt;&#10;    &lt;/div&gt;&#10;  );&#10;}' hidden>
+                <pre><code>function Actions() {
+  const dropdown = useDropdown({ id: "actions-menu" });
+
+  return (
+    &lt;div className="bs-dropdown" {...dropdown.getRootProps()}&gt;
+      &lt;button className="bs-btn" {...dropdown.getTriggerProps()}&gt;
+        Actions
+      &lt;/button&gt;
+      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;
+        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
+          Edit
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">
@@ -805,6 +855,7 @@ Alpine.start();</code></pre>
               <div class="docs-code-variant-tabs" role="tablist" aria-label="Tabs code framework">
                 <button id="tabs-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="tabs-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="tabs-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+                <button id="tabs-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
               </div>
               <div id="tabs-js-code-panel" role="tabpanel" aria-labelledby="tabs-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;&#10;  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;&#10;  &lt;button class="bs-tab" id="security-tab" type="button" role="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;&#10;&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel" aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;&#10;&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel" aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;'>
                 <pre><code>&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
@@ -831,6 +882,32 @@ Alpine.start();</code></pre>
   &lt;div class="bs-tab-panel" id="security-panel" role="tabpanel"
     aria-labelledby="security-tab" x-bind="panel" hidden&gt;Security settings&lt;/div&gt;
 &lt;/section&gt;</code></pre>
+              </div>
+              <div id="tabs-react-code-panel" role="tabpanel" aria-labelledby="tabs-react-code-tab" data-code-variant-panel="react" data-copy-source='function Account() {&#10;  const tabs = useTabs({ defaultSelectedId: "profile-tab" });&#10;&#10;  return (&#10;    &lt;&gt;&#10;      &lt;div className="bs-tabs" aria-label="Account" {...tabs.getTablistProps()}&gt;&#10;        &lt;button className="bs-tab" {...tabs.getTabProps({ id: "profile-tab", controls: "profile-panel" })}&gt;Profile&lt;/button&gt;&#10;        &lt;button className="bs-tab" {...tabs.getTabProps({ id: "security-tab", controls: "security-panel" })}&gt;Security&lt;/button&gt;&#10;      &lt;/div&gt;&#10;      &lt;div className="bs-tab-panel" id="profile-panel" {...tabs.getPanelProps({ tabId: "profile-tab" })}&gt;Profile settings&lt;/div&gt;&#10;      &lt;div className="bs-tab-panel" id="security-panel" {...tabs.getPanelProps({ tabId: "security-tab" })}&gt;Security settings&lt;/div&gt;&#10;    &lt;/&gt;&#10;  );&#10;}' hidden>
+                <pre><code>function Account() {
+  const tabs = useTabs({ defaultSelectedId: "profile-tab" });
+
+  return (
+    &lt;&gt;
+      &lt;div className="bs-tabs" aria-label="Account" {...tabs.getTablistProps()}&gt;
+        &lt;button className="bs-tab" {...tabs.getTabProps({
+          id: "profile-tab", controls: "profile-panel"
+        })}&gt;Profile&lt;/button&gt;
+        &lt;button className="bs-tab" {...tabs.getTabProps({
+          id: "security-tab", controls: "security-panel"
+        })}&gt;Security&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div className="bs-tab-panel" id="profile-panel"
+        {...tabs.getPanelProps({ tabId: "profile-tab" })}&gt;
+        Profile settings
+      &lt;/div&gt;
+      &lt;div className="bs-tab-panel" id="security-panel"
+        {...tabs.getPanelProps({ tabId: "security-tab" })}&gt;
+        Security settings
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">
