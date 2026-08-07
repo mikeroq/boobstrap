@@ -134,6 +134,7 @@ try {
     if (await componentExamples.count() !== 6) failures.push(`${viewport.name}: expected six rendered component examples`);
     if (await componentCopyButtons.count() !== 6) failures.push(`${viewport.name}: expected six component copy controls`);
     if (await docsPage.locator(".docs-example-guidance").count() !== 6) failures.push(`${viewport.name}: example guidance is incomplete`);
+    if (await docsPage.locator(".docs-example-guidance > div").count() !== 18) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -170,6 +171,19 @@ try {
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: theme toggle did not enable light theme");
       }
+      await docsPage.locator('.docs-nav a[href="#buttons"]').click();
+      await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#buttons"]')?.getAttribute("aria-current") === "location");
+      await docsPage.evaluate(() => {
+        const section = document.querySelector("#forms");
+        const headerHeight = document.querySelector(".docs-header")?.offsetHeight ?? 0;
+        window.scrollTo({ top: section.offsetTop - headerHeight, behavior: "instant" });
+      });
+      await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#forms"]')?.getAttribute("aria-current") === "location");
+      if (await docsPage.locator('.docs-nav a[href="#buttons"]').getAttribute("aria-current") !== null) {
+        failures.push("desktop: clicked navigation link stayed active after scrolling to another section");
+      }
+      await docsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+      await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#accessibility"]')?.getAttribute("aria-current") === "location");
     } else {
       await docsPage.getByRole("button", { name: "Open documentation menu" }).click();
       if (!await docsPage.locator("#docs-sidebar").isVisible()) {
