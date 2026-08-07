@@ -34,7 +34,7 @@
           <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/>
         </svg>
         <span>Boobstrap</span>
-        <span class="docs-version">v0.1.3</span>
+        <span class="docs-version">v0.1.4</span>
       </a>
 
       <nav class="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
@@ -70,6 +70,7 @@
           <a href="#alerts">Alerts</a>
           <a href="#forms">Forms</a>
           <a href="#code-windows">Code windows</a>
+          <a href="#icons">Icons</a>
 
           <p class="docs-nav-label">Reference</p>
           <a href="#utilities">Utilities</a>
@@ -119,8 +120,8 @@
             <h3>Use from a CDN</h3>
             <p>For a plain HTML project, load the version-pinned stylesheet directly from jsDelivr:</p>
             <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.3/dist/boobstrap.css" /&gt;'>Copy</button></div>
-              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.3/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
+              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.4/dist/boobstrap.css" /&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.1.4/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
             </div>
             <p>To self-host instead, copy <code>dist/boobstrap.css</code> from the installed package into your assets.</p>
 
@@ -343,6 +344,32 @@
             <div class="docs-note"><strong>Composition:</strong> use <code>.bs-code-window</code> as the shell, <code>.bs-code-toolbar</code> for chrome, <code>.bs-code-dots</code> and three <code>.bs-code-dot</code> elements for the controls, and <code>.bs-code-body</code> on the <code>&lt;pre&gt;</code>.</div>
           </section>
 
+          <section class="docs-section" id="icons">
+            <div class="docs-kicker">Utilities</div>
+            <h2>Icons</h2>
+            <p>Boobstrap keeps icons library-agnostic. Add <code>.bs-icon</code> to any inline SVG to normalize its size, alignment, and current-color stroke; use <code>.bs-icon-sm</code>, <code>.bs-icon-lg</code>, or <code>.bs-icon-xl</code> for scale.</p>
+            <div class="docs-demo bs-flex bs-items-center bs-gap-4">
+              <svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m9-9H3" /></svg>
+              <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m9-9H3" /></svg>
+              <svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" /></svg>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · inline SVG</span><button type="button" data-copy='&lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;  &lt;path d="M12 3v18m9-9H3" /&gt;&#10;&lt;/svg&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;svg</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-icon bs-icon-lg"</span> <span class="bs-code-attribute">viewBox</span>=<span class="bs-code-string">"0 0 24 24"</span> <span class="bs-code-attribute">aria-hidden</span>=<span class="bs-code-string">"true"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;path</span> <span class="bs-code-attribute">d</span>=<span class="bs-code-string">"M12 3v18m9-9H3"</span> <span class="bs-code-tag">/&gt;</span>
+<span class="bs-code-tag">&lt;/svg&gt;</span></code></pre>
+            </div>
+            <p>If you want a ready-made icon set, install one separately. For example, <a href="https://lucide.dev/guide/packages/lucide">Lucide</a> can replace matching SVG elements at runtime while Boobstrap remains CSS-only:</p>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>Shell · JavaScript</span><button type="button" data-copy='npm install lucide&#10;&#10;import { createIcons, icons } from "lucide";&#10;createIcons({ icons });'>Copy</button></div>
+              <pre><code><span class="bs-code-keyword">npm</span> install lucide
+
+<span class="bs-code-keyword">import</span> { createIcons, icons } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"lucide"</span>;
+createIcons({ icons });</code></pre>
+            </div>
+            <div class="docs-note"><strong>Accessibility:</strong> decorative icons should use <code>aria-hidden="true"</code>; meaningful icons need an accessible label or visible text.</div>
+          </section>
+
           <section class="docs-section" id="utilities">
             <div class="docs-kicker">Reference</div>
             <h2>Utilities</h2>
@@ -401,7 +428,7 @@
           </section>
 
           <footer class="docs-footer">
-            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.1.3 · MIT licensed.</p>
+            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.1.4 · MIT licensed.</p>
             <div class="docs-footer-links">
               <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View on npm</a>
               <a href="https://github.com/mikeroq/boobstrap-framework">View source →</a>
