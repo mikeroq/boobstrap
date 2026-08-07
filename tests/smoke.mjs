@@ -1,8 +1,16 @@
 import { spawn } from "node:child_process";
 import { mkdir, readFile } from "node:fs/promises";
+import { createServer } from "node:net";
 import { chromium } from "playwright";
 
-const port = 4173;
+const port = await new Promise((resolve, reject) => {
+  const probe = createServer();
+  probe.once("error", reject);
+  probe.listen(0, "127.0.0.1", () => {
+    const address = probe.address();
+    probe.close(() => resolve(address.port));
+  });
+});
 const baseUrl = `http://127.0.0.1:${port}`;
 const server = spawn("./node_modules/.bin/vite", ["preview", "--host", "127.0.0.1", "--port", String(port)], {
   stdio: ["ignore", "pipe", "pipe"],
@@ -38,7 +46,7 @@ try {
   await waitForServer();
   await mkdir("artifacts", { recursive: true });
 
-  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/og-image.jpg"]) {
+  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/og-image.jpg", "/boobstrap-starter.zip"]) {
     const response = await fetch(`${baseUrl}${asset}`);
     if (!response.ok) failures.push(`${asset}: returned HTTP ${response.status}`);
   }
@@ -88,6 +96,7 @@ try {
     await page.close();
 
     const docsPage = await browser.newPage({ viewport });
+    await docsPage.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: baseUrl });
     const docsConsoleErrors = [];
     docsPage.on("console", (message) => {
       if (message.type() === "error") docsConsoleErrors.push(message.text());
@@ -107,6 +116,9 @@ try {
     const docsFaviconUrl = await docsPage.locator('link[rel="icon"]').getAttribute("href");
     const docsOgImage = await docsPage.locator('meta[property="og:image"]').getAttribute("content");
     const docsNpmLinks = await docsPage.locator(`a[href="${npmPackageUrl}"]`).count();
+    const starterDownloadLinks = await docsPage.locator('a[href="/boobstrap-starter.zip"][download]').count();
+    const componentExamples = docsPage.locator("[data-component-example]");
+    const componentCopyButtons = docsPage.locator("[data-copy-example]");
     const packageTabs = docsPage.getByRole("tab");
     const selectedManager = viewport.name === "desktop" ? "pnpm" : "Bun";
     const expectedCommand = viewport.name === "desktop" ? "pnpm add @boobstrap/boobstrap" : "bun add @boobstrap/boobstrap";
@@ -118,6 +130,10 @@ try {
     if (docsFaviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: docs favicon is incorrect`);
     if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
+    if (starterDownloadLinks < 2) failures.push(`${viewport.name}: starter download is not prominent in docs`);
+    if (await componentExamples.count() !== 6) failures.push(`${viewport.name}: expected six rendered component examples`);
+    if (await componentCopyButtons.count() !== 6) failures.push(`${viewport.name}: expected six component copy controls`);
+    if (await docsPage.locator(".docs-example-guidance").count() !== 6) failures.push(`${viewport.name}: example guidance is incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -138,9 +154,14 @@ try {
     if (documentedTokens !== expectedTokens) {
       failures.push(`${viewport.name}: docs list ${documentedTokens} of ${expectedTokens} framework tokens`);
     }
-    if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs ${docsConsoleErrors.join("; ")}`);
-
     if (viewport.name === "desktop") {
+      for (const name of ["responsive-layout", "buttons", "navbar", "cards", "alerts", "forms"]) {
+        const copyButton = docsPage.locator(`[data-copy-example="${name}"]`);
+        const expectedMarkup = await copyButton.getAttribute("data-copy");
+        await copyButton.click();
+        const copiedMarkup = await docsPage.evaluate(() => navigator.clipboard.readText());
+        if (copiedMarkup !== expectedMarkup) failures.push(`desktop: ${name} copy control did not copy complete markup`);
+      }
       await docsPage.getByLabel("Filter classes").fill("bs-btn");
       if (await docsPage.locator("#class-reference .reference-row").count() !== 7) {
         failures.push("desktop: class filtering did not return the seven button classes");
@@ -156,7 +177,78 @@ try {
       }
     }
 
+    if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs after interaction ${docsConsoleErrors.join("; ")}`);
+
     await docsPage.close();
+
+    const playgroundPage = await browser.newPage({ viewport });
+    await playgroundPage.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: baseUrl });
+    const playgroundConsoleErrors = [];
+    playgroundPage.on("console", (message) => {
+      if (message.type() === "error") playgroundConsoleErrors.push(message.text());
+    });
+    playgroundPage.on("pageerror", (error) => playgroundConsoleErrors.push(error.message));
+
+    await playgroundPage.goto(`${baseUrl}/playground.html`, { waitUntil: "networkidle" });
+    const playgroundDimensions = await playgroundPage.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    const previewFrame = playgroundPage.frameLocator("[data-preview]");
+    await previewFrame.getByRole("heading", { name: "Build boldly." }).waitFor();
+    await playgroundPage.screenshot({ path: `artifacts/playground-${viewport.name}.png`, fullPage: true });
+
+    if (playgroundDimensions.scrollWidth > playgroundDimensions.clientWidth + 1) {
+      failures.push(`${viewport.name}: playground horizontal overflow (${playgroundDimensions.scrollWidth}px > ${playgroundDimensions.clientWidth}px)`);
+    }
+    if (await playgroundPage.locator('link[rel="canonical"]').getAttribute("href") !== "https://boobstrap.org/playground.html") {
+      failures.push(`${viewport.name}: playground canonical URL is incorrect`);
+    }
+
+    const editedHtml = '<main><h1 data-test-marker>Edited preview</h1><button type="button" onclick="document.body.dataset.ran=\'true\'">Safe button</button><script>document.body.dataset.scriptRan="true"</script></main>';
+    const editedCss = "h1 { color: rgb(1, 2, 3); }";
+    await playgroundPage.getByLabel("HTML").fill(editedHtml);
+    await playgroundPage.getByLabel("CSS").fill(editedCss);
+    const editedHeading = previewFrame.getByRole("heading", { name: "Edited preview" });
+    await editedHeading.waitFor();
+    if (await editedHeading.evaluate((element) => getComputedStyle(element).color) !== "rgb(1, 2, 3)") {
+      failures.push(`${viewport.name}: playground CSS edit did not update the preview`);
+    }
+    if (await previewFrame.locator("script").count() !== 0) failures.push(`${viewport.name}: playground retained a user script`);
+    if (await previewFrame.getByRole("button", { name: "Safe button" }).getAttribute("onclick") !== null) {
+      failures.push(`${viewport.name}: playground retained an inline event handler`);
+    }
+
+    await playgroundPage.getByRole("button", { name: "Copy page" }).click();
+    const copiedPage = await playgroundPage.evaluate(() => navigator.clipboard.readText());
+    if (!copiedPage.includes("Edited preview") || !copiedPage.includes(editedCss)) {
+      failures.push(`${viewport.name}: playground copy did not return the current source`);
+    }
+
+    await playgroundPage.getByRole("button", { name: "Mobile", exact: true }).click();
+    if (await playgroundPage.getByRole("button", { name: "Mobile", exact: true }).getAttribute("aria-pressed") !== "true") {
+      failures.push(`${viewport.name}: mobile preview control did not activate`);
+    }
+    if (!await playgroundPage.locator("[data-preview-shell]").evaluate((element) => element.classList.contains("preview-size-mobile"))) {
+      failures.push(`${viewport.name}: mobile preview width class is missing`);
+    }
+
+    await playgroundPage.getByRole("button", { name: "Reset" }).click();
+    await previewFrame.getByRole("heading", { name: "Build boldly." }).waitFor();
+    if (!await playgroundPage.getByLabel("HTML").inputValue().then((value) => value.includes("Boobstrap starter"))) {
+      failures.push(`${viewport.name}: playground reset did not restore starter HTML`);
+    }
+
+    if (viewport.name === "mobile") {
+      const htmlBox = await playgroundPage.getByLabel("HTML").boundingBox();
+      const cssBox = await playgroundPage.getByLabel("CSS").boundingBox();
+      if (!htmlBox || !cssBox || cssBox.y <= htmlBox.y + htmlBox.height) {
+        failures.push("mobile: playground editors did not stack vertically");
+      }
+    }
+    if (playgroundConsoleErrors.length) failures.push(`${viewport.name}: playground ${playgroundConsoleErrors.join("; ")}`);
+
+    await playgroundPage.close();
   }
 } finally {
   await browser.close();

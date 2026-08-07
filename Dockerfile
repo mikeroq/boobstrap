@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 
-COPY index.html docs.html vite.config.js ./
+COPY index.html docs.html playground.html vite.config.js ./
 COPY src ./src
 COPY public ./public
 

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Edit Boobstrap HTML and CSS and see a safe live preview." />
+    <meta name="theme-color" content="#140a15" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Playground — Boobstrap" />
+    <meta property="og:description" content="Edit Boobstrap HTML and CSS in a safe, responsive live preview." />
+    <meta property="og:url" content="https://boobstrap.org/playground.html" />
+    <meta property="og:image" content="https://boobstrap.org/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://boobstrap.org/playground.html" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <title>Playground — Boobstrap</title>
+    <script type="module" src="/src/playground.js"></script>
+  </head>
+  <body class="playground-page">
+    <a class="playground-skip-link" href="#playground-editor">Skip to editor</a>
+    <header class="playground-header">
+      <a class="playground-brand bs-inline-flex bs-items-center bs-gap-2 bs-no-underline" href="/docs.html">
+        <svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z" /></svg>
+        <span>Boobstrap playground</span>
+      </a>
+      <nav class="bs-flex bs-items-center bs-gap-2" aria-label="Playground navigation">
+        <a class="bs-btn bs-btn-ghost bs-btn-sm" href="/docs.html">Docs</a>
+        <a class="bs-btn bs-btn-secondary bs-btn-sm playground-download" href="/boobstrap-starter.zip" download>Download starter</a>
+      </nav>
+    </header>
+
+    <main class="playground-main" id="playground-editor">
+      <section class="playground-intro" aria-labelledby="playground-title">
+        <div>
+          <span class="bs-badge bs-badge-primary">No JavaScript execution</span>
+          <h1 id="playground-title">Shape your next interface.</h1>
+          <p>Edit HTML and CSS, then watch the sandboxed preview update. Scripts, event handlers, forms, embeds, and external requests are blocked.</p>
+        </div>
+        <div class="playground-actions bs-flex bs-flex-wrap bs-gap-2">
+          <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-copy-html>Copy HTML</button>
+          <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-copy-css>Copy CSS</button>
+          <button class="bs-btn bs-btn-primary bs-btn-sm" type="button" data-copy-page>Copy page</button>
+          <button class="bs-btn bs-btn-ghost bs-btn-sm" type="button" data-reset>Reset</button>
+        </div>
+      </section>
+
+      <div class="playground-workspace">
+        <section class="playground-editors" aria-label="Source editors">
+          <div class="playground-editor-panel">
+            <div class="playground-panel-heading">
+              <label for="html-editor">HTML</label>
+              <span>Semantic page markup</span>
+            </div>
+            <textarea id="html-editor" data-html-editor spellcheck="false" autocomplete="off"></textarea>
+          </div>
+          <div class="playground-editor-panel">
+            <div class="playground-panel-heading">
+              <label for="css-editor">CSS</label>
+              <span>Loaded after Boobstrap</span>
+            </div>
+            <textarea id="css-editor" data-css-editor spellcheck="false" autocomplete="off"></textarea>
+          </div>
+        </section>
+
+        <section class="playground-preview-panel" aria-labelledby="preview-title">
+          <div class="playground-preview-toolbar">
+            <div>
+              <h2 id="preview-title">Live preview</h2>
+              <p data-preview-status aria-live="polite">Ready</p>
+            </div>
+            <div class="playground-device-controls" role="group" aria-label="Preview width">
+              <button type="button" aria-pressed="true" data-preview-size="desktop">Desktop</button>
+              <button type="button" aria-pressed="false" data-preview-size="tablet">Tablet</button>
+              <button type="button" aria-pressed="false" data-preview-size="mobile">Mobile</button>
+            </div>
+          </div>
+          <div class="playground-preview-stage">
+            <div class="playground-preview-shell preview-size-desktop" data-preview-shell>
+              <iframe title="Boobstrap playground preview" sandbox="" data-preview></iframe>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </body>
+</html>

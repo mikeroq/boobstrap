@@ -39,6 +39,7 @@
 
       <nav class="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
         <a href="/" class="docs-header-link">Home</a>
+        <a href="/playground.html" class="docs-header-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
         <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
@@ -57,14 +58,17 @@
           <p class="docs-nav-label">Start</p>
           <a href="#introduction">Introduction</a>
           <a href="#installation">Installation</a>
+          <a href="#starter">Starter template</a>
           <a href="#theming">Theming</a>
 
           <p class="docs-nav-label">Foundations</p>
           <a href="#typography">Typography</a>
           <a href="#layout">Layout &amp; grid</a>
+          <a href="#responsive-composition">Responsive composition</a>
 
           <p class="docs-nav-label">Components</p>
           <a href="#buttons">Buttons</a>
+          <a href="#navbar">Header / navbar</a>
           <a href="#badges">Badges</a>
           <a href="#cards">Cards</a>
           <a href="#alerts">Alerts</a>
@@ -88,6 +92,10 @@
             <span class="bs-badge bs-badge-primary">Documentation</span>
             <h1>Look good.<br /><span class="bs-text-gradient">Ship fast.</span></h1>
             <p class="bs-lead">Boobstrap is a lightweight, class-based CSS framework with responsive layout primitives, polished components, practical utilities, and themeable design tokens.</p>
+            <div class="docs-hero-actions bs-flex bs-flex-wrap bs-gap-3">
+              <a class="bs-btn bs-btn-primary" href="/boobstrap-starter.zip" download>Download starter</a>
+              <a class="bs-btn bs-btn-secondary" href="/playground.html">Open playground</a>
+            </div>
             <div class="docs-stat-row bs-flex bs-flex-wrap bs-gap-3">
               <span><strong data-class-count>148</strong> classes</span>
               <span><strong data-token-count>79</strong> tokens</span>
@@ -128,6 +136,41 @@
             <div class="docs-callout">
               <strong>Prefix guarantee</strong>
               <p>Every public framework class starts with <code>bs-</code>. Boobstrap does apply a small element reset and base typography, but component and utility styles stay namespaced.</p>
+            </div>
+          </section>
+
+          <section class="docs-section" id="starter">
+            <div class="docs-kicker">Start shipping</div>
+            <h2>Starter template</h2>
+            <p>Download a minimal Vite project that imports <code>@boobstrap/boobstrap</code> from npm. It includes a responsive landing page, theme-token overrides, components, a labeled form, dependency-free inline SVG icons, and a production validation check.</p>
+            <div class="starter-card bs-card bs-card-raised">
+              <div class="bs-card-body">
+                <div class="starter-card-layout bs-grid bs-gap-6">
+                  <div class="bs-col-12 bs-col-md-8">
+                    <span class="bs-badge bs-badge-primary">Ready for npm, pnpm, Yarn, or Bun</span>
+                    <h3 class="bs-card-title bs-mt-4">A real project, not just a snippet</h3>
+                    <p class="bs-card-text bs-mb-4">Install, run the Vite dev server, customize the semantic tokens, then validate the production bundle with one command.</p>
+                    <div class="bs-flex bs-flex-wrap bs-gap-3">
+                      <a class="bs-btn bs-btn-primary" href="/boobstrap-starter.zip" download data-starter-download>Download ZIP</a>
+                      <a class="bs-btn bs-btn-secondary" href="https://github.com/mikeroq/boobstrap-framework/tree/master/examples/starter">Browse source</a>
+                      <a class="bs-btn bs-btn-ghost" href="/playground.html">Try it first</a>
+                    </div>
+                  </div>
+                  <div class="starter-tree bs-col-12 bs-col-md-4" aria-label="Starter project files">
+                    <code>index.html</code>
+                    <code>src/main.js</code>
+                    <code>src/styles.css</code>
+                    <code>scripts/validate.mjs</code>
+                    <code>package.json</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>Terminal</span><button type="button" data-copy="npm install&#10;npm run dev&#10;npm run validate">Copy</button></div>
+              <pre><code><span class="bs-code-keyword">npm</span> install
+<span class="bs-code-keyword">npm</span> run dev
+<span class="bs-code-keyword">npm</span> run validate</code></pre>
             </div>
           </section>
 
@@ -222,11 +265,48 @@
             </div>
           </section>
 
+          <section class="docs-section" id="responsive-composition">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Responsive layout composition</h2>
+            <p>Start every region at 12 columns, then opt into wider arrangements at <code>md</code> and <code>lg</code>. The markup stays in a useful reading order at every width.</p>
+            <div class="docs-demo" data-component-example="responsive-layout" id="features-example">
+              <section class="bs-grid bs-gap-4" aria-labelledby="composition-title">
+                <div class="composition-lead bs-card bs-col-12 bs-col-lg-8">
+                  <div class="bs-card-body">
+                    <span class="bs-badge bs-badge-primary">Featured</span>
+                    <h3 class="bs-card-title bs-mt-4" id="composition-title">A wide story at large screens</h3>
+                    <p class="bs-card-text bs-mb-0">This region spans the full row on mobile and eight columns from the large breakpoint.</p>
+                  </div>
+                </div>
+                <aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4" aria-label="Related information">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Related</h3><p class="bs-card-text bs-mb-0">Twelve columns, then six, then four.</p></div>
+                </aside>
+                <article class="bs-card bs-col-12 bs-col-md-6">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Supporting detail</h3><p class="bs-card-text bs-mb-0">Two equal cards from the medium breakpoint.</p></div>
+                </article>
+                <article class="bs-card bs-col-12 bs-col-md-6">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Another detail</h3><p class="bs-card-text bs-mb-0">Source order remains the mobile reading order.</p></div>
+                </article>
+              </section>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="responsive-layout" data-copy='&lt;section class="bs-container bs-section" aria-labelledby="features-title"&gt;&#10;  &lt;h2 id="features-title"&gt;Features&lt;/h2&gt;&#10;  &lt;div class="bs-grid bs-gap-4"&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-lg-8"&gt;&#10;      &lt;div class="bs-card-body"&gt;Featured story&lt;/div&gt;&#10;    &lt;/article&gt;&#10;    &lt;aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4" aria-label="Related information"&gt;&#10;      &lt;div class="bs-card-body"&gt;Related information&lt;/div&gt;&#10;    &lt;/aside&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-md-6"&gt;&#10;      &lt;div class="bs-card-body"&gt;Supporting detail&lt;/div&gt;&#10;    &lt;/article&gt;&#10;  &lt;/div&gt;&#10;&lt;/section&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;section</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-container bs-section"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"features-title"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;h2</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"features-title"</span><span class="bs-code-tag">&gt;</span>Features<span class="bs-code-tag">&lt;/h2&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-grid bs-gap-4"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-col-12 bs-col-lg-8"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/article&gt;</span>
+    <span class="bs-code-tag">&lt;aside</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-col-12 bs-col-md-6 bs-col-lg-4"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/aside&gt;</span>
+  <span class="bs-code-tag">&lt;/div&gt;</span>
+<span class="bs-code-tag">&lt;/section&gt;</span></code></pre>
+            </div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-grid</code> creates 12 tracks; column utilities change spans at the mobile-first breakpoints.</p><p><strong>Accessibility:</strong> arrange the DOM in a logical small-screen reading order. CSS columns should change presentation, never meaning.</p></div>
+          </section>
+
           <section class="docs-section" id="buttons">
             <div class="docs-kicker">Components</div>
             <h2>Buttons</h2>
             <p>Start with <code>.bs-btn</code>, add one visual variant, and optionally add a size or icon modifier. The same classes work on buttons and links.</p>
-            <div class="docs-demo bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+            <div class="docs-demo bs-flex bs-flex-wrap bs-items-center bs-gap-3" data-component-example="buttons">
               <button class="bs-btn bs-btn-primary" type="button">Primary</button>
               <button class="bs-btn bs-btn-secondary" type="button">Secondary</button>
               <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
@@ -238,11 +318,42 @@
               <button class="bs-btn bs-btn-primary" type="button" disabled>Disabled</button>
             </div>
             <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;&lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read docs&lt;/a&gt;'>Copy</button></div>
+              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="buttons" data-copy='&lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3"&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;a class="bs-btn bs-btn-secondary" href="/docs.html"&gt;Read docs&lt;/a&gt;&#10;  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Favorite"&gt;&#10;    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;      &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;&#10;    &lt;/svg&gt;&#10;  &lt;/button&gt;&#10;&lt;/div&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span><span class="bs-code-tag">&gt;</span>Save changes<span class="bs-code-tag">&lt;/button&gt;</span>
-<span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/docs"</span><span class="bs-code-tag">&gt;</span>Read docs<span class="bs-code-tag">&lt;/a&gt;</span></code></pre>
+<span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/docs.html"</span><span class="bs-code-tag">&gt;</span>Read docs<span class="bs-code-tag">&lt;/a&gt;</span>
+<span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary bs-btn-icon"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Favorite"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/button&gt;</span></code></pre>
             </div>
-            <div class="docs-note"><strong>Icon buttons:</strong> always provide an accessible name with <code>aria-label</code>. <code>.bs-btn-icon</code> only controls square sizing.</div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-btn</code> supplies structure; pair it with one variant. <code>.bs-btn-icon</code> makes the control square.</p><p><strong>Accessibility:</strong> use buttons for actions and links for navigation. Icon-only buttons need an <code>aria-label</code>, while their decorative SVG uses <code>aria-hidden="true"</code>.</p></div>
+          </section>
+
+          <section class="docs-section" id="navbar">
+            <div class="docs-kicker">Components</div>
+            <h2>Header / navbar</h2>
+            <p>Compose a semantic header from layout utilities. This dependency-free example wraps naturally when space gets tight.</p>
+            <div class="docs-demo" data-component-example="navbar">
+              <header class="example-navbar">
+                <nav class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4" aria-label="Example primary navigation">
+                  <a class="example-navbar-brand bs-inline-flex bs-items-center bs-gap-2 bs-no-underline" href="#navbar">
+                    <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z" /></svg>
+                    Acme
+                  </a>
+                  <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-2">
+                    <a class="bs-btn bs-btn-ghost bs-btn-sm" href="#features-example">Features</a>
+                    <a class="bs-btn bs-btn-primary bs-btn-sm" href="#contact-example">Get started</a>
+                  </div>
+                </nav>
+              </header>
+            </div>
+            <div class="docs-code-block">
+              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="navbar" data-copy='&lt;header&gt;&#10;  &lt;nav class="bs-container bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4 bs-py-4" aria-label="Primary navigation"&gt;&#10;    &lt;a class="bs-inline-flex bs-items-center bs-gap-2 bs-no-underline" href="/"&gt;Acme&lt;/a&gt;&#10;    &lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-2"&gt;&#10;      &lt;a class="bs-btn bs-btn-ghost bs-btn-sm" href="#features"&gt;Features&lt;/a&gt;&#10;      &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="#contact"&gt;Get started&lt;/a&gt;&#10;    &lt;/div&gt;&#10;  &lt;/nav&gt;&#10;&lt;/header&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;header&gt;</span>
+  <span class="bs-code-tag">&lt;nav</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-container bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4 bs-py-4"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Primary navigation"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/"</span><span class="bs-code-tag">&gt;</span>Acme<span class="bs-code-tag">&lt;/a&gt;</span>
+    <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-flex bs-flex-wrap bs-gap-2"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/div&gt;</span>
+  <span class="bs-code-tag">&lt;/nav&gt;</span>
+<span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
+            </div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> flex alignment positions the brand and links; <code>.bs-flex-wrap</code> prevents overflow on narrow screens.</p><p><strong>Accessibility:</strong> give each navigation landmark a useful label when a page contains more than one. Keep link text descriptive and preserve visible keyboard focus.</p></div>
           </section>
 
           <section class="docs-section" id="badges">
@@ -261,7 +372,7 @@
             <div class="docs-kicker">Components</div>
             <h2>Cards</h2>
             <p>Cards establish a contained surface. Structure content with the body, title, and text classes; add <code>.bs-card-raised</code> when the card needs more visual elevation.</p>
-            <div class="docs-demo cards-demo bs-grid bs-gap-4">
+            <div class="docs-demo cards-demo bs-grid bs-gap-4" data-component-example="cards">
               <article class="bs-card bs-col-12 bs-col-md-6">
                 <div class="bs-card-body">
                   <span class="bs-badge">Standard</span>
@@ -279,34 +390,37 @@
                 </div>
               </article>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;article class="bs-card bs-card-raised"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;h3 class="bs-card-title"&gt;Card title&lt;/h3&gt;&#10;    &lt;p class="bs-card-text"&gt;Supporting copy.&lt;/p&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span><span class="bs-code-tag">&gt;</span>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy='&lt;article class="bs-card bs-card-raised" aria-labelledby="launch-card-title"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;span class="bs-badge bs-badge-primary"&gt;New&lt;/span&gt;&#10;    &lt;h3 class="bs-card-title bs-mt-4" id="launch-card-title"&gt;Launch ready&lt;/h3&gt;&#10;    &lt;p class="bs-card-text bs-mb-4"&gt;Supporting copy for this card.&lt;/p&gt;&#10;    &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="/details"&gt;View details&lt;/a&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-body"</span><span class="bs-code-tag">&gt;</span>
-    <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span><span class="bs-code-tag">&gt;</span>Card title<span class="bs-code-tag">&lt;/h3&gt;</span>
+    <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>Launch ready<span class="bs-code-tag">&lt;/h3&gt;</span>
     <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-text"</span><span class="bs-code-tag">&gt;</span>Supporting copy.<span class="bs-code-tag">&lt;/p&gt;</span>
+    <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-btn-sm"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/details"</span><span class="bs-code-tag">&gt;</span>View details<span class="bs-code-tag">&lt;/a&gt;</span>
   <span class="bs-code-tag">&lt;/div&gt;</span>
 <span class="bs-code-tag">&lt;/article&gt;</span></code></pre></div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-card</code> creates the surface, <code>.bs-card-body</code> provides inset spacing, and <code>.bs-card-raised</code> adds elevation.</p><p><strong>Accessibility:</strong> use an article only when the card stands on its own. Give repeated cards headings, and do not turn the entire surface into a link when it contains other controls.</p></div>
           </section>
 
           <section class="docs-section" id="alerts">
             <div class="docs-kicker">Components</div>
             <h2>Alerts</h2>
             <p>Alerts communicate inline feedback. Pair <code>.bs-alert</code> with a state modifier and use <code>.bs-alert-title</code> for a clear lead-in.</p>
-            <div class="bs-stack bs-gap-3">
+            <div class="docs-demo bs-stack bs-gap-3" data-component-example="alerts">
               <div class="bs-alert bs-alert-primary" role="status"><span aria-hidden="true">✦</span><span><strong class="bs-alert-title">Heads up</strong>This preview is ready for your custom theme.</span></div>
               <div class="bs-alert bs-alert-success" role="status"><span aria-hidden="true">✓</span><span><strong class="bs-alert-title">Saved</strong>Your changes were published successfully.</span></div>
               <div class="bs-alert" role="status"><span aria-hidden="true">i</span><span><strong class="bs-alert-title">Neutral note</strong>The base alert works without a state modifier.</span></div>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-alert bs-alert-success" role="status"&gt;&#10;  &lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt;&#10;  Your changes were published.&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert bs-alert-success"</span> <span class="bs-code-attribute">role</span>=<span class="bs-code-string">"status"</span><span class="bs-code-tag">&gt;</span>
-  <span class="bs-code-tag">&lt;strong</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert-title"</span><span class="bs-code-tag">&gt;</span>Saved<span class="bs-code-tag">&lt;/strong&gt;</span>
-  Your changes were published.
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="alerts" data-copy='&lt;div class="bs-alert bs-alert-success" role="status"&gt;&#10;  &lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="m5 12 4 4L19 6" /&gt;&#10;  &lt;/svg&gt;&#10;  &lt;span&gt;&#10;    &lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt;&#10;    Your changes were published.&#10;  &lt;/span&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert bs-alert-success"</span> <span class="bs-code-attribute">role</span>=<span class="bs-code-string">"status"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;svg</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-icon bs-icon-lg"</span> <span class="bs-code-attribute">aria-hidden</span>=<span class="bs-code-string">"true"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/svg&gt;</span>
+  <span class="bs-code-tag">&lt;span&gt;</span><span class="bs-code-tag">&lt;strong</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert-title"</span><span class="bs-code-tag">&gt;</span>Saved<span class="bs-code-tag">&lt;/strong&gt;</span> Your changes were published.<span class="bs-code-tag">&lt;/span&gt;</span>
 <span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> start with <code>.bs-alert</code>, then add a state modifier; <code>.bs-alert-title</code> creates a clear text lead-in.</p><p><strong>Accessibility:</strong> apply <code>role="status"</code> only when success feedback appears dynamically. Use <code>role="alert"</code> sparingly for urgent errors, and never communicate state by color alone.</p></div>
           </section>
 
           <section class="docs-section" id="forms">
             <div class="docs-kicker">Components</div>
             <h2>Forms</h2>
             <p>Boobstrap styles native controls without replacing their semantics. Keep labels associated with controls and use <code>.bs-form-group</code> to establish consistent spacing.</p>
-            <div class="docs-demo">
+            <div class="docs-demo" data-component-example="forms" id="contact-example">
               <form class="docs-form" data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="docs-name">Name</label>
@@ -323,10 +437,14 @@
                 <button class="bs-btn bs-btn-primary docs-form-wide" type="submit">Send message</button>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-form-group"&gt;&#10;  &lt;label class="bs-label" for="email"&gt;Email&lt;/label&gt;&#10;  &lt;input class="bs-input" id="email" type="email" placeholder="you@example.com" /&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-form-group"</span><span class="bs-code-tag">&gt;</span>
-  <span class="bs-code-tag">&lt;label</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-label"</span> <span class="bs-code-attribute">for</span>=<span class="bs-code-string">"email"</span><span class="bs-code-tag">&gt;</span>Email<span class="bs-code-tag">&lt;/label&gt;</span>
-  <span class="bs-code-tag">&lt;input</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-input"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-tag">/&gt;</span>
-<span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="forms" data-copy='&lt;form action="/contact" method="post"&gt;&#10;  &lt;div class="bs-form-group"&gt;&#10;    &lt;label class="bs-label" for="email"&gt;Email&lt;/label&gt;&#10;    &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" required /&gt;&#10;  &lt;/div&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-mt-4" type="submit"&gt;Subscribe&lt;/button&gt;&#10;&lt;/form&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;form</span> <span class="bs-code-attribute">action</span>=<span class="bs-code-string">"/contact"</span> <span class="bs-code-attribute">method</span>=<span class="bs-code-string">"post"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-form-group"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;label</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-label"</span> <span class="bs-code-attribute">for</span>=<span class="bs-code-string">"email"</span><span class="bs-code-tag">&gt;</span>Email<span class="bs-code-tag">&lt;/label&gt;</span>
+    <span class="bs-code-tag">&lt;input</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-input"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">name</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">required</span> <span class="bs-code-tag">/&gt;</span>
+  <span class="bs-code-tag">&lt;/div&gt;</span>
+  <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-mt-4"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"submit"</span><span class="bs-code-tag">&gt;</span>Subscribe<span class="bs-code-tag">&lt;/button&gt;</span>
+<span class="bs-code-tag">&lt;/form&gt;</span></code></pre></div>
+            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-form-group</code> spaces a label and control; use the matching input, select, or textarea class on the native control.</p><p><strong>Accessibility:</strong> keep a visible label associated through matching <code>for</code> and <code>id</code> values. Use the correct input type, autocomplete token, name, and required state.</p></div>
           </section>
 
           <section class="docs-section" id="code-windows">
