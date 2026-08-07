@@ -77,7 +77,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.2.0 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.2.1 npm package", exact: true }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -153,7 +153,7 @@ try {
     if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
       failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
     }
-    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.0/dist/boobstrap.css" }).isVisible()) {
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.1/dist/boobstrap.css" }).isVisible()) {
       failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
     }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
