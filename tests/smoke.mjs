@@ -77,7 +77,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.2.0 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.2.1 npm package", exact: true }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -153,7 +153,7 @@ try {
     if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
       failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
     }
-    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.0/dist/boobstrap.css" }).isVisible()) {
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.1/dist/boobstrap.css" }).isVisible()) {
       failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
     }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
@@ -185,10 +185,21 @@ try {
           if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== alpineMarkup || !alpineMarkup.includes("x-data")) {
             failures.push(`desktop: ${name} Alpine variant did not copy complete markup`);
           }
+          const reactTab = exampleShell.getByRole("tab", { name: "React", exact: true });
+          await reactTab.click();
+          const reactMarkup = await exampleShell.locator('[data-code-variant-panel="react"]').getAttribute("data-copy-source");
+          await copyButton.click();
+          if (await docsPage.evaluate(() => navigator.clipboard.readText()) !== reactMarkup || !reactMarkup.includes("use")) {
+            failures.push(`desktop: ${name} React variant did not copy complete markup`);
+          }
           await jsTab.focus();
           await jsTab.press("ArrowRight");
           if (await alpineTab.getAttribute("aria-selected") !== "true" || !await alpineTab.evaluate((element) => element === document.activeElement)) {
             failures.push(`desktop: ${name} behavior switcher is not keyboard accessible`);
+          }
+          await alpineTab.press("End");
+          if (await reactTab.getAttribute("aria-selected") !== "true" || !await reactTab.evaluate((element) => element === document.activeElement)) {
+            failures.push(`desktop: ${name} React variant is not keyboard accessible`);
           }
         } else {
           const expectedMarkup = await copyButton.getAttribute("data-copy");
@@ -207,6 +218,13 @@ try {
       await alpineCopy.click();
       const alpineSource = await docsPage.evaluate(() => navigator.clipboard.readText());
       if (!alpineSource.includes('@boobstrap/alpine')) failures.push("desktop: Alpine setup did not copy its complete source");
+      const reactTab = docsPage.getByRole("tab", { name: "React", exact: true });
+      await reactTab.click();
+      const reactPanel = docsPage.locator('[data-framework-panel="react"]');
+      if (!await reactPanel.isVisible()) failures.push("desktop: React integration panel did not activate");
+      await reactPanel.locator("[data-copy]").click();
+      const reactSource = await docsPage.evaluate(() => navigator.clipboard.readText());
+      if (!reactSource.includes('@boobstrap/react')) failures.push("desktop: React setup did not copy its complete source");
 
       const collapsePreview = docsPage.locator('[data-component-example="collapse"]');
       const collapseToggle = collapsePreview.getByRole("button", { name: "Toggle details" });

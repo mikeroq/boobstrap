@@ -412,7 +412,7 @@ body.docs-page {
 
 .docs-runtime-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: var(--bs-space-3);
   margin-block: var(--bs-space-6);
 }
@@ -706,6 +706,7 @@ body.docs-page {
   .docs-layout { grid-template-columns: var(--docs-sidebar-width) minmax(0, 1fr); }
   .docs-on-this-page { display: none; }
   .docs-quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .docs-runtime-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 @media (max-width: 55rem) {
