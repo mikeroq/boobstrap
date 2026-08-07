@@ -206,17 +206,46 @@ pageNav.innerHTML = headings.map((heading) => `<a href="#${heading.parentElement
 const sectionLinks = [...document.querySelectorAll('.docs-nav a[href^="#"], [data-page-nav] a[href^="#"]')];
 const setActiveSection = (id) => {
   sectionLinks.forEach((link) => {
-    if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "true");
+    if (link.getAttribute("href") === `#${id}`) link.setAttribute("aria-current", "location");
     else link.removeAttribute("aria-current");
   });
 };
 
-const observer = new IntersectionObserver((entries) => {
-  const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
-  if (visible[0]) setActiveSection(visible[0].target.id);
-}, { rootMargin: "-20% 0px -70%", threshold: 0 });
+const trackedSections = [...document.querySelectorAll(".docs-section[id], .docs-hero[id]")];
+let scrollUpdateQueued = false;
 
-document.querySelectorAll(".docs-section[id], .docs-hero[id]").forEach((section) => observer.observe(section));
-setActiveSection("introduction");
+const updateActiveSection = () => {
+  const headerHeight = document.querySelector(".docs-header")?.offsetHeight ?? 0;
+  const readingLine = window.scrollY + headerHeight + 32;
+  const atPageEnd = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2;
+  let activeSection = trackedSections[0];
+
+  if (atPageEnd) {
+    activeSection = trackedSections.at(-1);
+  } else {
+    for (const section of trackedSections) {
+      if (section.offsetTop > readingLine) break;
+      activeSection = section;
+    }
+  }
+
+  if (activeSection) setActiveSection(activeSection.id);
+  scrollUpdateQueued = false;
+};
+
+const queueActiveSectionUpdate = () => {
+  if (scrollUpdateQueued) return;
+  scrollUpdateQueued = true;
+  window.requestAnimationFrame(updateActiveSection);
+};
+
+sectionLinks.forEach((link) => {
+  link.addEventListener("click", () => setActiveSection(link.hash.slice(1)));
+});
+window.addEventListener("scroll", queueActiveSectionUpdate, { passive: true });
+window.addEventListener("resize", queueActiveSectionUpdate);
+window.addEventListener("hashchange", queueActiveSectionUpdate);
+window.addEventListener("load", queueActiveSectionUpdate);
+updateActiveSection();
 
 document.documentElement.classList.add("js-ready");

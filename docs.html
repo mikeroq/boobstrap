@@ -299,7 +299,11 @@
   <span class="bs-code-tag">&lt;/div&gt;</span>
 <span class="bs-code-tag">&lt;/section&gt;</span></code></pre>
             </div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-grid</code> creates 12 tracks; column utilities change spans at the mobile-first breakpoints.</p><p><strong>Accessibility:</strong> arrange the DOM in a logical small-screen reading order. CSS columns should change presentation, never meaning.</p></div>
+            <div class="docs-example-guidance" aria-label="Responsive composition guidance">
+              <div><h3>Structure</h3><p>Use a labeled <code>&lt;section&gt;</code> for the region, then place articles, asides, or plain containers directly inside the grid.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-grid</code> creates 12 tracks. <code>.bs-col-12</code> is the mobile baseline; <code>md</code> applies from 48rem and <code>lg</code> from 64rem.</p></div>
+              <div><h3>Accessibility</h3><p>Keep the DOM in a logical small-screen reading order. Breakpoint classes should change presentation without changing meaning or focus order.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="buttons">
@@ -323,7 +327,11 @@
 <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/docs.html"</span><span class="bs-code-tag">&gt;</span>Read docs<span class="bs-code-tag">&lt;/a&gt;</span>
 <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary bs-btn-icon"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Favorite"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/button&gt;</span></code></pre>
             </div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-btn</code> supplies structure; pair it with one variant. <code>.bs-btn-icon</code> makes the control square.</p><p><strong>Accessibility:</strong> use buttons for actions and links for navigation. Icon-only buttons need an <code>aria-label</code>, while their decorative SVG uses <code>aria-hidden="true"</code>.</p></div>
+            <div class="docs-example-guidance" aria-label="Button guidance">
+              <div><h3>Structure</h3><p>Use <code>&lt;button type="button"&gt;</code> for in-page actions and <code>&lt;a href&gt;</code> when the control navigates somewhere.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-btn</code> supplies structure. Add one of <code>primary</code>, <code>secondary</code>, or <code>ghost</code>, then an optional size or <code>.bs-btn-icon</code>.</p></div>
+              <div><h3>Accessibility</h3><p>Icon-only buttons need an <code>aria-label</code>. Hide a decorative SVG with <code>aria-hidden="true"</code>, and use the native <code>disabled</code> attribute when unavailable.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="navbar">
@@ -353,7 +361,11 @@
   <span class="bs-code-tag">&lt;/nav&gt;</span>
 <span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
             </div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> flex alignment positions the brand and links; <code>.bs-flex-wrap</code> prevents overflow on narrow screens.</p><p><strong>Accessibility:</strong> give each navigation landmark a useful label when a page contains more than one. Keep link text descriptive and preserve visible keyboard focus.</p></div>
+            <div class="docs-example-guidance" aria-label="Navbar guidance">
+              <div><h3>Structure</h3><p>Wrap the primary navigation in <code>&lt;header&gt;</code> and <code>&lt;nav&gt;</code>. Keep the brand and destination links as real anchors.</p></div>
+              <div><h3>Class map</h3><p>Flex alignment positions the brand and links. <code>.bs-flex-wrap</code> prevents overflow, while gap utilities preserve spacing when rows wrap.</p></div>
+              <div><h3>Accessibility</h3><p>Label navigation landmarks when a page has more than one. Use descriptive link text and do not remove the framework's visible keyboard focus.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="badges">
@@ -397,7 +409,11 @@
     <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-btn-sm"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/details"</span><span class="bs-code-tag">&gt;</span>View details<span class="bs-code-tag">&lt;/a&gt;</span>
   <span class="bs-code-tag">&lt;/div&gt;</span>
 <span class="bs-code-tag">&lt;/article&gt;</span></code></pre></div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-card</code> creates the surface, <code>.bs-card-body</code> provides inset spacing, and <code>.bs-card-raised</code> adds elevation.</p><p><strong>Accessibility:</strong> use an article only when the card stands on its own. Give repeated cards headings, and do not turn the entire surface into a link when it contains other controls.</p></div>
+            <div class="docs-example-guidance" aria-label="Card guidance">
+              <div><h3>Structure</h3><p>Place content inside <code>.bs-card-body</code>, then use a real heading, supporting text, and the smallest set of actions the card needs.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-card</code> creates the surface, <code>.bs-card-body</code> adds inset spacing, and <code>.bs-card-raised</code> increases elevation without changing structure.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code>&lt;article&gt;</code> only for standalone content. Give repeated cards headings, and avoid a whole-card link when nested controls are present.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="alerts">
@@ -413,7 +429,11 @@
   <span class="bs-code-tag">&lt;svg</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-icon bs-icon-lg"</span> <span class="bs-code-attribute">aria-hidden</span>=<span class="bs-code-string">"true"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/svg&gt;</span>
   <span class="bs-code-tag">&lt;span&gt;</span><span class="bs-code-tag">&lt;strong</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert-title"</span><span class="bs-code-tag">&gt;</span>Saved<span class="bs-code-tag">&lt;/strong&gt;</span> Your changes were published.<span class="bs-code-tag">&lt;/span&gt;</span>
 <span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> start with <code>.bs-alert</code>, then add a state modifier; <code>.bs-alert-title</code> creates a clear text lead-in.</p><p><strong>Accessibility:</strong> apply <code>role="status"</code> only when success feedback appears dynamically. Use <code>role="alert"</code> sparingly for urgent errors, and never communicate state by color alone.</p></div>
+            <div class="docs-example-guidance" aria-label="Alert guidance">
+              <div><h3>Structure</h3><p>Combine an optional decorative icon with a text wrapper. Put the short summary in <code>.bs-alert-title</code> before the supporting message.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-alert</code> is neutral. Add <code>.bs-alert-primary</code> for highlighted guidance or <code>.bs-alert-success</code> for successful outcomes.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code>role="status"</code> for dynamic, non-urgent feedback and <code>role="alert"</code> sparingly for urgent errors. Never rely on color alone.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="forms">
@@ -444,7 +464,11 @@
   <span class="bs-code-tag">&lt;/div&gt;</span>
   <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-mt-4"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"submit"</span><span class="bs-code-tag">&gt;</span>Subscribe<span class="bs-code-tag">&lt;/button&gt;</span>
 <span class="bs-code-tag">&lt;/form&gt;</span></code></pre></div>
-            <div class="docs-example-guidance"><p><strong>Classes:</strong> <code>.bs-form-group</code> spaces a label and control; use the matching input, select, or textarea class on the native control.</p><p><strong>Accessibility:</strong> keep a visible label associated through matching <code>for</code> and <code>id</code> values. Use the correct input type, autocomplete token, name, and required state.</p></div>
+            <div class="docs-example-guidance" aria-label="Form guidance">
+              <div><h3>Structure</h3><p>Group each visible label with one native control. The form owns submission details; every submitted control needs a stable <code>name</code>.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-form-group</code> controls spacing. Apply <code>.bs-input</code>, <code>.bs-select</code>, or <code>.bs-textarea</code> to the matching native element.</p></div>
+              <div><h3>Accessibility</h3><p>Match <code>for</code> and <code>id</code>, choose the correct type and autocomplete token, and connect help or error text with <code>aria-describedby</code>.</p></div>
+            </div>
           </section>
 
           <section class="docs-section" id="code-windows">
