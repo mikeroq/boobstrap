@@ -77,7 +77,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.2.1 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.3.0 npm package", exact: true }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -139,12 +139,12 @@ try {
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
     if (starterDownloadLinks < 2) failures.push(`${viewport.name}: starter download is not prominent in docs`);
     if (await componentExamples.count() !== 9) failures.push(`${viewport.name}: expected nine rendered component examples`);
-    if (await componentCopyButtons.count() !== 9) failures.push(`${viewport.name}: expected nine component copy controls`);
+    if (await componentCopyButtons.count() !== 10) failures.push(`${viewport.name}: expected ten component copy controls`);
     if (await docsPage.locator(".docs-example-guidance").count() !== 9) failures.push(`${viewport.name}: example guidance is incomplete`);
     if (await docsPage.locator(".docs-example-guidance > div").count() !== 27) failures.push(`${viewport.name}: detailed example anatomy is incomplete`);
     if (await docsPage.locator(".docs-api").count() !== 11) failures.push(`${viewport.name}: component API references are incomplete`);
     if (await docsPage.locator("[data-example-shell]").count() !== 9) failures.push(`${viewport.name}: tabbed examples are incomplete`);
-    if (await docsPage.locator("[data-code-variants]").count() !== 3) failures.push(`${viewport.name}: behavior code variants are incomplete`);
+    if (await docsPage.locator("[data-code-variants]").count() !== 4) failures.push(`${viewport.name}: behavior code variants are incomplete`);
     if (await packageTabs.count() !== 4) failures.push(`${viewport.name}: expected four package-manager tabs`);
     await docsPage.getByRole("tab", { name: selectedManager, exact: true }).click();
     if (await docsPage.locator("[data-package-command-output]").textContent() !== expectedCommand) {
@@ -153,7 +153,7 @@ try {
     if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
       failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
     }
-    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.1/dist/boobstrap.css" }).isVisible()) {
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.0/dist/boobstrap.css" }).isVisible()) {
       failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
     }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
@@ -210,7 +210,8 @@ try {
         await exampleShell.getByRole("tab", { name: "Preview" }).click();
         if (!await exampleShell.locator("[data-component-example]").isVisible()) failures.push(`desktop: ${name} preview did not restore`);
       }
-      const alpineTab = docsPage.getByRole("tab", { name: "Alpine.js", exact: true });
+      const frameworkSwitcher = docsPage.locator("[data-framework-tabs]");
+      const alpineTab = frameworkSwitcher.getByRole("tab", { name: "Alpine.js", exact: true });
       await alpineTab.click();
       const alpinePanel = docsPage.locator('[data-framework-panel="alpine"]');
       if (!await alpinePanel.isVisible()) failures.push("desktop: Alpine integration panel did not activate");
@@ -218,13 +219,31 @@ try {
       await alpineCopy.click();
       const alpineSource = await docsPage.evaluate(() => navigator.clipboard.readText());
       if (!alpineSource.includes('@boobstrap/alpine')) failures.push("desktop: Alpine setup did not copy its complete source");
-      const reactTab = docsPage.getByRole("tab", { name: "React", exact: true });
+      const reactTab = frameworkSwitcher.getByRole("tab", { name: "React", exact: true });
       await reactTab.click();
       const reactPanel = docsPage.locator('[data-framework-panel="react"]');
       if (!await reactPanel.isVisible()) failures.push("desktop: React integration panel did not activate");
       await reactPanel.locator("[data-copy]").click();
       const reactSource = await docsPage.evaluate(() => navigator.clipboard.readText());
       if (!reactSource.includes('@boobstrap/react')) failures.push("desktop: React setup did not copy its complete source");
+
+      const loadingVariants = docsPage.locator('[data-code-variants]').filter({ has: docsPage.locator('[data-copy-example="button-loading"]') });
+      for (const [tabName, marker] of [["Boobstrap JS", "data-bs-button"], ["Alpine.js", "x-data"], ["React", "useButton"]]) {
+        await loadingVariants.getByRole("tab", { name: tabName, exact: true }).click();
+        await loadingVariants.locator('[data-copy-example="button-loading"]').click();
+        if (!await docsPage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes(marker))) {
+          failures.push(`desktop: loading button ${tabName} variant did not copy complete source`);
+        }
+      }
+
+      const loadingButton = docsPage.locator("[data-demo-loading]");
+      await loadingButton.click();
+      await docsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "loading");
+      if (!await loadingButton.isDisabled() || await loadingButton.getAttribute("aria-busy") !== "true" || !await loadingButton.locator(".bs-btn-spinner").isVisible()) {
+        failures.push("desktop: loading button did not synchronize its disabled, busy, and spinner states");
+      }
+      await docsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "idle");
+      if (await loadingButton.isDisabled()) failures.push("desktop: loading button did not restore after the demo request");
 
       const collapsePreview = docsPage.locator('[data-component-example="collapse"]');
       const collapseToggle = collapsePreview.getByRole("button", { name: "Toggle details" });
@@ -234,14 +253,14 @@ try {
       }
 
       const dropdownPreview = docsPage.locator('[data-component-example="dropdown"]');
-      const dropdownToggle = dropdownPreview.getByRole("button", { name: "Actions" });
+      const dropdownToggle = dropdownPreview.getByRole("button", { name: "More save options" });
       await dropdownToggle.focus();
       await dropdownToggle.press("ArrowDown");
-      const editItem = dropdownPreview.getByRole("menuitem", { name: "Edit" });
-      if (!await dropdownPreview.getByRole("menu").isVisible() || !await editItem.evaluate((element) => element === document.activeElement)) {
+      const publishItem = dropdownPreview.getByRole("menuitem", { name: "Save and publish" });
+      if (!await dropdownPreview.getByRole("menu").isVisible() || !await publishItem.evaluate((element) => element === document.activeElement)) {
         failures.push("desktop: dropdown example did not open with keyboard focus");
       }
-      await editItem.press("Escape");
+      await publishItem.press("Escape");
       if (await dropdownPreview.getByRole("menu").isVisible() || !await dropdownToggle.evaluate((element) => element === document.activeElement)) {
         failures.push("desktop: dropdown example did not close and restore focus with Escape");
       }
@@ -263,8 +282,8 @@ try {
       if (!await docsPage.locator('.docs-nav a[href="#behavior-layers"]').isVisible()) failures.push("desktop: docs navigation filter could not find Alpine guidance");
       await docsPage.getByLabel("Filter documentation sections").press("Escape");
       await docsPage.getByLabel("Filter classes").fill("bs-btn");
-      if (await docsPage.locator("#class-reference .reference-row").count() !== 7) {
-        failures.push("desktop: class filtering did not return the seven button classes");
+      if (await docsPage.locator("#class-reference .reference-row").count() !== 18) {
+        failures.push("desktop: class filtering did not return the eighteen button classes");
       }
       await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {

@@ -207,6 +207,11 @@ document.querySelectorAll("[data-code-variants]").forEach((switcher) => {
 });
 
 initBoobstrap(document);
+document.querySelectorAll("[data-demo-loading]").forEach((button) => {
+  button.addEventListener("bs:button:started", (event) => {
+    window.setTimeout(() => event.detail.controller.stop({ reason: "demo" }), 1200);
+  });
+});
 
 const navFilter = document.querySelector("[data-nav-filter]");
 const navGroups = [...document.querySelectorAll("[data-nav-group]")];
@@ -304,7 +309,7 @@ const declarationsFor = (className) => {
 const classCategory = (name) => {
   if (name === "bs-display" || name === "bs-lead") return "Typography primitives";
   if (name.startsWith("bs-container") || name === "bs-section" || name === "bs-grid" || name === "bs-row" || name.startsWith("bs-col")) return "Layout & grid";
-  if (name.startsWith("bs-btn")) return "Buttons";
+  if (name.startsWith("bs-btn") || name.startsWith("bs-spinner")) return "Buttons";
   if (name.startsWith("bs-card")) return "Cards";
   if (name.startsWith("bs-badge")) return "Badges";
   if (["bs-form-group", "bs-label", "bs-input", "bs-select", "bs-textarea"].includes(name)) return "Forms";
