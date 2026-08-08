@@ -229,7 +229,7 @@ try {
       }));
       if (!pairedExamples) failures.push(`${viewport.name}: ${config.path} does not place visible code below every preview`);
       if (routeDimensions.scrollWidth > routeDimensions.clientWidth + 1) {
-        failures.push(`${viewport.name}: ${config.path} has horizontal overflow`);
+        failures.push(`${viewport.name}: ${config.path} has horizontal overflow (${routeDimensions.scrollWidth}px > ${routeDimensions.clientWidth}px)`);
       }
       if (routeErrors.length) failures.push(`${viewport.name}: ${config.path} ${routeErrors.join("; ")}`);
 
