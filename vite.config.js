@@ -1,19 +1,23 @@
 import { defineConfig } from "vite";
 import { resolve } from "node:path";
+import { docsPages } from "./src/docs-pages.js";
 
 const cleanRoutes = () => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
-    ["/docs/", "/docs/index.html"],
     ["/docs/components/buttons", "/docs/components/buttons/index.html"],
-    ["/docs/components/buttons/", "/docs/components/buttons/index.html"],
     ["/playground", "/playground/index.html"],
-    ["/playground/", "/playground/index.html"],
   ]);
   const legacyRoutes = new Map([
     ["/docs.html", "/docs"],
+    ["/docs/", "/docs"],
     ["/playground.html", "/playground"],
+    ["/playground/", "/playground"],
   ]);
+  docsPages.forEach(({ path, standalone }) => {
+    routeFiles.set(path, standalone ? "/docs/components/buttons/index.html" : "/docs/index.html");
+    legacyRoutes.set(`${path}/`, path);
+  });
 
   const middleware = (request, response, next) => {
     const url = new URL(request.url, "http://localhost");

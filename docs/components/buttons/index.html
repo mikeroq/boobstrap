@@ -67,41 +67,41 @@
         <nav class="docs-nav" aria-label="Documentation sections">
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Get started</p>
-            <a href="/docs#introduction">Introduction</a>
-            <a href="/docs#installation">Installation</a>
-            <a href="/docs#starter">Starter template</a>
-            <a href="/docs#theming">Theming</a>
+            <a href="/docs/getting-started/introduction">Introduction</a>
+            <a href="/docs/getting-started/installation">Installation</a>
+            <a href="/docs/getting-started/starter-template">Starter template</a>
+            <a href="/docs/getting-started/theming">Theming</a>
           </div>
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Foundations</p>
-            <a href="/docs#typography">Typography</a>
-            <a href="/docs#layout">Layout &amp; grid</a>
-            <a href="/docs#responsive-composition">Responsive composition</a>
+            <a href="/docs/foundations/typography">Typography</a>
+            <a href="/docs/foundations/layout">Layout &amp; grid</a>
+            <a href="/docs/foundations/responsive-composition">Responsive composition</a>
           </div>
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Components</p>
             <a href="/docs/components/buttons" aria-current="page">Buttons</a>
-            <a href="/docs#navbar">Header / navbar</a>
-            <a href="/docs#badges">Badges</a>
-            <a href="/docs#cards">Cards</a>
-            <a href="/docs#alerts">Alerts</a>
-            <a href="/docs#forms">Forms</a>
-            <a href="/docs#code-windows">Code windows</a>
-            <a href="/docs#icons">Icons</a>
+            <a href="/docs/components/navbar">Header / navbar</a>
+            <a href="/docs/components/badges">Badges</a>
+            <a href="/docs/components/cards">Cards</a>
+            <a href="/docs/components/alerts">Alerts</a>
+            <a href="/docs/components/forms">Forms</a>
+            <a href="/docs/components/code-windows">Code windows</a>
+            <a href="/docs/components/icons">Icons</a>
           </div>
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Interactivity</p>
-            <a href="/docs#behavior-layers">JS, Alpine &amp; React</a>
-            <a href="/docs#collapse">Collapse</a>
-            <a href="/docs#dropdown">Dropdown</a>
-            <a href="/docs#tabs">Tabs</a>
+            <a href="/docs/interactivity/overview">JS, Alpine &amp; React</a>
+            <a href="/docs/interactivity/collapse">Collapse</a>
+            <a href="/docs/interactivity/dropdown">Dropdown</a>
+            <a href="/docs/interactivity/tabs">Tabs</a>
           </div>
           <div class="docs-nav-group" data-nav-group>
             <p class="docs-nav-label">Reference</p>
-            <a href="/docs#utilities">Utilities</a>
-            <a href="/docs#tokens">Design tokens</a>
-            <a href="/docs#class-reference">All classes</a>
-            <a href="/docs#accessibility">Accessibility</a>
+            <a href="/docs/reference/utilities">Utilities</a>
+            <a href="/docs/reference/tokens">Design tokens</a>
+            <a href="/docs/reference/classes">All classes</a>
+            <a href="/docs/reference/accessibility">Accessibility</a>
           </div>
           <p class="docs-nav-empty" data-nav-empty hidden>No matching sections.</p>
         </nav>
@@ -132,7 +132,7 @@
             <div class="docs-demo" data-component-example="button-overview">
               <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
                 <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
-                <a class="bs-btn bs-btn-secondary" href="/docs">Read the docs</a>
+                <a class="bs-btn bs-btn-secondary" href="/docs" data-link-button-example>Read the docs</a>
               </div>
             </div>
             <div class="docs-code-block">
@@ -141,6 +141,8 @@
 
 &lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read the docs&lt;/a&gt;</code></pre>
             </div>
+            <h3>Links styled as buttons</h3>
+            <p>Add <code>.bs-btn</code> and any visual modifier to an anchor with a real <code>href</code>. It receives the same sizing, focus treatment, spacing, and variants as a button while preserving native link behavior such as opening in a new tab or copying the destination.</p>
             <div class="docs-callout"><strong>Choose by behavior, not appearance.</strong><p>Do not use a link as a button just to get button styling. The element determines keyboard, form, and navigation behavior; the classes determine presentation.</p></div>
           </section>
 
@@ -444,7 +446,7 @@ save.destroy();</code></pre>
 
           <nav class="docs-component-pagination" aria-label="Component documentation">
             <a href="/docs"><span>Documentation</span><strong>← Back to overview</strong></a>
-            <a href="/docs#navbar"><span>Next component</span><strong>Header / navbar →</strong></a>
+            <a href="/docs/components/navbar"><span>Next component</span><strong>Header / navbar →</strong></a>
           </nav>
 
           <footer class="docs-footer">
