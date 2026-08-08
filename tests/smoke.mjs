@@ -124,6 +124,7 @@ try {
     const docsOgImage = await docsPage.locator('meta[property="og:image"]').getAttribute("content");
     const docsNpmLinks = await docsPage.locator(`a[href="${npmPackageUrl}"]`).count();
     const starterDownloadLinks = await docsPage.locator('a[href="/boobstrap-starter.zip"][download]').count();
+    const buttonDocumentationLinks = await docsPage.locator('a[href="/docs/components/buttons"]').count();
     const componentExamples = docsPage.locator("[data-component-example]");
     const componentCopyButtons = docsPage.locator("[data-copy-example]");
     const packageTabs = docsPage.locator("[data-package-command]");
@@ -138,6 +139,7 @@ try {
     if (docsOgImage !== ogImageUrl) failures.push(`${viewport.name}: docs OG image is incorrect`);
     if (docsNpmLinks < 2) failures.push(`${viewport.name}: docs npm links are missing`);
     if (starterDownloadLinks < 2) failures.push(`${viewport.name}: starter download is not prominent in docs`);
+    if (buttonDocumentationLinks < 3) failures.push(`${viewport.name}: dedicated button documentation is not prominent in docs`);
     if (await componentExamples.count() !== 9) failures.push(`${viewport.name}: expected nine rendered component examples`);
     if (await componentCopyButtons.count() !== 10) failures.push(`${viewport.name}: expected ten component copy controls`);
     if (await docsPage.locator(".docs-example-guidance").count() !== 9) failures.push(`${viewport.name}: example guidance is incomplete`);
@@ -294,7 +296,7 @@ try {
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="#cards"]').isVisible()) failures.push("desktop: docs navigation filter hid its match");
-      if (await docsPage.locator('.docs-nav a[href="#buttons"]').isVisible()) failures.push("desktop: docs navigation filter retained a non-match");
+      if (await docsPage.locator('.docs-nav a[href="/docs/components/buttons"]').isVisible()) failures.push("desktop: docs navigation filter retained a non-match");
       await docsPage.getByLabel("Filter documentation sections").fill("alpine");
       if (!await docsPage.locator('.docs-nav a[href="#behavior-layers"]').isVisible()) failures.push("desktop: docs navigation filter could not find Alpine guidance");
       await docsPage.getByLabel("Filter documentation sections").press("Escape");
@@ -306,15 +308,15 @@ try {
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: theme toggle did not enable light theme");
       }
-      await docsPage.locator('.docs-nav a[href="#buttons"]').click();
-      await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#buttons"]')?.getAttribute("aria-current") === "location");
+      await docsPage.locator('.docs-nav a[href="#cards"]').click();
+      await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#cards"]')?.getAttribute("aria-current") === "location");
       await docsPage.evaluate(() => {
         const section = document.querySelector("#forms");
         const headerHeight = document.querySelector(".docs-header")?.offsetHeight ?? 0;
         window.scrollTo({ top: section.offsetTop - headerHeight, behavior: "instant" });
       });
       await docsPage.waitForFunction(() => document.querySelector('.docs-nav a[href="#forms"]')?.getAttribute("aria-current") === "location");
-      if (await docsPage.locator('.docs-nav a[href="#buttons"]').getAttribute("aria-current") !== null) {
+      if (await docsPage.locator('.docs-nav a[href="#cards"]').getAttribute("aria-current") !== null) {
         failures.push("desktop: clicked navigation link stayed active after scrolling to another section");
       }
       await docsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
@@ -329,6 +331,104 @@ try {
     if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs after interaction ${docsConsoleErrors.join("; ")}`);
 
     await docsPage.close();
+
+    const buttonsPage = await browser.newPage({ viewport });
+    await buttonsPage.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: baseUrl });
+    const buttonsConsoleErrors = [];
+    buttonsPage.on("console", (message) => {
+      if (message.type() === "error") buttonsConsoleErrors.push(message.text());
+    });
+    buttonsPage.on("pageerror", (error) => buttonsConsoleErrors.push(error.message));
+
+    await buttonsPage.goto(`${baseUrl}/docs/components/buttons`, { waitUntil: "networkidle" });
+    await buttonsPage.screenshot({ path: `artifacts/buttons-${viewport.name}.png`, fullPage: true });
+    const buttonsDimensions = await buttonsPage.evaluate(() => ({
+      scrollWidth: document.documentElement.scrollWidth,
+      clientWidth: document.documentElement.clientWidth,
+    }));
+    const buttonSections = buttonsPage.locator(".docs-section");
+    const buttonExamples = buttonsPage.locator("[data-component-example]");
+    const buttonCopies = buttonsPage.locator("[data-copy-example]");
+
+    if (!await buttonsPage.getByRole("heading", { name: "Buttons", level: 1 }).isVisible()) {
+      failures.push(`${viewport.name}: dedicated button documentation heading is not visible`);
+    }
+    if (await buttonsPage.locator('link[rel="canonical"]').getAttribute("href") !== "https://boobstrap.org/docs/components/buttons") {
+      failures.push(`${viewport.name}: button documentation canonical URL is incorrect`);
+    }
+    if (await buttonSections.count() !== 10) failures.push(`${viewport.name}: button documentation is missing detailed sections`);
+    if (await buttonExamples.count() !== 8) failures.push(`${viewport.name}: button documentation is missing rendered examples`);
+    if (await buttonCopies.count() !== 8) failures.push(`${viewport.name}: button documentation is missing copy controls`);
+    if (await buttonsPage.locator("[data-example-shell]").count() !== 8) failures.push(`${viewport.name}: button examples are not tabbed`);
+    if (await buttonsPage.locator("[data-page-nav] a").count() !== 10) failures.push(`${viewport.name}: button page outline is incomplete`);
+    if (await buttonsPage.locator('.docs-nav a[href="/docs/components/buttons"]').getAttribute("aria-current") !== "page") {
+      failures.push(`${viewport.name}: button component is not current in the global docs navigation`);
+    }
+    if (buttonsDimensions.scrollWidth > buttonsDimensions.clientWidth + 1) {
+      failures.push(`${viewport.name}: button docs horizontal overflow (${buttonsDimensions.scrollWidth}px > ${buttonsDimensions.clientWidth}px)`);
+    }
+
+    if (viewport.name === "desktop") {
+      const variantsShell = buttonsPage.locator('[data-example-shell="button-variants"]');
+      await variantsShell.getByRole("tab", { name: "Code" }).click();
+      const variantsCopy = variantsShell.locator('[data-copy-example="button-variants"]');
+      const variantsMarkup = await variantsCopy.getAttribute("data-copy");
+      await variantsCopy.click();
+      if (await buttonsPage.evaluate(() => navigator.clipboard.readText()) !== variantsMarkup) {
+        failures.push("desktop: dedicated button example did not copy complete markup");
+      }
+      await variantsShell.getByRole("tab", { name: "Preview" }).click();
+
+      const splitPreview = buttonsPage.locator('[data-component-example="button-split-dropdown"]');
+      const splitToggle = splitPreview.getByRole("button", { name: "More save options" });
+      await splitToggle.focus();
+      await splitToggle.press("ArrowDown");
+      const splitItem = splitPreview.getByRole("menuitem", { name: "Save and publish" });
+      if (!await splitPreview.getByRole("menu").isVisible() || !await splitItem.evaluate((element) => element === document.activeElement)) {
+        failures.push("desktop: dedicated split button did not open with keyboard focus");
+      }
+      await splitItem.press("Escape");
+
+      const loadingShell = buttonsPage.locator('[data-example-shell="button-loading-detail"]');
+      await loadingShell.getByRole("tab", { name: "Code" }).click();
+      for (const [tabName, marker] of [["Boobstrap JS", "data-bs-button"], ["Alpine.js", "x-data"], ["React", "useButton"]]) {
+        await loadingShell.getByRole("tab", { name: tabName, exact: true }).click();
+        await loadingShell.locator('[data-copy-example="button-loading-detail"]').click();
+        if (!await buttonsPage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes(marker))) {
+          failures.push(`desktop: dedicated loading button ${tabName} variant did not copy complete source`);
+        }
+      }
+      await loadingShell.getByRole("tab", { name: "Preview" }).click();
+      const detailedLoadingButton = loadingShell.locator("[data-demo-loading]");
+      await detailedLoadingButton.click();
+      await buttonsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "loading");
+      if (!await detailedLoadingButton.isDisabled() || await detailedLoadingButton.getAttribute("aria-busy") !== "true") {
+        failures.push("desktop: dedicated loading example did not synchronize busy state");
+      }
+      await buttonsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "idle");
+
+      await buttonsPage.getByLabel("Filter documentation").fill("buttons");
+      if (!await buttonsPage.locator('.docs-nav a[href="/docs/components/buttons"]').isVisible()) {
+        failures.push("desktop: multi-page docs filter hid the button page match");
+      }
+      await buttonsPage.getByLabel("Filter documentation").press("Escape");
+
+      await buttonsPage.locator('[data-page-nav] a[href="#groups"]').click();
+      await buttonsPage.waitForFunction(() => document.querySelector('[data-page-nav] a[href="#groups"]')?.getAttribute("aria-current") === "location");
+      await buttonsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+      await buttonsPage.waitForFunction(() => document.querySelector('[data-page-nav] a[href="#accessibility"]')?.getAttribute("aria-current") === "location");
+      if (await buttonsPage.locator('[data-page-nav] a[href="#groups"]').getAttribute("aria-current") !== null) {
+        failures.push("desktop: dedicated page outline did not update after scrolling");
+      }
+    } else {
+      await buttonsPage.getByRole("button", { name: "Open documentation menu" }).click();
+      if (!await buttonsPage.locator("#docs-sidebar").isVisible()) {
+        failures.push("mobile: button documentation menu did not open");
+      }
+    }
+
+    if (buttonsConsoleErrors.length) failures.push(`${viewport.name}: button docs ${buttonsConsoleErrors.join("; ")}`);
+    await buttonsPage.close();
 
     const playgroundPage = await browser.newPage({ viewport });
     await playgroundPage.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: baseUrl });

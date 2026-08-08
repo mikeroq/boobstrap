@@ -220,8 +220,41 @@ body.docs-page {
   padding-bottom: clamp(4rem, 7vw, 6rem);
 }
 
-.docs-breadcrumb { display: flex; gap: var(--bs-space-2); margin-bottom: var(--bs-space-6); color: var(--bs-color-text-subtle); font-size: var(--bs-font-size-sm); }
+.docs-breadcrumb { display: flex; flex-wrap: wrap; gap: var(--bs-space-2); margin-bottom: var(--bs-space-6); color: var(--bs-color-text-subtle); font-size: var(--bs-font-size-sm); }
+.docs-breadcrumb a { color: var(--bs-color-text-muted); }
+.docs-breadcrumb a:hover { color: var(--bs-color-primary-hover); }
 .docs-breadcrumb span:last-child { color: var(--bs-color-text-muted); }
+
+.docs-component-hero {
+  padding-bottom: clamp(3.5rem, 7vw, 5.5rem);
+}
+
+.docs-component-hero h1 {
+  margin-block: var(--bs-space-3) var(--bs-space-4);
+  font-size: clamp(3.25rem, 8vw, 6rem);
+  line-height: 0.96;
+  letter-spacing: -0.055em;
+}
+
+.docs-component-hero .bs-lead { max-width: 48rem; }
+
+.docs-component-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--bs-space-2);
+  margin-top: var(--bs-space-6);
+}
+
+.docs-component-meta span {
+  padding: 0.4rem 0.7rem;
+  color: var(--bs-color-text-subtle);
+  background: color-mix(in srgb, var(--bs-color-surface) 72%, transparent);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-pill);
+  font-size: var(--bs-font-size-xs);
+}
+
+.docs-component-meta strong { color: var(--bs-color-text); }
 
 .docs-hero h1 {
   margin-block: 1.25rem 1.25rem;
@@ -478,6 +511,31 @@ body.docs-page {
 }
 .docs-runtime-card h3 { margin: 0 0 var(--bs-space-2); font-size: var(--bs-font-size-lg); }
 .docs-runtime-card p { margin: 0; color: var(--bs-color-text-muted); font-size: var(--bs-font-size-sm); line-height: 1.6; }
+
+.docs-usage-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--bs-space-3);
+  margin-block: var(--bs-space-6);
+}
+
+.docs-usage-grid article {
+  padding: var(--bs-space-5);
+  background: color-mix(in srgb, var(--bs-color-surface) 72%, transparent);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-lg);
+}
+
+.docs-usage-grid span {
+  color: var(--bs-color-primary-hover);
+  font-size: var(--bs-font-size-xs);
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.docs-usage-grid h3 { margin: var(--bs-space-3) 0 var(--bs-space-2); font-size: var(--bs-font-size-md); }
+.docs-usage-grid p { margin: 0; color: var(--bs-color-text-muted); font-size: var(--bs-font-size-sm); line-height: 1.6; }
 
 .docs-framework-switcher {
   overflow: hidden;
@@ -741,6 +799,29 @@ body.docs-page {
 .docs-footer a { color: var(--bs-color-text-muted); }
 .docs-footer a:hover { color: var(--bs-color-primary-hover); }
 
+.docs-component-pagination {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--bs-space-3);
+  margin-block: var(--bs-space-8);
+}
+
+.docs-component-pagination a {
+  display: grid;
+  gap: var(--bs-space-1);
+  padding: var(--bs-space-4);
+  color: var(--bs-color-text);
+  background: color-mix(in srgb, var(--bs-color-surface) 72%, transparent);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-lg);
+  text-decoration: none;
+}
+
+.docs-component-pagination a:last-child { text-align: right; }
+.docs-component-pagination a:hover { background: var(--bs-color-surface); border-color: var(--bs-color-primary); }
+.docs-component-pagination span { color: var(--bs-color-text-subtle); font-size: var(--bs-font-size-xs); }
+.docs-component-pagination strong { font-size: var(--bs-font-size-sm); }
+
 .docs-backdrop { display: none; }
 
 @media (max-width: 77rem) {
@@ -748,6 +829,7 @@ body.docs-page {
   .docs-on-this-page { display: none; }
   .docs-quick-links { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .docs-runtime-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .docs-usage-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 55rem) {
@@ -800,6 +882,8 @@ body.docs-page {
   .docs-code-block { margin-inline: -0.25rem; }
   .docs-code-block code { font-size: 0.75rem; }
   .docs-reference-grid { grid-template-columns: 1fr; }
+  .docs-component-pagination { grid-template-columns: 1fr; }
+  .docs-component-pagination a:last-child { text-align: left; }
   .docs-example-guidance > div { grid-template-columns: 1fr; gap: var(--bs-space-2); }
   .docs-example-toolbar { align-items: flex-start; flex-direction: column; padding: var(--bs-space-3) var(--bs-space-4) 0; }
   .docs-example-tabs { width: 100%; min-height: 2.5rem; }

@@ -222,7 +222,7 @@ const filterNavigation = () => {
   let visibleCount = 0;
   navGroups.forEach((group) => {
     let groupCount = 0;
-    group.querySelectorAll('a[href^="#"]').forEach((link) => {
+    group.querySelectorAll("a").forEach((link) => {
       const visible = link.textContent.toLowerCase().includes(query);
       link.hidden = !visible;
       if (visible) groupCount += 1;
@@ -292,8 +292,10 @@ const tokens = [...tokenBlock.matchAll(/(--bs-[a-z0-9-]+)\s*:\s*([^;]+);/g)].map
   value: value.trim(),
 }));
 
-document.querySelector("[data-class-count]").textContent = String(classNames.length);
-document.querySelector("[data-token-count]").textContent = String(tokens.length);
+const classCount = document.querySelector("[data-class-count]");
+const tokenCount = document.querySelector("[data-token-count]");
+if (classCount) classCount.textContent = String(classNames.length);
+if (tokenCount) tokenCount.textContent = String(tokens.length);
 
 const ruleBlocks = [...frameworkCss.matchAll(/([^{}]+)\{([^{}]*)\}/g)].map(([, selectors, declarations]) => ({
   selectors: selectors.trim(),
@@ -369,19 +371,19 @@ const tokenGroups = groupBy(tokens, tokenCategory);
 const classTarget = document.querySelector("[data-class-reference]");
 const tokenTarget = document.querySelector("[data-token-reference]");
 
-renderReference(classTarget, classGroups, "", "class");
-renderReference(tokenTarget, tokenGroups, "", "token");
+if (classTarget) renderReference(classTarget, classGroups, "", "class");
+if (tokenTarget) renderReference(tokenTarget, tokenGroups, "", "token");
 
 document.querySelector("[data-class-filter]")?.addEventListener("input", (event) => {
-  renderReference(classTarget, classGroups, event.target.value, "class");
+  if (classTarget) renderReference(classTarget, classGroups, event.target.value, "class");
 });
 document.querySelector("[data-token-filter]")?.addEventListener("input", (event) => {
-  renderReference(tokenTarget, tokenGroups, event.target.value, "token");
+  if (tokenTarget) renderReference(tokenTarget, tokenGroups, event.target.value, "token");
 });
 
 const spacingTarget = document.querySelector("[data-spacing-scale]");
 const spacingTokens = tokens.filter(({ name }) => name.startsWith("--bs-space-"));
-spacingTarget.innerHTML = spacingTokens.map(({ name, value }) => {
+if (spacingTarget) spacingTarget.innerHTML = spacingTokens.map(({ name, value }) => {
   const rem = Number.parseFloat(value) || 0;
   const width = rem === 0 ? 0 : Math.max(4, Math.min(100, rem * 12.5));
   return `<div class="spacing-item"><code>${escapeHtml(name.replace("--bs-space-", ""))}</code><span class="spacing-bar spacing-bar-${Math.round(width)}"></span><span class="spacing-value">${escapeHtml(value)}</span></div>`;
@@ -389,7 +391,7 @@ spacingTarget.innerHTML = spacingTokens.map(({ name, value }) => {
 
 const headings = [...document.querySelectorAll(".docs-section > h2")];
 const pageNav = document.querySelector("[data-page-nav]");
-pageNav.innerHTML = headings.map((heading) => `<a href="#${heading.parentElement.id}">${escapeHtml(heading.textContent)}</a>`).join("");
+if (pageNav) pageNav.innerHTML = headings.map((heading) => `<a href="#${heading.parentElement.id}">${escapeHtml(heading.textContent)}</a>`).join("");
 
 headings.forEach((heading) => {
   const anchor = document.createElement("a");
