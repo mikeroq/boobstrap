@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, dev]
+  pull_request:
+    branches: [master, dev]
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    name: Site smoke tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Set up Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: npm
+      - name: Install site dependencies
+        run: npm ci
+      - name: Install framework dev branch
+        if: github.ref == 'refs/heads/dev' || github.base_ref == 'dev'
+        run: npm run framework:dev
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Run smoke suite
+        run: npm test
