@@ -77,7 +77,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.3.0 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.3.1 npm package", exact: true }).getAttribute("href");
     const dimensions = await page.evaluate(() => ({
       scrollWidth: document.documentElement.scrollWidth,
       clientWidth: document.documentElement.clientWidth,
@@ -153,7 +153,7 @@ try {
     if (await docsPage.locator("[data-package-copy]").getAttribute("data-copy") !== expectedCommand) {
       failures.push(`${viewport.name}: ${selectedManager} copy command is incorrect`);
     }
-    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.0/dist/boobstrap.css" }).isVisible()) {
+    if (!await docsPage.locator(".docs-code-block code").filter({ hasText: "https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.1/dist/boobstrap.css" }).isVisible()) {
       failures.push(`${viewport.name}: version-pinned CDN option is not visible`);
     }
     if (docsDimensions.scrollWidth > docsDimensions.clientWidth + 1) {
@@ -241,6 +241,23 @@ try {
       await docsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "loading");
       if (!await loadingButton.isDisabled() || await loadingButton.getAttribute("aria-busy") !== "true" || !await loadingButton.locator(".bs-btn-spinner").isVisible()) {
         failures.push("desktop: loading button did not synchronize its disabled, busy, and spinner states");
+      }
+      const spinnerOffsets = await loadingButton.evaluate(async (button) => {
+        const spinner = button.querySelector(".bs-btn-spinner");
+        const offsets = [];
+        for (let frame = 0; frame < 3; frame += 1) {
+          const buttonRect = button.getBoundingClientRect();
+          const spinnerRect = spinner.getBoundingClientRect();
+          offsets.push({
+            x: Math.abs((spinnerRect.left + spinnerRect.width / 2) - (buttonRect.left + buttonRect.width / 2)),
+            y: Math.abs((spinnerRect.top + spinnerRect.height / 2) - (buttonRect.top + buttonRect.height / 2)),
+          });
+          await new Promise((resolve) => window.setTimeout(resolve, 90));
+        }
+        return offsets;
+      });
+      if (spinnerOffsets.some(({ x, y }) => x > 1 || y > 1)) {
+        failures.push("desktop: loading spinner moved away from the button center while rotating");
       }
       await docsPage.waitForFunction(() => document.querySelector("[data-demo-loading]")?.dataset.bsState === "idle");
       if (await loadingButton.isDisabled()) failures.push("desktop: loading button did not restore after the demo request");
