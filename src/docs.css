@@ -328,6 +328,47 @@ body.docs-page {
   border-radius: var(--bs-radius-lg);
 }
 
+.docs-button-demo {
+  display: grid;
+  gap: var(--bs-space-8);
+}
+
+.docs-button-demo-group {
+  display: grid;
+  gap: var(--bs-space-3);
+}
+
+.docs-demo-label {
+  color: var(--bs-color-text-subtle);
+  font-size: var(--bs-font-size-xs);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.docs-button-state-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+  gap: var(--bs-space-3);
+}
+
+.docs-button-state-grid > div {
+  display: grid;
+  gap: var(--bs-space-2);
+  align-content: start;
+  padding: var(--bs-space-3);
+  background: rgb(255 255 255 / 2%);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-md);
+}
+
+.docs-button-state-grid > div > span {
+  color: var(--bs-color-text-subtle);
+  font-size: var(--bs-font-size-xs);
+}
+
+.docs-button-state-grid .bs-btn { justify-self: start; }
+
 .docs-package-tabs {
   display: flex;
   width: fit-content;
@@ -605,7 +646,7 @@ body.docs-page {
 }
 
 .docs-table-wrap { overflow-x: auto; margin-block: var(--bs-space-6); border: 1px solid var(--bs-color-border); border-radius: var(--bs-radius-md); }
-.docs-table { width: 100%; border-collapse: collapse; text-align: left; }
+.docs-table { width: 100%; min-width: 38rem; border-collapse: collapse; text-align: left; }
 .docs-table th,
 .docs-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--bs-color-border); font-size: var(--bs-font-size-sm); vertical-align: top; }
 .docs-table th { padding: 0.7rem 1rem; color: var(--bs-color-text-subtle); background: color-mix(in srgb, var(--bs-color-surface) 75%, transparent); border-bottom: 1px solid var(--bs-color-border); font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.08em; }
@@ -765,10 +806,15 @@ body.docs-page {
   .docs-example-tabs button { flex: 1; }
   .docs-form { grid-template-columns: 1fr; }
   .docs-form-wide { grid-column: auto; }
+  .docs-button-state-grid { grid-template-columns: 1fr 1fr; }
   .docs-filter-row { grid-template-columns: 1fr; }
   .reference-row { grid-template-columns: 1fr; gap: var(--bs-space-1); }
   .spacing-item { grid-template-columns: 3rem minmax(0, 1fr) 3.5rem; }
   .docs-footer { align-items: flex-start; flex-direction: column; }
+}
+
+@media (max-width: 27rem) {
+  .docs-button-state-grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

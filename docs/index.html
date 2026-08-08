@@ -43,7 +43,7 @@
         <a href="/playground" class="docs-header-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
-        <span class="docs-version">v0.2.1</span>
+        <span class="docs-version">v0.3.0</span>
         <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
@@ -117,7 +117,7 @@
         <article class="docs-content">
           <section class="docs-hero" id="introduction">
             <div class="docs-breadcrumb" aria-label="Breadcrumb"><span>Docs</span><span aria-hidden="true">/</span><span>Introduction</span></div>
-            <span class="bs-badge bs-badge-primary">Boobstrap v0.2.1</span>
+            <span class="bs-badge bs-badge-primary">Boobstrap v0.3.0</span>
             <h1>Build with <span class="bs-text-gradient">Boobstrap.</span></h1>
             <p class="bs-lead">A CSS-first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add an official Alpine or React adapter.</p>
             <div class="docs-hero-actions bs-flex bs-flex-wrap bs-gap-3">
@@ -162,8 +162,8 @@
             <h3>Use from a CDN</h3>
             <p>For a plain HTML project, load the version-pinned stylesheet directly from jsDelivr:</p>
             <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.1/dist/boobstrap.css" /&gt;'>Copy</button></div>
-              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.2.1/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
+              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.0/dist/boobstrap.css" /&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.0/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
             </div>
             <p>To self-host instead, copy <code>dist/boobstrap.css</code> from the installed package into your assets.</p>
 
@@ -352,41 +352,179 @@
           <section class="docs-section" id="buttons">
             <div class="docs-kicker">Components</div>
             <h2>Buttons</h2>
-            <p>Start with <code>.bs-btn</code>, add one visual variant, and optionally add a size or icon modifier. The same classes work on buttons and links.</p>
-            <div class="docs-demo bs-flex bs-flex-wrap bs-items-center bs-gap-3" data-component-example="buttons">
-              <button class="bs-btn bs-btn-primary" type="button">Primary</button>
-              <button class="bs-btn bs-btn-secondary" type="button">Secondary</button>
-              <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
-              <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Small</button>
-              <button class="bs-btn bs-btn-primary bs-btn-lg" type="button">Large</button>
-              <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Favorite">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </button>
-              <button class="bs-btn bs-btn-primary" type="button" disabled>Disabled</button>
+            <p>Buttons cover action hierarchy, responsive sizing, icons, grouped controls, split dropdowns, pressed and disabled states, and asynchronous loading. The foundation remains semantic HTML and CSS; load a behavior layer only for dropdown or loading transitions.</p>
+            <div class="docs-demo docs-button-demo" data-component-example="buttons">
+              <div class="docs-button-demo-group">
+                <span class="docs-demo-label">Hierarchy</span>
+                <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                  <button class="bs-btn bs-btn-primary" type="button">Primary</button>
+                  <button class="bs-btn bs-btn-secondary" type="button">Secondary</button>
+                  <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
+                </div>
+              </div>
+
+              <div class="docs-button-demo-group">
+                <span class="docs-demo-label">Sizes and width</span>
+                <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                  <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Small</button>
+                  <button class="bs-btn bs-btn-primary" type="button">Default</button>
+                  <button class="bs-btn bs-btn-primary bs-btn-lg" type="button">Large</button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-block" type="button">Full-width action</button>
+                </div>
+              </div>
+
+              <div class="docs-button-demo-group">
+                <span class="docs-demo-label">Icons</span>
+                <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                  <button class="bs-btn bs-btn-primary" type="button">
+                    <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+                    Create
+                  </button>
+                  <button class="bs-btn bs-btn-secondary" type="button">
+                    Export
+                    <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0-12 4 4m-4-4L8 7M5 13v6h14v-6" /></svg>
+                  </button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Favorite">
+                    <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /></svg>
+                  </button>
+                </div>
+              </div>
+
+              <div class="docs-button-demo-group">
+                <span class="docs-demo-label">Persistent states</span>
+                <div class="docs-button-state-grid">
+                  <div><span>Default</span><button class="bs-btn bs-btn-secondary" type="button">Ready</button></div>
+                  <div><span>Pressed</span><button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true">Pinned</button></div>
+                  <div><span>Active</span><button class="bs-btn bs-btn-primary bs-btn-active" type="button">Current</button></div>
+                  <div><span>Disabled</span><button class="bs-btn bs-btn-primary" type="button" disabled>Unavailable</button></div>
+                  <div><span>Loading</span><button class="bs-btn bs-btn-primary" type="button" data-bs-button data-bs-loading data-bs-loading-label="Saving changes" data-demo-loading><span class="bs-btn-label">Save changes</span><span class="bs-spinner bs-btn-spinner" aria-hidden="true"></span></button></div>
+                </div>
+              </div>
+
+              <div class="docs-button-demo-group">
+                <span class="docs-demo-label">Toolbar, groups, and split action</span>
+                <div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions">
+                  <div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment">
+                    <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true">Left</button>
+                    <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false">Center</button>
+                    <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false">Right</button>
+                  </div>
+                  <div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="History">
+                    <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Undo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7-5 5 5 5M4 12h9a6 6 0 0 1 6 6" /></svg></button>
+                    <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Redo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5m5-5h-9a6 6 0 0 0-6 6" /></svg></button>
+                  </div>
+                  <div class="bs-dropdown bs-btn-group bs-btn-group-sm" data-bs-dropdown>
+                    <button class="bs-btn bs-btn-primary" type="button">Publish</button>
+                    <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="docs-publish-toggle" type="button" data-bs-toggle="dropdown" aria-controls="docs-publish-menu" aria-label="More publish options"></button>
+                    <div class="bs-dropdown-menu bs-dropdown-menu-end" id="docs-publish-menu" role="menu" aria-labelledby="docs-publish-toggle" data-bs-dropdown-menu hidden>
+                      <button class="bs-dropdown-item" type="button" role="menuitem">Publish now</button>
+                      <button class="bs-dropdown-item" type="button" role="menuitem">Schedule…</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
             <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="buttons" data-copy='&lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3"&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read docs&lt;/a&gt;&#10;  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Favorite"&gt;&#10;    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;      &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;&#10;    &lt;/svg&gt;&#10;  &lt;/button&gt;&#10;&lt;/div&gt;'>Copy</button></div>
-              <pre><code><span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span><span class="bs-code-tag">&gt;</span>Save changes<span class="bs-code-tag">&lt;/button&gt;</span>
-<span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/docs"</span><span class="bs-code-tag">&gt;</span>Read docs<span class="bs-code-tag">&lt;/a&gt;</span>
-<span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-secondary bs-btn-icon"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Favorite"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/button&gt;</span></code></pre>
+              <div class="docs-code-label"><span>HTML · Toolbar example</span><button type="button" data-copy-example="buttons" data-copy='&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions"&gt;&#10;  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&#10;  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon bs-btn-sm" type="button" aria-label="Favorite"&gt;&#10;    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;…&lt;/svg&gt;&#10;  &lt;/button&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+              <pre><code>&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions"&gt;
+  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;
+  &lt;/div&gt;
+
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon bs-btn-sm"
+    type="button" aria-label="Favorite"&gt;
+    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;…&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
             </div>
             <div class="docs-example-guidance" aria-label="Button guidance">
-              <div><h3>Structure</h3><p>Use <code>&lt;button type="button"&gt;</code> for in-page actions and <code>&lt;a href&gt;</code> when the control navigates somewhere.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-btn</code> supplies structure. Add one of <code>primary</code>, <code>secondary</code>, or <code>ghost</code>, then an optional size or <code>.bs-btn-icon</code>.</p></div>
-              <div><h3>Accessibility</h3><p>Icon-only buttons need an <code>aria-label</code>. Hide a decorative SVG with <code>aria-hidden="true"</code>, and use the native <code>disabled</code> attribute when unavailable.</p></div>
+              <div><h3>Structure</h3><p>Use <code>&lt;button type="button"&gt;</code> for actions and <code>&lt;a href&gt;</code> for navigation. A group owns only adjacent buttons; a toolbar composes one or more labeled groups.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-btn</code> supplies structure. Add one hierarchy class, then optional size, block, icon, group, split, or persistent-state classes.</p></div>
+              <div><h3>Accessibility</h3><p>Give icon-only and split triggers an accessible name. Use native <code>disabled</code> on buttons, keep SVGs decorative, label every group, and expose toggle state with <code>aria-pressed</code>.</p></div>
             </div>
             <div class="docs-api">
               <h3>Button API</h3>
-              <p>Every button starts with the base class. Add one visual variant and, when needed, one size or shape modifier.</p>
+              <p>Every button starts with the base class. Modifiers are deliberately composable across hierarchy, size, shape, layout, and state.</p>
               <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Use when</th></tr></thead><tbody>
                 <tr><td><code>.bs-btn</code></td><td>Shared sizing, alignment, focus, and interaction styles.</td><td>Always required.</td></tr>
                 <tr><td><code>.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>One primary action per region.</td></tr>
                 <tr><td><code>.bs-btn-secondary</code></td><td>Bordered, lower-emphasis action.</td><td>Alternative or supporting actions.</td></tr>
                 <tr><td><code>.bs-btn-ghost</code></td><td>Minimal transparent action.</td><td>Tertiary actions and quiet navigation.</td></tr>
-                <tr><td><code>.bs-btn-icon</code></td><td>Square button dimensions.</td><td>The accessible name is not visible.</td></tr>
-                <tr><td><code>.bs-btn-sm</code> / <code>.bs-btn-lg</code></td><td>Compact or prominent sizing.</td><td>Dense toolbars or hero actions.</td></tr>
+                <tr><td><code>.bs-btn-sm</code> / <code>.bs-btn-lg</code></td><td>Compact or prominent sizing.</td><td>Dense controls or high-emphasis actions.</td></tr>
+                <tr><td><code>.bs-btn-icon</code></td><td>Square dimensions that track small, default, and large sizes.</td><td>The visible content is only an icon.</td></tr>
+                <tr><td><code>.bs-btn-block</code></td><td>Stretches the action across its container.</td><td>Mobile forms and narrow panels.</td></tr>
+                <tr><td><code>.bs-btn-group</code></td><td>Joins adjacent button borders and radii.</td><td>Related actions share one visual unit.</td></tr>
+                <tr><td><code>.bs-btn-toolbar</code></td><td>Wraps and spaces multiple button groups.</td><td>Editor, table, and batch-action toolbars.</td></tr>
+                <tr><td><code>.bs-btn-split</code> / <code>.bs-btn-caret</code></td><td>Creates a compact, attached dropdown trigger.</td><td>A primary action has related alternatives.</td></tr>
+                <tr><td><code>.bs-btn-active</code> / <code>[aria-pressed="true"]</code></td><td>Persistent active or toggle styling.</td><td>State remains selected after interaction.</td></tr>
+                <tr><td><code>.bs-btn-disabled</code> / <code>[aria-disabled="true"]</code></td><td>Disabled appearance for non-button elements.</td><td>A native <code>disabled</code> attribute is unavailable.</td></tr>
+                <tr><td><code>.bs-spinner</code></td><td>Current-color loading indicator with size modifiers.</td><td>Inline progress needs to inherit its context.</td></tr>
+              </tbody></table></div>
+
+              <h3>Interaction states</h3>
+              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>State</th><th>Contract</th><th>Guidance</th></tr></thead><tbody>
+                <tr><td>Default</td><td>Semantic element plus <code>.bs-btn</code> and one hierarchy class.</td><td>Keep action labels concise and verb-led.</td></tr>
+                <tr><td>Hover / active</td><td>Native <code>:hover</code> and <code>:active</code>.</td><td>Never rely on hover alone to reveal meaning.</td></tr>
+                <tr><td>Focus</td><td>Global <code>:focus-visible</code> ring.</td><td>Do not remove the outline without an equivalent.</td></tr>
+                <tr><td>Pressed</td><td><code>aria-pressed="true|false"</code>.</td><td>Use only for toggle buttons; do not change the accessible label.</td></tr>
+                <tr><td>Disabled</td><td>Native <code>disabled</code> preferred.</td><td><code>aria-disabled</code> only communicates state; your app must also prevent activation.</td></tr>
+                <tr><td>Loading</td><td><code>disabled</code>, <code>aria-busy="true"</code>, and <code>data-bs-state="loading"</code>.</td><td>Use a specific loading label such as “Saving changes.”</td></tr>
               </tbody></table></div>
             </div>
+
+            <h3>Loading button behavior</h3>
+            <p>The label stays in the accessibility tree and preserves the button width while the spinner is centered above it. The controller disables repeat activation and restores the button's original attributes when <code>stop()</code> runs.</p>
+            <div class="docs-code-block" data-code-variants>
+              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs" role="tablist" aria-label="Loading button implementation">
+                <button id="button-loading-js-tab" type="button" role="tab" aria-selected="true" aria-controls="button-loading-js-panel" data-code-variant="js">Boobstrap JS</button>
+                <button id="button-loading-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="button-loading-alpine-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
+                <button id="button-loading-react-tab" type="button" role="tab" aria-selected="false" aria-controls="button-loading-react-panel" tabindex="-1" data-code-variant="react">React</button>
+              </div>
+              <div id="button-loading-js-panel" role="tabpanel" aria-labelledby="button-loading-js-tab" data-code-variant-panel="js" data-copy-source='&lt;button class="bs-btn bs-btn-primary" type="button" data-bs-button data-bs-loading data-bs-loading-label="Saving changes"&gt;&#10;  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;&#10;  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;&#10;&lt;/button&gt;&#10;&#10;&lt;script type="module"&gt;&#10;  import { Button } from "@boobstrap/boobstrap/js/button";&#10;  const element = document.querySelector("[data-bs-button]");&#10;  const save = Button.getOrCreateInstance(element);&#10;  element.addEventListener("click", async () =&gt; {&#10;    await persistChanges();&#10;    save.stop();&#10;  });&#10;&lt;/script&gt;'>
+                <pre><code>&lt;button class="bs-btn bs-btn-primary" type="button"
+  data-bs-button data-bs-loading data-bs-loading-label="Saving changes"&gt;
+  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
+  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;script type="module"&gt;
+  import { Button } from "@boobstrap/boobstrap/js/button";
+  const element = document.querySelector("[data-bs-button]");
+  const save = Button.getOrCreateInstance(element);
+  element.addEventListener("click", async () =&gt; {
+    await persistChanges();
+    save.stop();
+  });
+&lt;/script&gt;</code></pre>
+              </div>
+              <div id="button-loading-alpine-panel" role="tabpanel" aria-labelledby="button-loading-alpine-tab" data-code-variant-panel="alpine" data-copy-source='&lt;button class="bs-btn bs-btn-primary" type="button" x-data="bsButton" x-bind="root" data-bs-loading data-bs-loading-label="Saving changes" @click="persistChanges().finally(() =&gt; stop())"&gt;&#10;  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;&#10;  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;&#10;&lt;/button&gt;' hidden>
+                <pre><code>&lt;button class="bs-btn bs-btn-primary" type="button"
+  x-data="bsButton" x-bind="root" data-bs-loading
+  data-bs-loading-label="Saving changes"
+  @click="persistChanges().finally(() =&gt; stop())"&gt;
+  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
+  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+              </div>
+              <div id="button-loading-react-panel" role="tabpanel" aria-labelledby="button-loading-react-tab" data-code-variant-panel="react" data-copy-source='function SaveButton() {&#10;  const save = useButton({ loadingLabel: "Saving changes" });&#10;&#10;  const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());&#10;&#10;  return (&#10;    &lt;button className="bs-btn bs-btn-primary" {...save.getButtonProps({ onClick: persist })}&gt;&#10;      &lt;span className="bs-btn-label"&gt;Save changes&lt;/span&gt;&#10;      &lt;span className="bs-spinner bs-btn-spinner" aria-hidden="true" /&gt;&#10;    &lt;/button&gt;&#10;  );&#10;}' hidden>
+                <pre><code>function SaveButton() {
+  const save = useButton({ loadingLabel: "Saving changes" });
+  const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
+
+  return (
+    &lt;button className="bs-btn bs-btn-primary"
+      {...save.getButtonProps({ onClick: persist })}&gt;
+      &lt;span className="bs-btn-label"&gt;Save changes&lt;/span&gt;
+      &lt;span className="bs-spinner bs-btn-spinner" aria-hidden="true" /&gt;
+    &lt;/button&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+            <div class="docs-note"><strong>Async ownership:</strong> Boobstrap starts and presents loading state; your application owns the request and decides when to call <code>stop()</code>. A canceled <code>bs:button:start</code> or <code>bs:button:stop</code> event leaves state unchanged.</div>
           </section>
 
           <section class="docs-section" id="navbar">
@@ -640,7 +778,7 @@ createIcons({ icons });</code></pre>
 
             <div class="docs-runtime-grid">
               <article class="docs-runtime-card"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
-              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance collapse, dropdown, and tabs through explicit, tree-shakable controllers.</p></article>
+              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance loading buttons, collapse, dropdowns, and tabs through explicit, tree-shakable controllers.</p></article>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
             </div>
@@ -666,7 +804,7 @@ createIcons({ icons });</code></pre>
                 </div>
               </div>
               <div id="framework-alpine-panel" role="tabpanel" aria-labelledby="framework-alpine-tab" data-framework-panel="alpine" hidden>
-                <p>The adapter registers <code>bsCollapse</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
+                <p>The adapter registers <code>bsButton</code>, <code>bsCollapse</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
                 <div class="docs-code-block">
                   <div class="docs-code-label"><span>JavaScript · Alpine.js</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs&#10;&#10;import "@boobstrap/boobstrap";&#10;import Alpine from "alpinejs";&#10;import boobstrap from "@boobstrap/alpine";&#10;&#10;Alpine.plugin(boobstrap);&#10;Alpine.start();'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/alpine alpinejs
@@ -681,13 +819,13 @@ Alpine.start();</code></pre>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/alpine"><code>@boobstrap/alpine</code> on npm</a>. Alpine remains an application-level peer dependency and is never installed by the core framework.</p>
               </div>
               <div id="react" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden>
-                <p>The adapter provides SSR-safe <code>useCollapse</code>, <code>useDropdown</code>, and <code>useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
+                <p>The adapter provides SSR-safe <code>useButton</code>, <code>useCollapse</code>, <code>useDropdown</code>, and <code>useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
                 <div class="docs-code-block">
-                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useCollapse, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
+                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useButton, useCollapse, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/react react
 
 <span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
-<span class="bs-code-keyword">import</span> { useCollapse, useDropdown, useTabs } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/react"</span>;</code></pre>
+<span class="bs-code-keyword">import</span> { useButton, useCollapse, useDropdown, useTabs } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/react"</span>;</code></pre>
                 </div>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/react"><code>@boobstrap/react</code> on npm</a>. React is a peer dependency; the adapter never initializes Boobstrap JS on React-owned DOM.</p>
               </div>
@@ -767,14 +905,15 @@ Alpine.start();</code></pre>
           <section class="docs-section" id="dropdown">
             <div class="docs-kicker">Interactivity</div>
             <h2>Dropdown</h2>
-            <p>Dropdowns support pointer dismissal, item selection, <kbd>Escape</kbd>, <kbd>Tab</kbd>, arrow keys, <kbd>Home</kbd>, and <kbd>End</kbd>. Disabled items are skipped.</p>
+            <p>Dropdowns can stand alone or attach to a primary action as a split button. They support pointer dismissal, item selection, <kbd>Escape</kbd>, <kbd>Tab</kbd>, arrow keys, <kbd>Home</kbd>, and <kbd>End</kbd>. Disabled items are skipped.</p>
             <div class="docs-demo interaction-demo" data-component-example="dropdown">
-              <div class="bs-dropdown" data-bs-dropdown>
-                <button class="bs-btn bs-btn-secondary" id="docs-actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="docs-actions-menu">Actions</button>
+              <div class="bs-dropdown bs-btn-group" data-bs-dropdown>
+                <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+                <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="docs-actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="docs-actions-menu" aria-label="More save options"></button>
                 <div class="bs-dropdown-menu" id="docs-actions-menu" role="menu" aria-labelledby="docs-actions-toggle" data-bs-dropdown-menu hidden>
-                  <button class="bs-dropdown-item" type="button" role="menuitem">Edit</button>
-                  <button class="bs-dropdown-item" type="button" role="menuitem">Duplicate</button>
-                  <button class="bs-dropdown-item" type="button" role="menuitem" disabled>Archive</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save and publish</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save as draft</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem" disabled>Save as template</button>
                 </div>
               </div>
             </div>
@@ -785,40 +924,42 @@ Alpine.start();</code></pre>
                 <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="dropdown-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
               </div>
-              <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-dropdown" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>
-                <pre><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
-  &lt;button class="bs-btn" id="actions-toggle" type="button"
-    data-bs-toggle="dropdown" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;
-  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu"
-    aria-labelledby="actions-toggle" data-bs-dropdown-menu hidden&gt;
-    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
+              <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source='&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>
+                <pre><code>&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+    id="save-toggle" type="button" data-bs-toggle="dropdown"
+    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
+    aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
-              <div id="dropdown-alpine-code-panel" role="tabpanel" aria-labelledby="dropdown-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source='&lt;div class="bs-dropdown" x-data="bsDropdown" x-bind="root"&gt;&#10;  &lt;button class="bs-btn" id="actions-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger" aria-controls="actions-menu"&gt;Actions&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu" aria-labelledby="actions-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;' hidden>
-                <pre><code>&lt;div class="bs-dropdown" x-data="bsDropdown" x-bind="root"&gt;
-  &lt;button class="bs-btn" id="actions-toggle" type="button"
-    data-bs-toggle="dropdown" x-bind="trigger" aria-controls="actions-menu"&gt;
-    Actions
-  &lt;/button&gt;
-  &lt;div class="bs-dropdown-menu" id="actions-menu" role="menu"
-    aria-labelledby="actions-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;
-    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;
+              <div id="dropdown-alpine-code-panel" role="tabpanel" aria-labelledby="dropdown-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source='&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="save-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger" aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;' hidden>
+                <pre><code>&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+    id="save-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger"
+    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
+    aria-labelledby="save-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
-              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source='function Actions() {&#10;  const dropdown = useDropdown({ id: "actions-menu" });&#10;&#10;  return (&#10;    &lt;div className="bs-dropdown" {...dropdown.getRootProps()}&gt;&#10;      &lt;button className="bs-btn" {...dropdown.getTriggerProps()}&gt;Actions&lt;/button&gt;&#10;      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;&#10;        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;Edit&lt;/button&gt;&#10;      &lt;/div&gt;&#10;    &lt;/div&gt;&#10;  );&#10;}' hidden>
-                <pre><code>function Actions() {
-  const dropdown = useDropdown({ id: "actions-menu" });
+              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source='function SaveActions() {&#10;  const dropdown = useDropdown({ id: "save-menu" });&#10;&#10;  return (&#10;    &lt;div className="bs-dropdown bs-btn-group" {...dropdown.getRootProps()}&gt;&#10;      &lt;button className="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;      &lt;button className="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" aria-label="More save options" {...dropdown.getTriggerProps()} /&gt;&#10;      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;&#10;        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;&#10;      &lt;/div&gt;&#10;    &lt;/div&gt;&#10;  );&#10;}' hidden>
+                <pre><code>function SaveActions() {
+  const dropdown = useDropdown({ id: "save-menu" });
 
   return (
-    &lt;div className="bs-dropdown" {...dropdown.getRootProps()}&gt;
-      &lt;button className="bs-btn" {...dropdown.getTriggerProps()}&gt;
-        Actions
-      &lt;/button&gt;
+    &lt;div className="bs-dropdown bs-btn-group" {...dropdown.getRootProps()}&gt;
+      &lt;button className="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+      &lt;button className="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+        aria-label="More save options" {...dropdown.getTriggerProps()} /&gt;
       &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;
         &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
-          Edit
+          Save and publish
         &lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -827,9 +968,9 @@ Alpine.start();</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">
-              <div><h3>Structure</h3><p>Keep the toggle and menu in one <code>.bs-dropdown</code> root, and label the menu from its toggle.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-dropdown-menu-end</code> aligns the popup to the opposite inline edge when needed.</p></div>
-              <div><h3>Accessibility</h3><p>Use <code>role="menu"</code> and <code>role="menuitem"</code> only for action menus, not ordinary site navigation.</p></div>
+              <div><h3>Structure</h3><p>For a split action, combine <code>.bs-dropdown</code> and <code>.bs-btn-group</code>. The first button owns the default action; the second owns only the menu.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-btn-split</code> narrows the attached trigger, <code>.bs-btn-caret</code> draws its indicator, and <code>.bs-dropdown-menu-end</code> changes popup alignment.</p></div>
+              <div><h3>Accessibility</h3><p>Name the narrow trigger by purpose—“More save options,” not “Dropdown.” Use menu roles only for action menus, not ordinary site navigation.</p></div>
             </div>
             <div class="docs-api"><h3>Dropdown API</h3><p>Import <code>Dropdown</code> from <code>@boobstrap/boobstrap/js/dropdown</code>.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the menu; hide can optionally restore focus.</td></tr>
@@ -980,7 +1121,7 @@ Alpine.start();</code></pre>
           </section>
 
           <footer class="docs-footer">
-            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.2.1 · MIT licensed.</p>
+            <p><span class="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.3.0 · MIT licensed.</p>
             <div class="docs-footer-links">
               <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View on npm</a>
               <a href="https://github.com/mikeroq/boobstrap-framework">View source →</a>
