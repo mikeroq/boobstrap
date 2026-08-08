@@ -5,6 +5,8 @@ const cleanRoutes = () => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
     ["/docs/", "/docs/index.html"],
+    ["/docs/components/buttons", "/docs/components/buttons/index.html"],
+    ["/docs/components/buttons/", "/docs/components/buttons/index.html"],
     ["/playground", "/playground/index.html"],
     ["/playground/", "/playground/index.html"],
   ]);
@@ -45,6 +47,7 @@ export default defineConfig({
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         docs: resolve(import.meta.dirname, "docs/index.html"),
+        buttons: resolve(import.meta.dirname, "docs/components/buttons/index.html"),
         playground: resolve(import.meta.dirname, "playground/index.html"),
       },
     },
