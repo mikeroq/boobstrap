@@ -78,6 +78,7 @@ try {
     { name: "mobile", width: 390, height: 844 },
   ]) {
     const page = await browser.newPage({ viewport });
+    await page.context().grantPermissions(["clipboard-read", "clipboard-write"], { origin: baseUrl });
     const consoleErrors = [];
     page.on("console", (message) => {
       if (message.type() === "error") consoleErrors.push(message.text());
@@ -85,14 +86,16 @@ try {
     page.on("pageerror", (error) => consoleErrors.push(error.message));
 
     await page.goto(baseUrl, { waitUntil: "networkidle" });
-    await page.screenshot({ path: `artifacts/${viewport.name}.png` });
+    await page.screenshot({ path: `artifacts/${viewport.name}.png`, fullPage: true });
 
-    const titleVisible = await page.getByRole("heading", { name: "Boobstrap", level: 1 }).isVisible();
+    const titleVisible = await page.locator("h1#hero-heading").isVisible();
     const canonicalUrl = await page.locator('link[rel="canonical"]').getAttribute("href");
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
     const npmUrl = await page.getByRole("link", { name: "v0.3.1 npm package", exact: true }).getAttribute("href");
+    const docsUrl = await page.getByRole("link", { name: "Read the docs", exact: true }).getAttribute("href");
+    const playgroundUrl = await page.getByRole("link", { name: "Open playground", exact: true }).getAttribute("href");
     const dimensions = await dimensionsFor(page);
 
     if (!titleVisible) failures.push(`${viewport.name}: hero title is not visible`);
@@ -101,15 +104,34 @@ try {
     if (ogImage !== ogImageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
     if (twitterCard !== "summary_large_image") failures.push(`${viewport.name}: landing Twitter card is incorrect`);
     if (npmUrl !== npmPackageUrl) failures.push(`${viewport.name}: landing npm link is incorrect`);
+    if (docsUrl !== "/docs/getting-started/installation") failures.push(`${viewport.name}: landing docs CTA is incorrect`);
+    if (playgroundUrl !== "/playground") failures.push(`${viewport.name}: landing playground CTA is incorrect`);
+    if (!await page.getByRole("link", { name: "Docs", exact: true }).first().isVisible()) {
+      failures.push(`${viewport.name}: primary Docs navigation is not visible`);
+    }
+    if (await page.locator(".component-catalog > a").count() !== 6) failures.push(`${viewport.name}: landing component catalog is incomplete`);
+    if (await page.locator(".behavior-grid > a").count() !== 4) failures.push(`${viewport.name}: landing behavior choices are incomplete`);
+    if (await page.locator("[data-signup-form]").count() !== 0) failures.push(`${viewport.name}: simulated signup form remains on landing page`);
+    if (!await page.locator("[data-starter-download]").isVisible()) failures.push(`${viewport.name}: starter download is not visible`);
     if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: horizontal overflow (${dimensions.scrollWidth}px > ${dimensions.clientWidth}px)`);
     }
     if (consoleErrors.length) failures.push(`${viewport.name}: ${consoleErrors.join("; ")}`);
 
     if (viewport.name === "desktop") {
-      await page.getByLabel("Email address").fill("dev@example.com");
-      await page.getByRole("button", { name: "Subscribe" }).click();
-      await page.getByText("You're covered").waitFor();
+      const pnpmTab = page.getByRole("tab", { name: "pnpm", exact: true });
+      await pnpmTab.click();
+      if (await page.locator("[data-install-command-output]").textContent() !== "pnpm add @boobstrap/boobstrap") {
+        failures.push("desktop: landing package-manager tabs did not update");
+      }
+      await page.getByRole("button", { name: "Copy pnpm installation command" }).click();
+      if (await page.evaluate(() => navigator.clipboard.readText()) !== "pnpm add @boobstrap/boobstrap") {
+        failures.push("desktop: landing install command did not copy");
+      }
+      await pnpmTab.press("ArrowRight");
+      if (await page.getByRole("tab", { name: "Yarn", exact: true }).getAttribute("aria-selected") !== "true") {
+        failures.push("desktop: landing package-manager tabs are not keyboard operable");
+      }
     }
     await page.close();
 
