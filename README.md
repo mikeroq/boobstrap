@@ -13,7 +13,7 @@ npm run dev
 
 The site imports `@boobstrap/boobstrap@0.3.1` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/`, the documentation overview at `/docs`, dedicated component references such as `/docs/components/buttons`, and the playground at `/playground`. The documentation's class and design-token reference is generated in the browser from the exact compiled stylesheet installed by the site, preventing the reference from drifting from the shipped CSS.
+Vite serves the landing page at `/`, the documentation directory at `/docs`, 23 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`; the class and design-token references are generated in the browser from the exact compiled stylesheet installed by the site, preventing them from drifting from the shipped CSS.
 
 ## Validation
 
@@ -22,7 +22,7 @@ npm run build
 npm test
 ```
 
-The smoke test exercises both production pages in Chromium at desktop and mobile viewport sizes, checks for horizontal overflow and console errors, verifies the landing-page signup interaction, and confirms that the documentation enumerates every framework class and token.
+The smoke test visits every documentation route in Chromium at desktop and mobile viewport sizes. It verifies clean routing, visible preview/source pairs, copy controls, optional behavior tabs, keyboard interactions, horizontal overflow, console errors, and exact class and token coverage.
 
 ## Docker
 
@@ -46,7 +46,8 @@ The runtime container serves the Vite production build from unprivileged Nginx o
 - Site behavior: `src/main.js`
 - Landing page markup: `index.html`
 - Documentation markup: `docs/index.html`
-- Dedicated component documentation: `docs/components/<component>/index.html`
+- Deep button reference markup: `docs/components/buttons/index.html`
+- Documentation route registry: `src/docs-pages.js`
 - Documentation behavior and source-derived API reference: `src/docs.js`
 - Documentation presentation: `src/docs.css`
 - Playground markup: `playground/index.html`

@@ -2,6 +2,7 @@ import frameworkCss from "@boobstrap/boobstrap/dist/boobstrap.css?raw";
 import "@boobstrap/boobstrap/dist/boobstrap.css";
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
+import { docsPageForPath, docsPages, normalizeDocsPath } from "./docs-pages.js";
 
 const root = document.documentElement;
 const page = document.body;
@@ -48,6 +49,122 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
   updateThemeLabel();
 });
 
+const docsPath = normalizeDocsPath(window.location.pathname);
+const activeDocsPage = docsPageForPath(docsPath);
+const isDocsOverview = docsPath === "/docs";
+const docsIndex = document.querySelector("[data-docs-index]");
+const monolithSections = [...document.querySelectorAll(".docs-content > .docs-section")];
+let routedSection = null;
+
+const updatePageMetadata = ({ path, title, description }) => {
+  const pageTitle = `${title} — Boobstrap`;
+  const canonicalUrl = `https://boobstrap.org${path}`;
+  document.title = pageTitle;
+  document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
+  document.querySelector('meta[name="description"]')?.setAttribute("content", description);
+  document.querySelector('meta[property="og:title"]')?.setAttribute("content", pageTitle);
+  document.querySelector('meta[property="og:description"]')?.setAttribute("content", description);
+  document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
+  document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", pageTitle);
+  document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", description);
+};
+
+const createRoutedHero = (config) => {
+  const header = document.createElement("header");
+  header.className = "docs-component-hero docs-routed-hero";
+
+  const breadcrumb = document.createElement("nav");
+  breadcrumb.className = "docs-breadcrumb";
+  breadcrumb.setAttribute("aria-label", "Breadcrumb");
+  const docsLink = document.createElement("a");
+  docsLink.href = "/docs";
+  docsLink.textContent = "Docs";
+  const firstDivider = document.createElement("span");
+  firstDivider.setAttribute("aria-hidden", "true");
+  firstDivider.textContent = "/";
+  const category = document.createElement("span");
+  category.textContent = config.category;
+  const secondDivider = firstDivider.cloneNode(true);
+  const current = document.createElement("span");
+  current.textContent = config.title;
+  breadcrumb.append(docsLink, firstDivider, category, secondDivider, current);
+
+  const kicker = document.createElement("div");
+  kicker.className = "docs-kicker";
+  kicker.textContent = config.category;
+  const heading = document.createElement("h1");
+  heading.textContent = config.title;
+  const lead = document.createElement("p");
+  lead.className = "bs-lead";
+  lead.textContent = config.description;
+  const meta = document.createElement("div");
+  meta.className = "docs-component-meta";
+  meta.setAttribute("aria-label", `${config.title} documentation summary`);
+  const hasExamples = routedSection?.querySelector("[data-component-example], .docs-code-block");
+  meta.innerHTML = `<span><strong>${escapeHtml(config.category)}</strong> guide</span><span><strong>${hasExamples ? "Copy-ready" : "Complete"}</strong> reference</span><span><strong>v0.3.1</strong> current</span>`;
+  header.append(breadcrumb, kicker, heading, lead, meta);
+  return header;
+};
+
+if (docsIndex) {
+  const introduction = document.querySelector("#introduction");
+  if (isDocsOverview) {
+    monolithSections.forEach((section) => { section.hidden = section !== docsIndex; });
+    if (introduction) introduction.hidden = false;
+  } else if (activeDocsPage) {
+    updatePageMetadata(activeDocsPage);
+    routedSection = document.querySelector(`#${activeDocsPage.sectionId}`);
+    monolithSections.forEach((section) => { section.hidden = section !== routedSection; });
+    if (introduction) introduction.hidden = activeDocsPage.sectionId !== "introduction";
+    if (docsIndex) docsIndex.hidden = true;
+
+    if (routedSection?.classList.contains("docs-section")) {
+      routedSection.classList.add("docs-routed-section");
+      routedSection.before(createRoutedHero(activeDocsPage));
+    } else if (routedSection === introduction) {
+      introduction.classList.add("docs-routed-introduction");
+      const heading = introduction.querySelector("h1");
+      const lead = introduction.querySelector(".bs-lead");
+      const breadcrumb = introduction.querySelector(".docs-breadcrumb");
+      if (heading) heading.textContent = activeDocsPage.title;
+      if (lead) lead.textContent = activeDocsPage.description;
+      if (breadcrumb) breadcrumb.innerHTML = '<a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>Introduction</span>';
+    }
+  }
+}
+
+if (docsIndex && activeDocsPage) {
+  const activeIndex = docsPages.findIndex(({ path }) => path === activeDocsPage.path);
+  const previousPage = docsPages[activeIndex - 1] ?? { path: "/docs", title: "Documentation overview", category: "Documentation" };
+  const nextPage = docsPages[activeIndex + 1] ?? { path: "/docs", title: "Documentation overview", category: "Documentation" };
+  const pagination = document.createElement("nav");
+  pagination.className = "docs-component-pagination";
+  pagination.setAttribute("aria-label", "Documentation pagination");
+
+  const createPaginationLink = (config, direction) => {
+    const link = document.createElement("a");
+    link.href = config.path;
+    const context = document.createElement("span");
+    context.textContent = direction === "previous" ? `Previous · ${config.category}` : `Next · ${config.category}`;
+    const title = document.createElement("strong");
+    title.textContent = direction === "previous" ? `← ${config.title}` : `${config.title} →`;
+    link.append(context, title);
+    return link;
+  };
+
+  pagination.append(createPaginationLink(previousPage, "previous"), createPaginationLink(nextPage, "next"));
+  document.querySelector(".docs-footer")?.before(pagination);
+}
+
+if (activeDocsPage) {
+  updatePageMetadata(activeDocsPage);
+  document.querySelectorAll(".docs-nav a").forEach((link) => {
+    const linkPath = normalizeDocsPath(new URL(link.href, window.location.origin).pathname);
+    if (linkPath === docsPath) link.setAttribute("aria-current", "page");
+    else if (link.getAttribute("aria-current") === "page") link.removeAttribute("aria-current");
+  });
+}
+
 document.querySelectorAll("[data-copy]").forEach((button) => {
   button.addEventListener("click", async () => {
     const originalLabel = button.textContent;
@@ -59,78 +176,6 @@ document.querySelectorAll("[data-copy]").forEach((button) => {
     }
     window.setTimeout(() => { button.textContent = originalLabel; }, 1400);
   });
-});
-
-document.querySelectorAll("[data-component-example]").forEach((preview, index) => {
-  const code = preview.nextElementSibling;
-  if (!code?.classList.contains("docs-code-block")) return;
-
-  const name = preview.dataset.componentExample;
-  const label = name.split("-").map((part) => part[0].toUpperCase() + part.slice(1)).join(" ");
-  const shell = document.createElement("div");
-  const toolbar = document.createElement("div");
-  const title = document.createElement("span");
-  const tablist = document.createElement("div");
-  const previewTab = document.createElement("button");
-  const codeTab = document.createElement("button");
-  const previewId = preview.id || `component-preview-${index}`;
-  const codeId = `component-code-${index}`;
-
-  preview.id = previewId;
-  code.id = codeId;
-  shell.className = "docs-example-shell";
-  shell.dataset.exampleShell = name;
-  toolbar.className = "docs-example-toolbar";
-  title.className = "docs-example-title";
-  title.textContent = `${label} example`;
-  tablist.className = "docs-example-tabs";
-  tablist.setAttribute("role", "tablist");
-  tablist.setAttribute("aria-label", `${label} example view`);
-
-  const configureTab = (tab, textContent, targetId, selected) => {
-    tab.type = "button";
-    tab.textContent = textContent;
-    tab.setAttribute("role", "tab");
-    tab.setAttribute("aria-controls", targetId);
-    tab.setAttribute("aria-selected", String(selected));
-    tab.tabIndex = selected ? 0 : -1;
-    tab.dataset.exampleView = textContent.toLowerCase();
-  };
-
-  configureTab(previewTab, "Preview", previewId, true);
-  configureTab(codeTab, "Code", codeId, false);
-  preview.setAttribute("role", "tabpanel");
-  preview.setAttribute("aria-label", `${label} preview`);
-  code.setAttribute("role", "tabpanel");
-  code.setAttribute("aria-label", `${label} code`);
-
-  const selectView = (view, moveFocus = false) => {
-    const showPreview = view === "preview";
-    previewTab.setAttribute("aria-selected", String(showPreview));
-    codeTab.setAttribute("aria-selected", String(!showPreview));
-    previewTab.tabIndex = showPreview ? 0 : -1;
-    codeTab.tabIndex = showPreview ? -1 : 0;
-    preview.hidden = !showPreview;
-    code.hidden = showPreview;
-    if (moveFocus) (showPreview ? previewTab : codeTab).focus();
-  };
-
-  previewTab.addEventListener("click", () => selectView("preview"));
-  codeTab.addEventListener("click", () => selectView("code"));
-  [previewTab, codeTab].forEach((tab) => {
-    tab.addEventListener("keydown", (event) => {
-      if (!["ArrowLeft", "ArrowRight", "Home", "End"].includes(event.key)) return;
-      event.preventDefault();
-      const showPreview = event.key === "ArrowLeft" || event.key === "Home";
-      selectView(showPreview ? "preview" : "code", true);
-    });
-  });
-
-  preview.before(shell);
-  tablist.append(previewTab, codeTab);
-  toolbar.append(title, tablist);
-  shell.append(toolbar, preview, code);
-  selectView("preview");
 });
 
 document.querySelectorAll("[data-framework-tabs]").forEach((switcher) => {
@@ -389,15 +434,38 @@ if (spacingTarget) spacingTarget.innerHTML = spacingTokens.map(({ name, value })
   return `<div class="spacing-item"><code>${escapeHtml(name.replace("--bs-space-", ""))}</code><span class="spacing-bar spacing-bar-${Math.round(width)}"></span><span class="spacing-value">${escapeHtml(value)}</span></div>`;
 }).join("");
 
-const headings = [...document.querySelectorAll(".docs-section > h2")];
 const pageNav = document.querySelector("[data-page-nav]");
-if (pageNav) pageNav.innerHTML = headings.map((heading) => `<a href="#${heading.parentElement.id}">${escapeHtml(heading.textContent)}</a>`).join("");
+const slugify = (value) => value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+let outlineTargets;
 
-headings.forEach((heading) => {
+if (routedSection?.classList.contains("docs-section")) {
+  const subheadings = [...routedSection.querySelectorAll(":scope > h3, :scope > .docs-api > h3")];
+  outlineTargets = [{ element: routedSection, id: routedSection.id, label: "Overview", heading: null }];
+  subheadings.forEach((heading, index) => {
+    heading.id ||= `${routedSection.id}-${slugify(heading.textContent) || index + 1}`;
+    outlineTargets.push({ element: heading, id: heading.id, label: heading.textContent, heading });
+  });
+} else if (activeDocsPage?.sectionId === "introduction" && routedSection) {
+  outlineTargets = [{ element: routedSection, id: routedSection.id, label: "Overview", heading: null }];
+} else if (docsIndex && isDocsOverview) {
+  outlineTargets = [{ element: docsIndex, id: docsIndex.id, label: "Browse documentation", heading: docsIndex.querySelector(":scope > h2") }];
+} else {
+  outlineTargets = [...document.querySelectorAll(".docs-section > h2")].map((heading) => ({
+    element: heading.parentElement,
+    id: heading.parentElement.id,
+    label: heading.textContent,
+    heading,
+  }));
+}
+
+if (pageNav) pageNav.innerHTML = outlineTargets.map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`).join("");
+
+outlineTargets.forEach(({ heading, id, label }) => {
+  if (!heading) return;
   const anchor = document.createElement("a");
   anchor.className = "docs-heading-anchor";
-  anchor.href = `#${heading.parentElement.id}`;
-  anchor.setAttribute("aria-label", `Link to ${heading.textContent}`);
+  anchor.href = `#${id}`;
+  anchor.setAttribute("aria-label", `Link to ${label}`);
   anchor.textContent = "#";
   heading.append(anchor);
 });
@@ -410,7 +478,7 @@ const setActiveSection = (id) => {
   });
 };
 
-const trackedSections = [...document.querySelectorAll(".docs-section[id], .docs-hero[id]")];
+const trackedSections = outlineTargets.map(({ element }) => element);
 let scrollUpdateQueued = false;
 
 const updateActiveSection = () => {
