@@ -3,11 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Boobstrap is a lightweight, component-focused CSS framework with thoughtful defaults and a practical utility layer." />
+    <meta name="description" content="Boobstrap is a CSS-first framework for responsive layouts, polished components, practical utilities, and optional JavaScript, Alpine, and React behavior." />
     <meta name="theme-color" content="#140a15" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Boobstrap — Look good. Ship fast." />
-    <meta property="og:description" content="A cheeky CSS framework with modern components, thoughtful defaults, and practical utilities." />
+    <meta property="og:description" content="A CSS-first framework with polished components, thoughtful defaults, and optional behavior for Boobstrap JS, Alpine, and React." />
     <meta property="og:url" content="https://boobstrap.org/" />
     <meta property="og:image" content="https://boobstrap.org/og-image.jpg" />
     <meta property="og:image:width" content="1200" />
@@ -15,7 +15,7 @@
     <meta property="og:image:alt" content="Boobstrap — Look good. Ship fast." />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Boobstrap — Look good. Ship fast." />
-    <meta name="twitter:description" content="A cheeky CSS framework with modern components, thoughtful defaults, and practical utilities." />
+    <meta name="twitter:description" content="A CSS-first framework with polished components, thoughtful defaults, and optional behavior." />
     <meta name="twitter:image" content="https://boobstrap.org/og-image.jpg" />
     <link rel="canonical" href="https://boobstrap.org/" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
@@ -26,182 +26,226 @@
   <body class="site-shell">
     <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <div class="brand-ribbon brand-ribbon-top" aria-hidden="true"></div>
-    <div class="brand-ribbon brand-ribbon-bottom" aria-hidden="true"></div>
-
-    <header class="site-header bs-container bs-flex bs-items-center bs-justify-between">
-      <a class="brand-lockup bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap home">
-        <svg class="brand-mark" width="56" height="42" viewBox="0 0 56 42" aria-hidden="true">
-          <path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Z" fill="currentColor"/>
-          <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/>
-          <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/>
-        </svg>
-        <span>Boobstrap</span>
-      </a>
-
-      <div class="site-nav bs-flex bs-items-center bs-gap-3">
-        <a class="site-nav-link bs-no-underline" href="/docs">Docs</a>
-        <a class="bs-badge bs-badge-primary release-badge bs-no-underline" href="https://www.npmjs.com/package/@boobstrap/boobstrap">
-          <strong>v0.3.1</strong>
-          <span class="release-dot" aria-hidden="true"></span>
-          npm package
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="m12 2 1.5 6.5L20 10l-6.5 1.5L12 18l-1.5-6.5L4 10l6.5-1.5L12 2Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
-            <path d="m19 16 .6 2.4L22 19l-2.4.6L19 22l-.6-2.4L16 19l2.4-.6L19 16Z" fill="currentColor"/>
+    <header class="site-header">
+      <div class="site-header-inner bs-container bs-flex bs-items-center bs-justify-between">
+        <a class="brand-lockup bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap home">
+          <svg class="brand-mark" width="48" height="36" viewBox="0 0 56 42" aria-hidden="true">
+            <path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Z" fill="currentColor"/>
+            <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/>
+            <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/>
           </svg>
+          <span>Boobstrap</span>
         </a>
+
+        <nav class="site-nav bs-flex bs-items-center" aria-label="Primary navigation">
+          <a class="site-nav-link bs-no-underline" href="/docs">Docs</a>
+          <a class="site-nav-link site-nav-secondary bs-no-underline" href="#components">Components</a>
+          <a class="site-nav-link site-nav-secondary bs-no-underline" href="/playground">Playground</a>
+          <a class="site-nav-icon bs-inline-flex bs-items-center bs-justify-center" href="https://github.com/mikeroq/boobstrap-framework" aria-label="Boobstrap on GitHub">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.55 9.55 0 0 1 12 6.82c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
+          </a>
+          <a class="release-link bs-no-underline" href="https://www.npmjs.com/package/@boobstrap/boobstrap" aria-label="Boobstrap version 0.3.1 on npm">
+            <strong>v0.3.1</strong><span>npm</span>
+          </a>
+        </nav>
       </div>
     </header>
 
     <main id="main-content">
-      <section class="hero bs-container">
+      <section class="hero bs-container" aria-labelledby="hero-heading">
         <div class="hero-grid bs-grid bs-gap-8 bs-items-center">
-          <div class="hero-copy bs-col-12 bs-col-lg-5">
-            <div class="wordmark-wrap">
-              <h1 class="hero-wordmark bs-display bs-text-gradient bs-mb-4">Boobstrap</h1>
-              <span class="wordmark-spark" aria-hidden="true"><i></i><i></i><i></i></span>
-            </div>
-
-            <p class="hero-tagline bs-mb-4">
-              A cheeky CSS framework<br />
-              that <em class="bs-text-primary">still</em> means business.
+          <div class="hero-copy bs-col-12 bs-col-lg-6">
+            <div class="hero-eyebrow"><span aria-hidden="true">♥</span> CSS-first. Behavior optional.</div>
+            <h1 id="hero-heading">Look good.<br /><span class="bs-text-gradient">Ship fast.</span></h1>
+            <p class="hero-description bs-lead">
+              Boobstrap gives you responsive layouts, polished components, and practical utilities without owning your application. Start with CSS, then bring your own JavaScript—or use our optional Boobstrap JS, Alpine, and React integrations.
             </p>
 
-            <p class="hero-description bs-lead bs-mb-0">
-              Modern components. Thoughtful defaults.<br />
-              Built to help you ship beautiful interfaces—fast.
-            </p>
-
-            <div class="hero-actions bs-flex bs-flex-wrap bs-gap-3 bs-mt-8">
-              <a class="bs-btn bs-btn-primary bs-btn-lg" href="/docs#installation">
-                <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Get Started
-              </a>
-              <a class="bs-btn bs-btn-secondary bs-btn-lg" href="https://github.com/mikeroq/boobstrap-framework">
-                <svg width="21" height="21" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-                  <path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.87c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.55 9.55 0 0 1 12 6.82c.85 0 1.7.11 2.5.34 1.91-1.3 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.86v2.76c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/>
-                </svg>
-                View on GitHub
-              </a>
+            <div class="install-card" aria-label="Install Boobstrap">
+              <div class="install-tabs" role="tablist" aria-label="Package manager">
+                <button type="button" role="tab" aria-selected="true" tabindex="0" data-install-manager="npm" data-install-command="npm install @boobstrap/boobstrap">npm</button>
+                <button type="button" role="tab" aria-selected="false" tabindex="-1" data-install-manager="pnpm" data-install-command="pnpm add @boobstrap/boobstrap">pnpm</button>
+                <button type="button" role="tab" aria-selected="false" tabindex="-1" data-install-manager="Yarn" data-install-command="yarn add @boobstrap/boobstrap">Yarn</button>
+                <button type="button" role="tab" aria-selected="false" tabindex="-1" data-install-manager="Bun" data-install-command="bun add @boobstrap/boobstrap">Bun</button>
+              </div>
+              <div class="install-command" role="tabpanel" aria-label="Installation command">
+                <code data-install-command-output>npm install @boobstrap/boobstrap</code>
+                <button class="install-copy" type="button" data-install-copy aria-label="Copy npm installation command">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"/><path d="M15 9V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h3" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+                  <span>Copy</span>
+                </button>
+              </div>
+              <span class="bs-sr-only" aria-live="polite" data-install-status></span>
             </div>
+
+            <div class="hero-actions bs-flex bs-flex-wrap bs-gap-3">
+              <a class="bs-btn bs-btn-primary bs-btn-lg" href="/docs/getting-started/installation">Read the docs</a>
+              <a class="bs-btn bs-btn-secondary bs-btn-lg" href="/playground">Open playground</a>
+            </div>
+            <p class="hero-package-links">
+              <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View <code>@boobstrap/boobstrap</code> on npm <span aria-hidden="true">↗</span></a>
+              <span aria-hidden="true">·</span>
+              <a href="/boobstrap-starter.zip" download>Download starter ZIP</a>
+            </p>
           </div>
 
-          <div class="product-stage bs-col-12 bs-col-lg-7" aria-label="Boobstrap component examples">
-            <div class="stage-strap" aria-hidden="true"><span class="strap-medallion"><span>♥</span></span></div>
-
-            <article class="bs-code-window code-preview">
-              <div class="bs-code-toolbar">
-                <div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div>
-                <span class="bs-text-xs bs-text-subtle">CSS</span>
+          <div class="hero-showcase bs-col-12 bs-col-lg-6" aria-label="Boobstrap component preview">
+            <div class="showcase-glow" aria-hidden="true"></div>
+            <article class="showcase-window bs-card bs-card-raised">
+              <div class="showcase-toolbar bs-flex bs-items-center bs-justify-between">
+                <div class="showcase-dots" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span>Live component composition</span>
+                <span class="bs-badge bs-badge-primary">CSS</span>
               </div>
-              <div class="code-tabs bs-flex bs-justify-between bs-text-xs">
-                <strong class="bs-text-primary">HTML</strong>
-                <span class="bs-text-subtle">Preview</span>
-              </div>
-              <pre class="bs-code-body bs-m-0" aria-label="Example Boobstrap HTML"><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-container&quot;</span><span class="bs-code-tag">&gt;</span>
-  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-grid bs-gap-4&quot;</span><span class="bs-code-tag">&gt;</span>
-    <span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-card bs-p-6&quot;</span><span class="bs-code-tag">&gt;</span>
-      <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-card-title&quot;</span><span class="bs-code-tag">&gt;</span>
-        Look good. Ship fast.
-      <span class="bs-code-tag">&lt;/h3&gt;</span>
-      <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-text-muted&quot;</span><span class="bs-code-tag">&gt;</span>
-        Boobstrap has your back.
-      <span class="bs-code-tag">&lt;/p&gt;</span>
-    <span class="bs-code-tag">&lt;/article&gt;</span>
-  <span class="bs-code-tag">&lt;/div&gt;</span>
-<span class="bs-code-tag">&lt;/div&gt;</span></pre>
-            </article>
-
-            <article class="phone-preview bs-card bs-card-raised" aria-label="Responsive mobile preview">
-              <div class="phone-speaker" aria-hidden="true"></div>
-              <div class="phone-toolbar bs-flex bs-items-center bs-justify-between">
-                <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h11" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/></svg>
-                <svg class="phone-logo" width="28" height="22" viewBox="0 0 56 42" aria-hidden="true"><path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Zm44 0c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/><path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/></svg>
-              </div>
-              <div class="phone-content">
-                <h2>Built for<br />every <span class="bs-text-primary">shape.</span></h2>
-                <p class="bs-text-muted bs-text-sm">Responsive by design.<br />Look great anywhere.</p>
-                <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Learn more</button>
-              </div>
-              <div class="phone-curves" aria-hidden="true"><span>♥</span></div>
-            </article>
-
-            <article class="component-lab bs-card bs-card-raised" id="framework">
-              <div class="bs-card-body">
-                <p class="bs-text-primary bs-font-semibold bs-text-sm bs-mb-4">Component preview</p>
-                <div class="component-grid">
-                  <div>
-                    <div class="bs-flex bs-gap-2 bs-mb-4">
-                      <button class="bs-btn bs-btn-primary bs-flex-1" type="button">Primary</button>
-                      <button class="bs-btn bs-btn-secondary bs-flex-1" type="button">Secondary</button>
-                      <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8l1.1 1.1L12 21l7.8-7.5 1.1-1.1a5.5 5.5 0 0 0-.1-7.8Z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                      </button>
-                    </div>
-                    <form class="signup-form bs-flex bs-gap-2" data-signup-form>
-                      <label class="bs-sr-only" for="email">Email address</label>
-                      <input class="bs-input bs-flex-1" id="email" name="email" type="email" placeholder="Your email" required />
-                      <button class="bs-btn bs-btn-primary" type="submit">Subscribe</button>
-                    </form>
+              <div class="showcase-app">
+                <header class="showcase-app-header bs-flex bs-items-center bs-justify-between">
+                  <div class="bs-inline-flex bs-items-center bs-gap-2"><span class="showcase-app-mark" aria-hidden="true">♥</span><strong>Studio</strong></div>
+                  <nav class="bs-flex bs-gap-4" aria-label="Preview navigation"><a href="#components">Projects</a><a href="#behavior">Activity</a></nav>
+                </header>
+                <div class="showcase-app-body">
+                  <span class="bs-badge bs-badge-primary">New workspace</span>
+                  <h2>Everything you need.<br />Nothing you don’t.</h2>
+                  <p class="bs-text-muted">Responsive by default and shaped by semantic tokens.</p>
+                  <div class="showcase-actions bs-flex bs-flex-wrap bs-gap-2">
+                    <a class="bs-btn bs-btn-primary" href="/docs/components/buttons">Create project</a>
+                    <a class="bs-btn bs-btn-secondary" href="/docs/components/cards">View components</a>
                   </div>
-                  <div class="bs-alert bs-alert-primary lab-alert" role="status" data-form-status>
-                    <span class="alert-icon bs-inline-flex bs-items-center bs-justify-center" aria-hidden="true">
-                      <svg width="19" height="19" viewBox="0 0 24 24" fill="none"><path d="m7 12 3 3 7-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                    </span>
-                    <span><strong class="bs-alert-title bs-text-primary">Alert</strong>Accessible. Performant.<br />Dependable.</span>
+                  <div class="showcase-grid">
+                    <article class="bs-card"><div class="bs-card-body"><span class="showcase-card-icon" aria-hidden="true">#</span><h3 class="bs-card-title">Semantic tokens</h3><p class="bs-card-text">Change one value. Update the system.</p></div></article>
+                    <article class="bs-card"><div class="bs-card-body"><span class="showcase-card-icon" aria-hidden="true">12</span><h3 class="bs-card-title">Responsive grid</h3><p class="bs-card-text">Compose confidently at every size.</p></div></article>
                   </div>
+                  <div class="bs-alert bs-alert-success showcase-alert" role="status"><strong class="bs-alert-title">Ready to ship.</strong> Your interface is looking good.</div>
                 </div>
               </div>
             </article>
+            <div class="showcase-code" aria-hidden="true"><span>import</span> "@boobstrap/boobstrap/dist/boobstrap.css";</div>
           </div>
         </div>
       </section>
 
-      <section class="feature-section bs-container" id="components" aria-labelledby="feature-heading">
-        <h2 class="bs-sr-only" id="feature-heading">Framework features</h2>
-        <div class="feature-grid bs-grid">
-          <article class="feature bs-col-6 bs-col-lg-3 bs-text-center">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="34" height="34" viewBox="0 0 32 32" fill="none"><rect x="3" y="3" width="11" height="11" rx="2"/><rect x="18" y="3" width="11" height="11" rx="2"/><rect x="3" y="18" width="11" height="11" rx="2"/><rect x="18" y="18" width="11" height="11" rx="2"/></svg>
-            </span>
-            <h3 class="bs-text-md bs-mt-4 bs-mb-2">Responsive grid</h3>
-            <p class="bs-text-sm bs-text-muted bs-mb-0">A mobile-first 12-column system that plays nice at every breakpoint.</p>
-          </article>
-          <article class="feature bs-col-6 bs-col-lg-3 bs-text-center">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="38" height="38" viewBox="0 0 38 38" fill="none"><path d="m19 3 14 8-14 8L5 11l14-8Z"/><path d="m5 18 14 8 14-8M5 25l14 8 14-8"/></svg>
-            </span>
-            <h3 class="bs-text-md bs-mt-4 bs-mb-2">Reusable components</h3>
-            <p class="bs-text-sm bs-text-muted bs-mb-0">Polished building blocks that are accessible and easy to customize.</p>
-          </article>
-          <article class="feature bs-col-6 bs-col-lg-3 bs-text-center">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="37" height="37" viewBox="0 0 38 38" fill="none"><path d="m8 30 21-21M7 11h8M11 7v8M25 5v6M22 8h6M7 25l6 6M26 16l5 5"/><path d="m15 23 8-8 4 4-8 8-4-4Z"/></svg>
-            </span>
-            <h3 class="bs-text-md bs-mt-4 bs-mb-2">Utility classes</h3>
-            <p class="bs-text-sm bs-text-muted bs-mb-0">Focused helpers to build anything quickly without fighting your CSS.</p>
-          </article>
-          <article class="feature bs-col-6 bs-col-lg-3 bs-text-center">
-            <span class="feature-icon" aria-hidden="true">
-              <svg width="34" height="38" viewBox="0 0 34 38" fill="none"><path d="M20 2 5 21h11l-2 15 15-21H18l2-13Z"/></svg>
-            </span>
-            <h3 class="bs-text-md bs-mt-4 bs-mb-2">Fast prototyping</h3>
-            <p class="bs-text-sm bs-text-muted bs-mb-0">Start simple, iterate quickly, and ship with confidence.</p>
-          </article>
+      <section class="proof-strip bs-container" aria-label="Framework highlights">
+        <div><strong>CSS-only</strong><span>foundation</span></div>
+        <div><strong>0</strong><span>runtime dependencies</span></div>
+        <div><strong>12-column</strong><span>responsive grid</span></div>
+        <div><strong>MIT</strong><span>open source</span></div>
+      </section>
+
+      <section class="landing-section bs-container" aria-labelledby="foundation-heading">
+        <div class="section-heading">
+          <span class="section-kicker">A practical foundation</span>
+          <h2 id="foundation-heading">Use the whole system.<br />Or only what you need.</h2>
+          <p>Boobstrap stays close to the platform: semantic HTML, predictable classes, customizable CSS variables, and optional behavior that never locks you into a runtime.</p>
+        </div>
+        <div class="value-grid">
+          <a class="value-card" href="/docs/getting-started/introduction">
+            <span class="value-number">01</span>
+            <h3>CSS comes first</h3>
+            <p>Layouts, typography, forms, cards, alerts, buttons, and utilities work without JavaScript.</p>
+            <strong>Explore the foundation <span aria-hidden="true">→</span></strong>
+          </a>
+          <a class="value-card" href="/docs/reference/tokens">
+            <span class="value-number">02</span>
+            <h3>Tokens make it yours</h3>
+            <p>Customize color, type, spacing, radius, elevation, containers, and motion through semantic variables.</p>
+            <strong>Browse design tokens <span aria-hidden="true">→</span></strong>
+          </a>
+          <a class="value-card" href="/docs/reference/accessibility">
+            <span class="value-number">03</span>
+            <h3>Built on native semantics</h3>
+            <p>Visible focus, reduced-motion safeguards, accessible color foundations, and guidance for correct markup.</p>
+            <strong>Read accessibility guidance <span aria-hidden="true">→</span></strong>
+          </a>
+        </div>
+      </section>
+
+      <section class="landing-section component-section" id="components" aria-labelledby="components-heading">
+        <div class="bs-container">
+          <div class="section-heading section-heading-row">
+            <div><span class="section-kicker">Copy-ready components</span><h2 id="components-heading">Start with something polished.</h2></div>
+            <a class="section-link" href="/docs">Browse all documentation <span aria-hidden="true">→</span></a>
+          </div>
+          <div class="component-catalog">
+            <a class="catalog-card" href="/docs/components/buttons">
+              <div class="catalog-preview catalog-buttons"><span class="bs-btn bs-btn-primary bs-btn-sm">Primary</span><span class="bs-btn bs-btn-secondary bs-btn-sm">Secondary</span><span class="bs-btn bs-btn-secondary bs-btn-icon bs-btn-sm" aria-hidden="true">♥</span></div>
+              <div><h3>Buttons</h3><p>Variants, sizes, icons, groups, split actions, and loading states.</p></div>
+            </a>
+            <a class="catalog-card" href="/docs/components/cards">
+              <div class="catalog-preview"><div class="mini-card"><span></span><strong>Project brief</strong><small>Updated just now</small></div></div>
+              <div><h3>Cards</h3><p>Flexible surfaces for content, metadata, and actions.</p></div>
+            </a>
+            <a class="catalog-card" href="/docs/components/forms">
+              <div class="catalog-preview catalog-form"><label>Email address</label><span>you@example.com</span></div>
+              <div><h3>Forms</h3><p>Native, labeled controls with validation and help-text guidance.</p></div>
+            </a>
+            <a class="catalog-card" href="/docs/components/alerts">
+              <div class="catalog-preview"><div class="mini-alert"><span aria-hidden="true">✓</span><strong>Changes saved</strong></div></div>
+              <div><h3>Alerts</h3><p>Clear status messaging with appropriate semantic roles.</p></div>
+            </a>
+            <a class="catalog-card" href="/docs/components/navbar">
+              <div class="catalog-preview"><div class="mini-nav"><strong>Brand</strong><span>Docs&nbsp;&nbsp; About</span><i aria-hidden="true"></i></div></div>
+              <div><h3>Navigation</h3><p>Responsive headers composed from predictable layout utilities.</p></div>
+            </a>
+            <a class="catalog-card" href="/docs/foundations/responsive-composition">
+              <div class="catalog-preview catalog-layout" aria-hidden="true"><span></span><span></span><span></span></div>
+              <div><h3>Responsive layouts</h3><p>Mobile-first grids that preserve meaningful source order.</p></div>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="landing-section bs-container behavior-section" id="behavior" aria-labelledby="behavior-heading">
+        <div class="behavior-intro">
+          <span class="section-kicker">Your stack, your choice</span>
+          <h2 id="behavior-heading">Add behavior only when you need it.</h2>
+          <p>Every layer follows the same markup and accessibility contract. Pick one behavior owner for an interactive component—or keep the page entirely CSS-only.</p>
+          <a class="bs-btn bs-btn-secondary" href="/docs/interactivity/overview">Compare behavior layers</a>
+        </div>
+        <div class="behavior-grid">
+          <a href="/docs/getting-started/introduction"><span>Foundation</span><h3>CSS only</h3><p>Complete visual system. No runtime required.</p><code>import "boobstrap.css"</code></a>
+          <a href="/docs/interactivity/overview"><span>Official</span><h3>Boobstrap JS</h3><p>Small dependency-free controllers for interactive state.</p><code>initBoobstrap()</code></a>
+          <a href="/docs/interactivity/overview"><span>Official adapter</span><h3>Alpine.js</h3><p>Reusable providers and bindings for Alpine-owned state.</p><code>x-data="bsDropdown"</code></a>
+          <a href="/docs/interactivity/overview"><span>Official adapter</span><h3>React</h3><p>SSR-safe headless hooks with consumer-owned markup.</p><code>useDropdown()</code></a>
+        </div>
+      </section>
+
+      <section class="starter-section bs-container" aria-labelledby="starter-heading">
+        <div class="starter-panel">
+          <div>
+            <span class="section-kicker">Skip the blank canvas</span>
+            <h2 id="starter-heading">Start with a working project.</h2>
+            <p>Download a minimal Vite starter with npm imports, responsive composition, theme-token overrides, components, inline SVG icons, and a production validation check.</p>
+            <div class="bs-flex bs-flex-wrap bs-gap-3">
+              <a class="bs-btn bs-btn-primary bs-btn-lg" href="/boobstrap-starter.zip" download data-starter-download>Download starter ZIP</a>
+              <a class="bs-btn bs-btn-secondary bs-btn-lg" href="/docs/getting-started/starter-template">View setup guide</a>
+            </div>
+          </div>
+          <div class="starter-files" aria-label="Starter project files">
+            <div class="starter-files-header"><span></span><span></span><span></span><strong>boobstrap-starter</strong></div>
+            <code><span>▾</span> src</code>
+            <code>&nbsp;&nbsp; main.js</code>
+            <code>&nbsp;&nbsp; styles.css</code>
+            <code>index.html</code>
+            <code>package.json</code>
+            <code>scripts/validate.mjs</code>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer class="site-footer bs-container bs-flex bs-flex-wrap bs-items-center bs-justify-center bs-gap-4 bs-text-sm bs-text-muted">
-      <span class="bs-flex bs-items-center bs-gap-2"><span class="bs-text-primary" aria-hidden="true">♥</span> Made with care by developers, for developers.</span>
-      <span class="footer-divider" aria-hidden="true"></span>
-      <a href="/docs" class="bs-no-underline">Documentation</a>
-      <span class="footer-divider" aria-hidden="true"></span>
-      <a href="https://github.com/mikeroq/boobstrap-framework" class="bs-no-underline">Open source</a>
-      <span class="footer-divider" aria-hidden="true"></span>
-      <span>MIT Licensed</span>
+    <footer class="site-footer">
+      <div class="footer-grid bs-container">
+        <div class="footer-brand">
+          <a class="brand-lockup bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap home">
+            <svg class="brand-mark" width="42" height="32" viewBox="0 0 56 42" aria-hidden="true"><path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Zm44 0c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/><path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb"/></svg>
+            <span>Boobstrap</span>
+          </a>
+          <p>Look good. Ship fast.<br />A CSS-first framework that still means business.</p>
+        </div>
+        <nav aria-label="Documentation links"><strong>Learn</strong><a href="/docs">Documentation</a><a href="/docs/getting-started/installation">Installation</a><a href="/docs/components/buttons">Components</a><a href="/docs/reference/tokens">Design tokens</a></nav>
+        <nav aria-label="Resource links"><strong>Resources</strong><a href="/playground">Playground</a><a href="/boobstrap-starter.zip" download>Starter ZIP</a><a href="https://www.npmjs.com/package/@boobstrap/boobstrap">npm package</a><a href="https://github.com/mikeroq/boobstrap-framework">GitHub</a></nav>
+        <div class="footer-meta"><strong>Current release</strong><a href="https://www.npmjs.com/package/@boobstrap/boobstrap">v0.3.1</a><span>MIT licensed</span><span>CSS-only core</span></div>
+      </div>
+      <div class="footer-bottom bs-container"><span><span class="bs-text-primary" aria-hidden="true">♥</span> Made with care by developers, for developers.</span><span>© 2026 Boobstrap</span></div>
     </footer>
   </body>
 </html>
