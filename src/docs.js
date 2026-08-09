@@ -165,11 +165,14 @@ if (activeDocsPage) {
   });
 }
 
-document.querySelectorAll("[data-copy]").forEach((button) => {
+document.querySelectorAll("[data-copy], [data-copy-code]").forEach((button) => {
   button.addEventListener("click", async () => {
     const originalLabel = button.textContent;
+    const source = button.dataset.copy
+      ?? button.closest(".docs-code-block")?.querySelector("pre code")?.textContent.trim()
+      ?? "";
     try {
-      await navigator.clipboard.writeText(button.dataset.copy);
+      await navigator.clipboard.writeText(source);
       button.textContent = "Copied";
     } catch {
       button.textContent = "Select code";
