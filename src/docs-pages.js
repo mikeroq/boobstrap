@@ -11,6 +11,7 @@ export const docsPages = [
   { path: "/docs/components/badges", sectionId: "badges", category: "Components", title: "Badges", description: "Add compact labels for status, categories, counts, and metadata." },
   { path: "/docs/components/cards", sectionId: "cards", category: "Components", title: "Cards", description: "Group related content and actions with flexible card surfaces, bodies, titles, and text." },
   { path: "/docs/components/alerts", sectionId: "alerts", category: "Components", title: "Alerts", description: "Communicate success, warning, danger, and informational messages with appropriate semantics." },
+  { path: "/docs/components/banners", sectionId: "banners", category: "Components", title: "Banners", description: "Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior." },
   { path: "/docs/components/forms", sectionId: "forms", category: "Components", title: "Forms", description: "Choose a focused form guide with complete, copy-ready examples for every control family." },
   { path: "/docs/components/forms/inputs", sectionId: "form-inputs", category: "Forms", title: "Inputs and textareas", description: "Build labeled text controls with help text, validation feedback, disabled and read-only states, and three sizes." },
   { path: "/docs/components/forms/input-groups", sectionId: "form-input-groups", category: "Forms", title: "Input groups and icons", description: "Compose inputs with prefixed or suffixed text, buttons, selects, and inline icons." },

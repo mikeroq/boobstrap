@@ -362,6 +362,7 @@ const classCategory = (name) => {
   if (name.startsWith("bs-btn") || name.startsWith("bs-spinner")) return "Buttons";
   if (name.startsWith("bs-card")) return "Cards";
   if (name.startsWith("bs-badge")) return "Badges";
+  if (name.startsWith("bs-banner")) return "Banners";
   if (["bs-check", "bs-combobox", "bs-control", "bs-form", "bs-input", "bs-is", "bs-label", "bs-otp", "bs-select", "bs-switch", "bs-textarea"].some((prefix) => name.startsWith(prefix))) return "Forms";
   if (name.startsWith("bs-alert")) return "Alerts";
   if (name.startsWith("bs-code")) return "Code windows";

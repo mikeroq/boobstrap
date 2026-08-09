@@ -1,5 +1,16 @@
 import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { initBanners } from "@boobstrap/boobstrap/js/banner";
 import "./site.css";
+
+const devBanner = document.querySelector("[data-dev-banner]");
+const isDevelopmentSite = import.meta.env.DEV || import.meta.env.VITE_SITE_ENV === "development";
+
+if (devBanner && isDevelopmentSite) {
+  devBanner.hidden = false;
+  initBanners(devBanner);
+} else {
+  devBanner?.remove();
+}
 
 const installTabs = [...document.querySelectorAll("[data-install-manager]")];
 const installOutput = document.querySelector("[data-install-command-output]");

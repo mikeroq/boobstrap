@@ -6,6 +6,8 @@ RUN apk add --no-cache git
 
 WORKDIR /app
 
+ENV VITE_SITE_ENV=development
+
 COPY package.json package-lock.json ./
 RUN npm ci
 
