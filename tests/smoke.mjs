@@ -233,6 +233,10 @@ try {
       }
       if (routeErrors.length) failures.push(`${viewport.name}: ${config.path} ${routeErrors.join("; ")}`);
 
+      if (config.sectionId === "forms" && viewport.name === "mobile") {
+        await routePage.screenshot({ path: "artifacts/forms-mobile.png", fullPage: true });
+      }
+
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "installation") {
@@ -271,6 +275,42 @@ try {
 
       if (config.sectionId === "behavior-layers" && await routePage.locator("[data-framework-tab]").count() !== 3) {
         failures.push("desktop: behavior overview does not preserve all framework tabs");
+      }
+
+      if (config.sectionId === "forms") {
+        const [smallHeight, largeHeight] = await Promise.all([
+          routePage.locator("#docs-small-control").evaluate((element) => element.getBoundingClientRect().height),
+          routePage.locator("#docs-large-control").evaluate((element) => element.getBoundingClientRect().height),
+        ]);
+        if (smallHeight >= largeHeight) failures.push("desktop: form size examples are not ordered");
+
+        const password = routePage.locator("#docs-password");
+        await routePage.locator("[data-bs-password-toggle]").click();
+        if (await password.getAttribute("type") !== "text") failures.push("desktop: password example did not reveal its value");
+
+        const phone = routePage.locator("#docs-phone");
+        await phone.fill("4155550123");
+        if (await phone.inputValue() !== "(415) 555-0123") failures.push("desktop: mask example did not format its value");
+
+        const otpInputs = routePage.locator("[data-bs-otp-input]");
+        for (let index = 0; index < 6; index += 1) await otpInputs.nth(index).fill(String(index + 1));
+        if (await routePage.locator("[data-bs-otp-value]").inputValue() !== "123456") failures.push("desktop: OTP example did not synchronize its value");
+
+        const comboboxInput = routePage.locator("#docs-role-search");
+        await comboboxInput.fill("eng");
+        const comboboxState = await routePage.locator('[data-component-example="form-combobox"]').evaluate((element) => ({
+          open: !element.querySelector("[data-bs-combobox-listbox]").hidden,
+          visibleOptions: [...element.querySelectorAll("[data-bs-combobox-option]")].filter((option) => !option.hidden).length,
+        }));
+        if (!comboboxState.open || comboboxState.visibleOptions !== 1) failures.push("desktop: searchable select did not filter");
+        await comboboxInput.press("Enter");
+        if (await routePage.locator('[name="team_role"]').inputValue() !== "engineer") failures.push("desktop: searchable select did not submit its selected value");
+
+        const formSource = await routePage.locator("#forms .docs-code-block").allTextContents();
+        if (!formSource.some((source) => source.includes('x-data="bsCombobox"')) || !formSource.some((source) => source.includes("useCombobox"))) {
+          failures.push("desktop: searchable select is missing Alpine or React documentation");
+        }
+        await routePage.screenshot({ path: `artifacts/forms-${viewport.name}.png`, fullPage: true });
       }
 
       if (config.sectionId === "collapse") {
