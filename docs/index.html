@@ -716,45 +716,194 @@
           <section class="docs-section" id="forms">
             <div class="docs-kicker">Components</div>
             <h2>Forms</h2>
-            <p>Boobstrap styles native controls without replacing their semantics. Keep labels associated with controls and use <code>.bs-form-group</code> to establish consistent spacing.</p>
-            <div class="docs-demo" data-component-example="forms" id="contact-example">
+            <p>Build complete forms from semantic controls: strong labels, help and validation text, control sizes, input groups and icons, native pickers, selection controls, and optional progressive enhancement.</p>
+
+            <h3>Labels, controls, sizes, and native pickers</h3>
+            <div class="docs-demo" data-component-example="form-foundations" id="contact-example">
               <form class="docs-form" data-docs-form>
                 <div class="bs-form-group">
-                  <label class="bs-label" for="docs-name">Name</label>
-                  <input class="bs-input" id="docs-name" type="text" placeholder="Ada Lovelace" />
+                  <label class="bs-label" for="docs-email">Email <span class="bs-label-required" aria-hidden="true">*</span></label>
+                  <input class="bs-input" id="docs-email" type="email" placeholder="ada@example.com" aria-describedby="docs-email-help" required />
+                  <span class="bs-form-text" id="docs-email-help">We only use this for account notices.</span>
                 </div>
                 <div class="bs-form-group">
                   <label class="bs-label" for="docs-role">Role</label>
                   <select class="bs-select" id="docs-role"><option>Designer</option><option>Developer</option><option>Founder</option></select>
                 </div>
-                <div class="bs-form-group docs-form-wide">
-                  <label class="bs-label" for="docs-message">Message</label>
-                  <textarea class="bs-textarea" id="docs-message" placeholder="Tell us what you're building…"></textarea>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-start-date">Start date</label>
+                  <input class="bs-input" id="docs-start-date" type="date" />
                 </div>
-                <button class="bs-btn bs-btn-primary docs-form-wide" type="submit">Send message</button>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-start-time">Start time</label>
+                  <input class="bs-input" id="docs-start-time" type="time" />
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-small-control">Small</label>
+                  <input class="bs-input bs-input-sm" id="docs-small-control" placeholder="Compact control" />
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-large-control">Large <span class="bs-label-optional">Optional</span></label>
+                  <input class="bs-input bs-input-lg" id="docs-large-control" placeholder="Prominent control" />
+                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="forms" data-copy='&lt;form action="/contact" method="post"&gt;&#10;  &lt;div class="bs-form-group"&gt;&#10;    &lt;label class="bs-label" for="email"&gt;Email&lt;/label&gt;&#10;    &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" required /&gt;&#10;  &lt;/div&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-mt-4" type="submit"&gt;Subscribe&lt;/button&gt;&#10;&lt;/form&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;form</span> <span class="bs-code-attribute">action</span>=<span class="bs-code-string">"/contact"</span> <span class="bs-code-attribute">method</span>=<span class="bs-code-string">"post"</span><span class="bs-code-tag">&gt;</span>
-  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-form-group"</span><span class="bs-code-tag">&gt;</span>
-    <span class="bs-code-tag">&lt;label</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-label"</span> <span class="bs-code-attribute">for</span>=<span class="bs-code-string">"email"</span><span class="bs-code-tag">&gt;</span>Email<span class="bs-code-tag">&lt;/label&gt;</span>
-    <span class="bs-code-tag">&lt;input</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-input"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">name</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"email"</span> <span class="bs-code-attribute">required</span> <span class="bs-code-tag">/&gt;</span>
-  <span class="bs-code-tag">&lt;/div&gt;</span>
-  <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-mt-4"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"submit"</span><span class="bs-code-tag">&gt;</span>Subscribe<span class="bs-code-tag">&lt;/button&gt;</span>
-<span class="bs-code-tag">&lt;/form&gt;</span></code></pre></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Labels and sizes</span><button type="button" data-copy='&lt;div class="bs-form-group"&gt;&#10;  &lt;label class="bs-label" for="email"&gt;Email &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;&#10;  &lt;input class="bs-input" id="email" type="email" aria-describedby="email-help" required /&gt;&#10;  &lt;span class="bs-form-text" id="email-help"&gt;We only use this for account notices.&lt;/span&gt;&#10;&lt;/div&gt;&#10;&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;&#10;&lt;input class="bs-input bs-input-lg" aria-label="Large input" /&gt;'>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="email"&gt;Email &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input class="bs-input" id="email" type="email" aria-describedby="email-help" required /&gt;
+  &lt;span class="bs-form-text" id="email-help"&gt;We only use this for account notices.&lt;/span&gt;
+&lt;/div&gt;
+&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;
+&lt;input class="bs-input bs-input-lg" aria-label="Large input" /&gt;</code></pre></div>
+
+            <h3>Input groups, icons, passwords, and masks</h3>
+            <div class="docs-demo" data-component-example="form-composition">
+              <form class="docs-form" data-docs-form>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-search">Search</label>
+                  <div class="bs-input-wrap">
+                    <svg class="bs-input-icon bs-input-icon-start" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                    <input class="bs-input bs-input-has-icon-start" id="docs-search" type="search" placeholder="Search projects" />
+                  </div>
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-price">Price</label>
+                  <div class="bs-input-group">
+                    <span class="bs-input-group-text">$</span>
+                    <input class="bs-input" id="docs-price" inputmode="decimal" value="49.00" />
+                    <span class="bs-input-group-text">USD</span>
+                  </div>
+                </div>
+                <div class="bs-form-group" data-bs-password>
+                  <label class="bs-label" for="docs-password">Password</label>
+                  <div class="bs-input-wrap">
+                    <input class="bs-input bs-input-has-icon-end" id="docs-password" type="password" value="correct horse" data-bs-password-input />
+                    <button class="bs-input-action" type="button" data-bs-password-toggle><span data-bs-password-label>Show password</span></button>
+                  </div>
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="docs-phone">Phone mask</label>
+                  <input class="bs-input" id="docs-phone" type="tel" data-bs-mask="(999) 999-9999" placeholder="(555) 555-0123" />
+                </div>
+                <div class="bs-form-group docs-form-wide">
+                  <label class="bs-label" for="docs-domain">Domain</label>
+                  <div class="bs-input-group">
+                    <span class="bs-input-group-text">https://</span>
+                    <input class="bs-input" id="docs-domain" value="example.com" />
+                    <button class="bs-btn bs-btn-secondary" type="button">Verify</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Composed fields</span><button type="button" data-copy='&lt;div class="bs-input-group"&gt;&#10;  &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;&#10;  &lt;input class="bs-input" aria-label="Domain" /&gt;&#10;  &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;&#10;&lt;/div&gt;&#10;&lt;input class="bs-input" data-bs-mask="(999) 999-9999" aria-label="Phone" /&gt;'>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
+  &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
+  &lt;input class="bs-input" aria-label="Domain" /&gt;
+  &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
+&lt;/div&gt;
+&lt;input class="bs-input" data-bs-mask="(999) 999-9999" aria-label="Phone" /&gt;</code></pre></div>
+
+            <h3>Checkboxes, radios, switches, and OTP</h3>
+            <div class="docs-demo docs-form-selection-demo" data-component-example="form-selection-controls">
+              <fieldset class="bs-check-group">
+                <legend class="bs-label">Notifications</legend>
+                <label class="bs-check"><input class="bs-check-input" type="checkbox" checked /><span class="bs-check-label">Product updates</span><span class="bs-check-description">Monthly release notes and migration guidance.</span></label>
+                <label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" /><span class="bs-check-label">Security alerts</span></label>
+              </fieldset>
+              <fieldset class="bs-check-group">
+                <legend class="bs-label">Billing cycle</legend>
+                <label class="bs-check"><input class="bs-check-input" type="radio" name="docs-cycle" checked /><span class="bs-check-label">Monthly</span></label>
+                <label class="bs-check"><input class="bs-check-input" type="radio" name="docs-cycle" /><span class="bs-check-label">Yearly</span></label>
+              </fieldset>
+              <div class="bs-form-group">
+                <span class="bs-label" id="docs-otp-label">Six-digit code</span>
+                <div class="bs-otp" data-bs-otp aria-labelledby="docs-otp-label">
+                  <input class="bs-otp-input" aria-label="Digit 1" data-bs-otp-input />
+                  <input class="bs-otp-input" aria-label="Digit 2" data-bs-otp-input />
+                  <input class="bs-otp-input" aria-label="Digit 3" data-bs-otp-input />
+                  <input class="bs-otp-input" aria-label="Digit 4" data-bs-otp-input />
+                  <input class="bs-otp-input" aria-label="Digit 5" data-bs-otp-input />
+                  <input class="bs-otp-input" aria-label="Digit 6" data-bs-otp-input />
+                  <input type="hidden" name="verification_code" data-bs-otp-value />
+                </div>
+                <span class="bs-form-text">Paste or type the code; focus advances automatically.</span>
+              </div>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Selection and OTP</span><button type="button" data-copy='&lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="checkbox" /&gt;&lt;span class="bs-check-label"&gt;Product updates&lt;/span&gt;&lt;/label&gt;&#10;&lt;div class="bs-otp" data-bs-otp aria-label="Six-digit code"&gt;&#10;  &lt;input class="bs-otp-input" aria-label="Digit 1" data-bs-otp-input /&gt;&#10;  &lt;!-- Repeat through digit 6 --&gt;&#10;  &lt;input type="hidden" name="code" data-bs-otp-value /&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code>&lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="checkbox" /&gt;&lt;span class="bs-check-label"&gt;Product updates&lt;/span&gt;&lt;/label&gt;
+&lt;div class="bs-otp" data-bs-otp aria-label="Six-digit code"&gt;
+  &lt;input class="bs-otp-input" aria-label="Digit 1" data-bs-otp-input /&gt;
+  &lt;!-- Repeat through digit 6 --&gt;
+  &lt;input type="hidden" name="code" data-bs-otp-value /&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3>Searchable select</h3>
+            <p>The combobox keeps a searchable label separate from the submitted value and follows the editable ARIA combobox pattern.</p>
+            <div class="docs-demo" data-component-example="form-combobox">
+              <div class="bs-form-group">
+                <label class="bs-label" for="docs-role-search">Team role</label>
+                <div class="bs-combobox" data-bs-combobox>
+                  <input class="bs-combobox-input" id="docs-role-search" data-bs-combobox-input placeholder="Search roles" />
+                  <button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle aria-label="Toggle roles"></button>
+                  <input type="hidden" name="team_role" data-bs-combobox-value />
+                  <div class="bs-combobox-listbox" data-bs-combobox-listbox hidden>
+                    <div class="bs-combobox-option" data-bs-combobox-option data-bs-value="designer">Designer</div>
+                    <div class="bs-combobox-option" data-bs-combobox-option data-bs-value="engineer">Engineer</div>
+                    <div class="bs-combobox-option" data-bs-combobox-option data-bs-value="product-manager">Product manager</div>
+                    <div class="bs-combobox-option" data-bs-combobox-option data-bs-value="founder">Founder</div>
+                    <div class="bs-combobox-empty" data-bs-combobox-empty hidden>No roles found</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Boobstrap JS</span><button type="button" data-copy='&lt;div class="bs-combobox" data-bs-combobox&gt;&#10;  &lt;input class="bs-combobox-input" data-bs-combobox-input /&gt;&#10;  &lt;button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle aria-label="Toggle options"&gt;&lt;/button&gt;&#10;  &lt;input type="hidden" name="role" data-bs-combobox-value /&gt;&#10;  &lt;div class="bs-combobox-listbox" data-bs-combobox-listbox hidden&gt;&#10;    &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="engineer"&gt;Engineer&lt;/div&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code>&lt;div class="bs-combobox" data-bs-combobox&gt;
+  &lt;input class="bs-combobox-input" data-bs-combobox-input /&gt;
+  &lt;button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle aria-label="Toggle options"&gt;&lt;/button&gt;
+  &lt;input type="hidden" name="role" data-bs-combobox-value /&gt;
+  &lt;div class="bs-combobox-listbox" data-bs-combobox-listbox hidden&gt;
+    &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="engineer"&gt;Engineer&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Alpine.js</span></div><pre><code>&lt;div class="bs-combobox" x-data="bsCombobox" x-bind="root"&gt;
+  &lt;input class="bs-combobox-input" x-bind="input" data-bs-combobox-input /&gt;
+  &lt;button class="bs-combobox-toggle" x-bind="toggleButton" data-bs-combobox-toggle&gt;&lt;/button&gt;
+  &lt;input type="hidden" name="role" data-bs-combobox-value /&gt;
+  &lt;div class="bs-combobox-listbox" x-bind="listbox" data-bs-combobox-listbox hidden&gt;
+    &lt;div class="bs-combobox-option" x-bind="option" data-bs-combobox-option data-bs-value="engineer"&gt;Engineer&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <div class="docs-code-block"><div class="docs-code-label"><span>JSX · React</span></div><pre><code>const roles = [{ value: "engineer", label: "Engineer" }];
+const combo = useCombobox({ options: roles });
+
+return &lt;div className="bs-combobox" {...combo.getRootProps()}&gt;
+  &lt;input className="bs-combobox-input" {...combo.getInputProps()} /&gt;
+  &lt;button className="bs-combobox-toggle" {...combo.getToggleProps()} /&gt;
+  &lt;div className="bs-combobox-listbox" {...combo.getListboxProps()}&gt;
+    {combo.filteredOptions.map((option, index) =&gt;
+      &lt;div className="bs-combobox-option" {...combo.getOptionProps(option, index)}&gt;{option.label}&lt;/div&gt;
+    )}
+  &lt;/div&gt;
+&lt;/div&gt;;</code></pre></div>
             <div class="docs-example-guidance" aria-label="Form guidance">
-              <div><h3>Structure</h3><p>Group each visible label with one native control. The form owns submission details; every submitted control needs a stable <code>name</code>.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-form-group</code> controls spacing. Apply <code>.bs-input</code>, <code>.bs-select</code>, or <code>.bs-textarea</code> to the matching native element.</p></div>
-              <div><h3>Accessibility</h3><p>Match <code>for</code> and <code>id</code>, choose the correct type and autocomplete token, and connect help or error text with <code>aria-describedby</code>.</p></div>
+              <div><h3>Structure</h3><p>Use <code>.bs-form-group</code> for label, control, help, and feedback. Use <code>.bs-form-row</code> when two fields should share a responsive row.</p></div>
+              <div><h3>Enhancement</h3><p>Native inputs, selects, date/time pickers, checks, and radios need no JavaScript. Password, mask, OTP, and combobox behavior only initializes when its <code>data-bs-*</code> hook is present.</p></div>
+              <div><h3>Accessibility</h3><p>Keep visible labels associated, connect help and errors with <code>aria-describedby</code>, preserve native types and autocomplete, and never communicate validity with color alone.</p></div>
             </div>
             <div class="docs-api">
               <h3>Form API</h3>
-              <p>These classes style native controls without replacing their built-in semantics, validation, autocomplete, or keyboard behavior.</p>
+              <p>The CSS API is semantic and composable. Optional controllers use explicit data attributes and can be imported individually.</p>
               <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Apply to</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-form-group</code></td><td>Wrapper</td><td>Consistent label-to-control spacing.</td></tr>
-                <tr><td><code>.bs-label</code></td><td><code>&lt;label&gt;</code></td><td>Readable label size, weight, and color.</td></tr>
-                <tr><td><code>.bs-input</code></td><td><code>&lt;input&gt;</code></td><td>Text-like native input treatment.</td></tr>
-                <tr><td><code>.bs-select</code></td><td><code>&lt;select&gt;</code></td><td>Native selection control treatment.</td></tr>
+                <tr><td><code>.bs-label</code> and label modifiers</td><td><code>&lt;label&gt;</code></td><td>Strong labels with required and optional markers.</td></tr>
+                <tr><td><code>.bs-form-text</code> and feedback</td><td>Help or status text</td><td>Described-by guidance and valid/invalid feedback.</td></tr>
+                <tr><td><code>.bs-input</code> and size modifiers</td><td><code>&lt;input&gt;</code></td><td>Text-like, date, time, password, and small/large controls.</td></tr>
+                <tr><td><code>.bs-select</code> and size modifiers</td><td><code>&lt;select&gt;</code></td><td>Styled native selection with a consistent arrow.</td></tr>
                 <tr><td><code>.bs-textarea</code></td><td><code>&lt;textarea&gt;</code></td><td>Resizable multiline control treatment.</td></tr>
+                <tr><td><code>.bs-input-group</code></td><td>Wrapper</td><td>Attach text, buttons, or multiple controls as prefixes and suffixes.</td></tr>
+                <tr><td><code>.bs-input-wrap</code> and icon classes</td><td>Wrapper and inline SVG</td><td>Place start/end icons or an input action inside a control.</td></tr>
+                <tr><td><code>.bs-check</code>, <code>.bs-switch</code></td><td>Label wrapper</td><td>Checkbox, radio, description, inline, and switch layouts.</td></tr>
+                <tr><td><code>.bs-otp</code>, <code>.bs-otp-input</code></td><td>Group and inputs</td><td>Accessible single-character code fields with optional paste/navigation behavior.</td></tr>
+                <tr><td><code>.bs-combobox*</code></td><td>Combobox parts</td><td>Search input, toggle, listbox, options, and empty state.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -830,7 +979,7 @@ createIcons({ icons });</code></pre>
 
             <div class="docs-runtime-grid">
               <article class="docs-runtime-card"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
-              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance loading buttons, collapse, dropdowns, and tabs through explicit, tree-shakable controllers.</p></article>
+              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance form helpers, comboboxes, loading buttons, collapse, dropdowns, and tabs through explicit controllers.</p></article>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
               <article class="docs-runtime-card"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
             </div>
@@ -856,7 +1005,7 @@ createIcons({ icons });</code></pre>
                 </div>
               </div>
               <div id="framework-alpine-panel" role="tabpanel" aria-labelledby="framework-alpine-tab" data-framework-panel="alpine" hidden>
-                <p>The adapter registers <code>bsButton</code>, <code>bsCollapse</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
+                <p>The adapter registers <code>bsButton</code>, <code>bsCollapse</code>, <code>bsCombobox</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
                 <div class="docs-code-block">
                   <div class="docs-code-label"><span>JavaScript · Alpine.js</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs&#10;&#10;import "@boobstrap/boobstrap";&#10;import Alpine from "alpinejs";&#10;import boobstrap from "@boobstrap/alpine";&#10;&#10;Alpine.plugin(boobstrap);&#10;Alpine.start();'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/alpine alpinejs
@@ -873,11 +1022,11 @@ Alpine.start();</code></pre>
               <div id="react" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden>
                 <p>The adapter provides SSR-safe <code>useButton</code>, <code>useCollapse</code>, <code>useDropdown</code>, and <code>useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
                 <div class="docs-code-block">
-                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useButton, useCollapse, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
+                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useButton, useCollapse, useCombobox, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/react react
 
 <span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
-<span class="bs-code-keyword">import</span> { useButton, useCollapse, useDropdown, useTabs } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/react"</span>;</code></pre>
+<span class="bs-code-keyword">import</span> { useButton, useCollapse, useCombobox, useDropdown, useTabs } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"@boobstrap/react"</span>;</code></pre>
                 </div>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/react"><code>@boobstrap/react</code> on npm</a>. React is a peer dependency; the adapter never initializes Boobstrap JS on React-owned DOM.</p>
               </div>

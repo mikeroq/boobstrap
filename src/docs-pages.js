@@ -11,7 +11,7 @@ export const docsPages = [
   { path: "/docs/components/badges", sectionId: "badges", category: "Components", title: "Badges", description: "Add compact labels for status, categories, counts, and metadata." },
   { path: "/docs/components/cards", sectionId: "cards", category: "Components", title: "Cards", description: "Group related content and actions with flexible card surfaces, bodies, titles, and text." },
   { path: "/docs/components/alerts", sectionId: "alerts", category: "Components", title: "Alerts", description: "Communicate success, warning, danger, and informational messages with appropriate semantics." },
-  { path: "/docs/components/forms", sectionId: "forms", category: "Components", title: "Forms", description: "Build labeled, accessible forms with inputs, selects, textareas, grouping, and validation guidance." },
+  { path: "/docs/components/forms", sectionId: "forms", category: "Components", title: "Forms", description: "Build complete accessible forms with labels, groups, icons, native pickers, checks, OTP, masks, and searchable selects." },
   { path: "/docs/components/code-windows", sectionId: "code-windows", category: "Components", title: "Code windows", description: "Present terminal commands and source snippets in polished, readable code windows." },
   { path: "/docs/components/icons", sectionId: "icons", category: "Components", title: "Icons", description: "Use dependency-free inline SVGs or bring your preferred optional icon library." },
   { path: "/docs/interactivity/overview", sectionId: "behavior-layers", category: "Interactivity", title: "Behavior layers", description: "Choose CSS only, Boobstrap JS, Alpine, React, or your own application behavior." },
