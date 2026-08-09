@@ -112,6 +112,7 @@ try {
     if (await page.locator(".component-catalog > a").count() !== 6) failures.push(`${viewport.name}: landing component catalog is incomplete`);
     if (await page.locator(".behavior-grid > a").count() !== 4) failures.push(`${viewport.name}: landing behavior choices are incomplete`);
     if (await page.locator("[data-signup-form]").count() !== 0) failures.push(`${viewport.name}: simulated signup form remains on landing page`);
+    if (await page.locator("[data-dev-banner]").count() !== 0) failures.push(`${viewport.name}: development banner remains in the production build`);
     if (!await page.locator("[data-starter-download]").isVisible()) failures.push(`${viewport.name}: starter download is not visible`);
     if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: horizontal overflow (${dimensions.scrollWidth}px > ${dimensions.clientWidth}px)`);
@@ -258,6 +259,25 @@ try {
 
       if (config.sectionId === "tokens" && await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
         failures.push("desktop: token reference does not match the installed stylesheet");
+      }
+
+      if (config.sectionId === "banners") {
+        const contextualBanners = routePage.locator('[data-component-example="banner-variants"] .bs-banner');
+        if (await contextualBanners.count() !== 5) failures.push("desktop: banner reference is missing contextual variants");
+
+        const backgrounds = await contextualBanners.evaluateAll((elements) => elements.map((element) => getComputedStyle(element).backgroundColor));
+        if (new Set(backgrounds).size !== 5) failures.push("desktop: banner contextual variants do not have distinct backgrounds");
+
+        const dismissible = routePage.locator('[data-component-example="banner-dismissible"] [data-bs-banner]');
+        await dismissible.locator("[data-bs-banner-dismiss]").click();
+        if (await dismissible.isVisible() || await dismissible.getAttribute("data-bs-state") !== "dismissed") {
+          failures.push("desktop: dismissible banner did not synchronize its hidden state");
+        }
+
+        const bannerSource = await routePage.locator("#banners .docs-code-block").allTextContents();
+        if (!bannerSource.some((source) => source.includes("initBanners"))) {
+          failures.push("desktop: banner documentation is missing its JavaScript initialization example");
+        }
       }
 
       if (["collapse", "dropdown", "tabs"].includes(config.sectionId)) {
