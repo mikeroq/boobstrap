@@ -153,6 +153,7 @@ try {
     if (!await docsPage.getByRole("heading", { name: "Browse by topic", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: docs directory is not visible`);
     }
+    if (await docsPage.locator("[data-dev-banner]").count() !== 0) failures.push(`${viewport.name}: development banner remains in production docs`);
     if (await docsPage.locator(".docs-directory-grid a").count() !== docsPages.length) {
       failures.push(`${viewport.name}: docs directory does not link every topic`);
     }

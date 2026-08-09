@@ -53,42 +53,49 @@ try {
     { name: "desktop", width: 1680, height: 940 },
     { name: "mobile", width: 390, height: 844 },
   ]) {
-    const page = await browser.newPage({ viewport });
-    const consoleErrors = [];
-    page.on("console", (message) => {
-      if (message.type() === "error") consoleErrors.push(message.text());
-    });
-    page.on("pageerror", (error) => consoleErrors.push(error.message));
+    for (const target of [
+      { name: "landing", path: "/" },
+      { name: "docs-overview", path: "/docs" },
+      { name: "docs-route", path: "/docs/components/banners" },
+    ]) {
+      const page = await browser.newPage({ viewport });
+      const consoleErrors = [];
+      page.on("console", (message) => {
+        if (message.type() === "error") consoleErrors.push(message.text());
+      });
+      page.on("pageerror", (error) => consoleErrors.push(error.message));
 
-    await page.goto(baseUrl, { waitUntil: "networkidle" });
-    const banner = page.locator("[data-dev-banner]");
+      await page.goto(`${baseUrl}${target.path}`, { waitUntil: "networkidle" });
+      const banner = page.locator("[data-dev-banner]");
+      const testName = `${viewport.name} ${target.name}`;
 
-    if (!await banner.isVisible()) failures.push(`${viewport.name}: development banner is not visible`);
-    if (await banner.getAttribute("data-bs-state") !== "visible") failures.push(`${viewport.name}: development banner controller did not initialize`);
-    if (!await banner.getByText("Development preview", { exact: true }).isVisible()) failures.push(`${viewport.name}: development banner title is missing`);
-    if (!await banner.getByText("You are viewing dev.boobstrap.org, not the live Boobstrap site.", { exact: true }).isVisible()) {
-      failures.push(`${viewport.name}: development banner message is missing`);
+      if (!await banner.isVisible()) failures.push(`${testName}: development banner is not visible`);
+      if (await banner.getAttribute("data-bs-state") !== "visible") failures.push(`${testName}: development banner controller did not initialize`);
+      if (!await banner.getByText("Development preview", { exact: true }).isVisible()) failures.push(`${testName}: development banner title is missing`);
+      if (!await banner.getByText("You are viewing dev.boobstrap.org, not the live Boobstrap site.", { exact: true }).isVisible()) {
+        failures.push(`${testName}: development banner message is missing`);
+      }
+      if (await banner.getByRole("link", { name: "Visit live site", exact: true }).getAttribute("href") !== "https://boobstrap.org/") {
+        failures.push(`${testName}: development banner live-site action is incorrect`);
+      }
+
+      const bannerBox = await banner.boundingBox();
+      if (!bannerBox || Math.abs(bannerBox.width - viewport.width) > 1) failures.push(`${testName}: development banner is not full width`);
+      const dimensions = await page.evaluate(() => ({
+        scrollWidth: document.documentElement.scrollWidth,
+        clientWidth: document.documentElement.clientWidth,
+      }));
+      if (dimensions.scrollWidth > dimensions.clientWidth + 1) failures.push(`${testName}: development banner causes horizontal overflow`);
+
+      await page.screenshot({ path: `artifacts/dev-banner-${target.name}-${viewport.name}.png`, fullPage: true });
+      await banner.getByRole("button", { name: "Dismiss development preview banner" }).click();
+      if (await banner.isVisible() || await banner.getAttribute("data-bs-state") !== "dismissed") {
+        failures.push(`${testName}: development banner did not dismiss`);
+      }
+      if (consoleErrors.length) failures.push(`${testName}: ${consoleErrors.join("; ")}`);
+
+      await page.close();
     }
-    if (await banner.getByRole("link", { name: "Visit live site", exact: true }).getAttribute("href") !== "https://boobstrap.org/") {
-      failures.push(`${viewport.name}: development banner live-site action is incorrect`);
-    }
-
-    const bannerBox = await banner.boundingBox();
-    if (!bannerBox || Math.abs(bannerBox.width - viewport.width) > 1) failures.push(`${viewport.name}: development banner is not full width`);
-    const dimensions = await page.evaluate(() => ({
-      scrollWidth: document.documentElement.scrollWidth,
-      clientWidth: document.documentElement.clientWidth,
-    }));
-    if (dimensions.scrollWidth > dimensions.clientWidth + 1) failures.push(`${viewport.name}: development banner causes horizontal overflow`);
-
-    await page.screenshot({ path: `artifacts/dev-banner-${viewport.name}.png`, fullPage: true });
-    await banner.getByRole("button", { name: "Dismiss development preview banner" }).click();
-    if (await banner.isVisible() || await banner.getAttribute("data-bs-state") !== "dismissed") {
-      failures.push(`${viewport.name}: development banner did not dismiss`);
-    }
-    if (consoleErrors.length) failures.push(`${viewport.name}: ${consoleErrors.join("; ")}`);
-
-    await page.close();
   }
 } finally {
   await browser.close();
@@ -99,5 +106,5 @@ if (failures.length) {
   console.error(failures.join("\n"));
   process.exitCode = 1;
 } else {
-  console.log("Development banner checks passed at 1680×940 and 390×844.");
+  console.log("Development banner checks passed on landing and docs pages at 1680×940 and 390×844.");
 }

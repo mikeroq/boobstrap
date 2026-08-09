@@ -2,7 +2,10 @@ import frameworkCss from "@boobstrap/boobstrap/dist/boobstrap.css?raw";
 import "@boobstrap/boobstrap/dist/boobstrap.css";
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
+import { initDevelopmentBanner } from "./dev-banner.js";
 import { docsPageForPath, docsPages, normalizeDocsPath } from "./docs-pages.js";
+
+initDevelopmentBanner();
 
 const root = document.documentElement;
 const page = document.body;
