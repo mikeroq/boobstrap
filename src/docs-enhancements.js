@@ -334,6 +334,54 @@ toggle.addEventListener("click", () => {
     { title: "Semantics", body: "A plain <code>&lt;span&gt;</code> is appropriate for static metadata. Use a button or link only when the label itself is interactive." },
   ]);
 
+  addExample("navbar", {
+    id: "nav-vertical",
+    title: "Grouped vertical navigation",
+    description: "Use grouped navigation for persistent sidebars. Mark the current destination with aria-current and indent only true child destinations.",
+    preview: `<nav class="bs-nav" aria-label="Project navigation">
+  <div class="bs-nav-group">
+    <p class="bs-nav-heading">Workspace</p>
+    <a class="bs-nav-link" href="#navbar" aria-current="page">Overview</a>
+    <a class="bs-nav-link bs-nav-link-subitem" href="#navbar">Members</a>
+    <a class="bs-nav-link bs-nav-link-subitem" href="#navbar">Settings</a>
+  </div>
+  <div class="bs-nav-group">
+    <p class="bs-nav-heading">Resources</p>
+    <a class="bs-nav-link" href="#navbar">Documentation</a>
+  </div>
+</nav>`,
+    label: "HTML · Grouped vertical navigation",
+  });
+  addExample("navbar", {
+    id: "nav-breadcrumb",
+    title: "Breadcrumb trail",
+    description: "Breadcrumbs show the current page's position in a hierarchy. Keep the final item as plain text and identify the landmark with an accessible label.",
+    preview: `<nav class="bs-breadcrumb" aria-label="Breadcrumb">
+  <a href="/docs">Docs</a>
+  <span aria-hidden="true">/</span>
+  <a href="/docs/components">Components</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">Navigation</span>
+</nav>`,
+    label: "HTML · Breadcrumb",
+  });
+  addExample("navbar", {
+    id: "nav-page",
+    title: "Previous and next page navigation",
+    description: "Place page navigation after the article so readers can continue in either direction without returning to the sidebar.",
+    preview: `<nav class="bs-page-nav" aria-label="Documentation pages">
+  <a class="bs-page-nav-link" href="/docs/components/cards">
+    <span class="bs-page-nav-context">Previous</span>
+    <span class="bs-page-nav-title">Cards</span>
+  </a>
+  <a class="bs-page-nav-link" href="/docs/components/tables">
+    <span class="bs-page-nav-context">Next</span>
+    <span class="bs-page-nav-title">Tables</span>
+  </a>
+</nav>`,
+    label: "HTML · Previous and next pages",
+  });
+
   addExample("cards", {
     id: "card-basic",
     title: "Basic card",
@@ -360,6 +408,92 @@ toggle.addEventListener("click", () => {
 </article>`,
     label: "HTML · Raised action card",
   });
+  addExample("cards", {
+    id: "card-compact-link",
+    title: "Compact linked card",
+    description: "Use the link modifier when the entire card has one destination. The subtle and compact modifiers create a quiet, dense navigation surface.",
+    preview: `<a class="bs-card bs-card-subtle bs-card-compact bs-card-link" href="/docs/components/tables">
+  <span class="bs-text-xs bs-text-muted">Component guide</span>
+  <strong>Responsive tables</strong>
+  <span class="bs-text-sm bs-text-muted">Present structured data without widening the page.</span>
+</a>`,
+    label: "HTML · Compact linked card",
+  });
+
+  addExample("tables", {
+    id: "table-comparison",
+    title: "Feature comparison",
+    description: "Use a caption to name the dataset, column headers for the compared properties, and row headers for the item being compared.",
+    preview: `<div class="bs-table-responsive">
+  <table class="bs-table">
+    <caption class="bs-sr-only">Plan feature comparison</caption>
+    <thead><tr><th scope="col">Plan</th><th scope="col">Projects</th><th scope="col">Support</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Starter</th><td>3</td><td>Community</td></tr>
+      <tr><th scope="row">Team</th><td>Unlimited</td><td>Priority</td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · Semantic comparison table",
+  });
+  addExample("tables", {
+    id: "table-responsive",
+    title: "Responsive API data",
+    description: "The wrapper owns horizontal overflow, keeping long values readable without forcing the document wider than the viewport.",
+    preview: `<div class="bs-table-responsive">
+  <table class="bs-table">
+    <caption class="bs-sr-only">API endpoints</caption>
+    <thead><tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">Description</th><th scope="col">Authentication</th></tr></thead>
+    <tbody>
+      <tr><td><code class="bs-code-inline">GET</code></td><td><code class="bs-code-inline">/v1/workspaces/{workspace_id}/deployments</code></td><td>List recent deployments</td><td>Bearer token</td></tr>
+      <tr><td><code class="bs-code-inline">POST</code></td><td><code class="bs-code-inline">/v1/workspaces/{workspace_id}/deployments</code></td><td>Create a deployment</td><td>Bearer token</td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · Responsive data table",
+  });
+  addGuidance("tables", [
+    { title: "Semantics", body: "Use a table only when both rows and columns carry meaning. Add a caption, then identify column and row headers with <code>scope</code>." },
+    { title: "Responsive behavior", body: "Wrap the table in <code>.bs-table-responsive</code>. On narrow screens the table scrolls within its own border instead of widening the page." },
+    { title: "Content", body: "Keep labels concise and align data consistently. Do not encode meaning by color alone, and provide text for every status or action." },
+  ]);
+
+  addExample("lists", {
+    id: "reference-list",
+    title: "Key-value reference",
+    description: "A description list preserves the relationship between each name and value while the reference classes provide a compact responsive layout.",
+    preview: `<dl class="bs-reference-list">
+  <div class="bs-reference-row">
+    <dt class="bs-reference-name">Package</dt>
+    <dd class="bs-reference-value bs-m-0">@boobstrap/boobstrap</dd>
+  </div>
+  <div class="bs-reference-row">
+    <dt class="bs-reference-name">CSS entry</dt>
+    <dd class="bs-reference-value bs-m-0">dist/boobstrap.css</dd>
+  </div>
+  <div class="bs-reference-row">
+    <dt class="bs-reference-name">JavaScript entry</dt>
+    <dd class="bs-reference-value bs-m-0">dist/js/index.js</dd>
+  </div>
+</dl>`,
+    label: "HTML · Description-list reference",
+  });
+  addExample("lists", {
+    id: "checklist",
+    title: "Completion checklist",
+    description: "Use a checklist for a short set of satisfied requirements. Include status in the text because the decorative check marker is hidden from assistive technology.",
+    preview: `<ul class="bs-checklist">
+  <li>Keyboard focus remains visible</li>
+  <li>Controls have accessible names</li>
+  <li>Content works at narrow widths</li>
+</ul>`,
+    label: "HTML · Completion checklist",
+  });
+  addGuidance("lists", [
+    { title: "Reference data", body: "Prefer <code>&lt;dl&gt;</code>, <code>&lt;dt&gt;</code>, and <code>&lt;dd&gt;</code> for name/value pairs. Add <code>.bs-m-0</code> to each <code>&lt;dd&gt;</code> to remove its browser default margin." },
+    { title: "Responsive rows", body: "Reference rows collapse from two columns to one at narrow widths. Keep the name before the value so the reading order remains clear." },
+    { title: "Checklist meaning", body: "Use checklist text that states what is complete. The visual marker is decorative and should never be the only source of status." },
+  ]);
 
   addExample("alerts", {
     id: "alert-primary-focused",
@@ -383,9 +517,9 @@ toggle.addEventListener("click", () => {
   addExample("code-windows", {
     id: "code-window-terminal",
     title: "Terminal window",
-    description: "Use the toolbar for a short filename or context label and keep command output inside the scrollable code body.",
+    description: "Use the header for a short context label and an optional action, then keep command output inside the scrollable code body.",
     preview: `<div class="bs-code-window">
-  <div class="bs-code-toolbar"><div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div><span>Terminal</span></div>
+  <div class="bs-code-header"><span>Terminal</span><button class="bs-code-action" type="button">Copy</button></div>
   <pre class="bs-code-body bs-m-0"><code>npm install @boobstrap/boobstrap
 npm run build</code></pre>
 </div>`,
@@ -393,25 +527,39 @@ npm run build</code></pre>
   });
   addExample("code-windows", {
     id: "code-window-source",
-    title: "Highlighted source window",
-    description: "Apply the token classes directly for dependency-free static highlighting, or use your preferred syntax highlighter inside the code body.",
+    title: "Tabbed source window",
+    description: "Use code tabs and panels for equivalent implementations or languages. The tab controller keeps selection, focus, and panel visibility synchronized.",
     preview: `<div class="bs-code-window">
-  <div class="bs-code-toolbar"><div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div><span>index.html</span></div>
-  <pre class="bs-code-body bs-m-0"><code><span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">&quot;bs-btn bs-btn-primary&quot;</span><span class="bs-code-tag">&gt;</span>Ship<span class="bs-code-tag">&lt;/button&gt;</span></code></pre>
+  <div class="bs-code-header"><span>Install</span><button class="bs-code-action" type="button">Copy</button></div>
+  <div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs>
+    <button class="bs-code-tab" id="code-npm-tab" type="button" role="tab" aria-controls="code-npm-panel" aria-selected="true">npm</button>
+    <button class="bs-code-tab" id="code-pnpm-tab" type="button" role="tab" aria-controls="code-pnpm-panel">pnpm</button>
+  </div>
+  <div class="bs-code-panel" id="code-npm-panel" role="tabpanel" aria-labelledby="code-npm-tab"><pre class="bs-code-body"><code>npm install @boobstrap/boobstrap</code></pre></div>
+  <div class="bs-code-panel" id="code-pnpm-panel" role="tabpanel" aria-labelledby="code-pnpm-tab" hidden><pre class="bs-code-body"><code>pnpm add @boobstrap/boobstrap</code></pre></div>
 </div>`,
     source: `<div class="bs-code-window">
-  <div class="bs-code-toolbar">
-    <div class="bs-code-dots" aria-hidden="true">
-      <span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span>
-    </div>
-    <span>index.html</span>
+  <div class="bs-code-header">
+    <span>Install</span>
+    <button class="bs-code-action" type="button">Copy</button>
   </div>
-  <pre class="bs-code-body bs-m-0"><code>…</code></pre>
+  <div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs>
+    <button class="bs-code-tab" id="npm-tab" type="button" role="tab"
+      aria-controls="npm-panel" aria-selected="true">npm</button>
+    <button class="bs-code-tab" id="pnpm-tab" type="button" role="tab"
+      aria-controls="pnpm-panel">pnpm</button>
+  </div>
+  <div class="bs-code-panel" id="npm-panel" role="tabpanel" aria-labelledby="npm-tab">
+    <pre class="bs-code-body"><code>npm install @boobstrap/boobstrap</code></pre>
+  </div>
+  <div class="bs-code-panel" id="pnpm-panel" role="tabpanel" aria-labelledby="pnpm-tab" hidden>
+    <pre class="bs-code-body"><code>pnpm add @boobstrap/boobstrap</code></pre>
+  </div>
 </div>`,
-    label: "HTML · Source window",
+    label: "HTML · Tabbed code window",
   });
   addGuidance("code-windows", [
-    { title: "Structure", body: "Keep the toolbar and code body inside <code>.bs-code-window</code>. A <code>&lt;pre&gt;&lt;code&gt;</code> pair preserves whitespace and code semantics." },
+    { title: "Structure", body: "Keep the header, optional tabs, panels, and code bodies inside <code>.bs-code-window</code>. A <code>&lt;pre&gt;&lt;code&gt;</code> pair preserves whitespace and code semantics." },
     { title: "Overflow", body: "Long lines scroll inside <code>.bs-code-body</code>; avoid wrapping commands when line breaks would change what users copy." },
     { title: "Highlighting", body: "The included token classes cover static snippets. Dynamic highlighters can render their own spans without changing the window structure." },
   ]);
@@ -480,6 +628,32 @@ menu.addEventListener("bs:dropdown:shown", (event) => {
 });
 
 // Later: boobstrap.destroy();`,
+  });
+  addExample("tabs", {
+    id: "tabs-pills",
+    title: "Pill tabs",
+    description: "Use the pills modifier for a compact view switcher. It changes presentation only; the same tab roles, relationships, and controller behavior still apply.",
+    preview: `<div class="bs-tabs bs-tabs-pills" role="tablist" aria-label="Report period" data-bs-tabs>
+  <button class="bs-tab" id="pill-week-tab" type="button" role="tab" aria-controls="pill-week-panel" aria-selected="true">Week</button>
+  <button class="bs-tab" id="pill-month-tab" type="button" role="tab" aria-controls="pill-month-panel">Month</button>
+</div>
+<div class="bs-tab-panel" id="pill-week-panel" role="tabpanel" aria-labelledby="pill-week-tab">7-day report</div>
+<div class="bs-tab-panel" id="pill-month-panel" role="tabpanel" aria-labelledby="pill-month-tab" hidden>30-day report</div>`,
+    label: "HTML · Pill tabs",
+  });
+  addExample("tabs", {
+    id: "tabs-contained",
+    title: "Contained tabs and panels",
+    description: "Pair contained tabs with contained panels when the selector and content should read as one bordered surface.",
+    preview: `<section aria-label="Deployment details">
+  <div class="bs-tabs bs-tabs-contained" role="tablist" aria-label="Deployment detail" data-bs-tabs>
+    <button class="bs-tab" id="contained-summary-tab" type="button" role="tab" aria-controls="contained-summary-panel" aria-selected="true">Summary</button>
+    <button class="bs-tab" id="contained-log-tab" type="button" role="tab" aria-controls="contained-log-panel">Build log</button>
+  </div>
+  <div class="bs-tab-panel bs-tab-panel-contained" id="contained-summary-panel" role="tabpanel" aria-labelledby="contained-summary-tab">Deployment completed successfully.</div>
+  <div class="bs-tab-panel bs-tab-panel-contained" id="contained-log-panel" role="tabpanel" aria-labelledby="contained-log-tab" hidden>Build finished in 42 seconds.</div>
+</section>`,
+    label: "HTML · Contained tabs",
   });
   addCodeExample("tabs", {
     title: "Initialize and observe tabs",

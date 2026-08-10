@@ -100,9 +100,11 @@
           <div class="docs-nav-group bs-nav-group" data-nav-group>
             <p class="docs-nav-label bs-nav-heading">Components</p>
             <a href="/docs/components/buttons">Buttons</a>
-            <a href="/docs/components/navbar">Header / navbar</a>
+            <a href="/docs/components/navbar">Navigation</a>
             <a href="/docs/components/badges">Badges</a>
             <a href="/docs/components/cards">Cards</a>
+            <a href="/docs/components/tables">Tables</a>
+            <a href="/docs/components/lists">Reference lists</a>
             <a href="/docs/components/alerts">Alerts</a>
             <a href="/docs/components/banners">Banners</a>
             <a href="/docs/components/forms">Forms</a>
@@ -187,9 +189,11 @@
                 <span>03</span>
                 <h3>Components</h3>
                 <a href="/docs/components/buttons"><strong>Buttons</strong><small>Variants, groups, icons, and loading</small></a>
-                <a href="/docs/components/navbar"><strong>Header / navbar</strong><small>Semantic responsive navigation</small></a>
+                <a href="/docs/components/navbar"><strong>Navigation</strong><small>Headers, sidebars, breadcrumbs, and page links</small></a>
                 <a href="/docs/components/badges"><strong>Badges</strong><small>Status and metadata labels</small></a>
                 <a href="/docs/components/cards"><strong>Cards</strong><small>Flexible content surfaces</small></a>
+                <a href="/docs/components/tables"><strong>Tables</strong><small>Responsive structured data</small></a>
+                <a href="/docs/components/lists"><strong>Reference lists and checklists</strong><small>Dense values and completion steps</small></a>
                 <a href="/docs/components/alerts"><strong>Alerts</strong><small>Contextual messages and status</small></a>
                 <a href="/docs/components/banners"><strong>Banners</strong><small>Full-width contextual page notices</small></a>
                 <a href="/docs/components/forms"><strong>Forms</strong><small>Labeled inputs and controls</small></a>
@@ -616,8 +620,8 @@
 
           <section class="docs-section" id="navbar">
             <div class="docs-kicker">Components</div>
-            <h2>Header / navbar</h2>
-            <p>Build a semantic application header with a brand, destination links, and a menu control. Navbar presentation is CSS-only, so your application can choose the menu behavior that fits its layout.</p>
+            <h2>Navigation</h2>
+            <p>Boobstrap provides complementary navigation patterns for application headers, persistent sidebars, breadcrumb trails, and previous/next article links. The classes own presentation; your markup retains native link and landmark semantics.</p>
             <div class="docs-demo" data-component-example="navbar">
               <header class="bs-navbar bs-card bs-card-subtle bs-card-compact">
                 <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#navbar">
@@ -641,20 +645,29 @@
   <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-navbar-toggle"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Open navigation menu"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/button&gt;</span>
 <span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
             </div>
-            <div class="docs-example-guidance" aria-label="Navbar guidance">
-              <div><h3>Structure</h3><p>Wrap the primary navigation in <code>&lt;header&gt;</code> and <code>&lt;nav&gt;</code>. Keep the brand and destination links as real anchors.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-navbar</code> establishes the header row, while the brand, link, and toggle classes provide consistent typography and interaction states.</p></div>
-              <div><h3>Accessibility</h3><p>Label navigation landmarks when a page has more than one. Use descriptive link text and do not remove the framework's visible keyboard focus.</p></div>
+            <div class="docs-example-guidance" aria-label="Navigation guidance">
+              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, vertical nav for persistent destinations, breadcrumbs for hierarchy, and page navigation for a linear reading sequence.</p></div>
+              <div><h3>Current state</h3><p>Add <code>aria-current="page"</code> to the current destination. Do not rely on color or font weight alone to communicate which page is active.</p></div>
+              <div><h3>Landmarks</h3><p>Keep destinations as real links. Give each <code>&lt;nav&gt;</code> a distinct accessible label when the page contains multiple navigation landmarks.</p></div>
             </div>
             <div class="docs-api">
-              <h3>Navbar API</h3>
-              <p>The component provides presentation without imposing menu state. Add your application behavior to the toggle and responsive visibility rules when the links collapse.</p>
-              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Role in the header</th></tr></thead><tbody>
+              <h3>Navigation class API</h3>
+              <p>All navigation classes are CSS-only. Add application behavior to <code>.bs-navbar-toggle</code> when it reveals or hides a responsive menu, including synchronized <code>aria-expanded</code> and focus handling.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-navbar</code></td><td>Aligns the brand, navigation, and menu control in a full-width header row.</td></tr>
                 <tr><td><code>.bs-navbar-brand</code></td><td>Styles the product or site identity link.</td></tr>
                 <tr><td><code>.bs-navbar-link</code></td><td>Styles navigation destinations with hover and current-page states.</td></tr>
                 <tr><td><code>.bs-navbar-toggle</code></td><td>Provides an icon-sized menu control with visible interaction states.</td></tr>
-                <tr><td><code>.bs-nav-link</code></td><td>Styles vertical navigation and supports <code>aria-current</code>.</td></tr>
+                <tr><td><code>.bs-nav</code></td><td>Creates a vertical navigation stack with consistent spacing.</td></tr>
+                <tr><td><code>.bs-nav-group</code></td><td>Groups related destinations and separates adjacent groups.</td></tr>
+                <tr><td><code>.bs-nav-heading</code></td><td>Styles a non-interactive label for a navigation group.</td></tr>
+                <tr><td><code>.bs-nav-link</code></td><td>Styles a vertical destination and its <code>aria-current</code> state.</td></tr>
+                <tr><td><code>.bs-nav-link-subitem</code></td><td>Indents a destination that is conceptually nested under another item.</td></tr>
+                <tr><td><code>.bs-breadcrumb</code></td><td>Arranges a compact hierarchy trail with wrapping and muted separators.</td></tr>
+                <tr><td><code>.bs-page-nav</code></td><td>Lays out previous and next article links in a responsive pair.</td></tr>
+                <tr><td><code>.bs-page-nav-link</code></td><td>Creates a bordered page destination with hover and focus treatment.</td></tr>
+                <tr><td><code>.bs-page-nav-context</code></td><td>Styles the short directional label, such as “Previous” or “Next.”</td></tr>
+                <tr><td><code>.bs-page-nav-title</code></td><td>Styles the destination page title as the primary link text.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -674,7 +687,7 @@
           <section class="docs-section" id="cards">
             <div class="docs-kicker">Components</div>
             <h2>Cards</h2>
-            <p>Cards establish a contained surface. Structure content with the body, title, and text classes; add <code>.bs-card-raised</code> when the card needs more visual elevation.</p>
+            <p>Cards establish a contained surface. Use the body, title, and text classes for conventional content; choose subtle, compact, raised, or linked presentation according to the card's role.</p>
             <div class="docs-demo cards-demo bs-grid bs-gap-4" data-component-example="cards">
               <article class="bs-card bs-col-12 bs-col-md-6">
                 <div class="bs-card-body">
@@ -702,8 +715,8 @@
 <span class="bs-code-tag">&lt;/article&gt;</span></code></pre></div>
             <div class="docs-example-guidance" aria-label="Card guidance">
               <div><h3>Structure</h3><p>Place content inside <code>.bs-card-body</code>, then use a real heading, supporting text, and the smallest set of actions the card needs.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-card</code> creates the surface, <code>.bs-card-body</code> adds inset spacing, and <code>.bs-card-raised</code> increases elevation without changing structure.</p></div>
-              <div><h3>Accessibility</h3><p>Use <code>&lt;article&gt;</code> only for standalone content. Give repeated cards headings, and avoid a whole-card link when nested controls are present.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-card</code> creates the surface. Use raised for emphasis, subtle for a quieter border, compact for denser spacing, and link only when the entire surface has one destination.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code>&lt;article&gt;</code> only for standalone content. Give repeated cards headings, and never place buttons or additional links inside <code>.bs-card-link</code>.</p></div>
             </div>
             <div class="docs-api">
               <h3>Card API</h3>
@@ -711,9 +724,43 @@
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-card</code></td><td>Surface, border, radius, clipping, and default elevation.</td></tr>
                 <tr><td><code>.bs-card-raised</code></td><td>Stronger shadow for elevated or featured content.</td></tr>
+                <tr><td><code>.bs-card-subtle</code></td><td>Quieter surface and border treatment for secondary or nested content.</td></tr>
+                <tr><td><code>.bs-card-compact</code></td><td>Reduces inset spacing for dense references, navigation, and small summaries.</td></tr>
+                <tr><td><code>.bs-card-link</code></td><td>Makes a single-destination anchor behave and focus like an interactive card surface.</td></tr>
                 <tr><td><code>.bs-card-body</code></td><td>Responsive inset padding for card content.</td></tr>
                 <tr><td><code>.bs-card-title</code></td><td>Consistent spacing below the card heading.</td></tr>
                 <tr><td><code>.bs-card-text</code></td><td>Muted supporting-copy color.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="tables">
+            <div class="docs-kicker">Components</div>
+            <h2>Tables</h2>
+            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Boobstrap keeps native table semantics intact and adds a bordered, horizontally scrollable container for narrow viewports.</p>
+            <div class="docs-api">
+              <h3>Table API</h3>
+              <p>Apply the table class to semantic <code>&lt;table&gt;</code> markup and place it inside the responsive wrapper whenever its columns may exceed the available width.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Use it on</th></tr></thead><tbody>
+                <tr><td><code>.bs-table-responsive</code></td><td>Clips the outer border and enables horizontal scrolling without widening the page.</td><td>A wrapper <code>&lt;div&gt;</code> around the table.</td></tr>
+                <tr><td><code>.bs-table</code></td><td>Provides readable cell spacing, header treatment, row dividers, and semantic text colors.</td><td>The native <code>&lt;table&gt;</code> element.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="lists">
+            <div class="docs-kicker">Components</div>
+            <h2>Reference lists and checklists</h2>
+            <p>Reference lists make compact name-and-value data easy to scan without forcing it into a table. Checklists present a short set of completed requirements or recommended steps with a consistent success marker.</p>
+            <div class="docs-api">
+              <h3>List API</h3>
+              <p>Reference rows use presentation classes and should retain meaningful content order: name first, value second. Checklists stay native lists so item count and navigation remain available to assistive technology.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Recommended element</th></tr></thead><tbody>
+                <tr><td><code>.bs-reference-list</code></td><td>Groups rows inside one bordered, clipped surface.</td><td><code>&lt;dl&gt;</code> or a neutral wrapper.</td></tr>
+                <tr><td><code>.bs-reference-row</code></td><td>Creates a responsive two-column name/value row.</td><td>A row wrapper inside the list.</td></tr>
+                <tr><td><code>.bs-reference-name</code></td><td>Allows long names and tokens to wrap safely.</td><td><code>&lt;dt&gt;</code> or the first row child.</td></tr>
+                <tr><td><code>.bs-reference-value</code></td><td>Formats values in muted monospace text with safe wrapping.</td><td><code>&lt;dd&gt;</code> or the second row child.</td></tr>
+                <tr><td><code>.bs-checklist</code></td><td>Removes default bullets and adds an accessible-color visual check marker to each item.</td><td>A semantic <code>&lt;ul&gt;</code>.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -1635,7 +1682,9 @@ verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
                 <tr><td><code>.bs-code-action</code></td><td>Compact action button for copying or opening code.</td></tr>
                 <tr><td><code>.bs-code-body</code></td><td>Scrollable, formatted code content.</td></tr>
                 <tr><td><code>.bs-code-inline</code></td><td>Inline code inside prose, tables, and labels.</td></tr>
-                <tr><td><code>.bs-code-tabs</code> / <code>.bs-code-tab</code></td><td>Optional implementation or language variant navigation.</td></tr>
+                <tr><td><code>.bs-code-tabs</code></td><td>Tablist layout for implementation, package-manager, or language variants.</td></tr>
+                <tr><td><code>.bs-code-tab</code></td><td>Individual variant tab with selected, hover, and keyboard-focus states.</td></tr>
+                <tr><td><code>.bs-code-panel</code></td><td>Variant panel that hides cleanly with the native <code>hidden</code> attribute and resets nested code-body margins.</td></tr>
                 <tr><td><code>.bs-code-tag</code></td><td>HTML tags and selectors.</td></tr>
                 <tr><td><code>.bs-code-attribute</code></td><td>Attributes and property names.</td></tr>
                 <tr><td><code>.bs-code-string</code></td><td>Quoted values and literals.</td></tr>
@@ -1965,7 +2014,15 @@ Alpine.start();</code></pre>
               <div><h3>State</h3><p>The selected tab gets <code>aria-selected="true"</code>; every inactive panel uses <code>hidden</code>.</p></div>
               <div><h3>Accessibility</h3><p>Use tabs only when panels are peer views. Preserve meaningful headings inside complex panels.</p></div>
             </div>
-            <div class="docs-api"><h3>Tabs API</h3><p>Import <code>Tabs</code> from <code>@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+            <div class="docs-api">
+              <h3>Tab presentation classes</h3>
+              <p>Presentation modifiers do not change tab semantics or behavior. Apply them to the base tablist and panel classes while keeping every ARIA relationship intact.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-tabs-pills</code></td><td>Turns the base tablist into a compact pill-style view switcher.</td></tr>
+                <tr><td><code>.bs-tabs-contained</code></td><td>Connects the tablist visually to a bordered content surface.</td></tr>
+                <tr><td><code>.bs-tab-panel-contained</code></td><td>Adds the matching border, surface, radius, and padding to each controlled panel.</td></tr>
+              </tbody></table></div>
+              <h3>JavaScript API</h3><p>Import <code>Tabs</code> from <code>@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>activate(tab)</code></td><td>Select a tab element and synchronize all controlled panels.</td></tr>
               <tr><td><code>bs:tabs:change</code></td><td>Cancelable before-event with previous and next tab/panel detail.</td></tr>
               <tr><td><code>bs:tabs:changed</code></td><td>Bubbling event after the completed transition.</td></tr>
