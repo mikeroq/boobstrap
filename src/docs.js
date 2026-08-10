@@ -4,6 +4,7 @@ import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
 import { initDevelopmentBanner } from "./dev-banner.js";
 import { docsPageForPath, docsPages, normalizeDocsPath } from "./docs-pages.js";
+import { highlightCodeBlocks, highlightCodeElement } from "./syntax-highlighting.js";
 
 initDevelopmentBanner();
 
@@ -310,6 +311,7 @@ const selectPackageTab = (tab, moveFocus = false) => {
     candidate.tabIndex = selected ? 0 : -1;
   });
   packageCommandOutput.textContent = tab.dataset.packageCommand;
+  highlightCodeElement(packageCommandOutput);
   packageLabel.textContent = tab.dataset.packageName;
   packageCopy.dataset.copy = tab.dataset.packageCommand;
   if (moveFocus) tab.focus();
@@ -525,4 +527,5 @@ window.addEventListener("hashchange", queueActiveSectionUpdate);
 window.addEventListener("load", queueActiveSectionUpdate);
 updateActiveSection();
 
+highlightCodeBlocks();
 document.documentElement.classList.add("js-ready");
