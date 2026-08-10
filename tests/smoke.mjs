@@ -79,13 +79,42 @@ const promotedComponentCoverage = {
     "bs-page-nav-context",
     "bs-page-nav-link",
     "bs-page-nav-title",
+  ],
+  sidebars: [
     "bs-sidebar",
     "bs-sidebar-backdrop",
+    "bs-sidebar-collapsible",
+    "bs-sidebar-content",
     "bs-sidebar-drawer",
     "bs-sidebar-end",
+    "bs-sidebar-floating",
+    "bs-sidebar-footer",
+    "bs-sidebar-group",
+    "bs-sidebar-group-action",
+    "bs-sidebar-group-content",
+    "bs-sidebar-group-label",
+    "bs-sidebar-header",
+    "bs-sidebar-inset",
+    "bs-sidebar-label",
+    "bs-sidebar-layout",
+    "bs-sidebar-main",
+    "bs-sidebar-menu",
+    "bs-sidebar-menu-action",
+    "bs-sidebar-menu-badge",
+    "bs-sidebar-menu-button",
+    "bs-sidebar-menu-button-lg",
+    "bs-sidebar-menu-button-sm",
+    "bs-sidebar-menu-item",
+    "bs-sidebar-menu-sub",
+    "bs-sidebar-menu-sub-button",
+    "bs-sidebar-menu-sub-item",
     "bs-sidebar-open",
+    "bs-sidebar-rail",
+    "bs-sidebar-separator",
+    "bs-sidebar-skeleton",
     "bs-sidebar-start",
     "bs-sidebar-toc",
+    "bs-sidebar-trigger",
   ],
   cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
@@ -94,8 +123,8 @@ const promotedComponentCoverage = {
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 40) {
-  throw new Error(`Expected documentation coverage for 40 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 67) {
+  throw new Error(`Expected documentation coverage for 67 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -106,7 +135,8 @@ const documentationQualityMinimums = {
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
   buttons: { examples: 8, code: 8 },
-  navbar: { examples: 6, code: 7, guidance: true },
+  navbar: { examples: 4, code: 4, guidance: true },
+  sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 4, code: 4, guidance: true },
   tables: { examples: 2, code: 2, guidance: true },
@@ -263,6 +293,7 @@ try {
     }
     if (viewport.name === "desktop") {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
+      if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
@@ -399,7 +430,35 @@ try {
         await routePage.screenshot({ path: `artifacts/${config.sectionId}-mobile.png`, fullPage: true });
       }
 
+      if (config.sectionId === "sidebars" && viewport.name === "mobile") {
+        const drawerTrigger = routePage.getByRole("button", { name: "Toggle documentation menu" });
+        const drawer = routePage.locator("#example-sidebar");
+        await drawerTrigger.click();
+        if (await drawer.getAttribute("data-bs-state") !== "open" || await drawer.getAttribute("role") !== "dialog" || await drawerTrigger.getAttribute("aria-expanded") !== "true") {
+          failures.push("mobile: sidebar reference drawer did not synchronize dialog state");
+        }
+        await routePage.keyboard.press("Escape");
+        if (await drawer.getAttribute("data-bs-state") !== "closed" || !await drawerTrigger.evaluate((element) => element === document.activeElement)) {
+          failures.push("mobile: sidebar reference drawer did not dismiss and restore focus");
+        }
+        await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
+      }
+
       if (viewport.name !== "desktop") continue;
+
+      if (config.sectionId === "sidebars") {
+        const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
+        const collapsible = routePage.locator("#collapse-example-sidebar");
+        await collapseTrigger.click();
+        await routePage.waitForTimeout(300);
+        if (await collapsible.getAttribute("data-bs-state") !== "collapsed" || await collapseTrigger.getAttribute("aria-expanded") !== "false") {
+          failures.push("desktop: sidebar reference did not collapse through its public controller");
+        }
+        if (await collapsible.locator(".bs-sidebar-label").first().evaluate((element) => getComputedStyle(element).display) !== "none") {
+          failures.push("desktop: icon-collapse mode did not hide sidebar labels");
+        }
+        await routePage.screenshot({ path: "artifacts/sidebar-desktop.png", fullPage: true });
+      }
 
       if (config.sectionId === "installation") {
         await routePage.getByRole("tab", { name: "pnpm", exact: true }).click();

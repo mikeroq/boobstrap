@@ -75,13 +75,15 @@
 
     <div class="docs-layout">
       <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Documentation navigation">
+        <div class="bs-sidebar-header">
         <div class="docs-nav-search">
           <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <label class="bs-sr-only" for="docs-nav-filter">Filter documentation sections</label>
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
+        </div>
+        <nav class="docs-nav bs-nav bs-sidebar-content" aria-label="Documentation sections" data-bs-sidebar-close>
           <div class="docs-nav-group bs-nav-group" data-nav-group>
             <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
@@ -101,6 +103,7 @@
             <p class="docs-nav-label bs-nav-heading">Components</p>
             <a href="/docs/components/buttons">Buttons</a>
             <a href="/docs/components/navbar">Navigation</a>
+            <a href="/docs/components/sidebar">Sidebar</a>
             <a href="/docs/components/badges">Badges</a>
             <a href="/docs/components/cards">Cards</a>
             <a href="/docs/components/tables">Tables</a>
@@ -189,7 +192,8 @@
                 <span>03</span>
                 <h3>Components</h3>
                 <a href="/docs/components/buttons"><strong>Buttons</strong><small>Variants, groups, icons, and loading</small></a>
-                <a href="/docs/components/navbar"><strong>Navigation</strong><small>Headers, sidebars, breadcrumbs, and page links</small></a>
+                <a href="/docs/components/navbar"><strong>Navigation</strong><small>Headers, vertical nav, breadcrumbs, and page links</small></a>
+                <a href="/docs/components/sidebar"><strong>Sidebar</strong><small>Application shells, menus, drawers, and collapse modes</small></a>
                 <a href="/docs/components/badges"><strong>Badges</strong><small>Status and metadata labels</small></a>
                 <a href="/docs/components/cards"><strong>Cards</strong><small>Flexible content surfaces</small></a>
                 <a href="/docs/components/tables"><strong>Tables</strong><small>Responsive structured data</small></a>
@@ -621,7 +625,7 @@
           <section class="docs-section" id="navbar">
             <div class="docs-kicker">Components</div>
             <h2>Navigation</h2>
-            <p>Boobstrap provides complementary navigation patterns for application headers, persistent sidebars, breadcrumb trails, and previous/next article links. The classes own presentation; your markup retains native link and landmark semantics.</p>
+            <p>Boobstrap provides complementary navigation patterns for application headers, vertical link groups, breadcrumb trails, and previous/next article links. Use the dedicated Sidebar component when navigation becomes an application shell, drawer, or collapsible rail.</p>
             <div class="docs-demo" data-component-example="navbar">
               <header class="bs-navbar bs-card bs-card-subtle bs-card-compact">
                 <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#navbar">
@@ -646,7 +650,7 @@
 <span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
             </div>
             <div class="docs-example-guidance" aria-label="Navigation guidance">
-              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, a sidebar and vertical nav for persistent destinations, breadcrumbs for hierarchy, and page navigation for a linear reading sequence.</p></div>
+              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, a vertical nav for a short destination list, breadcrumbs for hierarchy, and page navigation for a linear reading sequence. Use <a href="/docs/components/sidebar">Sidebar</a> for an application rail or drawer.</p></div>
               <div><h3>Current state</h3><p>Add <code>aria-current="page"</code> to the current destination. Do not rely on color or font weight alone to communicate which page is active.</p></div>
               <div><h3>Landmarks</h3><p>Keep destinations as real links. Give each <code>&lt;nav&gt;</code> a distinct accessible label when the page contains multiple navigation landmarks.</p></div>
             </div>
@@ -668,22 +672,97 @@
                 <tr><td><code>.bs-page-nav-link</code></td><td>Creates a bordered page destination with hover and focus treatment.</td></tr>
                 <tr><td><code>.bs-page-nav-context</code></td><td>Styles the short directional label, such as “Previous” or “Next.”</td></tr>
                 <tr><td><code>.bs-page-nav-title</code></td><td>Styles the destination page title as the primary link text.</td></tr>
-                <tr><td><code>.bs-sidebar</code></td><td>Creates a sticky, independently scrolling navigation rail with configurable offset, height, and width variables.</td></tr>
-                <tr><td><code>.bs-sidebar-start</code></td><td>Adds inset spacing and a logical end border for a left/start rail.</td></tr>
-                <tr><td><code>.bs-sidebar-end</code></td><td>Adds inset spacing and a logical start border for a right/end rail.</td></tr>
-                <tr><td><code>.bs-sidebar-drawer</code></td><td>Converts the rail into an off-canvas drawer below 64rem and responds to <code>data-bs-state</code>.</td></tr>
-                <tr><td><code>.bs-sidebar-backdrop</code></td><td>Provides the dimmed dismiss target behind an open drawer.</td></tr>
-                <tr><td><code>.bs-sidebar-toc</code></td><td>Compacts nested <code>.bs-nav</code> links for a right-hand “On this page” table of contents.</td></tr>
-                <tr><td><code>.bs-sidebar-open</code></td><td>Document-body state applied by the controller to prevent background scrolling while a drawer is open.</td></tr>
               </tbody></table></div>
-              <h3>Sidebar JavaScript API</h3>
-              <p>Import <code>Sidebar</code> from <code>@boobstrap/boobstrap/js/sidebar</code>, or initialize it through <code>initBoobstrap(document)</code>. A sidebar must have an <code>id</code>; triggers and external dismiss buttons reference it with <code>aria-controls</code>.</p>
+            </div>
+          </section>
+
+          <section class="docs-section" id="sidebars">
+            <div class="docs-kicker">Components</div>
+            <h2>Sidebar</h2>
+            <p>Sidebar is a composable application shell for navigation, tools, and contextual controls. Its CSS primitives cover the shell, fixed regions, scrollable content, groups, nested menus, visual variants, loading states, and logical placement. The optional controller adds an accessible mobile drawer and desktop collapse behavior.</p>
+            <div class="docs-callout"><strong>CSS first, behavior when needed.</strong><p>A persistent rail, menu, or table of contents needs no JavaScript. Add <code>data-bs-sidebar</code> only for responsive drawer or desktop collapse behavior, and keep state ownership in one layer.</p></div>
+
+            <div class="docs-api">
+              <h3>Composition and layout classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-sidebar-layout</code></td><td>Creates the full-height flex shell containing a sidebar and main content region.</td></tr>
+                <tr><td><code>.bs-sidebar</code></td><td>Creates the sticky rail and defines its width, height, offset, and responsive custom properties.</td></tr>
+                <tr><td><code>.bs-sidebar-main</code></td><td>Allows the primary content surface to shrink safely beside the rail.</td></tr>
+                <tr><td><code>.bs-sidebar-start</code></td><td>Places rail spacing and border at the logical start edge.</td></tr>
+                <tr><td><code>.bs-sidebar-end</code></td><td>Places rail spacing and border at the logical end edge.</td></tr>
+                <tr><td><code>.bs-sidebar-header</code></td><td>Creates a fixed top region for identity, search, or a workspace switcher.</td></tr>
+                <tr><td><code>.bs-sidebar-content</code></td><td>Creates the independently scrolling middle region.</td></tr>
+                <tr><td><code>.bs-sidebar-footer</code></td><td>Creates a fixed bottom region for account or utility actions.</td></tr>
+                <tr><td><code>.bs-sidebar-separator</code></td><td>Divides adjacent sidebar regions or groups.</td></tr>
+                <tr><td><code>.bs-sidebar-floating</code></td><td>Adds inset spacing, elevation, border, and rounded corners to the rail.</td></tr>
+                <tr><td><code>.bs-sidebar-inset</code></td><td>Coordinates a contained rail with an inset main surface.</td></tr>
+              </tbody></table></div>
+
+              <h3>Group and menu classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-sidebar-group</code></td><td>Groups one related set of controls or destinations.</td></tr>
+                <tr><td><code>.bs-sidebar-group-label</code></td><td>Styles the group's non-interactive accessible heading.</td></tr>
+                <tr><td><code>.bs-sidebar-group-action</code></td><td>Positions an icon action at the inline end of a group heading.</td></tr>
+                <tr><td><code>.bs-sidebar-group-content</code></td><td>Contains the group's menu or custom content without overflow.</td></tr>
+                <tr><td><code>.bs-sidebar-menu</code></td><td>Resets and spaces the primary list of menu items.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-item</code></td><td>Provides the positioning context for a menu button and optional action.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-button</code></td><td>Styles a link or button with active, disabled, icon, label, and badge support.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-button-sm</code></td><td>Creates a compact menu row.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-button-lg</code></td><td>Creates a taller menu row for account or workspace controls.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-action</code></td><td>Positions a secondary icon action over the menu row's inline end.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-badge</code></td><td>Aligns a compact count or status at the inline end.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-sub</code></td><td>Creates an indented, bordered nested menu list.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-sub-item</code></td><td>Provides the nested item positioning context.</td></tr>
+                <tr><td><code>.bs-sidebar-menu-sub-button</code></td><td>Styles a compact nested link or button.</td></tr>
+                <tr><td><code>.bs-sidebar-label</code></td><td>Truncates text and hides it when icon-collapse mode is active.</td></tr>
+                <tr><td><code>.bs-sidebar-skeleton</code></td><td>Displays a reduced-motion-aware loading placeholder.</td></tr>
+              </tbody></table></div>
+
+              <h3>Behavior and utility classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-sidebar-trigger</code></td><td>Styles an accessible icon-sized toggle button.</td></tr>
+                <tr><td><code>.bs-sidebar-rail</code></td><td>Creates a narrow edge target that toggles desktop width.</td></tr>
+                <tr><td><code>.bs-sidebar-collapsible</code></td><td>Enables animated desktop icon or off-canvas collapse presentation.</td></tr>
+                <tr><td><code>.bs-sidebar-drawer</code></td><td>Converts the rail to an off-canvas dialog below the configured media query.</td></tr>
+                <tr><td><code>.bs-sidebar-backdrop</code></td><td>Provides the mobile drawer's dimmed external dismiss target.</td></tr>
+                <tr><td><code>.bs-sidebar-toc</code></td><td>Compacts a conventional <code>.bs-nav</code> for an “On this page” rail.</td></tr>
+                <tr><td><code>.bs-sidebar-open</code></td><td>Locks document scrolling while any controlled mobile drawer is open.</td></tr>
+              </tbody></table></div>
+
+              <h3>Data attributes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Attribute</th><th>Contract</th></tr></thead><tbody>
+                <tr><td><code>data-bs-sidebar</code></td><td>Marks an identified sidebar for controller initialization.</td></tr>
+                <tr><td><code>data-bs-toggle="sidebar"</code></td><td>Toggles the sidebar named by the same element's <code>aria-controls</code>.</td></tr>
+                <tr><td><code>data-bs-sidebar-dismiss</code></td><td>Closes a mobile drawer or collapses a configured desktop rail.</td></tr>
+                <tr><td><code>data-bs-sidebar-close</code></td><td>Closes the mobile drawer after a destination is selected.</td></tr>
+                <tr><td><code>data-bs-sidebar-collapse</code></td><td>Selects <code>icon</code>, <code>offcanvas</code>, or <code>none</code> desktop behavior.</td></tr>
+                <tr><td><code>data-bs-sidebar-media</code></td><td>Overrides the mobile-drawer media query; default is <code>(max-width: 64rem)</code>.</td></tr>
+                <tr><td><code>data-bs-sidebar-shortcut</code></td><td>Enables a Control/Command keyboard shortcut using the supplied key.</td></tr>
+                <tr><td><code>data-bs-state</code></td><td>Reflects <code>open</code>/<code>closed</code> on mobile and <code>expanded</code>/<code>collapsed</code> on desktop.</td></tr>
+              </tbody></table></div>
+
+              <h3>JavaScript methods and events</h3>
+              <p>Import <code>Sidebar</code> from <code>@boobstrap/boobstrap/js/sidebar</code>, or use <code>initBoobstrap(document)</code>. The sidebar needs an <code>id</code>; every external control references it with <code>aria-controls</code>.</p>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
-                <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the mobile drawer while synchronizing the trigger, backdrop, focus, and document state.</td></tr>
-                <tr><td><code>toggle()</code></td><td>Invert the drawer's stored mobile state.</td></tr>
-                <tr><td><code>destroy()</code></td><td>Remove trigger, dismiss, keyboard, and responsive-media listeners.</td></tr>
-                <tr><td><code>bs:sidebar:show</code> / <code>bs:sidebar:hide</code></td><td>Cancelable events dispatched before state changes.</td></tr>
-                <tr><td><code>bs:sidebar:shown</code> / <code>bs:sidebar:hidden</code></td><td>Bubbling events dispatched after state, focus, and backdrop synchronization.</td></tr>
+                <tr><td><code>getOrCreateInstance(element)</code></td><td>Returns the existing controller or initializes one instance.</td></tr>
+                <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the mobile drawer, including focus and document state.</td></tr>
+                <tr><td><code>expand()</code> / <code>collapse()</code></td><td>Expand or collapse a desktop rail when its mode is not <code>none</code>.</td></tr>
+                <tr><td><code>toggle()</code></td><td>Toggles the active responsive mode.</td></tr>
+                <tr><td><code>destroy()</code></td><td>Removes trigger, dismiss, keyboard, and media-query listeners.</td></tr>
+                <tr><td><code>bs:sidebar:show</code> / <code>bs:sidebar:hide</code></td><td>Cancelable mobile before-events.</td></tr>
+                <tr><td><code>bs:sidebar:shown</code> / <code>bs:sidebar:hidden</code></td><td>Mobile after-events dispatched once state and focus are synchronized.</td></tr>
+                <tr><td><code>bs:sidebar:expand</code> / <code>bs:sidebar:collapse</code></td><td>Cancelable desktop before-events.</td></tr>
+                <tr><td><code>bs:sidebar:expanded</code> / <code>bs:sidebar:collapsed</code></td><td>Desktop after-events dispatched after the rail state changes.</td></tr>
+              </tbody></table></div>
+
+              <h3>CSS custom properties</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Property</th><th>Default and purpose</th></tr></thead><tbody>
+                <tr><td><code>--bs-sidebar-offset</code></td><td><code>0px</code>; space reserved above a sticky or fixed rail.</td></tr>
+                <tr><td><code>--bs-sidebar-height</code></td><td><code>calc(100vh - var(--bs-sidebar-offset))</code>; rail block size.</td></tr>
+                <tr><td><code>--bs-sidebar-width</code></td><td><code>17rem</code>; expanded rail width.</td></tr>
+                <tr><td><code>--bs-sidebar-width-mobile</code></td><td><code>calc(100vw - 3rem)</code>; maximum drawer width.</td></tr>
+                <tr><td><code>--bs-sidebar-width-collapsed</code></td><td><code>3.5rem</code>; desktop icon-rail width.</td></tr>
+                <tr><td><code>--bs-sidebar-skeleton-width</code></td><td><code>65%</code>; placeholder text-line width.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -1869,7 +1948,7 @@ Alpine.start();</code></pre>
               <div><h3>State</h3><p><code>.bs-collapse</code> supplies the visual contract; <code>hidden</code> is the readable initial state.</p></div>
               <div><h3>Accessibility</h3><p>Use a real button. The controller maintains <code>aria-expanded</code> and fires cancelable show/hide events.</p></div>
             </div>
-            <div class="docs-note"><strong>Navigation drawers:</strong> use the <a href="/docs/components/navbar">responsive Sidebar component</a> for an off-canvas menu. Sidebar adds a backdrop, focus containment and restoration, <kbd>Escape</kbd> handling, a persistent desktop rail, and document scroll locking; Collapse intentionally remains a lightweight inline disclosure.</div>
+            <div class="docs-note"><strong>Navigation drawers:</strong> use the <a href="/docs/components/sidebar">Sidebar component</a> for an off-canvas menu. Sidebar adds a backdrop, focus containment and restoration, <kbd>Escape</kbd> handling, a persistent desktop rail, and document scroll locking; Collapse intentionally remains a lightweight inline disclosure.</div>
             <div class="docs-api"><h3>Collapse API</h3><p>Import <code>Collapse</code> from <code>@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>show()</code> / <code>hide()</code></td><td>Change visibility and synchronized public state.</td></tr>
               <tr><td><code>toggle()</code></td><td>Invert the current panel state.</td></tr>

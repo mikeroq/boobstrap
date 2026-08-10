@@ -58,13 +58,15 @@
 
     <div class="docs-layout">
       <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Documentation navigation">
+        <div class="bs-sidebar-header">
         <div class="docs-nav-search">
           <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <label class="bs-sr-only" for="docs-nav-filter">Filter documentation</label>
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
+        </div>
+        <nav class="docs-nav bs-nav bs-sidebar-content" aria-label="Documentation sections" data-bs-sidebar-close>
           <div class="docs-nav-group bs-nav-group" data-nav-group>
             <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
@@ -82,6 +84,7 @@
             <p class="docs-nav-label bs-nav-heading">Components</p>
             <a href="/docs/components/buttons" aria-current="page">Buttons</a>
             <a href="/docs/components/navbar">Navigation</a>
+            <a href="/docs/components/sidebar">Sidebar</a>
             <a href="/docs/components/badges">Badges</a>
             <a href="/docs/components/cards">Cards</a>
             <a href="/docs/components/tables">Tables</a>
