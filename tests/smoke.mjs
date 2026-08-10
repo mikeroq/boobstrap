@@ -63,6 +63,33 @@ const expectedFormExampleCounts = {
   "form-checks-radios": 4,
   "form-otp": 1,
 };
+const promotedComponentCoverage = {
+  navbar: [
+    "bs-breadcrumb",
+    "bs-nav",
+    "bs-nav-group",
+    "bs-nav-heading",
+    "bs-nav-link",
+    "bs-nav-link-subitem",
+    "bs-navbar",
+    "bs-navbar-brand",
+    "bs-navbar-link",
+    "bs-navbar-toggle",
+    "bs-page-nav",
+    "bs-page-nav-context",
+    "bs-page-nav-link",
+    "bs-page-nav-title",
+  ],
+  cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
+  "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
+  tables: ["bs-table", "bs-table-responsive"],
+  lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
+  tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
+};
+const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
+if (promotedComponentClasses.size !== 33) {
+  throw new Error(`Expected documentation coverage for 33 promoted component classes; found ${promotedComponentClasses.size}`);
+}
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
   installation: { code: 5, guidance: true },
@@ -72,9 +99,11 @@ const documentationQualityMinimums = {
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
   buttons: { examples: 8, code: 8 },
-  navbar: { examples: 1, code: 1, guidance: true },
+  navbar: { examples: 4, code: 4, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
-  cards: { examples: 3, code: 3, guidance: true },
+  cards: { examples: 4, code: 4, guidance: true },
+  tables: { examples: 2, code: 2, guidance: true },
+  lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
   forms: { examples: 2, code: 2 },
@@ -91,7 +120,7 @@ const documentationQualityMinimums = {
   "behavior-layers": { code: 3, guidance: true },
   collapse: { examples: 1, code: 2, guidance: true },
   dropdown: { examples: 1, code: 2, guidance: true },
-  tabs: { examples: 1, code: 2, guidance: true },
+  tabs: { examples: 3, code: 4, guidance: true },
   utilities: { examples: 3, code: 3, guidance: true },
   tokens: { examples: 1, code: 1, guidance: true },
   "class-reference": { examples: 1, code: 1, guidance: true },
@@ -324,6 +353,14 @@ try {
         }
         if (qualityMinimums.guidance && await routePage.locator(".docs-example-guidance:visible").count() === 0) {
           failures.push(`${viewport.name}: ${config.path} is missing structured usage guidance`);
+        }
+      }
+      const promotedClasses = promotedComponentCoverage[config.sectionId];
+      if (promotedClasses) {
+        const apiText = (await routePage.locator(".docs-api").allTextContents()).join(" ");
+        const missingClasses = promotedClasses.filter((className) => !apiText.includes(`.${className}`));
+        if (missingClasses.length) {
+          failures.push(`${viewport.name}: ${config.path} API reference is missing ${missingClasses.map((name) => `.${name}`).join(", ")}`);
         }
       }
       if (await visibleDemos.count() > 0 && !await visibleDemos.evaluateAll((elements) => elements.every((preview) => (
