@@ -53,6 +53,41 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
   updateThemeLabel();
 });
 
+const previewThemes = ["light", "dark"];
+
+document.querySelectorAll(".docs-demo").forEach((preview) => {
+  const initialTheme = root.dataset.bsTheme === "light" ? "light" : "dark";
+  preview.dataset.bsTheme = initialTheme;
+  preview.dataset.previewThemeReady = "";
+
+  const controls = document.createElement("span");
+  controls.className = "docs-preview-theme-switch";
+  controls.dataset.previewThemeControls = "";
+  controls.setAttribute("role", "group");
+  controls.setAttribute("aria-label", "Preview color theme");
+
+  const setPreviewTheme = (theme) => {
+    preview.dataset.bsTheme = theme;
+    controls.querySelectorAll("[data-preview-theme-option]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(button.dataset.previewThemeOption === theme));
+    });
+  };
+
+  previewThemes.forEach((theme) => {
+    const button = document.createElement("button");
+    button.className = "docs-preview-theme-button";
+    button.dataset.previewThemeOption = theme;
+    button.type = "button";
+    button.textContent = theme[0].toUpperCase() + theme.slice(1);
+    button.setAttribute("aria-label", `Use ${theme} theme for this preview`);
+    button.addEventListener("click", () => setPreviewTheme(theme));
+    controls.append(button);
+  });
+
+  preview.prepend(controls);
+  setPreviewTheme(initialTheme);
+});
+
 const docsPath = normalizeDocsPath(window.location.pathname);
 const activeDocsPage = docsPageForPath(docsPath);
 const isDocsOverview = docsPath === "/docs";
