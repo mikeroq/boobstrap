@@ -381,6 +381,51 @@ toggle.addEventListener("click", () => {
 </nav>`,
     label: "HTML · Previous and next pages",
   });
+  addExample("navbar", {
+    id: "sidebar-responsive",
+    title: "Responsive navigation sidebar",
+    description: "The sidebar remains a sticky rail at large widths and becomes an accessible off-canvas drawer below 64rem. The optional controller owns the backdrop, focus, Escape, ARIA state, and scroll lock.",
+    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar">Open documentation menu</button>
+<aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="example-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Example documentation navigation">
+  <nav class="bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
+    <p class="bs-nav-heading">Get started</p>
+    <a class="bs-nav-link" href="#sidebar-responsive">Introduction</a>
+    <a class="bs-nav-link" href="#sidebar-responsive">Installation</a>
+  </nav>
+</aside>
+<button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="example-sidebar" aria-label="Close documentation menu"></button>`,
+    label: "HTML · Responsive sidebar drawer",
+  });
+  addExample("navbar", {
+    id: "sidebar-toc",
+    title: "Right-hand table of contents",
+    description: "Use the end and table-of-contents modifiers for compact in-page navigation. The page layout decides when to hide the rail so the reading column keeps enough width.",
+    preview: `<aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" style="--bs-sidebar-height: auto" aria-label="On this page">
+  <p class="bs-nav-heading">On this page</p>
+  <nav class="bs-nav">
+    <a class="bs-nav-link" href="#sidebar-toc" aria-current="location">Overview</a>
+    <a class="bs-nav-link" href="#sidebar-toc">Accessibility</a>
+    <a class="bs-nav-link" href="#sidebar-toc">JavaScript API</a>
+  </nav>
+</aside>`,
+    label: "HTML · Sticky table of contents",
+  });
+  addCodeExample("navbar", {
+    title: "Initialize and observe a sidebar",
+    description: "The aggregate initializer discovers responsive sidebars, or import the component directly when you need imperative control.",
+    label: "JavaScript · Sidebar lifecycle",
+    language: "javascript",
+    source: `import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const boobstrap = initBoobstrap(document);
+const sidebar = document.querySelector("[data-bs-sidebar]");
+
+sidebar.addEventListener("bs:sidebar:shown", () => {
+  console.log("Navigation drawer opened");
+});
+
+// Later: boobstrap.destroy();`,
+  });
 
   addExample("cards", {
     id: "card-basic",

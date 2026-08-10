@@ -79,6 +79,13 @@ const promotedComponentCoverage = {
     "bs-page-nav-context",
     "bs-page-nav-link",
     "bs-page-nav-title",
+    "bs-sidebar",
+    "bs-sidebar-backdrop",
+    "bs-sidebar-drawer",
+    "bs-sidebar-end",
+    "bs-sidebar-open",
+    "bs-sidebar-start",
+    "bs-sidebar-toc",
   ],
   cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
@@ -87,8 +94,8 @@ const promotedComponentCoverage = {
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 33) {
-  throw new Error(`Expected documentation coverage for 33 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 40) {
+  throw new Error(`Expected documentation coverage for 40 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -99,7 +106,7 @@ const documentationQualityMinimums = {
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
   buttons: { examples: 8, code: 8 },
-  navbar: { examples: 4, code: 4, guidance: true },
+  navbar: { examples: 6, code: 7, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 4, code: 4, guidance: true },
   tables: { examples: 2, code: 2, guidance: true },
@@ -255,6 +262,8 @@ try {
       failures.push(`${viewport.name}: docs overview horizontal overflow`);
     }
     if (viewport.name === "desktop") {
+      if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
+      if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').isVisible()) {
@@ -269,8 +278,13 @@ try {
         failures.push("desktop: docs theme toggle did not enable light theme");
       }
     } else {
-      await docsPage.getByRole("button", { name: "Open documentation menu" }).click();
-      if (!await docsPage.locator("#docs-sidebar").isVisible()) failures.push("mobile: docs menu did not open");
+      const menuToggle = docsPage.getByRole("button", { name: "Open documentation menu" });
+      const mobileSidebar = docsPage.locator("#docs-sidebar");
+      await menuToggle.click();
+      if (!await mobileSidebar.isVisible() || await mobileSidebar.getAttribute("data-bs-state") !== "open") failures.push("mobile: docs menu did not open through the sidebar controller");
+      if (await menuToggle.getAttribute("aria-expanded") !== "true" || !await docsPage.locator("body").evaluate((element) => element.classList.contains("bs-sidebar-open"))) failures.push("mobile: docs menu state did not synchronize");
+      await docsPage.keyboard.press("Escape");
+      if (await mobileSidebar.getAttribute("data-bs-state") !== "closed" || !await menuToggle.evaluate((element) => element === document.activeElement)) failures.push("mobile: docs menu did not close and restore focus on Escape");
     }
     if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs overview ${docsConsoleErrors.join("; ")}`);
     await docsPage.close();
