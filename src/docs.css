@@ -778,6 +778,27 @@ body.docs-page {
   line-height: 1.6;
 }
 
+[data-introduction-details] {
+  margin-top: var(--bs-space-10);
+  padding-top: var(--bs-space-8);
+  border-top: 1px solid var(--bs-color-border);
+}
+
+[data-introduction-details] > h2 { margin-top: var(--bs-space-8); }
+[data-introduction-details] > h2:first-child { margin-top: 0; }
+
+.docs-utility-sample {
+  padding: var(--bs-space-4);
+  color: var(--bs-color-text-muted);
+  background: var(--bs-color-surface);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-md);
+  font-size: var(--bs-font-size-sm);
+}
+
+.docs-token-preview { max-width: 32rem; }
+.docs-demo > .bs-code-window { width: 100%; }
+
 .example-navbar {
   padding: var(--bs-space-4);
   background: var(--bs-color-background);

@@ -58,6 +58,40 @@ const expectedFormExampleCounts = {
   "form-checks-radios": 4,
   "form-otp": 1,
 };
+const documentationQualityMinimums = {
+  introduction: { examples: 1, code: 1 },
+  installation: { code: 5, guidance: true },
+  starter: { code: 3, guidance: true },
+  theming: { examples: 1, code: 4, guidance: true },
+  typography: { examples: 2, code: 3, guidance: true },
+  layout: { examples: 2, code: 3, guidance: true },
+  "responsive-composition": { examples: 1, code: 1, guidance: true },
+  buttons: { examples: 8, code: 8 },
+  navbar: { examples: 1, code: 1, guidance: true },
+  badges: { examples: 2, code: 3, guidance: true },
+  cards: { examples: 3, code: 3, guidance: true },
+  alerts: { examples: 3, code: 3, guidance: true },
+  banners: { examples: 2, code: 3, guidance: true },
+  forms: { examples: 2, code: 2 },
+  "form-inputs": { examples: 7, code: 7, guidance: true },
+  "form-input-groups": { examples: 5, code: 5 },
+  "form-selects": { examples: 4, code: 4 },
+  "form-searchable-select": { examples: 1, code: 5 },
+  "form-date-time": { examples: 5, code: 5 },
+  "form-passwords-masks": { examples: 4, code: 6 },
+  "form-checks-radios": { examples: 4, code: 4 },
+  "form-otp": { examples: 1, code: 2 },
+  "code-windows": { examples: 2, code: 2, guidance: true },
+  icons: { examples: 2, code: 4, guidance: true },
+  "behavior-layers": { code: 3, guidance: true },
+  collapse: { examples: 1, code: 2, guidance: true },
+  dropdown: { examples: 1, code: 2, guidance: true },
+  tabs: { examples: 1, code: 2, guidance: true },
+  utilities: { examples: 3, code: 3, guidance: true },
+  tokens: { examples: 1, code: 1, guidance: true },
+  "class-reference": { examples: 1, code: 1, guidance: true },
+  accessibility: { examples: 3, code: 3, guidance: true },
+};
 
 try {
   await waitForServer();
@@ -250,6 +284,22 @@ try {
         return code?.classList.contains("docs-code-block") && getComputedStyle(code).display !== "none";
       }));
       if (!pairedExamples) failures.push(`${viewport.name}: ${config.path} does not place visible code below every preview`);
+      const qualityMinimums = documentationQualityMinimums[config.sectionId];
+      if (!qualityMinimums) {
+        failures.push(`${viewport.name}: ${config.path} is missing a documentation quality contract`);
+      } else {
+        const exampleCount = await previews.count();
+        const codeCount = await renderedCode.count();
+        if (exampleCount < (qualityMinimums.examples ?? 0)) {
+          failures.push(`${viewport.name}: ${config.path} has ${exampleCount} focused examples; expected at least ${qualityMinimums.examples}`);
+        }
+        if (codeCount < (qualityMinimums.code ?? 0)) {
+          failures.push(`${viewport.name}: ${config.path} has ${codeCount} code examples; expected at least ${qualityMinimums.code}`);
+        }
+        if (qualityMinimums.guidance && await routePage.locator(".docs-example-guidance:visible").count() === 0) {
+          failures.push(`${viewport.name}: ${config.path} is missing structured usage guidance`);
+        }
+      }
       if (await visibleDemos.count() > 0 && !await visibleDemos.evaluateAll((elements) => elements.every((preview) => (
         ["light", "dark"].includes(preview.dataset.bsTheme)
         && preview.querySelectorAll(":scope > [data-preview-theme-controls]").length === 1
