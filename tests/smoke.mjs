@@ -47,6 +47,11 @@ const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\
 const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
 const ogImageUrl = "https://boobstrap.org/og-image.jpg";
+const escapeHtml = (value) => value
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
 const expectedFormExampleCounts = {
   forms: 2,
   "form-inputs": 7,
@@ -109,9 +114,18 @@ try {
     }
   }
 
-  for (const { path } of docsPages) {
+  for (const { path, title, description } of docsPages) {
     const response = await fetch(`${baseUrl}${path}`);
     if (!response.ok) failures.push(`${path}: returned HTTP ${response.status}`);
+    const source = await response.text();
+    const pageTitle = `${title} — Boobstrap`;
+    const canonicalUrl = `https://boobstrap.org${path}`;
+    if (!source.includes(`<title>${escapeHtml(pageTitle)}</title>`)) failures.push(`${path}: raw HTML has the wrong page title`);
+    if (!source.includes(`<meta property="og:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph title`);
+    if (!source.includes(`<meta property="og:description" content="${escapeHtml(description)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph description`);
+    if (!source.includes(`<meta property="og:url" content="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph URL`);
+    if (!source.includes(`<meta name="twitter:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter title`);
+    if (!source.includes(`<link rel="canonical" href="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong canonical URL`);
     const slashResponse = await fetch(`${baseUrl}${path}/`, { redirect: "manual" });
     if (slashResponse.status !== 308 || slashResponse.headers.get("location") !== path) {
       failures.push(`${path}/: expected a 308 redirect to ${path}`);
