@@ -213,6 +213,7 @@ try {
       const routeDimensions = await dimensionsFor(routePage);
       const visibleHeading = routePage.locator(".docs-content > .docs-component-hero > h1:visible, .docs-content > .docs-hero > h1:visible");
       const previews = routePage.locator("[data-component-example]:visible");
+      const visibleDemos = routePage.locator(".docs-demo:visible");
       const renderedCode = routePage.locator(".docs-content .docs-code-block pre code");
 
       if (response?.status() !== 200) failures.push(`${viewport.name}: ${config.path} did not return 200`);
@@ -249,6 +250,13 @@ try {
         return code?.classList.contains("docs-code-block") && getComputedStyle(code).display !== "none";
       }));
       if (!pairedExamples) failures.push(`${viewport.name}: ${config.path} does not place visible code below every preview`);
+      if (await visibleDemos.count() > 0 && !await visibleDemos.evaluateAll((elements) => elements.every((preview) => (
+        ["light", "dark"].includes(preview.dataset.bsTheme)
+        && preview.querySelectorAll(":scope > [data-preview-theme-controls]").length === 1
+        && preview.querySelectorAll(":scope > [data-preview-theme-controls] [data-preview-theme-option]").length === 2
+      )))) {
+        failures.push(`${viewport.name}: ${config.path} has a preview without independent light/dark controls`);
+      }
       if (config.sectionId in expectedFormExampleCounts && await previews.count() !== expectedFormExampleCounts[config.sectionId]) {
         failures.push(`${viewport.name}: ${config.path} does not expose the expected focused form examples`);
       }
@@ -336,6 +344,29 @@ try {
           routePage.locator("#input-large").evaluate((element) => element.getBoundingClientRect().height),
         ]);
         if (smallHeight >= largeHeight) failures.push("desktop: form size examples are not ordered");
+
+        const emailPreview = routePage.locator('[data-component-example="form-input-email"]');
+        const textareaPreview = routePage.locator('[data-component-example="form-textarea"]');
+        await emailPreview.getByRole("button", { name: "Use light theme for this preview" }).click();
+        await routePage.waitForTimeout(250);
+        const independentThemeState = await routePage.evaluate(() => ({
+          page: document.documentElement.dataset.bsTheme,
+          email: document.querySelector('[data-component-example="form-input-email"]')?.dataset.bsTheme,
+          emailBackground: getComputedStyle(document.querySelector("#input-email")).backgroundColor,
+          textarea: document.querySelector('[data-component-example="form-textarea"]')?.dataset.bsTheme,
+          textareaBackground: getComputedStyle(document.querySelector("#input-message")).backgroundColor,
+        }));
+        if (independentThemeState.page !== "dark" || independentThemeState.email !== "light" || independentThemeState.textarea !== "dark") {
+          failures.push("desktop: a preview theme control changed the page or another preview");
+        }
+        if (independentThemeState.emailBackground !== "rgb(255, 255, 255)" || independentThemeState.emailBackground === independentThemeState.textareaBackground) {
+          failures.push("desktop: light form preview does not use a distinct white control background");
+        }
+
+        await routePage.getByRole("button", { name: "Switch to light theme" }).click();
+        if (await textareaPreview.getAttribute("data-bs-theme") !== "dark" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
+          failures.push("desktop: page theme toggle overrode an independent preview theme");
+        }
       }
 
       if (config.sectionId === "form-passwords-masks") {
