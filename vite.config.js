@@ -2,24 +2,35 @@ import { defineConfig } from "vite";
 import { resolve } from "node:path";
 import { docsPages } from "./src/docs-pages.js";
 
-const cleanRoutes = () => {
+const routeFiles = (useGeneratedDocs) => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
     ["/docs/components/buttons", "/docs/components/buttons/index.html"],
     ["/playground", "/playground/index.html"],
   ]);
+  docsPages.forEach(({ path, standalone }) => {
+    const file = standalone
+      ? "/docs/components/buttons/index.html"
+      : useGeneratedDocs
+        ? `${path}/index.html`
+        : "/docs/index.html";
+    routeFiles.set(path, file);
+  });
+  return routeFiles;
+};
+
+const cleanRoutes = () => {
   const legacyRoutes = new Map([
     ["/docs.html", "/docs"],
     ["/docs/", "/docs"],
     ["/playground.html", "/playground"],
     ["/playground/", "/playground"],
   ]);
-  docsPages.forEach(({ path, standalone }) => {
-    routeFiles.set(path, standalone ? "/docs/components/buttons/index.html" : "/docs/index.html");
+  docsPages.forEach(({ path }) => {
     legacyRoutes.set(`${path}/`, path);
   });
 
-  const middleware = (request, response, next) => {
+  const middleware = (files) => (request, response, next) => {
     const url = new URL(request.url, "http://localhost");
     const redirect = legacyRoutes.get(url.pathname);
     if (redirect) {
@@ -28,7 +39,7 @@ const cleanRoutes = () => {
       response.end();
       return;
     }
-    const file = routeFiles.get(url.pathname);
+    const file = files.get(url.pathname);
     if (file) request.url = `${file}${url.search}`;
     next();
   };
@@ -36,10 +47,10 @@ const cleanRoutes = () => {
   return {
     name: "boobstrap-clean-routes",
     configureServer(server) {
-      server.middlewares.use(middleware);
+      server.middlewares.use(middleware(routeFiles(false)));
     },
     configurePreviewServer(server) {
-      server.middlewares.use(middleware);
+      server.middlewares.use(middleware(routeFiles(true)));
     },
   };
 };

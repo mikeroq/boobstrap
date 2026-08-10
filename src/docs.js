@@ -3,10 +3,12 @@ import "@boobstrap/boobstrap/dist/boobstrap.css";
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
 import { initDevelopmentBanner } from "./dev-banner.js";
+import { enhanceDocumentation } from "./docs-enhancements.js";
 import { docsPageForPath, docsPages, normalizeDocsPath } from "./docs-pages.js";
 import { highlightCodeBlocks, highlightCodeElement } from "./syntax-highlighting.js";
 
 initDevelopmentBanner();
+enhanceDocumentation();
 
 const root = document.documentElement;
 const page = document.body;
@@ -491,6 +493,10 @@ if (routedSection?.classList.contains("docs-section")) {
   });
 } else if (activeDocsPage?.sectionId === "introduction" && routedSection) {
   outlineTargets = [{ element: routedSection, id: routedSection.id, label: "Overview", heading: null }];
+  routedSection.querySelectorAll("[data-introduction-details] > h2").forEach((heading, index) => {
+    heading.id ||= `introduction-${slugify(heading.textContent) || index + 1}`;
+    outlineTargets.push({ element: heading, id: heading.id, label: heading.textContent, heading });
+  });
 } else if (docsIndex && isDocsOverview) {
   outlineTargets = [{ element: docsIndex, id: docsIndex.id, label: "Browse documentation", heading: docsIndex.querySelector(":scope > h2") }];
 } else {

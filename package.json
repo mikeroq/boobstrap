@@ -8,7 +8,7 @@
     "dev": "vite",
     "framework:dev": "node scripts/use-framework-dev.mjs",
     "framework:sync": "node scripts/use-framework-dev.mjs --sync",
-    "build": "vite build",
+    "build": "vite build && node scripts/generate-doc-route-pages.mjs",
     "preview": "vite preview",
     "test": "npm run build && node tests/smoke.mjs && node tests/dev-banner.mjs"
   },

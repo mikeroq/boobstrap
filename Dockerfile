@@ -12,6 +12,7 @@ COPY docs ./docs
 COPY playground ./playground
 COPY src ./src
 COPY public ./public
+COPY scripts ./scripts
 
 RUN npm run build
 
