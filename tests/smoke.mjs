@@ -283,6 +283,18 @@ try {
       if (await routePage.locator(".docs-component-pagination a").count() !== 2) {
         failures.push(`${viewport.name}: ${config.path} is missing previous/next documentation links`);
       }
+      if (await routePage.locator(".docs-header.bs-navbar").count() !== 1 || await routePage.locator(".docs-nav a:not(.bs-nav-link)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} is not using the framework navigation components`);
+      }
+      if (await routePage.locator(".docs-code-block:not(.bs-code-window), .docs-code-label:not(.bs-code-header), .docs-code-label button:not(.bs-code-action), .docs-code-block > pre:not(.bs-code-body)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a code sample outside the framework code components`);
+      }
+      if (await routePage.locator(".docs-table-wrap:not(.bs-table-responsive), .docs-table:not(.bs-table)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a reference table outside the framework table components`);
+      }
+      if (await routePage.locator(".docs-component-pagination:not(.bs-page-nav), .docs-component-pagination > a:not(.bs-page-nav-link)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} is not using the framework page-navigation component`);
+      }
       if (await routePage.getByRole("tab", { name: "Preview", exact: true }).count() !== 0 || await routePage.getByRole("tab", { name: "Code", exact: true }).count() !== 0) {
         failures.push(`${viewport.name}: ${config.path} retained preview/code tabs`);
       }
