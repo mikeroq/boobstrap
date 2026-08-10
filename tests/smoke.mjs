@@ -47,6 +47,17 @@ const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\
 const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
 const ogImageUrl = "https://boobstrap.org/og-image.jpg";
+const expectedFormExampleCounts = {
+  forms: 2,
+  "form-inputs": 7,
+  "form-input-groups": 5,
+  "form-selects": 4,
+  "form-searchable-select": 1,
+  "form-date-time": 5,
+  "form-passwords-masks": 4,
+  "form-checks-radios": 4,
+  "form-otp": 1,
+};
 
 try {
   await waitForServer();
@@ -238,6 +249,12 @@ try {
         return code?.classList.contains("docs-code-block") && getComputedStyle(code).display !== "none";
       }));
       if (!pairedExamples) failures.push(`${viewport.name}: ${config.path} does not place visible code below every preview`);
+      if (config.sectionId in expectedFormExampleCounts && await previews.count() !== expectedFormExampleCounts[config.sectionId]) {
+        failures.push(`${viewport.name}: ${config.path} does not expose the expected focused form examples`);
+      }
+      if (config.sectionId.startsWith("form") && await routePage.locator('.docs-code-label:has-text("Complete labeled controls"), .docs-code-label:has-text("Complete input groups"), .docs-code-label:has-text("Complete native selects"), .docs-code-label:has-text("Complete date and time controls"), .docs-code-label:has-text("Complete mask examples"), .docs-code-label:has-text("Complete selection controls")').count() > 0) {
+        failures.push(`${viewport.name}: ${config.path} retains a grouped form code block`);
+      }
       if (routeDimensions.scrollWidth > routeDimensions.clientWidth + 1) {
         failures.push(`${viewport.name}: ${config.path} has horizontal overflow (${routeDimensions.scrollWidth}px > ${routeDimensions.clientWidth}px)`);
       }

@@ -876,7 +876,82 @@ banners[0].show();</code></pre></div>
           <section class="docs-section" id="forms">
             <div class="docs-kicker">Components</div>
             <h2>Forms</h2>
-            <p>Form documentation is organized by control type so each page can show the complete rendered component, copy-ready markup, behavior setup, and accessibility details without mixing unrelated patterns.</p>
+            <p>Start with a layout pattern, then open a focused control page for an isolated rendered example and its copy-ready code.</p>
+
+            <h3>Stacked form</h3>
+            <div class="docs-demo" data-component-example="form-layout-stacked">
+              <form class="bs-stack bs-gap-4" data-docs-form>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-name">Name</label>
+                  <input class="bs-input" id="layout-name" name="name" autocomplete="name" />
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-role">Role</label>
+                  <select class="bs-select" id="layout-role" name="role"><option>Designer</option><option>Engineer</option></select>
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-notes">Notes</label>
+                  <textarea class="bs-textarea" id="layout-notes" name="notes" rows="3"></textarea>
+                </div>
+                <label class="bs-check"><input class="bs-check-input" type="checkbox" name="updates" /><span class="bs-check-label">Send product updates</span></label>
+                <button class="bs-btn bs-btn-primary" type="submit">Create account</button>
+              </form>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Stacked form layout</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="name"&gt;Name&lt;/label&gt;
+    &lt;input class="bs-input" id="name" name="name" autocomplete="name" /&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="role"&gt;Role&lt;/label&gt;
+    &lt;select class="bs-select" id="role" name="role"&gt;
+      &lt;option&gt;Designer&lt;/option&gt;
+      &lt;option&gt;Engineer&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="notes"&gt;Notes&lt;/label&gt;
+    &lt;textarea class="bs-textarea" id="notes" name="notes" rows="3"&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;label class="bs-check"&gt;
+    &lt;input class="bs-check-input" type="checkbox" name="updates" /&gt;
+    &lt;span class="bs-check-label"&gt;Send product updates&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="submit"&gt;Create account&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+
+            <h3>Responsive form row</h3>
+            <div class="docs-demo" data-component-example="form-layout-responsive">
+              <form class="bs-stack bs-gap-4" data-docs-form>
+                <div class="bs-form-row">
+                  <div class="bs-form-group"><label class="bs-label" for="layout-first">First name</label><input class="bs-input" id="layout-first" name="first_name" autocomplete="given-name" /></div>
+                  <div class="bs-form-group"><label class="bs-label" for="layout-last">Last name</label><input class="bs-input" id="layout-last" name="last_name" autocomplete="family-name" /></div>
+                </div>
+                <div class="bs-form-group"><label class="bs-label" for="layout-email">Email address</label><input class="bs-input" id="layout-email" name="email" type="email" autocomplete="email" /></div>
+                <div class="bs-flex bs-flex-wrap bs-gap-3"><button class="bs-btn bs-btn-primary" type="submit">Save profile</button><button class="bs-btn bs-btn-secondary" type="button">Cancel</button></div>
+              </form>
+            </div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Responsive form row</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
+  &lt;div class="bs-form-row"&gt;
+    &lt;div class="bs-form-group"&gt;
+      &lt;label class="bs-label" for="first-name"&gt;First name&lt;/label&gt;
+      &lt;input class="bs-input" id="first-name" name="first_name" autocomplete="given-name" /&gt;
+    &lt;/div&gt;
+    &lt;div class="bs-form-group"&gt;
+      &lt;label class="bs-label" for="last-name"&gt;Last name&lt;/label&gt;
+      &lt;input class="bs-input" id="last-name" name="last_name" autocomplete="family-name" /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="email"&gt;Email address&lt;/label&gt;
+    &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" /&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-flex bs-flex-wrap bs-gap-3"&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="submit"&gt;Save profile&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+
             <h3>Choose a form topic</h3>
             <div class="docs-form-topic-grid">
               <a href="/docs/components/forms/inputs"><strong>Inputs and textareas</strong><span>Labels, help text, validation, states, and sizes</span></a>
@@ -896,143 +971,53 @@ banners[0].show();</code></pre></div>
             <h2>Inputs and textareas</h2>
             <p>Use a form group to keep each visible label, control, help message, and validation message together.</p>
 
-            <h3>Labeled controls</h3>
-            <div class="docs-demo" data-component-example="form-inputs-basic">
-              <form class="docs-form" data-docs-form>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-email">Email address <span class="bs-label-required" aria-hidden="true">*</span></label>
-                  <input class="bs-input" id="input-email" name="email" type="email" autocomplete="email" placeholder="ada@example.com" aria-describedby="input-email-help" required />
-                  <span class="bs-form-text" id="input-email-help">Used for receipts and account recovery.</span>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-company">Company <span class="bs-label-optional">Optional</span></label>
-                  <input class="bs-input" id="input-company" name="company" type="text" autocomplete="organization" placeholder="Analytical Engines Ltd." />
-                </div>
-                <div class="bs-form-group docs-form-wide">
-                  <label class="bs-label" for="input-message">Project details</label>
-                  <textarea class="bs-textarea" id="input-message" name="message" rows="4" placeholder="Tell us what you are building." aria-describedby="input-message-help"></textarea>
-                  <span class="bs-form-text" id="input-message-help">Include your launch date and expected traffic.</span>
-                </div>
-              </form>
-            </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete labeled controls</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
-  &lt;div class="bs-form-group"&gt;
-    &lt;label class="bs-label" for="email"&gt;
-      Email address
-      &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;
-    &lt;/label&gt;
-    &lt;input
-      class="bs-input"
-      id="email"
-      name="email"
-      type="email"
-      autocomplete="email"
-      placeholder="ada@example.com"
-      aria-describedby="email-help"
-      required
-    /&gt;
-    &lt;span class="bs-form-text" id="email-help"&gt;
-      Used for receipts and account recovery.
-    &lt;/span&gt;
-  &lt;/div&gt;
+            <h3>Email input with helper text</h3>
+            <div class="docs-demo" data-component-example="form-input-email"><div class="bs-form-group"><label class="bs-label" for="input-email">Email address <span class="bs-label-required" aria-hidden="true">*</span></label><input class="bs-input" id="input-email" name="email" type="email" autocomplete="email" placeholder="ada@example.com" aria-describedby="input-email-help" required /><span class="bs-form-text" id="input-email-help">Used for receipts and account recovery.</span></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Email input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="email"&gt;Email address &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
+  &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" aria-describedby="email-help" required /&gt;
+  &lt;span class="bs-form-text" id="email-help"&gt;Used for receipts and account recovery.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
 
-  &lt;div class="bs-form-group"&gt;
-    &lt;label class="bs-label" for="company"&gt;
-      Company &lt;span class="bs-label-optional"&gt;Optional&lt;/span&gt;
-    &lt;/label&gt;
-    &lt;input
-      class="bs-input"
-      id="company"
-      name="company"
-      type="text"
-      autocomplete="organization"
-    /&gt;
-  &lt;/div&gt;
+            <h3>Textarea</h3>
+            <div class="docs-demo" data-component-example="form-textarea"><div class="bs-form-group"><label class="bs-label" for="input-message">Project details</label><textarea class="bs-textarea" id="input-message" name="message" rows="4" placeholder="Tell us what you are building." aria-describedby="input-message-help"></textarea><span class="bs-form-text" id="input-message-help">Include your launch date and expected traffic.</span></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Textarea</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="message"&gt;Project details&lt;/label&gt;
+  &lt;textarea class="bs-textarea" id="message" name="message" rows="4" aria-describedby="message-help"&gt;&lt;/textarea&gt;
+  &lt;span class="bs-form-text" id="message-help"&gt;Include your launch date and expected traffic.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
 
-  &lt;div class="bs-form-group"&gt;
-    &lt;label class="bs-label" for="message"&gt;Project details&lt;/label&gt;
-    &lt;textarea
-      class="bs-textarea"
-      id="message"
-      name="message"
-      rows="4"
-      aria-describedby="message-help"
-    &gt;&lt;/textarea&gt;
-    &lt;span class="bs-form-text" id="message-help"&gt;
-      Include your launch date and expected traffic.
-    &lt;/span&gt;
-  &lt;/div&gt;
-&lt;/form&gt;</code></pre></div>
-
-            <h3>Sizes and states</h3>
-            <div class="docs-demo" data-component-example="form-inputs-states">
-              <form class="docs-form" data-docs-form>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-small">Small input</label>
-                  <input class="bs-input bs-input-sm" id="input-small" name="compact" value="Compact value" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-large">Large input</label>
-                  <input class="bs-input bs-input-lg" id="input-large" name="prominent" value="Prominent value" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-valid">Valid input</label>
-                  <input class="bs-input" id="input-valid" name="username" value="ada-lovelace" aria-invalid="false" aria-describedby="input-valid-feedback" />
-                  <span class="bs-form-feedback bs-form-feedback-valid" id="input-valid-feedback">This username is available.</span>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-invalid">Invalid input</label>
-                  <input class="bs-input" id="input-invalid" name="website" value="not a URL" aria-invalid="true" aria-describedby="input-invalid-feedback" />
-                  <span class="bs-form-feedback bs-form-feedback-invalid" id="input-invalid-feedback">Enter a complete URL including https://.</span>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-readonly">Read-only</label>
-                  <input class="bs-input" id="input-readonly" value="acct_01HX" readonly />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="input-disabled">Disabled</label>
-                  <input class="bs-input" id="input-disabled" value="Unavailable" disabled />
-                </div>
-              </form>
-            </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Sizes and states</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;
+            <h3>Input sizes</h3>
+            <div class="docs-demo" data-component-example="form-input-sizes"><div class="bs-stack bs-gap-3"><input class="bs-input bs-input-sm" id="input-small" aria-label="Small input" value="Small" /><input class="bs-input" aria-label="Default input" value="Default" /><input class="bs-input bs-input-lg" id="input-large" aria-label="Large input" value="Large" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Input sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;
 &lt;input class="bs-input" aria-label="Default input" /&gt;
-&lt;input class="bs-input bs-input-lg" aria-label="Large input" /&gt;
+&lt;input class="bs-input bs-input-lg" aria-label="Large input" /&gt;</code></pre></div>
 
-&lt;div class="bs-form-group"&gt;
+            <h3>Valid input</h3>
+            <div class="docs-demo" data-component-example="form-input-valid"><div class="bs-form-group"><label class="bs-label" for="input-valid">Username</label><input class="bs-input" id="input-valid" name="username" value="ada-lovelace" aria-invalid="false" aria-describedby="input-valid-feedback" /><span class="bs-form-feedback bs-form-feedback-valid" id="input-valid-feedback">This username is available.</span></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Valid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="username"&gt;Username&lt;/label&gt;
-  &lt;input
-    class="bs-input"
-    id="username"
-    name="username"
-    value="ada-lovelace"
-    aria-invalid="false"
-    aria-describedby="username-feedback"
-  /&gt;
-  &lt;span
-    class="bs-form-feedback bs-form-feedback-valid"
-    id="username-feedback"
-  &gt;This username is available.&lt;/span&gt;
-&lt;/div&gt;
+  &lt;input class="bs-input" id="username" aria-invalid="false" aria-describedby="username-feedback" /&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-valid" id="username-feedback"&gt;This username is available.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
 
-&lt;div class="bs-form-group"&gt;
+            <h3>Invalid input</h3>
+            <div class="docs-demo" data-component-example="form-input-invalid"><div class="bs-form-group"><label class="bs-label" for="input-invalid">Website</label><input class="bs-input" id="input-invalid" name="website" value="not a URL" aria-invalid="true" aria-describedby="input-invalid-feedback" /><span class="bs-form-feedback bs-form-feedback-invalid" id="input-invalid-feedback">Enter a complete URL including https://.</span></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Invalid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="website"&gt;Website&lt;/label&gt;
-  &lt;input
-    class="bs-input"
-    id="website"
-    name="website"
-    value="not a URL"
-    aria-invalid="true"
-    aria-describedby="website-feedback"
-  /&gt;
-  &lt;span
-    class="bs-form-feedback bs-form-feedback-invalid"
-    id="website-feedback"
-  &gt;Enter a complete URL including https://.&lt;/span&gt;
-&lt;/div&gt;
+  &lt;input class="bs-input" id="website" aria-invalid="true" aria-describedby="website-feedback" /&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-invalid" id="website-feedback"&gt;Enter a complete URL including https://.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
 
-&lt;input class="bs-input" value="acct_01HX" aria-label="Account ID" readonly /&gt;
-&lt;input class="bs-input" value="Unavailable" aria-label="Unavailable value" disabled /&gt;</code></pre></div>
+            <h3>Read-only input</h3>
+            <div class="docs-demo" data-component-example="form-input-readonly"><div class="bs-form-group"><label class="bs-label" for="input-readonly">Account ID</label><input class="bs-input" id="input-readonly" value="acct_01HX" readonly /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Read-only input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="account-id"&gt;Account ID&lt;/label&gt;
+&lt;input class="bs-input" id="account-id" value="acct_01HX" readonly /&gt;</code></pre></div>
+
+            <h3>Disabled input</h3>
+            <div class="docs-demo" data-component-example="form-input-disabled"><div class="bs-form-group"><label class="bs-label" for="input-disabled">Unavailable value</label><input class="bs-input" id="input-disabled" value="Unavailable" disabled /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Disabled input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="unavailable"&gt;Unavailable value&lt;/label&gt;
+&lt;input class="bs-input" id="unavailable" value="Unavailable" disabled /&gt;</code></pre></div>
 
             <div class="docs-example-guidance" aria-label="Input guidance">
               <div><h3>Labels</h3><p>Use a visible <code>&lt;label&gt;</code> whose <code>for</code> matches the control ID. Required and optional markers supplement the label; the native <code>required</code> attribute remains the actual constraint.</p></div>
@@ -1046,9 +1031,9 @@ banners[0].show();</code></pre></div>
             <h2>Input groups and icons</h2>
             <p>Attach contextual text, controls, or actions to an input, or place decorative icons inside the control boundary.</p>
 
-            <h3>Prefixes, suffixes, buttons, and selects</h3>
-            <div class="docs-demo" data-component-example="form-input-groups">
-              <form class="docs-form" data-docs-form>
+            <h3>Text prefix and suffix</h3>
+            <div class="docs-demo" data-component-example="form-input-group-text">
+              <form data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="group-price">Price</label>
                   <div class="bs-input-group">
@@ -1057,32 +1042,9 @@ banners[0].show();</code></pre></div>
                     <span class="bs-input-group-text" id="group-price-currency">USD</span>
                   </div>
                 </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="group-username">Profile URL</label>
-                  <div class="bs-input-group">
-                    <span class="bs-input-group-text">boobstrap.org/u/</span>
-                    <input class="bs-input" id="group-username" name="username" value="ada" />
-                  </div>
-                </div>
-                <div class="bs-form-group docs-form-wide">
-                  <label class="bs-label" for="group-domain">Domain</label>
-                  <div class="bs-input-group">
-                    <span class="bs-input-group-text">https://</span>
-                    <input class="bs-input" id="group-domain" name="domain" value="example.com" />
-                    <button class="bs-btn bs-btn-secondary" type="button">Verify domain</button>
-                  </div>
-                </div>
-                <div class="bs-form-group docs-form-wide">
-                  <label class="bs-label" for="group-search">Repository</label>
-                  <div class="bs-input-group">
-                    <select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select>
-                    <input class="bs-input" id="group-search" name="repository" placeholder="Repository name" />
-                    <button class="bs-btn bs-btn-primary" type="submit">Search</button>
-                  </div>
-                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete input groups</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="price"&gt;Price&lt;/label&gt;
   &lt;div class="bs-input-group"&gt;
     &lt;span class="bs-input-group-text" aria-hidden="true"&gt;$&lt;/span&gt;
@@ -1095,47 +1057,26 @@ banners[0].show();</code></pre></div>
     /&gt;
     &lt;span class="bs-input-group-text" id="price-currency"&gt;USD&lt;/span&gt;
   &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="bs-form-group"&gt;
-  &lt;label class="bs-label" for="username"&gt;Profile URL&lt;/label&gt;
-  &lt;div class="bs-input-group"&gt;
-    &lt;span class="bs-input-group-text"&gt;boobstrap.org/u/&lt;/span&gt;
-    &lt;input class="bs-input" id="username" name="username" /&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="bs-form-group"&gt;
-  &lt;label class="bs-label" for="domain"&gt;Domain&lt;/label&gt;
-  &lt;div class="bs-input-group"&gt;
-    &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
-    &lt;input class="bs-input" id="domain" name="domain" /&gt;
-    &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;
-      Verify domain
-    &lt;/button&gt;
-  &lt;/div&gt;
-&lt;/div&gt;
-
-&lt;div class="bs-form-group"&gt;
-  &lt;label class="bs-label" for="repository"&gt;Repository&lt;/label&gt;
-  &lt;div class="bs-input-group"&gt;
-    &lt;select class="bs-select" aria-label="Repository owner"&gt;
-      &lt;option&gt;mikeroq&lt;/option&gt;
-      &lt;option&gt;boobstrap&lt;/option&gt;
-    &lt;/select&gt;
-    &lt;input
-      class="bs-input"
-      id="repository"
-      name="repository"
-      placeholder="Repository name"
-    /&gt;
-    &lt;button class="bs-btn bs-btn-primary" type="submit"&gt;Search&lt;/button&gt;
-  &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
-            <h3>Start and end icons</h3>
-            <div class="docs-demo" data-component-example="form-input-icons">
-              <form class="docs-form" data-docs-form>
+            <h3>Button add-on</h3>
+            <div class="docs-demo" data-component-example="form-input-group-button"><div class="bs-form-group"><label class="bs-label" for="group-domain">Domain</label><div class="bs-input-group"><span class="bs-input-group-text">https://</span><input class="bs-input" id="group-domain" name="domain" value="example.com" /><button class="bs-btn bs-btn-secondary" type="button">Verify</button></div></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Button add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
+  &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
+  &lt;input class="bs-input" aria-label="Domain" /&gt;
+  &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3>Select add-on</h3>
+            <div class="docs-demo" data-component-example="form-input-group-select"><div class="bs-form-group"><label class="bs-label" for="group-search">Repository</label><div class="bs-input-group"><select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select><input class="bs-input" id="group-search" name="repository" placeholder="Repository name" /></div></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Select add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
+  &lt;select class="bs-select" aria-label="Repository owner"&gt;&lt;option&gt;mikeroq&lt;/option&gt;&lt;/select&gt;
+  &lt;input class="bs-input" aria-label="Repository name" /&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3>Start icon</h3>
+            <div class="docs-demo" data-component-example="form-input-icon-start">
+              <form data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="icon-search">Search projects</label>
                   <div class="bs-input-wrap">
@@ -1143,16 +1084,9 @@ banners[0].show();</code></pre></div>
                     <input class="bs-input bs-input-has-icon-start" id="icon-search" name="query" type="search" placeholder="Search projects" />
                   </div>
                 </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="icon-email">Verified email</label>
-                  <div class="bs-input-wrap">
-                    <input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com" />
-                    <svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
-                  </div>
-                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete icon inputs</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Start icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="search"&gt;Search projects&lt;/label&gt;
   &lt;div class="bs-input-wrap"&gt;
     &lt;svg
@@ -1171,25 +1105,15 @@ banners[0].show();</code></pre></div>
       placeholder="Search projects"
     /&gt;
   &lt;/div&gt;
-&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
 
-&lt;div class="bs-form-group"&gt;
-  &lt;label class="bs-label" for="verified-email"&gt;Verified email&lt;/label&gt;
-  &lt;div class="bs-input-wrap"&gt;
-    &lt;input
-      class="bs-input bs-input-has-icon-end"
-      id="verified-email"
-      name="verified_email"
-      type="email"
-    /&gt;
-    &lt;svg
-      class="bs-input-icon bs-input-icon-end"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    &gt;
-      &lt;path d="m5 12 4 4L19 6"&gt;&lt;/path&gt;
-    &lt;/svg&gt;
-  &lt;/div&gt;
+            <h3>End icon</h3>
+            <div class="docs-demo" data-component-example="form-input-icon-end"><div class="bs-form-group"><label class="bs-label" for="icon-email">Verified email</label><div class="bs-input-wrap"><input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com" /><svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></div></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · End icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-wrap"&gt;
+  &lt;input class="bs-input bs-input-has-icon-end" type="email" aria-label="Verified email" /&gt;
+  &lt;svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"&gt;
+    &lt;path d="m5 12 4 4L19 6"&gt;&lt;/path&gt;
+  &lt;/svg&gt;
 &lt;/div&gt;</code></pre></div>
             <div class="docs-note"><strong>Icon responsibility:</strong> decorative icons use <code>aria-hidden="true"</code>; the visible label still names the control. When the icon communicates status, pair it with visible or screen-reader text outside the SVG.</div>
           </section>
@@ -1199,9 +1123,9 @@ banners[0].show();</code></pre></div>
             <h2>Native selects</h2>
             <p>The <code>.bs-select</code> class preserves native selection behavior while applying the framework’s control surface, focus ring, sizing, and arrow.</p>
 
-            <h3>Options, groups, sizes, and states</h3>
-            <div class="docs-demo" data-component-example="form-native-selects">
-              <form class="docs-form" data-docs-form>
+            <h3>Basic select</h3>
+            <div class="docs-demo" data-component-example="form-select-basic">
+              <form data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="select-role">Team role</label>
                   <select class="bs-select" id="select-role" name="role">
@@ -1211,34 +1135,9 @@ banners[0].show();</code></pre></div>
                     <option value="product-manager">Product manager</option>
                   </select>
                 </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="select-region">Deployment region</label>
-                  <select class="bs-select" id="select-region" name="region">
-                    <optgroup label="North America">
-                      <option value="us-east">US East</option>
-                      <option value="us-west">US West</option>
-                    </optgroup>
-                    <optgroup label="Europe">
-                      <option value="eu-central">EU Central</option>
-                      <option value="eu-west">EU West</option>
-                    </optgroup>
-                  </select>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="select-small">Small select</label>
-                  <select class="bs-select bs-select-sm" id="select-small"><option>Compact</option></select>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="select-large">Large select</label>
-                  <select class="bs-select bs-select-lg" id="select-large"><option>Prominent</option></select>
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="select-disabled">Disabled select</label>
-                  <select class="bs-select" id="select-disabled" disabled><option>Unavailable</option></select>
-                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete native selects</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Basic select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="role"&gt;Team role&lt;/label&gt;
   &lt;select class="bs-select" id="role" name="role" required&gt;
     &lt;option value=""&gt;Choose a role&lt;/option&gt;
@@ -1246,31 +1145,25 @@ banners[0].show();</code></pre></div>
     &lt;option value="engineer"&gt;Engineer&lt;/option&gt;
     &lt;option value="product-manager"&gt;Product manager&lt;/option&gt;
   &lt;/select&gt;
-&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
 
-&lt;div class="bs-form-group"&gt;
-  &lt;label class="bs-label" for="region"&gt;Deployment region&lt;/label&gt;
-  &lt;select class="bs-select" id="region" name="region"&gt;
-    &lt;optgroup label="North America"&gt;
-      &lt;option value="us-east"&gt;US East&lt;/option&gt;
-      &lt;option value="us-west"&gt;US West&lt;/option&gt;
-    &lt;/optgroup&gt;
-    &lt;optgroup label="Europe"&gt;
-      &lt;option value="eu-central"&gt;EU Central&lt;/option&gt;
-      &lt;option value="eu-west"&gt;EU West&lt;/option&gt;
-    &lt;/optgroup&gt;
-  &lt;/select&gt;
-&lt;/div&gt;
-
-&lt;select class="bs-select bs-select-sm" aria-label="Small select"&gt;
-  &lt;option&gt;Compact&lt;/option&gt;
-&lt;/select&gt;
-&lt;select class="bs-select bs-select-lg" aria-label="Large select"&gt;
-  &lt;option&gt;Prominent&lt;/option&gt;
-&lt;/select&gt;
-&lt;select class="bs-select" aria-label="Disabled select" disabled&gt;
-  &lt;option&gt;Unavailable&lt;/option&gt;
+            <h3>Option groups</h3>
+            <div class="docs-demo" data-component-example="form-select-groups"><div class="bs-form-group"><label class="bs-label" for="select-region">Deployment region</label><select class="bs-select" id="select-region" name="region"><optgroup label="North America"><option value="us-east">US East</option><option value="us-west">US West</option></optgroup><optgroup label="Europe"><option value="eu-central">EU Central</option><option value="eu-west">EU West</option></optgroup></select></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Option groups</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select" aria-label="Deployment region"&gt;
+  &lt;optgroup label="North America"&gt;&lt;option value="us-east"&gt;US East&lt;/option&gt;&lt;option value="us-west"&gt;US West&lt;/option&gt;&lt;/optgroup&gt;
+  &lt;optgroup label="Europe"&gt;&lt;option value="eu-central"&gt;EU Central&lt;/option&gt;&lt;option value="eu-west"&gt;EU West&lt;/option&gt;&lt;/optgroup&gt;
 &lt;/select&gt;</code></pre></div>
+
+            <h3>Select sizes</h3>
+            <div class="docs-demo" data-component-example="form-select-sizes"><div class="bs-stack bs-gap-3"><select class="bs-select bs-select-sm" aria-label="Small select"><option>Compact</option></select><select class="bs-select" aria-label="Default select"><option>Default</option></select><select class="bs-select bs-select-lg" aria-label="Large select"><option>Prominent</option></select></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Select sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select bs-select-sm" aria-label="Small select"&gt;&lt;option&gt;Compact&lt;/option&gt;&lt;/select&gt;
+&lt;select class="bs-select" aria-label="Default select"&gt;&lt;option&gt;Default&lt;/option&gt;&lt;/select&gt;
+&lt;select class="bs-select bs-select-lg" aria-label="Large select"&gt;&lt;option&gt;Prominent&lt;/option&gt;&lt;/select&gt;</code></pre></div>
+
+            <h3>Disabled select</h3>
+            <div class="docs-demo" data-component-example="form-select-disabled"><div class="bs-form-group"><label class="bs-label" for="select-disabled">Region</label><select class="bs-select" id="select-disabled" disabled><option>Unavailable</option></select></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Disabled select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="region"&gt;Region&lt;/label&gt;
+&lt;select class="bs-select" id="region" disabled&gt;&lt;option&gt;Unavailable&lt;/option&gt;&lt;/select&gt;</code></pre></div>
             <div class="docs-note"><strong>Prefer native when possible:</strong> use a native select when users choose from a manageable fixed list. It works without JavaScript and inherits platform keyboard, touch, screen-reader, and form-submission behavior.</div>
           </section>
 
@@ -1459,69 +1352,37 @@ export function TeamRoleSelect() {
             <h2>Date and time inputs</h2>
             <p>Apply <code>.bs-input</code> to native date and time types to retain platform pickers, locale formatting, validation, and mobile keyboards.</p>
 
-            <h3>Native picker types</h3>
-            <div class="docs-demo" data-component-example="form-date-time">
-              <form class="docs-form" data-docs-form>
+            <h3>Date input</h3>
+            <div class="docs-demo" data-component-example="form-date">
+              <form data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="picker-date">Start date</label>
                   <input class="bs-input" id="picker-date" name="start_date" type="date" min="2026-01-01" />
                 </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="picker-time">Start time</label>
-                  <input class="bs-input" id="picker-time" name="start_time" type="time" step="900" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="picker-datetime">Publish at</label>
-                  <input class="bs-input" id="picker-datetime" name="publish_at" type="datetime-local" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="picker-month">Billing month</label>
-                  <input class="bs-input" id="picker-month" name="billing_month" type="month" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="picker-week">Delivery week</label>
-                  <input class="bs-input" id="picker-week" name="delivery_week" type="week" />
-                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete date and time controls</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
-  &lt;div class="bs-form-row"&gt;
-    &lt;div class="bs-form-group"&gt;
-      &lt;label class="bs-label" for="start-date"&gt;Start date&lt;/label&gt;
-      &lt;input
-        class="bs-input"
-        id="start-date"
-        name="start_date"
-        type="date"
-        min="2026-01-01"
-      /&gt;
-    &lt;/div&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Date input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-date"&gt;Start date&lt;/label&gt;
+&lt;input class="bs-input" id="start-date" name="start_date" type="date" min="2026-01-01" /&gt;</code></pre></div>
 
-    &lt;div class="bs-form-group"&gt;
-      &lt;label class="bs-label" for="start-time"&gt;Start time&lt;/label&gt;
-      &lt;input
-        class="bs-input"
-        id="start-time"
-        name="start_time"
-        type="time"
-        step="900"
-      /&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+            <h3>Time input</h3>
+            <div class="docs-demo" data-component-example="form-time"><div class="bs-form-group"><label class="bs-label" for="picker-time">Start time</label><input class="bs-input" id="picker-time" name="start_time" type="time" step="900" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Time input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-time"&gt;Start time&lt;/label&gt;
+&lt;input class="bs-input" id="start-time" name="start_time" type="time" step="900" /&gt;</code></pre></div>
 
-  &lt;div class="bs-form-group"&gt;
-    &lt;label class="bs-label" for="publish-at"&gt;Publish at&lt;/label&gt;
-    &lt;input
-      class="bs-input"
-      id="publish-at"
-      name="publish_at"
-      type="datetime-local"
-    /&gt;
-  &lt;/div&gt;
+            <h3>Local date and time</h3>
+            <div class="docs-demo" data-component-example="form-datetime"><div class="bs-form-group"><label class="bs-label" for="picker-datetime">Publish at</label><input class="bs-input" id="picker-datetime" name="publish_at" type="datetime-local" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Datetime-local input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="publish-at"&gt;Publish at&lt;/label&gt;
+&lt;input class="bs-input" id="publish-at" name="publish_at" type="datetime-local" /&gt;</code></pre></div>
 
-  &lt;input class="bs-input" name="billing_month" type="month" aria-label="Billing month" /&gt;
-  &lt;input class="bs-input" name="delivery_week" type="week" aria-label="Delivery week" /&gt;
-&lt;/form&gt;</code></pre></div>
+            <h3>Month input</h3>
+            <div class="docs-demo" data-component-example="form-month"><div class="bs-form-group"><label class="bs-label" for="picker-month">Billing month</label><input class="bs-input" id="picker-month" name="billing_month" type="month" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Month input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="billing-month"&gt;Billing month&lt;/label&gt;
+&lt;input class="bs-input" id="billing-month" name="billing_month" type="month" /&gt;</code></pre></div>
+
+            <h3>Week input</h3>
+            <div class="docs-demo" data-component-example="form-week"><div class="bs-form-group"><label class="bs-label" for="picker-week">Delivery week</label><input class="bs-input" id="picker-week" name="delivery_week" type="week" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Week input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="delivery-week"&gt;Delivery week&lt;/label&gt;
+&lt;input class="bs-input" id="delivery-week" name="delivery_week" type="week" /&gt;</code></pre></div>
             <div class="docs-note"><strong>Server handling:</strong> native date values submit as date-like strings without a timezone. Treat <code>datetime-local</code> as local wall time and collect a timezone separately when the instant matters.</div>
           </section>
 
@@ -1569,24 +1430,16 @@ import { initPasswords } from "@boobstrap/boobstrap/js/password";
 
 const passwordFields = initPasswords(document);</code></pre></div>
 
-            <h3>Declarative masks</h3>
-            <div class="docs-demo" data-component-example="form-masks">
-              <form class="docs-form" data-docs-form>
+            <h3>Phone mask</h3>
+            <div class="docs-demo" data-component-example="form-mask-phone">
+              <form data-docs-form>
                 <div class="bs-form-group">
                   <label class="bs-label" for="mask-phone">Phone number</label>
                   <input class="bs-input" id="mask-phone" name="phone" type="tel" autocomplete="tel" data-bs-mask="(999) 999-9999" placeholder="(555) 555-0123" />
                 </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="mask-date">Reference date</label>
-                  <input class="bs-input" id="mask-date" name="reference_date" inputmode="numeric" data-bs-mask="99/99/9999" placeholder="MM/DD/YYYY" />
-                </div>
-                <div class="bs-form-group">
-                  <label class="bs-label" for="mask-key">Product key</label>
-                  <input class="bs-input" id="mask-key" name="product_key" data-bs-mask="AAAA-9999-****" placeholder="ABCD-1234-E5F6" />
-                </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete mask examples</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Phone mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="phone"&gt;Phone number&lt;/label&gt;
   &lt;input
     class="bs-input"
@@ -1597,24 +1450,17 @@ const passwordFields = initPasswords(document);</code></pre></div>
     data-bs-mask="(999) 999-9999"
     placeholder="(555) 555-0123"
   /&gt;
-&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
 
-&lt;input
-  class="bs-input"
-  name="reference_date"
-  inputmode="numeric"
-  data-bs-mask="99/99/9999"
-  placeholder="MM/DD/YYYY"
-  aria-label="Reference date"
-/&gt;
+            <h3>Date mask</h3>
+            <div class="docs-demo" data-component-example="form-mask-date"><div class="bs-form-group"><label class="bs-label" for="mask-date">Reference date</label><input class="bs-input" id="mask-date" name="reference_date" inputmode="numeric" data-bs-mask="99/99/9999" placeholder="MM/DD/YYYY" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Date mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="reference-date"&gt;Reference date&lt;/label&gt;
+&lt;input class="bs-input" id="reference-date" name="reference_date" inputmode="numeric" data-bs-mask="99/99/9999" placeholder="MM/DD/YYYY" /&gt;</code></pre></div>
 
-&lt;input
-  class="bs-input"
-  name="product_key"
-  data-bs-mask="AAAA-9999-****"
-  placeholder="ABCD-1234-E5F6"
-  aria-label="Product key"
-/&gt;</code></pre></div>
+            <h3>Alphanumeric mask</h3>
+            <div class="docs-demo" data-component-example="form-mask-key"><div class="bs-form-group"><label class="bs-label" for="mask-key">Product key</label><input class="bs-input" id="mask-key" name="product_key" data-bs-mask="AAAA-9999-****" placeholder="ABCD-1234-E5F6" /></div></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Alphanumeric mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="product-key"&gt;Product key&lt;/label&gt;
+&lt;input class="bs-input" id="product-key" name="product_key" data-bs-mask="AAAA-9999-****" placeholder="ABCD-1234-E5F6" /&gt;</code></pre></div>
             <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize input masks</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initInputMasks } from "@boobstrap/boobstrap/js/input-mask";
 
@@ -1627,8 +1473,8 @@ const masks = initInputMasks(document);</code></pre></div>
             <h2>Checkboxes and radios</h2>
             <p>Use checkboxes for independent choices, radios for one choice from a set, and switches for immediate binary settings.</p>
 
-            <h3>Checks, descriptions, radios, and switches</h3>
-            <div class="docs-demo docs-form-selection-demo" data-component-example="form-checks-radios">
+            <h3>Checkbox group</h3>
+            <div class="docs-demo" data-component-example="form-checkbox-group">
               <fieldset class="bs-check-group">
                 <legend class="bs-label">Notifications</legend>
                 <label class="bs-check">
@@ -1645,23 +1491,8 @@ const masks = initInputMasks(document);</code></pre></div>
                   <span class="bs-check-label">Legacy notices</span>
                 </label>
               </fieldset>
-              <fieldset class="bs-check-group">
-                <legend class="bs-label">Billing cycle</legend>
-                <label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle" value="monthly" checked /><span class="bs-check-label">Monthly</span></label>
-                <label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle" value="yearly" /><span class="bs-check-label">Yearly</span><span class="bs-check-description">Save 20% with annual billing.</span></label>
-              </fieldset>
-              <fieldset class="bs-check-group">
-                <legend class="bs-label">Preferences</legend>
-                <label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" name="security_alerts" checked /><span class="bs-check-label">Security alerts</span></label>
-                <label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" name="maintenance_mode" /><span class="bs-check-label">Maintenance mode</span></label>
-              </fieldset>
-              <fieldset>
-                <legend class="bs-label">Inline density</legend>
-                <label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density" value="comfortable" checked /><span class="bs-check-label">Comfortable</span></label>
-                <label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density" value="compact" /><span class="bs-check-label">Compact</span></label>
-              </fieldset>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete selection controls</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Checkbox group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
   &lt;legend class="bs-label"&gt;Notifications&lt;/legend&gt;
   &lt;label class="bs-check"&gt;
     &lt;input
@@ -1695,65 +1526,30 @@ const masks = initInputMasks(document);</code></pre></div>
     /&gt;
     &lt;span class="bs-check-label"&gt;Legacy notices&lt;/span&gt;
   &lt;/label&gt;
-&lt;/fieldset&gt;
+&lt;/fieldset&gt;</code></pre></div>
 
-&lt;fieldset class="bs-check-group"&gt;
+            <h3>Radio group</h3>
+            <div class="docs-demo" data-component-example="form-radio-group"><fieldset class="bs-check-group"><legend class="bs-label">Billing cycle</legend><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="monthly" checked /><span class="bs-check-label">Monthly</span></label><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="yearly" /><span class="bs-check-label">Yearly</span><span class="bs-check-description">Save 20% with annual billing.</span></label></fieldset></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Radio group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
   &lt;legend class="bs-label"&gt;Billing cycle&lt;/legend&gt;
-  &lt;label class="bs-check"&gt;
-    &lt;input
-      class="bs-check-input"
-      type="radio"
-      name="billing_cycle"
-      value="monthly"
-      checked
-    /&gt;
-    &lt;span class="bs-check-label"&gt;Monthly&lt;/span&gt;
-  &lt;/label&gt;
-  &lt;label class="bs-check"&gt;
-    &lt;input
-      class="bs-check-input"
-      type="radio"
-      name="billing_cycle"
-      value="yearly"
-    /&gt;
-    &lt;span class="bs-check-label"&gt;Yearly&lt;/span&gt;
-    &lt;span class="bs-check-description"&gt;Save 20% with annual billing.&lt;/span&gt;
-  &lt;/label&gt;
-&lt;/fieldset&gt;
+  &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="monthly" checked /&gt;&lt;span class="bs-check-label"&gt;Monthly&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="yearly" /&gt;&lt;span class="bs-check-label"&gt;Yearly&lt;/span&gt;&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre></div>
 
-&lt;label class="bs-check bs-switch"&gt;
-  &lt;input
-    class="bs-check-input"
-    type="checkbox"
-    name="security_alerts"
-    checked
-  /&gt;
+            <h3>Switch</h3>
+            <div class="docs-demo" data-component-example="form-switch"><label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" name="security_alerts" checked /><span class="bs-check-label">Security alerts</span></label></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Switch</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-check bs-switch"&gt;
+  &lt;input class="bs-check-input" type="checkbox" name="security_alerts" checked /&gt;
   &lt;span class="bs-check-label"&gt;Security alerts&lt;/span&gt;
-&lt;/label&gt;
-
-&lt;label class="bs-check bs-switch"&gt;
-  &lt;input
-    class="bs-check-input"
-    type="checkbox"
-    name="maintenance_mode"
-  /&gt;
-  &lt;span class="bs-check-label"&gt;Maintenance mode&lt;/span&gt;
-&lt;/label&gt;
-
-&lt;label class="bs-check bs-check-inline"&gt;
-  &lt;input
-    class="bs-check-input"
-    type="radio"
-    name="density"
-    value="comfortable"
-    checked
-  /&gt;
-  &lt;span class="bs-check-label"&gt;Comfortable&lt;/span&gt;
-&lt;/label&gt;
-&lt;label class="bs-check bs-check-inline"&gt;
-  &lt;input class="bs-check-input" type="radio" name="density" value="compact" /&gt;
-  &lt;span class="bs-check-label"&gt;Compact&lt;/span&gt;
 &lt;/label&gt;</code></pre></div>
+
+            <h3>Inline radio choices</h3>
+            <div class="docs-demo" data-component-example="form-radio-inline"><fieldset><legend class="bs-label">Density</legend><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="comfortable" checked /><span class="bs-check-label">Comfortable</span></label><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="compact" /><span class="bs-check-label">Compact</span></label></fieldset></div>
+            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Inline radios</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset&gt;
+  &lt;legend class="bs-label"&gt;Density&lt;/legend&gt;
+  &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="comfortable" checked /&gt;&lt;span class="bs-check-label"&gt;Comfortable&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="compact" /&gt;&lt;span class="bs-check-label"&gt;Compact&lt;/span&gt;&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre></div>
             <div class="docs-note"><strong>Group choices:</strong> wrap related controls in <code>&lt;fieldset&gt;</code> and name the set with <code>&lt;legend&gt;</code>. Radios in one set must share the same <code>name</code>.</div>
           </section>
 
