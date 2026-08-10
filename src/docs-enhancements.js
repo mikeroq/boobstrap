@@ -381,22 +381,152 @@ toggle.addEventListener("click", () => {
 </nav>`,
     label: "HTML · Previous and next pages",
   });
-  addExample("navbar", {
+
+  addCodeExample("sidebars", {
+    title: "Anatomy",
+    description: "The shell mirrors the way application sidebars are actually assembled. Header and footer remain fixed, content scrolls, and groups contain menu lists or custom controls.",
+    label: "Text · Composition map",
+    language: "text",
+    source: `SidebarLayout
+├── Sidebar
+│   ├── SidebarHeader
+│   ├── SidebarContent
+│   │   └── SidebarGroup
+│   │       ├── SidebarGroupLabel + SidebarGroupAction
+│   │       └── SidebarGroupContent
+│   │           └── SidebarMenu
+│   │               └── SidebarMenuItem
+│   │                   ├── SidebarMenuButton
+│   │                   ├── SidebarMenuAction + SidebarMenuBadge
+│   │                   └── SidebarMenuSub
+│   ├── SidebarFooter
+│   └── SidebarRail
+└── SidebarMain + SidebarTrigger`,
+  });
+
+  addExample("sidebars", {
+    id: "sidebar-shell",
+    title: "Complete application shell",
+    description: "Compose a fixed identity region, independently scrolling navigation, account footer, and primary surface. The source order stays meaningful when the layout stacks on a narrow viewport.",
+    preview: `<div class="bs-sidebar-layout" style="min-block-size: 30rem">
+  <aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: 30rem" aria-label="Acme workspace">
+    <div class="bs-sidebar-header">
+      <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
+        <span aria-hidden="true">◆</span><span class="bs-sidebar-label">Acme, Inc.</span><span aria-hidden="true">⌄</span>
+      </button>
+    </div>
+    <div class="bs-sidebar-content">
+      <section class="bs-sidebar-group" aria-labelledby="shell-workspace-label">
+        <div class="bs-sidebar-group-label" id="shell-workspace-label">Workspace</div>
+        <div class="bs-sidebar-group-content">
+          <ul class="bs-sidebar-menu">
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">Dashboard</span></a></li>
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">□</span><span class="bs-sidebar-label">Projects</span><span class="bs-sidebar-menu-badge">8</span></a></li>
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">♧</span><span class="bs-sidebar-label">Team</span></a></li>
+          </ul>
+        </div>
+      </section>
+      <hr class="bs-sidebar-separator" />
+      <section class="bs-sidebar-group" aria-labelledby="shell-tools-label">
+        <div class="bs-sidebar-group-label" id="shell-tools-label">Tools</div>
+        <div class="bs-sidebar-group-content">
+          <ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">⚙</span><span class="bs-sidebar-label">Settings</span></a></li></ul>
+        </div>
+      </section>
+    </div>
+    <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span aria-hidden="true">●</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
+  </aside>
+  <div class="bs-sidebar-main bs-p-6" role="region" aria-label="Example main content"><span class="bs-badge bs-badge-primary">Main content</span><h4 class="bs-mt-4">Project overview</h4><p class="bs-text-muted">Your application content lives in the flexible main region.</p></div>
+</div>`,
+    label: "HTML · Complete sidebar shell",
+  });
+
+  addExample("sidebars", {
+    id: "sidebar-menu-anatomy",
+    title: "Menu actions, badges, and nested destinations",
+    description: "A menu item can combine one primary destination with an independently named action, count, or nested list. Keep links for navigation and buttons for commands.",
+    preview: `<aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 21rem" aria-label="Project navigation">
+  <div class="bs-sidebar-content">
+    <section class="bs-sidebar-group" aria-labelledby="projects-label">
+      <div class="bs-sidebar-group-label" id="projects-label">Projects</div>
+      <button class="bs-sidebar-group-action" type="button" aria-label="Add project">+</button>
+      <div class="bs-sidebar-group-content">
+        <ul class="bs-sidebar-menu">
+          <li class="bs-sidebar-menu-item">
+            <a class="bs-sidebar-menu-button" href="#sidebar-menu-anatomy" data-active="true"><span aria-hidden="true">◇</span><span class="bs-sidebar-label">Website redesign</span><span class="bs-sidebar-menu-badge">3</span></a>
+            <button class="bs-sidebar-menu-action" type="button" aria-label="Website redesign actions">•••</button>
+            <ul class="bs-sidebar-menu-sub">
+              <li class="bs-sidebar-menu-sub-item"><a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy" aria-current="page">Overview</a></li>
+              <li class="bs-sidebar-menu-sub-item"><a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy">Activity</a></li>
+            </ul>
+          </li>
+          <li class="bs-sidebar-menu-item"><button class="bs-sidebar-menu-button" type="button" disabled><span aria-hidden="true">◇</span><span class="bs-sidebar-label">Archived project</span></button></li>
+        </ul>
+      </div>
+    </section>
+  </div>
+</aside>`,
+    label: "HTML · Rich menu anatomy",
+  });
+
+  addExample("sidebars", {
+    id: "sidebar-variants",
+    title: "Default, floating, and inset variants",
+    description: "Use the default bordered rail for dense products, floating for an elevated panel, and inset when the main surface should read as a distinct workspace.",
+    preview: `<div class="bs-grid bs-gap-6">
+  <div class="bs-col-12 bs-col-lg-4"><aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Default sidebar example"><div class="bs-sidebar-header"><strong>Default</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside></div>
+  <div class="bs-col-12 bs-col-lg-4"><aside class="bs-sidebar bs-sidebar-start bs-sidebar-floating" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Floating sidebar example"><div class="bs-sidebar-header"><strong>Floating</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside></div>
+  <div class="bs-col-12 bs-col-lg-4"><div class="bs-sidebar-layout" style="min-block-size: 12rem"><aside class="bs-sidebar bs-sidebar-start bs-sidebar-inset" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Inset sidebar example"><div class="bs-sidebar-header"><strong>Inset</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside><div class="bs-sidebar-main bs-p-4">Content</div></div></div>
+</div>`,
+    label: "HTML · Sidebar variants",
+  });
+
+  addExample("sidebars", {
+    id: "sidebar-icon-collapse",
+    title: "Icon-collapse mode",
+    description: "Use icon mode when destinations remain recognizable without labels. The edge rail and any external trigger share the same aria-controls target; Control/Command+B is enabled by the declared shortcut.",
+    preview: `<button class="bs-sidebar-trigger bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar">☰</button>
+<div class="bs-sidebar-layout" style="min-block-size: 22rem">
+  <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible" id="collapse-example-sidebar" style="position: relative; --bs-sidebar-height: 22rem" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-sidebar-media="(max-width: 0px)" data-bs-sidebar-shortcut="b" data-bs-state="expanded" aria-label="Collapsible example navigation">
+    <div class="bs-sidebar-header"><strong class="bs-sidebar-label">Acme</strong></div>
+    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">Dashboard</span></a></li><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse"><span aria-hidden="true">□</span><span class="bs-sidebar-label">Projects</span><span class="bs-sidebar-menu-badge">8</span></a></li></ul></div>
+    <button class="bs-sidebar-rail" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar width"></button>
+  </aside>
+  <div class="bs-sidebar-main bs-p-5" role="region" aria-label="Collapse mode result">Toggle the rail to compare expanded and icon states.</div>
+</div>`,
+    label: "HTML · Collapsible icon rail",
+  });
+
+  addCodeExample("sidebars", {
+    title: "Choose a collapse mode",
+    description: "Icon retains the narrow rail, offcanvas removes it completely on desktop, and none keeps it persistent. Mobile drawer behavior remains independent when the drawer class is present.",
+    label: "HTML · Collapse modes",
+    source: `<aside class="bs-sidebar bs-sidebar-collapsible" data-bs-sidebar-collapse="icon">...</aside>
+<aside class="bs-sidebar bs-sidebar-collapsible" data-bs-sidebar-collapse="offcanvas">...</aside>
+<aside class="bs-sidebar" data-bs-sidebar-collapse="none">...</aside>`,
+  });
+
+  addExample("sidebars", {
     id: "sidebar-responsive",
     title: "Responsive navigation sidebar",
     description: "The sidebar remains a sticky rail at large widths and becomes an accessible off-canvas drawer below 64rem. The optional controller owns the backdrop, focus, Escape, ARIA state, and scroll lock.",
-    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar">Open documentation menu</button>
-<aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="example-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Example documentation navigation">
-  <nav class="bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
-    <p class="bs-nav-heading">Get started</p>
-    <a class="bs-nav-link" href="#sidebar-responsive">Introduction</a>
-    <a class="bs-nav-link" href="#sidebar-responsive">Installation</a>
-  </nav>
+    preview: `<button class="bs-sidebar-trigger" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar" aria-label="Toggle documentation menu">☰</button>
+<aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="example-sidebar" style="--bs-sidebar-height: 20rem" data-bs-sidebar data-bs-state="closed" aria-label="Example documentation navigation">
+  <div class="bs-sidebar-header"><div class="bs-flex bs-items-center bs-justify-between bs-gap-3"><strong>Documentation</strong><button class="bs-sidebar-trigger" type="button" data-bs-sidebar-dismiss aria-label="Close documentation menu">×</button></div></div>
+  <div class="bs-sidebar-content">
+    <nav class="bs-sidebar-group" aria-label="Documentation sections">
+      <div class="bs-sidebar-group-label">Get started</div>
+      <div class="bs-sidebar-group-content"><ul class="bs-sidebar-menu">
+        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-responsive" data-bs-sidebar-close>Introduction</a></li>
+        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-responsive" data-bs-sidebar-close>Installation</a></li>
+      </ul></div>
+    </nav>
+  </div>
 </aside>
 <button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="example-sidebar" aria-label="Close documentation menu"></button>`,
     label: "HTML · Responsive sidebar drawer",
   });
-  addExample("navbar", {
+  addExample("sidebars", {
     id: "sidebar-toc",
     title: "Right-hand table of contents",
     description: "Use the end and table-of-contents modifiers for compact in-page navigation. The page layout decides when to hide the rail so the reading column keeps enough width.",
@@ -410,7 +540,7 @@ toggle.addEventListener("click", () => {
 </aside>`,
     label: "HTML · Sticky table of contents",
   });
-  addCodeExample("navbar", {
+  addCodeExample("sidebars", {
     title: "Initialize and observe a sidebar",
     description: "The aggregate initializer discovers responsive sidebars, or import the component directly when you need imperative control.",
     label: "JavaScript · Sidebar lifecycle",
@@ -418,14 +548,123 @@ toggle.addEventListener("click", () => {
     source: `import { initBoobstrap } from "@boobstrap/boobstrap/js";
 
 const boobstrap = initBoobstrap(document);
-const sidebar = document.querySelector("[data-bs-sidebar]");
+const element = document.querySelector("[data-bs-sidebar]");
 
-sidebar.addEventListener("bs:sidebar:shown", () => {
+element.addEventListener("bs:sidebar:shown", () => {
   console.log("Navigation drawer opened");
 });
 
 // Later: boobstrap.destroy();`,
   });
+
+  addExample("sidebars", {
+    id: "sidebar-loading",
+    title: "Loading state",
+    description: "Skeleton rows preserve menu rhythm while destinations load. Change each placeholder's text width locally and let the framework disable pulsing when reduced motion is preferred.",
+    preview: `<aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="Loading navigation">
+  <div class="bs-sidebar-header"><strong>Loading workspace</strong></div>
+  <div class="bs-sidebar-content">
+    <div class="bs-sidebar-group"><div class="bs-sidebar-group-label">Projects</div><div class="bs-sidebar-group-content">
+      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 72%" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 55%" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 63%" aria-hidden="true"></div>
+    </div></div>
+  </div>
+</aside>`,
+    label: "HTML · Loading placeholders",
+  });
+
+  addExample("sidebars", {
+    id: "sidebar-rtl",
+    title: "Right-to-left and end placement",
+    description: "Start/end placement, borders, nested-menu indentation, actions, and badges use logical properties, so the same markup follows document direction without mirrored class names.",
+    preview: `<div dir="rtl">
+  <aside class="bs-sidebar bs-sidebar-end" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="التنقل في المشروع">
+    <div class="bs-sidebar-header"><strong>مساحة العمل</strong></div>
+    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu">
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">لوحة التحكم</span><span class="bs-sidebar-menu-badge">٤</span></a></li>
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl"><span aria-hidden="true">□</span><span class="bs-sidebar-label">المشاريع</span></a></li>
+    </ul></div>
+  </aside>
+</div>`,
+    label: "HTML · Logical end sidebar",
+  });
+
+  addCodeExample("sidebars", {
+    title: "Direct controller API",
+    description: "Use the component entry point when application code needs imperative control. Toggle automatically selects mobile show/hide or desktop expand/collapse for the current media query.",
+    label: "JavaScript · Controller methods",
+    language: "javascript",
+    source: `import { Sidebar } from "@boobstrap/boobstrap/js/sidebar";
+
+const sidebar = Sidebar.getOrCreateInstance(
+  document.querySelector("#app-sidebar"),
+);
+
+sidebar.show();       // mobile drawer
+sidebar.hide();       // mobile drawer
+sidebar.expand();     // desktop rail
+sidebar.collapse();   // desktop rail
+sidebar.toggle();     // active responsive mode
+
+// During application teardown:
+sidebar.destroy();`,
+  });
+
+  addCodeExample("sidebars", {
+    title: "Cancelable lifecycle events",
+    description: "Before-events can veto a transition. After-events are useful for analytics or layout work and include the controller, reason, and original source event in event.detail.",
+    label: "JavaScript · Lifecycle events",
+    language: "javascript",
+    source: `const sidebar = document.querySelector("#app-sidebar");
+
+sidebar.addEventListener("bs:sidebar:collapse", (event) => {
+  if (document.body.dataset.editorBusy === "true") event.preventDefault();
+});
+
+sidebar.addEventListener("bs:sidebar:collapsed", (event) => {
+  console.log(event.detail.reason); // trigger, shortcut, or api
+});`,
+  });
+
+  addCodeExample("sidebars", {
+    title: "Size customization",
+    description: "Set sizing variables at the sidebar boundary. If an application overrides the controller media query, its own drawer media rules must use the same breakpoint so behavior and presentation remain aligned.",
+    label: "HTML · Local configuration",
+    source: `<aside
+  class="bs-sidebar bs-sidebar-drawer"
+  style="--bs-sidebar-offset: 4rem;
+         --bs-sidebar-width: 19rem;
+         --bs-sidebar-width-mobile: 22rem;
+         --bs-sidebar-width-collapsed: 4rem"
+  data-bs-sidebar
+>...</aside>`,
+  });
+
+  addCodeExample("sidebars", {
+    title: "Application-owned state",
+    description: "React, Alpine, or another state layer can use the CSS presentation without the vanilla controller. Synchronize data-bs-state and aria-expanded together, and implement the same focus and dialog responsibilities for mobile drawers.",
+    label: "JavaScript · Controlled presentation",
+    language: "javascript",
+    source: `const sidebar = document.querySelector("#app-sidebar");
+const trigger = document.querySelector('[aria-controls="app-sidebar"]');
+
+function renderSidebar(expanded) {
+  sidebar.dataset.bsState = expanded ? "expanded" : "collapsed";
+  trigger.setAttribute("aria-expanded", String(expanded));
+}
+
+trigger.addEventListener("click", () => {
+  renderSidebar(sidebar.dataset.bsState === "collapsed");
+});`,
+  });
+
+  addGuidance("sidebars", [
+    { title: "Choose the shell", body: "Use <code>.bs-sidebar-layout</code> for product navigation beside a flexible main surface. A standalone <code>.bs-sidebar-end.bs-sidebar-toc</code> is enough for a compact article outline." },
+    { title: "Choose collapse deliberately", body: "Use <code>icon</code> only when every destination has a recognizable icon and accessible name. Use <code>offcanvas</code> when content needs the full width. Use <code>none</code> for always-visible navigation." },
+    { title: "Keep semantics native", body: "Use an <code>&lt;aside&gt;</code> landmark, labeled <code>&lt;nav&gt;</code> regions, links for destinations, buttons for actions, and <code>aria-current</code> for the active page." },
+    { title: "One state owner", body: "Initialize the Boobstrap controller or let your application own state—never both on the same sidebar. Custom mobile behavior must reproduce focus trapping, Escape dismissal, inert state, and focus restoration." },
+  ]);
 
   addExample("cards", {
     id: "card-basic",

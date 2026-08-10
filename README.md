@@ -15,7 +15,7 @@ Day-to-day work is integrated through the `dev` branch and previewed with the fr
 
 The site imports `@boobstrap/boobstrap@0.3.1` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/`, the documentation directory at `/docs`, 23 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`; the class and design-token references are generated in the browser from the exact compiled stylesheet installed by the site, preventing them from drifting from the shipped CSS.
+Vite serves the landing page at `/`, the documentation directory at `/docs`, 35 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`; the class and design-token references are generated in the browser from the exact compiled stylesheet installed by the site, preventing them from drifting from the shipped CSS.
 
 ## Validation
 
