@@ -202,6 +202,7 @@ try {
       const routeDimensions = await dimensionsFor(routePage);
       const visibleHeading = routePage.locator(".docs-content > .docs-component-hero > h1:visible, .docs-content > .docs-hero > h1:visible");
       const previews = routePage.locator("[data-component-example]:visible");
+      const renderedCode = routePage.locator(".docs-content .docs-code-block pre code");
 
       if (response?.status() !== 200) failures.push(`${viewport.name}: ${config.path} did not return 200`);
       if (await visibleHeading.count() !== 1 || (await visibleHeading.textContent())?.trim() !== config.title) {
@@ -225,6 +226,13 @@ try {
       if (await routePage.getByRole("tab", { name: "Preview", exact: true }).count() !== 0 || await routePage.getByRole("tab", { name: "Code", exact: true }).count() !== 0) {
         failures.push(`${viewport.name}: ${config.path} retained preview/code tabs`);
       }
+      if (await renderedCode.count() > 0 && !await renderedCode.evaluateAll((elements) => elements.every((code) => (
+        code.classList.contains("hljs")
+        && code.dataset.highlighted === "yes"
+        && Boolean(code.dataset.highlightLanguage)
+      )))) {
+        failures.push(`${viewport.name}: ${config.path} has an unhighlighted code block`);
+      }
       const pairedExamples = await previews.evaluateAll((elements) => elements.every((preview) => {
         const code = preview.nextElementSibling;
         return code?.classList.contains("docs-code-block") && getComputedStyle(code).display !== "none";
@@ -245,6 +253,9 @@ try {
         await routePage.getByRole("tab", { name: "pnpm", exact: true }).click();
         if (await routePage.locator("[data-package-command-output]").textContent() !== "pnpm add @boobstrap/boobstrap") {
           failures.push("desktop: installation package tabs did not update");
+        }
+        if (await routePage.locator("[data-package-command-output]").getAttribute("data-highlight-language") !== "bash") {
+          failures.push("desktop: dynamic package command was not re-highlighted");
         }
       }
 
@@ -278,6 +289,10 @@ try {
         const bannerSource = await routePage.locator("#banners .docs-code-block").allTextContents();
         if (!bannerSource.some((source) => source.includes("initBanners"))) {
           failures.push("desktop: banner documentation is missing its JavaScript initialization example");
+        }
+        if (await routePage.locator('#banners .docs-code-block code .hljs-tag').count() === 0
+          || await routePage.locator('#banners .docs-code-block code .hljs-keyword').count() === 0) {
+          failures.push("desktop: banner HTML and JavaScript examples are missing syntax tokens");
         }
       }
 

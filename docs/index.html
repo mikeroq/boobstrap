@@ -1820,19 +1820,19 @@ verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
           <section class="docs-section" id="code-windows">
             <div class="docs-kicker">Components</div>
             <h2>Code windows</h2>
-            <p>The code-window family provides a complete presentation shell and optional syntax-color helpers. It does not perform syntax highlighting; apply the token classes in server-rendered or hand-authored markup.</p>
+            <p>The code-window family provides a complete presentation shell and optional syntax-color helpers. Boobstrap leaves parsing to your application; these docs integrate Highlight.js while the framework token classes remain available for server-rendered or hand-authored markup.</p>
             <div class="bs-code-window">
               <div class="bs-code-toolbar"><div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div><span class="bs-text-xs bs-text-subtle">example.html</span></div>
-              <pre class="bs-code-body bs-m-0"><span class="bs-code-comment">&lt;!-- Build boldly --&gt;</span>
+              <pre class="bs-code-body bs-m-0"><code data-language="xml"><span class="bs-code-comment">&lt;!-- Build boldly --&gt;</span>
 <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span><span class="bs-code-tag">&gt;</span>
   Ship it
 <span class="bs-code-tag">&lt;/button&gt;</span>
-<span class="bs-code-keyword">const</span> ready = <span class="bs-code-string">true</span>;</pre>
+<span class="bs-code-keyword">const</span> ready = <span class="bs-code-string">true</span>;</code></pre>
             </div>
             <div class="docs-note"><strong>Composition:</strong> use <code>.bs-code-window</code> as the shell, <code>.bs-code-toolbar</code> for chrome, <code>.bs-code-dots</code> and three <code>.bs-code-dot</code> elements for the controls, and <code>.bs-code-body</code> on the <code>&lt;pre&gt;</code>.</div>
             <div class="docs-api">
               <h3>Code window API</h3>
-              <p>Syntax classes only color tokens you mark up; Boobstrap does not ship a parser or client-side highlighter.</p>
+              <p>Syntax classes color tokens you mark up. Pair them with a parser such as Highlight.js when your application needs automatic highlighting.</p>
               <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-code-window</code></td><td>Outer shell, border, background, and clipping.</td></tr>
                 <tr><td><code>.bs-code-toolbar</code></td><td>Optional filename or control row.</td></tr>
