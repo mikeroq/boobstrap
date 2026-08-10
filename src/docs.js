@@ -10,6 +10,45 @@ import { highlightCodeBlocks, highlightCodeElement } from "./syntax-highlighting
 initDevelopmentBanner();
 enhanceDocumentation();
 
+document.querySelectorAll(".docs-nav a, .docs-on-this-page a").forEach((link) => {
+  link.classList.add("bs-nav-link");
+  if (link.classList.contains("docs-nav-subitem")) link.classList.add("bs-nav-link-subitem");
+});
+document.querySelectorAll(".docs-code-block").forEach((block) => {
+  block.classList.add("bs-code-window");
+  block.querySelector(":scope > .docs-code-label")?.classList.add("bs-code-header");
+  block.querySelector(":scope > .docs-code-label button")?.classList.add("bs-code-action");
+  block.querySelectorAll(":scope > pre, :scope > .docs-code-variant-panel > pre").forEach((pre) => pre.classList.add("bs-code-body"));
+  block.querySelectorAll(".docs-code-variant-tabs").forEach((tabs) => tabs.classList.add("bs-code-tabs"));
+  block.querySelectorAll(".docs-code-variant-tabs button").forEach((tab) => tab.classList.add("bs-code-tab"));
+  block.querySelectorAll(".docs-code-variant-panel").forEach((panel) => panel.classList.add("bs-code-panel"));
+});
+document.querySelectorAll(":not(pre) > code").forEach((code) => code.classList.add("bs-code-inline"));
+document.querySelectorAll(".docs-package-tabs").forEach((tabs) => tabs.classList.add("bs-tabs", "bs-tabs-pills"));
+document.querySelectorAll(".docs-package-tab").forEach((tab) => tab.classList.add("bs-tab"));
+document.querySelectorAll(".docs-framework-tablist").forEach((tabs) => tabs.classList.add("bs-tabs", "bs-tabs-contained"));
+document.querySelectorAll(".docs-framework-tablist button").forEach((tab) => tab.classList.add("bs-tab"));
+document.querySelectorAll(".docs-framework-switcher [role=\"tabpanel\"]").forEach((panel) => panel.classList.add("bs-tab-panel", "bs-tab-panel-contained"));
+document.querySelectorAll(".docs-quick-links a").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-compact", "bs-card-link"));
+document.querySelectorAll(".docs-directory-grid > section, .docs-usage-grid article").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-body"));
+document.querySelectorAll(".docs-form-topic-grid a").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-body", "bs-card-link"));
+document.querySelectorAll(".docs-reference-card").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-compact"));
+document.querySelectorAll(".docs-callout, .docs-note").forEach((callout) => {
+  callout.classList.add("bs-alert", "bs-alert-primary");
+  const content = document.createElement("span");
+  content.append(...callout.childNodes);
+  callout.append(content);
+});
+document.querySelectorAll(".docs-component-meta span, .docs-stat-row > span").forEach((badge) => badge.classList.add("bs-badge", "bs-text-xs"));
+document.querySelectorAll(".docs-component-pagination").forEach((pagination) => {
+  pagination.classList.add("bs-page-nav");
+  pagination.querySelectorAll(":scope > a").forEach((link) => {
+    link.classList.add("bs-page-nav-link");
+    link.querySelector("span")?.classList.add("bs-page-nav-context");
+    link.querySelector("strong")?.classList.add("bs-page-nav-title");
+  });
+});
+
 const root = document.documentElement;
 const page = document.body;
 const menuToggle = document.querySelector("[data-menu-toggle]");
@@ -115,7 +154,7 @@ const createRoutedHero = (config) => {
   header.className = "docs-component-hero docs-routed-hero";
 
   const breadcrumb = document.createElement("nav");
-  breadcrumb.className = "docs-breadcrumb";
+  breadcrumb.className = "docs-breadcrumb bs-breadcrumb";
   breadcrumb.setAttribute("aria-label", "Breadcrumb");
   const docsLink = document.createElement("a");
   docsLink.href = "/docs";
@@ -142,7 +181,7 @@ const createRoutedHero = (config) => {
   meta.className = "docs-component-meta";
   meta.setAttribute("aria-label", `${config.title} documentation summary`);
   const hasExamples = routedSection?.querySelector("[data-component-example], .docs-code-block");
-  meta.innerHTML = `<span><strong>${escapeHtml(config.category)}</strong> guide</span><span><strong>${hasExamples ? "Copy-ready" : "Complete"}</strong> reference</span><span><strong>v0.3.1</strong> current</span>`;
+  meta.innerHTML = `<span class="bs-badge bs-text-xs"><strong>${escapeHtml(config.category)}</strong> guide</span><span class="bs-badge bs-text-xs"><strong>${hasExamples ? "Copy-ready" : "Complete"}</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span>`;
   header.append(breadcrumb, kicker, heading, lead, meta);
   return header;
 };
@@ -179,15 +218,18 @@ if (docsIndex && activeDocsPage) {
   const previousPage = docsPages[activeIndex - 1] ?? { path: "/docs", title: "Documentation overview", category: "Documentation" };
   const nextPage = docsPages[activeIndex + 1] ?? { path: "/docs", title: "Documentation overview", category: "Documentation" };
   const pagination = document.createElement("nav");
-  pagination.className = "docs-component-pagination";
+  pagination.className = "docs-component-pagination bs-page-nav";
   pagination.setAttribute("aria-label", "Documentation pagination");
 
   const createPaginationLink = (config, direction) => {
     const link = document.createElement("a");
+    link.className = "bs-page-nav-link";
     link.href = config.path;
     const context = document.createElement("span");
+    context.className = "bs-page-nav-context";
     context.textContent = direction === "previous" ? `Previous · ${config.category}` : `Next · ${config.category}`;
     const title = document.createElement("strong");
+    title.className = "bs-page-nav-title";
     title.textContent = direction === "previous" ? `← ${config.title}` : `${config.title} →`;
     link.append(context, title);
     return link;
@@ -448,10 +490,10 @@ const renderReference = (target, groups, query, type) => {
       const swatch = type === "token" && /^(#|rgb|linear-gradient|var\(--bs-(brand|plum|color))/.test(value)
         ? `<span class="token-swatch token-swatch-${escapeHtml(name.replace("--bs-", ""))}"></span>`
         : "";
-      return `<div class="reference-row"><div class="reference-name">${swatch}<code>${escapeHtml(type === "class" ? `.${name}` : name)}</code></div><div class="reference-value">${escapeHtml(value)}</div></div>`;
+      return `<div class="reference-row bs-reference-row"><div class="reference-name bs-reference-name">${swatch}<code class="bs-code-inline">${escapeHtml(type === "class" ? `.${name}` : name)}</code></div><div class="reference-value bs-reference-value">${escapeHtml(value)}</div></div>`;
     }).join("");
 
-    return `<section class="reference-group"><h3>${escapeHtml(category)}<span class="reference-count">${visibleItems.length}</span></h3><div class="reference-list">${rows}</div></section>`;
+    return `<section class="reference-group"><h3>${escapeHtml(category)}<span class="reference-count">${visibleItems.length}</span></h3><div class="reference-list bs-reference-list">${rows}</div></section>`;
   }).join("");
 
   target.innerHTML = markup || '<p class="reference-empty">No matching entries.</p>';
@@ -508,7 +550,10 @@ if (routedSection?.classList.contains("docs-section")) {
   }));
 }
 
-if (pageNav) pageNav.innerHTML = outlineTargets.map(({ id, label }) => `<a href="#${id}">${escapeHtml(label)}</a>`).join("");
+if (pageNav) {
+  pageNav.classList.add("bs-nav");
+  pageNav.innerHTML = outlineTargets.map(({ id, label }) => `<a class="bs-nav-link" href="#${id}">${escapeHtml(label)}</a>`).join("");
+}
 
 outlineTargets.forEach(({ heading, id, label }) => {
   if (!heading) return;

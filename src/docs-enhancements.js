@@ -19,19 +19,21 @@ const createDescription = (description) => {
 
 const createCodeBlock = ({ label, source, language }) => {
   const block = document.createElement("div");
-  block.className = "docs-code-block";
+  block.className = "docs-code-block bs-code-window";
 
   const toolbar = document.createElement("div");
-  toolbar.className = "docs-code-label";
+  toolbar.className = "docs-code-label bs-code-header";
   const title = document.createElement("span");
   title.textContent = label;
   const copy = document.createElement("button");
+  copy.className = "bs-code-action";
   copy.type = "button";
   copy.dataset.copyCode = "";
   copy.textContent = "Copy";
   toolbar.append(title, copy);
 
   const pre = document.createElement("pre");
+  pre.className = "bs-code-body";
   const code = document.createElement("code");
   if (language) code.dataset.language = language;
   code.textContent = source.trim();
@@ -103,10 +105,10 @@ const addIntroductionDetails = () => {
   details.innerHTML = `
     <h2>What ships in the framework</h2>
     <div class="docs-reference-grid">
-      <article class="docs-reference-card"><h3>CSS foundations</h3><p>A small reset, semantic theme tokens, responsive containers, a 12-column grid, typography, and composable utilities.</p></article>
-      <article class="docs-reference-card"><h3>UI components</h3><p>Buttons, cards, badges, alerts, banners, form controls, code windows, and interaction presentation classes.</p></article>
-      <article class="docs-reference-card"><h3>Optional behavior</h3><p>Dependency-free controllers plus official Alpine.js and React adapters for stateful components.</p></article>
-      <article class="docs-reference-card"><h3>Copy-ready docs</h3><p>Every visual example is paired with source and can be inspected independently in light or dark mode.</p></article>
+      <article class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>CSS foundations</h3><p>A small reset, semantic theme tokens, responsive containers, a 12-column grid, typography, and composable utilities.</p></article>
+      <article class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>UI components</h3><p>Buttons, cards, badges, alerts, banners, form controls, code windows, and interaction presentation classes.</p></article>
+      <article class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Optional behavior</h3><p>Dependency-free controllers plus official Alpine.js and React adapters for stateful components.</p></article>
+      <article class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Copy-ready docs</h3><p>Every visual example is paired with source and can be inspected independently in light or dark mode.</p></article>
     </div>
     <h2>Your first component</h2>
     <p>Import the stylesheet once, then compose semantic HTML with namespaced <code>bs-</code> classes.</p>

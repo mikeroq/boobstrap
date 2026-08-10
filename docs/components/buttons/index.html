@@ -26,8 +26,8 @@
   <body class="docs-page docs-component-page">
     <a class="docs-skip-link" href="#docs-content">Skip to button documentation</a>
 
-    <header class="docs-header">
-      <a class="docs-brand bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap Docs home">
+    <header class="docs-header bs-navbar">
+      <a class="docs-brand bs-navbar-brand bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap Docs home">
         <svg class="docs-brand-mark" width="38" height="30" viewBox="0 0 56 42" aria-hidden="true">
           <path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Z" fill="currentColor"/>
           <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/>
@@ -39,16 +39,16 @@
       </a>
 
       <nav class="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
-        <a href="/" class="docs-header-link">Home</a>
-        <a href="/playground" class="docs-header-link">Playground</a>
-        <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link">npm</a>
-        <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
+        <a href="/" class="docs-header-link bs-navbar-link">Home</a>
+        <a href="/playground" class="docs-header-link bs-navbar-link">Playground</a>
+        <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link bs-navbar-link">npm</a>
+        <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link bs-navbar-link">GitHub</a>
         <span class="docs-version">v0.3.1</span>
-        <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
+        <button class="docs-icon-button bs-navbar-toggle" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </button>
-        <button class="docs-menu-button docs-icon-button" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </nav>
@@ -64,22 +64,22 @@
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav" aria-label="Documentation sections">
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Get started</p>
+        <nav class="docs-nav bs-nav" aria-label="Documentation sections">
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
             <a href="/docs/getting-started/installation">Installation</a>
             <a href="/docs/getting-started/starter-template">Starter template</a>
             <a href="/docs/getting-started/theming">Theming</a>
           </div>
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Foundations</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Foundations</p>
             <a href="/docs/foundations/typography">Typography</a>
             <a href="/docs/foundations/layout">Layout &amp; grid</a>
             <a href="/docs/foundations/responsive-composition">Responsive composition</a>
           </div>
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Components</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Components</p>
             <a href="/docs/components/buttons" aria-current="page">Buttons</a>
             <a href="/docs/components/navbar">Header / navbar</a>
             <a href="/docs/components/badges">Badges</a>
@@ -89,15 +89,15 @@
             <a href="/docs/components/code-windows">Code windows</a>
             <a href="/docs/components/icons">Icons</a>
           </div>
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Interactivity</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Interactivity</p>
             <a href="/docs/interactivity/overview">JS, Alpine &amp; React</a>
             <a href="/docs/interactivity/collapse">Collapse</a>
             <a href="/docs/interactivity/dropdown">Dropdown</a>
             <a href="/docs/interactivity/tabs">Tabs</a>
           </div>
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Reference</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Reference</p>
             <a href="/docs/reference/utilities">Utilities</a>
             <a href="/docs/reference/tokens">Design tokens</a>
             <a href="/docs/reference/classes">All classes</a>
@@ -112,7 +112,7 @@
       <main class="docs-main" id="docs-content">
         <article class="docs-content docs-component-content">
           <header class="docs-component-hero">
-            <nav class="docs-breadcrumb" aria-label="Breadcrumb">
+            <nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb">
               <a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Buttons</span>
             </nav>
             <div class="docs-kicker">Components</div>
@@ -135,8 +135,8 @@
                 <a class="bs-btn bs-btn-secondary" href="/docs" data-link-button-example>Read the docs</a>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Semantic elements</span><button type="button" data-copy-example="button-overview" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;&#10;&lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read the docs&lt;/a&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Semantic elements</span><button type="button" data-copy-example="button-overview" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;&#10;&lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read the docs&lt;/a&gt;'>Copy</button></div>
               <pre><code>&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
 
 &lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read the docs&lt;/a&gt;</code></pre>
@@ -157,8 +157,8 @@
                 <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Variants</span><button type="button" data-copy-example="button-variants" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Primary&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Secondary&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-ghost" type="button"&gt;Ghost&lt;/button&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Variants</span><button type="button" data-copy-example="button-variants" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Primary&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Secondary&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-ghost" type="button"&gt;Ghost&lt;/button&gt;'>Copy</button></div>
               <pre><code>&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Primary&lt;/button&gt;
 &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Secondary&lt;/button&gt;
 &lt;button class="bs-btn bs-btn-ghost" type="button"&gt;Ghost&lt;/button&gt;</code></pre>
@@ -182,8 +182,8 @@
               </div>
               <button class="bs-btn bs-btn-secondary bs-btn-block" type="button">Full-width action</button>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Sizes and block</span><button type="button" data-copy-example="button-sizes" data-copy='&lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Small&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Default&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-primary bs-btn-lg" type="button"&gt;Large&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-secondary bs-btn-block" type="button"&gt;Full-width action&lt;/button&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Sizes and block</span><button type="button" data-copy-example="button-sizes" data-copy='&lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Small&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Default&lt;/button&gt;&#10;&lt;button class="bs-btn bs-btn-primary bs-btn-lg" type="button"&gt;Large&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-secondary bs-btn-block" type="button"&gt;Full-width action&lt;/button&gt;'>Copy</button></div>
               <pre><code>&lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Small&lt;/button&gt;
 &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Default&lt;/button&gt;
 &lt;button class="bs-btn bs-btn-primary bs-btn-lg" type="button"&gt;Large&lt;/button&gt;
@@ -212,8 +212,8 @@
                 </button>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Inline SVG</span><button type="button" data-copy-example="button-icons" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;&#10;  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="M12 5v14M5 12h14" /&gt;&#10;  &lt;/svg&gt;&#10;  Create&#10;&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites"&gt;&#10;  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;&#10;  &lt;/svg&gt;&#10;&lt;/button&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Inline SVG</span><button type="button" data-copy-example="button-icons" data-copy='&lt;button class="bs-btn bs-btn-primary" type="button"&gt;&#10;  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="M12 5v14M5 12h14" /&gt;&#10;  &lt;/svg&gt;&#10;  Create&#10;&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites"&gt;&#10;  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;&#10;  &lt;/svg&gt;&#10;&lt;/button&gt;'>Copy</button></div>
               <pre><code>&lt;button class="bs-btn bs-btn-primary" type="button"&gt;
   &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
     &lt;path d="M12 5v14M5 12h14" /&gt;
@@ -241,8 +241,8 @@
               <div><span>Active style</span><button class="bs-btn bs-btn-primary bs-btn-active" type="button">Current</button></div>
               <div><span>Disabled</span><button class="bs-btn bs-btn-primary" type="button" disabled>Unavailable</button></div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Persistent states</span><button type="button" data-copy-example="button-states" data-copy='&lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Pinned&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-primary bs-btn-active" type="button"&gt;Current&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-primary" type="button" disabled&gt;Unavailable&lt;/button&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Persistent states</span><button type="button" data-copy-example="button-states" data-copy='&lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Pinned&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-primary bs-btn-active" type="button"&gt;Current&lt;/button&gt;&#10;&#10;&lt;button class="bs-btn bs-btn-primary" type="button" disabled&gt;Unavailable&lt;/button&gt;'>Copy</button></div>
               <pre><code>&lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Pinned&lt;/button&gt;
 
 &lt;button class="bs-btn bs-btn-primary bs-btn-active" type="button"&gt;Current&lt;/button&gt;
@@ -269,8 +269,8 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Labeled toolbar</span><button type="button" data-copy-example="button-groups" data-copy='&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor controls"&gt;&#10;  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Labeled toolbar</span><button type="button" data-copy-example="button-groups" data-copy='&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor controls"&gt;&#10;  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
               <pre><code>&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor controls"&gt;
   &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;
     &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;
@@ -300,8 +300,8 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-split-dropdown" data-copy='&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu bs-dropdown-menu-end" id="save-menu" role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-split-dropdown" data-copy='&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;&#10;  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;&#10;  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;&#10;  &lt;div class="bs-dropdown-menu bs-dropdown-menu-end" id="save-menu" role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;&#10;    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
               <pre><code>&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
   &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
   &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
@@ -327,9 +327,9 @@
                 <span class="bs-spinner bs-btn-spinner" aria-hidden="true"></span>
               </button>
             </div>
-            <div class="docs-code-block" data-code-variants>
-              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading-detail" data-copy>Copy</button></div>
-              <div class="docs-code-variant-tabs" role="tablist" aria-label="Loading button implementation">
+            <div class="docs-code-block bs-code-window" data-code-variants>
+              <div class="docs-code-label bs-code-header"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading-detail" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Loading button implementation">
                 <button id="button-detail-js-tab" type="button" role="tab" aria-selected="true" aria-controls="button-detail-js-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="button-detail-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-alpine-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="button-detail-react-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-react-panel" tabindex="-1" data-code-variant="react">React</button>
@@ -383,7 +383,7 @@
             <h2>Class and JavaScript API</h2>
             <p>Button modifiers compose across hierarchy, size, shape, layout, and state. JavaScript is required only for managed loading state and dropdown behavior.</p>
             <h3>CSS classes</h3>
-            <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
               <tr><td><code>.bs-btn</code></td><td>Base alignment, spacing, typography, focus, and interaction styles.</td><td>Required on every button.</td></tr>
               <tr><td><code>.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>Prefer one per focused region.</td></tr>
               <tr><td><code>.bs-btn-secondary</code></td><td>Bordered supporting action.</td><td>For alternatives and secondary actions.</td></tr>
@@ -407,8 +407,8 @@
             </tbody></table></div>
 
             <h3>Button controller</h3>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>JavaScript · Component import</span><button type="button" data-copy='import { Button } from "@boobstrap/boobstrap/js/button";&#10;&#10;const save = Button.getOrCreateInstance(document.querySelector("[data-bs-button]"));&#10;save.start();&#10;save.stop();&#10;save.toggle();&#10;save.destroy();'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>JavaScript · Component import</span><button type="button" data-copy='import { Button } from "@boobstrap/boobstrap/js/button";&#10;&#10;const save = Button.getOrCreateInstance(document.querySelector("[data-bs-button]"));&#10;save.start();&#10;save.stop();&#10;save.toggle();&#10;save.destroy();'>Copy</button></div>
               <pre><code>import { Button } from "@boobstrap/boobstrap/js/button";
 
 const save = Button.getOrCreateInstance(document.querySelector("[data-bs-button]"));
@@ -417,7 +417,7 @@ save.stop();
 save.toggle();
 save.destroy();</code></pre>
             </div>
-            <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Method or event</th><th>Contract</th></tr></thead><tbody>
+            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Method or event</th><th>Contract</th></tr></thead><tbody>
               <tr><td><code>start(options?)</code></td><td>Enters loading state and returns <code>true</code> when the transition completes.</td></tr>
               <tr><td><code>stop(options?)</code></td><td>Restores the original attributes and returns <code>true</code> when the transition completes.</td></tr>
               <tr><td><code>toggle(options?)</code></td><td>Starts or stops based on the current state.</td></tr>
@@ -431,7 +431,7 @@ save.destroy();</code></pre>
             <div class="docs-kicker">Ship responsibly</div>
             <h2>Accessibility</h2>
             <p>Boobstrap supplies focus-visible treatment and state styling. Your markup and application logic still own meaning, names, state, and correct keyboard behavior.</p>
-            <ul class="docs-checklist">
+            <ul class="docs-checklist bs-checklist">
               <li>Use <code>&lt;button type="button"&gt;</code> for actions and <code>&lt;a href&gt;</code> for navigation.</li>
               <li>Set an explicit button <code>type</code>; the default inside a form is <code>submit</code>.</li>
               <li>Give icon-only buttons and split triggers a concise accessible name with <code>aria-label</code> or visible text.</li>
@@ -444,7 +444,7 @@ save.destroy();</code></pre>
             <div class="docs-callout"><strong>Do not remove focus indication.</strong><p>The built-in focus ring is intentional. If your theme overrides it, provide an equally visible replacement in both light and dark themes.</p></div>
           </section>
 
-          <nav class="docs-component-pagination" aria-label="Component documentation">
+          <nav class="docs-component-pagination bs-page-nav" aria-label="Component documentation">
             <a href="/docs"><span>Documentation</span><strong>← Back to overview</strong></a>
             <a href="/docs/components/navbar"><span>Next component</span><strong>Header / navbar →</strong></a>
           </nav>
@@ -460,7 +460,7 @@ save.destroy();</code></pre>
       </main>
 
       <aside class="docs-on-this-page" aria-label="On this page">
-        <p class="docs-nav-label">On this page</p>
+        <p class="docs-nav-label bs-nav-heading">On this page</p>
         <nav data-page-nav></nav>
       </aside>
     </div>

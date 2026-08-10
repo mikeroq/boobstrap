@@ -43,8 +43,8 @@
       </div>
     </div>
 
-    <header class="docs-header">
-      <a class="docs-brand bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap Docs home">
+    <header class="docs-header bs-navbar">
+      <a class="docs-brand bs-navbar-brand bs-inline-flex bs-items-center bs-gap-3 bs-no-underline" href="/" aria-label="Boobstrap Docs home">
         <svg class="docs-brand-mark" width="38" height="30" viewBox="0 0 56 42" aria-hidden="true">
           <path d="M6 3c-8 9-7 25 4 33 5 4 11 5 17 3-8-4-14-12-14-21 0-6 2-11 6-15-5 0-9 0-13 0Z" fill="currentColor"/>
           <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="currentColor"/>
@@ -56,16 +56,16 @@
       </a>
 
       <nav class="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
-        <a href="/" class="docs-header-link">Home</a>
-        <a href="/playground" class="docs-header-link">Playground</a>
-        <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link">npm</a>
-        <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link">GitHub</a>
+        <a href="/" class="docs-header-link bs-navbar-link">Home</a>
+        <a href="/playground" class="docs-header-link bs-navbar-link">Playground</a>
+        <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" class="docs-header-link bs-navbar-link">npm</a>
+        <a href="https://github.com/mikeroq/boobstrap-framework" class="docs-header-link bs-navbar-link">GitHub</a>
         <span class="docs-version">v0.3.1</span>
-        <button class="docs-icon-button" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
+        <button class="docs-icon-button bs-navbar-toggle" type="button" data-theme-toggle aria-label="Switch to light theme" title="Toggle color theme">
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </button>
-        <button class="docs-menu-button docs-icon-button" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </nav>
@@ -81,24 +81,24 @@
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav" aria-label="Documentation sections">
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Get started</p>
+        <nav class="docs-nav bs-nav" aria-label="Documentation sections">
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
             <a href="/docs/getting-started/installation">Installation</a>
             <a href="/docs/getting-started/starter-template">Starter template</a>
             <a href="/docs/getting-started/theming">Theming</a>
           </div>
 
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Foundations</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Foundations</p>
             <a href="/docs/foundations/typography">Typography</a>
             <a href="/docs/foundations/layout">Layout &amp; grid</a>
             <a href="/docs/foundations/responsive-composition">Responsive composition</a>
           </div>
 
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Components</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Components</p>
             <a href="/docs/components/buttons">Buttons</a>
             <a href="/docs/components/navbar">Header / navbar</a>
             <a href="/docs/components/badges">Badges</a>
@@ -118,16 +118,16 @@
             <a href="/docs/components/icons">Icons</a>
           </div>
 
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Interactivity</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Interactivity</p>
             <a href="/docs/interactivity/overview">JS, Alpine &amp; React</a>
             <a href="/docs/interactivity/collapse">Collapse</a>
             <a href="/docs/interactivity/dropdown">Dropdown</a>
             <a href="/docs/interactivity/tabs">Tabs</a>
           </div>
 
-          <div class="docs-nav-group" data-nav-group>
-            <p class="docs-nav-label">Reference</p>
+          <div class="docs-nav-group bs-nav-group" data-nav-group>
+            <p class="docs-nav-label bs-nav-heading">Reference</p>
             <a href="/docs/reference/utilities">Utilities</a>
             <a href="/docs/reference/tokens">Design tokens</a>
             <a href="/docs/reference/classes">All classes</a>
@@ -142,7 +142,7 @@
       <main class="docs-main" id="docs-content">
         <article class="docs-content">
           <section class="docs-hero" id="introduction">
-            <div class="docs-breadcrumb" aria-label="Breadcrumb"><span>Docs</span><span aria-hidden="true">/</span><span>Introduction</span></div>
+            <div class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><span>Docs</span><span aria-hidden="true">/</span><span>Introduction</span></div>
             <span class="bs-badge bs-badge-primary">Boobstrap v0.3.1</span>
             <h1>Build with <span class="bs-text-gradient">Boobstrap.</span></h1>
             <p class="bs-lead">A CSS-first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add an official Alpine or React adapter.</p>
@@ -235,20 +235,20 @@
               <button class="docs-package-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-package-name="Bun" data-package-command="bun add @boobstrap/boobstrap">Bun</button>
             </div>
 
-            <div class="docs-code-block" role="tabpanel" aria-label="Installation command">
-              <div class="docs-code-label"><span><span data-package-label>npm</span> · Terminal</span><button type="button" data-package-copy data-copy="npm install @boobstrap/boobstrap">Copy</button></div>
+            <div class="docs-code-block bs-code-window" role="tabpanel" aria-label="Installation command">
+              <div class="docs-code-label bs-code-header"><span><span data-package-label>npm</span> · Terminal</span><button type="button" data-package-copy data-copy="npm install @boobstrap/boobstrap">Copy</button></div>
               <pre><code data-package-command-output>npm install @boobstrap/boobstrap</code></pre>
             </div>
 
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>JavaScript</span><button type="button" data-copy="import &quot;@boobstrap/boobstrap/dist/boobstrap.css&quot;;">Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>JavaScript</span><button type="button" data-copy="import &quot;@boobstrap/boobstrap/dist/boobstrap.css&quot;;">Copy</button></div>
               <pre><code><span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap/dist/boobstrap.css"</span>;</code></pre>
             </div>
 
             <h3>Use from a CDN</h3>
             <p>For a plain HTML project, load the version-pinned stylesheet directly from jsDelivr:</p>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.1/dist/boobstrap.css" /&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · jsDelivr</span><button type="button" data-copy='&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.1/dist/boobstrap.css" /&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;link</span> <span class="bs-code-attribute">rel</span>=<span class="bs-code-string">"stylesheet"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.1/dist/boobstrap.css"</span> <span class="bs-code-tag">/&gt;</span></code></pre>
             </div>
             <p>To self-host instead, copy <code>dist/boobstrap.css</code> from the installed package into your assets.</p>
@@ -286,8 +286,8 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>Terminal</span><button type="button" data-copy="npm install&#10;npm run dev&#10;npm run validate">Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>Terminal</span><button type="button" data-copy="npm install&#10;npm run dev&#10;npm run validate">Copy</button></div>
               <pre><code><span class="bs-code-keyword">npm</span> install
 <span class="bs-code-keyword">npm</span> run dev
 <span class="bs-code-keyword">npm</span> run validate</code></pre>
@@ -314,15 +314,15 @@
               </div>
             </div>
 
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;html data-bs-theme="light"&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy='&lt;html data-bs-theme="light"&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;html</span> <span class="bs-code-attribute">data-bs-theme</span>=<span class="bs-code-string">"light"</span><span class="bs-code-tag">&gt;</span></code></pre>
             </div>
 
             <h3>Customize semantic tokens</h3>
             <p>Override variables after importing Boobstrap. Components consume semantic tokens such as <code>--bs-color-primary</code>, so a small override updates the whole system.</p>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>CSS</span><button type="button" data-copy=":root {&#10;  --bs-color-primary: #8b5cf6;&#10;  --bs-color-primary-hover: #a78bfa;&#10;  --bs-radius-md: 0.5rem;&#10;}">Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>CSS</span><button type="button" data-copy=":root {&#10;  --bs-color-primary: #8b5cf6;&#10;  --bs-color-primary-hover: #a78bfa;&#10;  --bs-radius-md: 0.5rem;&#10;}">Copy</button></div>
               <pre><code><span class="bs-code-tag">:root</span> {
   <span class="bs-code-attribute">--bs-color-primary</span>: <span class="bs-code-string">#8b5cf6</span>;
   <span class="bs-code-attribute">--bs-color-primary-hover</span>: <span class="bs-code-string">#a78bfa</span>;
@@ -343,8 +343,8 @@
               <p class="bs-lead bs-mb-4">Lead copy introduces a section with a larger, muted treatment.</p>
               <p class="bs-mb-0">Body copy inherits the framework text color and a comfortable <code>1.6</code> line height.</p>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;h1 class="bs-display bs-text-gradient"&gt;Build boldly.&lt;/h1&gt;&#10;&lt;p class="bs-lead"&gt;Thoughtful defaults, ready to ship.&lt;/p&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy='&lt;h1 class="bs-display bs-text-gradient"&gt;Build boldly.&lt;/h1&gt;&#10;&lt;p class="bs-lead"&gt;Thoughtful defaults, ready to ship.&lt;/p&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;h1</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-display bs-text-gradient"</span><span class="bs-code-tag">&gt;</span>Build boldly.<span class="bs-code-tag">&lt;/h1&gt;</span>
 <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-lead"</span><span class="bs-code-tag">&gt;</span>Thoughtful defaults, ready to ship.<span class="bs-code-tag">&lt;/p&gt;</span></code></pre>
             </div>
@@ -354,8 +354,8 @@
             <div class="docs-kicker">Foundations</div>
             <h2>Layout &amp; grid</h2>
             <p><code>.bs-container</code> centers content with a fluid gutter and a <code>90rem</code> ceiling. Add a size modifier for narrower content. <code>.bs-section</code> provides fluid vertical rhythm.</p>
-            <div class="docs-table-wrap">
-              <table class="docs-table">
+            <div class="docs-table-wrap bs-table-responsive">
+              <table class="docs-table bs-table">
                 <thead><tr><th>Class</th><th>Maximum width</th></tr></thead>
                 <tbody>
                   <tr><td><code>.bs-container</code></td><td><code>--bs-container-2xl</code> · 90rem</td></tr>
@@ -376,8 +376,8 @@
                 <div class="bs-col-12 bs-col-lg-4">12 / lg 4</div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-grid bs-gap-4"&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-4"&gt;...&lt;/div&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-8"&gt;...&lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy='&lt;div class="bs-grid bs-gap-4"&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-4"&gt;...&lt;/div&gt;&#10;  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-8"&gt;...&lt;/div&gt;&#10;&lt;/div&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-grid bs-gap-4"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-col-12 bs-col-md-6 bs-col-lg-4"</span><span class="bs-code-tag">&gt;</span>...<span class="bs-code-tag">&lt;/div&gt;</span>
   <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-col-12 bs-col-md-6 bs-col-lg-8"</span><span class="bs-code-tag">&gt;</span>...<span class="bs-code-tag">&lt;/div&gt;</span>
@@ -409,8 +409,8 @@
                 </article>
               </section>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="responsive-layout" data-copy='&lt;section class="bs-container bs-section" aria-labelledby="features-title"&gt;&#10;  &lt;h2 id="features-title"&gt;Features&lt;/h2&gt;&#10;  &lt;div class="bs-grid bs-gap-4"&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-lg-8"&gt;&#10;      &lt;div class="bs-card-body"&gt;Featured story&lt;/div&gt;&#10;    &lt;/article&gt;&#10;    &lt;aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4" aria-label="Related information"&gt;&#10;      &lt;div class="bs-card-body"&gt;Related information&lt;/div&gt;&#10;    &lt;/aside&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-md-6"&gt;&#10;      &lt;div class="bs-card-body"&gt;Supporting detail&lt;/div&gt;&#10;    &lt;/article&gt;&#10;  &lt;/div&gt;&#10;&lt;/section&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="responsive-layout" data-copy='&lt;section class="bs-container bs-section" aria-labelledby="features-title"&gt;&#10;  &lt;h2 id="features-title"&gt;Features&lt;/h2&gt;&#10;  &lt;div class="bs-grid bs-gap-4"&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-lg-8"&gt;&#10;      &lt;div class="bs-card-body"&gt;Featured story&lt;/div&gt;&#10;    &lt;/article&gt;&#10;    &lt;aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4" aria-label="Related information"&gt;&#10;      &lt;div class="bs-card-body"&gt;Related information&lt;/div&gt;&#10;    &lt;/aside&gt;&#10;    &lt;article class="bs-card bs-col-12 bs-col-md-6"&gt;&#10;      &lt;div class="bs-card-body"&gt;Supporting detail&lt;/div&gt;&#10;    &lt;/article&gt;&#10;  &lt;/div&gt;&#10;&lt;/section&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;section</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-container bs-section"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"features-title"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;h2</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"features-title"</span><span class="bs-code-tag">&gt;</span>Features<span class="bs-code-tag">&lt;/h2&gt;</span>
   <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-grid bs-gap-4"</span><span class="bs-code-tag">&gt;</span>
@@ -427,7 +427,7 @@
             <div class="docs-api">
               <h3>Responsive breakpoints</h3>
               <p>Column spans are mobile-first. Start with an unprefixed span, then override it only where the composition needs more room.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Prefix</th><th>Starts at</th><th>Example</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Prefix</th><th>Starts at</th><th>Example</th></tr></thead><tbody>
                 <tr><td>None</td><td>All viewport widths</td><td><code>.bs-col-12</code></td></tr>
                 <tr><td><code>md</code></td><td>48rem / 768px</td><td><code>.bs-col-md-6</code></td></tr>
                 <tr><td><code>lg</code></td><td>64rem / 1024px</td><td><code>.bs-col-lg-4</code></td></tr>
@@ -511,8 +511,8 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Toolbar example</span><button type="button" data-copy-example="buttons" data-copy='&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions"&gt;&#10;  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&#10;  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon bs-btn-sm" type="button" aria-label="Favorite"&gt;&#10;    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;…&lt;/svg&gt;&#10;  &lt;/button&gt;&#10;&lt;/div&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Toolbar example</span><button type="button" data-copy-example="buttons" data-copy='&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions"&gt;&#10;  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;&#10;    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;&#10;  &lt;/div&gt;&#10;&#10;  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon bs-btn-sm" type="button" aria-label="Favorite"&gt;&#10;    &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;…&lt;/svg&gt;&#10;  &lt;/button&gt;&#10;&lt;/div&gt;'>Copy</button></div>
               <pre><code>&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor actions"&gt;
   &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;
     &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;
@@ -534,7 +534,7 @@
             <div class="docs-api">
               <h3>Button API</h3>
               <p>Every button starts with the base class. Modifiers are deliberately composable across hierarchy, size, shape, layout, and state.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Use when</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Use when</th></tr></thead><tbody>
                 <tr><td><code>.bs-btn</code></td><td>Shared sizing, alignment, focus, and interaction styles.</td><td>Always required.</td></tr>
                 <tr><td><code>.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>One primary action per region.</td></tr>
                 <tr><td><code>.bs-btn-secondary</code></td><td>Bordered, lower-emphasis action.</td><td>Alternative or supporting actions.</td></tr>
@@ -551,7 +551,7 @@
               </tbody></table></div>
 
               <h3>Interaction states</h3>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>State</th><th>Contract</th><th>Guidance</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>State</th><th>Contract</th><th>Guidance</th></tr></thead><tbody>
                 <tr><td>Default</td><td>Semantic element plus <code>.bs-btn</code> and one hierarchy class.</td><td>Keep action labels concise and verb-led.</td></tr>
                 <tr><td>Hover / active</td><td>Native <code>:hover</code> and <code>:active</code>.</td><td>Never rely on hover alone to reveal meaning.</td></tr>
                 <tr><td>Focus</td><td>Global <code>:focus-visible</code> ring.</td><td>Do not remove the outline without an equivalent.</td></tr>
@@ -563,9 +563,9 @@
 
             <h3>Loading button behavior</h3>
             <p>The label stays in the accessibility tree and preserves the button width while the spinner is centered above it. The controller disables repeat activation and restores the button's original attributes when <code>stop()</code> runs.</p>
-            <div class="docs-code-block" data-code-variants>
-              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading" data-copy>Copy</button></div>
-              <div class="docs-code-variant-tabs" role="tablist" aria-label="Loading button implementation">
+            <div class="docs-code-block bs-code-window" data-code-variants>
+              <div class="docs-code-label bs-code-header"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Loading button implementation">
                 <button id="button-loading-js-tab" type="button" role="tab" aria-selected="true" aria-controls="button-loading-js-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="button-loading-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="button-loading-alpine-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="button-loading-react-tab" type="button" role="tab" aria-selected="false" aria-controls="button-loading-react-panel" tabindex="-1" data-code-variant="react">React</button>
@@ -617,44 +617,44 @@
           <section class="docs-section" id="navbar">
             <div class="docs-kicker">Components</div>
             <h2>Header / navbar</h2>
-            <p>Compose a semantic header from layout utilities. This dependency-free example wraps naturally when space gets tight.</p>
+            <p>Build a semantic application header with a brand, destination links, and a menu control. Navbar presentation is CSS-only, so your application can choose the menu behavior that fits its layout.</p>
             <div class="docs-demo" data-component-example="navbar">
-              <header class="example-navbar">
-                <nav class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4" aria-label="Example primary navigation">
-                  <a class="example-navbar-brand bs-inline-flex bs-items-center bs-gap-2 bs-no-underline" href="#navbar">
-                    <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z" /></svg>
-                    Acme
-                  </a>
-                  <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-2">
-                    <a class="bs-btn bs-btn-ghost bs-btn-sm" href="#features-example">Features</a>
-                    <a class="bs-btn bs-btn-primary bs-btn-sm" href="/docs/components/forms/inputs">Get started</a>
-                  </div>
+              <header class="bs-navbar bs-card bs-card-subtle bs-card-compact">
+                <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#navbar">
+                  <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z" /></svg>
+                  Acme
+                </a>
+                <nav class="bs-flex bs-items-center bs-gap-2" aria-label="Example primary navigation">
+                  <a class="bs-navbar-link" href="#features-example">Features</a>
+                  <a class="bs-navbar-link" href="/docs/components/forms/inputs">Forms</a>
                 </nav>
+                <button class="bs-navbar-toggle" type="button" aria-label="Open navigation menu"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" /></svg></button>
               </header>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="navbar" data-copy='&lt;header&gt;&#10;  &lt;nav class="bs-container bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4 bs-py-4" aria-label="Primary navigation"&gt;&#10;    &lt;a class="bs-inline-flex bs-items-center bs-gap-2 bs-no-underline" href="/"&gt;Acme&lt;/a&gt;&#10;    &lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-2"&gt;&#10;      &lt;a class="bs-btn bs-btn-ghost bs-btn-sm" href="#features"&gt;Features&lt;/a&gt;&#10;      &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="#contact"&gt;Get started&lt;/a&gt;&#10;    &lt;/div&gt;&#10;  &lt;/nav&gt;&#10;&lt;/header&gt;'>Copy</button></div>
-              <pre><code><span class="bs-code-tag">&lt;header&gt;</span>
-  <span class="bs-code-tag">&lt;nav</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-container bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4 bs-py-4"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Primary navigation"</span><span class="bs-code-tag">&gt;</span>
-    <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/"</span><span class="bs-code-tag">&gt;</span>Acme<span class="bs-code-tag">&lt;/a&gt;</span>
-    <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-flex bs-flex-wrap bs-gap-2"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/div&gt;</span>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="navbar" data-copy='&lt;header class="bs-navbar"&gt;&#10;  &lt;a class="bs-navbar-brand" href="/"&gt;Acme&lt;/a&gt;&#10;  &lt;nav class="bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation"&gt;&#10;    &lt;a class="bs-navbar-link" href="#features"&gt;Features&lt;/a&gt;&#10;    &lt;a class="bs-navbar-link" href="#contact"&gt;Contact&lt;/a&gt;&#10;  &lt;/nav&gt;&#10;  &lt;button class="bs-navbar-toggle" type="button" aria-label="Open navigation menu"&gt;…&lt;/button&gt;&#10;&lt;/header&gt;'>Copy</button></div>
+              <pre><code><span class="bs-code-tag">&lt;header</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-navbar"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-navbar-brand"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/"</span><span class="bs-code-tag">&gt;</span>Acme<span class="bs-code-tag">&lt;/a&gt;</span>
+  <span class="bs-code-tag">&lt;nav</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-flex bs-items-center bs-gap-2"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Primary navigation"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-navbar-link"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"#features"</span><span class="bs-code-tag">&gt;</span>Features<span class="bs-code-tag">&lt;/a&gt;</span>
   <span class="bs-code-tag">&lt;/nav&gt;</span>
+  <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-navbar-toggle"</span> <span class="bs-code-attribute">aria-label</span>=<span class="bs-code-string">"Open navigation menu"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/button&gt;</span>
 <span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
             </div>
             <div class="docs-example-guidance" aria-label="Navbar guidance">
               <div><h3>Structure</h3><p>Wrap the primary navigation in <code>&lt;header&gt;</code> and <code>&lt;nav&gt;</code>. Keep the brand and destination links as real anchors.</p></div>
-              <div><h3>Class map</h3><p>Flex alignment positions the brand and links. <code>.bs-flex-wrap</code> prevents overflow, while gap utilities preserve spacing when rows wrap.</p></div>
+              <div><h3>Class map</h3><p><code>.bs-navbar</code> establishes the header row, while the brand, link, and toggle classes provide consistent typography and interaction states.</p></div>
               <div><h3>Accessibility</h3><p>Label navigation landmarks when a page has more than one. Use descriptive link text and do not remove the framework's visible keyboard focus.</p></div>
             </div>
             <div class="docs-api">
-              <h3>Composition utilities</h3>
-              <p>Boobstrap does not impose a navbar component or JavaScript menu. Compose the layout from predictable utilities and add application behavior only when needed.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Role in the header</th></tr></thead><tbody>
-                <tr><td><code>.bs-container</code></td><td>Centers the navigation and applies a fluid page gutter.</td></tr>
-                <tr><td><code>.bs-flex</code></td><td>Places the brand and navigation actions in one row.</td></tr>
-                <tr><td><code>.bs-flex-wrap</code></td><td>Allows content to wrap rather than overflow at narrow widths.</td></tr>
-                <tr><td><code>.bs-justify-between</code></td><td>Pushes the brand and action group to opposite edges.</td></tr>
-                <tr><td><code>.bs-items-center</code></td><td>Aligns text, buttons, and icons on the cross axis.</td></tr>
+              <h3>Navbar API</h3>
+              <p>The component provides presentation without imposing menu state. Add your application behavior to the toggle and responsive visibility rules when the links collapse.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Role in the header</th></tr></thead><tbody>
+                <tr><td><code>.bs-navbar</code></td><td>Aligns the brand, navigation, and menu control in a full-width header row.</td></tr>
+                <tr><td><code>.bs-navbar-brand</code></td><td>Styles the product or site identity link.</td></tr>
+                <tr><td><code>.bs-navbar-link</code></td><td>Styles navigation destinations with hover and current-page states.</td></tr>
+                <tr><td><code>.bs-navbar-toggle</code></td><td>Provides an icon-sized menu control with visible interaction states.</td></tr>
+                <tr><td><code>.bs-nav-link</code></td><td>Styles vertical navigation and supports <code>aria-current</code>.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -668,7 +668,7 @@
               <span class="bs-badge bs-badge-primary">New release</span>
               <span class="bs-badge bs-badge-primary"><span aria-hidden="true">♥</span> Loved</span>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML</span><button type="button" data-copy='&lt;span class="bs-badge bs-badge-primary"&gt;New release&lt;/span&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;span</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-badge bs-badge-primary"</span><span class="bs-code-tag">&gt;</span>New release<span class="bs-code-tag">&lt;/span&gt;</span></code></pre></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy='&lt;span class="bs-badge bs-badge-primary"&gt;New release&lt;/span&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;span</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-badge bs-badge-primary"</span><span class="bs-code-tag">&gt;</span>New release<span class="bs-code-tag">&lt;/span&gt;</span></code></pre></div>
           </section>
 
           <section class="docs-section" id="cards">
@@ -693,7 +693,7 @@
                 </div>
               </article>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy='&lt;article class="bs-card bs-card-raised" aria-labelledby="launch-card-title"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;span class="bs-badge bs-badge-primary"&gt;New&lt;/span&gt;&#10;    &lt;h3 class="bs-card-title bs-mt-4" id="launch-card-title"&gt;Launch ready&lt;/h3&gt;&#10;    &lt;p class="bs-card-text bs-mb-4"&gt;Supporting copy for this card.&lt;/p&gt;&#10;    &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="/details"&gt;View details&lt;/a&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy='&lt;article class="bs-card bs-card-raised" aria-labelledby="launch-card-title"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;span class="bs-badge bs-badge-primary"&gt;New&lt;/span&gt;&#10;    &lt;h3 class="bs-card-title bs-mt-4" id="launch-card-title"&gt;Launch ready&lt;/h3&gt;&#10;    &lt;p class="bs-card-text bs-mb-4"&gt;Supporting copy for this card.&lt;/p&gt;&#10;    &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="/details"&gt;View details&lt;/a&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-body"</span><span class="bs-code-tag">&gt;</span>
     <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>Launch ready<span class="bs-code-tag">&lt;/h3&gt;</span>
     <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-text"</span><span class="bs-code-tag">&gt;</span>Supporting copy.<span class="bs-code-tag">&lt;/p&gt;</span>
@@ -708,7 +708,7 @@
             <div class="docs-api">
               <h3>Card API</h3>
               <p>Cards are intentionally small: one shell, one content wrapper, and optional typography and elevation helpers.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-card</code></td><td>Surface, border, radius, clipping, and default elevation.</td></tr>
                 <tr><td><code>.bs-card-raised</code></td><td>Stronger shadow for elevated or featured content.</td></tr>
                 <tr><td><code>.bs-card-body</code></td><td>Responsive inset padding for card content.</td></tr>
@@ -727,7 +727,7 @@
               <div class="bs-alert bs-alert-success" role="status"><span aria-hidden="true">✓</span><span><strong class="bs-alert-title">Saved</strong>Your changes were published successfully.</span></div>
               <div class="bs-alert" role="status"><span aria-hidden="true">i</span><span><strong class="bs-alert-title">Neutral note</strong>The base alert works without a state modifier.</span></div>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete example</span><button type="button" data-copy-example="alerts" data-copy='&lt;div class="bs-alert bs-alert-success" role="status"&gt;&#10;  &lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="m5 12 4 4L19 6" /&gt;&#10;  &lt;/svg&gt;&#10;  &lt;span&gt;&#10;    &lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt;&#10;    Your changes were published.&#10;  &lt;/span&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert bs-alert-success"</span> <span class="bs-code-attribute">role</span>=<span class="bs-code-string">"status"</span><span class="bs-code-tag">&gt;</span>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="alerts" data-copy='&lt;div class="bs-alert bs-alert-success" role="status"&gt;&#10;  &lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;    &lt;path d="m5 12 4 4L19 6" /&gt;&#10;  &lt;/svg&gt;&#10;  &lt;span&gt;&#10;    &lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt;&#10;    Your changes were published.&#10;  &lt;/span&gt;&#10;&lt;/div&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert bs-alert-success"</span> <span class="bs-code-attribute">role</span>=<span class="bs-code-string">"status"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;svg</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-icon bs-icon-lg"</span> <span class="bs-code-attribute">aria-hidden</span>=<span class="bs-code-string">"true"</span><span class="bs-code-tag">&gt;</span>…<span class="bs-code-tag">&lt;/svg&gt;</span>
   <span class="bs-code-tag">&lt;span&gt;</span><span class="bs-code-tag">&lt;strong</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-alert-title"</span><span class="bs-code-tag">&gt;</span>Saved<span class="bs-code-tag">&lt;/strong&gt;</span> Your changes were published.<span class="bs-code-tag">&lt;/span&gt;</span>
 <span class="bs-code-tag">&lt;/div&gt;</span></code></pre></div>
@@ -739,7 +739,7 @@
             <div class="docs-api">
               <h3>Alert API</h3>
               <p>The visual variant describes emphasis; the ARIA role describes announcement behavior. Choose each independently.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-alert</code></td><td>Neutral alert layout, spacing, border, and surface.</td></tr>
                 <tr><td><code>.bs-alert-title</code></td><td>High-contrast summary placed before supporting copy.</td></tr>
                 <tr><td><code>.bs-alert-primary</code></td><td>Brand-highlighted guidance or informational emphasis.</td></tr>
@@ -786,7 +786,7 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete contextual banner</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-banner bs-banner-info" role="status"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete contextual banner</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-banner bs-banner-info" role="status"&gt;
   &lt;div class="bs-banner-inner"&gt;
     &lt;svg
       class="bs-banner-icon bs-icon"
@@ -819,7 +819,7 @@
                 </div>
               </div>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete dismissible banner</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete dismissible banner</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div
   class="bs-banner bs-banner-warning"
   role="status"
   data-bs-banner
@@ -846,7 +846,7 @@
     &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize banners</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize banners</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initBanners } from "@boobstrap/boobstrap/js/banner";
 
 const banners = initBanners(document);
@@ -861,7 +861,7 @@ banners[0].show();</code></pre></div>
             </div>
             <div class="docs-api">
               <h3>Banner API</h3>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class or hook</th><th>Purpose</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class or hook</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-banner</code></td><td>Full-width contextual background and boundary.</td></tr>
                 <tr><td><code>.bs-banner-inner</code></td><td>Responsive icon, content, action, and dismissal layout.</td></tr>
                 <tr><td><code>.bs-banner-{primary|info|success|warning|danger}</code></td><td>Contextual accent, background, and focus colors.</td></tr>
@@ -897,7 +897,7 @@ banners[0].show();</code></pre></div>
                 <button class="bs-btn bs-btn-primary" type="submit">Create account</button>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Stacked form layout</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Stacked form layout</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
   &lt;div class="bs-form-group"&gt;
     &lt;label class="bs-label" for="name"&gt;Name&lt;/label&gt;
     &lt;input class="bs-input" id="name" name="name" autocomplete="name" /&gt;
@@ -931,7 +931,7 @@ banners[0].show();</code></pre></div>
                 <div class="bs-flex bs-flex-wrap bs-gap-3"><button class="bs-btn bs-btn-primary" type="submit">Save profile</button><button class="bs-btn bs-btn-secondary" type="button">Cancel</button></div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Responsive form row</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive form row</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form class="bs-stack bs-gap-4"&gt;
   &lt;div class="bs-form-row"&gt;
     &lt;div class="bs-form-group"&gt;
       &lt;label class="bs-label" for="first-name"&gt;First name&lt;/label&gt;
@@ -973,7 +973,7 @@ banners[0].show();</code></pre></div>
 
             <h3>Email input with helper text</h3>
             <div class="docs-demo" data-component-example="form-input-email"><div class="bs-form-group"><label class="bs-label" for="input-email">Email address <span class="bs-label-required" aria-hidden="true">*</span></label><input class="bs-input" id="input-email" name="email" type="email" autocomplete="email" placeholder="ada@example.com" aria-describedby="input-email-help" required /><span class="bs-form-text" id="input-email-help">Used for receipts and account recovery.</span></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Email input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Email input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="email"&gt;Email address &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;&lt;/label&gt;
   &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" aria-describedby="email-help" required /&gt;
   &lt;span class="bs-form-text" id="email-help"&gt;Used for receipts and account recovery.&lt;/span&gt;
@@ -981,7 +981,7 @@ banners[0].show();</code></pre></div>
 
             <h3>Textarea</h3>
             <div class="docs-demo" data-component-example="form-textarea"><div class="bs-form-group"><label class="bs-label" for="input-message">Project details</label><textarea class="bs-textarea" id="input-message" name="message" rows="4" placeholder="Tell us what you are building." aria-describedby="input-message-help"></textarea><span class="bs-form-text" id="input-message-help">Include your launch date and expected traffic.</span></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Textarea</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Textarea</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="message"&gt;Project details&lt;/label&gt;
   &lt;textarea class="bs-textarea" id="message" name="message" rows="4" aria-describedby="message-help"&gt;&lt;/textarea&gt;
   &lt;span class="bs-form-text" id="message-help"&gt;Include your launch date and expected traffic.&lt;/span&gt;
@@ -989,13 +989,13 @@ banners[0].show();</code></pre></div>
 
             <h3>Input sizes</h3>
             <div class="docs-demo" data-component-example="form-input-sizes"><div class="bs-stack bs-gap-3"><input class="bs-input bs-input-sm" id="input-small" aria-label="Small input" value="Small" /><input class="bs-input" aria-label="Default input" value="Default" /><input class="bs-input bs-input-lg" id="input-large" aria-label="Large input" value="Large" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Input sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Input sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;input class="bs-input bs-input-sm" aria-label="Small input" /&gt;
 &lt;input class="bs-input" aria-label="Default input" /&gt;
 &lt;input class="bs-input bs-input-lg" aria-label="Large input" /&gt;</code></pre></div>
 
             <h3>Valid input</h3>
             <div class="docs-demo" data-component-example="form-input-valid"><div class="bs-form-group"><label class="bs-label" for="input-valid">Username</label><input class="bs-input" id="input-valid" name="username" value="ada-lovelace" aria-invalid="false" aria-describedby="input-valid-feedback" /><span class="bs-form-feedback bs-form-feedback-valid" id="input-valid-feedback">This username is available.</span></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Valid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Valid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="username"&gt;Username&lt;/label&gt;
   &lt;input class="bs-input" id="username" aria-invalid="false" aria-describedby="username-feedback" /&gt;
   &lt;span class="bs-form-feedback bs-form-feedback-valid" id="username-feedback"&gt;This username is available.&lt;/span&gt;
@@ -1003,7 +1003,7 @@ banners[0].show();</code></pre></div>
 
             <h3>Invalid input</h3>
             <div class="docs-demo" data-component-example="form-input-invalid"><div class="bs-form-group"><label class="bs-label" for="input-invalid">Website</label><input class="bs-input" id="input-invalid" name="website" value="not a URL" aria-invalid="true" aria-describedby="input-invalid-feedback" /><span class="bs-form-feedback bs-form-feedback-invalid" id="input-invalid-feedback">Enter a complete URL including https://.</span></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Invalid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Invalid input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="website"&gt;Website&lt;/label&gt;
   &lt;input class="bs-input" id="website" aria-invalid="true" aria-describedby="website-feedback" /&gt;
   &lt;span class="bs-form-feedback bs-form-feedback-invalid" id="website-feedback"&gt;Enter a complete URL including https://.&lt;/span&gt;
@@ -1011,12 +1011,12 @@ banners[0].show();</code></pre></div>
 
             <h3>Read-only input</h3>
             <div class="docs-demo" data-component-example="form-input-readonly"><div class="bs-form-group"><label class="bs-label" for="input-readonly">Account ID</label><input class="bs-input" id="input-readonly" value="acct_01HX" readonly /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Read-only input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="account-id"&gt;Account ID&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Read-only input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="account-id"&gt;Account ID&lt;/label&gt;
 &lt;input class="bs-input" id="account-id" value="acct_01HX" readonly /&gt;</code></pre></div>
 
             <h3>Disabled input</h3>
             <div class="docs-demo" data-component-example="form-input-disabled"><div class="bs-form-group"><label class="bs-label" for="input-disabled">Unavailable value</label><input class="bs-input" id="input-disabled" value="Unavailable" disabled /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Disabled input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="unavailable"&gt;Unavailable value&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Disabled input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="unavailable"&gt;Unavailable value&lt;/label&gt;
 &lt;input class="bs-input" id="unavailable" value="Unavailable" disabled /&gt;</code></pre></div>
 
             <div class="docs-example-guidance" aria-label="Input guidance">
@@ -1044,7 +1044,7 @@ banners[0].show();</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="price"&gt;Price&lt;/label&gt;
   &lt;div class="bs-input-group"&gt;
     &lt;span class="bs-input-group-text" aria-hidden="true"&gt;$&lt;/span&gt;
@@ -1061,7 +1061,7 @@ banners[0].show();</code></pre></div>
 
             <h3>Button add-on</h3>
             <div class="docs-demo" data-component-example="form-input-group-button"><div class="bs-form-group"><label class="bs-label" for="group-domain">Domain</label><div class="bs-input-group"><span class="bs-input-group-text">https://</span><input class="bs-input" id="group-domain" name="domain" value="example.com" /><button class="bs-btn bs-btn-secondary" type="button">Verify</button></div></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Button add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Button add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
   &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
   &lt;input class="bs-input" aria-label="Domain" /&gt;
   &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
@@ -1069,7 +1069,7 @@ banners[0].show();</code></pre></div>
 
             <h3>Select add-on</h3>
             <div class="docs-demo" data-component-example="form-input-group-select"><div class="bs-form-group"><label class="bs-label" for="group-search">Repository</label><div class="bs-input-group"><select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select><input class="bs-input" id="group-search" name="repository" placeholder="Repository name" /></div></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Select add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Select add-on</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-group"&gt;
   &lt;select class="bs-select" aria-label="Repository owner"&gt;&lt;option&gt;mikeroq&lt;/option&gt;&lt;/select&gt;
   &lt;input class="bs-input" aria-label="Repository name" /&gt;
 &lt;/div&gt;</code></pre></div>
@@ -1086,7 +1086,7 @@ banners[0].show();</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Start icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Start icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="search"&gt;Search projects&lt;/label&gt;
   &lt;div class="bs-input-wrap"&gt;
     &lt;svg
@@ -1109,7 +1109,7 @@ banners[0].show();</code></pre></div>
 
             <h3>End icon</h3>
             <div class="docs-demo" data-component-example="form-input-icon-end"><div class="bs-form-group"><label class="bs-label" for="icon-email">Verified email</label><div class="bs-input-wrap"><input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com" /><svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></div></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · End icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-wrap"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · End icon</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-input-wrap"&gt;
   &lt;input class="bs-input bs-input-has-icon-end" type="email" aria-label="Verified email" /&gt;
   &lt;svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"&gt;
     &lt;path d="m5 12 4 4L19 6"&gt;&lt;/path&gt;
@@ -1137,7 +1137,7 @@ banners[0].show();</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Basic select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Basic select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="role"&gt;Team role&lt;/label&gt;
   &lt;select class="bs-select" id="role" name="role" required&gt;
     &lt;option value=""&gt;Choose a role&lt;/option&gt;
@@ -1149,20 +1149,20 @@ banners[0].show();</code></pre></div>
 
             <h3>Option groups</h3>
             <div class="docs-demo" data-component-example="form-select-groups"><div class="bs-form-group"><label class="bs-label" for="select-region">Deployment region</label><select class="bs-select" id="select-region" name="region"><optgroup label="North America"><option value="us-east">US East</option><option value="us-west">US West</option></optgroup><optgroup label="Europe"><option value="eu-central">EU Central</option><option value="eu-west">EU West</option></optgroup></select></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Option groups</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select" aria-label="Deployment region"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Option groups</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select" aria-label="Deployment region"&gt;
   &lt;optgroup label="North America"&gt;&lt;option value="us-east"&gt;US East&lt;/option&gt;&lt;option value="us-west"&gt;US West&lt;/option&gt;&lt;/optgroup&gt;
   &lt;optgroup label="Europe"&gt;&lt;option value="eu-central"&gt;EU Central&lt;/option&gt;&lt;option value="eu-west"&gt;EU West&lt;/option&gt;&lt;/optgroup&gt;
 &lt;/select&gt;</code></pre></div>
 
             <h3>Select sizes</h3>
             <div class="docs-demo" data-component-example="form-select-sizes"><div class="bs-stack bs-gap-3"><select class="bs-select bs-select-sm" aria-label="Small select"><option>Compact</option></select><select class="bs-select" aria-label="Default select"><option>Default</option></select><select class="bs-select bs-select-lg" aria-label="Large select"><option>Prominent</option></select></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Select sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select bs-select-sm" aria-label="Small select"&gt;&lt;option&gt;Compact&lt;/option&gt;&lt;/select&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Select sizes</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;select class="bs-select bs-select-sm" aria-label="Small select"&gt;&lt;option&gt;Compact&lt;/option&gt;&lt;/select&gt;
 &lt;select class="bs-select" aria-label="Default select"&gt;&lt;option&gt;Default&lt;/option&gt;&lt;/select&gt;
 &lt;select class="bs-select bs-select-lg" aria-label="Large select"&gt;&lt;option&gt;Prominent&lt;/option&gt;&lt;/select&gt;</code></pre></div>
 
             <h3>Disabled select</h3>
             <div class="docs-demo" data-component-example="form-select-disabled"><div class="bs-form-group"><label class="bs-label" for="select-disabled">Region</label><select class="bs-select" id="select-disabled" disabled><option>Unavailable</option></select></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Disabled select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="region"&gt;Region&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Disabled select</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="region"&gt;Region&lt;/label&gt;
 &lt;select class="bs-select" id="region" disabled&gt;&lt;option&gt;Unavailable&lt;/option&gt;&lt;/select&gt;</code></pre></div>
             <div class="docs-note"><strong>Prefer native when possible:</strong> use a native select when users choose from a manageable fixed list. It works without JavaScript and inherits platform keyboard, touch, screen-reader, and form-submission behavior.</div>
           </section>
@@ -1193,7 +1193,7 @@ banners[0].show();</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete Boobstrap JS markup</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete Boobstrap JS markup</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
   &lt;div class="bs-form-group"&gt;
     &lt;label class="bs-label" for="team-role"&gt;Team role&lt;/label&gt;
     &lt;div class="bs-combobox" data-bs-combobox&gt;
@@ -1230,7 +1230,7 @@ banners[0].show();</code></pre></div>
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/form&gt;</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize only comboboxes</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize only comboboxes</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initComboboxes } from "@boobstrap/boobstrap/js/combobox";
 
 const comboboxes = initComboboxes(document);
@@ -1241,13 +1241,13 @@ export function destroyComboboxes() {
 }</code></pre></div>
 
             <h3>Alpine.js</h3>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Alpine setup</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Alpine setup</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import Alpine from "alpinejs";
 import boobstrap from "@boobstrap/alpine";
 
 Alpine.plugin(boobstrap);
 Alpine.start();</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete Alpine combobox</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete Alpine combobox</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
   &lt;div class="bs-form-group"&gt;
     &lt;label class="bs-label" for="alpine-role"&gt;Team role&lt;/label&gt;
     &lt;div class="bs-combobox" x-data="bsCombobox" x-bind="root"&gt;
@@ -1298,7 +1298,7 @@ Alpine.start();</code></pre></div>
 &lt;/form&gt;</code></pre></div>
 
             <h3>React</h3>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JSX · Complete React component</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Complete React component</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { useCombobox } from "@boobstrap/react";
 
 const roles = [
@@ -1361,27 +1361,27 @@ export function TeamRoleSelect() {
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Date input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-date"&gt;Start date&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Date input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-date"&gt;Start date&lt;/label&gt;
 &lt;input class="bs-input" id="start-date" name="start_date" type="date" min="2026-01-01" /&gt;</code></pre></div>
 
             <h3>Time input</h3>
             <div class="docs-demo" data-component-example="form-time"><div class="bs-form-group"><label class="bs-label" for="picker-time">Start time</label><input class="bs-input" id="picker-time" name="start_time" type="time" step="900" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Time input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-time"&gt;Start time&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Time input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="start-time"&gt;Start time&lt;/label&gt;
 &lt;input class="bs-input" id="start-time" name="start_time" type="time" step="900" /&gt;</code></pre></div>
 
             <h3>Local date and time</h3>
             <div class="docs-demo" data-component-example="form-datetime"><div class="bs-form-group"><label class="bs-label" for="picker-datetime">Publish at</label><input class="bs-input" id="picker-datetime" name="publish_at" type="datetime-local" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Datetime-local input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="publish-at"&gt;Publish at&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Datetime-local input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="publish-at"&gt;Publish at&lt;/label&gt;
 &lt;input class="bs-input" id="publish-at" name="publish_at" type="datetime-local" /&gt;</code></pre></div>
 
             <h3>Month input</h3>
             <div class="docs-demo" data-component-example="form-month"><div class="bs-form-group"><label class="bs-label" for="picker-month">Billing month</label><input class="bs-input" id="picker-month" name="billing_month" type="month" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Month input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="billing-month"&gt;Billing month&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Month input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="billing-month"&gt;Billing month&lt;/label&gt;
 &lt;input class="bs-input" id="billing-month" name="billing_month" type="month" /&gt;</code></pre></div>
 
             <h3>Week input</h3>
             <div class="docs-demo" data-component-example="form-week"><div class="bs-form-group"><label class="bs-label" for="picker-week">Delivery week</label><input class="bs-input" id="picker-week" name="delivery_week" type="week" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Week input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="delivery-week"&gt;Delivery week&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Week input</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="delivery-week"&gt;Delivery week&lt;/label&gt;
 &lt;input class="bs-input" id="delivery-week" name="delivery_week" type="week" /&gt;</code></pre></div>
             <div class="docs-note"><strong>Server handling:</strong> native date values submit as date-like strings without a timezone. Treat <code>datetime-local</code> as local wall time and collect a timezone separately when the instant matters.</div>
           </section>
@@ -1403,7 +1403,7 @@ export function TeamRoleSelect() {
                 </div>
               </div>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete password field</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group" data-bs-password&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete password field</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group" data-bs-password&gt;
   &lt;label class="bs-label" for="password"&gt;Password&lt;/label&gt;
   &lt;div class="bs-input-wrap"&gt;
     &lt;input
@@ -1425,7 +1425,7 @@ export function TeamRoleSelect() {
     &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize password fields</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize password fields</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initPasswords } from "@boobstrap/boobstrap/js/password";
 
 const passwordFields = initPasswords(document);</code></pre></div>
@@ -1439,7 +1439,7 @@ const passwordFields = initPasswords(document);</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Phone mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Phone mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="phone"&gt;Phone number&lt;/label&gt;
   &lt;input
     class="bs-input"
@@ -1454,14 +1454,14 @@ const passwordFields = initPasswords(document);</code></pre></div>
 
             <h3>Date mask</h3>
             <div class="docs-demo" data-component-example="form-mask-date"><div class="bs-form-group"><label class="bs-label" for="mask-date">Reference date</label><input class="bs-input" id="mask-date" name="reference_date" inputmode="numeric" data-bs-mask="99/99/9999" placeholder="MM/DD/YYYY" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Date mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="reference-date"&gt;Reference date&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Date mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="reference-date"&gt;Reference date&lt;/label&gt;
 &lt;input class="bs-input" id="reference-date" name="reference_date" inputmode="numeric" data-bs-mask="99/99/9999" placeholder="MM/DD/YYYY" /&gt;</code></pre></div>
 
             <h3>Alphanumeric mask</h3>
             <div class="docs-demo" data-component-example="form-mask-key"><div class="bs-form-group"><label class="bs-label" for="mask-key">Product key</label><input class="bs-input" id="mask-key" name="product_key" data-bs-mask="AAAA-9999-****" placeholder="ABCD-1234-E5F6" /></div></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Alphanumeric mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="product-key"&gt;Product key&lt;/label&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Alphanumeric mask</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-label" for="product-key"&gt;Product key&lt;/label&gt;
 &lt;input class="bs-input" id="product-key" name="product_key" data-bs-mask="AAAA-9999-****" placeholder="ABCD-1234-E5F6" /&gt;</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize input masks</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize input masks</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initInputMasks } from "@boobstrap/boobstrap/js/input-mask";
 
 const masks = initInputMasks(document);</code></pre></div>
@@ -1492,7 +1492,7 @@ const masks = initInputMasks(document);</code></pre></div>
                 </label>
               </fieldset>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Checkbox group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Checkbox group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
   &lt;legend class="bs-label"&gt;Notifications&lt;/legend&gt;
   &lt;label class="bs-check"&gt;
     &lt;input
@@ -1530,7 +1530,7 @@ const masks = initInputMasks(document);</code></pre></div>
 
             <h3>Radio group</h3>
             <div class="docs-demo" data-component-example="form-radio-group"><fieldset class="bs-check-group"><legend class="bs-label">Billing cycle</legend><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="monthly" checked /><span class="bs-check-label">Monthly</span></label><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="yearly" /><span class="bs-check-label">Yearly</span><span class="bs-check-description">Save 20% with annual billing.</span></label></fieldset></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Radio group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Radio group</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset class="bs-check-group"&gt;
   &lt;legend class="bs-label"&gt;Billing cycle&lt;/legend&gt;
   &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="monthly" checked /&gt;&lt;span class="bs-check-label"&gt;Monthly&lt;/span&gt;&lt;/label&gt;
   &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="yearly" /&gt;&lt;span class="bs-check-label"&gt;Yearly&lt;/span&gt;&lt;/label&gt;
@@ -1538,14 +1538,14 @@ const masks = initInputMasks(document);</code></pre></div>
 
             <h3>Switch</h3>
             <div class="docs-demo" data-component-example="form-switch"><label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" name="security_alerts" checked /><span class="bs-check-label">Security alerts</span></label></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Switch</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-check bs-switch"&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Switch</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;label class="bs-check bs-switch"&gt;
   &lt;input class="bs-check-input" type="checkbox" name="security_alerts" checked /&gt;
   &lt;span class="bs-check-label"&gt;Security alerts&lt;/span&gt;
 &lt;/label&gt;</code></pre></div>
 
             <h3>Inline radio choices</h3>
             <div class="docs-demo" data-component-example="form-radio-inline"><fieldset><legend class="bs-label">Density</legend><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="comfortable" checked /><span class="bs-check-label">Comfortable</span></label><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="compact" /><span class="bs-check-label">Compact</span></label></fieldset></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Inline radios</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Inline radios</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;fieldset&gt;
   &lt;legend class="bs-label"&gt;Density&lt;/legend&gt;
   &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="comfortable" checked /&gt;&lt;span class="bs-check-label"&gt;Comfortable&lt;/span&gt;&lt;/label&gt;
   &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="compact" /&gt;&lt;span class="bs-check-label"&gt;Compact&lt;/span&gt;&lt;/label&gt;
@@ -1576,7 +1576,7 @@ const masks = initInputMasks(document);</code></pre></div>
                 </div>
               </form>
             </div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>HTML · Complete six-digit OTP</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete six-digit OTP</span><button type="button" data-copy-code>Copy</button></div><pre><code>&lt;form&gt;
   &lt;div class="bs-form-group"&gt;
     &lt;span class="bs-label" id="verification-code-label"&gt;
       Six-digit code
@@ -1603,7 +1603,7 @@ const masks = initInputMasks(document);</code></pre></div>
     &lt;/span&gt;
   &lt;/div&gt;
 &lt;/form&gt;</code></pre></div>
-            <div class="docs-code-block"><div class="docs-code-label"><span>JavaScript · Initialize and handle completion</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize and handle completion</span><button type="button" data-copy-code>Copy</button></div><pre><code>import "@boobstrap/boobstrap";
 import { initOtps } from "@boobstrap/boobstrap/js/otp";
 
 const [verificationCode] = initOtps(document);
@@ -1618,21 +1618,24 @@ verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
             <h2>Code windows</h2>
             <p>The code-window family provides a complete presentation shell and optional syntax-color helpers. Boobstrap leaves parsing to your application; these docs integrate Highlight.js while the framework token classes remain available for server-rendered or hand-authored markup.</p>
             <div class="bs-code-window">
-              <div class="bs-code-toolbar"><div class="bs-code-dots" aria-hidden="true"><span class="bs-code-dot"></span><span class="bs-code-dot"></span><span class="bs-code-dot"></span></div><span class="bs-text-xs bs-text-subtle">example.html</span></div>
+              <div class="bs-code-header"><span>example.html</span><button class="bs-code-action" type="button" data-copy='&lt;button class="bs-btn bs-btn-primary"&gt;Ship it&lt;/button&gt;'>Copy</button></div>
               <pre class="bs-code-body bs-m-0"><code data-language="xml"><span class="bs-code-comment">&lt;!-- Build boldly --&gt;</span>
 <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary"</span><span class="bs-code-tag">&gt;</span>
   Ship it
 <span class="bs-code-tag">&lt;/button&gt;</span>
 <span class="bs-code-keyword">const</span> ready = <span class="bs-code-string">true</span>;</code></pre>
             </div>
-            <div class="docs-note"><strong>Composition:</strong> use <code>.bs-code-window</code> as the shell, <code>.bs-code-toolbar</code> for chrome, <code>.bs-code-dots</code> and three <code>.bs-code-dot</code> elements for the controls, and <code>.bs-code-body</code> on the <code>&lt;pre&gt;</code>.</div>
+            <div class="docs-note"><strong>Composition:</strong> use <code>.bs-code-window</code> as the shell, <code>.bs-code-header</code> for a label and copy action, optional <code>.bs-code-tabs</code> for implementation variants, and <code>.bs-code-body</code> on the <code>&lt;pre&gt;</code>.</div>
             <div class="docs-api">
               <h3>Code window API</h3>
               <p>Syntax classes color tokens you mark up. Pair them with a parser such as Highlight.js when your application needs automatic highlighting.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-code-window</code></td><td>Outer shell, border, background, and clipping.</td></tr>
-                <tr><td><code>.bs-code-toolbar</code></td><td>Optional filename or control row.</td></tr>
+                <tr><td><code>.bs-code-header</code></td><td>Optional filename, language label, or control row.</td></tr>
+                <tr><td><code>.bs-code-action</code></td><td>Compact action button for copying or opening code.</td></tr>
                 <tr><td><code>.bs-code-body</code></td><td>Scrollable, formatted code content.</td></tr>
+                <tr><td><code>.bs-code-inline</code></td><td>Inline code inside prose, tables, and labels.</td></tr>
+                <tr><td><code>.bs-code-tabs</code> / <code>.bs-code-tab</code></td><td>Optional implementation or language variant navigation.</td></tr>
                 <tr><td><code>.bs-code-tag</code></td><td>HTML tags and selectors.</td></tr>
                 <tr><td><code>.bs-code-attribute</code></td><td>Attributes and property names.</td></tr>
                 <tr><td><code>.bs-code-string</code></td><td>Quoted values and literals.</td></tr>
@@ -1650,15 +1653,15 @@ verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
               <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m9-9H3" /></svg>
               <svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z" /></svg>
             </div>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>HTML · inline SVG</span><button type="button" data-copy='&lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;  &lt;path d="M12 3v18m9-9H3" /&gt;&#10;&lt;/svg&gt;'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · inline SVG</span><button type="button" data-copy='&lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;&#10;  &lt;path d="M12 3v18m9-9H3" /&gt;&#10;&lt;/svg&gt;'>Copy</button></div>
               <pre><code><span class="bs-code-tag">&lt;svg</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-icon bs-icon-lg"</span> <span class="bs-code-attribute">viewBox</span>=<span class="bs-code-string">"0 0 24 24"</span> <span class="bs-code-attribute">aria-hidden</span>=<span class="bs-code-string">"true"</span><span class="bs-code-tag">&gt;</span>
   <span class="bs-code-tag">&lt;path</span> <span class="bs-code-attribute">d</span>=<span class="bs-code-string">"M12 3v18m9-9H3"</span> <span class="bs-code-tag">/&gt;</span>
 <span class="bs-code-tag">&lt;/svg&gt;</span></code></pre>
             </div>
             <p>If you want a ready-made icon set, install one separately. For example, <a href="https://lucide.dev/guide/packages/lucide">Lucide</a> can replace matching SVG elements at runtime while Boobstrap remains CSS-only:</p>
-            <div class="docs-code-block">
-              <div class="docs-code-label"><span>Shell · JavaScript</span><button type="button" data-copy='npm install lucide&#10;&#10;import { createIcons, icons } from "lucide";&#10;createIcons({ icons });'>Copy</button></div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>Shell · JavaScript</span><button type="button" data-copy='npm install lucide&#10;&#10;import { createIcons, icons } from "lucide";&#10;createIcons({ icons });'>Copy</button></div>
               <pre><code><span class="bs-code-keyword">npm</span> install lucide
 
 <span class="bs-code-keyword">import</span> { createIcons, icons } <span class="bs-code-keyword">from</span> <span class="bs-code-string">"lucide"</span>;
@@ -1668,7 +1671,7 @@ createIcons({ icons });</code></pre>
             <div class="docs-api">
               <h3>Icon sizing</h3>
               <p>Icon utilities use <code>em</code>, so an icon follows the surrounding text or button size without a separate breakpoint system.</p>
-              <div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Class</th><th>Rendered size</th></tr></thead><tbody>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Rendered size</th></tr></thead><tbody>
                 <tr><td><code>.bs-icon</code></td><td>1em with normalized current-color stroke.</td></tr>
                 <tr><td><code>.bs-icon-sm</code></td><td>0.875em</td></tr>
                 <tr><td><code>.bs-icon-lg</code></td><td>1.25em</td></tr>
@@ -1683,10 +1686,10 @@ createIcons({ icons });</code></pre>
             <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can initialize dependency-free controllers or let Alpine or React own the same component contract.</p>
 
             <div class="docs-runtime-grid">
-              <article class="docs-runtime-card"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
-              <article class="docs-runtime-card"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance form helpers, comboboxes, loading buttons, collapse, dropdowns, and tabs through explicit controllers.</p></article>
-              <article class="docs-runtime-card"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
-              <article class="docs-runtime-card"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code>bs-</code> class without loading JavaScript.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance form helpers, comboboxes, loading buttons, collapse, dropdowns, and tabs through explicit controllers.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code>x-data</code> providers and <code>x-bind</code> objects.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
             </div>
 
             <p class="docs-package-note">Every interactive example below includes Boobstrap JS, Alpine.js, and React variants. The classes and accessibility contract stay consistent while the selected behavior layer owns state.</p>
@@ -1699,8 +1702,8 @@ createIcons({ icons });</code></pre>
               </div>
               <div id="framework-vanilla-panel" role="tabpanel" aria-labelledby="framework-vanilla-tab" data-framework-panel="vanilla">
                 <p>Importing the stylesheet remains runtime-free. Initialize all supported controllers, or import one component from a dedicated subpath.</p>
-                <div class="docs-code-block">
-                  <div class="docs-code-label"><span>JavaScript · Boobstrap JS</span><button type="button" data-copy='npm install @boobstrap/boobstrap&#10;&#10;import "@boobstrap/boobstrap";&#10;import { initBoobstrap } from "@boobstrap/boobstrap/js";&#10;&#10;const boobstrap = initBoobstrap();'>Copy</button></div>
+                <div class="docs-code-block bs-code-window">
+                  <div class="docs-code-label bs-code-header"><span>JavaScript · Boobstrap JS</span><button type="button" data-copy='npm install @boobstrap/boobstrap&#10;&#10;import "@boobstrap/boobstrap";&#10;import { initBoobstrap } from "@boobstrap/boobstrap/js";&#10;&#10;const boobstrap = initBoobstrap();'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap
 
 <span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
@@ -1711,8 +1714,8 @@ createIcons({ icons });</code></pre>
               </div>
               <div id="framework-alpine-panel" role="tabpanel" aria-labelledby="framework-alpine-tab" data-framework-panel="alpine" hidden>
                 <p>The adapter registers <code>bsButton</code>, <code>bsCollapse</code>, <code>bsCombobox</code>, <code>bsDropdown</code>, and <code>bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code>@alpinejs/csp</code>.</p>
-                <div class="docs-code-block">
-                  <div class="docs-code-label"><span>JavaScript · Alpine.js</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs&#10;&#10;import "@boobstrap/boobstrap";&#10;import Alpine from "alpinejs";&#10;import boobstrap from "@boobstrap/alpine";&#10;&#10;Alpine.plugin(boobstrap);&#10;Alpine.start();'>Copy</button></div>
+                <div class="docs-code-block bs-code-window">
+                  <div class="docs-code-label bs-code-header"><span>JavaScript · Alpine.js</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs&#10;&#10;import "@boobstrap/boobstrap";&#10;import Alpine from "alpinejs";&#10;import boobstrap from "@boobstrap/alpine";&#10;&#10;Alpine.plugin(boobstrap);&#10;Alpine.start();'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/alpine alpinejs
 
 <span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
@@ -1726,8 +1729,8 @@ Alpine.start();</code></pre>
               </div>
               <div id="react" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden>
                 <p>The adapter provides SSR-safe <code>useButton</code>, <code>useCollapse</code>, <code>useDropdown</code>, and <code>useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
-                <div class="docs-code-block">
-                  <div class="docs-code-label"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useButton, useCollapse, useCombobox, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
+                <div class="docs-code-block bs-code-window">
+                  <div class="docs-code-label bs-code-header"><span>JavaScript · React</span><button type="button" data-copy='npm install @boobstrap/boobstrap @boobstrap/react react&#10;&#10;import "@boobstrap/boobstrap";&#10;import { useButton, useCollapse, useCombobox, useDropdown, useTabs } from "@boobstrap/react";'>Copy</button></div>
                   <pre><code><span class="bs-code-keyword">npm</span> install @boobstrap/boobstrap @boobstrap/react react
 
 <span class="bs-code-keyword">import</span> <span class="bs-code-string">"@boobstrap/boobstrap"</span>;
@@ -1749,9 +1752,9 @@ Alpine.start();</code></pre>
                 <div class="bs-card-body"><strong>Progressive by design.</strong><p class="bs-card-text bs-mb-0">The panel remains semantic HTML before and after enhancement.</p></div>
               </div>
             </div>
-            <div class="docs-code-block" data-code-variants>
-              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="collapse" data-copy>Copy</button></div>
-              <div class="docs-code-variant-tabs" role="tablist" aria-label="Collapse code framework">
+            <div class="docs-code-block bs-code-window" data-code-variants>
+              <div class="docs-code-label bs-code-header"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="collapse" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Collapse code framework">
                 <button id="collapse-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="collapse-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="collapse-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="collapse-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
@@ -1801,7 +1804,7 @@ Alpine.start();</code></pre>
               <div><h3>State</h3><p><code>.bs-collapse</code> supplies the visual contract; <code>hidden</code> is the readable initial state.</p></div>
               <div><h3>Accessibility</h3><p>Use a real button. The controller maintains <code>aria-expanded</code> and fires cancelable show/hide events.</p></div>
             </div>
-            <div class="docs-api"><h3>Collapse API</h3><p>Import <code>Collapse</code> from <code>@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+            <div class="docs-api"><h3>Collapse API</h3><p>Import <code>Collapse</code> from <code>@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>show()</code> / <code>hide()</code></td><td>Change visibility and synchronized public state.</td></tr>
               <tr><td><code>toggle()</code></td><td>Invert the current panel state.</td></tr>
               <tr><td><code>bs:collapse:*</code></td><td>Cancelable before-events and bubbling completed-events.</td></tr>
@@ -1823,9 +1826,9 @@ Alpine.start();</code></pre>
                 </div>
               </div>
             </div>
-            <div class="docs-code-block" data-code-variants>
-              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="dropdown" data-copy>Copy</button></div>
-              <div class="docs-code-variant-tabs" role="tablist" aria-label="Dropdown code framework">
+            <div class="docs-code-block bs-code-window" data-code-variants>
+              <div class="docs-code-label bs-code-header"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="dropdown" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Dropdown code framework">
                 <button id="dropdown-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="dropdown-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="dropdown-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
@@ -1878,7 +1881,7 @@ Alpine.start();</code></pre>
               <div><h3>Class map</h3><p><code>.bs-btn-split</code> narrows the attached trigger, <code>.bs-btn-caret</code> draws its indicator, and <code>.bs-dropdown-menu-end</code> changes popup alignment.</p></div>
               <div><h3>Accessibility</h3><p>Name the narrow trigger by purpose—“More save options,” not “Dropdown.” Use menu roles only for action menus, not ordinary site navigation.</p></div>
             </div>
-            <div class="docs-api"><h3>Dropdown API</h3><p>Import <code>Dropdown</code> from <code>@boobstrap/boobstrap/js/dropdown</code>.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+            <div class="docs-api"><h3>Dropdown API</h3><p>Import <code>Dropdown</code> from <code>@boobstrap/boobstrap/js/dropdown</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the menu; hide can optionally restore focus.</td></tr>
               <tr><td><code>toggle()</code></td><td>Invert the current menu state.</td></tr>
               <tr><td><code>bs:dropdown:*</code></td><td>Observe or cancel menu lifecycle transitions.</td></tr>
@@ -1897,9 +1900,9 @@ Alpine.start();</code></pre>
               <div class="bs-tab-panel" id="docs-profile-panel" role="tabpanel" aria-labelledby="docs-profile-tab">Profile settings</div>
               <div class="bs-tab-panel" id="docs-security-panel" role="tabpanel" aria-labelledby="docs-security-tab" hidden>Security settings</div>
             </div>
-            <div class="docs-code-block" data-code-variants>
-              <div class="docs-code-label"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="tabs" data-copy>Copy</button></div>
-              <div class="docs-code-variant-tabs" role="tablist" aria-label="Tabs code framework">
+            <div class="docs-code-block bs-code-window" data-code-variants>
+              <div class="docs-code-label bs-code-header"><span data-code-label>HTML · Boobstrap JS</span><button type="button" data-copy-example="tabs" data-copy>Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Tabs code framework">
                 <button id="tabs-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="tabs-js-code-panel" data-code-variant="js">Boobstrap JS</button>
                 <button id="tabs-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-alpine-code-panel" tabindex="-1" data-code-variant="alpine">Alpine.js</button>
                 <button id="tabs-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-react-code-panel" tabindex="-1" data-code-variant="react">React</button>
@@ -1962,7 +1965,7 @@ Alpine.start();</code></pre>
               <div><h3>State</h3><p>The selected tab gets <code>aria-selected="true"</code>; every inactive panel uses <code>hidden</code>.</p></div>
               <div><h3>Accessibility</h3><p>Use tabs only when panels are peer views. Preserve meaningful headings inside complex panels.</p></div>
             </div>
-            <div class="docs-api"><h3>Tabs API</h3><p>Import <code>Tabs</code> from <code>@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap"><table class="docs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+            <div class="docs-api"><h3>Tabs API</h3><p>Import <code>Tabs</code> from <code>@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>activate(tab)</code></td><td>Select a tab element and synchronize all controlled panels.</td></tr>
               <tr><td><code>bs:tabs:change</code></td><td>Cancelable before-event with previous and next tab/panel detail.</td></tr>
               <tr><td><code>bs:tabs:changed</code></td><td>Bubbling event after the completed transition.</td></tr>
@@ -1975,14 +1978,14 @@ Alpine.start();</code></pre>
             <p>Utilities are single-purpose helpers designed for composition. Responsive display helpers use the <code>md</code> breakpoint at 48rem.</p>
 
             <div class="docs-reference-grid">
-              <div class="docs-reference-card"><h3>Display &amp; flex</h3><p><code>.bs-block</code>, <code>.bs-inline-block</code>, <code>.bs-flex</code>, <code>.bs-inline-flex</code>, <code>.bs-hidden</code>, <code>.bs-stack</code>, <code>.bs-flex-wrap</code>, <code>.bs-flex-1</code>.</p></div>
-              <div class="docs-reference-card"><h3>Alignment</h3><p><code>.bs-items-start</code>, <code>.bs-items-center</code>, <code>.bs-items-end</code>, <code>.bs-justify-start</code>, <code>.bs-justify-center</code>, <code>.bs-justify-between</code>, <code>.bs-justify-end</code>, <code>.bs-self-center</code>.</p></div>
-              <div class="docs-reference-card"><h3>Sizing &amp; position</h3><p><code>.bs-w-full</code>, <code>.bs-h-full</code>, <code>.bs-relative</code>, <code>.bs-overflow-hidden</code>.</p></div>
-              <div class="docs-reference-card"><h3>Responsive display</h3><p><code>.bs-md-flex</code>, <code>.bs-md-block</code>, and <code>.bs-md-hidden</code> apply from 48rem upward.</p></div>
-              <div class="docs-reference-card"><h3>Gap</h3><p><code>.bs-gap-{n}</code> supports <code>1, 2, 3, 4, 5, 6, 8, 10, 12</code> and maps directly to spacing tokens.</p></div>
-              <div class="docs-reference-card"><h3>Margin</h3><p><code>.bs-m-0</code>, <code>.bs-mx-auto</code>, <code>.bs-mt-{n}</code> for <code>2, 3, 4, 6, 8, 10</code>, and <code>.bs-mb-{n}</code> for <code>0, 2, 4, 6</code>.</p></div>
-              <div class="docs-reference-card"><h3>Padding</h3><p><code>.bs-p-{n}</code> for <code>0, 2, 3, 4, 5, 6, 8</code>; <code>.bs-px-{n}</code> for <code>4, 6</code>; <code>.bs-py-{n}</code> for <code>2, 4, 6, 8</code>.</p></div>
-              <div class="docs-reference-card"><h3>Text</h3><p>Sizes <code>.bs-text-xs</code> through <code>.bs-text-3xl</code>; alignment, semantic colors, gradient text, font weights, italic, link decoration, and screen-reader-only helpers.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Display &amp; flex</h3><p><code>.bs-block</code>, <code>.bs-inline-block</code>, <code>.bs-flex</code>, <code>.bs-inline-flex</code>, <code>.bs-hidden</code>, <code>.bs-stack</code>, <code>.bs-flex-wrap</code>, <code>.bs-flex-1</code>.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Alignment</h3><p><code>.bs-items-start</code>, <code>.bs-items-center</code>, <code>.bs-items-end</code>, <code>.bs-justify-start</code>, <code>.bs-justify-center</code>, <code>.bs-justify-between</code>, <code>.bs-justify-end</code>, <code>.bs-self-center</code>.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Sizing &amp; position</h3><p><code>.bs-w-full</code>, <code>.bs-h-full</code>, <code>.bs-relative</code>, <code>.bs-overflow-hidden</code>.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Responsive display</h3><p><code>.bs-md-flex</code>, <code>.bs-md-block</code>, and <code>.bs-md-hidden</code> apply from 48rem upward.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Gap</h3><p><code>.bs-gap-{n}</code> supports <code>1, 2, 3, 4, 5, 6, 8, 10, 12</code> and maps directly to spacing tokens.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Margin</h3><p><code>.bs-m-0</code>, <code>.bs-mx-auto</code>, <code>.bs-mt-{n}</code> for <code>2, 3, 4, 6, 8, 10</code>, and <code>.bs-mb-{n}</code> for <code>0, 2, 4, 6</code>.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Padding</h3><p><code>.bs-p-{n}</code> for <code>0, 2, 3, 4, 5, 6, 8</code>; <code>.bs-px-{n}</code> for <code>4, 6</code>; <code>.bs-py-{n}</code> for <code>2, 4, 6, 8</code>.</p></div>
+              <div class="docs-reference-card bs-card bs-card-subtle bs-card-compact"><h3>Text</h3><p>Sizes <code>.bs-text-xs</code> through <code>.bs-text-3xl</code>; alignment, semantic colors, gradient text, font weights, italic, link decoration, and screen-reader-only helpers.</p></div>
             </div>
 
             <h3>Spacing scale</h3>
@@ -2015,7 +2018,7 @@ Alpine.start();</code></pre>
             <div class="docs-kicker">Guidance</div>
             <h2>Accessibility</h2>
             <p>Boobstrap supplies visible focus treatment, reduced-motion safeguards, accessible color foundations, and <code>.bs-sr-only</code>. Your markup still owns semantics and behavior.</p>
-            <ul class="docs-checklist">
+            <ul class="docs-checklist bs-checklist">
               <li>Use native elements first: <code>&lt;button&gt;</code> for actions and <code>&lt;a&gt;</code> for navigation.</li>
               <li>Associate every form control with a visible <code>&lt;label&gt;</code>, or use <code>.bs-sr-only</code> when the visual design cannot accommodate one.</li>
               <li>Add <code>aria-label</code> to icon-only buttons.</li>
@@ -2037,7 +2040,7 @@ Alpine.start();</code></pre>
       </main>
 
       <aside class="docs-on-this-page" aria-label="On this page">
-        <p class="docs-nav-label">On this page</p>
+        <p class="docs-nav-label bs-nav-heading">On this page</p>
         <nav data-page-nav></nav>
       </aside>
     </div>
