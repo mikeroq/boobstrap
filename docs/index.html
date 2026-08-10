@@ -65,7 +65,7 @@
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </button>
-        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </nav>
@@ -74,14 +74,14 @@
     <progress class="docs-reading-progress" max="100" value="0" aria-label="Documentation reading progress" data-reading-progress></progress>
 
     <div class="docs-layout">
-      <aside class="docs-sidebar" id="docs-sidebar" data-sidebar>
+      <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Documentation navigation">
         <div class="docs-nav-search">
           <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <label class="bs-sr-only" for="docs-nav-filter">Filter documentation sections</label>
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav bs-nav" aria-label="Documentation sections">
+        <nav class="docs-nav bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
           <div class="docs-nav-group bs-nav-group" data-nav-group>
             <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
@@ -139,7 +139,7 @@
         </nav>
       </aside>
 
-      <button class="docs-backdrop" type="button" data-menu-close aria-label="Close documentation menu"></button>
+      <button class="docs-backdrop bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu"></button>
 
       <main class="docs-main" id="docs-content">
         <article class="docs-content">
@@ -646,7 +646,7 @@
 <span class="bs-code-tag">&lt;/header&gt;</span></code></pre>
             </div>
             <div class="docs-example-guidance" aria-label="Navigation guidance">
-              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, vertical nav for persistent destinations, breadcrumbs for hierarchy, and page navigation for a linear reading sequence.</p></div>
+              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, a sidebar and vertical nav for persistent destinations, breadcrumbs for hierarchy, and page navigation for a linear reading sequence.</p></div>
               <div><h3>Current state</h3><p>Add <code>aria-current="page"</code> to the current destination. Do not rely on color or font weight alone to communicate which page is active.</p></div>
               <div><h3>Landmarks</h3><p>Keep destinations as real links. Give each <code>&lt;nav&gt;</code> a distinct accessible label when the page contains multiple navigation landmarks.</p></div>
             </div>
@@ -668,6 +668,22 @@
                 <tr><td><code>.bs-page-nav-link</code></td><td>Creates a bordered page destination with hover and focus treatment.</td></tr>
                 <tr><td><code>.bs-page-nav-context</code></td><td>Styles the short directional label, such as “Previous” or “Next.”</td></tr>
                 <tr><td><code>.bs-page-nav-title</code></td><td>Styles the destination page title as the primary link text.</td></tr>
+                <tr><td><code>.bs-sidebar</code></td><td>Creates a sticky, independently scrolling navigation rail with configurable offset, height, and width variables.</td></tr>
+                <tr><td><code>.bs-sidebar-start</code></td><td>Adds inset spacing and a logical end border for a left/start rail.</td></tr>
+                <tr><td><code>.bs-sidebar-end</code></td><td>Adds inset spacing and a logical start border for a right/end rail.</td></tr>
+                <tr><td><code>.bs-sidebar-drawer</code></td><td>Converts the rail into an off-canvas drawer below 64rem and responds to <code>data-bs-state</code>.</td></tr>
+                <tr><td><code>.bs-sidebar-backdrop</code></td><td>Provides the dimmed dismiss target behind an open drawer.</td></tr>
+                <tr><td><code>.bs-sidebar-toc</code></td><td>Compacts nested <code>.bs-nav</code> links for a right-hand “On this page” table of contents.</td></tr>
+                <tr><td><code>.bs-sidebar-open</code></td><td>Document-body state applied by the controller to prevent background scrolling while a drawer is open.</td></tr>
+              </tbody></table></div>
+              <h3>Sidebar JavaScript API</h3>
+              <p>Import <code>Sidebar</code> from <code>@boobstrap/boobstrap/js/sidebar</code>, or initialize it through <code>initBoobstrap(document)</code>. A sidebar must have an <code>id</code>; triggers and external dismiss buttons reference it with <code>aria-controls</code>.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>show()</code> / <code>hide()</code></td><td>Open or close the mobile drawer while synchronizing the trigger, backdrop, focus, and document state.</td></tr>
+                <tr><td><code>toggle()</code></td><td>Invert the drawer's stored mobile state.</td></tr>
+                <tr><td><code>destroy()</code></td><td>Remove trigger, dismiss, keyboard, and responsive-media listeners.</td></tr>
+                <tr><td><code>bs:sidebar:show</code> / <code>bs:sidebar:hide</code></td><td>Cancelable events dispatched before state changes.</td></tr>
+                <tr><td><code>bs:sidebar:shown</code> / <code>bs:sidebar:hidden</code></td><td>Bubbling events dispatched after state, focus, and backdrop synchronization.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -1853,6 +1869,7 @@ Alpine.start();</code></pre>
               <div><h3>State</h3><p><code>.bs-collapse</code> supplies the visual contract; <code>hidden</code> is the readable initial state.</p></div>
               <div><h3>Accessibility</h3><p>Use a real button. The controller maintains <code>aria-expanded</code> and fires cancelable show/hide events.</p></div>
             </div>
+            <div class="docs-note"><strong>Navigation drawers:</strong> use the <a href="/docs/components/navbar">responsive Sidebar component</a> for an off-canvas menu. Sidebar adds a backdrop, focus containment and restoration, <kbd>Escape</kbd> handling, a persistent desktop rail, and document scroll locking; Collapse intentionally remains a lightweight inline disclosure.</div>
             <div class="docs-api"><h3>Collapse API</h3><p>Import <code>Collapse</code> from <code>@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
               <tr><td><code>show()</code> / <code>hide()</code></td><td>Change visibility and synchronized public state.</td></tr>
               <tr><td><code>toggle()</code></td><td>Invert the current panel state.</td></tr>
@@ -2096,7 +2113,7 @@ Alpine.start();</code></pre>
         </article>
       </main>
 
-      <aside class="docs-on-this-page" aria-label="On this page">
+      <aside class="docs-on-this-page bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page">
         <p class="docs-nav-label bs-nav-heading">On this page</p>
         <nav data-page-nav></nav>
       </aside>

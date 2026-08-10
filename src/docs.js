@@ -50,34 +50,33 @@ document.querySelectorAll(".docs-component-pagination").forEach((pagination) => 
 });
 
 const root = document.documentElement;
-const page = document.body;
-const menuToggle = document.querySelector("[data-menu-toggle]");
-const sidebar = document.querySelector("[data-sidebar]");
+
+const updateSidebarOffset = () => {
+  const header = document.querySelector(".docs-header");
+  const headerBottom = header?.getBoundingClientRect().bottom ?? 0;
+  root.style.setProperty("--docs-sidebar-offset", `${Math.max(header?.offsetHeight ?? 0, headerBottom)}px`);
+};
+
+let sidebarOffsetQueued = false;
+const queueSidebarOffset = () => {
+  if (sidebarOffsetQueued) return;
+  sidebarOffsetQueued = true;
+  requestAnimationFrame(() => {
+    sidebarOffsetQueued = false;
+    updateSidebarOffset();
+  });
+};
+
+updateSidebarOffset();
+window.addEventListener("scroll", queueSidebarOffset, { passive: true });
+window.addEventListener("resize", queueSidebarOffset);
+document.addEventListener("bs:banner:dismissed", queueSidebarOffset);
 
 const escapeHtml = (value) => value
   .replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
   .replaceAll(">", "&gt;")
   .replaceAll('"', "&quot;");
-
-const closeMenu = () => {
-  page.classList.remove("docs-menu-open");
-  menuToggle?.setAttribute("aria-expanded", "false");
-};
-
-menuToggle?.addEventListener("click", () => {
-  const isOpen = page.classList.toggle("docs-menu-open");
-  menuToggle.setAttribute("aria-expanded", String(isOpen));
-});
-
-document.querySelector("[data-menu-close]")?.addEventListener("click", closeMenu);
-sidebar?.addEventListener("click", (event) => {
-  if (event.target.closest("a")) closeMenu();
-});
-
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") closeMenu();
-});
 
 const storedTheme = localStorage.getItem("boobstrap-theme");
 if (storedTheme === "light" || storedTheme === "dark") root.dataset.bsTheme = storedTheme;

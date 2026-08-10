@@ -48,7 +48,7 @@
           <svg class="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.8"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
           <svg class="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></svg>
         </button>
-        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
+        <button class="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
         </button>
       </nav>
@@ -57,14 +57,14 @@
     <progress class="docs-reading-progress" max="100" value="0" aria-label="Documentation reading progress" data-reading-progress></progress>
 
     <div class="docs-layout">
-      <aside class="docs-sidebar" id="docs-sidebar" data-sidebar>
+      <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Documentation navigation">
         <div class="docs-nav-search">
           <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
           <label class="bs-sr-only" for="docs-nav-filter">Filter documentation</label>
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
           <kbd>/</kbd>
         </div>
-        <nav class="docs-nav bs-nav" aria-label="Documentation sections">
+        <nav class="docs-nav bs-nav" aria-label="Documentation sections" data-bs-sidebar-close>
           <div class="docs-nav-group bs-nav-group" data-nav-group>
             <p class="docs-nav-label bs-nav-heading">Get started</p>
             <a href="/docs/getting-started/introduction">Introduction</a>
@@ -109,7 +109,7 @@
         </nav>
       </aside>
 
-      <button class="docs-backdrop" type="button" data-menu-close aria-label="Close documentation menu"></button>
+      <button class="docs-backdrop bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu"></button>
 
       <main class="docs-main" id="docs-content">
         <article class="docs-content docs-component-content">
@@ -461,7 +461,7 @@ save.destroy();</code></pre>
         </article>
       </main>
 
-      <aside class="docs-on-this-page" aria-label="On this page">
+      <aside class="docs-on-this-page bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page">
         <p class="docs-nav-label bs-nav-heading">On this page</p>
         <nav data-page-nav></nav>
       </aside>
