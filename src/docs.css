@@ -672,14 +672,28 @@ body.docs-page {
 }
 
 .docs-theme-stage {
+  position: relative;
+  isolation: isolate;
   display: grid;
   grid-template-columns: minmax(0, 1.05fr) minmax(17rem, 0.95fr);
   gap: var(--bs-space-5);
   align-items: stretch;
+  overflow: hidden;
   padding: clamp(1.25rem, 4vw, 2.5rem);
-  background: var(--bs-gradient-brand);
+  background: var(--bs-color-surface);
+  border: 1px solid var(--bs-color-border);
   border-radius: var(--bs-radius-xl);
   box-shadow: var(--bs-shadow-brand);
+}
+
+.docs-theme-stage::before {
+  position: absolute;
+  z-index: -1;
+  inset-block-start: 0;
+  inset-inline: 0;
+  height: 0.4rem;
+  background: var(--bs-gradient-brand);
+  content: "";
 }
 
 .docs-theme-stage-copy {
@@ -690,7 +704,7 @@ body.docs-page {
 .docs-theme-stage-copy h3 {
   max-width: 14ch;
   margin: var(--bs-space-4) 0 var(--bs-space-3);
-  color: var(--bs-color-primary-contrast);
+  color: var(--bs-color-text);
   font-size: clamp(1.8rem, 4vw, 2.8rem);
   line-height: var(--bs-line-height-tight);
   letter-spacing: -0.035em;
@@ -699,9 +713,9 @@ body.docs-page {
 .docs-theme-summary {
   display: inline-flex;
   padding: 0.4rem 0.7rem;
-  color: var(--bs-color-text);
-  background: color-mix(in srgb, var(--bs-color-surface) 88%, transparent);
-  border: 1px solid var(--bs-color-border);
+  color: var(--bs-color-primary-contrast);
+  background: var(--bs-color-primary);
+  border: 1px solid var(--bs-color-primary);
   border-radius: var(--bs-radius-pill);
   box-shadow: var(--bs-shadow-sm);
   font-size: var(--bs-font-size-xs);
@@ -711,8 +725,7 @@ body.docs-page {
 .docs-theme-stage-copy p {
   max-width: 38rem;
   margin: 0;
-  color: var(--bs-color-primary-contrast);
-  opacity: 0.82;
+  color: var(--bs-color-text-muted);
 }
 
 .docs-theme-actions {
@@ -722,11 +735,12 @@ body.docs-page {
   margin-top: var(--bs-space-5);
 }
 
+.docs-theme-actions .bs-btn-secondary { background: var(--bs-color-surface-hover); }
+
 .docs-theme-sample-card {
   align-self: center;
-  background: color-mix(in srgb, var(--bs-color-surface) 94%, transparent);
+  background: var(--bs-color-surface-raised);
   box-shadow: var(--bs-shadow-lg);
-  backdrop-filter: blur(1rem);
 }
 
 .docs-theme-sample-card h4 { margin: var(--bs-space-3) 0 var(--bs-space-2); }
