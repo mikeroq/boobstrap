@@ -410,6 +410,13 @@
               <div><h3>Corners</h3><p>The square preset sets the complete radius scale—including pill radius—to zero. Intrinsic circles such as radios, spinners, and status dots remain circular.</p></div>
             </div>
 
+            <h3>Complete color token reference</h3>
+            <p>The tables below are generated from the compiled framework stylesheet used by this site. They list the complete brand ramp and every <code>--bs-color-*</code> token for all five palettes in both modes, including exact hex and alpha-channel values.</p>
+            <div class="docs-color-reference" data-theme-color-reference>
+              <p class="docs-color-reference-loading">Loading color token values…</p>
+            </div>
+            <div class="docs-note"><strong>Reading the values:</strong> Solid colors use hex notation. Translucent focus, border, and control values retain their CSS <code>rgb(... / ...%)</code> notation so their alpha channel remains explicit. The complete non-color token inventory is available in <a href="/docs/reference/tokens">Design tokens</a>.</div>
+
             <h3>Set a document default</h3>
             <p>Place all three attributes on the same theme boundary. Omitting an attribute uses its default, but explicit values make application intent easier to audit.</p>
             <div class="docs-code-block bs-code-window">
@@ -2254,7 +2261,7 @@ Alpine.start();</code></pre>
           <section class="docs-section" id="tokens">
             <div class="docs-kicker">Reference</div>
             <h2>Design tokens</h2>
-            <p>All framework decisions are exposed as CSS custom properties. Color tokens may be remapped by a theme; typography, spacing, radius, elevation, container, and motion tokens are shared.</p>
+            <p>All framework decisions are exposed as CSS custom properties. Color tokens may be remapped by a theme; typography, spacing, radius, elevation, container, and motion tokens are shared. Compare every palette and resolved color value in the <a href="/docs/getting-started/theming#theming-complete-color-token-reference">complete theme color reference</a>.</p>
             <div class="docs-filter-row">
               <label for="token-filter">Filter tokens</label>
               <input class="bs-input" id="token-filter" type="search" placeholder="Try color, space, radius…" data-token-filter />

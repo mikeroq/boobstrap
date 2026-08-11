@@ -796,6 +796,76 @@ body.docs-page {
 .docs-theme-sample-card h4 { margin: var(--bs-space-3) 0 var(--bs-space-2); }
 .docs-theme-sample-card .bs-label { margin-top: var(--bs-space-4); }
 
+.docs-color-token-probe {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.docs-color-reference {
+  display: grid;
+  gap: var(--bs-space-8);
+  margin-block: var(--bs-space-6);
+}
+
+.docs-color-reference-loading {
+  padding: var(--bs-space-6);
+  color: var(--bs-color-text-muted);
+  background: var(--bs-color-surface);
+  border: 1px solid var(--bs-color-border);
+  border-radius: var(--bs-radius-lg);
+}
+
+.docs-color-reference-group { min-width: 0; }
+.docs-color-reference-group h4 { margin: 0 0 var(--bs-space-1); }
+.docs-color-reference-group > p { margin: 0; color: var(--bs-color-text-muted); font-size: var(--bs-font-size-sm); }
+.docs-color-table-wrap { margin-block: var(--bs-space-4) 0; }
+
+.docs-color-token-table {
+  min-width: 72rem;
+  font-size: var(--bs-font-size-xs);
+}
+
+.docs-color-token-table :is(th, td):first-child {
+  position: sticky;
+  z-index: 1;
+  left: 0;
+  min-width: 17rem;
+  background: var(--bs-color-background);
+}
+
+.docs-color-token-table thead th:first-child { z-index: 2; }
+.docs-color-token-table th:not(:first-child) { min-width: 10rem; }
+.docs-color-token-table tbody th { letter-spacing: normal; text-transform: none; }
+
+.docs-color-palette-heading,
+.docs-color-token-value {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--bs-space-2);
+  white-space: nowrap;
+}
+
+.docs-color-token-value code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font-size: inherit;
+}
+
+.docs-color-token-swatch {
+  width: 1.15rem;
+  height: 1.15rem;
+  flex: 0 0 auto;
+  margin: 0;
+  border-color: color-mix(in srgb, currentColor 28%, transparent);
+  border-radius: var(--bs-radius-xs);
+}
+
 .typography-demo .bs-display { font-size: clamp(2.5rem, 8vw, 5.2rem); }
 .typography-demo h1 { font-size: 2.25rem; }
 .typography-demo h2 { font-size: 1.75rem; }
@@ -888,12 +958,15 @@ body.docs-page {
 .token-swatch-color-primary { background: var(--bs-color-primary); }
 .token-swatch-color-primary-hover { background: var(--bs-color-primary-hover); }
 .token-swatch-color-primary-active { background: var(--bs-color-primary-active); }
+.token-swatch-color-primary-contrast { background: var(--bs-color-primary-contrast); }
+.token-swatch-color-focus-ring { background: var(--bs-color-focus-ring); }
 .token-swatch-color-success { background: var(--bs-color-success); }
 .token-swatch-color-warning { background: var(--bs-color-warning); }
 .token-swatch-color-danger { background: var(--bs-color-danger); }
 .token-swatch-color-info { background: var(--bs-color-info); }
 .token-swatch-color-border { background: var(--bs-color-border); }
 .token-swatch-color-border-strong { background: var(--bs-color-border-strong); }
+.token-swatch-color-control-background { background: var(--bs-color-control-background); }
 .token-swatch-gradient-brand { background: var(--bs-gradient-brand); }
 .reference-empty { padding: var(--bs-space-8); color: var(--bs-color-text-muted); border: 1px dashed var(--bs-color-border); border-radius: var(--bs-radius-lg); text-align: center; }
 
@@ -995,6 +1068,12 @@ body.docs-page {
   .docs-theme-control-palette { grid-column: auto; grid-row: auto; }
   .docs-theme-stage { padding: var(--bs-space-4); }
   .docs-theme-stage-copy { padding: var(--bs-space-2); }
+  .docs-color-token-table :is(th, td):first-child {
+    width: 11rem;
+    min-width: 11rem;
+    max-width: 11rem;
+  }
+  .docs-color-token-table tbody th code { overflow-wrap: anywhere; }
   .docs-example-guidance > div { grid-template-columns: 1fr; gap: var(--bs-space-2); }
   .docs-form { grid-template-columns: 1fr; }
   .docs-form-wide { grid-column: auto; }

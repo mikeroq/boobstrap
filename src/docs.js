@@ -185,6 +185,71 @@ document.querySelectorAll("[data-theme-configurator]").forEach((configurator) =>
   renderTheme();
 });
 
+const themeColorReference = document.querySelector("[data-theme-color-reference]");
+const isThemeColorReferenceRoute = normalizeDocsPath(window.location.pathname) === "/docs/getting-started/theming";
+if (themeColorReference && isThemeColorReferenceRoute) {
+  const themeReferenceTokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
+  const themeReferenceTokens = [...themeReferenceTokenBlock.matchAll(/(--bs-[a-z0-9-]+)\s*:/g)].map(([, name]) => name);
+  const brandTokens = themeReferenceTokens.filter((name) => name.startsWith("--bs-brand-"));
+  const semanticColorTokens = themeReferenceTokens.filter((name) => name.startsWith("--bs-color-"));
+  const probe = document.createElement("div");
+  probe.className = "docs-color-token-probe";
+  probe.setAttribute("aria-hidden", "true");
+  document.body.append(probe);
+
+  const tokenValuesFor = (theme, palette, tokenNames) => {
+    probe.dataset.bsTheme = theme;
+    probe.dataset.bsPalette = palette;
+    const styles = getComputedStyle(probe);
+    return Object.fromEntries(tokenNames.map((name) => [name, styles.getPropertyValue(name).trim()]));
+  };
+
+  const paletteValues = Object.fromEntries(themeAxes.palette.map((palette) => [
+    palette,
+    {
+      brand: tokenValuesFor("dark", palette, brandTokens),
+      dark: tokenValuesFor("dark", palette, semanticColorTokens),
+      light: tokenValuesFor("light", palette, semanticColorTokens),
+    },
+  ]));
+  probe.remove();
+
+  const swatchClassFor = (token) => `token-swatch-${token.replace("--bs-", "")}`;
+  const renderPaletteHeading = (palette) => `<span class="docs-color-palette-heading" data-bs-theme="dark" data-bs-palette="${palette}"><span class="token-swatch docs-color-token-swatch token-swatch-brand-500" aria-hidden="true"></span>${titleCase(palette)}</span>`;
+  const renderMatrix = ({ heading, description, tokens: tokenNames, valueKey }) => {
+    const rows = tokenNames.map((token) => {
+      const values = themeAxes.palette.map((palette) => {
+        const value = paletteValues[palette][valueKey][token];
+        return `<td data-bs-theme="${valueKey === "brand" ? "dark" : valueKey}" data-bs-palette="${palette}" data-color-token-cell data-token="${escapeHtml(token)}"><span class="docs-color-token-value"><span class="token-swatch docs-color-token-swatch ${swatchClassFor(token)}" aria-hidden="true"></span><code>${escapeHtml(value)}</code></span></td>`;
+      }).join("");
+      return `<tr><th scope="row"><code>${escapeHtml(token)}</code></th>${values}</tr>`;
+    }).join("");
+
+    return `<section class="docs-color-reference-group"><h4>${escapeHtml(heading)}</h4><p>${escapeHtml(description)}</p><div class="docs-table-wrap docs-color-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="${escapeHtml(heading)}"><table class="docs-table docs-color-token-table bs-table"><caption class="bs-sr-only">${escapeHtml(heading)} across Rose, Violet, Blue, Teal, and Amber palettes</caption><thead><tr><th scope="col">Token</th>${themeAxes.palette.map((palette) => `<th scope="col">${renderPaletteHeading(palette)}</th>`).join("")}</tr></thead><tbody>${rows}</tbody></table></div></section>`;
+  };
+
+  themeColorReference.innerHTML = [
+    renderMatrix({
+      heading: "Palette brand scales",
+      description: "Primitive accent steps shared by dark and light mode for each palette.",
+      tokens: brandTokens,
+      valueKey: "brand",
+    }),
+    renderMatrix({
+      heading: "Dark mode semantic colors",
+      description: "Resolved component-facing colors when data-bs-theme is dark.",
+      tokens: semanticColorTokens,
+      valueKey: "dark",
+    }),
+    renderMatrix({
+      heading: "Light mode semantic colors",
+      description: "Resolved component-facing colors when data-bs-theme is light.",
+      tokens: semanticColorTokens,
+      valueKey: "light",
+    }),
+  ].join("");
+}
+
 const docsPath = normalizeDocsPath(window.location.pathname);
 const activeDocsPage = docsPageForPath(docsPath);
 const isDocsOverview = docsPath === "/docs";

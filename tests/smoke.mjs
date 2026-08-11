@@ -44,7 +44,12 @@ const expectedClasses = new Set(
     .filter((name) => name.startsWith("bs-")),
 );
 const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
-const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
+const expectedTokenNames = [...tokenBlock.matchAll(/(--bs-[a-z0-9-]+)\s*:/g)].map(([, name]) => name);
+const expectedTokens = expectedTokenNames.length;
+const expectedBrandTokens = expectedTokenNames.filter((name) => name.startsWith("--bs-brand-"));
+const expectedSemanticColorTokens = expectedTokenNames.filter((name) => name.startsWith("--bs-color-"));
+const expectedThemeColorRows = expectedBrandTokens.length + (expectedSemanticColorTokens.length * 2);
+const expectedThemeColorCells = expectedThemeColorRows * 5;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
 const ogImageUrl = "https://boobstrap.org/og-image.jpg";
 const escapeHtml = (value) => value
@@ -413,6 +418,9 @@ try {
       if (formsDisclosureExpanded !== String(expectsFormsDisclosure)) {
         failures.push(`${viewport.name}: ${config.path} has the wrong Forms navigation disclosure state`);
       }
+      if (config.sectionId === "theming" && await routePage.locator("[data-theme-color-reference] [data-color-token-cell]").count() !== expectedThemeColorCells) {
+        failures.push(`${viewport.name}: complete theme color reference does not render all ${expectedThemeColorCells} palette values`);
+      }
       if (await routePage.locator("[data-page-nav] a").count() < 1) {
         failures.push(`${viewport.name}: ${config.path} has no local page outline`);
       }
@@ -559,8 +567,13 @@ try {
         }
       }
 
-      if (config.sectionId === "tokens" && await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
-        failures.push("desktop: token reference does not match the installed stylesheet");
+      if (config.sectionId === "tokens") {
+        if (await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
+          failures.push("desktop: token reference does not match the installed stylesheet");
+        }
+        if (await routePage.locator('#tokens a[href="/docs/getting-started/theming#theming-complete-color-token-reference"]').count() !== 1) {
+          failures.push("desktop: token index does not link to the complete theme color reference");
+        }
       }
 
       if (config.sectionId === "theming" && viewport.name === "desktop") {
@@ -576,6 +589,29 @@ try {
           || await configurator.locator('[data-theme-axis="radius"]').count() !== 2) {
           failures.push("desktop: theming configurator does not expose every supported option");
         }
+
+        const colorReference = routePage.locator("[data-theme-color-reference]");
+        if (await routePage.locator("#theming-complete-color-token-reference").count() !== 1) {
+          failures.push("desktop: complete theme color reference is not directly linkable");
+        }
+        if (await colorReference.locator(".docs-color-reference-group").count() !== 3
+          || await colorReference.locator("tbody tr").count() !== expectedThemeColorRows) {
+          failures.push(`desktop: complete theme color reference does not cover every palette token (${expectedThemeColorRows} rows expected)`);
+        }
+        const colorReferenceMismatch = await colorReference.locator("[data-color-token-cell]").evaluateAll((cells) => {
+          const mismatch = cells.find((cell) => {
+            const displayedValue = cell.querySelector("code")?.textContent.trim();
+            const resolvedValue = getComputedStyle(cell).getPropertyValue(cell.dataset.token).trim();
+            return !displayedValue || displayedValue !== resolvedValue || !cell.querySelector(".docs-color-token-swatch");
+          });
+          return mismatch?.dataset.token ?? null;
+        });
+        if (colorReferenceMismatch) failures.push(`desktop: theme color reference has a stale or missing value for ${colorReferenceMismatch}`);
+        if ((await colorReference.locator('[data-bs-theme="light"][data-bs-palette="blue"][data-token="--bs-color-primary"] code').textContent())?.trim() !== "#1d4ed8"
+          || (await colorReference.locator('[data-bs-theme="dark"][data-bs-palette="amber"][data-token="--bs-color-primary"] code').textContent())?.trim() !== "#fbbf24") {
+          failures.push("desktop: theme color reference does not expose expected light and dark palette hex values");
+        }
+        if (await colorReference.locator("[style]").count() !== 0) failures.push("desktop: theme color reference relies on CSP-blocked inline styles");
 
         for (const theme of ["dark", "light"]) {
           await configurator.locator(`[data-theme-axis="theme"][data-theme-value="${theme}"]`).click();
