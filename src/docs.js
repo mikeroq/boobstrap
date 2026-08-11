@@ -305,6 +305,31 @@ if (activeDocsPage) {
   });
 }
 
+const navDisclosures = [...document.querySelectorAll("[data-nav-disclosure]")].map((disclosure) => {
+  const toggle = disclosure.querySelector("[data-nav-disclosure-toggle]");
+  const submenu = disclosure.querySelector("[data-nav-submenu]");
+  const row = disclosure.querySelector(".docs-nav-disclosure-row");
+  const parentLink = row?.querySelector("a");
+  const prefix = normalizeDocsPath(disclosure.dataset.navPrefix ?? "");
+  const label = parentLink?.textContent.trim() || "Submenu";
+  let open = docsPath === prefix || docsPath.startsWith(`${prefix}/`);
+
+  const render = (forcedOpen) => {
+    const expanded = forcedOpen ?? open;
+    submenu.hidden = !expanded;
+    toggle.setAttribute("aria-expanded", String(expanded));
+    toggle.setAttribute("aria-label", `${expanded ? "Hide" : "Show"} ${label} pages`);
+  };
+
+  toggle?.addEventListener("click", () => {
+    open = !open;
+    render();
+  });
+  render();
+
+  return { disclosure, parentLink, row, submenu, render };
+});
+
 document.querySelectorAll("[data-copy], [data-copy-code]").forEach((button) => {
   button.addEventListener("click", async () => {
     const originalLabel = button.textContent;
@@ -415,6 +440,17 @@ const filterNavigation = () => {
       link.hidden = !visible;
       if (visible) groupCount += 1;
     });
+
+    navDisclosures
+      .filter(({ disclosure }) => group.contains(disclosure))
+      .forEach(({ disclosure, parentLink, row, submenu, render }) => {
+        const parentMatches = parentLink && !parentLink.hidden;
+        const childMatches = [...submenu.querySelectorAll("a")].some((link) => !link.hidden);
+        disclosure.hidden = Boolean(query) && !parentMatches && !childMatches;
+        row.hidden = Boolean(query) && !parentMatches;
+        render(query ? childMatches : undefined);
+      });
+
     group.hidden = groupCount === 0;
     visibleCount += groupCount;
   });

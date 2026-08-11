@@ -300,6 +300,10 @@ try {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
       if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
+      const formsToggle = docsPage.locator("[data-nav-disclosure-toggle]");
+      if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
+        failures.push("desktop: Forms navigation is expanded outside the Forms section");
+      }
       const docsNavRhythm = await docsPage.locator(".docs-nav-group > a").evaluateAll((links) => ({
         heights: links.map((link) => link.getBoundingClientRect().height),
         gaps: links.slice(1).map((link, index) => link.getBoundingClientRect().top - links[index].getBoundingClientRect().bottom),
@@ -315,6 +319,15 @@ try {
         failures.push("desktop: multi-page docs filter retained a non-match");
       }
       await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      await docsPage.getByLabel("Filter documentation sections").fill("one-time password");
+      if (!await docsPage.locator('.docs-nav a[href="/docs/components/forms/otp"]').isVisible()
+        || await formsToggle.getAttribute("aria-expanded") !== "true") {
+        failures.push("desktop: docs filter did not reveal a matching Forms child page");
+      }
+      await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
+        failures.push("desktop: clearing the docs filter did not restore the Forms disclosure state");
+      }
       await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: docs theme toggle did not enable light theme");
@@ -322,9 +335,37 @@ try {
     } else {
       const menuToggle = docsPage.getByRole("button", { name: "Open documentation menu" });
       const mobileSidebar = docsPage.locator("#docs-sidebar");
+      if (await docsPage.locator("[data-nav-disclosure-toggle]").getAttribute("aria-expanded") !== "false") {
+        failures.push("mobile: Forms navigation is expanded outside the Forms section");
+      }
+      await docsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
       await menuToggle.click();
       if (!await mobileSidebar.isVisible() || await mobileSidebar.getAttribute("data-bs-state") !== "open") failures.push("mobile: docs menu did not open through the sidebar controller");
       if (await menuToggle.getAttribute("aria-expanded") !== "true" || !await docsPage.locator("body").evaluate((element) => element.classList.contains("bs-sidebar-open"))) failures.push("mobile: docs menu state did not synchronize");
+      const closeButton = docsPage.locator(".docs-sidebar-close");
+      await docsPage.waitForFunction(() => document.activeElement?.getAttribute("aria-label") === "Close documentation menu");
+      if (!await closeButton.evaluate((element) => element === document.activeElement)
+        || await docsPage.getByLabel("Filter documentation sections").evaluate((element) => element === document.activeElement)) {
+        failures.push("mobile: opening the docs menu focused search instead of the close control");
+      }
+      const drawerGeometry = await mobileSidebar.evaluate((sidebar) => {
+        const content = sidebar.querySelector(":scope > .bs-sidebar-content");
+        const lastLink = [...content.querySelectorAll("a")].filter((link) => !link.hidden).at(-1);
+        content.scrollTop = content.scrollHeight;
+        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+        const lastLinkRect = lastLink.getBoundingClientRect();
+        return {
+          sidebarFitsViewport: sidebarRect.bottom <= viewportHeight + 1,
+          contentScrolls: content.scrollHeight > content.clientHeight,
+          contentReachedBottom: Math.abs(content.scrollHeight - content.clientHeight - content.scrollTop) <= 1,
+          lastLinkVisible: lastLinkRect.bottom <= contentRect.bottom + 1,
+        };
+      });
+      if (!Object.values(drawerGeometry).every(Boolean)) {
+        failures.push(`mobile: docs menu does not expose a complete independent scroll region (${JSON.stringify(drawerGeometry)})`);
+      }
       await docsPage.keyboard.press("Escape");
       if (await mobileSidebar.getAttribute("data-bs-state") !== "closed" || !await menuToggle.evaluate((element) => element === document.activeElement)) failures.push("mobile: docs menu did not close and restore focus on Escape");
     }
@@ -361,6 +402,11 @@ try {
       }
       if (await routePage.locator(`.docs-nav a[href="${config.path}"]`).getAttribute("aria-current") !== "page") {
         failures.push(`${viewport.name}: ${config.path} is not current in the docs navigation`);
+      }
+      const formsDisclosureExpanded = await routePage.locator("[data-nav-disclosure-toggle]").getAttribute("aria-expanded");
+      const expectsFormsDisclosure = config.path === "/docs/components/forms" || config.path.startsWith("/docs/components/forms/");
+      if (formsDisclosureExpanded !== String(expectsFormsDisclosure)) {
+        failures.push(`${viewport.name}: ${config.path} has the wrong Forms navigation disclosure state`);
       }
       if (await routePage.locator("[data-page-nav] a").count() < 1) {
         failures.push(`${viewport.name}: ${config.path} has no local page outline`);
@@ -834,6 +880,38 @@ try {
     if (playgroundConsoleErrors.length) failures.push(`${viewport.name}: playground ${playgroundConsoleErrors.join("; ")}`);
     await playgroundPage.close();
   }
+
+  const compactDesktopPage = await browser.newPage({ viewport: { width: 980, height: 844 } });
+  const compactDesktopErrors = [];
+  compactDesktopPage.on("console", (message) => {
+    if (message.type() === "error") compactDesktopErrors.push(message.text());
+  });
+  compactDesktopPage.on("pageerror", (error) => compactDesktopErrors.push(error.message));
+  await compactDesktopPage.goto(`${baseUrl}/docs/getting-started/introduction`, { waitUntil: "networkidle" });
+  const compactSidebar = compactDesktopPage.locator("#docs-sidebar");
+  const compactMenuToggle = compactDesktopPage.getByRole("button", { name: "Open documentation menu" });
+  const compactSidebarState = await compactSidebar.evaluate((sidebar) => ({
+    state: sidebar.dataset.bsState,
+    position: getComputedStyle(sidebar).position,
+    transform: getComputedStyle(sidebar).transform,
+    visible: sidebar.getBoundingClientRect().width > 0 && sidebar.getBoundingClientRect().height > 0,
+  }));
+  if (!compactSidebarState.visible || compactSidebarState.state !== "expanded"
+    || compactSidebarState.position !== "sticky" || compactSidebarState.transform !== "none"
+    || await compactMenuToggle.isVisible()) {
+    failures.push(`980px desktop view: documentation sidebar did not remain persistent (${JSON.stringify(compactSidebarState)})`);
+  }
+
+  await compactDesktopPage.setViewportSize({ width: 390, height: 844 });
+  await compactDesktopPage.waitForFunction(() => document.querySelector("#docs-sidebar")?.dataset.bsState === "closed");
+  if (!await compactMenuToggle.isVisible()) failures.push("responsive sidebar: menu control did not appear after switching to mobile view");
+  await compactDesktopPage.setViewportSize({ width: 980, height: 844 });
+  await compactDesktopPage.waitForFunction(() => document.querySelector("#docs-sidebar")?.dataset.bsState === "expanded");
+  if (!await compactSidebar.isVisible() || await compactMenuToggle.isVisible()) {
+    failures.push("responsive sidebar: persistent navigation did not return after switching to desktop view");
+  }
+  if (compactDesktopErrors.length) failures.push(`980px desktop view: ${compactDesktopErrors.join("; ")}`);
+  await compactDesktopPage.close();
 } finally {
   await browser.close();
   server.kill("SIGTERM");
