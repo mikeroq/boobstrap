@@ -18,7 +18,12 @@ document.querySelectorAll(".docs-code-block").forEach((block) => {
   block.classList.add("bs-code-window");
   block.querySelector(":scope > .docs-code-label")?.classList.add("bs-code-header");
   block.querySelector(":scope > .docs-code-label button")?.classList.add("bs-code-action");
-  block.querySelectorAll(":scope > pre, :scope > .docs-code-variant-panel > pre").forEach((pre) => pre.classList.add("bs-code-body"));
+  const codeLabel = block.querySelector(":scope > .docs-code-label > span")?.textContent.trim() || "Source";
+  block.querySelectorAll(":scope > pre, :scope > .docs-code-variant-panel > pre").forEach((pre) => {
+    pre.classList.add("bs-code-body");
+    pre.tabIndex = 0;
+    pre.setAttribute("aria-label", `${codeLabel} code example`);
+  });
   block.querySelectorAll(".docs-code-variant-tabs").forEach((tabs) => tabs.classList.add("bs-code-tabs"));
   block.querySelectorAll(".docs-code-variant-tabs button").forEach((tab) => tab.classList.add("bs-code-tab"));
   block.querySelectorAll(".docs-code-variant-panel").forEach((panel) => panel.classList.add("bs-code-panel"));
@@ -95,7 +100,7 @@ document.querySelector("[data-theme-toggle]")?.addEventListener("click", () => {
 
 const previewThemes = ["light", "dark"];
 
-document.querySelectorAll(".docs-demo").forEach((preview) => {
+document.querySelectorAll(".docs-demo:not([data-theme-configurator])").forEach((preview) => {
   const initialTheme = root.dataset.bsTheme === "light" ? "light" : "dark";
   preview.dataset.bsTheme = initialTheme;
   preview.dataset.previewThemeReady = "";
@@ -126,6 +131,58 @@ document.querySelectorAll(".docs-demo").forEach((preview) => {
 
   preview.prepend(controls);
   setPreviewTheme(initialTheme);
+});
+
+const themeAxes = {
+  theme: ["dark", "light"],
+  palette: ["rose", "violet", "blue", "teal", "amber"],
+  radius: ["rounded", "square"],
+};
+
+const titleCase = (value) => value[0].toUpperCase() + value.slice(1);
+
+document.querySelectorAll("[data-theme-configurator]").forEach((configurator) => {
+  const markup = configurator.nextElementSibling?.querySelector("[data-theme-markup]");
+  const copyButton = configurator.nextElementSibling?.querySelector("[data-theme-copy]");
+  const status = configurator.querySelector("[data-theme-status]");
+  const summary = configurator.querySelector("[data-theme-summary]");
+  const state = {
+    theme: themeAxes.theme.includes(configurator.dataset.bsTheme) ? configurator.dataset.bsTheme : "dark",
+    palette: themeAxes.palette.includes(configurator.dataset.bsPalette) ? configurator.dataset.bsPalette : "rose",
+    radius: themeAxes.radius.includes(configurator.dataset.bsRadius) ? configurator.dataset.bsRadius : "rounded",
+  };
+
+  const renderTheme = () => {
+    configurator.dataset.bsTheme = state.theme;
+    configurator.dataset.bsPalette = state.palette;
+    configurator.dataset.bsRadius = state.radius;
+
+    configurator.querySelectorAll("[data-theme-axis][data-theme-value]").forEach((button) => {
+      button.setAttribute("aria-pressed", String(state[button.dataset.themeAxis] === button.dataset.themeValue));
+    });
+
+    const selectionLabel = `${titleCase(state.theme)} · ${titleCase(state.palette)} · ${titleCase(state.radius)}`;
+    if (summary) summary.textContent = selectionLabel;
+    if (status) status.textContent = `Previewing ${state.theme} mode, ${state.palette} palette, and ${state.radius} corners.`;
+
+    const source = `<html\n  data-bs-theme="${state.theme}"\n  data-bs-palette="${state.palette}"\n  data-bs-radius="${state.radius}"\n>`;
+    if (markup) {
+      markup.textContent = source;
+      highlightCodeElement(markup);
+    }
+    if (copyButton) copyButton.dataset.copy = source;
+  };
+
+  configurator.querySelectorAll("[data-theme-axis][data-theme-value]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const { themeAxis: axis, themeValue: value } = button.dataset;
+      if (!themeAxes[axis]?.includes(value)) return;
+      state[axis] = value;
+      renderTheme();
+    });
+  });
+
+  renderTheme();
 });
 
 const docsPath = normalizeDocsPath(window.location.pathname);
@@ -199,6 +256,7 @@ if (docsIndex) {
 
     if (routedSection?.classList.contains("docs-section")) {
       routedSection.classList.add("docs-routed-section");
+      routedSection.querySelectorAll(":scope > h3").forEach((heading) => heading.setAttribute("aria-level", "2"));
       routedSection.before(createRoutedHero(activeDocsPage));
     } else if (routedSection === introduction) {
       introduction.classList.add("docs-routed-introduction");
