@@ -124,6 +124,7 @@ const promotedComponentCoverage = {
   cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
   tables: [
+    "bs-datatable",
     "bs-pagination",
     "bs-pagination-ellipsis",
     "bs-pagination-item",
@@ -149,8 +150,8 @@ const promotedComponentCoverage = {
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 85) {
-  throw new Error(`Expected documentation coverage for 85 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 86) {
+  throw new Error(`Expected documentation coverage for 86 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -165,7 +166,7 @@ const documentationQualityMinimums = {
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 4, code: 4, guidance: true },
-  tables: { examples: 8, code: 8, guidance: true },
+  tables: { examples: 9, code: 11, guidance: true },
   lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
@@ -553,11 +554,12 @@ try {
       }
 
       if (config.sectionId === "tables") {
+        await routePage.locator("#table-datatables .dt-container").waitFor();
         const exampleTables = routePage.locator('#tables [data-component-example] table.bs-table');
         const responsiveExamples = routePage.locator('#tables [data-component-example] .bs-table-responsive');
         const paginationLists = routePage.locator('#tables [data-component-example] .bs-pagination');
-        if (await exampleTables.count() !== 6 || await paginationLists.count() !== 3) {
-          failures.push(`${viewport.name}: tables guide does not expose six table and three pagination compositions`);
+        if (await exampleTables.count() !== 7 || await paginationLists.count() !== 3) {
+          failures.push(`${viewport.name}: tables guide does not expose seven table and three pagination compositions`);
         }
         if (!await exampleTables.evaluateAll((tables) => tables.every((table) => (
           table.querySelector(":scope > caption")
@@ -587,6 +589,38 @@ try {
         }
         if ((viewport.name === "mobile") !== (tablePresentation.optionalPageDisplay === "none")) {
           failures.push(`${viewport.name}: optional pagination pages did not follow the mobile visibility contract`);
+        }
+
+        const dataTable = routePage.locator("#table-datatables");
+        const dataTableSearch = dataTable.locator(".dt-search input");
+        const dataTableLength = dataTable.locator(".dt-length select");
+        const dataTableRows = dataTable.locator("tbody tr");
+        const dataTableRegion = dataTable.locator(".dt-layout-table > .dt-layout-cell");
+        if (await dataTableRows.count() !== 5 || await dataTable.locator(".dt-info").getAttribute("role") !== "status") {
+          failures.push(`${viewport.name}: DataTables did not initialize with five visible rows and live result information`);
+        }
+        if (await dataTableRegion.getAttribute("role") !== "region"
+          || await dataTableRegion.getAttribute("tabindex") !== "0"
+          || await dataTableRegion.getAttribute("aria-label") !== "Customer directory results") {
+          failures.push(`${viewport.name}: DataTables overflow region is not keyboard accessible and named`);
+        }
+        await dataTableSearch.fill("Berlin");
+        if (await dataTableRows.count() !== 1 || !await dataTableRows.first().textContent().then((text) => text.includes("Noor Hassan"))) {
+          failures.push(`${viewport.name}: DataTables search did not filter to the matching customer`);
+        }
+        await dataTableSearch.fill("");
+        await dataTableLength.selectOption("10");
+        if (await dataTableRows.count() !== 10) failures.push(`${viewport.name}: DataTables page-length control did not show ten rows`);
+        await dataTableLength.selectOption("5");
+        await dataTable.locator("thead .dt-column-order").first().click();
+        await dataTable.locator("thead th").first().waitFor();
+        await routePage.waitForFunction(() => document.querySelector("#table-datatables thead th")?.getAttribute("aria-sort") === "ascending");
+        if (!await dataTableRows.first().textContent().then((text) => text.includes("Alexis Martin"))) {
+          failures.push(`${viewport.name}: DataTables column sorting did not reorder customer names`);
+        }
+        await dataTable.locator('[aria-label="Next"]').click();
+        if (!await dataTable.locator(".dt-info").textContent().then((text) => text.includes("6 to 10"))) {
+          failures.push(`${viewport.name}: DataTables pagination did not advance to the second page`);
         }
         await routePage.screenshot({ path: `artifacts/tables-${viewport.name}.png`, fullPage: true });
       }

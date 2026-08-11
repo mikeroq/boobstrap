@@ -3,6 +3,7 @@ import "@boobstrap/boobstrap/dist/boobstrap.css";
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import "./docs.css";
 import { initDevelopmentBanner } from "./dev-banner.js";
+import { initDataTablesDemo } from "./datatables-demo.js";
 import { enhanceDocumentation } from "./docs-enhancements.js";
 import { docsPageForPath, docsPages, normalizeDocsPath } from "./docs-pages.js";
 import { highlightCodeBlocks, highlightCodeElement } from "./syntax-highlighting.js";
@@ -333,6 +334,10 @@ if (docsIndex) {
       if (breadcrumb) breadcrumb.innerHTML = '<a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>Introduction</span>';
     }
   }
+}
+
+if (activeDocsPage?.sectionId === "tables" && routedSection) {
+  initDataTablesDemo(routedSection);
 }
 
 if (docsIndex && activeDocsPage) {
