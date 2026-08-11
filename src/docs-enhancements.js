@@ -409,8 +409,8 @@ toggle.addEventListener("click", () => {
     id: "sidebar-shell",
     title: "Complete application shell",
     description: "Compose a fixed identity region, independently scrolling navigation, account footer, and primary surface. The source order stays meaningful when the layout stacks on a narrow viewport.",
-    preview: `<div class="bs-sidebar-layout" style="min-block-size: 30rem">
-  <aside class="bs-sidebar bs-sidebar-start bs-p-0" style="position: relative; --bs-sidebar-height: 30rem" aria-label="Acme workspace">
+    preview: `<div class="bs-sidebar-layout">
+  <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Acme workspace">
     <div class="bs-sidebar-header">
       <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
         <span aria-hidden="true">◆</span><span class="bs-sidebar-label">Acme, Inc.</span><span aria-hidden="true">⌄</span>

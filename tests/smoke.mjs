@@ -295,8 +295,12 @@ try {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
       if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
-      const docsNavRowHeights = await docsPage.locator('.docs-nav a[href="/docs/components/forms"], .docs-nav a[href="/docs/components/forms/inputs"]').evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
-      if (docsNavRowHeights.length !== 2 || Math.abs(docsNavRowHeights[0] - docsNavRowHeights[1]) > 0.5) failures.push("desktop: nested documentation links do not preserve the sidebar row rhythm");
+      const docsNavRhythm = await docsPage.locator(".docs-nav-group > a").evaluateAll((links) => ({
+        heights: links.map((link) => link.getBoundingClientRect().height),
+        gaps: links.slice(1).map((link, index) => link.getBoundingClientRect().top - links[index].getBoundingClientRect().bottom),
+      }));
+      if (docsNavRhythm.heights.length < 2 || docsNavRhythm.heights.some((height) => Math.abs(height - docsNavRhythm.heights[0]) > 0.5)) failures.push("desktop: documentation links do not share one sidebar row height");
+      if (docsNavRhythm.gaps.some((gap) => gap < 1)) failures.push("desktop: documentation links do not preserve visible row spacing");
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').isVisible()) {
@@ -449,12 +453,14 @@ try {
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "sidebars") {
+        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push("desktop: complete application shell relies on CSP-blocked inline styles");
         const shellSidebar = routePage.locator("#sidebar-shell > .bs-sidebar-layout > .bs-sidebar");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
           const headerRect = sidebar.querySelector(":scope > .bs-sidebar-header").getBoundingClientRect();
           const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
-          return Math.abs(headerRect.width - sidebarRect.width) <= 1
+          return Math.abs(sidebarRect.height - 480) <= 1
+            && Math.abs(headerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });

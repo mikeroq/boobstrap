@@ -124,8 +124,13 @@ body.docs-page {
 
 .docs-nav-empty { margin-top: var(--bs-space-5); color: var(--bs-color-text-subtle); font-size: var(--bs-font-size-sm); }
 
-/* Keep nested routes indented without changing the sidebar's row rhythm. */
-.docs-nav .bs-nav-link-subitem { font-size: var(--bs-font-size-sm); }
+.docs-nav-group { gap: 0.15rem; }
+
+.docs-nav .bs-nav-link {
+  display: flex;
+  min-block-size: 2.25rem;
+  align-items: center;
+}
 
 .docs-main { min-width: 0; }
 
@@ -344,6 +349,13 @@ body.docs-page {
   border-top: 0;
   border-start-start-radius: 0;
   border-start-end-radius: 0;
+}
+
+#sidebar-shell > .bs-sidebar-layout { min-block-size: 30rem; }
+
+#sidebar-shell > .bs-sidebar-layout > .bs-sidebar {
+  --bs-sidebar-height: 30rem;
+  position: relative;
 }
 
 .docs-button-demo {
