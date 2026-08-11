@@ -123,13 +123,34 @@ const promotedComponentCoverage = {
   ],
   cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
-  tables: ["bs-table", "bs-table-responsive"],
+  tables: [
+    "bs-pagination",
+    "bs-pagination-ellipsis",
+    "bs-pagination-item",
+    "bs-pagination-lg",
+    "bs-pagination-link",
+    "bs-pagination-optional",
+    "bs-pagination-sm",
+    "bs-table",
+    "bs-table-bordered",
+    "bs-table-borderless",
+    "bs-table-caption-bottom",
+    "bs-table-cell-actions",
+    "bs-table-cell-numeric",
+    "bs-table-compact",
+    "bs-table-empty",
+    "bs-table-hover",
+    "bs-table-responsive",
+    "bs-table-sort",
+    "bs-table-sticky-header",
+    "bs-table-striped",
+  ],
   lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 67) {
-  throw new Error(`Expected documentation coverage for 67 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 85) {
+  throw new Error(`Expected documentation coverage for 85 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -144,7 +165,7 @@ const documentationQualityMinimums = {
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 4, code: 4, guidance: true },
-  tables: { examples: 2, code: 2, guidance: true },
+  tables: { examples: 8, code: 8, guidance: true },
   lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
@@ -529,6 +550,45 @@ try {
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });
         if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
+      }
+
+      if (config.sectionId === "tables") {
+        const exampleTables = routePage.locator('#tables [data-component-example] table.bs-table');
+        const responsiveExamples = routePage.locator('#tables [data-component-example] .bs-table-responsive');
+        const paginationLists = routePage.locator('#tables [data-component-example] .bs-pagination');
+        if (await exampleTables.count() !== 6 || await paginationLists.count() !== 3) {
+          failures.push(`${viewport.name}: tables guide does not expose six table and three pagination compositions`);
+        }
+        if (!await exampleTables.evaluateAll((tables) => tables.every((table) => (
+          table.querySelector(":scope > caption")
+          && [...table.querySelectorAll("th")].every((header) => ["col", "row"].includes(header.getAttribute("scope")))
+        )))) {
+          failures.push(`${viewport.name}: a table example is missing a caption or scoped header`);
+        }
+        if (!await responsiveExamples.evaluateAll((wrappers) => wrappers.every((wrapper) => (
+          wrapper.getAttribute("role") === "region"
+          && wrapper.getAttribute("tabindex") === "0"
+          && Boolean(wrapper.getAttribute("aria-label"))
+        )))) {
+          failures.push(`${viewport.name}: a scrollable table example is not a named keyboard-focusable region`);
+        }
+        const tablePresentation = await routePage.locator("#table-sticky-sortable").evaluate((example) => {
+          const stickyHeader = example.querySelector("thead th");
+          const currentPage = document.querySelector('#table-pagination [aria-current="page"]');
+          const optionalPage = document.querySelector("#table-pagination .bs-pagination-optional");
+          return {
+            stickyPosition: getComputedStyle(stickyHeader).position,
+            currentPageBackground: getComputedStyle(currentPage).backgroundColor,
+            optionalPageDisplay: getComputedStyle(optionalPage).display,
+          };
+        });
+        if (tablePresentation.stickyPosition !== "sticky" || tablePresentation.currentPageBackground === "rgba(0, 0, 0, 0)") {
+          failures.push(`${viewport.name}: sticky headers or pagination current state did not render`);
+        }
+        if ((viewport.name === "mobile") !== (tablePresentation.optionalPageDisplay === "none")) {
+          failures.push(`${viewport.name}: optional pagination pages did not follow the mobile visibility contract`);
+        }
+        await routePage.screenshot({ path: `artifacts/tables-${viewport.name}.png`, fullPage: true });
       }
 
       if (viewport.name !== "desktop") continue;
