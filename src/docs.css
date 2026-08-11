@@ -351,7 +351,13 @@ body.docs-page {
   border-start-end-radius: 0;
 }
 
-#sidebar-shell > .bs-sidebar-layout { min-block-size: 30rem; }
+#sidebar-shell { overflow-x: auto; }
+
+#sidebar-shell > .bs-sidebar-layout {
+  display: flex;
+  min-inline-size: 36rem;
+  min-block-size: 30rem;
+}
 
 #sidebar-shell > .bs-sidebar-layout > .bs-sidebar {
   --bs-sidebar-height: 30rem;

@@ -450,21 +450,26 @@ try {
         await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
       }
 
-      if (viewport.name !== "desktop") continue;
-
       if (config.sectionId === "sidebars") {
-        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push("desktop: complete application shell relies on CSP-blocked inline styles");
+        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push(`${viewport.name}: complete application shell relies on CSP-blocked inline styles`);
         const shellSidebar = routePage.locator("#sidebar-shell > .bs-sidebar-layout > .bs-sidebar");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
+          const mainRect = sidebar.nextElementSibling.getBoundingClientRect();
           const headerRect = sidebar.querySelector(":scope > .bs-sidebar-header").getBoundingClientRect();
           const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
           return Math.abs(sidebarRect.height - 480) <= 1
+            && Math.abs(mainRect.top - sidebarRect.top) <= 1
             && Math.abs(headerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });
-        if (!shellRegionsAlign) failures.push("desktop: complete application shell regions do not span the sidebar");
+        if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
+      }
+
+      if (viewport.name !== "desktop") continue;
+
+      if (config.sectionId === "sidebars") {
         const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
         const collapsible = routePage.locator("#collapse-example-sidebar");
         await collapseTrigger.click();
