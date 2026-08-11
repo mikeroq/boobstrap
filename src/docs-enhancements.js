@@ -57,6 +57,7 @@ const addExample = (sectionId, {
 
   const demo = document.createElement("div");
   demo.className = `docs-demo ${demoClass}`.trim();
+  demo.id = id;
   demo.dataset.componentExample = id;
   demo.innerHTML = preview.trim();
 
@@ -409,7 +410,7 @@ toggle.addEventListener("click", () => {
     title: "Complete application shell",
     description: "Compose a fixed identity region, independently scrolling navigation, account footer, and primary surface. The source order stays meaningful when the layout stacks on a narrow viewport.",
     preview: `<div class="bs-sidebar-layout" style="min-block-size: 30rem">
-  <aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: 30rem" aria-label="Acme workspace">
+  <aside class="bs-sidebar bs-sidebar-start bs-p-0" style="position: relative; --bs-sidebar-height: 30rem" aria-label="Acme workspace">
     <div class="bs-sidebar-header">
       <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
         <span aria-hidden="true">◆</span><span class="bs-sidebar-label">Acme, Inc.</span><span aria-hidden="true">⌄</span>

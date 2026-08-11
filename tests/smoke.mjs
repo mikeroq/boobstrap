@@ -295,6 +295,8 @@ try {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
       if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
+      const docsNavRowHeights = await docsPage.locator('.docs-nav a[href="/docs/components/forms"], .docs-nav a[href="/docs/components/forms/inputs"]').evaluateAll((links) => links.map((link) => link.getBoundingClientRect().height));
+      if (docsNavRowHeights.length !== 2 || Math.abs(docsNavRowHeights[0] - docsNavRowHeights[1]) > 0.5) failures.push("desktop: nested documentation links do not preserve the sidebar row rhythm");
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').isVisible()) {
@@ -447,6 +449,16 @@ try {
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "sidebars") {
+        const shellSidebar = routePage.locator("#sidebar-shell > .bs-sidebar-layout > .bs-sidebar");
+        const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
+          const sidebarRect = sidebar.getBoundingClientRect();
+          const headerRect = sidebar.querySelector(":scope > .bs-sidebar-header").getBoundingClientRect();
+          const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
+          return Math.abs(headerRect.width - sidebarRect.width) <= 1
+            && Math.abs(footerRect.width - sidebarRect.width) <= 1
+            && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
+        });
+        if (!shellRegionsAlign) failures.push("desktop: complete application shell regions do not span the sidebar");
         const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
         const collapsible = routePage.locator("#collapse-example-sidebar");
         await collapseTrigger.click();

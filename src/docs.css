@@ -124,6 +124,9 @@ body.docs-page {
 
 .docs-nav-empty { margin-top: var(--bs-space-5); color: var(--bs-color-text-subtle); font-size: var(--bs-font-size-sm); }
 
+/* Keep nested routes indented without changing the sidebar's row rhythm. */
+.docs-nav .bs-nav-link-subitem { font-size: var(--bs-font-size-sm); }
+
 .docs-main { min-width: 0; }
 
 .docs-content {
