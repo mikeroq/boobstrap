@@ -526,6 +526,29 @@ try {
           failures.push("desktop: theming configurator does not expose every supported option");
         }
 
+        for (const theme of ["dark", "light"]) {
+          await configurator.locator(`[data-theme-axis="theme"][data-theme-value="${theme}"]`).click();
+          for (const palette of ["rose", "violet", "blue", "teal", "amber"]) {
+            await configurator.locator(`[data-theme-axis="palette"][data-theme-value="${palette}"]`).click();
+            const buttonSeparation = await configurator.evaluate((element) => {
+              const stage = element.querySelector(".docs-theme-stage");
+              const primary = element.querySelector(".docs-theme-actions .bs-btn-primary");
+              const secondary = element.querySelector(".docs-theme-actions .bs-btn-secondary");
+              return {
+                stage: getComputedStyle(stage).backgroundColor,
+                primary: getComputedStyle(primary).backgroundColor,
+                secondary: getComputedStyle(secondary).backgroundColor,
+                secondaryBorder: getComputedStyle(secondary).borderColor,
+              };
+            });
+            if (buttonSeparation.primary === buttonSeparation.stage
+              || buttonSeparation.secondary === buttonSeparation.stage
+              || buttonSeparation.secondaryBorder === "rgba(0, 0, 0, 0)") {
+              failures.push(`desktop: ${theme}/${palette} theme preview does not separate actions from their canvas (${JSON.stringify(buttonSeparation)})`);
+            }
+          }
+        }
+
         await configurator.locator('[data-theme-axis="theme"][data-theme-value="light"]').click();
         await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').click();
         await configurator.locator('[data-theme-axis="radius"][data-theme-value="square"]').click();
