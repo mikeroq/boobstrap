@@ -351,12 +351,17 @@ try {
       const drawerGeometry = await mobileSidebar.evaluate((sidebar) => {
         const content = sidebar.querySelector(":scope > .bs-sidebar-content");
         const lastLink = [...content.querySelectorAll("a")].filter((link) => !link.hidden).at(-1);
+        const header = document.querySelector(".docs-header");
         content.scrollTop = content.scrollHeight;
         const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+        const headerRect = header.getBoundingClientRect();
         const sidebarRect = sidebar.getBoundingClientRect();
         const contentRect = content.getBoundingClientRect();
         const lastLinkRect = lastLink.getBoundingClientRect();
         return {
+          headerRemainsVisible: headerRect.top >= -1 && headerRect.bottom > 0,
+          headerIsFixedWhileScrollLocked: getComputedStyle(header).position === "fixed",
+          sidebarMeetsHeader: Math.abs(headerRect.bottom - sidebarRect.top) <= 1,
           sidebarFitsViewport: sidebarRect.bottom <= viewportHeight + 1,
           contentScrolls: content.scrollHeight > content.clientHeight,
           contentReachedBottom: Math.abs(content.scrollHeight - content.clientHeight - content.scrollTop) <= 1,

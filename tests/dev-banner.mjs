@@ -87,6 +87,23 @@ try {
       }));
       if (dimensions.scrollWidth > dimensions.clientWidth + 1) failures.push(`${testName}: development banner causes horizontal overflow`);
 
+      if (viewport.name === "mobile" && target.name === "docs-overview") {
+        await page.getByRole("button", { name: "Open documentation menu" }).click();
+        const openNavigationGeometry = await page.evaluate(() => {
+          const bannerRect = document.querySelector("[data-dev-banner]").getBoundingClientRect();
+          const headerRect = document.querySelector(".docs-header").getBoundingClientRect();
+          const sidebarRect = document.querySelector("#docs-sidebar").getBoundingClientRect();
+          return {
+            headerFollowsBanner: Math.abs(headerRect.top - bannerRect.bottom) <= 1,
+            sidebarFollowsHeader: Math.abs(sidebarRect.top - headerRect.bottom) <= 1,
+          };
+        });
+        if (!Object.values(openNavigationGeometry).every(Boolean)) {
+          failures.push(`${testName}: opening navigation breaks the banner/header/sidebar stack (${JSON.stringify(openNavigationGeometry)})`);
+        }
+        await page.keyboard.press("Escape");
+      }
+
       await page.screenshot({ path: `artifacts/dev-banner-${target.name}-${viewport.name}.png`, fullPage: true });
       await banner.getByRole("button", { name: "Dismiss development preview banner" }).click();
       if (await banner.isVisible() || await banner.getAttribute("data-bs-state") !== "dismissed") {
