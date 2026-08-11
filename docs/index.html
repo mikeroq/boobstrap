@@ -112,7 +112,20 @@
             <a href="/docs/components/sidebar">Sidebar</a>
             <a href="/docs/components/badges">Badges</a>
             <a href="/docs/components/cards">Cards</a>
-            <a href="/docs/components/tables">Tables</a>
+            <div class="docs-nav-disclosure" data-nav-disclosure data-nav-prefix="/docs/components/tables">
+              <div class="docs-nav-disclosure-row">
+                <a href="/docs/components/tables">Tables</a>
+                <button type="button" data-nav-disclosure-toggle aria-expanded="false" aria-controls="docs-tables-submenu" aria-label="Show Tables pages">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m5 6 3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </button>
+              </div>
+              <div class="docs-nav-submenu" id="docs-tables-submenu" data-nav-submenu hidden>
+                <a class="docs-nav-subitem" href="/docs/components/tables/fundamentals">Fundamentals</a>
+                <a class="docs-nav-subitem" href="/docs/components/tables/styles">Table styles</a>
+                <a class="docs-nav-subitem" href="/docs/components/tables/pagination">Pagination</a>
+                <a class="docs-nav-subitem" href="/docs/components/tables/datatables">DataTables.net</a>
+              </div>
+            </div>
             <a href="/docs/components/lists">Reference lists</a>
             <a href="/docs/components/alerts">Alerts</a>
             <a href="/docs/components/banners">Banners</a>
@@ -212,6 +225,10 @@
                 <a href="/docs/components/badges"><strong>Badges</strong><small>Status and metadata labels</small></a>
                 <a href="/docs/components/cards"><strong>Cards</strong><small>Flexible content surfaces</small></a>
                 <a href="/docs/components/tables"><strong>Tables</strong><small>Responsive structured data</small></a>
+                <a href="/docs/components/tables/fundamentals"><strong>Table fundamentals</strong><small>Semantics, overflow, sorting, and empty states</small></a>
+                <a href="/docs/components/tables/styles"><strong>Table styles</strong><small>Stripes, hover rows, borders, and density</small></a>
+                <a href="/docs/components/tables/pagination"><strong>Pagination</strong><small>Accessible page controls and sizes</small></a>
+                <a href="/docs/components/tables/datatables"><strong>DataTables.net</strong><small>Install and run the complete DataTables 3 integration</small></a>
                 <a href="/docs/components/lists"><strong>Reference lists and checklists</strong><small>Dense values and completion steps</small></a>
                 <a href="/docs/components/alerts"><strong>Alerts</strong><small>Contextual messages and status</small></a>
                 <a href="/docs/components/banners"><strong>Banners</strong><small>Full-width contextual page notices</small></a>
@@ -944,41 +961,102 @@
 
           <section class="docs-section" id="tables">
             <div class="docs-kicker">Components</div>
-            <h2>Tables and data pagination</h2>
-            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Boobstrap preserves native table semantics while providing composable density, border, row-state, sticky-header, sorting, alignment, empty-state, overflow, and pagination presentation.</p>
+            <h2>Tables</h2>
+            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Start with native table structure, then choose a focused guide for responsive behavior, visual styles, pagination, or the DataTables.net adapter.</p>
+            <div class="docs-table-topics">
+              <h3>Choose a table topic</h3>
+              <div class="docs-topic-grid">
+                <a href="/docs/components/tables/fundamentals"><strong>Table fundamentals</strong><span>Captions, headers, footers, responsive overflow, sticky columns, sorting, and empty states</span></a>
+                <a href="/docs/components/tables/styles"><strong>Table styles</strong><span>Striped and hoverable records, bordered compact matrices, and borderless comparisons</span></a>
+                <a href="/docs/components/tables/pagination"><strong>Pagination</strong><span>Current and disabled states, responsive page ranges, and compact or large controls</span></a>
+                <a href="/docs/components/tables/datatables"><strong>DataTables.net</strong><span>A complete DataTables 3 installation, initialization, and fully functional live example</span></a>
+              </div>
+              <div class="docs-note"><strong>Start with semantics:</strong> use a table only when both row and column relationships matter. Boobstrap styles native markup; your application or data library continues to own sorting, pagination, filtering, and loading.</div>
+            </div>
             <div class="docs-api">
-              <h3>Table API</h3>
-              <p>Start with <code>.bs-table</code>, then combine only the modifiers the dataset needs. Put tables that can exceed their container inside a named, keyboard-focusable responsive region.</p>
-              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
-                <tr><th scope="row"><code>.bs-table-responsive</code></th><td>Provides the outer surface and contained horizontal or vertical scrolling.</td><td>A wrapper around the table.</td></tr>
+              <h3>Core table API</h3>
+              <p>Every guide builds on these three primitives. The child references document the optional classes alongside the examples they affect.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Core table class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Core table classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
                 <tr><th scope="row"><code>.bs-table</code></th><td>Provides readable cells, semantic header groups, row dividers, captions, and footer treatment.</td><td>The native <code>&lt;table&gt;</code>.</td></tr>
-                <tr><th scope="row"><code>.bs-table-striped</code></th><td>Adds an alternating surface to even body rows.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-table-hover</code></th><td>Highlights body rows on pointer hover and when a descendant has keyboard focus.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-table-bordered</code></th><td>Adds vertical cell borders to the default horizontal row dividers.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-table-borderless</code></th><td>Removes internal cell borders for low-density comparison layouts.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-table-compact</code></th><td>Reduces cell padding for dense operational datasets.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-table-sticky-header</code></th><td>Constrains the scroll region and keeps column headers visible. Override <code>--bs-table-max-height</code> as needed.</td><td>The responsive wrapper.</td></tr>
+                <tr><th scope="row"><code>.bs-table-responsive</code></th><td>Contains horizontal overflow without widening the page.</td><td>A named, keyboard-focusable wrapper around the table.</td></tr>
                 <tr><th scope="row"><code>.bs-table-cell-numeric</code></th><td>Right-aligns tabular numbers and prevents unwanted wrapping.</td><td>Matching header and data cells.</td></tr>
-                <tr><th scope="row"><code>.bs-table-cell-actions</code></th><td>Right-aligns and keeps row actions on one line.</td><td>Matching header and data cells.</td></tr>
-                <tr><th scope="row"><code>.bs-table-sort</code></th><td>Styles a real sort button and reflects its parent header’s <code>aria-sort</code> value.</td><td>A button inside a column header.</td></tr>
-                <tr><th scope="row"><code>.bs-table-empty</code></th><td>Creates a centered empty-state cell with generous vertical space.</td><td>A cell spanning all columns.</td></tr>
-                <tr><th scope="row"><code>.bs-table-caption-bottom</code></th><td>Moves the native caption below the table when a source note reads better there.</td><td>The table.</td></tr>
-                <tr><th scope="row"><code>.bs-datatable</code></th><td>Scopes the DataTables 3 presentation adapter for generated search, page-length, information, sorting, overflow, processing, and pagination controls.</td><td>A wrapper around the source table before DataTables initialization.</td></tr>
               </tbody></table></div>
+            </div>
+          </section>
 
-              <h3>DataTables.net compatibility</h3>
-              <p>The adapter targets dependency-free <a href="https://datatables.net/">DataTables 3</a>. Install <code>datatables.net</code>, wrap the semantic source table in <code>.bs-datatable</code>, and keep <code>.bs-table</code> plus any table modifiers on the table itself. Do not load <code>datatables.net-dt</code> or its default CSS alongside the adapter.</p>
+          <section class="docs-section" id="table-fundamentals">
+            <div class="docs-kicker">Tables</div>
+            <h2>Table fundamentals</h2>
+            <p>Build tables from meaningful native structure, contain wide datasets in accessible overflow regions, and expose data states without weakening the row-and-column relationships.</p>
+            <div class="docs-api">
+              <h3>Structure and behavior API</h3>
+              <p>Sorting remains application behavior. Use a real button in the header and keep <code>aria-sort</code> synchronized with the rendered row order.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table fundamentals class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table fundamentals classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code>.bs-table</code></th><td>Styles native captions, headers, body rows, cells, and footers.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-responsive</code></th><td>Contains horizontal or vertical overflow.</td><td>A wrapper with a role, keyboard target, and accessible name.</td></tr>
+                <tr><th scope="row"><code>.bs-table-sticky-header</code></th><td>Constrains the scroll region and keeps column headers visible. Override <code>--bs-table-max-height</code> as needed.</td><td>The responsive wrapper.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-numeric</code></th><td>Aligns tabular numbers to the right.</td><td>Matching numeric header and data cells.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-actions</code></th><td>Right-aligns and keeps row actions on one line.</td><td>Matching action header and data cells.</td></tr>
+                <tr><th scope="row"><code>.bs-table-sort</code></th><td>Styles a real sort button and reflects its parent header’s sort state.</td><td>A button inside a column header.</td></tr>
+                <tr><th scope="row"><code>.bs-table-empty</code></th><td>Creates a centered empty-state cell with generous vertical space.</td><td>One cell spanning every column.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
 
+          <section class="docs-section" id="table-styles">
+            <div class="docs-kicker">Tables</div>
+            <h2>Table styles</h2>
+            <p>Choose row treatments, borders, caption placement, and density from the shape of the dataset. Combine modifiers sparingly so the data remains the strongest visual signal.</p>
+            <div class="docs-api">
+              <h3>Table style API</h3>
+              <p>Style modifiers compose on <code>.bs-table</code>. Keep wide variants inside <code>.bs-table-responsive</code> and use alignment helpers consistently across each column.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table style class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table style classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th></tr></thead><tbody>
+                <tr><th scope="row"><code>.bs-table-striped</code></th><td>Adds an alternating surface to even body rows.</td></tr>
+                <tr><th scope="row"><code>.bs-table-hover</code></th><td>Highlights body rows on pointer hover and when a descendant has keyboard focus.</td></tr>
+                <tr><th scope="row"><code>.bs-table-bordered</code></th><td>Adds vertical cell borders to the default horizontal row dividers.</td></tr>
+                <tr><th scope="row"><code>.bs-table-borderless</code></th><td>Removes internal cell borders for short, low-density comparisons.</td></tr>
+                <tr><th scope="row"><code>.bs-table-compact</code></th><td>Reduces cell padding for dense operational datasets.</td></tr>
+                <tr><th scope="row"><code>.bs-table-caption-bottom</code></th><td>Moves the native caption below the table for a source or freshness note.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-numeric</code></th><td>Right-aligns numeric columns.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-actions</code></th><td>Right-aligns row actions and keeps them together.</td></tr>
+                <tr><th scope="row"><code>.bs-table-responsive</code></th><td>Contains a styled table when its columns exceed the available width.</td></tr>
+                <tr><th scope="row"><code>.bs-table</code></th><td>Required base presentation for every table variant.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="table-pagination">
+            <div class="docs-kicker">Tables</div>
+            <h2>Pagination</h2>
+            <p>Present dataset pages as a semantic list inside a labeled navigation landmark. Your router or data layer still owns URLs, loading, focus preservation, and result-count announcements.</p>
+            <div class="docs-api">
               <h3>Pagination API</h3>
-              <p>Pagination is presentation only: your application, router, or data library still owns the current page, URLs, loading, and result updates. Keep the existing <code>.bs-page-nav</code> for previous/next article navigation.</p>
+              <p>Use links when every page has a URL and buttons for in-place data updates. An ellipsis communicates an omitted range and is never interactive.</p>
               <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Pagination class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Pagination classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
                 <tr><th scope="row"><code>.bs-pagination</code></th><td>Creates a wrapping, list-based pagination row.</td><td>A <code>&lt;ul&gt;</code> inside a labeled navigation landmark.</td></tr>
                 <tr><th scope="row"><code>.bs-pagination-item</code></th><td>Provides the list-item hook and a target for responsive visibility.</td><td>Each <code>&lt;li&gt;</code>.</td></tr>
-                <tr><th scope="row"><code>.bs-pagination-link</code></th><td>Styles page, previous, and next links plus current and disabled states.</td><td>An anchor or button.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-link</code></th><td>Styles page, previous, and next controls plus current and disabled states.</td><td>An anchor or button.</td></tr>
                 <tr><th scope="row"><code>.bs-pagination-ellipsis</code></th><td>Aligns a decorative gap marker with page controls.</td><td>A non-interactive span.</td></tr>
                 <tr><th scope="row"><code>.bs-pagination-optional</code></th><td>Hides nonessential page numbers below 36rem while keeping boundary controls.</td><td>Optional list items.</td></tr>
                 <tr><th scope="row"><code>.bs-pagination-sm</code></th><td>Creates compact pagination for dense toolbars.</td><td>The pagination list.</td></tr>
                 <tr><th scope="row"><code>.bs-pagination-lg</code></th><td>Creates larger pagination controls for prominent result sets.</td><td>The pagination list.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="table-datatables">
+            <div class="docs-kicker">Tables</div>
+            <h2>DataTables.net</h2>
+            <p>Add DataTables 3 search, ordering, paging, and result updates to a semantic Boobstrap table without loading a second visual theme. The example below is live and fully functional.</p>
+            <div class="docs-note"><strong>Compatibility:</strong> use the dependency-free <a href="https://datatables.net/">DataTables 3</a> package. Do not load <code>datatables.net-dt</code> or its default CSS alongside the Boobstrap adapter.</div>
+            <div class="docs-api">
+              <h3>DataTables adapter API</h3>
+              <p>Boobstrap owns presentation; DataTables owns generated controls, data state, and ARIA updates. Keep the source table semantic before initialization.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="DataTables adapter class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">DataTables adapter classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code>.bs-datatable</code></th><td>Scopes token-driven presentation for generated search, page-length, information, sorting, overflow, processing, and pagination controls.</td><td>A wrapper around the source table before initialization.</td></tr>
+                <tr><th scope="row"><code>.bs-table</code></th><td>Preserves the framework table treatment after DataTables enhances the markup.</td><td>The source table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-striped</code></th><td>Optionally adds alternating row surfaces.</td><td>The source table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-hover</code></th><td>Optionally adds pointer and keyboard-focus row feedback.</td><td>The source table.</td></tr>
               </tbody></table></div>
             </div>
           </section>
@@ -1235,7 +1313,7 @@ banners[0].show();</code></pre></div>
 &lt;/form&gt;</code></pre></div>
 
             <h3>Choose a form topic</h3>
-            <div class="docs-form-topic-grid">
+            <div class="docs-topic-grid">
               <a href="/docs/components/forms/inputs"><strong>Inputs and textareas</strong><span>Labels, help text, validation, states, and sizes</span></a>
               <a href="/docs/components/forms/input-groups"><strong>Input groups and icons</strong><span>Prefixes, suffixes, buttons, selects, and inline SVGs</span></a>
               <a href="/docs/components/forms/selects"><strong>Native selects</strong><span>Styled semantic selects, option groups, sizes, and states</span></a>

@@ -68,6 +68,13 @@ const expectedFormExampleCounts = {
   "form-checks-radios": 4,
   "form-otp": 1,
 };
+const expectedTableExampleCounts = {
+  tables: 1,
+  "table-fundamentals": 2,
+  "table-styles": 3,
+  "table-pagination": 2,
+  "table-datatables": 1,
+};
 const promotedComponentCoverage = {
   navbar: [
     "bs-breadcrumb",
@@ -123,15 +130,17 @@ const promotedComponentCoverage = {
   ],
   cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
-  tables: [
-    "bs-datatable",
-    "bs-pagination",
-    "bs-pagination-ellipsis",
-    "bs-pagination-item",
-    "bs-pagination-lg",
-    "bs-pagination-link",
-    "bs-pagination-optional",
-    "bs-pagination-sm",
+  tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
+  "table-fundamentals": [
+    "bs-table",
+    "bs-table-cell-actions",
+    "bs-table-cell-numeric",
+    "bs-table-empty",
+    "bs-table-responsive",
+    "bs-table-sort",
+    "bs-table-sticky-header",
+  ],
+  "table-styles": [
     "bs-table",
     "bs-table-bordered",
     "bs-table-borderless",
@@ -139,11 +148,23 @@ const promotedComponentCoverage = {
     "bs-table-cell-actions",
     "bs-table-cell-numeric",
     "bs-table-compact",
-    "bs-table-empty",
     "bs-table-hover",
     "bs-table-responsive",
-    "bs-table-sort",
-    "bs-table-sticky-header",
+    "bs-table-striped",
+  ],
+  "table-pagination": [
+    "bs-pagination",
+    "bs-pagination-ellipsis",
+    "bs-pagination-item",
+    "bs-pagination-lg",
+    "bs-pagination-link",
+    "bs-pagination-optional",
+    "bs-pagination-sm",
+  ],
+  "table-datatables": [
+    "bs-datatable",
+    "bs-table",
+    "bs-table-hover",
     "bs-table-striped",
   ],
   lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
@@ -166,7 +187,11 @@ const documentationQualityMinimums = {
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 4, code: 4, guidance: true },
-  tables: { examples: 9, code: 11, guidance: true },
+  tables: { examples: 1, code: 1, guidance: true },
+  "table-fundamentals": { examples: 2, code: 2, guidance: true },
+  "table-styles": { examples: 3, code: 3, guidance: true },
+  "table-pagination": { examples: 2, code: 2, guidance: true },
+  "table-datatables": { examples: 1, code: 3, guidance: true },
   lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
@@ -327,11 +352,17 @@ try {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
       if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
-      const formsToggle = docsPage.locator("[data-nav-disclosure-toggle]");
+      const formsDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/forms"]');
+      const formsToggle = formsDisclosure.locator("[data-nav-disclosure-toggle]");
+      const tablesDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/tables"]');
+      const tablesToggle = tablesDisclosure.locator("[data-nav-disclosure-toggle]");
       if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
         failures.push("desktop: Forms navigation is expanded outside the Forms section");
       }
-      const docsNavRhythm = await docsPage.locator(".docs-nav-group > a").evaluateAll((links) => ({
+      if (await tablesToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-tables-submenu").isVisible()) {
+        failures.push("desktop: Tables navigation is expanded outside the Tables section");
+      }
+      const docsNavRhythm = await docsPage.locator(".docs-nav-group > a, .docs-nav-group > .docs-nav-disclosure > .docs-nav-disclosure-row > a").evaluateAll((links) => ({
         heights: links.map((link) => link.getBoundingClientRect().height),
         gaps: links.slice(1).map((link, index) => link.getBoundingClientRect().top - links[index].getBoundingClientRect().bottom),
       }));
@@ -355,6 +386,16 @@ try {
       if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
         failures.push("desktop: clearing the docs filter did not restore the Forms disclosure state");
       }
+      await docsPage.keyboard.press("/");
+      await docsPage.getByLabel("Filter documentation sections").fill("DataTables.net");
+      if (!await docsPage.locator('.docs-nav a[href="/docs/components/tables/datatables"]').isVisible()
+        || await tablesToggle.getAttribute("aria-expanded") !== "true") {
+        failures.push("desktop: docs filter did not reveal the DataTables.net child page");
+      }
+      await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      if (await tablesToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-tables-submenu").isVisible()) {
+        failures.push("desktop: clearing the docs filter did not restore the Tables disclosure state");
+      }
       await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: docs theme toggle did not enable light theme");
@@ -362,8 +403,8 @@ try {
     } else {
       const menuToggle = docsPage.getByRole("button", { name: "Open documentation menu" });
       const mobileSidebar = docsPage.locator("#docs-sidebar");
-      if (await docsPage.locator("[data-nav-disclosure-toggle]").getAttribute("aria-expanded") !== "false") {
-        failures.push("mobile: Forms navigation is expanded outside the Forms section");
+      if (!await docsPage.locator("[data-nav-disclosure-toggle]").evaluateAll((toggles) => toggles.every((toggle) => toggle.getAttribute("aria-expanded") === "false"))) {
+        failures.push("mobile: a nested navigation family is expanded outside its section");
       }
       await docsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
       await menuToggle.click();
@@ -435,10 +476,12 @@ try {
       if (await routePage.locator(`.docs-nav a[href="${config.path}"]`).getAttribute("aria-current") !== "page") {
         failures.push(`${viewport.name}: ${config.path} is not current in the docs navigation`);
       }
-      const formsDisclosureExpanded = await routePage.locator("[data-nav-disclosure-toggle]").getAttribute("aria-expanded");
-      const expectsFormsDisclosure = config.path === "/docs/components/forms" || config.path.startsWith("/docs/components/forms/");
-      if (formsDisclosureExpanded !== String(expectsFormsDisclosure)) {
-        failures.push(`${viewport.name}: ${config.path} has the wrong Forms navigation disclosure state`);
+      for (const prefix of ["/docs/components/tables", "/docs/components/forms"]) {
+        const disclosureExpanded = await routePage.locator(`[data-nav-prefix="${prefix}"] [data-nav-disclosure-toggle]`).getAttribute("aria-expanded");
+        const expectsDisclosure = config.path === prefix || config.path.startsWith(`${prefix}/`);
+        if (disclosureExpanded !== String(expectsDisclosure)) {
+          failures.push(`${viewport.name}: ${config.path} has the wrong ${prefix.split("/").at(-1)} navigation disclosure state`);
+        }
       }
       if (config.sectionId === "theming" && await routePage.locator("[data-theme-color-reference] [data-color-token-cell]").count() !== expectedThemeColorCells) {
         failures.push(`${viewport.name}: complete theme color reference does not render all ${expectedThemeColorCells} palette values`);
@@ -510,6 +553,9 @@ try {
       if (config.sectionId in expectedFormExampleCounts && await previews.count() !== expectedFormExampleCounts[config.sectionId]) {
         failures.push(`${viewport.name}: ${config.path} does not expose the expected focused form examples`);
       }
+      if (config.sectionId in expectedTableExampleCounts && await previews.count() !== expectedTableExampleCounts[config.sectionId]) {
+        failures.push(`${viewport.name}: ${config.path} does not expose the expected focused table examples`);
+      }
       if (config.sectionId.startsWith("form") && await routePage.locator('.docs-code-label:has-text("Complete labeled controls"), .docs-code-label:has-text("Complete input groups"), .docs-code-label:has-text("Complete native selects"), .docs-code-label:has-text("Complete date and time controls"), .docs-code-label:has-text("Complete mask examples"), .docs-code-label:has-text("Complete selection controls")').count() > 0) {
         failures.push(`${viewport.name}: ${config.path} retains a grouped form code block`);
       }
@@ -553,14 +599,10 @@ try {
         if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
       }
 
-      if (config.sectionId === "tables") {
-        await routePage.locator("#table-datatables .dt-container").waitFor();
-        const exampleTables = routePage.locator('#tables [data-component-example] table.bs-table');
-        const responsiveExamples = routePage.locator('#tables [data-component-example] .bs-table-responsive');
-        const paginationLists = routePage.locator('#tables [data-component-example] .bs-pagination');
-        if (await exampleTables.count() !== 7 || await paginationLists.count() !== 3) {
-          failures.push(`${viewport.name}: tables guide does not expose seven table and three pagination compositions`);
-        }
+      if (config.sectionId in expectedTableExampleCounts) {
+        const activeTableSection = routePage.locator(`#${config.sectionId}`);
+        const exampleTables = activeTableSection.locator("[data-component-example] table.bs-table");
+        const responsiveExamples = activeTableSection.locator("[data-component-example] .bs-table-responsive");
         if (!await exampleTables.evaluateAll((tables) => tables.every((table) => (
           table.querySelector(":scope > caption")
           && [...table.querySelectorAll("th")].every((header) => ["col", "row"].includes(header.getAttribute("scope")))
@@ -574,24 +616,34 @@ try {
         )))) {
           failures.push(`${viewport.name}: a scrollable table example is not a named keyboard-focusable region`);
         }
-        const tablePresentation = await routePage.locator("#table-sticky-sortable").evaluate((example) => {
-          const stickyHeader = example.querySelector("thead th");
-          const currentPage = document.querySelector('#table-pagination [aria-current="page"]');
-          const optionalPage = document.querySelector("#table-pagination .bs-pagination-optional");
+      }
+
+      if (config.sectionId === "table-fundamentals") {
+        const stickyPosition = await routePage.locator("#table-sticky-sortable thead th").first().evaluate((header) => getComputedStyle(header).position);
+        if (stickyPosition !== "sticky") failures.push(`${viewport.name}: sticky table headers did not render`);
+      }
+
+      if (config.sectionId === "table-pagination") {
+        const paginationPresentation = await routePage.locator("#pagination-dataset").evaluate((example) => {
+          const currentPage = example.querySelector('[aria-current="page"]');
+          const optionalPage = example.querySelector(".bs-pagination-optional");
           return {
-            stickyPosition: getComputedStyle(stickyHeader).position,
             currentPageBackground: getComputedStyle(currentPage).backgroundColor,
             optionalPageDisplay: getComputedStyle(optionalPage).display,
           };
         });
-        if (tablePresentation.stickyPosition !== "sticky" || tablePresentation.currentPageBackground === "rgba(0, 0, 0, 0)") {
-          failures.push(`${viewport.name}: sticky headers or pagination current state did not render`);
-        }
-        if ((viewport.name === "mobile") !== (tablePresentation.optionalPageDisplay === "none")) {
+        if (paginationPresentation.currentPageBackground === "rgba(0, 0, 0, 0)") failures.push(`${viewport.name}: pagination current state did not render`);
+        if ((viewport.name === "mobile") !== (paginationPresentation.optionalPageDisplay === "none")) {
           failures.push(`${viewport.name}: optional pagination pages did not follow the mobile visibility contract`);
         }
+        if (await routePage.locator("#table-pagination [data-component-example] .bs-pagination").count() !== 3) {
+          failures.push(`${viewport.name}: pagination guide does not expose default, small, and large compositions`);
+        }
+      }
 
-        const dataTable = routePage.locator("#table-datatables");
+      if (config.sectionId === "table-datatables") {
+        const dataTable = routePage.locator("#datatable-customer-directory");
+        await dataTable.locator(".dt-container").waitFor();
         const dataTableSearch = dataTable.locator(".dt-search input");
         const dataTableLength = dataTable.locator(".dt-length select");
         const dataTableRows = dataTable.locator("tbody tr");
@@ -614,7 +666,7 @@ try {
         await dataTableLength.selectOption("5");
         await dataTable.locator("thead .dt-column-order").first().click();
         await dataTable.locator("thead th").first().waitFor();
-        await routePage.waitForFunction(() => document.querySelector("#table-datatables thead th")?.getAttribute("aria-sort") === "ascending");
+        await routePage.waitForFunction(() => document.querySelector("#datatable-customer-directory thead th")?.getAttribute("aria-sort") === "ascending");
         if (!await dataTableRows.first().textContent().then((text) => text.includes("Alexis Martin"))) {
           failures.push(`${viewport.name}: DataTables column sorting did not reorder customer names`);
         }
@@ -622,7 +674,7 @@ try {
         if (!await dataTable.locator(".dt-info").textContent().then((text) => text.includes("6 to 10"))) {
           failures.push(`${viewport.name}: DataTables pagination did not advance to the second page`);
         }
-        await routePage.screenshot({ path: `artifacts/tables-${viewport.name}.png`, fullPage: true });
+        await routePage.screenshot({ path: `artifacts/table-datatables-${viewport.name}.png`, fullPage: true });
       }
 
       if (viewport.name !== "desktop") continue;
