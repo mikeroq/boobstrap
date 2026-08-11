@@ -945,6 +945,11 @@ body.docs-page {
 @media (max-width: 60rem) {
   .docs-header-link { display: none; }
   .docs-menu-button { display: inline-grid; }
+  body.docs-page.bs-sidebar-open .docs-header {
+    position: fixed;
+    inset-block-start: calc(var(--docs-sidebar-offset) - var(--docs-header-height));
+    inset-inline: 0;
+  }
   .docs-layout { display: block; padding: 0; }
   .docs-content { padding-inline: clamp(1rem, 5vw, 2rem); }
   .docs-directory-grid { grid-template-columns: 1fr; }
