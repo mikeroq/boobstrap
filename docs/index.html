@@ -944,14 +944,37 @@
 
           <section class="docs-section" id="tables">
             <div class="docs-kicker">Components</div>
-            <h2>Tables</h2>
-            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Boobstrap keeps native table semantics intact and adds a bordered, horizontally scrollable container for narrow viewports.</p>
+            <h2>Tables and data pagination</h2>
+            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Boobstrap preserves native table semantics while providing composable density, border, row-state, sticky-header, sorting, alignment, empty-state, overflow, and pagination presentation.</p>
             <div class="docs-api">
               <h3>Table API</h3>
-              <p>Apply the table class to semantic <code>&lt;table&gt;</code> markup and place it inside the responsive wrapper whenever its columns may exceed the available width.</p>
-              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Use it on</th></tr></thead><tbody>
-                <tr><td><code>.bs-table-responsive</code></td><td>Clips the outer border and enables horizontal scrolling without widening the page.</td><td>A wrapper <code>&lt;div&gt;</code> around the table.</td></tr>
-                <tr><td><code>.bs-table</code></td><td>Provides readable cell spacing, header treatment, row dividers, and semantic text colors.</td><td>The native <code>&lt;table&gt;</code> element.</td></tr>
+              <p>Start with <code>.bs-table</code>, then combine only the modifiers the dataset needs. Put tables that can exceed their container inside a named, keyboard-focusable responsive region.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code>.bs-table-responsive</code></th><td>Provides the outer surface and contained horizontal or vertical scrolling.</td><td>A wrapper around the table.</td></tr>
+                <tr><th scope="row"><code>.bs-table</code></th><td>Provides readable cells, semantic header groups, row dividers, captions, and footer treatment.</td><td>The native <code>&lt;table&gt;</code>.</td></tr>
+                <tr><th scope="row"><code>.bs-table-striped</code></th><td>Adds an alternating surface to even body rows.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-hover</code></th><td>Highlights body rows on pointer hover and when a descendant has keyboard focus.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-bordered</code></th><td>Adds vertical cell borders to the default horizontal row dividers.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-borderless</code></th><td>Removes internal cell borders for low-density comparison layouts.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-compact</code></th><td>Reduces cell padding for dense operational datasets.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-table-sticky-header</code></th><td>Constrains the scroll region and keeps column headers visible. Override <code>--bs-table-max-height</code> as needed.</td><td>The responsive wrapper.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-numeric</code></th><td>Right-aligns tabular numbers and prevents unwanted wrapping.</td><td>Matching header and data cells.</td></tr>
+                <tr><th scope="row"><code>.bs-table-cell-actions</code></th><td>Right-aligns and keeps row actions on one line.</td><td>Matching header and data cells.</td></tr>
+                <tr><th scope="row"><code>.bs-table-sort</code></th><td>Styles a real sort button and reflects its parent header’s <code>aria-sort</code> value.</td><td>A button inside a column header.</td></tr>
+                <tr><th scope="row"><code>.bs-table-empty</code></th><td>Creates a centered empty-state cell with generous vertical space.</td><td>A cell spanning all columns.</td></tr>
+                <tr><th scope="row"><code>.bs-table-caption-bottom</code></th><td>Moves the native caption below the table when a source note reads better there.</td><td>The table.</td></tr>
+              </tbody></table></div>
+
+              <h3>Pagination API</h3>
+              <p>Pagination is presentation only: your application, router, or data library still owns the current page, URLs, loading, and result updates. Keep the existing <code>.bs-page-nav</code> for previous/next article navigation.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Pagination class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Pagination classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code>.bs-pagination</code></th><td>Creates a wrapping, list-based pagination row.</td><td>A <code>&lt;ul&gt;</code> inside a labeled navigation landmark.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-item</code></th><td>Provides the list-item hook and a target for responsive visibility.</td><td>Each <code>&lt;li&gt;</code>.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-link</code></th><td>Styles page, previous, and next links plus current and disabled states.</td><td>An anchor or button.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-ellipsis</code></th><td>Aligns a decorative gap marker with page controls.</td><td>A non-interactive span.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-optional</code></th><td>Hides nonessential page numbers below 36rem while keeping boundary controls.</td><td>Optional list items.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-sm</code></th><td>Creates compact pagination for dense toolbars.</td><td>The pagination list.</td></tr>
+                <tr><th scope="row"><code>.bs-pagination-lg</code></th><td>Creates larger pagination controls for prominent result sets.</td><td>The pagination list.</td></tr>
               </tbody></table></div>
             </div>
           </section>

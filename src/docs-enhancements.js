@@ -707,40 +707,134 @@ trigger.addEventListener("click", () => {
 
   addExample("tables", {
     id: "table-comparison",
-    title: "Feature comparison",
-    description: "Use a caption to name the dataset, column headers for the compared properties, and row headers for the item being compared.",
-    preview: `<div class="bs-table-responsive">
+    title: "Semantic headers, body, and footer",
+    description: "A caption names the dataset, scoped headers expose its row-and-column relationships, and the footer summarizes values without pretending to be another record.",
+    preview: `<div class="bs-table-responsive" role="region" tabindex="0" aria-label="Workspace usage by plan">
   <table class="bs-table">
-    <caption class="bs-sr-only">Plan feature comparison</caption>
-    <thead><tr><th scope="col">Plan</th><th scope="col">Projects</th><th scope="col">Support</th></tr></thead>
+    <caption>Workspace usage by plan</caption>
+    <thead><tr><th scope="col">Plan</th><th class="bs-table-cell-numeric" scope="col">Workspaces</th><th class="bs-table-cell-numeric" scope="col">Members</th></tr></thead>
     <tbody>
-      <tr><th scope="row">Starter</th><td>3</td><td>Community</td></tr>
-      <tr><th scope="row">Team</th><td>Unlimited</td><td>Priority</td></tr>
+      <tr><th scope="row">Starter</th><td class="bs-table-cell-numeric">18</td><td class="bs-table-cell-numeric">42</td></tr>
+      <tr><th scope="row">Team</th><td class="bs-table-cell-numeric">12</td><td class="bs-table-cell-numeric">86</td></tr>
     </tbody>
+    <tfoot><tr><th scope="row">Total</th><td class="bs-table-cell-numeric">30</td><td class="bs-table-cell-numeric">128</td></tr></tfoot>
   </table>
 </div>`,
-    label: "HTML · Semantic comparison table",
+    label: "HTML · Table anatomy",
   });
   addExample("tables", {
-    id: "table-responsive",
-    title: "Responsive API data",
-    description: "The wrapper owns horizontal overflow, keeping long values readable without forcing the document wider than the viewport.",
-    preview: `<div class="bs-table-responsive">
-  <table class="bs-table">
-    <caption class="bs-sr-only">API endpoints</caption>
-    <thead><tr><th scope="col">Method</th><th scope="col">Endpoint</th><th scope="col">Description</th><th scope="col">Authentication</th></tr></thead>
+    id: "table-database-records",
+    title: "Striped, hoverable data table",
+    description: "Combine stripes with hover and focus-within feedback for operational records. Status remains readable as text, and each row’s action is a real control.",
+    preview: `<div class="bs-table-responsive" role="region" tabindex="0" aria-label="Customer database records">
+  <table class="bs-table bs-table-striped bs-table-hover">
+    <caption>Recently active customer accounts</caption>
+    <thead><tr><th scope="col">Customer</th><th scope="col">Status</th><th scope="col">Plan</th><th scope="col">Last active</th><th class="bs-table-cell-actions" scope="col">Action</th></tr></thead>
     <tbody>
-      <tr><td><code class="bs-code-inline">GET</code></td><td><code class="bs-code-inline">/v1/workspaces/{workspace_id}/deployments</code></td><td>List recent deployments</td><td>Bearer token</td></tr>
-      <tr><td><code class="bs-code-inline">POST</code></td><td><code class="bs-code-inline">/v1/workspaces/{workspace_id}/deployments</code></td><td>Create a deployment</td><td>Bearer token</td></tr>
+      <tr><th scope="row">Avery Morgan</th><td><span class="bs-badge bs-badge-primary">Active</span></td><td>Team</td><td>2 min ago</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
+      <tr><th scope="row">Kai Patel</th><td><span class="bs-badge">Invited</span></td><td>Starter</td><td>Yesterday</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
+      <tr><th scope="row">Sam Rivera</th><td><span class="bs-badge bs-badge-primary">Active</span></td><td>Business</td><td>3 days ago</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
     </tbody>
   </table>
 </div>`,
-    label: "HTML · Responsive data table",
+    label: "HTML · Operational data table",
+  });
+  addExample("tables", {
+    id: "table-bordered-compact",
+    title: "Bordered and compact",
+    description: "Use cell borders when readers need to trace values across a dense matrix. Compact spacing keeps repeated numeric data scannable.",
+    preview: `<div class="bs-table-responsive" role="region" tabindex="0" aria-label="Quarterly revenue matrix">
+  <table class="bs-table bs-table-bordered bs-table-compact">
+    <caption>Revenue by region, USD thousands</caption>
+    <thead><tr><th scope="col">Region</th><th class="bs-table-cell-numeric" scope="col">Q1</th><th class="bs-table-cell-numeric" scope="col">Q2</th><th class="bs-table-cell-numeric" scope="col">Q3</th><th class="bs-table-cell-numeric" scope="col">Q4</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">North</th><td class="bs-table-cell-numeric">184</td><td class="bs-table-cell-numeric">201</td><td class="bs-table-cell-numeric">218</td><td class="bs-table-cell-numeric">236</td></tr>
+      <tr><th scope="row">South</th><td class="bs-table-cell-numeric">142</td><td class="bs-table-cell-numeric">156</td><td class="bs-table-cell-numeric">164</td><td class="bs-table-cell-numeric">179</td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · Bordered compact table",
+  });
+  addExample("tables", {
+    id: "table-borderless",
+    title: "Borderless comparison",
+    description: "Remove internal rules when the dataset is short and spacing alone provides enough separation. A bottom caption works well for a source or freshness note.",
+    preview: `<div class="bs-table-responsive" role="region" tabindex="0" aria-label="Package size comparison">
+  <table class="bs-table bs-table-borderless bs-table-caption-bottom">
+    <caption>Minified package sizes from the current release.</caption>
+    <thead><tr><th scope="col">Entry</th><th class="bs-table-cell-numeric" scope="col">CSS</th><th class="bs-table-cell-numeric" scope="col">JavaScript</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Core</th><td class="bs-table-cell-numeric">70 kB</td><td class="bs-table-cell-numeric">14 kB</td></tr>
+      <tr><th scope="row">React adapter</th><td class="bs-table-cell-numeric">—</td><td class="bs-table-cell-numeric">9 kB</td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · Borderless table",
+  });
+  addExample("tables", {
+    id: "table-sticky-sortable",
+    title: "Sticky and sortable columns",
+    description: "Constrain a long result set with the sticky-header wrapper. Sorting remains application behavior: update the rows and move aria-sort to the active column after each sort.",
+    preview: `<div class="bs-table-responsive bs-table-sticky-header" role="region" tabindex="0" aria-label="Deployment history" style="--bs-table-max-height: 16rem;">
+  <table class="bs-table bs-table-hover">
+    <caption>Deployment history</caption>
+    <thead><tr><th scope="col" aria-sort="descending"><button class="bs-table-sort" type="button">Deployed</button></th><th scope="col"><button class="bs-table-sort" type="button">Environment</button></th><th scope="col">Commit</th><th scope="col">Result</th></tr></thead>
+    <tbody>
+      <tr><td>Aug 11, 14:32</td><td>Production</td><td><code class="bs-code-inline">a81f0d2</code></td><td>Passed</td></tr>
+      <tr><td>Aug 11, 12:08</td><td>Preview</td><td><code class="bs-code-inline">7c29be1</code></td><td>Passed</td></tr>
+      <tr><td>Aug 10, 18:41</td><td>Production</td><td><code class="bs-code-inline">663d420</code></td><td>Rolled back</td></tr>
+      <tr><td>Aug 10, 16:05</td><td>Preview</td><td><code class="bs-code-inline">45fb118</code></td><td>Passed</td></tr>
+      <tr><td>Aug 9, 09:27</td><td>Production</td><td><code class="bs-code-inline">31ad902</code></td><td>Passed</td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · Sticky sortable table",
+  });
+  addExample("tables", {
+    id: "table-empty-state",
+    title: "Empty dataset",
+    description: "Keep the table structure and column context while data is empty. The message should explain the absence; place any recovery action in or immediately after the cell.",
+    preview: `<div class="bs-table-responsive" role="region" tabindex="0" aria-label="Filtered invoices">
+  <table class="bs-table">
+    <caption>Invoices matching the current filters</caption>
+    <thead><tr><th scope="col">Invoice</th><th scope="col">Customer</th><th scope="col">Due date</th><th class="bs-table-cell-numeric" scope="col">Amount</th></tr></thead>
+    <tbody><tr><td class="bs-table-empty" colspan="4">No invoices match these filters.</td></tr></tbody>
+  </table>
+</div>`,
+    label: "HTML · Empty table state",
+  });
+  addExample("tables", {
+    id: "table-pagination",
+    title: "Dataset pagination",
+    description: "Use a labeled navigation landmark, mark exactly one page current, remove disabled links from the tab order, and allow optional middle pages to collapse on small screens.",
+    preview: `<nav aria-label="Customer result pages">
+  <ul class="bs-pagination">
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-disabled="true" tabindex="-1">Previous</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-current="page" aria-label="Page 1, current page">1</a></li>
+    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 2">2</a></li>
+    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 3">3</a></li>
+    <li class="bs-pagination-item"><span class="bs-pagination-ellipsis" aria-hidden="true">…</span></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 12">12</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-label="Next page">Next</a></li>
+  </ul>
+</nav>`,
+    label: "HTML · Pagination states",
+  });
+  addExample("tables", {
+    id: "table-pagination-sizes",
+    title: "Pagination sizes",
+    description: "The default size fits most product interfaces. Use the small modifier in dense toolbars and the large modifier only where pagination is a primary interaction.",
+    preview: `<div class="bs-stack bs-gap-4">
+  <nav aria-label="Compact result pages"><ul class="bs-pagination bs-pagination-sm"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Next</a></li></ul></nav>
+  <nav aria-label="Large result pages"><ul class="bs-pagination bs-pagination-lg"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Next</a></li></ul></nav>
+</div>`,
+    label: "HTML · Small and large pagination",
   });
   addGuidance("tables", [
-    { title: "Semantics", body: "Use a table only when both rows and columns carry meaning. Add a caption, then identify column and row headers with <code>scope</code>." },
-    { title: "Responsive behavior", body: "Wrap the table in <code>.bs-table-responsive</code>. On narrow screens the table scrolls within its own border instead of widening the page." },
-    { title: "Content", body: "Keep labels concise and align data consistently. Do not encode meaning by color alone, and provide text for every status or action." },
+    { title: "Structure", body: "Use <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code> for their real purposes. Add <code>scope=\"col\"</code> or <code>scope=\"row\"</code> to unambiguous headers." },
+    { title: "Overflow", body: "Give scrollable wrappers <code>role=\"region\"</code>, <code>tabindex=\"0\"</code>, and an accessible name. This lets keyboard users reach columns that extend beyond the viewport." },
+    { title: "Interaction", body: "Hover and stripes are visual aids, not state. Keep actions as links or buttons, status as text, and sorting in real buttons whose parent <code>aria-sort</code> value stays synchronized." },
+    { title: "Pagination", body: "Use links when each page has a URL and buttons for in-place data updates. Announce async loading and result-count changes, preserve focus, and never make an ellipsis interactive." },
   ]);
 
   addExample("lists", {
