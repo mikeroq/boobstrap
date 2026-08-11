@@ -37,7 +37,7 @@ document.querySelectorAll(".docs-framework-tablist button").forEach((tab) => tab
 document.querySelectorAll(".docs-framework-switcher [role=\"tabpanel\"]").forEach((panel) => panel.classList.add("bs-tab-panel", "bs-tab-panel-contained"));
 document.querySelectorAll(".docs-quick-links a").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-compact", "bs-card-link"));
 document.querySelectorAll(".docs-directory-grid > section, .docs-usage-grid article").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-body"));
-document.querySelectorAll(".docs-form-topic-grid a").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-body", "bs-card-link"));
+document.querySelectorAll(".docs-topic-grid a").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-body", "bs-card-link"));
 document.querySelectorAll(".docs-reference-card").forEach((card) => card.classList.add("bs-card", "bs-card-subtle", "bs-card-compact"));
 document.querySelectorAll(".docs-callout, .docs-note").forEach((callout) => {
   callout.classList.add("bs-alert", "bs-alert-primary");
@@ -336,7 +336,7 @@ if (docsIndex) {
   }
 }
 
-if (activeDocsPage?.sectionId === "tables" && routedSection) {
+if (activeDocsPage?.sectionId === "table-datatables" && routedSection) {
   initDataTablesDemo(routedSection);
 }
 

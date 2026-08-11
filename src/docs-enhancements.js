@@ -721,8 +721,9 @@ trigger.addEventListener("click", () => {
   </table>
 </div>`,
     label: "HTML · Table anatomy",
+    beforeSelector: ".docs-table-topics",
   });
-  addExample("tables", {
+  addExample("table-styles", {
     id: "table-database-records",
     title: "Striped, hoverable data table",
     description: "Combine stripes with hover and focus-within feedback for operational records. Status remains readable as text, and each row’s action is a real control.",
@@ -739,7 +740,7 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Operational data table",
   });
-  addExample("tables", {
+  addExample("table-styles", {
     id: "table-bordered-compact",
     title: "Bordered and compact",
     description: "Use cell borders when readers need to trace values across a dense matrix. Compact spacing keeps repeated numeric data scannable.",
@@ -755,7 +756,7 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Bordered compact table",
   });
-  addExample("tables", {
+  addExample("table-styles", {
     id: "table-borderless",
     title: "Borderless comparison",
     description: "Remove internal rules when the dataset is short and spacing alone provides enough separation. A bottom caption works well for a source or freshness note.",
@@ -771,7 +772,7 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Borderless table",
   });
-  addExample("tables", {
+  addExample("table-fundamentals", {
     id: "table-sticky-sortable",
     title: "Sticky and sortable columns",
     description: "Constrain a long result set with the sticky-header wrapper. Sorting remains application behavior: update the rows and move aria-sort to the active column after each sort.",
@@ -790,7 +791,7 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Sticky sortable table",
   });
-  addExample("tables", {
+  addExample("table-fundamentals", {
     id: "table-empty-state",
     title: "Empty dataset",
     description: "Keep the table structure and column context while data is empty. The message should explain the absence; place any recovery action in or immediately after the cell.",
@@ -803,35 +804,35 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Empty table state",
   });
-  addExample("tables", {
-    id: "table-pagination",
+  addExample("table-pagination", {
+    id: "pagination-dataset",
     title: "Dataset pagination",
     description: "Use a labeled navigation landmark, mark exactly one page current, remove disabled links from the tab order, and allow optional middle pages to collapse on small screens.",
     preview: `<nav aria-label="Customer result pages">
   <ul class="bs-pagination">
-    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-disabled="true" tabindex="-1">Previous</a></li>
-    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-current="page" aria-label="Page 1, current page">1</a></li>
-    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 2">2</a></li>
-    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 3">3</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-dataset" aria-disabled="true" tabindex="-1">Previous</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-dataset" aria-current="page" aria-label="Page 1, current page">1</a></li>
+    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#pagination-dataset" aria-label="Page 2">2</a></li>
+    <li class="bs-pagination-item bs-pagination-optional"><a class="bs-pagination-link" href="#pagination-dataset" aria-label="Page 3">3</a></li>
     <li class="bs-pagination-item"><span class="bs-pagination-ellipsis" aria-hidden="true">…</span></li>
-    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-label="Page 12">12</a></li>
-    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination" aria-label="Next page">Next</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-dataset" aria-label="Page 12">12</a></li>
+    <li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-dataset" aria-label="Next page">Next</a></li>
   </ul>
 </nav>`,
     label: "HTML · Pagination states",
   });
-  addExample("tables", {
-    id: "table-pagination-sizes",
+  addExample("table-pagination", {
+    id: "pagination-sizes",
     title: "Pagination sizes",
     description: "The default size fits most product interfaces. Use the small modifier in dense toolbars and the large modifier only where pagination is a primary interaction.",
     preview: `<div class="bs-stack bs-gap-4">
-  <nav aria-label="Compact result pages"><ul class="bs-pagination bs-pagination-sm"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Next</a></li></ul></nav>
-  <nav aria-label="Large result pages"><ul class="bs-pagination bs-pagination-lg"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#table-pagination-sizes">Next</a></li></ul></nav>
+  <nav aria-label="Compact result pages"><ul class="bs-pagination bs-pagination-sm"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">Next</a></li></ul></nav>
+  <nav aria-label="Large result pages"><ul class="bs-pagination bs-pagination-lg"><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">Previous</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes" aria-current="page">1</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">2</a></li><li class="bs-pagination-item"><a class="bs-pagination-link" href="#pagination-sizes">Next</a></li></ul></nav>
 </div>`,
     label: "HTML · Small and large pagination",
   });
-  addExample("tables", {
-    id: "table-datatables",
+  addExample("table-datatables", {
+    id: "datatable-customer-directory",
     title: "Fully functional DataTables.net integration",
     description: "This live DataTables 3 example supports client-side search, column sorting, page-length changes, result counts, and pagination. Try every control: the generated interface is styled entirely by Boobstrap tokens.",
     preview: `<div class="bs-datatable">
@@ -857,14 +858,14 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · DataTables customer directory",
   });
-  addCodeExample("tables", {
+  addCodeExample("table-datatables", {
     title: "Install DataTables 3",
     description: "Install the dependency-free DataTables core. Do not import its default styling package—the Boobstrap adapter supplies the complete presentation layer.",
     label: "Terminal · Install DataTables",
     language: "bash",
     source: `npm install @boobstrap/boobstrap datatables.net`,
   });
-  addCodeExample("tables", {
+  addCodeExample("table-datatables", {
     title: "Initialize the live table",
     description: "DataTables owns search, ordering, paging, and result updates. After initialization, name the generated overflow cell so keyboard users can reach columns beyond the viewport.",
     label: "JavaScript · DataTables initialization",
@@ -900,10 +901,28 @@ region?.setAttribute("aria-label", "Customer directory results");`,
   });
   addGuidance("tables", [
     { title: "Structure", body: "Use <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code> for their real purposes. Add <code>scope=\"col\"</code> or <code>scope=\"row\"</code> to unambiguous headers." },
-    { title: "Overflow", body: "Give scrollable wrappers <code>role=\"region\"</code>, <code>tabindex=\"0\"</code>, and an accessible name. This lets keyboard users reach columns that extend beyond the viewport." },
-    { title: "Interaction", body: "Hover and stripes are visual aids, not state. Keep actions as links or buttons, status as text, and sorting in real buttons whose parent <code>aria-sort</code> value stays synchronized." },
-    { title: "Pagination", body: "Use links when each page has a URL and buttons for in-place data updates. Announce async loading and result-count changes, preserve focus, and never make an ellipsis interactive." },
-    { title: "DataTables 3", body: "Wrap the source table in <code>.bs-datatable</code>, import <code>datatables.net</code>, and initialize the native ESM constructor. Boobstrap styles the generated controls; DataTables remains responsible for behavior and ARIA state." },
+    { title: "Choose a guide", body: "Start with fundamentals, add only the visual modifiers your dataset needs, then choose application-owned pagination or the DataTables.net integration." },
+    { title: "Behavior ownership", body: "Boobstrap provides presentation. Your application or data library owns row ordering, filters, loading, current-page state, and result announcements." },
+  ]);
+  addGuidance("table-fundamentals", [
+    { title: "Overflow", body: "Give scrollable wrappers <code>role=\"region\"</code>, <code>tabindex=\"0\"</code>, and an accessible name. This lets keyboard users reach columns beyond the viewport." },
+    { title: "Sorting", body: "Put sorting on real buttons, move <code>aria-sort</code> to the active header, and update it only after the visible rows have been reordered." },
+    { title: "Empty states", body: "Keep the caption and headers in place, then span one explanatory <code>.bs-table-empty</code> cell across the body so users retain column context." },
+  ]);
+  addGuidance("table-styles", [
+    { title: "Row aids", body: "Stripes and hover feedback help scanning but do not communicate selection, status, or validation. Keep those meanings in text and controls." },
+    { title: "Density", body: "Use compact cells for repeated operational values, not as a substitute for removing low-value columns or supporting responsive overflow." },
+    { title: "Borders", body: "Use full borders for matrices that require tracing in two directions. Prefer default dividers or borderless treatment for shorter comparisons." },
+  ]);
+  addGuidance("table-pagination", [
+    { title: "Control type", body: "Use links when each result page has a stable URL and buttons when the dataset changes in place." },
+    { title: "Current state", body: "Mark exactly one control with <code>aria-current=\"page\"</code>. Remove disabled links from the tab order and keep an ellipsis non-interactive." },
+    { title: "Async updates", body: "Announce loading and result-count changes, preserve a useful focus position, and update the URL when users need refresh or sharing to retain the page." },
+  ]);
+  addGuidance("table-datatables", [
+    { title: "Version", body: "The adapter targets dependency-free DataTables 3. Import <code>datatables.net</code> and do not load the package’s default visual theme." },
+    { title: "Class map", body: "Wrap the source table in <code>.bs-datatable</code> and keep <code>.bs-table</code> plus any table modifiers on the table itself." },
+    { title: "Accessibility", body: "DataTables maintains control state and result information. Give its generated overflow cell a region role, keyboard target, and accessible name after initialization." },
   ]);
 
   addExample("lists", {
