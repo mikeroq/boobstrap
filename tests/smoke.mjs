@@ -130,7 +130,7 @@ const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
   installation: { code: 5, guidance: true },
   starter: { code: 3, guidance: true },
-  theming: { examples: 1, code: 4, guidance: true },
+  theming: { examples: 2, code: 6, guidance: true },
   typography: { examples: 2, code: 3, guidance: true },
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
@@ -178,6 +178,11 @@ try {
     if (response.status !== 308 || response.headers.get("location") !== cleanPath) {
       failures.push(`${legacyPath}: expected a 308 redirect to ${cleanPath}`);
     }
+  }
+
+  const docsOverviewSource = await (await fetch(`${baseUrl}/docs`)).text();
+  if (!docsOverviewSource.includes(`<strong data-token-count>${expectedTokens}</strong> tokens`)) {
+    failures.push(`docs overview: static token count does not match the installed framework (${expectedTokens})`);
   }
 
   for (const { path, title, description } of docsPages) {
@@ -341,7 +346,7 @@ try {
       const routeDimensions = await dimensionsFor(routePage);
       const visibleHeading = routePage.locator(".docs-content > .docs-component-hero > h1:visible, .docs-content > .docs-hero > h1:visible");
       const previews = routePage.locator("[data-component-example]:visible");
-      const visibleDemos = routePage.locator(".docs-demo:visible");
+      const genericVisibleDemos = routePage.locator(".docs-demo:visible:not([data-theme-configurator])");
       const renderedCode = routePage.locator(".docs-content .docs-code-block pre code");
 
       if (response?.status() !== 200) failures.push(`${viewport.name}: ${config.path} did not return 200`);
@@ -414,7 +419,7 @@ try {
           failures.push(`${viewport.name}: ${config.path} API reference is missing ${missingClasses.map((name) => `.${name}`).join(", ")}`);
         }
       }
-      if (await visibleDemos.count() > 0 && !await visibleDemos.evaluateAll((elements) => elements.every((preview) => (
+      if (await genericVisibleDemos.count() > 0 && !await genericVisibleDemos.evaluateAll((elements) => elements.every((preview) => (
         ["light", "dark"].includes(preview.dataset.bsTheme)
         && preview.querySelectorAll(":scope > [data-preview-theme-controls]").length === 1
         && preview.querySelectorAll(":scope > [data-preview-theme-controls] [data-preview-theme-option]").length === 2
@@ -505,6 +510,60 @@ try {
 
       if (config.sectionId === "tokens" && await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
         failures.push("desktop: token reference does not match the installed stylesheet");
+      }
+
+      if (config.sectionId === "theming" && viewport.name === "desktop") {
+        const configurator = routePage.locator("[data-theme-configurator]");
+        const initialThemeTokens = await configurator.evaluate((element) => ({
+          primary: getComputedStyle(element).getPropertyValue("--bs-color-primary").trim(),
+          radius: getComputedStyle(element).getPropertyValue("--bs-radius-lg").trim(),
+        }));
+
+        if (await configurator.count() !== 1) failures.push("desktop: theming guide is missing its configurator");
+        if (await configurator.locator('[data-theme-axis="theme"]').count() !== 2
+          || await configurator.locator('[data-theme-axis="palette"]').count() !== 5
+          || await configurator.locator('[data-theme-axis="radius"]').count() !== 2) {
+          failures.push("desktop: theming configurator does not expose every supported option");
+        }
+
+        await configurator.locator('[data-theme-axis="theme"][data-theme-value="light"]').click();
+        await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').click();
+        await configurator.locator('[data-theme-axis="radius"][data-theme-value="square"]').click();
+
+        const configuredTheme = await configurator.evaluate((element) => ({
+          theme: element.dataset.bsTheme,
+          palette: element.dataset.bsPalette,
+          radiusPreset: element.dataset.bsRadius,
+          primary: getComputedStyle(element).getPropertyValue("--bs-color-primary").trim(),
+          radius: getComputedStyle(element).getPropertyValue("--bs-radius-lg").trim(),
+        }));
+        if (configuredTheme.theme !== "light" || configuredTheme.palette !== "blue" || configuredTheme.radiusPreset !== "square") {
+          failures.push(`desktop: theming configurator did not apply the selected attributes (${JSON.stringify(configuredTheme)})`);
+        }
+        if (configuredTheme.primary === initialThemeTokens.primary || Number.parseFloat(configuredTheme.radius) !== 0 || Number.parseFloat(initialThemeTokens.radius) === 0) {
+          failures.push(`desktop: theming configurator did not resolve palette and radius tokens (${JSON.stringify({ initialThemeTokens, configuredTheme })})`);
+        }
+        if (await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').getAttribute("aria-pressed") !== "true"
+          || await configurator.locator('[data-theme-axis="radius"][data-theme-value="rounded"]').getAttribute("aria-pressed") !== "false") {
+          failures.push("desktop: theming configurator did not expose its selected state accessibly");
+        }
+        if ((await configurator.locator("[data-theme-summary]").textContent())?.trim() !== "Light · Blue · Square") {
+          failures.push("desktop: theming configurator summary did not update");
+        }
+
+        const expectedThemeMarkup = '<html\n  data-bs-theme="light"\n  data-bs-palette="blue"\n  data-bs-radius="square"\n>';
+        if ((await routePage.locator("[data-theme-markup]").textContent())?.trim() !== expectedThemeMarkup) {
+          failures.push("desktop: theming configurator did not update its copy-ready markup");
+        }
+        await routePage.locator("[data-theme-copy]").click();
+        if (await routePage.evaluate(() => navigator.clipboard.readText()) !== expectedThemeMarkup) {
+          failures.push("desktop: theming configurator copied stale markup");
+        }
+
+        const themingText = await routePage.locator("#theming").textContent();
+        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "--bs-color-primary-contrast", "--bs-color-focus-ring"]) {
+          if (!themingText.includes(publicContract)) failures.push(`desktop: theming guide is missing ${publicContract}`);
+        }
       }
 
       if (config.sectionId === "banners") {

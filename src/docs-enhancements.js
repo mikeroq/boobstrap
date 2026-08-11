@@ -212,22 +212,22 @@ if (import.meta.hot) {
 
   addExample("theming", {
     id: "theming-scoped-preview",
-    title: "Scope a theme to one region",
-    description: "A theme attribute remaps inherited semantic tokens only inside its subtree, which is useful for embedded panels and previews.",
-    preview: `<div class="bs-card" data-bs-theme="light">
+    title: "Scope a complete theme to one region",
+    description: "All three attributes inherit through a subtree, which is useful for embedded products, dashboards, and previews with a distinct visual identity.",
+    preview: `<div class="bs-card" data-bs-theme="light" data-bs-palette="teal" data-bs-radius="square">
   <div class="bs-card-body">
-    <span class="bs-badge bs-badge-primary">Light region</span>
-    <h4 class="bs-card-title bs-mt-4">Scoped independently</h4>
-    <p class="bs-card-text bs-mb-4">The surrounding documentation can remain dark.</p>
+    <span class="bs-badge bs-badge-primary">Light · Teal · Square</span>
+    <h3 class="bs-card-title bs-mt-4">Scoped independently</h3>
+    <p class="bs-card-text bs-mb-4">The surrounding page keeps its own mode, palette, and corners.</p>
     <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Continue</button>
   </div>
 </div>`,
-    label: "HTML · Scoped light theme",
+    label: "HTML · Scoped theme",
   });
   addCodeExample("theming", {
-    title: "Build a persistent theme toggle",
-    description: "Apply the stored preference before paint when possible, then keep the control label synchronized with the next available action.",
-    label: "JavaScript · Theme toggle",
+    title: "Persist a mode preference",
+    description: "Mode can change without disturbing the selected palette or corner profile. Apply a stored preference before paint when possible to avoid a visual flash.",
+    label: "JavaScript · Mode toggle",
     language: "javascript",
     source: `const root = document.documentElement;
 const toggle = document.querySelector("[data-theme-toggle]");
