@@ -74,14 +74,20 @@
     <progress class="docs-reading-progress" max="100" value="0" aria-label="Documentation reading progress" data-reading-progress></progress>
 
     <div class="docs-layout">
-      <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-state="closed" aria-label="Documentation navigation">
+      <aside class="docs-sidebar bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="docs-sidebar" data-bs-sidebar data-bs-sidebar-media="(max-width: 60rem)" data-bs-state="expanded" aria-label="Documentation navigation">
         <div class="bs-sidebar-header">
-        <div class="docs-nav-search">
-          <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-          <label class="bs-sr-only" for="docs-nav-filter">Filter documentation sections</label>
-          <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
-          <kbd>/</kbd>
-        </div>
+          <div class="docs-sidebar-mobile-header">
+            <strong>Documentation</strong>
+            <button class="docs-sidebar-close docs-icon-button" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" /></svg>
+            </button>
+          </div>
+          <div class="docs-nav-search">
+            <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+            <label class="bs-sr-only" for="docs-nav-filter">Filter documentation sections</label>
+            <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autocomplete="off" data-nav-filter />
+            <kbd>/</kbd>
+          </div>
         </div>
         <nav class="docs-nav bs-nav bs-sidebar-content" aria-label="Documentation sections" data-bs-sidebar-close>
           <div class="docs-nav-group bs-nav-group" data-nav-group>
@@ -110,15 +116,24 @@
             <a href="/docs/components/lists">Reference lists</a>
             <a href="/docs/components/alerts">Alerts</a>
             <a href="/docs/components/banners">Banners</a>
-            <a href="/docs/components/forms">Forms</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/inputs">Inputs &amp; textareas</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/input-groups">Input groups &amp; icons</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/selects">Native selects</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/searchable-select">Searchable select</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/date-time">Date &amp; time</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/passwords-masks">Passwords &amp; masks</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/checks-radios">Checkboxes &amp; radios</a>
-            <a class="docs-nav-subitem" href="/docs/components/forms/otp">One-time password</a>
+            <div class="docs-nav-disclosure" data-nav-disclosure data-nav-prefix="/docs/components/forms">
+              <div class="docs-nav-disclosure-row">
+                <a href="/docs/components/forms">Forms</a>
+                <button type="button" data-nav-disclosure-toggle aria-expanded="false" aria-controls="docs-forms-submenu" aria-label="Show Forms pages">
+                  <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m5 6 3 3 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" /></svg>
+                </button>
+              </div>
+              <div class="docs-nav-submenu" id="docs-forms-submenu" data-nav-submenu hidden>
+                <a class="docs-nav-subitem" href="/docs/components/forms/inputs">Inputs &amp; textareas</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/input-groups">Input groups &amp; icons</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/selects">Native selects</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/searchable-select">Searchable select</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/date-time">Date &amp; time</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/passwords-masks">Passwords &amp; masks</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/checks-radios">Checkboxes &amp; radios</a>
+                <a class="docs-nav-subitem" href="/docs/components/forms/otp">One-time password</a>
+              </div>
+            </div>
             <a href="/docs/components/code-windows">Code windows</a>
             <a href="/docs/components/icons">Icons</a>
           </div>
