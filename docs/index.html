@@ -963,7 +963,11 @@
                 <tr><th scope="row"><code>.bs-table-sort</code></th><td>Styles a real sort button and reflects its parent header’s <code>aria-sort</code> value.</td><td>A button inside a column header.</td></tr>
                 <tr><th scope="row"><code>.bs-table-empty</code></th><td>Creates a centered empty-state cell with generous vertical space.</td><td>A cell spanning all columns.</td></tr>
                 <tr><th scope="row"><code>.bs-table-caption-bottom</code></th><td>Moves the native caption below the table when a source note reads better there.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code>.bs-datatable</code></th><td>Scopes the DataTables 3 presentation adapter for generated search, page-length, information, sorting, overflow, processing, and pagination controls.</td><td>A wrapper around the source table before DataTables initialization.</td></tr>
               </tbody></table></div>
+
+              <h3>DataTables.net compatibility</h3>
+              <p>The adapter targets dependency-free <a href="https://datatables.net/">DataTables 3</a>. Install <code>datatables.net</code>, wrap the semantic source table in <code>.bs-datatable</code>, and keep <code>.bs-table</code> plus any table modifiers on the table itself. Do not load <code>datatables.net-dt</code> or its default CSS alongside the adapter.</p>
 
               <h3>Pagination API</h3>
               <p>Pagination is presentation only: your application, router, or data library still owns the current page, URLs, loading, and result updates. Keep the existing <code>.bs-page-nav</code> for previous/next article navigation.</p>

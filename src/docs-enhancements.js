@@ -830,11 +830,80 @@ trigger.addEventListener("click", () => {
 </div>`,
     label: "HTML · Small and large pagination",
   });
+  addExample("tables", {
+    id: "table-datatables",
+    title: "Fully functional DataTables.net integration",
+    description: "This live DataTables 3 example supports client-side search, column sorting, page-length changes, result counts, and pagination. Try every control: the generated interface is styled entirely by Boobstrap tokens.",
+    preview: `<div class="bs-datatable">
+  <table class="bs-table bs-table-striped bs-table-hover" id="customer-directory" data-datatables-demo>
+    <caption>Customer directory</caption>
+    <thead><tr><th scope="col">Customer</th><th scope="col">Role</th><th scope="col">Office</th><th scope="col">Joined</th><th scope="col">Status</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Avery Morgan</th><td>Engineering lead</td><td>London</td><td data-order="2026-07-28">Jul 28, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Kai Patel</th><td>Product designer</td><td>Toronto</td><td data-order="2026-07-22">Jul 22, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Sam Rivera</th><td>Support manager</td><td>Austin</td><td data-order="2026-07-19">Jul 19, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Jordan Lee</th><td>Data analyst</td><td>Singapore</td><td data-order="2026-07-14">Jul 14, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Noor Hassan</th><td>Security engineer</td><td>Berlin</td><td data-order="2026-07-09">Jul 9, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Taylor Brooks</th><td>Account executive</td><td>New York</td><td data-order="2026-06-30">Jun 30, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Emi Tanaka</th><td>Frontend engineer</td><td>Tokyo</td><td data-order="2026-06-24">Jun 24, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Robin Clarke</th><td>Content strategist</td><td>Dublin</td><td data-order="2026-06-18">Jun 18, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Priya Shah</th><td>Product manager</td><td>Mumbai</td><td data-order="2026-06-11">Jun 11, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Casey Nguyen</th><td>QA engineer</td><td>Sydney</td><td data-order="2026-06-03">Jun 3, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Morgan Okafor</th><td>Finance director</td><td>Lagos</td><td data-order="2026-05-27">May 27, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Alexis Martin</th><td>Solutions architect</td><td>Paris</td><td data-order="2026-05-16">May 16, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Drew Wilson</th><td>Operations lead</td><td>Chicago</td><td data-order="2026-05-08">May 8, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+    </tbody>
+  </table>
+</div>`,
+    label: "HTML · DataTables customer directory",
+  });
+  addCodeExample("tables", {
+    title: "Install DataTables 3",
+    description: "Install the dependency-free DataTables core. Do not import its default styling package—the Boobstrap adapter supplies the complete presentation layer.",
+    label: "Terminal · Install DataTables",
+    language: "bash",
+    source: `npm install @boobstrap/boobstrap datatables.net`,
+  });
+  addCodeExample("tables", {
+    title: "Initialize the live table",
+    description: "DataTables owns search, ordering, paging, and result updates. After initialization, name the generated overflow cell so keyboard users can reach columns beyond the viewport.",
+    label: "JavaScript · DataTables initialization",
+    language: "javascript",
+    source: `import "@boobstrap/boobstrap/dist/boobstrap.css";
+import DataTable from "datatables.net";
+
+const table = document.querySelector("#customer-directory");
+
+new DataTable(table, {
+  pageLength: 5,
+  lengthMenu: [5, 10, 25],
+  order: [[3, "desc"]],
+  layout: {
+    topStart: { pageLength: { menu: [5, 10, 25] } },
+    topEnd: { search: { placeholder: "Name, role, or office" } },
+    bottomStart: "info",
+    bottomEnd: { paging: { buttons: 3 } },
+  },
+  language: {
+    entries: { _: "customers", 1: "customer" },
+    search: "Search customers:",
+    zeroRecords: "No customers match that search.",
+  },
+});
+
+const region = table.closest(".dt-layout-table")
+  ?.querySelector(":scope > .dt-layout-cell");
+
+region?.setAttribute("role", "region");
+region?.setAttribute("tabindex", "0");
+region?.setAttribute("aria-label", "Customer directory results");`,
+  });
   addGuidance("tables", [
     { title: "Structure", body: "Use <code>&lt;caption&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tbody&gt;</code>, and <code>&lt;tfoot&gt;</code> for their real purposes. Add <code>scope=\"col\"</code> or <code>scope=\"row\"</code> to unambiguous headers." },
     { title: "Overflow", body: "Give scrollable wrappers <code>role=\"region\"</code>, <code>tabindex=\"0\"</code>, and an accessible name. This lets keyboard users reach columns that extend beyond the viewport." },
     { title: "Interaction", body: "Hover and stripes are visual aids, not state. Keep actions as links or buttons, status as text, and sorting in real buttons whose parent <code>aria-sort</code> value stays synchronized." },
     { title: "Pagination", body: "Use links when each page has a URL and buttons for in-place data updates. Announce async loading and result-count changes, preserve focus, and never make an ellipsis interactive." },
+    { title: "DataTables 3", body: "Wrap the source table in <code>.bs-datatable</code>, import <code>datatables.net</code>, and initialize the native ESM constructor. Boobstrap styles the generated controls; DataTables remains responsible for behavior and ARIA state." },
   ]);
 
   addExample("lists", {
