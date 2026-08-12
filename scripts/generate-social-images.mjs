@@ -55,7 +55,7 @@ const cardSvg = (card) => {
   const descriptionLines = wrapText(card.description, 78, titleLines.length > 1 ? 2 : 3);
   const descriptionY = titleLines.length > 1 ? 414 : 350;
   const routeLabel = card.path === "/" ? "boobstrap.org" : `boobstrap.org${card.path}`;
-  const categoryWidth = Math.max(154, (card.category.length * 15) + 44);
+  const categoryWidth = Math.max(176, (card.category.length * 16) + 88);
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg width="1200" height="630" viewBox="0 0 1200 630" xmlns="http://www.w3.org/2000/svg">
@@ -105,9 +105,9 @@ const cardSvg = (card) => {
 
   <line x1="70" y1="535" x2="1130" y2="535" stroke="#ffffff" stroke-opacity="0.12"/>
   <text x="70" y="580" fill="#ffffff" fill-opacity="0.62" font-family="DejaVu Sans, Arial, sans-serif" font-size="22">${escapeXml(routeLabel)}</text>
-  <g transform="translate(1000 558)">
-    <rect width="130" height="38" rx="19" fill="url(#accent)"/>
-    <text x="65" y="26" text-anchor="middle" fill="${palette.background}" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="800">OPEN DOCS</text>
+  <g transform="translate(980 558)">
+    <rect width="150" height="38" rx="19" fill="url(#accent)"/>
+    <text x="75" y="26" text-anchor="middle" fill="${palette.background}" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="800">OPEN DOCS</text>
   </g>
 </svg>`;
 };
