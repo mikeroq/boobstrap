@@ -912,49 +912,72 @@
           <section class="docs-section" id="cards">
             <div class="docs-kicker">Components</div>
             <h2>Cards</h2>
-            <p>Cards establish a contained surface. Use the body, title, and text classes for conventional content; choose subtle, compact, raised, or linked presentation according to the card's role.</p>
+            <p>Cards establish a contained surface with composable header, content, and footer regions. Header and footer are optional; add title, description, and action slots only when the card needs them.</p>
             <div class="docs-demo cards-demo bs-grid bs-gap-4" data-component-example="cards">
               <article class="bs-card bs-col-12 bs-col-md-6">
-                <div class="bs-card-body">
-                  <span class="bs-badge">Standard</span>
-                  <h3 class="bs-card-title bs-mt-4">A thoughtful default</h3>
-                  <p class="bs-card-text bs-mb-4">Contained content with a subtle border and surface treatment.</p>
-                  <a class="bs-btn bs-btn-ghost bs-p-0" href="#class-reference">Explore the API →</a>
+                <header class="bs-card-header">
+                  <h3 class="bs-card-title">Deployment</h3>
+                  <p class="bs-card-description">Production status for the current release.</p>
+                  <span class="bs-badge bs-badge-primary bs-card-action">Healthy</span>
+                </header>
+                <div class="bs-card-content">
+                  <strong>Version 2.4.0 is live</strong>
+                  <p class="bs-card-text bs-mb-0">All regions are responding normally.</p>
                 </div>
               </article>
               <article class="bs-card bs-card-raised bs-col-12 bs-col-md-6">
-                <div class="bs-card-body">
-                  <span class="bs-badge bs-badge-primary">Raised</span>
-                  <h3 class="bs-card-title bs-mt-4">Extra elevation</h3>
-                  <p class="bs-card-text bs-mb-4">The raised modifier adds a stronger shadow without changing structure.</p>
-                  <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Take action</button>
+                <header class="bs-card-header">
+                  <h3 class="bs-card-title">Team access</h3>
+                  <p class="bs-card-description">Manage members and workspace permissions.</p>
+                  <button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button">Settings</button>
+                </header>
+                <div class="bs-card-content">
+                  <strong>12 active members</strong>
+                  <p class="bs-card-text bs-mb-0">Two invitations are waiting for a response.</p>
                 </div>
+                <footer class="bs-card-footer">
+                  <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Invite member</button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">View members</button>
+                </footer>
               </article>
             </div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy='&lt;article class="bs-card bs-card-raised" aria-labelledby="launch-card-title"&gt;&#10;  &lt;div class="bs-card-body"&gt;&#10;    &lt;span class="bs-badge bs-badge-primary"&gt;New&lt;/span&gt;&#10;    &lt;h3 class="bs-card-title bs-mt-4" id="launch-card-title"&gt;Launch ready&lt;/h3&gt;&#10;    &lt;p class="bs-card-text bs-mb-4"&gt;Supporting copy for this card.&lt;/p&gt;&#10;    &lt;a class="bs-btn bs-btn-primary bs-btn-sm" href="/details"&gt;View details&lt;/a&gt;&#10;  &lt;/div&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>
-  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-body"</span><span class="bs-code-tag">&gt;</span>
-    <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"launch-card-title"</span><span class="bs-code-tag">&gt;</span>Launch ready<span class="bs-code-tag">&lt;/h3&gt;</span>
-    <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-text"</span><span class="bs-code-tag">&gt;</span>Supporting copy.<span class="bs-code-tag">&lt;/p&gt;</span>
-    <span class="bs-code-tag">&lt;a</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-btn-sm"</span> <span class="bs-code-attribute">href</span>=<span class="bs-code-string">"/details"</span><span class="bs-code-tag">&gt;</span>View details<span class="bs-code-tag">&lt;/a&gt;</span>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy='&lt;article class="bs-card bs-card-raised" aria-labelledby="team-card-title"&gt;&#10;  &lt;header class="bs-card-header"&gt;&#10;    &lt;h3 class="bs-card-title" id="team-card-title"&gt;Team access&lt;/h3&gt;&#10;    &lt;p class="bs-card-description"&gt;Manage members and permissions.&lt;/p&gt;&#10;    &lt;button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button"&gt;Settings&lt;/button&gt;&#10;  &lt;/header&gt;&#10;  &lt;div class="bs-card-content"&gt;&#10;    &lt;strong&gt;12 active members&lt;/strong&gt;&#10;    &lt;p class="bs-card-text bs-mb-0"&gt;Two invitations are pending.&lt;/p&gt;&#10;  &lt;/div&gt;&#10;  &lt;footer class="bs-card-footer"&gt;&#10;    &lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Invite member&lt;/button&gt;&#10;  &lt;/footer&gt;&#10;&lt;/article&gt;'>Copy</button></div><pre><code><span class="bs-code-tag">&lt;article</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card bs-card-raised"</span> <span class="bs-code-attribute">aria-labelledby</span>=<span class="bs-code-string">"team-card-title"</span><span class="bs-code-tag">&gt;</span>
+  <span class="bs-code-tag">&lt;header</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-header"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;h3</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-title"</span> <span class="bs-code-attribute">id</span>=<span class="bs-code-string">"team-card-title"</span><span class="bs-code-tag">&gt;</span>Team access<span class="bs-code-tag">&lt;/h3&gt;</span>
+    <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-description"</span><span class="bs-code-tag">&gt;</span>Manage members and permissions.<span class="bs-code-tag">&lt;/p&gt;</span>
+    <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-ghost bs-btn-sm bs-card-action"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span><span class="bs-code-tag">&gt;</span>Settings<span class="bs-code-tag">&lt;/button&gt;</span>
+  <span class="bs-code-tag">&lt;/header&gt;</span>
+  <span class="bs-code-tag">&lt;div</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-content"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;strong&gt;</span>12 active members<span class="bs-code-tag">&lt;/strong&gt;</span>
+    <span class="bs-code-tag">&lt;p</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-text bs-mb-0"</span><span class="bs-code-tag">&gt;</span>Two invitations are pending.<span class="bs-code-tag">&lt;/p&gt;</span>
   <span class="bs-code-tag">&lt;/div&gt;</span>
+  <span class="bs-code-tag">&lt;footer</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-card-footer"</span><span class="bs-code-tag">&gt;</span>
+    <span class="bs-code-tag">&lt;button</span> <span class="bs-code-attribute">class</span>=<span class="bs-code-string">"bs-btn bs-btn-primary bs-btn-sm"</span> <span class="bs-code-attribute">type</span>=<span class="bs-code-string">"button"</span><span class="bs-code-tag">&gt;</span>Invite member<span class="bs-code-tag">&lt;/button&gt;</span>
+  <span class="bs-code-tag">&lt;/footer&gt;</span>
 <span class="bs-code-tag">&lt;/article&gt;</span></code></pre></div>
             <div class="docs-example-guidance" aria-label="Card guidance">
-              <div><h3>Structure</h3><p>Place content inside <code>.bs-card-body</code>, then use a real heading, supporting text, and the smallest set of actions the card needs.</p></div>
-              <div><h3>Class map</h3><p><code>.bs-card</code> creates the surface. Use raised for emphasis, subtle for a quieter border, compact for denser spacing, and link only when the entire surface has one destination.</p></div>
-              <div><h3>Accessibility</h3><p>Use <code>&lt;article&gt;</code> only for standalone content. Give repeated cards headings, and never place buttons or additional links inside <code>.bs-card-link</code>.</p></div>
+              <div><h3>Structure</h3><p>Use <code>.bs-card-header</code>, <code>.bs-card-content</code>, and <code>.bs-card-footer</code> in that order. Header and footer are optional; content can stand alone.</p></div>
+              <div><h3>Header slots</h3><p>Place <code>.bs-card-title</code>, <code>.bs-card-description</code>, and an optional <code>.bs-card-action</code> directly in the header. The action aligns independently without disconnecting the description from its heading.</p></div>
+              <div><h3>Compatibility</h3><p><code>.bs-card-body</code> remains a supported padded content region, and <code>.bs-card-text</code> remains available for muted copy. Prefer the explicit content and description names in new structured cards.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code>&lt;article&gt;</code> only for standalone content, connect its heading with <code>aria-labelledby</code>, and keep every action a native link or button. Never nest extra controls inside <code>.bs-card-link</code>.</p></div>
             </div>
             <div class="docs-api">
               <h3>Card API</h3>
-              <p>Cards are intentionally small: one shell, one content wrapper, and optional typography and elevation helpers.</p>
+              <p>Cards use one surface with explicit, composable regions. The header and footer are optional; every card can contain only <code>.bs-card-content</code> when no additional structure is needed.</p>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code>.bs-card</code></td><td>Surface, border, radius, clipping, and default elevation.</td></tr>
+                <tr><td><code>.bs-card-header</code></td><td>Optional responsive grid for the title, description, and action slots.</td></tr>
+                <tr><td><code>.bs-card-title</code></td><td>Heading slot within a card header or content region.</td></tr>
+                <tr><td><code>.bs-card-description</code></td><td>Muted supporting copy associated with the header title.</td></tr>
+                <tr><td><code>.bs-card-action</code></td><td>Optional header action aligned independently at the inline end.</td></tr>
+                <tr><td><code>.bs-card-content</code></td><td>Primary padded content region; works with or without a header and footer.</td></tr>
+                <tr><td><code>.bs-card-footer</code></td><td>Optional wrapping row for related actions, metadata, or status.</td></tr>
                 <tr><td><code>.bs-card-raised</code></td><td>Stronger shadow for elevated or featured content.</td></tr>
                 <tr><td><code>.bs-card-subtle</code></td><td>Quieter surface and border treatment for secondary or nested content.</td></tr>
-                <tr><td><code>.bs-card-compact</code></td><td>Reduces inset spacing for dense references, navigation, and small summaries.</td></tr>
+                <tr><td><code>.bs-card-compact</code></td><td>Reduces inset spacing consistently across simple or structured card regions.</td></tr>
                 <tr><td><code>.bs-card-link</code></td><td>Makes a single-destination anchor behave and focus like an interactive card surface.</td></tr>
-                <tr><td><code>.bs-card-body</code></td><td>Responsive inset padding for card content.</td></tr>
-                <tr><td><code>.bs-card-title</code></td><td>Consistent spacing below the card heading.</td></tr>
-                <tr><td><code>.bs-card-text</code></td><td>Muted supporting-copy color.</td></tr>
+                <tr><td><code>.bs-card-body</code></td><td>Backward-compatible padded content region.</td></tr>
+                <tr><td><code>.bs-card-text</code></td><td>Backward-compatible muted supporting-copy treatment.</td></tr>
               </tbody></table></div>
             </div>
           </section>
