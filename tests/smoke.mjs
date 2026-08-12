@@ -3,6 +3,7 @@ import { mkdir, readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import { chromium } from "playwright";
 import { docsPages } from "../src/docs-pages.js";
+import { socialCardForPath, socialCards } from "../src/social-cards.js";
 
 const port = await new Promise((resolve, reject) => {
   const probe = createServer();
@@ -51,7 +52,7 @@ const expectedSemanticColorTokens = expectedTokenNames.filter((name) => name.sta
 const expectedThemeColorRows = expectedBrandTokens.length + (expectedSemanticColorTokens.length * 2);
 const expectedThemeColorCells = expectedThemeColorRows * 5;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
-const ogImageUrl = "https://boobstrap.org/og-image.jpg";
+const landingSocialCard = socialCardForPath("/");
 const escapeHtml = (value) => value
   .replaceAll("&", "&amp;")
   .replaceAll("<", "&lt;")
@@ -224,10 +225,26 @@ try {
   await waitForServer();
   await mkdir("artifacts", { recursive: true });
 
-  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/og-image.jpg", "/boobstrap-starter.zip"]) {
+  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/boobstrap-starter.zip"]) {
     const response = await fetch(`${baseUrl}${asset}`);
     if (!response.ok) failures.push(`${asset}: returned HTTP ${response.status}`);
   }
+
+  const socialImageBodies = new Set();
+  for (const card of socialCards) {
+    const response = await fetch(`${baseUrl}${card.imagePath}`);
+    if (!response.ok) {
+      failures.push(`${card.imagePath}: returned HTTP ${response.status}`);
+      continue;
+    }
+    const body = Buffer.from(await response.arrayBuffer());
+    socialImageBodies.add(body.toString("base64"));
+    if (response.headers.get("content-type") !== "image/png") failures.push(`${card.imagePath}: is not served as image/png`);
+    if (body.readUInt32BE(16) !== 1200 || body.readUInt32BE(20) !== 630) {
+      failures.push(`${card.imagePath}: is not 1200×630`);
+    }
+  }
+  if (socialImageBodies.size !== socialCards.length) failures.push("social images: one or more routes share identical image output");
 
   for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"]]) {
     const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
@@ -237,8 +254,20 @@ try {
   }
 
   const docsOverviewSource = await (await fetch(`${baseUrl}/docs`)).text();
+  const docsOverviewSocialCard = socialCardForPath("/docs");
   if (!new RegExp(`<strong[^>]*data-token-count(?:="")?[^>]*>${expectedTokens}</strong> tokens`).test(docsOverviewSource)) {
     failures.push(`docs overview: static token count does not match the installed framework (${expectedTokens})`);
+  }
+  if (!docsOverviewSource.includes(`<meta property="og:image" content="${docsOverviewSocialCard.imageUrl}"`)
+    || !docsOverviewSource.includes(`<meta name="twitter:image" content="${docsOverviewSocialCard.imageUrl}"`)) {
+    failures.push("docs overview: route-specific social image metadata is missing");
+  }
+
+  const playgroundSource = await (await fetch(`${baseUrl}/playground`)).text();
+  const playgroundSocialCard = socialCardForPath("/playground");
+  if (!playgroundSource.includes(`<meta property="og:image" content="${playgroundSocialCard.imageUrl}"`)
+    || !playgroundSource.includes(`<meta name="twitter:image" content="${playgroundSocialCard.imageUrl}"`)) {
+    failures.push("playground: route-specific social image metadata is missing");
   }
 
   for (const { path, title, description } of docsPages) {
@@ -247,11 +276,16 @@ try {
     const source = await response.text();
     const pageTitle = `${title} — Boobstrap`;
     const canonicalUrl = `https://boobstrap.org${path}`;
+    const socialCard = socialCardForPath(path);
     if (!source.includes(`<title>${escapeHtml(pageTitle)}</title>`)) failures.push(`${path}: raw HTML has the wrong page title`);
     if (!source.includes(`<meta property="og:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph title`);
     if (!source.includes(`<meta property="og:description" content="${escapeHtml(description)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph description`);
     if (!source.includes(`<meta property="og:url" content="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph URL`);
+    if (!source.includes(`<meta property="og:image" content="${socialCard.imageUrl}"`)) failures.push(`${path}: raw HTML has the wrong route-specific Open Graph image`);
+    if (!source.includes(`<meta property="og:image:alt" content="${escapeHtml(socialCard.imageAlt)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph image alt text`);
     if (!source.includes(`<meta name="twitter:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter title`);
+    if (!source.includes(`<meta name="twitter:image" content="${socialCard.imageUrl}"`)) failures.push(`${path}: raw HTML has the wrong route-specific Twitter image`);
+    if (!source.includes(`<meta name="twitter:image:alt" content="${escapeHtml(socialCard.imageAlt)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter image alt text`);
     if (!source.includes(`<link rel="canonical" href="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong canonical URL`);
     const currentLinkPattern = new RegExp(`<a[^>]*(?:href="${path}"[^>]*aria-current="page"|aria-current="page"[^>]*href="${path}")[^>]*>`);
     if (!currentLinkPattern.test(source)) failures.push(`${path}: raw HTML does not identify the current navigation link before JavaScript`);
@@ -317,7 +351,7 @@ try {
     if (!titleVisible) failures.push(`${viewport.name}: hero title is not visible`);
     if (canonicalUrl !== "https://boobstrap.org/") failures.push(`${viewport.name}: landing canonical URL is incorrect`);
     if (faviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: landing favicon is incorrect`);
-    if (ogImage !== ogImageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
+    if (ogImage !== landingSocialCard.imageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
     if (twitterCard !== "summary_large_image") failures.push(`${viewport.name}: landing Twitter card is incorrect`);
     if (npmUrl !== npmPackageUrl) failures.push(`${viewport.name}: landing npm link is incorrect`);
     if (docsUrl !== "/docs/getting-started/installation") failures.push(`${viewport.name}: landing docs CTA is incorrect`);

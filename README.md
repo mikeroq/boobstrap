@@ -19,6 +19,8 @@ Vite serves the landing page at `/`, the React documentation application at `/do
 
 The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles.
 
+The same build generates a distinct 1200×630 PNG social card for the landing page, playground, docs overview, and every guide under `dist/og`. Each route receives matching absolute `og:image` and `twitter:image` metadata; `src/social-cards.js` is the shared URL and palette registry.
+
 ## Validation
 
 ```bash
@@ -57,6 +59,7 @@ The runtime container serves the Vite production build from unprivileged Nginx o
 - Documentation route registry: `src/docs-pages.js`
 - Documentation example behavior: `src/docs/runtime.js`
 - Static route renderer: `scripts/generate-doc-route-pages.mjs`
+- Social-card registry and image renderer: `src/social-cards.js`, `scripts/generate-social-images.mjs`
 - Documentation presentation: `src/docs.css`
 - Playground markup: `playground/index.html`
 - Framework package: [mikeroq/boobstrap-framework](https://github.com/mikeroq/boobstrap-framework)

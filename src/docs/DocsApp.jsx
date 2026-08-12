@@ -4,6 +4,7 @@ import parse from "html-react-parser";
 import { initBanners } from "@boobstrap/boobstrap/js/banner";
 import { initSidebars } from "@boobstrap/boobstrap/js/sidebar";
 import { docsPages, normalizeDocsPath } from "../docs-pages.js";
+import { socialCardForPath } from "../social-cards.js";
 import { DocsNavigation } from "./DocsNavigation.jsx";
 import { docsRouteForPath, loadDocsContent, outlineForContent } from "./content.js";
 import { initDocsPageRuntime } from "./runtime.js";
@@ -18,14 +19,19 @@ const loadCachedContent = (sectionId) => {
 const updateDocumentMetadata = (route) => {
   const pageTitle = route.path === "/docs" ? "Documentation — Boobstrap" : `${route.title} — Boobstrap`;
   const canonicalUrl = `https://boobstrap.org${route.path}`;
+  const socialCard = socialCardForPath(route.path);
   document.title = pageTitle;
   document.querySelector('link[rel="canonical"]')?.setAttribute("href", canonicalUrl);
   document.querySelector('meta[name="description"]')?.setAttribute("content", route.description);
   document.querySelector('meta[property="og:title"]')?.setAttribute("content", pageTitle);
   document.querySelector('meta[property="og:description"]')?.setAttribute("content", route.description);
   document.querySelector('meta[property="og:url"]')?.setAttribute("content", canonicalUrl);
+  document.querySelector('meta[property="og:image"]')?.setAttribute("content", socialCard.imageUrl);
+  document.querySelector('meta[property="og:image:alt"]')?.setAttribute("content", socialCard.imageAlt);
   document.querySelector('meta[name="twitter:title"]')?.setAttribute("content", pageTitle);
   document.querySelector('meta[name="twitter:description"]')?.setAttribute("content", route.description);
+  document.querySelector('meta[name="twitter:image"]')?.setAttribute("content", socialCard.imageUrl);
+  document.querySelector('meta[name="twitter:image:alt"]')?.setAttribute("content", socialCard.imageAlt);
 };
 
 function DevelopmentBanner({ enabled }) {
