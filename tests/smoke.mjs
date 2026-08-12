@@ -129,6 +129,8 @@ const promotedComponentCoverage = {
     "bs-sidebar-trigger",
   ],
   cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-subtle"],
+  dialogs: ["bs-dialog", "bs-dialog-body", "bs-dialog-close", "bs-dialog-description", "bs-dialog-footer", "bs-dialog-fullscreen", "bs-dialog-header", "bs-dialog-height-lg", "bs-dialog-height-sm", "bs-dialog-lg", "bs-dialog-open", "bs-dialog-sm", "bs-dialog-title", "bs-dialog-xl"],
+  drawers: ["bs-drawer", "bs-drawer-body", "bs-drawer-close", "bs-drawer-description", "bs-drawer-end", "bs-drawer-footer", "bs-drawer-header", "bs-drawer-lg", "bs-drawer-sm", "bs-drawer-start", "bs-drawer-title", "bs-drawer-xl"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
   tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
   "table-fundamentals": [
@@ -171,8 +173,8 @@ const promotedComponentCoverage = {
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 91) {
-  throw new Error(`Expected documentation coverage for 91 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 117) {
+  throw new Error(`Expected documentation coverage for 117 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -187,6 +189,8 @@ const documentationQualityMinimums = {
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 5, code: 5, guidance: true },
+  dialogs: { examples: 4, code: 6, guidance: true },
+  drawers: { examples: 4, code: 6, guidance: true },
   tables: { examples: 1, code: 1, guidance: true },
   "table-fundamentals": { examples: 2, code: 2, guidance: true },
   "table-styles": { examples: 3, code: 3, guidance: true },
@@ -675,6 +679,120 @@ try {
           failures.push(`${viewport.name}: structured card layout did not render correctly (${JSON.stringify(structuredCardLayout)})`);
         }
         await routePage.screenshot({ path: `artifacts/cards-${viewport.name}.png`, fullPage: true });
+      }
+
+      if (config.sectionId === "dialogs") {
+        const trigger = routePage.getByRole("button", { name: "Edit profile" });
+        const dialog = routePage.locator("#profile-dialog");
+        await trigger.click();
+        const dialogLayout = await dialog.evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          const header = element.querySelector(":scope > .bs-dialog-header");
+          const body = element.querySelector(":scope > .bs-dialog-body");
+          const footer = element.querySelector(":scope > .bs-dialog-footer");
+          return {
+            open: element.open && element.dataset.bsState === "open",
+            centered: Math.abs((rect.left + rect.width / 2) - (window.innerWidth / 2)) <= 1,
+            headerFixed: getComputedStyle(header).flexShrink === "0",
+            bodyScrolls: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
+            footerFixed: getComputedStyle(footer).flexShrink === "0",
+            named: element.getAttribute("aria-labelledby") === "profile-dialog-title" && element.getAttribute("aria-describedby") === "profile-dialog-description",
+          };
+        });
+        if (!Object.values(dialogLayout).every(Boolean)) failures.push(`${viewport.name}: complete dialog layout is incomplete (${JSON.stringify(dialogLayout)})`);
+        if (!await routePage.locator("body").evaluate((element) => element.classList.contains("bs-dialog-open"))) failures.push(`${viewport.name}: dialog did not lock document scrolling`);
+        await routePage.screenshot({ path: `artifacts/dialog-open-${viewport.name}.png` });
+        await routePage.keyboard.press("Escape");
+        await routePage.waitForFunction(() => !document.querySelector("#profile-dialog").open);
+        if (!await trigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: dialog did not restore focus after Escape`);
+
+        const staticTrigger = routePage.getByRole("button", { name: "Archive project" });
+        const staticDialog = routePage.locator("#archive-dialog");
+        await staticTrigger.click();
+        await routePage.mouse.click(1, 1);
+        if (!await staticDialog.evaluate((element) => element.open)) failures.push(`${viewport.name}: static-backdrop dialog closed from an outside click`);
+        await staticDialog.getByRole("button", { name: "Keep project" }).click();
+        await routePage.waitForFunction(() => !document.querySelector("#archive-dialog").open);
+
+        const scrollTrigger = routePage.getByRole("button", { name: "Review release" });
+        const scrollDialog = routePage.locator("#release-dialog");
+        await scrollTrigger.click();
+        const scrollRegions = await scrollDialog.evaluate((element) => {
+          const body = element.querySelector(".bs-dialog-body");
+          body.scrollTop = body.scrollHeight;
+          return {
+            constrained: element.clientHeight <= (24 * parseFloat(getComputedStyle(document.documentElement).fontSize)) + 1,
+            scrollable: body.scrollHeight > body.clientHeight,
+            reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+          };
+        });
+        if (!Object.values(scrollRegions).every(Boolean)) failures.push(`${viewport.name}: constrained dialog body does not scroll independently (${JSON.stringify(scrollRegions)})`);
+        await scrollDialog.getByRole("button", { name: "Checklist complete" }).click();
+      }
+
+      if (config.sectionId === "drawers") {
+        const endTrigger = routePage.getByRole("button", { name: "Edit account" });
+        const endDrawer = routePage.locator("#account-drawer");
+        await endTrigger.click();
+        await endDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+        const endLayout = await endDrawer.evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          const body = element.querySelector(":scope > .bs-drawer-body");
+          const footer = element.querySelector(":scope > .bs-drawer-footer");
+          return {
+            open: element.open && element.dataset.bsState === "open",
+            meetsEnd: Math.abs(rect.right - document.documentElement.clientWidth) <= 1,
+            fillsViewport: Math.abs(rect.height - window.innerHeight) <= 1,
+            bodyOwnsScroll: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
+            footerFixed: getComputedStyle(footer).flexShrink === "0" && footer.getBoundingClientRect().bottom <= rect.bottom + 1,
+            checkDescriptionStacks: getComputedStyle(element.querySelector(".bs-check-description")).gridColumnStart === "2",
+          };
+        });
+        if (!Object.values(endLayout).every(Boolean)) failures.push(`${viewport.name}: end drawer layout is incomplete (${JSON.stringify(endLayout)})`);
+        await routePage.screenshot({ path: `artifacts/drawer-open-${viewport.name}.png` });
+        await routePage.mouse.click(1, Math.floor(viewport.height / 2));
+        if (!await endDrawer.evaluate((element) => element.open)) failures.push(`${viewport.name}: form drawer closed despite disabled backdrop dismissal`);
+        await endDrawer.getByRole("button", { name: "Cancel" }).click();
+        await routePage.waitForFunction(() => !document.querySelector("#account-drawer").open);
+        if (!await endTrigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: drawer dismiss control did not restore focus`);
+
+        const startTrigger = routePage.getByRole("button", { name: "Filter results" });
+        const startDrawer = routePage.locator("#filter-drawer");
+        await startTrigger.click();
+        await startDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+        if (!await startDrawer.evaluate((element) => Math.abs(element.getBoundingClientRect().left) <= 1)) failures.push(`${viewport.name}: start drawer does not meet the logical start edge`);
+        await routePage.keyboard.press("Escape");
+
+        const activityTrigger = routePage.getByRole("button", { name: "View activity" });
+        const activityDrawer = routePage.locator("#activity-drawer");
+        await activityTrigger.click();
+        const activityScroll = await activityDrawer.evaluate((element) => {
+          const body = element.querySelector(".bs-drawer-body");
+          body.scrollTop = body.scrollHeight;
+          return {
+            scrollable: body.scrollHeight > body.clientHeight,
+            reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+          };
+        });
+        if (!Object.values(activityScroll).every(Boolean)) failures.push(`${viewport.name}: long drawer body does not scroll to its final item (${JSON.stringify(activityScroll)})`);
+        await routePage.mouse.click(1, Math.floor(viewport.height / 2));
+        await routePage.waitForFunction(() => !document.querySelector("#activity-drawer").open);
+        if (!await activityTrigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: dismissible drawer backdrop did not close and restore focus`);
+
+        for (const [name, expectedRem] of [["Small", 20], ["Large", 36], ["Custom 32rem", 32]]) {
+          await routePage.getByRole("button", { name, exact: true }).click();
+          const openDrawer = routePage.locator("dialog.bs-drawer[open]");
+          await openDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+          const width = await openDrawer.evaluate((element) => element.getBoundingClientRect().width);
+          const sizing = await routePage.evaluate(() => {
+            const styles = getComputedStyle(document.documentElement);
+            const rootFontSize = parseFloat(styles.fontSize);
+            return { rootFontSize, mobileInset: parseFloat(styles.getPropertyValue("--bs-space-8")) * rootFontSize };
+          });
+          const maximumWidth = viewport.width <= 640 ? viewport.width - sizing.mobileInset : Infinity;
+          if (Math.abs(width - Math.min(expectedRem * sizing.rootFontSize, maximumWidth)) > 2) failures.push(`${viewport.name}: ${name} drawer width is ${width}px`);
+          await openDrawer.getByRole("button", { name: "Done" }).click();
+        }
       }
 
       if (config.sectionId in expectedTableExampleCounts) {

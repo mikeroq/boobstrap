@@ -728,6 +728,213 @@ trigger.addEventListener("click", () => {
     label: "HTML · Compact linked card",
   });
 
+  addExample("dialogs", {
+    id: "dialog-form",
+    title: "Form dialog with complete structure",
+    description: "The trigger names the native dialog with aria-controls. Header and footer remain visible while a longer form scrolls inside the body.",
+    preview: `<button class="bs-btn bs-btn-primary" type="button" data-bs-toggle="dialog" aria-controls="profile-dialog">Edit profile</button>
+<dialog class="bs-dialog bs-dialog-lg" id="profile-dialog" data-bs-dialog aria-labelledby="profile-dialog-title" aria-describedby="profile-dialog-description">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="profile-dialog-title">Edit profile</h4>
+    <p class="bs-dialog-description" id="profile-dialog-description">Update the information visible to your workspace.</p>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss aria-label="Close profile dialog">&times;</button>
+  </header>
+  <div class="bs-dialog-body">
+    <form class="bs-stack bs-gap-4">
+      <div class="bs-form-group"><label class="bs-label" for="dialog-display-name">Display name</label><input class="bs-input" id="dialog-display-name" value="Ada Lovelace" /></div>
+      <div class="bs-form-group"><label class="bs-label" for="dialog-role">Role</label><select class="bs-select" id="dialog-role"><option>Engineering lead</option><option>Product designer</option></select></div>
+      <div class="bs-form-group"><label class="bs-label" for="dialog-bio">Bio</label><textarea class="bs-textarea" id="dialog-bio" rows="4">Building dependable tools for ambitious teams.</textarea></div>
+    </form>
+  </div>
+  <footer class="bs-dialog-footer">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss>Cancel</button>
+    <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+  </footer>
+</dialog>`,
+    label: "HTML · Form dialog",
+  });
+  addExample("dialogs", {
+    id: "dialog-confirmation",
+    title: "Focused confirmation without a header close button",
+    description: "Header controls and footers are optional independently. This destructive decision disables backdrop dismissal so an accidental outside click cannot discard the choice.",
+    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog">Archive project</button>
+<dialog class="bs-dialog bs-dialog-sm" id="archive-dialog" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="archive-dialog-title">Archive this project?</h4>
+    <p class="bs-dialog-description" id="archive-dialog-description">Members will lose access until the project is restored.</p>
+  </header>
+  <div class="bs-dialog-body"><p class="bs-mb-0">The project and its history remain available to workspace administrators.</p></div>
+  <footer class="bs-dialog-footer">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss>Keep project</button>
+    <button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss>Archive project</button>
+  </footer>
+</dialog>`,
+    label: "HTML · Static-backdrop confirmation",
+  });
+  addExample("dialogs", {
+    id: "dialog-scroll",
+    title: "Constrained height with a scrolling body",
+    description: "A height modifier makes overflow behavior easy to verify: the body reaches every item without moving the title or footer actions.",
+    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="release-dialog">Review release</button>
+<dialog class="bs-dialog bs-dialog-height-sm" id="release-dialog" data-bs-dialog aria-labelledby="release-dialog-title">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="release-dialog-title">Release checklist</h4>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss aria-label="Close release checklist">&times;</button>
+  </header>
+  <div class="bs-dialog-body">
+    <ul class="bs-checklist"><li>Accessibility review</li><li>Responsive layout review</li><li>Cross-browser verification</li><li>Migration notes</li><li>Package integrity</li><li>Security scan</li><li>Performance budget</li><li>Rollback plan</li><li>Stakeholder approval</li><li>Production monitoring</li></ul>
+  </div>
+  <footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss>Checklist complete</button></footer>
+</dialog>`,
+    label: "HTML · Scrollable dialog body",
+  });
+  addExample("dialogs", {
+    id: "dialog-sizes",
+    title: "Width and height choices",
+    description: "Choose a named size for common layouts or override the component properties locally. Fullscreen remains inset from the viewport so its boundary stays visible.",
+    preview: `<div class="bs-flex bs-flex-wrap bs-gap-3">
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-small">Small</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-default">Default</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-large">Large + tall</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-full">Fullscreen</button>
+</div>
+<dialog class="bs-dialog bs-dialog-sm" id="dialog-size-small" data-bs-dialog aria-labelledby="dialog-size-small-title"><div class="bs-dialog-body"><h4 id="dialog-size-small-title">Small dialog</h4><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss>Done</button></div></dialog>
+<dialog class="bs-dialog" id="dialog-size-default" data-bs-dialog aria-labelledby="dialog-size-default-title"><div class="bs-dialog-body"><h4 id="dialog-size-default-title">Default dialog</h4><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss>Done</button></div></dialog>
+<dialog class="bs-dialog bs-dialog-lg bs-dialog-height-lg" id="dialog-size-large" data-bs-dialog aria-labelledby="dialog-size-large-title"><div class="bs-dialog-body"><h4 id="dialog-size-large-title">Large, tall dialog</h4></div><footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss>Done</button></footer></dialog>
+<dialog class="bs-dialog bs-dialog-fullscreen" id="dialog-size-full" data-bs-dialog aria-labelledby="dialog-size-full-title"><div class="bs-dialog-body"><h4 id="dialog-size-full-title">Fullscreen dialog</h4></div><footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss>Done</button></footer></dialog>`,
+    label: "HTML · Dialog sizes",
+  });
+  addCodeExample("dialogs", {
+    title: "Control a dialog with JavaScript",
+    description: "The aggregate initializer discovers data-bs-dialog automatically, or import one controller when application code needs an imperative instance.",
+    label: "JavaScript · Imperative control",
+    language: "javascript",
+    source: `import { Dialog } from "@boobstrap/boobstrap/js/dialog";
+
+const element = document.querySelector("#profile-dialog");
+const dialog = Dialog.getOrCreateInstance(element);
+
+dialog.show();
+dialog.hide();
+dialog.toggle();
+
+element.addEventListener("bs:dialog:hide", (event) => {
+  if (document.body.dataset.unsaved === "true") event.preventDefault();
+});`,
+  });
+  addCodeExample("dialogs", {
+    title: "Let Alpine own dialog state",
+    description: "The official provider works with standard Alpine and the strict-CSP build. Bind the trigger, native dialog, and any dismiss controls without attaching the vanilla controller.",
+    label: "HTML · Alpine.js",
+    source: `<div x-data="bsDialog">
+  <button class="bs-btn" type="button" x-bind="trigger" aria-controls="alpine-dialog">Open dialog</button>
+  <dialog class="bs-dialog" id="alpine-dialog" x-ref="dialog" x-bind="panel" aria-labelledby="alpine-dialog-title">
+    <header class="bs-dialog-header">
+      <h2 class="bs-dialog-title" id="alpine-dialog-title">Account details</h2>
+      <button class="bs-dialog-close" type="button" x-bind="dismiss" aria-label="Close account details">&times;</button>
+    </header>
+    <div class="bs-dialog-body">...</div>
+  </dialog>
+</div>`,
+  });
+  addGuidance("dialogs", [
+    { title: "Semantics", body: "Use a native <code>&lt;dialog&gt;</code>, connect a visible title with <code>aria-labelledby</code>, and connect supporting copy with <code>aria-describedby</code>." },
+    { title: "Dismissal", body: "Keep Escape and at least one explicit dismiss control. Disable backdrop dismissal for destructive decisions or forms where an outside click could lose work." },
+    { title: "Scrolling", body: "Place overflow-prone content only in <code>.bs-dialog-body</code>. Header and footer are fixed flex regions, so do not add competing page-level scroll containers." },
+    { title: "State ownership", body: "Use Boobstrap JS or an adapter on one instance, never both. All layers expose the same open/close state and lifecycle events." },
+  ]);
+
+  addExample("drawers", {
+    id: "drawer-end-form",
+    title: "End drawer with a form",
+    description: "The common task-panel pattern opens from the logical end edge, keeps its context and actions visible, and protects unsaved form work from accidental backdrop clicks.",
+    preview: `<button class="bs-btn bs-btn-primary" type="button" data-bs-toggle="dialog" aria-controls="account-drawer">Edit account</button>
+<dialog class="bs-drawer bs-drawer-end" id="account-drawer" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="account-drawer-title" aria-describedby="account-drawer-description">
+  <header class="bs-drawer-header">
+    <h4 class="bs-drawer-title" id="account-drawer-title">Account settings</h4>
+    <p class="bs-drawer-description" id="account-drawer-description">Manage workspace identity and contact details.</p>
+    <button class="bs-drawer-close" type="button" data-bs-dialog-dismiss aria-label="Close account settings">&times;</button>
+  </header>
+  <div class="bs-drawer-body">
+    <form class="bs-stack bs-gap-4"><div class="bs-form-group"><label class="bs-label" for="drawer-company">Company</label><input class="bs-input" id="drawer-company" value="Analytical Engines" /></div><div class="bs-form-group"><label class="bs-label" for="drawer-email">Contact email</label><input class="bs-input" id="drawer-email" type="email" value="ada@example.com" /></div><label class="bs-check"><input class="bs-check-input" type="checkbox" checked /><span class="bs-check-label">Product updates</span><span class="bs-check-description">Receive occasional release notes.</span></label></form>
+  </div>
+  <footer class="bs-drawer-footer"><button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss>Cancel</button><button class="bs-btn bs-btn-primary" type="button">Save</button></footer>
+</dialog>`,
+    label: "HTML · End drawer form",
+  });
+  addExample("drawers", {
+    id: "drawer-start-filters",
+    title: "Start drawer with optional footer omitted",
+    description: "Logical placement follows document direction. Omit the footer when controls apply immediately and the drawer needs no persistent bottom action.",
+    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="filter-drawer">Filter results</button>
+<dialog class="bs-drawer bs-drawer-start bs-drawer-sm" id="filter-drawer" data-bs-dialog aria-labelledby="filter-drawer-title">
+  <header class="bs-drawer-header"><h4 class="bs-drawer-title" id="filter-drawer-title">Filters</h4><button class="bs-drawer-close" type="button" data-bs-dialog-dismiss aria-label="Close filters">&times;</button></header>
+  <div class="bs-drawer-body"><fieldset class="bs-stack bs-gap-3"><legend class="bs-label">Status</legend><label class="bs-check"><input class="bs-check-input" type="checkbox" checked /><span class="bs-check-label">Active</span></label><label class="bs-check"><input class="bs-check-input" type="checkbox" /><span class="bs-check-label">Draft</span></label><label class="bs-check"><input class="bs-check-input" type="checkbox" /><span class="bs-check-label">Archived</span></label></fieldset></div>
+</dialog>`,
+    label: "HTML · Start drawer",
+  });
+  addExample("drawers", {
+    id: "drawer-scroll",
+    title: "Long activity drawer with a fixed footer",
+    description: "Scroll to the final event without losing the title or the persistent footer action. The drawer itself remains exactly viewport height.",
+    preview: `<button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="activity-drawer">View activity</button>
+<dialog class="bs-drawer bs-drawer-end bs-drawer-lg" id="activity-drawer" data-bs-dialog aria-labelledby="activity-drawer-title">
+  <header class="bs-drawer-header"><h4 class="bs-drawer-title" id="activity-drawer-title">Recent activity</h4><p class="bs-drawer-description">Events from the last seven days.</p><button class="bs-drawer-close" type="button" data-bs-dialog-dismiss aria-label="Close recent activity">&times;</button></header>
+  <div class="bs-drawer-body"><ol class="bs-stack bs-gap-4"><li><strong>Deployment completed</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Production · 14 minutes ago</p></li><li><strong>Review approved</strong><p class="bs-text-muted bs-text-sm bs-mb-0">API changes · 38 minutes ago</p></li><li><strong>Member invited</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Design team · 1 hour ago</p></li><li><strong>Backup created</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Workspace · 2 hours ago</p></li><li><strong>Domain verified</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Settings · Yesterday</p></li><li><strong>Token rotated</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Security · Yesterday</p></li><li><strong>Release created</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Version 2.4.0 · Monday</p></li><li><strong>Audit exported</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Compliance · Monday</p></li><li><strong>Environment cloned</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Staging · Sunday</p></li><li><strong>Permission changed</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Members · Sunday</p></li><li><strong>Webhook delivered</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Integrations · Saturday</p></li><li><strong>Report generated</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Analytics · Saturday</p></li><li><strong>Branch protected</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Repository · Friday</p></li><li><strong>Key registered</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Security · Friday</p></li><li><strong>Billing contact updated</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Workspace · Thursday</p></li><li><strong>Export completed</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Data · Thursday</p></li></ol></div>
+  <footer class="bs-drawer-footer"><button class="bs-btn bs-btn-primary" type="button">Open activity log</button></footer>
+</dialog>`,
+    label: "HTML · Scrollable drawer body",
+  });
+  addExample("drawers", {
+    id: "drawer-widths",
+    title: "Named and custom widths",
+    description: "Use compact through extra-large widths for common tasks, or set --bs-drawer-width directly when the panel must align with product content.",
+    preview: `<div class="bs-flex bs-flex-wrap bs-gap-3">
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="drawer-width-small">Small</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="drawer-width-large">Large</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="drawer-width-custom">Custom 32rem</button>
+</div>
+<dialog class="bs-drawer bs-drawer-end bs-drawer-sm" id="drawer-width-small" data-bs-dialog aria-label="Small drawer"><div class="bs-drawer-body"><strong>20rem drawer</strong><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss>Done</button></div></dialog>
+<dialog class="bs-drawer bs-drawer-end bs-drawer-lg" id="drawer-width-large" data-bs-dialog aria-label="Large drawer"><div class="bs-drawer-body"><strong>36rem drawer</strong><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss>Done</button></div></dialog>
+<dialog class="bs-drawer bs-drawer-end" id="drawer-width-custom" data-bs-dialog style="--bs-drawer-width: 32rem" aria-label="Custom width drawer"><div class="bs-drawer-body"><strong>Custom 32rem drawer</strong><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss>Done</button></div></dialog>`,
+    label: "HTML · Drawer widths",
+  });
+  addCodeExample("drawers", {
+    title: "Use the shared JavaScript controller",
+    description: "Drawer placement is CSS, so application code imports the same Dialog class and receives the same lifecycle events as a centered modal.",
+    label: "JavaScript · Drawer control",
+    language: "javascript",
+    source: `import { Dialog } from "@boobstrap/boobstrap/js/dialog";
+
+const drawer = Dialog.getOrCreateInstance(
+  document.querySelector("#account-drawer"),
+);
+
+drawer.show();
+drawer.hide();`,
+  });
+  addCodeExample("drawers", {
+    title: "Control a drawer with Alpine",
+    description: "Use the bsDialog provider and drawer classes together. This stays compatible with Alpine's strict-CSP build.",
+    label: "HTML · Alpine.js drawer",
+    source: `<div x-data="bsDialog">
+  <button class="bs-btn" type="button" x-bind="trigger" aria-controls="alpine-drawer">Open drawer</button>
+  <dialog class="bs-drawer bs-drawer-end" id="alpine-drawer" x-ref="dialog" x-bind="panel" aria-labelledby="alpine-drawer-title">
+    <header class="bs-drawer-header">
+      <h2 class="bs-drawer-title" id="alpine-drawer-title">Account</h2>
+      <button class="bs-drawer-close" type="button" x-bind="dismiss" aria-label="Close account drawer">&times;</button>
+    </header>
+    <div class="bs-drawer-body">...</div>
+  </dialog>
+</div>`,
+  });
+  addGuidance("drawers", [
+    { title: "Placement", body: "Use exactly one logical placement class. Start and end automatically follow left-to-right and right-to-left document direction." },
+    { title: "Width", body: "Choose a named width by task complexity, not screen size alone. The framework caps every drawer safely on narrow viewports." },
+    { title: "Scrolling", body: "Keep the header and footer as direct regions and put long lists or forms in <code>.bs-drawer-body</code>, which owns vertical scrolling." },
+    { title: "Dismissal", body: "Backdrop dismissal is useful for exploratory panels. Disable it for edits that may contain unsaved work, and always retain Escape plus an explicit control." },
+  ]);
+
   addExample("tables", {
     id: "table-comparison",
     title: "Semantic headers, body, and footer",
