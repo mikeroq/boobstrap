@@ -1,0 +1,56 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Tables</span><span aria-hidden="true">/</span><span>Table fundamentals</span></nav><div class="docs-kicker">Tables</div><h1>Table fundamentals</h1><p class="bs-lead">Build semantic tables with captions, scoped headers, footers, responsive overflow, sticky headers, sorting controls, and empty states.</p><div class="docs-component-meta" aria-label="Table fundamentals documentation summary"><span class="bs-badge bs-text-xs"><strong>Tables</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="table-fundamentals">
+            <div class="docs-kicker">Tables</div>
+            <h2>Table fundamentals</h2>
+            <p>Build tables from meaningful native structure, contain wide datasets in accessible overflow regions, and expose data states without weakening the row-and-column relationships.</p>
+            <h3 aria-level="2" id="table-fundamentals-sticky-and-sortable-columns">Sticky and sortable columns</h3><p>Constrain a long result set with the sticky-header wrapper. Sorting remains application behavior: update the rows and move aria-sort to the active column after each sort.</p><div class="docs-demo" id="table-sticky-sortable" data-component-example="table-sticky-sortable"><div class="bs-table-responsive bs-table-sticky-header" role="region" tabindex="0" aria-label="Deployment history" style="--bs-table-max-height: 16rem;">
+  <table class="bs-table bs-table-hover">
+    <caption>Deployment history</caption>
+    <thead><tr><th scope="col" aria-sort="descending"><button class="bs-table-sort" type="button">Deployed</button></th><th scope="col"><button class="bs-table-sort" type="button">Environment</button></th><th scope="col">Commit</th><th scope="col">Result</th></tr></thead>
+    <tbody>
+      <tr><td>Aug 11, 14:32</td><td>Production</td><td><code class="bs-code-inline">a81f0d2</code></td><td>Passed</td></tr>
+      <tr><td>Aug 11, 12:08</td><td>Preview</td><td><code class="bs-code-inline">7c29be1</code></td><td>Passed</td></tr>
+      <tr><td>Aug 10, 18:41</td><td>Production</td><td><code class="bs-code-inline">663d420</code></td><td>Rolled back</td></tr>
+      <tr><td>Aug 10, 16:05</td><td>Preview</td><td><code class="bs-code-inline">45fb118</code></td><td>Passed</td></tr>
+      <tr><td>Aug 9, 09:27</td><td>Production</td><td><code class="bs-code-inline">31ad902</code></td><td>Passed</td></tr>
+    </tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Sticky sortable table</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Sticky sortable table code example"><code class="">&lt;div class="bs-table-responsive bs-table-sticky-header" role="region" tabindex="0" aria-label="Deployment history" style="--bs-table-max-height: 16rem;"&gt;
+  &lt;table class="bs-table bs-table-hover"&gt;
+    &lt;caption&gt;Deployment history&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col" aria-sort="descending"&gt;&lt;button class="bs-table-sort" type="button"&gt;Deployed&lt;/button&gt;&lt;/th&gt;&lt;th scope="col"&gt;&lt;button class="bs-table-sort" type="button"&gt;Environment&lt;/button&gt;&lt;/th&gt;&lt;th scope="col"&gt;Commit&lt;/th&gt;&lt;th scope="col"&gt;Result&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;td&gt;Aug 11, 14:32&lt;/td&gt;&lt;td&gt;Production&lt;/td&gt;&lt;td&gt;&lt;code class="bs-code-inline"&gt;a81f0d2&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Passed&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Aug 11, 12:08&lt;/td&gt;&lt;td&gt;Preview&lt;/td&gt;&lt;td&gt;&lt;code class="bs-code-inline"&gt;7c29be1&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Passed&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Aug 10, 18:41&lt;/td&gt;&lt;td&gt;Production&lt;/td&gt;&lt;td&gt;&lt;code class="bs-code-inline"&gt;663d420&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Rolled back&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Aug 10, 16:05&lt;/td&gt;&lt;td&gt;Preview&lt;/td&gt;&lt;td&gt;&lt;code class="bs-code-inline"&gt;45fb118&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Passed&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;td&gt;Aug 9, 09:27&lt;/td&gt;&lt;td&gt;Production&lt;/td&gt;&lt;td&gt;&lt;code class="bs-code-inline"&gt;31ad902&lt;/code&gt;&lt;/td&gt;&lt;td&gt;Passed&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="table-fundamentals-empty-dataset">Empty dataset</h3><p>Keep the table structure and column context while data is empty. The message should explain the absence; place any recovery action in or immediately after the cell.</p><div class="docs-demo" id="table-empty-state" data-component-example="table-empty-state"><div class="bs-table-responsive" role="region" tabindex="0" aria-label="Filtered invoices">
+  <table class="bs-table">
+    <caption>Invoices matching the current filters</caption>
+    <thead><tr><th scope="col">Invoice</th><th scope="col">Customer</th><th scope="col">Due date</th><th class="bs-table-cell-numeric" scope="col">Amount</th></tr></thead>
+    <tbody><tr><td class="bs-table-empty" colspan="4">No invoices match these filters.</td></tr></tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Empty table state</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Empty table state code example"><code class="">&lt;div class="bs-table-responsive" role="region" tabindex="0" aria-label="Filtered invoices"&gt;
+  &lt;table class="bs-table"&gt;
+    &lt;caption&gt;Invoices matching the current filters&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Invoice&lt;/th&gt;&lt;th scope="col"&gt;Customer&lt;/th&gt;&lt;th scope="col"&gt;Due date&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Amount&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;&lt;tr&gt;&lt;td class="bs-table-empty" colspan="4"&gt;No invoices match these filters.&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="table fundamentals guidance"><div><h3>Overflow</h3><p>Give scrollable wrappers <code class="bs-code-inline">role="region"</code>, <code class="bs-code-inline">tabindex="0"</code>, and an accessible name. This lets keyboard users reach columns beyond the viewport.</p></div><div><h3>Sorting</h3><p>Put sorting on real buttons, move <code class="bs-code-inline">aria-sort</code> to the active header, and update it only after the visible rows have been reordered.</p></div><div><h3>Empty states</h3><p>Keep the caption and headers in place, then span one explanatory <code class="bs-code-inline">.bs-table-empty</code> cell across the body so users retain column context.</p></div></div><div class="docs-api">
+              <h3 id="table-fundamentals-structure-and-behavior-api">Structure and behavior API</h3>
+              <p>Sorting remains application behavior. Use a real button in the header and keep <code class="bs-code-inline">aria-sort</code> synchronized with the rendered row order.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table fundamentals class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table fundamentals classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table</code></th><td>Styles native captions, headers, body rows, cells, and footers.</td><td>The table.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-responsive</code></th><td>Contains horizontal or vertical overflow.</td><td>A wrapper with a role, keyboard target, and accessible name.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-sticky-header</code></th><td>Constrains the scroll region and keeps column headers visible. Override <code class="bs-code-inline">--bs-table-max-height</code> as needed.</td><td>The responsive wrapper.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-cell-numeric</code></th><td>Aligns tabular numbers to the right.</td><td>Matching numeric header and data cells.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-cell-actions</code></th><td>Right-aligns and keeps row actions on one line.</td><td>Matching action header and data cells.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-sort</code></th><td>Styles a real sort button and reflects its parent header’s sort state.</td><td>A button inside a column header.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-empty</code></th><td>Creates a centered empty-state cell with generous vertical space.</td><td>One cell spanning every column.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

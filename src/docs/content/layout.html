@@ -1,0 +1,57 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Foundations</span><span aria-hidden="true">/</span><span>Layout and grid</span></nav><div class="docs-kicker">Foundations</div><h1>Layout and grid</h1><p class="bs-lead">Build responsive page structures with containers, the 12-column grid, flex utilities, and gaps.</p><div class="docs-component-meta" aria-label="Layout and grid documentation summary"><span class="bs-badge bs-text-xs"><strong>Foundations</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="layout">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Layout &amp; grid</h2>
+            <p><code class="bs-code-inline">.bs-container</code> centers content with a fluid gutter and a <code class="bs-code-inline">90rem</code> ceiling. Add a size modifier for narrower content. <code class="bs-code-inline">.bs-section</code> provides fluid vertical rhythm.</p>
+            <div class="docs-table-wrap bs-table-responsive">
+              <table class="docs-table bs-table">
+                <thead><tr><th>Class</th><th>Maximum width</th></tr></thead>
+                <tbody>
+                  <tr><td><code class="bs-code-inline">.bs-container</code></td><td><code class="bs-code-inline">--bs-container-2xl</code> · 90rem</td></tr>
+                  <tr><td><code class="bs-code-inline">.bs-container-sm</code></td><td>40rem</td></tr>
+                  <tr><td><code class="bs-code-inline">.bs-container-md</code></td><td>48rem</td></tr>
+                  <tr><td><code class="bs-code-inline">.bs-container-lg</code></td><td>64rem</td></tr>
+                  <tr><td><code class="bs-code-inline">.bs-container-xl</code></td><td>76rem</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h3 aria-level="2" id="layout-12-column-grid">12-column grid</h3>
+            <p>Use <code class="bs-code-inline">.bs-grid</code> or its alias <code class="bs-code-inline">.bs-row</code>, then assign column spans. Unprefixed columns work at every width; <code class="bs-code-inline">md</code> begins at 48rem and <code class="bs-code-inline">lg</code> at 64rem.</p>
+            <div class="docs-demo grid-demo">
+              <div class="bs-grid bs-gap-3">
+                <div class="bs-col-12 bs-col-md-6 bs-col-lg-4">12 / md 6 / lg 4</div>
+                <div class="bs-col-12 bs-col-md-6 bs-col-lg-4">12 / md 6 / lg 4</div>
+                <div class="bs-col-12 bs-col-lg-4">12 / lg 4</div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy="&lt;div class=&quot;bs-grid bs-gap-4&quot;&gt;
+  &lt;div class=&quot;bs-col-12 bs-col-md-6 bs-col-lg-4&quot;&gt;...&lt;/div&gt;
+  &lt;div class=&quot;bs-col-12 bs-col-md-6 bs-col-lg-8&quot;&gt;...&lt;/div&gt;
+&lt;/div&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML code example"><code class="">&lt;div class="bs-grid bs-gap-4"&gt;
+  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-4"&gt;...&lt;/div&gt;
+  &lt;div class="bs-col-12 bs-col-md-6 bs-col-lg-8"&gt;...&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+          <h3 aria-level="2" id="layout-flex-alignment-and-wrapping">Flex alignment and wrapping</h3><p>Compose a responsive action row that keeps its label and controls aligned and wraps safely when space runs out.</p><div class="docs-demo" id="layout-flex-toolbar" data-component-example="layout-flex-toolbar"><div class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4">
+  <div><strong>Project settings</strong><p class="bs-text-muted bs-text-sm bs-mb-0">Last saved two minutes ago</p></div>
+  <div class="bs-flex bs-flex-wrap bs-gap-2">
+    <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Cancel</button>
+    <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Save changes</button>
+  </div>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Wrapping action row</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Wrapping action row code example"><code class="">&lt;div class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-4"&gt;
+  &lt;div&gt;&lt;strong&gt;Project settings&lt;/strong&gt;&lt;p class="bs-text-muted bs-text-sm bs-mb-0"&gt;Last saved two minutes ago&lt;/p&gt;&lt;/div&gt;
+  &lt;div class="bs-flex bs-flex-wrap bs-gap-2"&gt;
+    &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button"&gt;Cancel&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="layout-responsive-display">Responsive display</h3><p>The md display utilities apply from 48rem upward. Keep essential content available at every size.</p><div class="docs-demo" id="layout-responsive-display" data-component-example="layout-responsive-display"><div class="bs-stack bs-gap-3">
+  <div class="docs-utility-sample bs-block bs-md-hidden">Visible below the md breakpoint</div>
+  <div class="docs-utility-sample bs-hidden bs-md-block">Visible from the md breakpoint</div>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive visibility</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Responsive visibility code example"><code class="">&lt;div class="bs-stack bs-gap-3"&gt;
+  &lt;div class="docs-utility-sample bs-block bs-md-hidden"&gt;Visible below the md breakpoint&lt;/div&gt;
+  &lt;div class="docs-utility-sample bs-hidden bs-md-block"&gt;Visible from the md breakpoint&lt;/div&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="layout guidance"><div><h3>Container</h3><p>Use one container to establish page gutters and a readable maximum width. Nesting containers usually creates uneven alignment.</p></div><div><h3>Grid</h3><p>Start with <code class="bs-code-inline">.bs-col-12</code>, then add only the breakpoint spans that materially change the composition.</p></div><div><h3>Source order</h3><p>Keep the DOM in its meaningful mobile reading order. Layout utilities should not create a visual order that disagrees with reading or focus order.</p></div></div></section>

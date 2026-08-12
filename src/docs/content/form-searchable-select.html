@@ -1,0 +1,181 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Searchable select</span></nav><div class="docs-kicker">Forms</div><h1>Searchable select</h1><p class="bs-lead">Implement the searchable combobox with complete Boobstrap JS, Alpine.js, and React examples.</p><div class="docs-component-meta" aria-label="Searchable select documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="form-searchable-select">
+            <div class="docs-kicker">Forms</div>
+            <h2>Searchable select</h2>
+            <p>The combobox filters human-readable labels while synchronizing the selected machine value into a hidden form input.</p>
+
+            <h3 aria-level="2" id="form-searchable-select-boobstrap-javascript">Boobstrap JavaScript</h3>
+            <div class="docs-demo" data-component-example="form-combobox">
+              <form data-docs-form="">
+                <div class="bs-form-group">
+                  <label class="bs-label" for="combobox-role">Team role</label>
+                  <div class="bs-combobox" data-bs-combobox="" data-bs-state="closed">
+                    <input class="bs-combobox-input" id="combobox-role" data-bs-combobox-input="" placeholder="Search roles" role="combobox" aria-autocomplete="list" aria-controls="bs-combobox-listbox-1" autocomplete="off" aria-expanded="false">
+                    <button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle="" aria-label="Toggle roles" aria-expanded="false"></button>
+                    <input type="hidden" name="team_role" data-bs-combobox-value="">
+                    <div class="bs-combobox-listbox" data-bs-combobox-listbox="" hidden="" id="bs-combobox-listbox-1" role="listbox" data-bs-state="closed">
+                      <div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="designer" id="bs-combobox-listbox-1-option-1" role="option" data-bs-state="idle">Designer</div>
+                      <div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="engineer" id="bs-combobox-listbox-1-option-2" role="option" data-bs-state="idle">Engineer</div>
+                      <div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="product-manager" id="bs-combobox-listbox-1-option-3" role="option" data-bs-state="idle">Product manager</div>
+                      <div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="founder" id="bs-combobox-listbox-1-option-4" role="option" data-bs-state="idle">Founder</div>
+                      <div class="bs-combobox-empty" data-bs-combobox-empty="" hidden="">No roles found</div>
+                    </div>
+                  </div>
+                  <span class="bs-form-text">Type to filter, then use Arrow keys and Enter to select.</span>
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete Boobstrap JS markup</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete Boobstrap JS markup code example"><code class="">&lt;form&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="team-role"&gt;Team role&lt;/label&gt;
+    &lt;div class="bs-combobox" data-bs-combobox&gt;
+      &lt;input
+        class="bs-combobox-input"
+        id="team-role"
+        data-bs-combobox-input
+        placeholder="Search roles"
+      /&gt;
+      &lt;button
+        class="bs-combobox-toggle"
+        type="button"
+        data-bs-combobox-toggle
+        aria-label="Toggle roles"
+      &gt;&lt;/button&gt;
+      &lt;input type="hidden" name="team_role" data-bs-combobox-value /&gt;
+      &lt;div class="bs-combobox-listbox" data-bs-combobox-listbox hidden&gt;
+        &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="designer"&gt;
+          Designer
+        &lt;/div&gt;
+        &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="engineer"&gt;
+          Engineer
+        &lt;/div&gt;
+        &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="product-manager"&gt;
+          Product manager
+        &lt;/div&gt;
+        &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="founder"&gt;
+          Founder
+        &lt;/div&gt;
+        &lt;div class="bs-combobox-empty" data-bs-combobox-empty hidden&gt;
+          No roles found
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize only comboboxes</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialize only comboboxes code example"><code class="">import "@boobstrap/boobstrap";
+import { initComboboxes } from "@boobstrap/boobstrap/js/combobox";
+
+const comboboxes = initComboboxes(document);
+
+// Call this from your router or view cleanup hook.
+export function destroyComboboxes() {
+  comboboxes.forEach((combobox) =&gt; combobox.destroy());
+}</code></pre></div>
+
+            <h3 aria-level="2" id="form-searchable-select-alpine-js">Alpine.js</h3>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Alpine setup</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Alpine setup code example"><code class="">import "@boobstrap/boobstrap";
+import Alpine from "alpinejs";
+import boobstrap from "@boobstrap/alpine";
+
+Alpine.plugin(boobstrap);
+Alpine.start();</code></pre></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete Alpine combobox</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete Alpine combobox code example"><code class="">&lt;form&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="alpine-role"&gt;Team role&lt;/label&gt;
+    &lt;div class="bs-combobox" x-data="bsCombobox" x-bind="root"&gt;
+      &lt;input
+        class="bs-combobox-input"
+        id="alpine-role"
+        x-bind="input"
+        data-bs-combobox-input
+        placeholder="Search roles"
+      /&gt;
+      &lt;button
+        class="bs-combobox-toggle"
+        x-bind="toggleButton"
+        data-bs-combobox-toggle
+        aria-label="Toggle roles"
+      &gt;&lt;/button&gt;
+      &lt;input type="hidden" name="team_role" data-bs-combobox-value /&gt;
+      &lt;div
+        class="bs-combobox-listbox"
+        x-bind="listbox"
+        data-bs-combobox-listbox
+        hidden
+      &gt;
+        &lt;div
+          class="bs-combobox-option"
+          x-bind="option"
+          data-bs-combobox-option
+          data-bs-value="designer"
+        &gt;Designer&lt;/div&gt;
+        &lt;div
+          class="bs-combobox-option"
+          x-bind="option"
+          data-bs-combobox-option
+          data-bs-value="engineer"
+        &gt;Engineer&lt;/div&gt;
+        &lt;div
+          class="bs-combobox-option"
+          x-bind="option"
+          data-bs-combobox-option
+          data-bs-value="product-manager"
+        &gt;Product manager&lt;/div&gt;
+        &lt;div class="bs-combobox-empty" data-bs-combobox-empty hidden&gt;
+          No roles found
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-searchable-select-react">React</h3>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Complete React component</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · Complete React component code example"><code class="">import "@boobstrap/boobstrap";
+import { useCombobox } from "@boobstrap/react";
+
+const roles = [
+  { value: "designer", label: "Designer" },
+  { value: "engineer", label: "Engineer" },
+  { value: "product-manager", label: "Product manager" },
+  { value: "founder", label: "Founder" },
+];
+
+export function TeamRoleSelect() {
+  const role = useCombobox({ options: roles });
+
+  return (
+    &lt;div className="bs-form-group"&gt;
+      &lt;label className="bs-label" htmlFor="react-role"&gt;Team role&lt;/label&gt;
+      &lt;div className="bs-combobox" {...role.getRootProps()}&gt;
+        &lt;input
+          className="bs-combobox-input"
+          id="react-role"
+          placeholder="Search roles"
+          {...role.getInputProps()}
+        /&gt;
+        &lt;button
+          className="bs-combobox-toggle"
+          {...role.getToggleProps({ "aria-label": "Toggle roles" })}
+        /&gt;
+        &lt;input type="hidden" name="team_role" value={role.value} readOnly /&gt;
+        &lt;div className="bs-combobox-listbox" {...role.getListboxProps()}&gt;
+          {role.filteredOptions.map((option, index) =&gt; (
+            &lt;div
+              className="bs-combobox-option"
+              key={option.value}
+              {...role.getOptionProps(option, index)}
+            &gt;
+              {option.label}
+            &lt;/div&gt;
+          ))}
+          {role.filteredOptions.length === 0 &amp;&amp; (
+            &lt;div className="bs-combobox-empty"&gt;No roles found&lt;/div&gt;
+          )}
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose one owner:</strong> initialize the plain JavaScript controller, Alpine adapter, or React hook—not more than one on the same combobox.</span></div>
+          </section>

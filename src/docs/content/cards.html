@@ -1,0 +1,151 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Cards</span></nav><div class="docs-kicker">Components</div><h1>Cards</h1><p class="bs-lead">Compose related content and actions with optional headers, structured content, and flexible footers.</p><div class="docs-component-meta" aria-label="Cards documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="cards">
+            <div class="docs-kicker">Components</div>
+            <h2>Cards</h2>
+            <p>Cards establish a contained surface with composable header, content, and footer regions. Header and footer are optional; add title, description, and action slots only when the card needs them.</p>
+            <div class="docs-demo cards-demo bs-grid bs-gap-4" data-component-example="cards">
+              <article class="bs-card bs-col-12 bs-col-md-6">
+                <header class="bs-card-header">
+                  <h3 class="bs-card-title">Deployment</h3>
+                  <p class="bs-card-description">Production status for the current release.</p>
+                  <span class="bs-badge bs-badge-primary bs-card-action">Healthy</span>
+                </header>
+                <div class="bs-card-content">
+                  <strong>Version 2.4.0 is live</strong>
+                  <p class="bs-card-text bs-mb-0">All regions are responding normally.</p>
+                </div>
+              </article>
+              <article class="bs-card bs-card-raised bs-col-12 bs-col-md-6">
+                <header class="bs-card-header">
+                  <h3 class="bs-card-title">Team access</h3>
+                  <p class="bs-card-description">Manage members and workspace permissions.</p>
+                  <button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button">Settings</button>
+                </header>
+                <div class="bs-card-content">
+                  <strong>12 active members</strong>
+                  <p class="bs-card-text bs-mb-0">Two invitations are waiting for a response.</p>
+                </div>
+                <footer class="bs-card-footer">
+                  <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Invite member</button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">View members</button>
+                </footer>
+              </article>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="cards" data-copy="&lt;article class=&quot;bs-card bs-card-raised&quot; aria-labelledby=&quot;team-card-title&quot;&gt;
+  &lt;header class=&quot;bs-card-header&quot;&gt;
+    &lt;h3 class=&quot;bs-card-title&quot; id=&quot;team-card-title&quot;&gt;Team access&lt;/h3&gt;
+    &lt;p class=&quot;bs-card-description&quot;&gt;Manage members and permissions.&lt;/p&gt;
+    &lt;button class=&quot;bs-btn bs-btn-ghost bs-btn-sm bs-card-action&quot; type=&quot;button&quot;&gt;Settings&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class=&quot;bs-card-content&quot;&gt;
+    &lt;strong&gt;12 active members&lt;/strong&gt;
+    &lt;p class=&quot;bs-card-text bs-mb-0&quot;&gt;Two invitations are pending.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;footer class=&quot;bs-card-footer&quot;&gt;
+    &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-sm&quot; type=&quot;button&quot;&gt;Invite member&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete example code example"><code class="">&lt;article class="bs-card bs-card-raised" aria-labelledby="team-card-title"&gt;
+  &lt;header class="bs-card-header"&gt;
+    &lt;h3 class="bs-card-title" id="team-card-title"&gt;Team access&lt;/h3&gt;
+    &lt;p class="bs-card-description"&gt;Manage members and permissions.&lt;/p&gt;
+    &lt;button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button"&gt;Settings&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-card-content"&gt;
+    &lt;strong&gt;12 active members&lt;/strong&gt;
+    &lt;p class="bs-card-text bs-mb-0"&gt;Two invitations are pending.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;footer class="bs-card-footer"&gt;
+    &lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Invite member&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre></div>
+            <div class="docs-example-guidance" aria-label="Card guidance">
+              <div><h3>Structure</h3><p>Use <code class="bs-code-inline">.bs-card-header</code>, <code class="bs-code-inline">.bs-card-content</code>, and <code class="bs-code-inline">.bs-card-footer</code> in that order. Header and footer are optional; content can stand alone.</p></div>
+              <div><h3>Header slots</h3><p>Place <code class="bs-code-inline">.bs-card-title</code>, <code class="bs-code-inline">.bs-card-description</code>, and an optional <code class="bs-code-inline">.bs-card-action</code> directly in the header. The action aligns independently without disconnecting the description from its heading.</p></div>
+              <div><h3>Compatibility</h3><p><code class="bs-code-inline">.bs-card-body</code> remains a supported padded content region, and <code class="bs-code-inline">.bs-card-text</code> remains available for muted copy. Prefer the explicit content and description names in new structured cards.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code class="bs-code-inline">&lt;article&gt;</code> only for standalone content, connect its heading with <code class="bs-code-inline">aria-labelledby</code>, and keep every action a native link or button. Never nest extra controls inside <code class="bs-code-inline">.bs-card-link</code>.</p></div>
+            </div>
+            <h3 aria-level="2" id="cards-content-only-card">Content-only card</h3><p>Header and footer are optional. Use the content region by itself when the card needs one uninterrupted block.</p><div class="docs-demo" id="card-basic" data-component-example="card-basic"><article class="bs-card" aria-labelledby="basic-card-title">
+  <div class="bs-card-content">
+    <h4 class="bs-card-title" id="basic-card-title">Release notes</h4>
+    <p class="bs-card-text bs-mb-0">A concise summary belongs inside the same content surface.</p>
+  </div>
+</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Content-only card</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Content-only card code example"><code class="">&lt;article class="bs-card" aria-labelledby="basic-card-title"&gt;
+  &lt;div class="bs-card-content"&gt;
+    &lt;h4 class="bs-card-title" id="basic-card-title"&gt;Release notes&lt;/h4&gt;
+    &lt;p class="bs-card-text bs-mb-0"&gt;A concise summary belongs inside the same content surface.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div><h3 aria-level="2" id="cards-complete-structured-card">Complete structured card</h3><p>Compose an optional header and footer around the content region. The header aligns its title and description with an independent action slot; the footer wraps related actions naturally.</p><div class="docs-demo" id="card-action" data-component-example="card-action"><article class="bs-card bs-card-raised" aria-labelledby="workspace-card-title">
+  <header class="bs-card-header">
+    <h4 class="bs-card-title" id="workspace-card-title">Workspace usage</h4>
+    <p class="bs-card-description">Review current storage and manage plan capacity.</p>
+    <button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button">Manage</button>
+  </header>
+  <div class="bs-card-content">
+    <strong>68 GB of 100 GB</strong>
+    <p class="bs-card-text bs-mb-0">Storage resets on the first day of each month.</p>
+  </div>
+  <footer class="bs-card-footer">
+    <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Upgrade plan</button>
+    <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">View usage</button>
+  </footer>
+</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Header, content, and footer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Header, content, and footer code example"><code class="">&lt;article class="bs-card bs-card-raised" aria-labelledby="workspace-card-title"&gt;
+  &lt;header class="bs-card-header"&gt;
+    &lt;h4 class="bs-card-title" id="workspace-card-title"&gt;Workspace usage&lt;/h4&gt;
+    &lt;p class="bs-card-description"&gt;Review current storage and manage plan capacity.&lt;/p&gt;
+    &lt;button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button"&gt;Manage&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-card-content"&gt;
+    &lt;strong&gt;68 GB of 100 GB&lt;/strong&gt;
+    &lt;p class="bs-card-text bs-mb-0"&gt;Storage resets on the first day of each month.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;footer class="bs-card-footer"&gt;
+    &lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Upgrade plan&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button"&gt;View usage&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre></div><h3 aria-level="2" id="cards-header-and-content-without-a-footer">Header and content without a footer</h3><p>Omit the footer when the card has no bottom actions. Header actions remain real controls and descriptions stay associated with the card heading.</p><div class="docs-demo" id="card-header-content" data-component-example="card-header-content"><article class="bs-card bs-card-subtle" aria-labelledby="deployment-card-title">
+  <header class="bs-card-header">
+    <h4 class="bs-card-title" id="deployment-card-title">Production deployment</h4>
+    <p class="bs-card-description">Deployed from main 14 minutes ago.</p>
+    <span class="bs-badge bs-badge-primary bs-card-action">Healthy</span>
+  </header>
+  <div class="bs-card-content">
+    <p class="bs-card-text bs-mb-0">All regions are responding normally and the error rate is below the alert threshold.</p>
+  </div>
+</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Header and content</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Header and content code example"><code class="">&lt;article class="bs-card bs-card-subtle" aria-labelledby="deployment-card-title"&gt;
+  &lt;header class="bs-card-header"&gt;
+    &lt;h4 class="bs-card-title" id="deployment-card-title"&gt;Production deployment&lt;/h4&gt;
+    &lt;p class="bs-card-description"&gt;Deployed from main 14 minutes ago.&lt;/p&gt;
+    &lt;span class="bs-badge bs-badge-primary bs-card-action"&gt;Healthy&lt;/span&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-card-content"&gt;
+    &lt;p class="bs-card-text bs-mb-0"&gt;All regions are responding normally and the error rate is below the alert threshold.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div><h3 aria-level="2" id="cards-compact-linked-card">Compact linked card</h3><p>Use the link modifier when the entire card has one destination. The subtle and compact modifiers create a quiet, dense navigation surface.</p><div class="docs-demo" id="card-compact-link" data-component-example="card-compact-link"><a class="bs-card bs-card-subtle bs-card-compact bs-card-link" href="/docs/components/tables">
+  <span class="bs-text-xs bs-text-muted">Component guide</span>
+  <strong>Responsive tables</strong>
+  <span class="bs-text-sm bs-text-muted">Present structured data without widening the page.</span>
+</a></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Compact linked card</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Compact linked card code example"><code class="">&lt;a class="bs-card bs-card-subtle bs-card-compact bs-card-link" href="/docs/components/tables"&gt;
+  &lt;span class="bs-text-xs bs-text-muted"&gt;Component guide&lt;/span&gt;
+  &lt;strong&gt;Responsive tables&lt;/strong&gt;
+  &lt;span class="bs-text-sm bs-text-muted"&gt;Present structured data without widening the page.&lt;/span&gt;
+&lt;/a&gt;</code></pre></div><div class="docs-api">
+              <h3 id="cards-card-api">Card API</h3>
+              <p>Cards use one surface with explicit, composable regions. The header and footer are optional; every card can contain only <code class="bs-code-inline">.bs-card-content</code> when no additional structure is needed.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-card</code></td><td>Surface, border, radius, clipping, and default elevation.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-header</code></td><td>Optional responsive grid for the title, description, and action slots.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-title</code></td><td>Heading slot within a card header or content region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-description</code></td><td>Muted supporting copy associated with the header title.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-action</code></td><td>Optional header action aligned independently at the inline end.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-content</code></td><td>Primary padded content region; works with or without a header and footer.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-footer</code></td><td>Optional wrapping row for related actions, metadata, or status.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-raised</code></td><td>Stronger shadow for elevated or featured content.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-subtle</code></td><td>Quieter surface and border treatment for secondary or nested content.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-compact</code></td><td>Reduces inset spacing consistently across simple or structured card regions.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-link</code></td><td>Makes a single-destination anchor behave and focus like an interactive card surface.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-body</code></td><td>Backward-compatible padded content region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-text</code></td><td>Backward-compatible muted supporting-copy treatment.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

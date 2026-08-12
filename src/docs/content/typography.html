@@ -1,0 +1,43 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Foundations</span><span aria-hidden="true">/</span><span>Typography</span></nav><div class="docs-kicker">Foundations</div><h1>Typography</h1><p class="bs-lead">Use Boobstrap’s type scale, display text, lead copy, and semantic text utilities.</p><div class="docs-component-meta" aria-label="Typography documentation summary"><span class="bs-badge bs-text-xs"><strong>Foundations</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="typography">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Typography</h2>
+            <p>Headings and body copy receive sensible defaults. Use <code class="bs-code-inline">.bs-display</code> for oversized hero text and <code class="bs-code-inline">.bs-lead</code> for introductory copy.</p>
+            <div class="docs-demo typography-demo">
+              <p class="bs-display bs-text-gradient bs-mb-6">Boobstrap</p>
+              <h1>Heading one</h1>
+              <h2>Heading two</h2>
+              <h3>Heading three</h3>
+              <p class="bs-lead bs-mb-4">Lead copy introduces a section with a larger, muted treatment.</p>
+              <p class="bs-mb-0">Body copy inherits the framework text color and a comfortable <code class="bs-code-inline">1.6</code> line height.</p>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy="&lt;h1 class=&quot;bs-display bs-text-gradient&quot;&gt;Build boldly.&lt;/h1&gt;
+&lt;p class=&quot;bs-lead&quot;&gt;Thoughtful defaults, ready to ship.&lt;/p&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML code example"><code class="">&lt;h1 class="bs-display bs-text-gradient"&gt;Build boldly.&lt;/h1&gt;
+&lt;p class="bs-lead"&gt;Thoughtful defaults, ready to ship.&lt;/p&gt;</code></pre>
+            </div>
+          <h3 aria-level="2" id="typography-text-size-utilities">Text size utilities</h3><p>Use the named type scale when text size is presentational and keep the semantic element appropriate to the content hierarchy.</p><div class="docs-demo" id="typography-scale" data-component-example="typography-scale"><div class="bs-stack bs-gap-3">
+  <p class="bs-text-xs bs-mb-0">Extra-small supporting text</p>
+  <p class="bs-text-sm bs-mb-0">Small metadata text</p>
+  <p class="bs-text-md bs-mb-0">Default body text</p>
+  <p class="bs-text-xl bs-mb-0">Large introductory text</p>
+  <p class="bs-text-3xl bs-font-bold bs-mb-0">Section statement</p>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Type scale</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Type scale code example"><code class="">&lt;div class="bs-stack bs-gap-3"&gt;
+  &lt;p class="bs-text-xs bs-mb-0"&gt;Extra-small supporting text&lt;/p&gt;
+  &lt;p class="bs-text-sm bs-mb-0"&gt;Small metadata text&lt;/p&gt;
+  &lt;p class="bs-text-md bs-mb-0"&gt;Default body text&lt;/p&gt;
+  &lt;p class="bs-text-xl bs-mb-0"&gt;Large introductory text&lt;/p&gt;
+  &lt;p class="bs-text-3xl bs-font-bold bs-mb-0"&gt;Section statement&lt;/p&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="typography-color-weight-and-alignment">Color, weight, and alignment</h3><p>Combine single-purpose utilities for emphasis without changing the underlying semantic element.</p><div class="docs-demo" id="typography-treatment" data-component-example="typography-treatment"><div class="bs-stack bs-gap-3">
+  <p class="bs-text-primary bs-font-semibold bs-mb-0">Primary emphasized text</p>
+  <p class="bs-text-muted bs-mb-0">Muted supporting copy</p>
+  <p class="bs-text-subtle bs-italic bs-mb-0">Subtle editorial note</p>
+  <p class="bs-text-right bs-font-bold bs-mb-0">Right-aligned total: $128</p>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text treatments</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Text treatments code example"><code class="">&lt;div class="bs-stack bs-gap-3"&gt;
+  &lt;p class="bs-text-primary bs-font-semibold bs-mb-0"&gt;Primary emphasized text&lt;/p&gt;
+  &lt;p class="bs-text-muted bs-mb-0"&gt;Muted supporting copy&lt;/p&gt;
+  &lt;p class="bs-text-subtle bs-italic bs-mb-0"&gt;Subtle editorial note&lt;/p&gt;
+  &lt;p class="bs-text-right bs-font-bold bs-mb-0"&gt;Right-aligned total: $128&lt;/p&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="typography guidance"><div><h3>Hierarchy</h3><p>Choose heading levels from the document outline. Use size classes to change appearance without skipping semantic levels.</p></div><div><h3>Readability</h3><p>Reserve <code class="bs-code-inline">.bs-display</code> for short hero copy. Body and lead text keep more generous line height for sustained reading.</p></div><div><h3>Emphasis</h3><p>Weight, color, and italic utilities are presentational. Do not rely on color alone to convey a warning, error, or required state.</p></div></div></section>

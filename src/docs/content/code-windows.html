@@ -1,0 +1,67 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Code windows</span></nav><div class="docs-kicker">Components</div><h1>Code windows</h1><p class="bs-lead">Present terminal commands and source snippets in polished, readable code windows.</p><div class="docs-component-meta" aria-label="Code windows documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="code-windows">
+            <div class="docs-kicker">Components</div>
+            <h2>Code windows</h2>
+            <p>The code-window family provides a complete presentation shell and optional syntax-color helpers. Boobstrap leaves parsing to your application; these docs integrate Highlight.js while the framework token classes remain available for server-rendered or hand-authored markup.</p>
+            <div class="bs-code-window">
+              <div class="bs-code-header"><span>example.html</span><button class="bs-code-action" type="button" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot;&gt;Ship it&lt;/button&gt;">Copy</button></div>
+              <pre class="bs-code-body bs-m-0"><code data-language="xml" class="">&lt;!-- Build boldly --&gt;
+&lt;button class="bs-btn bs-btn-primary"&gt;
+  Ship it
+&lt;/button&gt;
+const ready = true;</code></pre>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Composition:</strong> use <code class="bs-code-inline">.bs-code-window</code> as the shell, <code class="bs-code-inline">.bs-code-header</code> for a label and copy action, optional <code class="bs-code-inline">.bs-code-tabs</code> for implementation variants, and <code class="bs-code-inline">.bs-code-body</code> on the <code class="bs-code-inline">&lt;pre&gt;</code>.</span></div>
+            <h3 aria-level="2" id="code-windows-terminal-window">Terminal window</h3><p>Use the header for a short context label and an optional action, then keep command output inside the scrollable code body.</p><div class="docs-demo" id="code-window-terminal" data-component-example="code-window-terminal"><div class="bs-code-window">
+  <div class="bs-code-header"><span>Terminal</span><button class="bs-code-action" type="button">Copy</button></div>
+  <pre class="bs-code-body bs-m-0"><code class="">npm install @boobstrap/boobstrap
+npm run build</code></pre>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Terminal window</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Terminal window code example"><code class="">&lt;div class="bs-code-window"&gt;
+  &lt;div class="bs-code-header"&gt;&lt;span&gt;Terminal&lt;/span&gt;&lt;button class="bs-code-action" type="button"&gt;Copy&lt;/button&gt;&lt;/div&gt;
+  &lt;pre class="bs-code-body bs-m-0"&gt;&lt;code&gt;npm install @boobstrap/boobstrap
+npm run build&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="code-windows-tabbed-source-window">Tabbed source window</h3><p>Use code tabs and panels for equivalent implementations or languages. The tab controller keeps selection, focus, and panel visibility synchronized.</p><div class="docs-demo" id="code-window-source" data-component-example="code-window-source"><div class="bs-code-window">
+  <div class="bs-code-header"><span>Install</span><button class="bs-code-action" type="button">Copy</button></div>
+  <div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs="">
+    <button class="bs-code-tab" id="code-npm-tab" type="button" role="tab" aria-controls="code-npm-panel" aria-selected="true" tabindex="0" data-bs-state="active">npm</button>
+    <button class="bs-code-tab" id="code-pnpm-tab" type="button" role="tab" aria-controls="code-pnpm-panel" aria-selected="false" tabindex="-1" data-bs-state="inactive">pnpm</button>
+  </div>
+  <div class="bs-code-panel" id="code-npm-panel" role="tabpanel" aria-labelledby="code-npm-tab" data-bs-state="active"><pre class="bs-code-body"><code class="">npm install @boobstrap/boobstrap</code></pre></div>
+  <div class="bs-code-panel" id="code-pnpm-panel" role="tabpanel" aria-labelledby="code-pnpm-tab" hidden="" data-bs-state="inactive"><pre class="bs-code-body"><code class="">pnpm add @boobstrap/boobstrap</code></pre></div>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Tabbed code window</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Tabbed code window code example"><code class="">&lt;div class="bs-code-window"&gt;
+  &lt;div class="bs-code-header"&gt;
+    &lt;span&gt;Install&lt;/span&gt;
+    &lt;button class="bs-code-action" type="button"&gt;Copy&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs&gt;
+    &lt;button class="bs-code-tab" id="npm-tab" type="button" role="tab"
+      aria-controls="npm-panel" aria-selected="true"&gt;npm&lt;/button&gt;
+    &lt;button class="bs-code-tab" id="pnpm-tab" type="button" role="tab"
+      aria-controls="pnpm-panel"&gt;pnpm&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-code-panel" id="npm-panel" role="tabpanel" aria-labelledby="npm-tab"&gt;
+    &lt;pre class="bs-code-body"&gt;&lt;code&gt;npm install @boobstrap/boobstrap&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-code-panel" id="pnpm-panel" role="tabpanel" aria-labelledby="pnpm-tab" hidden&gt;
+    &lt;pre class="bs-code-body"&gt;&lt;code&gt;pnpm add @boobstrap/boobstrap&lt;/code&gt;&lt;/pre&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="code windows guidance"><div><h3>Structure</h3><p>Keep the header, optional tabs, panels, and code bodies inside <code class="bs-code-inline">.bs-code-window</code>. A <code class="bs-code-inline">&lt;pre&gt;&lt;code&gt;</code> pair preserves whitespace and code semantics.</p></div><div><h3>Overflow</h3><p>Long lines scroll inside <code class="bs-code-inline">.bs-code-body</code>; avoid wrapping commands when line breaks would change what users copy.</p></div><div><h3>Highlighting</h3><p>The included token classes cover static snippets. Dynamic highlighters can render their own spans without changing the window structure.</p></div></div><div class="docs-api">
+              <h3 id="code-windows-code-window-api">Code window API</h3>
+              <p>Syntax classes color tokens you mark up. Pair them with a parser such as Highlight.js when your application needs automatic highlighting.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-code-window</code></td><td>Outer shell, border, background, and clipping.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-header</code></td><td>Optional filename, language label, or control row.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-action</code></td><td>Compact action button for copying or opening code.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-body</code></td><td>Scrollable, formatted code content.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-inline</code></td><td>Inline code inside prose, tables, and labels.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-tabs</code></td><td>Tablist layout for implementation, package-manager, or language variants.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-tab</code></td><td>Individual variant tab with selected, hover, and keyboard-focus states.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-panel</code></td><td>Variant panel that hides cleanly with the native <code class="bs-code-inline">hidden</code> attribute and resets nested code-body margins.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-tag</code></td><td>HTML tags and selectors.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-attribute</code></td><td>Attributes and property names.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-string</code></td><td>Quoted values and literals.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-comment</code></td><td>Comments and secondary annotations.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

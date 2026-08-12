@@ -1,0 +1,413 @@
+<header class="docs-component-hero">
+            <nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb">
+              <a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Buttons</span>
+            </nav>
+            <div class="docs-kicker">Components</div>
+            <h1>Buttons</h1>
+            <p class="bs-lead">Use buttons to trigger actions, navigate to a destination, group related controls, or communicate asynchronous work. Boobstrap supplies the visual system in CSS and adds behavior only where state management is required.</p>
+            <div class="docs-component-meta" aria-label="Button component summary">
+              <span class="bs-badge bs-text-xs"><strong>CSS</strong> required</span>
+              <span class="bs-badge bs-text-xs"><strong>JavaScript</strong> optional</span>
+              <span class="bs-badge bs-text-xs"><strong>21</strong> public classes</span>
+            </div>
+          </header>
+
+<section class="docs-section" id="overview">
+            <div class="docs-kicker">Start here</div>
+            <h2>Overview</h2>
+            <p>Every button begins with <code class="bs-code-inline">.bs-btn</code> and one hierarchy modifier. Use a native <code class="bs-code-inline">&lt;button&gt;</code> for an action and an <code class="bs-code-inline">&lt;a href&gt;</code> when activating the control navigates somewhere.</p>
+            <div class="docs-demo" data-component-example="button-overview">
+              <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+                <a class="bs-btn bs-btn-secondary" href="/docs" data-link-button-example="">Read the docs</a>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Semantic elements</span><button type="button" data-copy-example="button-overview" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+
+&lt;a class=&quot;bs-btn bs-btn-secondary&quot; href=&quot;/docs&quot;&gt;Read the docs&lt;/a&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Semantic elements code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+
+&lt;a class="bs-btn bs-btn-secondary" href="/docs"&gt;Read the docs&lt;/a&gt;</code></pre>
+            </div>
+            <h3>Links styled as buttons</h3>
+            <p>Add <code class="bs-code-inline">.bs-btn</code> and any visual modifier to an anchor with a real <code class="bs-code-inline">href</code>. It receives the same sizing, focus treatment, spacing, and variants as a button while preserving native link behavior such as opening in a new tab or copying the destination.</p>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Choose by behavior, not appearance.</strong><p>Do not use a link as a button just to get button styling. The element determines keyboard, form, and navigation behavior; the classes determine presentation.</p></span></div>
+          </section>
+
+<section class="docs-section" id="variants">
+            <div class="docs-kicker">Hierarchy</div>
+            <h2>Variants</h2>
+            <p>Choose one emphasis level based on the action’s importance within its current region. Most screens need one primary action, a few supporting actions, and quiet ghost actions.</p>
+            <div class="docs-demo" data-component-example="button-variants">
+              <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                <button class="bs-btn bs-btn-primary" type="button">Primary</button>
+                <button class="bs-btn bs-btn-secondary" type="button">Secondary</button>
+                <button class="bs-btn bs-btn-ghost" type="button">Ghost</button>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Variants</span><button type="button" data-copy-example="button-variants" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Primary&lt;/button&gt;
+&lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot;&gt;Secondary&lt;/button&gt;
+&lt;button class=&quot;bs-btn bs-btn-ghost&quot; type=&quot;button&quot;&gt;Ghost&lt;/button&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Variants code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Primary&lt;/button&gt;
+&lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Secondary&lt;/button&gt;
+&lt;button class="bs-btn bs-btn-ghost" type="button"&gt;Ghost&lt;/button&gt;</code></pre>
+            </div>
+            <div class="docs-usage-grid">
+              <article class="bs-card bs-card-subtle bs-card-body"><span>Primary</span><h3>Commit the main action</h3><p>Use once per focused region for actions such as Save, Continue, or Create.</p></article>
+              <article class="bs-card bs-card-subtle bs-card-body"><span>Secondary</span><h3>Offer an alternative</h3><p>Use for supporting actions that should remain easy to discover.</p></article>
+              <article class="bs-card bs-card-subtle bs-card-body"><span>Ghost</span><h3>Keep it quiet</h3><p>Use for tertiary actions, compact navigation, and low-risk dismissal.</p></article>
+            </div>
+          </section>
+
+<section class="docs-section" id="sizes">
+            <div class="docs-kicker">Scale &amp; layout</div>
+            <h2>Sizes and width</h2>
+            <p>The default size is appropriate for most interfaces. Use small buttons in dense toolbars, large buttons for a prominent call to action, and block buttons when the container should define the width.</p>
+            <div class="docs-demo docs-button-demo" data-component-example="button-sizes">
+              <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Small</button>
+                <button class="bs-btn bs-btn-primary" type="button">Default</button>
+                <button class="bs-btn bs-btn-primary bs-btn-lg" type="button">Large</button>
+              </div>
+              <button class="bs-btn bs-btn-secondary bs-btn-block" type="button">Full-width action</button>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Sizes and block</span><button type="button" data-copy-example="button-sizes" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary bs-btn-sm&quot; type=&quot;button&quot;&gt;Small&lt;/button&gt;
+&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Default&lt;/button&gt;
+&lt;button class=&quot;bs-btn bs-btn-primary bs-btn-lg&quot; type=&quot;button&quot;&gt;Large&lt;/button&gt;
+
+&lt;button class=&quot;bs-btn bs-btn-secondary bs-btn-block&quot; type=&quot;button&quot;&gt;Full-width action&lt;/button&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Sizes and block code example"><code class="">&lt;button class="bs-btn bs-btn-primary bs-btn-sm" type="button"&gt;Small&lt;/button&gt;
+&lt;button class="bs-btn bs-btn-primary" type="button"&gt;Default&lt;/button&gt;
+&lt;button class="bs-btn bs-btn-primary bs-btn-lg" type="button"&gt;Large&lt;/button&gt;
+
+&lt;button class="bs-btn bs-btn-secondary bs-btn-block" type="button"&gt;Full-width action&lt;/button&gt;</code></pre>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Touch targets:</strong> the default button is 2.75rem high and the large button is 3.35rem high. Be careful when using small buttons for primary mobile actions or controls that need generous touch space.</span></div>
+          </section>
+
+<section class="docs-section" id="icons">
+            <div class="docs-kicker">Visual cues</div>
+            <h2>Icons</h2>
+            <p>Place an inline SVG before or after the label; <code class="bs-code-inline">.bs-btn</code> handles spacing. Add <code class="bs-code-inline">.bs-btn-icon</code> only when the icon is the complete visible label.</p>
+            <div class="docs-demo" data-component-example="button-icons">
+              <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+                <button class="bs-btn bs-btn-primary" type="button">
+                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                  Create
+                </button>
+                <button class="bs-btn bs-btn-secondary" type="button">
+                  Export
+                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0-12 4 4m-4-4L8 7M5 13v6h14v-6"></path></svg>
+                </button>
+                <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites">
+                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+                </button>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Inline SVG</span><button type="button" data-copy-example="button-icons" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;
+  &lt;svg class=&quot;bs-icon&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;path d=&quot;M12 5v14M5 12h14&quot; /&gt;
+  &lt;/svg&gt;
+  Create
+&lt;/button&gt;
+
+&lt;button class=&quot;bs-btn bs-btn-secondary bs-btn-icon&quot; type=&quot;button&quot; aria-label=&quot;Add to favorites&quot;&gt;
+  &lt;svg class=&quot;bs-icon&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;path d=&quot;M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z&quot; /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Inline SVG code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"&gt;
+  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
+    &lt;path d="M12 5v14M5 12h14" /&gt;
+  &lt;/svg&gt;
+  Create
+&lt;/button&gt;
+
+&lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button"
+  aria-label="Add to favorites"&gt;
+  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
+    &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;
+  &lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+            </div>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Icons stay optional.</strong><p>Boobstrap does not ship an icon library. Use dependency-free SVG markup, Lucide, or your preferred icon set. Decorative icons need <code class="bs-code-inline">aria-hidden="true"</code>; icon-only buttons need an accessible name.</p></span></div>
+          </section>
+
+<section class="docs-section" id="states">
+            <div class="docs-kicker">Interaction feedback</div>
+            <h2>States</h2>
+            <p>Hover, active, and focus-visible feedback are automatic. Use semantic attributes for persistent pressed and disabled states so assistive technology receives the same information as sighted users.</p>
+            <div class="docs-demo docs-button-state-grid" data-component-example="button-states">
+              <div><span>Default</span><button class="bs-btn bs-btn-secondary" type="button">Ready</button></div>
+              <div><span>Pressed</span><button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true">Pinned</button></div>
+              <div><span>Active style</span><button class="bs-btn bs-btn-primary bs-btn-active" type="button">Current</button></div>
+              <div><span>Disabled</span><button class="bs-btn bs-btn-primary" type="button" disabled="">Unavailable</button></div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Persistent states</span><button type="button" data-copy-example="button-states" data-copy="&lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;Pinned&lt;/button&gt;
+
+&lt;button class=&quot;bs-btn bs-btn-primary bs-btn-active&quot; type=&quot;button&quot;&gt;Current&lt;/button&gt;
+
+&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot; disabled&gt;Unavailable&lt;/button&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Persistent states code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Pinned&lt;/button&gt;
+
+&lt;button class="bs-btn bs-btn-primary bs-btn-active" type="button"&gt;Current&lt;/button&gt;
+
+&lt;button class="bs-btn bs-btn-primary" type="button" disabled&gt;Unavailable&lt;/button&gt;</code></pre>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Disabled links need application logic.</strong> If a link must appear unavailable, remove its <code class="bs-code-inline">href</code>, add <code class="bs-code-inline">aria-disabled="true"</code> and <code class="bs-code-inline">.bs-btn-disabled</code>, and prevent activation in your application. Prefer a real button whenever the control performs an action.</span></div>
+          </section>
+
+<section class="docs-section" id="groups">
+            <div class="docs-kicker">Related controls</div>
+            <h2>Button groups and toolbars</h2>
+            <p>A group joins adjacent related buttons into one visual control. A toolbar lays out one or more groups and wraps them when space is constrained.</p>
+            <div class="docs-demo" data-component-example="button-groups">
+              <div class="bs-btn-toolbar" role="toolbar" aria-label="Editor controls">
+                <div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment">
+                  <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true">Left</button>
+                  <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false">Center</button>
+                  <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false">Right</button>
+                </div>
+                <div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="History">
+                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Undo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7-5 5 5 5M4 12h9a6 6 0 0 1 6 6"></path></svg></button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Redo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5m5-5h-9a6 6 0 0 0-6 6"></path></svg></button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Labeled toolbar</span><button type="button" data-copy-example="button-groups" data-copy="&lt;div class=&quot;bs-btn-toolbar&quot; role=&quot;toolbar&quot; aria-label=&quot;Editor controls&quot;&gt;
+  &lt;div class=&quot;bs-btn-group bs-btn-group-sm&quot; role=&quot;group&quot; aria-label=&quot;Text alignment&quot;&gt;
+    &lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;true&quot;&gt;Left&lt;/button&gt;
+    &lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Center&lt;/button&gt;
+    &lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; aria-pressed=&quot;false&quot;&gt;Right&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Labeled toolbar code example"><code class="">&lt;div class="bs-btn-toolbar" role="toolbar" aria-label="Editor controls"&gt;
+  &lt;div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="Text alignment"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="true"&gt;Left&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Center&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false"&gt;Right&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance" aria-label="Button group guidance">
+              <div><h3>Structure</h3><p>Keep each <code class="bs-code-inline">.bs-btn-group</code> focused on one family of actions. Place multiple groups inside <code class="bs-code-inline">.bs-btn-toolbar</code>.</p></div>
+              <div><h3>Sizing</h3><p>Apply <code class="bs-code-inline">.bs-btn-group-sm</code> or <code class="bs-code-inline">.bs-btn-group-lg</code> to the group so every child shares one size.</p></div>
+              <div><h3>Accessibility</h3><p>Add <code class="bs-code-inline">role="group"</code> or <code class="bs-code-inline">role="toolbar"</code> and an accessible label that describes the controls as a set.</p></div>
+            </div>
+          </section>
+
+<section class="docs-section" id="split-dropdowns">
+            <div class="docs-kicker">Compound actions</div>
+            <h2>Split dropdown buttons</h2>
+            <p>Keep the main action on the first button and attach a compact trigger for related alternatives. Split dropdown behavior is available through Boobstrap JS, Alpine, or React.</p>
+            <div class="docs-demo interaction-demo" data-component-example="button-split-dropdown">
+              <div class="bs-dropdown bs-btn-group" data-bs-dropdown="" data-bs-state="closed">
+                <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+                <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="button-docs-save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="button-docs-save-menu" aria-label="More save options" aria-haspopup="menu" aria-expanded="false"></button>
+                <div class="bs-dropdown-menu bs-dropdown-menu-end" id="button-docs-save-menu" role="menu" aria-labelledby="button-docs-save-toggle" data-bs-dropdown-menu="" hidden="" data-bs-state="closed">
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save and publish</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save as draft</button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-split-dropdown" data-copy="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; data-bs-dropdown&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
+  &lt;div class=&quot;bs-dropdown-menu bs-dropdown-menu-end&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu hidden&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save as draft&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Boobstrap JS code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+    id="save-toggle" type="button" data-bs-toggle="dropdown"
+    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu bs-dropdown-menu-end" id="save-menu"
+    role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Keyboard behavior:</strong> Arrow Down opens the menu and focuses its first enabled item. Arrow keys, Home, and End move through items; Escape closes the menu and restores focus to the trigger.</span></div>
+          </section>
+
+<section class="docs-section" id="loading">
+            <div class="docs-kicker">Asynchronous actions</div>
+            <h2>Loading buttons</h2>
+            <p>The loading controller prevents repeat activation, applies busy and disabled state, replaces the accessible name, and restores the button after your application calls <code class="bs-code-inline">stop()</code>.</p>
+            <div class="docs-demo" data-component-example="button-loading-detail">
+              <button class="bs-btn bs-btn-primary" type="button" data-bs-button="" data-bs-loading="" data-bs-loading-label="Saving changes" data-demo-loading="" data-bs-state="idle">
+                <span class="bs-btn-label">Save changes</span>
+                <span class="bs-spinner bs-btn-spinner" aria-hidden="true"></span>
+              </button>
+            </div>
+            <div class="docs-code-block bs-code-window" data-code-variants="">
+              <div class="docs-code-label bs-code-header"><span data-code-label="">HTML · Boobstrap JS</span><button type="button" data-copy-example="button-loading-detail" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot; data-bs-button data-bs-loading data-bs-loading-label=&quot;Saving changes&quot;&gt;
+  &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
+  &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;script type=&quot;module&quot;&gt;
+  import { Button } from &quot;@boobstrap/boobstrap/js/button&quot;;
+  const element = document.querySelector(&quot;[data-bs-button]&quot;);
+  const save = Button.getOrCreateInstance(element);
+  element.addEventListener(&quot;click&quot;, async () =&gt; {
+    await persistChanges();
+    save.stop();
+  });
+&lt;/script&gt;" class="bs-code-action" data-copy-variant="js">Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Loading button implementation">
+                <button id="button-detail-js-tab" type="button" role="tab" aria-selected="true" aria-controls="button-detail-js-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
+                <button id="button-detail-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-alpine-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
+                <button id="button-detail-react-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-react-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+              </div>
+              <div id="button-detail-js-panel" role="tabpanel" aria-labelledby="button-detail-js-tab" data-code-variant-panel="js" data-copy-source="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot; data-bs-button data-bs-loading data-bs-loading-label=&quot;Saving changes&quot;&gt;
+  &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
+  &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;script type=&quot;module&quot;&gt;
+  import { Button } from &quot;@boobstrap/boobstrap/js/button&quot;;
+  const element = document.querySelector(&quot;[data-bs-button]&quot;);
+  const save = Button.getOrCreateInstance(element);
+  element.addEventListener(&quot;click&quot;, async () =&gt; {
+    await persistChanges();
+    save.stop();
+  });
+&lt;/script&gt;">
+                <pre><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
+  data-bs-button data-bs-loading data-bs-loading-label="Saving changes"&gt;
+  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
+  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;
+
+&lt;script type="module"&gt;
+  import { Button } from "@boobstrap/boobstrap/js/button";
+  const element = document.querySelector("[data-bs-button]");
+  const save = Button.getOrCreateInstance(element);
+  element.addEventListener("click", async () =&gt; {
+    await persistChanges();
+    save.stop();
+  });
+&lt;/script&gt;</code></pre>
+              </div>
+              <div id="button-detail-alpine-panel" role="tabpanel" aria-labelledby="button-detail-alpine-tab" data-code-variant-panel="alpine" data-copy-source="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot; x-data=&quot;bsButton&quot; x-bind=&quot;root&quot; data-bs-loading data-bs-loading-label=&quot;Saving changes&quot; @click=&quot;persistChanges().finally(() =&gt; stop())&quot;&gt;
+  &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
+  &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+&lt;/button&gt;" hidden="">
+                <pre><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
+  x-data="bsButton" x-bind="root" data-bs-loading
+  data-bs-loading-label="Saving changes"
+  @click="persistChanges().finally(() =&gt; stop())"&gt;
+  &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
+  &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+&lt;/button&gt;</code></pre>
+              </div>
+              <div id="button-detail-react-panel" role="tabpanel" aria-labelledby="button-detail-react-tab" data-code-variant-panel="react" data-copy-source="function SaveButton() {
+  const save = useButton({ loadingLabel: &quot;Saving changes&quot; });
+  const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
+
+  return (
+    &lt;button className=&quot;bs-btn bs-btn-primary&quot; {...save.getButtonProps({ onClick: persist })}&gt;
+      &lt;span className=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
+      &lt;span className=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot; /&gt;
+    &lt;/button&gt;
+  );
+}" hidden="">
+                <pre><code class="">function SaveButton() {
+  const save = useButton({ loadingLabel: "Saving changes" });
+  const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
+
+  return (
+    &lt;button className="bs-btn bs-btn-primary"
+      {...save.getButtonProps({ onClick: persist })}&gt;
+      &lt;span className="bs-btn-label"&gt;Save changes&lt;/span&gt;
+      &lt;span className="bs-spinner bs-btn-spinner" aria-hidden="true" /&gt;
+    &lt;/button&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Your application owns completion.</strong><p>Boobstrap starts and presents the loading state. Always call <code class="bs-code-inline">stop()</code> in a <code class="bs-code-inline">finally</code> path so failures and cancellations restore the control.</p></span></div>
+          </section>
+
+<section class="docs-section" id="api">
+            <div class="docs-kicker">Reference</div>
+            <h2>Class and JavaScript API</h2>
+            <p>Button modifiers compose across hierarchy, size, shape, layout, and state. JavaScript is required only for managed loading state and dropdown behavior.</p>
+            <h3>CSS classes</h3>
+            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">.bs-btn</code></td><td>Base alignment, spacing, typography, focus, and interaction styles.</td><td>Required on every button.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>Prefer one per focused region.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-secondary</code></td><td>Bordered supporting action.</td><td>For alternatives and secondary actions.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-ghost</code></td><td>Transparent, low-emphasis action.</td><td>For tertiary actions and quiet navigation.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-sm</code></td><td>Compact button sizing.</td><td>2.25rem minimum height.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-lg</code></td><td>Large button sizing.</td><td>3.35rem minimum height.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-icon</code></td><td>Square, size-aware icon-only button.</td><td>Requires an accessible name.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-block</code></td><td>Stretches to the container width.</td><td>Useful in narrow forms and panels.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-toolbar</code></td><td>Wraps and spaces groups.</td><td>Add <code class="bs-code-inline">role="toolbar"</code> and a label.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-group</code></td><td>Joins adjacent buttons.</td><td>Add <code class="bs-code-inline">role="group"</code> and a label.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-group-sm</code></td><td>Sizes all group children small.</td><td>Apply to the group.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-group-lg</code></td><td>Sizes all group children large.</td><td>Apply to the group.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-split</code></td><td>Compact attached trigger width.</td><td>Combine with a group and dropdown.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-caret</code></td><td>Draws a CSS-only disclosure caret.</td><td>No icon dependency required.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-active</code></td><td>Persistent active appearance.</td><td>Use <code class="bs-code-inline">aria-pressed</code> for toggles.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-disabled</code></td><td>Disabled appearance for non-button elements.</td><td>Does not prevent events by itself.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-label</code></td><td>Preserves the label width and accessible text during loading.</td><td>Wrap the visible loading-button label.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-spinner</code></td><td>Current-color spinner.</td><td>Use size modifiers as needed.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-spinner-sm</code> / <code class="bs-code-inline">.bs-spinner-lg</code></td><td>Compact or large spinner sizing.</td><td>Can be used inside or outside buttons.</td></tr>
+              <tr><td><code class="bs-code-inline">.bs-btn-spinner</code></td><td>Centers a spinner during button loading state.</td><td>Pair with <code class="bs-code-inline">.bs-spinner</code>.</td></tr>
+            </tbody></table></div>
+
+            <h3>Button controller</h3>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>JavaScript · Component import</span><button type="button" data-copy="import { Button } from &quot;@boobstrap/boobstrap/js/button&quot;;
+
+const save = Button.getOrCreateInstance(document.querySelector(&quot;[data-bs-button]&quot;));
+save.start();
+save.stop();
+save.toggle();
+save.destroy();" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Component import code example"><code class="">import { Button } from "@boobstrap/boobstrap/js/button";
+
+const save = Button.getOrCreateInstance(document.querySelector("[data-bs-button]"));
+save.start();
+save.stop();
+save.toggle();
+save.destroy();</code></pre>
+            </div>
+            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Method or event</th><th>Contract</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">start(options?)</code></td><td>Enters loading state and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
+              <tr><td><code class="bs-code-inline">stop(options?)</code></td><td>Restores the original attributes and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
+              <tr><td><code class="bs-code-inline">toggle(options?)</code></td><td>Starts or stops based on the current state.</td></tr>
+              <tr><td><code class="bs-code-inline">destroy()</code></td><td>Removes listeners, restores loading state, and releases the instance.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:button:start</code> / <code class="bs-code-inline">bs:button:stop</code></td><td>Cancelable before-events. Calling <code class="bs-code-inline">preventDefault()</code> prevents the transition.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:button:started</code> / <code class="bs-code-inline">bs:button:stopped</code></td><td>Bubbling events emitted after a completed transition.</td></tr>
+            </tbody></table></div>
+          </section>
+
+<section class="docs-section" id="accessibility">
+            <div class="docs-kicker">Ship responsibly</div>
+            <h2>Accessibility</h2>
+            <p>Boobstrap supplies focus-visible treatment and state styling. Your markup and application logic still own meaning, names, state, and correct keyboard behavior.</p>
+            <ul class="docs-checklist bs-checklist">
+              <li>Use <code class="bs-code-inline">&lt;button type="button"&gt;</code> for actions and <code class="bs-code-inline">&lt;a href&gt;</code> for navigation.</li>
+              <li>Set an explicit button <code class="bs-code-inline">type</code>; the default inside a form is <code class="bs-code-inline">submit</code>.</li>
+              <li>Give icon-only buttons and split triggers a concise accessible name with <code class="bs-code-inline">aria-label</code> or visible text.</li>
+              <li>Mark decorative SVG icons <code class="bs-code-inline">aria-hidden="true"</code> so they do not duplicate the label.</li>
+              <li>Use <code class="bs-code-inline">aria-pressed="true|false"</code> for toggle buttons and keep their accessible label stable.</li>
+              <li>Prefer the native <code class="bs-code-inline">disabled</code> attribute. Remember that <code class="bs-code-inline">aria-disabled</code> communicates state but does not block activation.</li>
+              <li>Label button groups and toolbars so their relationship is announced to assistive technology.</li>
+              <li>Keep loading labels specific—“Saving changes” is more useful than “Loading”—and restore the control on every completion path.</li>
+            </ul>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Do not remove focus indication.</strong><p>The built-in focus ring is intentional. If your theme overrides it, provide an equally visible replacement in both light and dark themes.</p></span></div>
+          </section>

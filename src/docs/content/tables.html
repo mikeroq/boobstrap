@@ -1,0 +1,46 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Tables</span></nav><div class="docs-kicker">Components</div><h1>Tables</h1><p class="bs-lead">Choose a focused guide for semantic table structure, responsive behavior, visual styles, pagination, or DataTables.net.</p><div class="docs-component-meta" aria-label="Tables documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="tables">
+            <div class="docs-kicker">Components</div>
+            <h2>Tables</h2>
+            <p>Use tables for genuinely tabular relationships: information users compare by row and column. Start with native table structure, then choose a focused guide for responsive behavior, visual styles, pagination, or the DataTables.net adapter.</p>
+            <h3 aria-level="2" id="tables-semantic-headers-body-and-footer">Semantic headers, body, and footer</h3><p>A caption names the dataset, scoped headers expose its row-and-column relationships, and the footer summarizes values without pretending to be another record.</p><div class="docs-demo" id="table-comparison" data-component-example="table-comparison"><div class="bs-table-responsive" role="region" tabindex="0" aria-label="Workspace usage by plan">
+  <table class="bs-table">
+    <caption>Workspace usage by plan</caption>
+    <thead><tr><th scope="col">Plan</th><th class="bs-table-cell-numeric" scope="col">Workspaces</th><th class="bs-table-cell-numeric" scope="col">Members</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Starter</th><td class="bs-table-cell-numeric">18</td><td class="bs-table-cell-numeric">42</td></tr>
+      <tr><th scope="row">Team</th><td class="bs-table-cell-numeric">12</td><td class="bs-table-cell-numeric">86</td></tr>
+    </tbody>
+    <tfoot><tr><th scope="row">Total</th><td class="bs-table-cell-numeric">30</td><td class="bs-table-cell-numeric">128</td></tr></tfoot>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Table anatomy</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Table anatomy code example"><code class="">&lt;div class="bs-table-responsive" role="region" tabindex="0" aria-label="Workspace usage by plan"&gt;
+  &lt;table class="bs-table"&gt;
+    &lt;caption&gt;Workspace usage by plan&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Plan&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Workspaces&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Members&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Starter&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;18&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;42&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Team&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;12&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;86&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+    &lt;tfoot&gt;&lt;tr&gt;&lt;th scope="row"&gt;Total&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;30&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;128&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-table-topics">
+              <h3>Choose a table topic</h3>
+              <div class="docs-topic-grid">
+                <a href="/docs/components/tables/fundamentals" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Table fundamentals</strong><span>Captions, headers, footers, responsive overflow, sticky columns, sorting, and empty states</span></a>
+                <a href="/docs/components/tables/styles" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Table styles</strong><span>Striped and hoverable records, bordered compact matrices, and borderless comparisons</span></a>
+                <a href="/docs/components/tables/pagination" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Pagination</strong><span>Current and disabled states, responsive page ranges, and compact or large controls</span></a>
+                <a href="/docs/components/tables/datatables" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>DataTables.net</strong><span>A complete DataTables 3 installation, initialization, and fully functional live example</span></a>
+              </div>
+              <div class="docs-note bs-alert bs-alert-primary"><span><strong>Start with semantics:</strong> use a table only when both row and column relationships matter. Boobstrap styles native markup; your application or data library continues to own sorting, pagination, filtering, and loading.</span></div>
+            </div>
+            <div class="docs-example-guidance" aria-label="tables guidance"><div><h3>Structure</h3><p>Use <code class="bs-code-inline">&lt;caption&gt;</code>, <code class="bs-code-inline">&lt;thead&gt;</code>, <code class="bs-code-inline">&lt;tbody&gt;</code>, and <code class="bs-code-inline">&lt;tfoot&gt;</code> for their real purposes. Add <code class="bs-code-inline">scope="col"</code> or <code class="bs-code-inline">scope="row"</code> to unambiguous headers.</p></div><div><h3>Choose a guide</h3><p>Start with fundamentals, add only the visual modifiers your dataset needs, then choose application-owned pagination or the DataTables.net integration.</p></div><div><h3>Behavior ownership</h3><p>Boobstrap provides presentation. Your application or data library owns row ordering, filters, loading, current-page state, and result announcements.</p></div></div><div class="docs-api">
+              <h3 id="tables-core-table-api">Core table API</h3>
+              <p>Every guide builds on these three primitives. The child references document the optional classes alongside the examples they affect.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Core table class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Core table classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table</code></th><td>Provides readable cells, semantic header groups, row dividers, captions, and footer treatment.</td><td>The native <code class="bs-code-inline">&lt;table&gt;</code>.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-responsive</code></th><td>Contains horizontal overflow without widening the page.</td><td>A named, keyboard-focusable wrapper around the table.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-cell-numeric</code></th><td>Right-aligns tabular numbers and prevents unwanted wrapping.</td><td>Matching header and data cells.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

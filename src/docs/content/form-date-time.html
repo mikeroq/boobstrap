@@ -1,0 +1,40 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Date and time inputs</span></nav><div class="docs-kicker">Forms</div><h1>Date and time inputs</h1><p class="bs-lead">Use styled native date, time, datetime-local, month, and week pickers without JavaScript.</p><div class="docs-component-meta" aria-label="Date and time inputs documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="form-date-time">
+            <div class="docs-kicker">Forms</div>
+            <h2>Date and time inputs</h2>
+            <p>Apply <code class="bs-code-inline">.bs-input</code> to native date and time types to retain platform pickers, locale formatting, validation, and mobile keyboards.</p>
+
+            <h3 aria-level="2" id="form-date-time-date-input">Date input</h3>
+            <div class="docs-demo" data-component-example="form-date">
+              <form data-docs-form="">
+                <div class="bs-form-group">
+                  <label class="bs-label" for="picker-date">Start date</label>
+                  <input class="bs-input" id="picker-date" name="start_date" type="date" min="2026-01-01">
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Date input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Date input code example"><code class="">&lt;label class="bs-label" for="start-date"&gt;Start date&lt;/label&gt;
+&lt;input class="bs-input" id="start-date" name="start_date" type="date" min="2026-01-01" /&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-date-time-time-input">Time input</h3>
+            <div class="docs-demo" data-component-example="form-time"><div class="bs-form-group"><label class="bs-label" for="picker-time">Start time</label><input class="bs-input" id="picker-time" name="start_time" type="time" step="900"></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Time input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Time input code example"><code class="">&lt;label class="bs-label" for="start-time"&gt;Start time&lt;/label&gt;
+&lt;input class="bs-input" id="start-time" name="start_time" type="time" step="900" /&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-date-time-local-date-and-time">Local date and time</h3>
+            <div class="docs-demo" data-component-example="form-datetime"><div class="bs-form-group"><label class="bs-label" for="picker-datetime">Publish at</label><input class="bs-input" id="picker-datetime" name="publish_at" type="datetime-local"></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Datetime-local input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Datetime-local input code example"><code class="">&lt;label class="bs-label" for="publish-at"&gt;Publish at&lt;/label&gt;
+&lt;input class="bs-input" id="publish-at" name="publish_at" type="datetime-local" /&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-date-time-month-input">Month input</h3>
+            <div class="docs-demo" data-component-example="form-month"><div class="bs-form-group"><label class="bs-label" for="picker-month">Billing month</label><input class="bs-input" id="picker-month" name="billing_month" type="month"></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Month input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Month input code example"><code class="">&lt;label class="bs-label" for="billing-month"&gt;Billing month&lt;/label&gt;
+&lt;input class="bs-input" id="billing-month" name="billing_month" type="month" /&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-date-time-week-input">Week input</h3>
+            <div class="docs-demo" data-component-example="form-week"><div class="bs-form-group"><label class="bs-label" for="picker-week">Delivery week</label><input class="bs-input" id="picker-week" name="delivery_week" type="week"></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Week input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Week input code example"><code class="">&lt;label class="bs-label" for="delivery-week"&gt;Delivery week&lt;/label&gt;
+&lt;input class="bs-input" id="delivery-week" name="delivery_week" type="week" /&gt;</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Server handling:</strong> native date values submit as date-like strings without a timezone. Treat <code class="bs-code-inline">datetime-local</code> as local wall time and collect a timezone separately when the instant matters.</span></div>
+          </section>

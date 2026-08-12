@@ -1,0 +1,117 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Dropdown</span></nav><div class="docs-kicker">Interactivity</div><h1>Dropdown</h1><p class="bs-lead">Build accessible action menus with focus management and complete keyboard navigation.</p><div class="docs-component-meta" aria-label="Dropdown documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="dropdown">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Dropdown</h2>
+            <p>Dropdowns can stand alone or attach to a primary action as a split button. They support pointer dismissal, item selection, <kbd>Escape</kbd>, <kbd>Tab</kbd>, arrow keys, <kbd>Home</kbd>, and <kbd>End</kbd>. Disabled items are skipped.</p>
+            <div class="docs-demo interaction-demo" data-component-example="dropdown">
+              <div class="bs-dropdown bs-btn-group" data-bs-dropdown="" data-bs-state="closed">
+                <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+                <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="docs-actions-toggle" type="button" data-bs-toggle="dropdown" aria-controls="docs-actions-menu" aria-label="More save options" aria-haspopup="menu" aria-expanded="false"></button>
+                <div class="bs-dropdown-menu" id="docs-actions-menu" role="menu" aria-labelledby="docs-actions-toggle" data-bs-dropdown-menu="" hidden="" data-bs-state="closed">
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save and publish</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Save as draft</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem" disabled="">Save as template</button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window" data-code-variants="">
+              <div class="docs-code-label bs-code-header"><span data-code-label="">HTML · Boobstrap JS</span><button type="button" data-copy-example="dropdown" data-copy="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; data-bs-dropdown&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
+  &lt;div class=&quot;bs-dropdown-menu&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu hidden&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;" class="bs-code-action" data-copy-variant="js">Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Dropdown code framework">
+                <button id="dropdown-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="dropdown-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
+                <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
+                <button id="dropdown-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+              </div>
+              <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; data-bs-dropdown&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
+  &lt;div class=&quot;bs-dropdown-menu&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu hidden&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;">
+                <pre><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+    id="save-toggle" type="button" data-bs-toggle="dropdown"
+    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
+    aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+              <div id="dropdown-alpine-code-panel" role="tabpanel" aria-labelledby="dropdown-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; x-data=&quot;bsDropdown&quot; x-bind=&quot;root&quot;&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; x-bind=&quot;trigger&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
+  &lt;div class=&quot;bs-dropdown-menu&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu x-bind=&quot;menu&quot; hidden&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;" hidden="">
+                <pre><code class="">&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+    id="save-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger"
+    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
+  &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
+    aria-labelledby="save-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source="function SaveActions() {
+  const dropdown = useDropdown({ id: &quot;save-menu&quot; });
+
+  return (
+    &lt;div className=&quot;bs-dropdown bs-btn-group&quot; {...dropdown.getRootProps()}&gt;
+      &lt;button className=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+      &lt;button className=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; aria-label=&quot;More save options&quot; {...dropdown.getTriggerProps()} /&gt;
+      &lt;div className=&quot;bs-dropdown-menu&quot; {...dropdown.getMenuProps()}&gt;
+        &lt;button className=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}" hidden="">
+                <pre><code class="">function SaveActions() {
+  const dropdown = useDropdown({ id: "save-menu" });
+
+  return (
+    &lt;div className="bs-dropdown bs-btn-group" {...dropdown.getRootProps()}&gt;
+      &lt;button className="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+      &lt;button className="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+        aria-label="More save options" {...dropdown.getTriggerProps()} /&gt;
+      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;
+        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
+          Save and publish
+        &lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>For a split action, combine <code class="bs-code-inline">.bs-dropdown</code> and <code class="bs-code-inline">.bs-btn-group</code>. The first button owns the default action; the second owns only the menu.</p></div>
+              <div><h3>Class map</h3><p><code class="bs-code-inline">.bs-btn-split</code> narrows the attached trigger, <code class="bs-code-inline">.bs-btn-caret</code> draws its indicator, and <code class="bs-code-inline">.bs-dropdown-menu-end</code> changes popup alignment.</p></div>
+              <div><h3>Accessibility</h3><p>Name the narrow trigger by purpose—“More save options,” not “Dropdown.” Use menu roles only for action menus, not ordinary site navigation.</p></div>
+            </div>
+            <h3 aria-level="2" id="dropdown-initialize-and-observe-dropdown">Initialize and observe dropdown</h3><p>The controller manages outside clicks, Escape, focus restoration, and action-menu keyboard navigation.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialization and events</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialization and events code example"><code data-language="javascript" class="">import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const boobstrap = initBoobstrap(document);
+const menu = document.querySelector("#save-menu");
+
+menu.addEventListener("bs:dropdown:shown", (event) =&gt; {
+  console.log("Menu opened", event.detail.controller);
+});
+
+// Later: boobstrap.destroy();</code></pre></div><div class="docs-api"><h3 id="dropdown-dropdown-api">Dropdown API</h3><p>Import <code class="bs-code-inline">Dropdown</code> from <code class="bs-code-inline">@boobstrap/boobstrap/js/dropdown</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">show()</code> / <code class="bs-code-inline">hide()</code></td><td>Open or close the menu; hide can optionally restore focus.</td></tr>
+              <tr><td><code class="bs-code-inline">toggle()</code></td><td>Invert the current menu state.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:dropdown:*</code></td><td>Observe or cancel menu lifecycle transitions.</td></tr>
+            </tbody></table></div></div>
+          </section>

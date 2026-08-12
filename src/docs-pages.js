@@ -1,3 +1,11 @@
+export const docsOverview = {
+  path: "/docs",
+  sectionId: "overview",
+  category: "Documentation",
+  title: "Documentation",
+  description: "Complete Boobstrap documentation: CSS, optional JavaScript, Alpine and React integrations, components, utilities, themes, and design tokens.",
+};
+
 export const docsPages = [
   { path: "/docs/getting-started/introduction", sectionId: "introduction", category: "Get started", title: "Introduction", description: "Learn what Boobstrap includes, how its CSS-first architecture works, and which optional behavior layer fits your project." },
   { path: "/docs/getting-started/installation", sectionId: "installation", category: "Get started", title: "Installation", description: "Install Boobstrap with npm, pnpm, Yarn, Bun, a CDN, or self-hosted assets." },
@@ -6,7 +14,7 @@ export const docsPages = [
   { path: "/docs/foundations/typography", sectionId: "typography", category: "Foundations", title: "Typography", description: "Use Boobstrap’s type scale, display text, lead copy, and semantic text utilities." },
   { path: "/docs/foundations/layout", sectionId: "layout", category: "Foundations", title: "Layout and grid", description: "Build responsive page structures with containers, the 12-column grid, flex utilities, and gaps." },
   { path: "/docs/foundations/responsive-composition", sectionId: "responsive-composition", category: "Foundations", title: "Responsive composition", description: "Compose mobile-first layouts that preserve meaningful source order across breakpoints." },
-  { path: "/docs/components/buttons", sectionId: "buttons", category: "Components", title: "Buttons", description: "Build accessible buttons, groups, toolbars, split actions, and loading states with Boobstrap.", standalone: true },
+  { path: "/docs/components/buttons", sectionId: "buttons", category: "Components", title: "Buttons", description: "Build accessible buttons, groups, toolbars, split actions, and loading states with Boobstrap." },
   { path: "/docs/components/navbar", sectionId: "navbar", category: "Components", title: "Navigation", description: "Build semantic headers, vertical navigation, breadcrumb trails, and previous/next page navigation with Boobstrap components." },
   { path: "/docs/components/sidebar", sectionId: "sidebars", category: "Components", title: "Sidebar", description: "Build composable application sidebars with fixed regions, nested menus, responsive drawers, variants, and desktop collapse modes." },
   { path: "/docs/components/badges", sectionId: "badges", category: "Components", title: "Badges", description: "Add compact labels for status, categories, counts, and metadata." },

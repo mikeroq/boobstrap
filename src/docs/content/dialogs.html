@@ -1,0 +1,152 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Dialogs</span></nav><div class="docs-kicker">Components</div><h1>Dialogs</h1><p class="bs-lead">Build accessible modal dialogs with optional regions, flexible sizing, scrollable bodies, forms, triggers, and framework adapters.</p><div class="docs-component-meta" aria-label="Dialogs documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="dialogs">
+            <div class="docs-kicker">Components</div>
+            <h2>Dialogs</h2>
+            <p>Dialogs use the native <code class="bs-code-inline">&lt;dialog&gt;</code> element for modal semantics, focus containment, and background inertness. Compose an optional header and footer around the independently scrolling body, then choose a size or override the component properties.</p>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Use a dialog for focused, interruptive work.</strong><p>Keep routine content in the page. A modal should ask for a decision, collect a short form, or present a task that must be completed or dismissed before returning to the page.</p></span></div>
+            <h3 aria-level="2" id="dialogs-form-dialog-with-complete-structure">Form dialog with complete structure</h3><p>The trigger names the native dialog with aria-controls. Header and footer remain visible while a longer form scrolls inside the body.</p><div class="docs-demo" id="dialog-form" data-component-example="dialog-form"><button class="bs-btn bs-btn-primary" type="button" data-bs-toggle="dialog" aria-controls="profile-dialog" aria-expanded="false">Edit profile</button>
+<dialog class="bs-dialog bs-dialog-lg" id="profile-dialog" data-bs-dialog="" aria-labelledby="profile-dialog-title" aria-describedby="profile-dialog-description" data-bs-state="closed">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="profile-dialog-title">Edit profile</h4>
+    <p class="bs-dialog-description" id="profile-dialog-description">Update the information visible to your workspace.</p>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close profile dialog">×</button>
+  </header>
+  <div class="bs-dialog-body">
+    <form class="bs-stack bs-gap-4">
+      <div class="bs-form-group"><label class="bs-label" for="dialog-display-name">Display name</label><input class="bs-input" id="dialog-display-name" value="Ada Lovelace"></div>
+      <div class="bs-form-group"><label class="bs-label" for="dialog-role">Role</label><select class="bs-select" id="dialog-role"><option>Engineering lead</option><option>Product designer</option></select></div>
+      <div class="bs-form-group"><label class="bs-label" for="dialog-bio">Bio</label><textarea class="bs-textarea" id="dialog-bio" rows="4">Building dependable tools for ambitious teams.</textarea></div>
+    </form>
+  </div>
+  <footer class="bs-dialog-footer">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss="">Cancel</button>
+    <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+  </footer>
+</dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Form dialog</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Form dialog code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button" data-bs-toggle="dialog" aria-controls="profile-dialog"&gt;Edit profile&lt;/button&gt;
+&lt;dialog class="bs-dialog bs-dialog-lg" id="profile-dialog" data-bs-dialog aria-labelledby="profile-dialog-title" aria-describedby="profile-dialog-description"&gt;
+  &lt;header class="bs-dialog-header"&gt;
+    &lt;h4 class="bs-dialog-title" id="profile-dialog-title"&gt;Edit profile&lt;/h4&gt;
+    &lt;p class="bs-dialog-description" id="profile-dialog-description"&gt;Update the information visible to your workspace.&lt;/p&gt;
+    &lt;button class="bs-dialog-close" type="button" data-bs-dialog-dismiss aria-label="Close profile dialog"&gt;&amp;times;&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-dialog-body"&gt;
+    &lt;form class="bs-stack bs-gap-4"&gt;
+      &lt;div class="bs-form-group"&gt;&lt;label class="bs-label" for="dialog-display-name"&gt;Display name&lt;/label&gt;&lt;input class="bs-input" id="dialog-display-name" value="Ada Lovelace" /&gt;&lt;/div&gt;
+      &lt;div class="bs-form-group"&gt;&lt;label class="bs-label" for="dialog-role"&gt;Role&lt;/label&gt;&lt;select class="bs-select" id="dialog-role"&gt;&lt;option&gt;Engineering lead&lt;/option&gt;&lt;option&gt;Product designer&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;
+      &lt;div class="bs-form-group"&gt;&lt;label class="bs-label" for="dialog-bio"&gt;Bio&lt;/label&gt;&lt;textarea class="bs-textarea" id="dialog-bio" rows="4"&gt;Building dependable tools for ambitious teams.&lt;/textarea&gt;&lt;/div&gt;
+    &lt;/form&gt;
+  &lt;/div&gt;
+  &lt;footer class="bs-dialog-footer"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss&gt;Cancel&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-focused-confirmation-without-a-header-close-button">Focused confirmation without a header close button</h3><p>Header controls and footers are optional independently. This destructive decision disables backdrop dismissal so an accidental outside click cannot discard the choice.</p><div class="docs-demo" id="dialog-confirmation" data-component-example="dialog-confirmation"><button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog" aria-expanded="false">Archive project</button>
+<dialog class="bs-dialog bs-dialog-sm" id="archive-dialog" data-bs-dialog="" data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description" data-bs-state="closed">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="archive-dialog-title">Archive this project?</h4>
+    <p class="bs-dialog-description" id="archive-dialog-description">Members will lose access until the project is restored.</p>
+  </header>
+  <div class="bs-dialog-body"><p class="bs-mb-0">The project and its history remain available to workspace administrators.</p></div>
+  <footer class="bs-dialog-footer">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss="">Keep project</button>
+    <button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss="">Archive project</button>
+  </footer>
+</dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Static-backdrop confirmation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Static-backdrop confirmation code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog"&gt;Archive project&lt;/button&gt;
+&lt;dialog class="bs-dialog bs-dialog-sm" id="archive-dialog" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description"&gt;
+  &lt;header class="bs-dialog-header"&gt;
+    &lt;h4 class="bs-dialog-title" id="archive-dialog-title"&gt;Archive this project?&lt;/h4&gt;
+    &lt;p class="bs-dialog-description" id="archive-dialog-description"&gt;Members will lose access until the project is restored.&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-dialog-body"&gt;&lt;p class="bs-mb-0"&gt;The project and its history remain available to workspace administrators.&lt;/p&gt;&lt;/div&gt;
+  &lt;footer class="bs-dialog-footer"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-dialog-dismiss&gt;Keep project&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss&gt;Archive project&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-constrained-height-with-a-scrolling-body">Constrained height with a scrolling body</h3><p>A height modifier makes overflow behavior easy to verify: the body reaches every item without moving the title or footer actions.</p><div class="docs-demo" id="dialog-scroll" data-component-example="dialog-scroll"><button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="release-dialog" aria-expanded="false">Review release</button>
+<dialog class="bs-dialog bs-dialog-height-sm" id="release-dialog" data-bs-dialog="" aria-labelledby="release-dialog-title" data-bs-state="closed">
+  <header class="bs-dialog-header">
+    <h4 class="bs-dialog-title" id="release-dialog-title">Release checklist</h4>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close release checklist">×</button>
+  </header>
+  <div class="bs-dialog-body">
+    <ul class="bs-checklist"><li>Accessibility review</li><li>Responsive layout review</li><li>Cross-browser verification</li><li>Migration notes</li><li>Package integrity</li><li>Security scan</li><li>Performance budget</li><li>Rollback plan</li><li>Stakeholder approval</li><li>Production monitoring</li></ul>
+  </div>
+  <footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss="">Checklist complete</button></footer>
+</dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Scrollable dialog body</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Scrollable dialog body code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="release-dialog"&gt;Review release&lt;/button&gt;
+&lt;dialog class="bs-dialog bs-dialog-height-sm" id="release-dialog" data-bs-dialog aria-labelledby="release-dialog-title"&gt;
+  &lt;header class="bs-dialog-header"&gt;
+    &lt;h4 class="bs-dialog-title" id="release-dialog-title"&gt;Release checklist&lt;/h4&gt;
+    &lt;button class="bs-dialog-close" type="button" data-bs-dialog-dismiss aria-label="Close release checklist"&gt;&amp;times;&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-dialog-body"&gt;
+    &lt;ul class="bs-checklist"&gt;&lt;li&gt;Accessibility review&lt;/li&gt;&lt;li&gt;Responsive layout review&lt;/li&gt;&lt;li&gt;Cross-browser verification&lt;/li&gt;&lt;li&gt;Migration notes&lt;/li&gt;&lt;li&gt;Package integrity&lt;/li&gt;&lt;li&gt;Security scan&lt;/li&gt;&lt;li&gt;Performance budget&lt;/li&gt;&lt;li&gt;Rollback plan&lt;/li&gt;&lt;li&gt;Stakeholder approval&lt;/li&gt;&lt;li&gt;Production monitoring&lt;/li&gt;&lt;/ul&gt;
+  &lt;/div&gt;
+  &lt;footer class="bs-dialog-footer"&gt;&lt;button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss&gt;Checklist complete&lt;/button&gt;&lt;/footer&gt;
+&lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-width-and-height-choices">Width and height choices</h3><p>Choose a named size for common layouts or override the component properties locally. Fullscreen remains inset from the viewport so its boundary stays visible.</p><div class="docs-demo" id="dialog-sizes" data-component-example="dialog-sizes"><div class="bs-flex bs-flex-wrap bs-gap-3">
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-small" aria-expanded="false">Small</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-default" aria-expanded="false">Default</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-large" aria-expanded="false">Large + tall</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-full" aria-expanded="false">Fullscreen</button>
+</div>
+<dialog class="bs-dialog bs-dialog-sm" id="dialog-size-small" data-bs-dialog="" aria-labelledby="dialog-size-small-title" data-bs-state="closed"><div class="bs-dialog-body"><h4 id="dialog-size-small-title">Small dialog</h4><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss="">Done</button></div></dialog>
+<dialog class="bs-dialog" id="dialog-size-default" data-bs-dialog="" aria-labelledby="dialog-size-default-title" data-bs-state="closed"><div class="bs-dialog-body"><h4 id="dialog-size-default-title">Default dialog</h4><button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss="">Done</button></div></dialog>
+<dialog class="bs-dialog bs-dialog-lg bs-dialog-height-lg" id="dialog-size-large" data-bs-dialog="" aria-labelledby="dialog-size-large-title" data-bs-state="closed"><div class="bs-dialog-body"><h4 id="dialog-size-large-title">Large, tall dialog</h4></div><footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss="">Done</button></footer></dialog>
+<dialog class="bs-dialog bs-dialog-fullscreen" id="dialog-size-full" data-bs-dialog="" aria-labelledby="dialog-size-full-title" data-bs-state="closed"><div class="bs-dialog-body"><h4 id="dialog-size-full-title">Fullscreen dialog</h4></div><footer class="bs-dialog-footer"><button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss="">Done</button></footer></dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Dialog sizes</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Dialog sizes code example"><code class="">&lt;div class="bs-flex bs-flex-wrap bs-gap-3"&gt;
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-small"&gt;Small&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-default"&gt;Default&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-large"&gt;Large + tall&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-toggle="dialog" aria-controls="dialog-size-full"&gt;Fullscreen&lt;/button&gt;
+&lt;/div&gt;
+&lt;dialog class="bs-dialog bs-dialog-sm" id="dialog-size-small" data-bs-dialog aria-labelledby="dialog-size-small-title"&gt;&lt;div class="bs-dialog-body"&gt;&lt;h4 id="dialog-size-small-title"&gt;Small dialog&lt;/h4&gt;&lt;button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss&gt;Done&lt;/button&gt;&lt;/div&gt;&lt;/dialog&gt;
+&lt;dialog class="bs-dialog" id="dialog-size-default" data-bs-dialog aria-labelledby="dialog-size-default-title"&gt;&lt;div class="bs-dialog-body"&gt;&lt;h4 id="dialog-size-default-title"&gt;Default dialog&lt;/h4&gt;&lt;button class="bs-btn bs-btn-primary bs-mt-4" type="button" data-bs-dialog-dismiss&gt;Done&lt;/button&gt;&lt;/div&gt;&lt;/dialog&gt;
+&lt;dialog class="bs-dialog bs-dialog-lg bs-dialog-height-lg" id="dialog-size-large" data-bs-dialog aria-labelledby="dialog-size-large-title"&gt;&lt;div class="bs-dialog-body"&gt;&lt;h4 id="dialog-size-large-title"&gt;Large, tall dialog&lt;/h4&gt;&lt;/div&gt;&lt;footer class="bs-dialog-footer"&gt;&lt;button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss&gt;Done&lt;/button&gt;&lt;/footer&gt;&lt;/dialog&gt;
+&lt;dialog class="bs-dialog bs-dialog-fullscreen" id="dialog-size-full" data-bs-dialog aria-labelledby="dialog-size-full-title"&gt;&lt;div class="bs-dialog-body"&gt;&lt;h4 id="dialog-size-full-title"&gt;Fullscreen dialog&lt;/h4&gt;&lt;/div&gt;&lt;footer class="bs-dialog-footer"&gt;&lt;button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss&gt;Done&lt;/button&gt;&lt;/footer&gt;&lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-control-a-dialog-with-javascript">Control a dialog with JavaScript</h3><p>The aggregate initializer discovers data-bs-dialog automatically, or import one controller when application code needs an imperative instance.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Imperative control</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Imperative control code example"><code data-language="javascript" class="">import { Dialog } from "@boobstrap/boobstrap/js/dialog";
+
+const element = document.querySelector("#profile-dialog");
+const dialog = Dialog.getOrCreateInstance(element);
+
+dialog.show();
+dialog.hide();
+dialog.toggle();
+
+element.addEventListener("bs:dialog:hide", (event) =&gt; {
+  if (document.body.dataset.unsaved === "true") event.preventDefault();
+});</code></pre></div><h3 aria-level="2" id="dialogs-let-alpine-own-dialog-state">Let Alpine own dialog state</h3><p>The official provider works with standard Alpine and the strict-CSP build. Bind the trigger, native dialog, and any dismiss controls without attaching the vanilla controller.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Alpine.js</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Alpine.js code example"><code class="">&lt;div x-data="bsDialog"&gt;
+  &lt;button class="bs-btn" type="button" x-bind="trigger" aria-controls="alpine-dialog"&gt;Open dialog&lt;/button&gt;
+  &lt;dialog class="bs-dialog" id="alpine-dialog" x-ref="dialog" x-bind="panel" aria-labelledby="alpine-dialog-title"&gt;
+    &lt;header class="bs-dialog-header"&gt;
+      &lt;h2 class="bs-dialog-title" id="alpine-dialog-title"&gt;Account details&lt;/h2&gt;
+      &lt;button class="bs-dialog-close" type="button" x-bind="dismiss" aria-label="Close account details"&gt;&amp;times;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="bs-dialog-body"&gt;...&lt;/div&gt;
+  &lt;/dialog&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="dialogs guidance"><div><h3>Semantics</h3><p>Use a native <code class="bs-code-inline">&lt;dialog&gt;</code>, connect a visible title with <code class="bs-code-inline">aria-labelledby</code>, and connect supporting copy with <code class="bs-code-inline">aria-describedby</code>.</p></div><div><h3>Dismissal</h3><p>Keep Escape and at least one explicit dismiss control. Disable backdrop dismissal for destructive decisions or forms where an outside click could lose work.</p></div><div><h3>Scrolling</h3><p>Place overflow-prone content only in <code class="bs-code-inline">.bs-dialog-body</code>. Header and footer are fixed flex regions, so do not add competing page-level scroll containers.</p></div><div><h3>State ownership</h3><p>Use Boobstrap JS or an adapter on one instance, never both. All layers expose the same open/close state and lifecycle events.</p></div></div><div class="docs-api">
+              <h3 id="dialogs-dialog-class-api">Dialog class API</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-dialog</code></td><td>Creates the centered native modal surface and defines its width and maximum height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-header</code></td><td>Optional fixed header grid for the title, description, and close control.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-title</code></td><td>Names the dialog and connects through <code class="bs-code-inline">aria-labelledby</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-description</code></td><td>Optional supporting copy connected through <code class="bs-code-inline">aria-describedby</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-close</code></td><td>Optional icon-sized close control placed in the header.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-body</code></td><td>Flexible content region that scrolls independently when content exceeds the available height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-footer</code></td><td>Optional fixed, wrapping footer for task actions.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-sm</code> / <code class="bs-code-inline">.bs-dialog-lg</code> / <code class="bs-code-inline">.bs-dialog-xl</code></td><td>Selects 24rem, 48rem, or 64rem width; the unmodified dialog is 36rem.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-height-sm</code> / <code class="bs-code-inline">.bs-dialog-height-lg</code></td><td>Constrains the dialog to a 24rem or 48rem responsive height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-fullscreen</code></td><td>Expands the dialog to the viewport inset while preserving its regions.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-dialog-open</code></td><td>Locks document scrolling while a controlled modal or drawer is open.</td></tr>
+              </tbody></table></div>
+              <h3 id="dialogs-behavior-and-customization">Behavior and customization</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">data-bs-dialog</code></td><td>Initializes the native dialog with Boobstrap behavior.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-toggle="dialog"</code></td><td>Opens or closes the dialog named by <code class="bs-code-inline">aria-controls</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-dialog-dismiss</code></td><td>Closes from an explicit button inside the dialog.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-dialog-close-on-backdrop="false"</code></td><td>Keeps outside clicks from discarding the current task.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-dialog-width</code></td><td>Overrides the modal width at the component boundary.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-dialog-max-height</code></td><td>Overrides the responsive maximum height before the body scrolls.</td></tr>
+                <tr><td><code class="bs-code-inline">show()</code> / <code class="bs-code-inline">hide()</code> / <code class="bs-code-inline">toggle()</code></td><td>Controls the same instance imperatively from application JavaScript.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:dialog:show</code> / <code class="bs-code-inline">bs:dialog:hide</code></td><td>Cancelable before-events for application coordination.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:dialog:shown</code> / <code class="bs-code-inline">bs:dialog:hidden</code></td><td>Completed events emitted after visible state and focus are synchronized.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
