@@ -8,7 +8,7 @@
     "dev": "vite",
     "framework:dev": "node scripts/use-framework-dev.mjs",
     "framework:sync": "node scripts/use-framework-dev.mjs --sync",
-    "build": "vite build && node scripts/generate-doc-route-pages.mjs",
+    "build": "vite build && node scripts/generate-doc-route-pages.mjs && node scripts/generate-social-images.mjs",
     "preview": "vite preview",
     "test": "npm run build && node tests/smoke.mjs && node tests/dev-banner.mjs"
   },
@@ -29,6 +29,7 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^5.2.0",
     "playwright": "^1.62.1",
+    "sharp": "^0.35.3",
     "vite": "^7.1.1"
   }
 }

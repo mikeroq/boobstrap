@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { createServer } from "vite";
 import { docsOverview, docsPages } from "../src/docs-pages.js";
+import { socialCardForPath } from "../src/social-cards.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const distRoot = resolve(projectRoot, "dist");
@@ -22,6 +23,7 @@ const replaceMeta = (html, attribute, name, content) => html.replace(
 const renderRoutePage = (config, appMarkup) => {
   const pageTitle = config.path === "/docs" ? "Documentation — Boobstrap" : `${config.title} — Boobstrap`;
   const canonicalUrl = `https://boobstrap.org${config.path}`;
+  const socialCard = socialCardForPath(config.path);
   let html = docsTemplate.replace(
     /(<div id="docs-root">)[\s\S]*(<\/div>\s*<\/body>)/,
     (_match, openingRoot, closingDocument) => `${openingRoot}${appMarkup}${closingDocument}`,
@@ -32,8 +34,12 @@ const renderRoutePage = (config, appMarkup) => {
   html = replaceMeta(html, "property", "og:title", pageTitle);
   html = replaceMeta(html, "property", "og:description", config.description);
   html = replaceMeta(html, "property", "og:url", canonicalUrl);
+  html = replaceMeta(html, "property", "og:image", socialCard.imageUrl);
+  html = replaceMeta(html, "property", "og:image:alt", socialCard.imageAlt);
   html = replaceMeta(html, "name", "twitter:title", pageTitle);
   html = replaceMeta(html, "name", "twitter:description", config.description);
+  html = replaceMeta(html, "name", "twitter:image", socialCard.imageUrl);
+  html = replaceMeta(html, "name", "twitter:image:alt", socialCard.imageAlt);
   return html;
 };
 

@@ -38,6 +38,7 @@ The smoke suite launches Chromium. If the browser binary is missing, install the
 - `src/docs-pages.js`: canonical documentation route registry and metadata.
 - `src/docs/runtime.js`: imperative enhancement layer for live framework examples inside guide content.
 - `scripts/generate-doc-route-pages.mjs`: build-time React renderer for route-specific HTML and metadata.
+- `src/social-cards.js` and `scripts/generate-social-images.mjs`: route-specific Open Graph metadata and build-time PNG generation.
 - `src/docs.css`: documentation presentation.
 - `playground/index.html`: playground markup.
 - `src/playground.js` and `src/playground.css`: sandboxed playground behavior and presentation.
