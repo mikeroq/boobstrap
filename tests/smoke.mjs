@@ -128,7 +128,7 @@ const promotedComponentCoverage = {
     "bs-sidebar-toc",
     "bs-sidebar-trigger",
   ],
-  cards: ["bs-card-compact", "bs-card-link", "bs-card-subtle"],
+  cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-subtle"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
   tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
   "table-fundamentals": [
@@ -171,8 +171,8 @@ const promotedComponentCoverage = {
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 86) {
-  throw new Error(`Expected documentation coverage for 86 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 91) {
+  throw new Error(`Expected documentation coverage for 91 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -186,7 +186,7 @@ const documentationQualityMinimums = {
   navbar: { examples: 4, code: 4, guidance: true },
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
-  cards: { examples: 4, code: 4, guidance: true },
+  cards: { examples: 5, code: 5, guidance: true },
   tables: { examples: 1, code: 1, guidance: true },
   "table-fundamentals": { examples: 2, code: 2, guidance: true },
   "table-styles": { examples: 3, code: 3, guidance: true },
@@ -623,6 +623,43 @@ try {
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });
         if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
+      }
+
+      if (config.sectionId === "cards") {
+        const completeCard = routePage.locator("#card-action > .bs-card");
+        if (await completeCard.locator(":scope > .bs-card-header + .bs-card-content + .bs-card-footer").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-title").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-description").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-action").count() !== 1) {
+          failures.push(`${viewport.name}: complete card does not expose the header, title, description, action, content, and footer contract`);
+        }
+        if (await routePage.locator("#card-basic .bs-card-header, #card-basic .bs-card-footer").count() !== 0
+          || await routePage.locator("#card-header-content .bs-card-footer").count() !== 0) {
+          failures.push(`${viewport.name}: optional card header or footer regions are rendered when omitted`);
+        }
+        const structuredCardLayout = await completeCard.evaluate((card) => {
+          const header = card.querySelector(".bs-card-header");
+          const action = card.querySelector(".bs-card-action");
+          const content = card.querySelector(".bs-card-content");
+          const footer = card.querySelector(".bs-card-footer");
+          return {
+            cardDisplay: getComputedStyle(card).display,
+            headerDisplay: getComputedStyle(header).display,
+            actionArea: getComputedStyle(action).gridArea,
+            footerDisplay: getComputedStyle(footer).display,
+            contentPaddingInline: getComputedStyle(content).paddingInline,
+            footerPaddingInline: getComputedStyle(footer).paddingInline,
+          };
+        });
+        if (structuredCardLayout.cardDisplay !== "flex"
+          || structuredCardLayout.headerDisplay !== "grid"
+          || structuredCardLayout.actionArea !== "action"
+          || structuredCardLayout.footerDisplay !== "flex"
+          || structuredCardLayout.contentPaddingInline === "0px"
+          || structuredCardLayout.contentPaddingInline !== structuredCardLayout.footerPaddingInline) {
+          failures.push(`${viewport.name}: structured card layout did not render correctly (${JSON.stringify(structuredCardLayout)})`);
+        }
+        await routePage.screenshot({ path: `artifacts/cards-${viewport.name}.png`, fullPage: true });
       }
 
       if (config.sectionId in expectedTableExampleCounts) {

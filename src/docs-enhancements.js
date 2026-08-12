@@ -669,29 +669,52 @@ trigger.addEventListener("click", () => {
 
   addExample("cards", {
     id: "card-basic",
-    title: "Basic card",
-    description: "Use a card body to establish consistent inset spacing around one coherent piece of content.",
+    title: "Content-only card",
+    description: "Header and footer are optional. Use the content region by itself when the card needs one uninterrupted block.",
     preview: `<article class="bs-card" aria-labelledby="basic-card-title">
-  <div class="bs-card-body">
+  <div class="bs-card-content">
     <h4 class="bs-card-title" id="basic-card-title">Release notes</h4>
     <p class="bs-card-text bs-mb-0">A concise summary belongs inside the same content surface.</p>
   </div>
 </article>`,
-    label: "HTML · Basic card",
+    label: "HTML · Content-only card",
   });
   addExample("cards", {
     id: "card-action",
-    title: "Card with an action",
-    description: "Keep the action explicit and use a real link when it navigates to another resource.",
-    preview: `<article class="bs-card bs-card-raised" aria-labelledby="action-card-title">
-  <div class="bs-card-body">
-    <span class="bs-badge bs-badge-primary">Recommended</span>
-    <h4 class="bs-card-title bs-mt-4" id="action-card-title">Production checklist</h4>
-    <p class="bs-card-text bs-mb-4">Review accessibility, responsive layout, and deployment validation.</p>
-    <a class="bs-btn bs-btn-primary bs-btn-sm" href="/docs/reference/accessibility">Open checklist</a>
+    title: "Complete structured card",
+    description: "Compose an optional header and footer around the content region. The header aligns its title and description with an independent action slot; the footer wraps related actions naturally.",
+    preview: `<article class="bs-card bs-card-raised" aria-labelledby="workspace-card-title">
+  <header class="bs-card-header">
+    <h4 class="bs-card-title" id="workspace-card-title">Workspace usage</h4>
+    <p class="bs-card-description">Review current storage and manage plan capacity.</p>
+    <button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button">Manage</button>
+  </header>
+  <div class="bs-card-content">
+    <strong>68 GB of 100 GB</strong>
+    <p class="bs-card-text bs-mb-0">Storage resets on the first day of each month.</p>
+  </div>
+  <footer class="bs-card-footer">
+    <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Upgrade plan</button>
+    <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">View usage</button>
+  </footer>
+</article>`,
+    label: "HTML · Header, content, and footer",
+  });
+  addExample("cards", {
+    id: "card-header-content",
+    title: "Header and content without a footer",
+    description: "Omit the footer when the card has no bottom actions. Header actions remain real controls and descriptions stay associated with the card heading.",
+    preview: `<article class="bs-card bs-card-subtle" aria-labelledby="deployment-card-title">
+  <header class="bs-card-header">
+    <h4 class="bs-card-title" id="deployment-card-title">Production deployment</h4>
+    <p class="bs-card-description">Deployed from main 14 minutes ago.</p>
+    <span class="bs-badge bs-badge-primary bs-card-action">Healthy</span>
+  </header>
+  <div class="bs-card-content">
+    <p class="bs-card-text bs-mb-0">All regions are responding normally and the error rate is below the alert threshold.</p>
   </div>
 </article>`,
-    label: "HTML · Raised action card",
+    label: "HTML · Header and content",
   });
   addExample("cards", {
     id: "card-compact-link",
