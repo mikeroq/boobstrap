@@ -41,4 +41,15 @@ jobs:
       - name: Build production container
         run: docker build --tag boobstrap-site:test .
       - name: Verify generated social card
-        run: docker run --rm --entrypoint test boobstrap-site:test -s /usr/share/nginx/html/og/docs/components/drawers.png
+        shell: bash
+        run: |
+          docker run --detach --name boobstrap-site-test --publish 127.0.0.1:3000:3000 boobstrap-site:test
+          trap 'docker rm --force boobstrap-site-test >/dev/null' EXIT
+          for attempt in {1..10}; do
+            if curl --fail --silent --output /dev/null http://127.0.0.1:3000/og/docs/components/drawers.png; then
+              break
+            fi
+            sleep 1
+          done
+          curl --fail --silent --show-error --head http://127.0.0.1:3000/og/docs/components/drawers.png \
+            | grep --ignore-case --quiet '^cache-control: public, max-age=300, must-revalidate'
