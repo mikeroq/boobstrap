@@ -31,3 +31,14 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Run smoke suite
         run: npm test
+
+  production-image:
+    name: Production image
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+      - name: Build production container
+        run: docker build --tag boobstrap-site:test .
+      - name: Verify generated social card
+        run: docker run --rm --entrypoint test boobstrap-site:test -s /usr/share/nginx/html/og/docs/components/drawers.png
