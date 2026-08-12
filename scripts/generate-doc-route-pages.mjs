@@ -1,7 +1,8 @@
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { docsPages } from "../src/docs-pages.js";
+import { createServer } from "vite";
+import { docsOverview, docsPages } from "../src/docs-pages.js";
 
 const projectRoot = fileURLToPath(new URL("..", import.meta.url));
 const distRoot = resolve(projectRoot, "dist");
@@ -18,25 +19,13 @@ const replaceMeta = (html, attribute, name, content) => html.replace(
   `$1${escapeHtml(content)}$2`,
 );
 
-const renderNavigationState = (html, path) => {
-  let rendered = html.replace(`href="${path}"`, `href="${path}" aria-current="page"`);
-  const disclosure = ["tables", "forms"].find((section) => path === `/docs/components/${section}` || path.startsWith(`/docs/components/${section}/`));
-  if (!disclosure) return rendered;
-
-  rendered = rendered.replace(
-    `aria-expanded="false" aria-controls="docs-${disclosure}-submenu"`,
-    `aria-expanded="true" aria-controls="docs-${disclosure}-submenu"`,
-  );
-  return rendered.replace(
-    `id="docs-${disclosure}-submenu" data-nav-submenu hidden`,
-    `id="docs-${disclosure}-submenu" data-nav-submenu`,
-  );
-};
-
-const renderRoutePage = (config) => {
-  const pageTitle = `${config.title} — Boobstrap`;
+const renderRoutePage = (config, appMarkup) => {
+  const pageTitle = config.path === "/docs" ? "Documentation — Boobstrap" : `${config.title} — Boobstrap`;
   const canonicalUrl = `https://boobstrap.org${config.path}`;
-  let html = docsTemplate;
+  let html = docsTemplate.replace(
+    /(<div id="docs-root">)[\s\S]*(<\/div>\s*<\/body>)/,
+    (_match, openingRoot, closingDocument) => `${openingRoot}${appMarkup}${closingDocument}`,
+  );
   html = html.replace(/<title>[^<]*<\/title>/, `<title>${escapeHtml(pageTitle)}</title>`);
   html = html.replace(/(<link\s+rel="canonical"\s+href=")[^"]*("\s*\/?>)/, `$1${canonicalUrl}$2`);
   html = replaceMeta(html, "name", "description", config.description);
@@ -45,16 +34,26 @@ const renderRoutePage = (config) => {
   html = replaceMeta(html, "property", "og:url", canonicalUrl);
   html = replaceMeta(html, "name", "twitter:title", pageTitle);
   html = replaceMeta(html, "name", "twitter:description", config.description);
-  return renderNavigationState(html, config.path);
+  return html;
 };
 
-let generatedCount = 0;
-for (const config of docsPages) {
-  if (config.standalone) continue;
-  const outputDirectory = resolve(distRoot, ...config.path.slice(1).split("/"));
-  await mkdir(outputDirectory, { recursive: true });
-  await writeFile(resolve(outputDirectory, "index.html"), renderRoutePage(config));
-  generatedCount += 1;
+const vite = await createServer({
+  root: projectRoot,
+  appType: "custom",
+  server: { middlewareMode: true },
+});
+
+try {
+  const { renderDocs } = await vite.ssrLoadModule("/src/docs/entry-server.jsx");
+  const development = process.env.VITE_SITE_ENV === "development";
+  for (const config of [docsOverview, ...docsPages]) {
+    const appMarkup = await renderDocs(config.path, { development });
+    const outputDirectory = resolve(distRoot, ...config.path.slice(1).split("/"));
+    await mkdir(outputDirectory, { recursive: true });
+    await writeFile(resolve(outputDirectory, "index.html"), renderRoutePage(config, appMarkup));
+  }
+} finally {
+  await vite.close();
 }
 
-console.log(`Generated ${generatedCount} route-specific documentation pages.`);
+console.log(`Rendered ${docsPages.length + 1} React documentation routes.`);

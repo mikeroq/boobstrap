@@ -1,0 +1,54 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>Starter template</span></nav><div class="docs-kicker">Get started</div><h1>Starter template</h1><p class="bs-lead">Download and run the minimal Vite starter with theme tokens, components, icons, and production validation.</p><div class="docs-component-meta" aria-label="Starter template documentation summary"><span class="bs-badge bs-text-xs"><strong>Get started</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="starter">
+            <div class="docs-kicker">Start shipping</div>
+            <h2>Starter template</h2>
+            <p>Download a minimal Vite project that imports <code class="bs-code-inline">@boobstrap/boobstrap</code> from npm. It includes a responsive landing page, theme-token overrides, components, a labeled form, dependency-free inline SVG icons, and a production validation check.</p>
+            <div class="starter-card bs-card bs-card-raised">
+              <div class="bs-card-body">
+                <div class="starter-card-layout bs-grid bs-gap-6">
+                  <div class="bs-col-12 bs-col-md-8">
+                    <span class="bs-badge bs-badge-primary">Ready for npm, pnpm, Yarn, or Bun</span>
+                    <h3 class="bs-card-title bs-mt-4">A real project, not just a snippet</h3>
+                    <p class="bs-card-text bs-mb-4">Install, run the Vite dev server, customize the semantic tokens, then validate the production bundle with one command.</p>
+                    <div class="bs-flex bs-flex-wrap bs-gap-3">
+                      <a class="bs-btn bs-btn-primary" href="/boobstrap-starter.zip" download="" data-starter-download="">Download ZIP</a>
+                      <a class="bs-btn bs-btn-secondary" href="https://github.com/mikeroq/boobstrap-framework/tree/master/examples/starter">Browse source</a>
+                      <a class="bs-btn bs-btn-ghost" href="/playground">Try it first</a>
+                    </div>
+                  </div>
+                  <div class="starter-tree bs-col-12 bs-col-md-4" aria-label="Starter project files">
+                    <code class="bs-code-inline">index.html</code>
+                    <code class="bs-code-inline">src/main.js</code>
+                    <code class="bs-code-inline">src/styles.css</code>
+                    <code class="bs-code-inline">scripts/validate.mjs</code>
+                    <code class="bs-code-inline">package.json</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>Terminal</span><button type="button" data-copy="npm install
+npm run dev
+npm run validate" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="Terminal code example"><code class="">npm install
+npm run dev
+npm run validate</code></pre>
+            </div>
+          <h3 aria-level="2" id="starter-application-entry">Application entry</h3><p>The starter keeps framework setup explicit and exposes the returned cleanup function for hot reloads or application teardown.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · src/main.js</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · src/main.js code example"><code data-language="javascript" class="">import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { initBoobstrap } from "@boobstrap/boobstrap/js";
+import "./styles.css";
+
+const boobstrap = initBoobstrap(document);
+
+if (import.meta.hot) {
+  import.meta.hot.dispose(() =&gt; boobstrap.destroy());
+}</code></pre></div><h3 aria-level="2" id="starter-project-level-customization">Project-level customization</h3><p>Load overrides after the framework stylesheet and change semantic tokens instead of reaching into component selectors.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>CSS · src/styles.css</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="CSS · src/styles.css code example"><code data-language="css" class="">:root {
+  --bs-color-primary: #7c3aed;
+  --bs-color-primary-hover: #8b5cf6;
+  --bs-container-xl: 72rem;
+}
+
+.site-shell {
+  min-height: 100vh;
+}</code></pre></div><div class="docs-example-guidance" aria-label="starter guidance"><div><h3>Run</h3><p>Use <code class="bs-code-inline">npm run dev</code> while building and <code class="bs-code-inline">npm run validate</code> before shipping the generated bundle.</p></div><div><h3>Customize</h3><p>Keep application CSS after the framework import. Prefer semantic tokens and composition utilities for system-wide changes.</p></div><div><h3>Replace</h3><p>The sample content is disposable. The package setup, theme boundary, validation script, and accessible document structure are the useful starting points.</p></div></div></section>

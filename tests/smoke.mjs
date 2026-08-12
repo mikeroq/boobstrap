@@ -237,7 +237,7 @@ try {
   }
 
   const docsOverviewSource = await (await fetch(`${baseUrl}/docs`)).text();
-  if (!docsOverviewSource.includes(`<strong data-token-count>${expectedTokens}</strong> tokens`)) {
+  if (!new RegExp(`<strong[^>]*data-token-count(?:="")?[^>]*>${expectedTokens}</strong> tokens`).test(docsOverviewSource)) {
     failures.push(`docs overview: static token count does not match the installed framework (${expectedTokens})`);
   }
 
@@ -253,7 +253,8 @@ try {
     if (!source.includes(`<meta property="og:url" content="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph URL`);
     if (!source.includes(`<meta name="twitter:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter title`);
     if (!source.includes(`<link rel="canonical" href="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong canonical URL`);
-    if (!source.includes(`href="${path}" aria-current="page"`)) failures.push(`${path}: raw HTML does not identify the current navigation link before JavaScript`);
+    const currentLinkPattern = new RegExp(`<a[^>]*(?:href="${path}"[^>]*aria-current="page"|aria-current="page"[^>]*href="${path}")[^>]*>`);
+    if (!currentLinkPattern.test(source)) failures.push(`${path}: raw HTML does not identify the current navigation link before JavaScript`);
     const disclosure = ["tables", "forms"].find((section) => path === `/docs/components/${section}` || path.startsWith(`/docs/components/${section}/`));
     if (disclosure && (!source.includes(`aria-expanded="true" aria-controls="docs-${disclosure}-submenu"`)
       || source.includes(`id="docs-${disclosure}-submenu" data-nav-submenu hidden`))) {
@@ -282,6 +283,9 @@ try {
   if (!await noScriptPage.locator("#docs-tables-submenu").isVisible()
     || await noScriptPage.locator('.docs-nav a[href="/docs/components/tables/styles"]').getAttribute("aria-current") !== "page") {
     failures.push("docs initial render: current table navigation state is missing before JavaScript");
+  }
+  if ((await noScriptPage.locator(".docs-content > .docs-component-hero > h1").textContent())?.trim() !== "Table styles") {
+    failures.push("docs initial render: route content is not server-rendered before JavaScript");
   }
   await noScriptContext.close();
 
@@ -442,6 +446,15 @@ try {
       await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: docs theme toggle did not enable light theme");
+      }
+      const stylesheetCount = await docsPage.locator('link[rel="stylesheet"]').count();
+      await docsPage.locator(".docs-header").evaluate((header) => { header.dataset.spaShellMarker = "retained"; });
+      await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').click();
+      await docsPage.waitForURL(`${baseUrl}/docs/components/cards`);
+      await docsPage.getByRole("heading", { name: "Cards", level: 1 }).waitFor();
+      if (await docsPage.locator('.docs-header[data-spa-shell-marker="retained"]').count() !== 1
+        || await docsPage.locator('link[rel="stylesheet"]').count() !== stylesheetCount) {
+        failures.push("desktop: React documentation navigation reloaded the shell or its styles");
       }
     } else {
       const menuToggle = docsPage.getByRole("button", { name: "Open documentation menu" });

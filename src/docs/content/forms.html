@@ -1,0 +1,94 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Forms</span></nav><div class="docs-kicker">Components</div><h1>Forms</h1><p class="bs-lead">Choose a focused form guide with complete, copy-ready examples for every control family.</p><div class="docs-component-meta" aria-label="Forms documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="forms">
+            <div class="docs-kicker">Components</div>
+            <h2>Forms</h2>
+            <p>Start with a layout pattern, then open a focused control page for an isolated rendered example and its copy-ready code.</p>
+
+            <h3 aria-level="2" id="forms-stacked-form">Stacked form</h3>
+            <div class="docs-demo" data-component-example="form-layout-stacked">
+              <form class="bs-stack bs-gap-4" data-docs-form="">
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-name">Name</label>
+                  <input class="bs-input" id="layout-name" name="name" autocomplete="name">
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-role">Role</label>
+                  <select class="bs-select" id="layout-role" name="role"><option>Designer</option><option>Engineer</option></select>
+                </div>
+                <div class="bs-form-group">
+                  <label class="bs-label" for="layout-notes">Notes</label>
+                  <textarea class="bs-textarea" id="layout-notes" name="notes" rows="3"></textarea>
+                </div>
+                <label class="bs-check"><input class="bs-check-input" type="checkbox" name="updates"><span class="bs-check-label">Send product updates</span></label>
+                <button class="bs-btn bs-btn-primary" type="submit">Create account</button>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Stacked form layout</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Stacked form layout code example"><code class="">&lt;form class="bs-stack bs-gap-4"&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="name"&gt;Name&lt;/label&gt;
+    &lt;input class="bs-input" id="name" name="name" autocomplete="name" /&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="role"&gt;Role&lt;/label&gt;
+    &lt;select class="bs-select" id="role" name="role"&gt;
+      &lt;option&gt;Designer&lt;/option&gt;
+      &lt;option&gt;Engineer&lt;/option&gt;
+    &lt;/select&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="notes"&gt;Notes&lt;/label&gt;
+    &lt;textarea class="bs-textarea" id="notes" name="notes" rows="3"&gt;&lt;/textarea&gt;
+  &lt;/div&gt;
+  &lt;label class="bs-check"&gt;
+    &lt;input class="bs-check-input" type="checkbox" name="updates" /&gt;
+    &lt;span class="bs-check-label"&gt;Send product updates&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="submit"&gt;Create account&lt;/button&gt;
+&lt;/form&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="forms-responsive-form-row">Responsive form row</h3>
+            <div class="docs-demo" data-component-example="form-layout-responsive">
+              <form class="bs-stack bs-gap-4" data-docs-form="">
+                <div class="bs-form-row">
+                  <div class="bs-form-group"><label class="bs-label" for="layout-first">First name</label><input class="bs-input" id="layout-first" name="first_name" autocomplete="given-name"></div>
+                  <div class="bs-form-group"><label class="bs-label" for="layout-last">Last name</label><input class="bs-input" id="layout-last" name="last_name" autocomplete="family-name"></div>
+                </div>
+                <div class="bs-form-group"><label class="bs-label" for="layout-email">Email address</label><input class="bs-input" id="layout-email" name="email" type="email" autocomplete="email"></div>
+                <div class="bs-flex bs-flex-wrap bs-gap-3"><button class="bs-btn bs-btn-primary" type="submit">Save profile</button><button class="bs-btn bs-btn-secondary" type="button">Cancel</button></div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive form row</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Responsive form row code example"><code class="">&lt;form class="bs-stack bs-gap-4"&gt;
+  &lt;div class="bs-form-row"&gt;
+    &lt;div class="bs-form-group"&gt;
+      &lt;label class="bs-label" for="first-name"&gt;First name&lt;/label&gt;
+      &lt;input class="bs-input" id="first-name" name="first_name" autocomplete="given-name" /&gt;
+    &lt;/div&gt;
+    &lt;div class="bs-form-group"&gt;
+      &lt;label class="bs-label" for="last-name"&gt;Last name&lt;/label&gt;
+      &lt;input class="bs-input" id="last-name" name="last_name" autocomplete="family-name" /&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="email"&gt;Email address&lt;/label&gt;
+    &lt;input class="bs-input" id="email" name="email" type="email" autocomplete="email" /&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-flex bs-flex-wrap bs-gap-3"&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="submit"&gt;Save profile&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Cancel&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="forms-choose-a-form-topic">Choose a form topic</h3>
+            <div class="docs-topic-grid">
+              <a href="/docs/components/forms/inputs" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Inputs and textareas</strong><span>Labels, help text, validation, states, and sizes</span></a>
+              <a href="/docs/components/forms/input-groups" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Input groups and icons</strong><span>Prefixes, suffixes, buttons, selects, and inline SVGs</span></a>
+              <a href="/docs/components/forms/selects" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Native selects</strong><span>Styled semantic selects, option groups, sizes, and states</span></a>
+              <a href="/docs/components/forms/searchable-select" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Searchable select</strong><span>Complete Boobstrap JS, Alpine.js, and React implementations</span></a>
+              <a href="/docs/components/forms/date-time" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Date and time inputs</strong><span>Date, time, datetime-local, month, and week pickers</span></a>
+              <a href="/docs/components/forms/passwords-masks" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Passwords and masks</strong><span>Password reveal behavior and declarative input formatting</span></a>
+              <a href="/docs/components/forms/checks-radios" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>Checkboxes and radios</strong><span>Checks, descriptions, inline choices, radios, and switches</span></a>
+              <a href="/docs/components/forms/otp" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>One-time password</strong><span>A complete six-digit code with paste and value synchronization</span></a>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Start with semantics:</strong> native inputs, selects, textareas, fieldsets, and labels provide the baseline. Add Boobstrap classes for presentation and initialize JavaScript only for behavior such as masks, password reveal, OTP, or searchable selection.</span></div>
+          </section>

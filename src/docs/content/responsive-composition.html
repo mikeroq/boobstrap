@@ -1,0 +1,64 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Foundations</span><span aria-hidden="true">/</span><span>Responsive composition</span></nav><div class="docs-kicker">Foundations</div><h1>Responsive composition</h1><p class="bs-lead">Compose mobile-first layouts that preserve meaningful source order across breakpoints.</p><div class="docs-component-meta" aria-label="Responsive composition documentation summary"><span class="bs-badge bs-text-xs"><strong>Foundations</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="responsive-composition">
+            <div class="docs-kicker">Foundations</div>
+            <h2>Responsive layout composition</h2>
+            <p>Start every region at 12 columns, then opt into wider arrangements at <code class="bs-code-inline">md</code> and <code class="bs-code-inline">lg</code>. The markup stays in a useful reading order at every width.</p>
+            <div class="docs-demo" data-component-example="responsive-layout" id="features-example">
+              <section class="bs-grid bs-gap-4" aria-labelledby="composition-title">
+                <div class="composition-lead bs-card bs-col-12 bs-col-lg-8">
+                  <div class="bs-card-body">
+                    <span class="bs-badge bs-badge-primary">Featured</span>
+                    <h3 class="bs-card-title bs-mt-4" id="composition-title">A wide story at large screens</h3>
+                    <p class="bs-card-text bs-mb-0">This region spans the full row on mobile and eight columns from the large breakpoint.</p>
+                  </div>
+                </div>
+                <aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4" aria-label="Related information">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Related</h3><p class="bs-card-text bs-mb-0">Twelve columns, then six, then four.</p></div>
+                </aside>
+                <article class="bs-card bs-col-12 bs-col-md-6">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Supporting detail</h3><p class="bs-card-text bs-mb-0">Two equal cards from the medium breakpoint.</p></div>
+                </article>
+                <article class="bs-card bs-col-12 bs-col-md-6">
+                  <div class="bs-card-body"><h3 class="bs-card-title">Another detail</h3><p class="bs-card-text bs-mb-0">Source order remains the mobile reading order.</p></div>
+                </article>
+              </section>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="responsive-layout" data-copy="&lt;section class=&quot;bs-container bs-section&quot; aria-labelledby=&quot;features-title&quot;&gt;
+  &lt;h2 id=&quot;features-title&quot;&gt;Features&lt;/h2&gt;
+  &lt;div class=&quot;bs-grid bs-gap-4&quot;&gt;
+    &lt;article class=&quot;bs-card bs-col-12 bs-col-lg-8&quot;&gt;
+      &lt;div class=&quot;bs-card-body&quot;&gt;Featured story&lt;/div&gt;
+    &lt;/article&gt;
+    &lt;aside class=&quot;bs-card bs-col-12 bs-col-md-6 bs-col-lg-4&quot; aria-label=&quot;Related information&quot;&gt;
+      &lt;div class=&quot;bs-card-body&quot;&gt;Related information&lt;/div&gt;
+    &lt;/aside&gt;
+    &lt;article class=&quot;bs-card bs-col-12 bs-col-md-6&quot;&gt;
+      &lt;div class=&quot;bs-card-body&quot;&gt;Supporting detail&lt;/div&gt;
+    &lt;/article&gt;
+  &lt;/div&gt;
+&lt;/section&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete example code example"><code class="">&lt;section class="bs-container bs-section" aria-labelledby="features-title"&gt;
+  &lt;h2 id="features-title"&gt;Features&lt;/h2&gt;
+  &lt;div class="bs-grid bs-gap-4"&gt;
+    &lt;article class="bs-card bs-col-12 bs-col-lg-8"&gt;…&lt;/article&gt;
+    &lt;aside class="bs-card bs-col-12 bs-col-md-6 bs-col-lg-4"&gt;…&lt;/aside&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance" aria-label="Responsive composition guidance">
+              <div><h3>Structure</h3><p>Use a labeled <code class="bs-code-inline">&lt;section&gt;</code> for the region, then place articles, asides, or plain containers directly inside the grid.</p></div>
+              <div><h3>Class map</h3><p><code class="bs-code-inline">.bs-grid</code> creates 12 tracks. <code class="bs-code-inline">.bs-col-12</code> is the mobile baseline; <code class="bs-code-inline">md</code> applies from 48rem and <code class="bs-code-inline">lg</code> from 64rem.</p></div>
+              <div><h3>Accessibility</h3><p>Keep the DOM in a logical small-screen reading order. Breakpoint classes should change presentation without changing meaning or focus order.</p></div>
+            </div>
+            <div class="docs-api">
+              <h3 id="responsive-composition-responsive-breakpoints">Responsive breakpoints</h3>
+              <p>Column spans are mobile-first. Start with an unprefixed span, then override it only where the composition needs more room.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Prefix</th><th>Starts at</th><th>Example</th></tr></thead><tbody>
+                <tr><td>None</td><td>All viewport widths</td><td><code class="bs-code-inline">.bs-col-12</code></td></tr>
+                <tr><td><code class="bs-code-inline">md</code></td><td>48rem / 768px</td><td><code class="bs-code-inline">.bs-col-md-6</code></td></tr>
+                <tr><td><code class="bs-code-inline">lg</code></td><td>64rem / 1024px</td><td><code class="bs-code-inline">.bs-col-lg-4</code></td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

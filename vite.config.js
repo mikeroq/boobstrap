@@ -1,19 +1,15 @@
 import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 import { docsPages } from "./src/docs-pages.js";
 
 const routeFiles = (useGeneratedDocs) => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
-    ["/docs/components/buttons", "/docs/components/buttons/index.html"],
     ["/playground", "/playground/index.html"],
   ]);
-  docsPages.forEach(({ path, standalone }) => {
-    const file = standalone
-      ? "/docs/components/buttons/index.html"
-      : useGeneratedDocs
-        ? `${path}/index.html`
-        : "/docs/index.html";
+  docsPages.forEach(({ path }) => {
+    const file = useGeneratedDocs ? `${path}/index.html` : "/docs/index.html";
     routeFiles.set(path, file);
   });
   return routeFiles;
@@ -56,13 +52,12 @@ const cleanRoutes = () => {
 };
 
 export default defineConfig({
-  plugins: [cleanRoutes()],
+  plugins: [react(), cleanRoutes()],
   build: {
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         docs: resolve(import.meta.dirname, "docs/index.html"),
-        buttons: resolve(import.meta.dirname, "docs/components/buttons/index.html"),
         playground: resolve(import.meta.dirname, "playground/index.html"),
       },
     },

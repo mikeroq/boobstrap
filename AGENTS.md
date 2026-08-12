@@ -2,7 +2,7 @@
 
 ## Project overview
 
-This repository contains the official Boobstrap marketing site, documentation, and browser playground. It is a static, dependency-light Vite site built with plain HTML, CSS, and JavaScript.
+This repository contains the official Boobstrap marketing site, documentation, and browser playground. The landing page and playground use plain HTML, CSS, and JavaScript. The documentation is a React application built by Vite and server-rendered to static HTML for every public route.
 
 The reusable framework itself is not developed here. It is consumed from the pinned `@boobstrap/boobstrap` npm package. Framework source and distributable CSS belong in the separate `mikeroq/boobstrap-framework` repository.
 
@@ -30,10 +30,14 @@ The smoke suite launches Chromium. If the browser binary is missing, install the
 - `index.html`: landing-page markup and metadata.
 - `src/main.js`: landing-page behavior.
 - `src/site.css`: landing-page layout, illustration, and responsive styling.
-- `docs/index.html`: documentation overview and most documentation content.
-- `docs/components/buttons/index.html`: standalone deep reference for buttons.
+- `docs/index.html`: minimal HTML entry for the React documentation application.
+- `src/docs/DocsApp.jsx`: shared documentation shell and route composition.
+- `src/docs/DocsNavigation.jsx`: searchable React Router navigation and nested families.
+- `src/docs/content/*.html`: independently loaded content modules for each documentation guide.
+- `src/docs/entry-client.jsx` and `src/docs/entry-server.jsx`: hydration and static rendering entries.
 - `src/docs-pages.js`: canonical documentation route registry and metadata.
-- `src/docs.js`: documentation routing behavior, navigation, examples, and generated framework references.
+- `src/docs/runtime.js`: imperative enhancement layer for live framework examples inside guide content.
+- `scripts/generate-doc-route-pages.mjs`: build-time React renderer for route-specific HTML and metadata.
 - `src/docs.css`: documentation presentation.
 - `playground/index.html`: playground markup.
 - `src/playground.js` and `src/playground.css`: sandboxed playground behavior and presentation.

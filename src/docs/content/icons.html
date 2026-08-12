@@ -1,0 +1,56 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Icons</span></nav><div class="docs-kicker">Components</div><h1>Icons</h1><p class="bs-lead">Use dependency-free inline SVGs or bring your preferred optional icon library.</p><div class="docs-component-meta" aria-label="Icons documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="icons">
+            <div class="docs-kicker">Utilities</div>
+            <h2>Icons</h2>
+            <p>Boobstrap keeps icons library-agnostic. Add <code class="bs-code-inline">.bs-icon</code> to any inline SVG to normalize its size, alignment, and current-color stroke; use <code class="bs-code-inline">.bs-icon-sm</code>, <code class="bs-code-inline">.bs-icon-lg</code>, or <code class="bs-code-inline">.bs-icon-xl</code> for scale.</p>
+            <div class="docs-demo bs-flex bs-items-center bs-gap-4">
+              <svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m9-9H3"></path></svg>
+              <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18m9-9H3"></path></svg>
+              <svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"></path></svg>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · inline SVG</span><button type="button" data-copy="&lt;svg class=&quot;bs-icon bs-icon-lg&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;path d=&quot;M12 3v18m9-9H3&quot; /&gt;
+&lt;/svg&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · inline SVG code example"><code class="">&lt;svg class="bs-icon bs-icon-lg" viewBox="0 0 24 24" aria-hidden="true"&gt;
+  &lt;path d="M12 3v18m9-9H3" /&gt;
+&lt;/svg&gt;</code></pre>
+            </div>
+            <p>If you want a ready-made icon set, install one separately. For example, <a href="https://lucide.dev/guide/packages/lucide">Lucide</a> can replace matching SVG elements at runtime while Boobstrap remains CSS-only:</p>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>Shell · JavaScript</span><button type="button" data-copy="npm install lucide
+
+import { createIcons, icons } from &quot;lucide&quot;;
+createIcons({ icons });" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="Shell · JavaScript code example"><code class="">npm install lucide
+
+import { createIcons, icons } from "lucide";
+createIcons({ icons });</code></pre>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Accessibility:</strong> decorative icons should use <code class="bs-code-inline">aria-hidden="true"</code>; meaningful icons need an accessible label or visible text.</span></div>
+            <h3 aria-level="2" id="icons-icon-sizes">Icon sizes</h3><p>Icons size relative to surrounding text by default; use a modifier when the icon needs deliberate visual emphasis.</p><div class="docs-demo" id="icon-sizes" data-component-example="icon-sizes"><div class="bs-flex bs-flex-wrap bs-items-center bs-gap-6">
+  <span class="bs-inline-flex bs-items-center bs-gap-2"><svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> Small</span>
+  <span class="bs-inline-flex bs-items-center bs-gap-2"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> Default</span>
+  <span class="bs-inline-flex bs-items-center bs-gap-2"><svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg> Extra large</span>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Icon sizes</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Icon sizes code example"><code class="">&lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-6"&gt;
+  &lt;span class="bs-inline-flex bs-items-center bs-gap-2"&gt;&lt;svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M12 5v14M5 12h14" /&gt;&lt;/svg&gt; Small&lt;/span&gt;
+  &lt;span class="bs-inline-flex bs-items-center bs-gap-2"&gt;&lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M12 5v14M5 12h14" /&gt;&lt;/svg&gt; Default&lt;/span&gt;
+  &lt;span class="bs-inline-flex bs-items-center bs-gap-2"&gt;&lt;svg class="bs-icon bs-icon-xl" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M12 5v14M5 12h14" /&gt;&lt;/svg&gt; Extra large&lt;/span&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="icons-icons-inside-controls">Icons inside controls</h3><p>Hide a decorative SVG from assistive technology and put the control's accessible name on the button.</p><div class="docs-demo" id="icon-accessible-button" data-component-example="icon-accessible-button"><div class="bs-flex bs-flex-wrap bs-gap-3">
+  <button class="bs-btn bs-btn-primary" type="button"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>Create</button>
+  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></button>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Accessible icon buttons</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Accessible icon buttons code example"><code class="">&lt;div class="bs-flex bs-flex-wrap bs-gap-3"&gt;
+  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;&lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M12 5v14M5 12h14" /&gt;&lt;/svg&gt;Create&lt;/button&gt;
+  &lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites"&gt;&lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;&lt;/svg&gt;&lt;/button&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="icons guidance"><div><h3>Source</h3><p>Boobstrap styles inline SVG; it does not bundle an icon set. Paste only trusted SVG or use the library already chosen by your application.</p></div><div><h3>Sizing</h3><p>The base icon is <code class="bs-code-inline">1em</code>. Size modifiers stay aligned with text and buttons without hard-coded pixel dimensions.</p></div><div><h3>Names</h3><p>Decorative icons use <code class="bs-code-inline">aria-hidden="true"</code>. Icon-only controls need an accessible name on the interactive element.</p></div></div><div class="docs-api">
+              <h3 id="icons-icon-sizing">Icon sizing</h3>
+              <p>Icon utilities use <code class="bs-code-inline">em</code>, so an icon follows the surrounding text or button size without a separate breakpoint system.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Rendered size</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-icon</code></td><td>1em with normalized current-color stroke.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-icon-sm</code></td><td>0.875em</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-icon-lg</code></td><td>1.25em</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-icon-xl</code></td><td>1.5em</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

@@ -1,0 +1,47 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Alerts</span></nav><div class="docs-kicker">Components</div><h1>Alerts</h1><p class="bs-lead">Communicate success, warning, danger, and informational messages with appropriate semantics.</p><div class="docs-component-meta" aria-label="Alerts documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.3.1</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="alerts">
+            <div class="docs-kicker">Components</div>
+            <h2>Alerts</h2>
+            <p>Alerts communicate inline feedback. Pair <code class="bs-code-inline">.bs-alert</code> with a state modifier and use <code class="bs-code-inline">.bs-alert-title</code> for a clear lead-in.</p>
+            <div class="docs-demo bs-stack bs-gap-3" data-component-example="alerts">
+              <div class="bs-alert bs-alert-primary" role="status"><span aria-hidden="true">✦</span><span><strong class="bs-alert-title">Heads up</strong>This preview is ready for your custom theme.</span></div>
+              <div class="bs-alert bs-alert-success" role="status"><span aria-hidden="true">✓</span><span><strong class="bs-alert-title">Saved</strong>Your changes were published successfully.</span></div>
+              <div class="bs-alert" role="status"><span aria-hidden="true">i</span><span><strong class="bs-alert-title">Neutral note</strong>The base alert works without a state modifier.</span></div>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="alerts" data-copy="&lt;div class=&quot;bs-alert bs-alert-success&quot; role=&quot;status&quot;&gt;
+  &lt;svg class=&quot;bs-icon bs-icon-lg&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
+    &lt;path d=&quot;m5 12 4 4L19 6&quot; /&gt;
+  &lt;/svg&gt;
+  &lt;span&gt;
+    &lt;strong class=&quot;bs-alert-title&quot;&gt;Saved&lt;/strong&gt;
+    Your changes were published.
+  &lt;/span&gt;
+&lt;/div&gt;" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete example code example"><code class="">&lt;div class="bs-alert bs-alert-success" role="status"&gt;
+  &lt;svg class="bs-icon bs-icon-lg" aria-hidden="true"&gt;…&lt;/svg&gt;
+  &lt;span&gt;&lt;strong class="bs-alert-title"&gt;Saved&lt;/strong&gt; Your changes were published.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+            <div class="docs-example-guidance" aria-label="Alert guidance">
+              <div><h3>Structure</h3><p>Combine an optional decorative icon with a text wrapper. Put the short summary in <code class="bs-code-inline">.bs-alert-title</code> before the supporting message.</p></div>
+              <div><h3>Class map</h3><p><code class="bs-code-inline">.bs-alert</code> is neutral. Add <code class="bs-code-inline">.bs-alert-primary</code> for highlighted guidance or <code class="bs-code-inline">.bs-alert-success</code> for successful outcomes.</p></div>
+              <div><h3>Accessibility</h3><p>Use <code class="bs-code-inline">role="status"</code> for dynamic, non-urgent feedback and <code class="bs-code-inline">role="alert"</code> sparingly for urgent errors. Never rely on color alone.</p></div>
+            </div>
+            <h3 aria-level="2" id="alerts-informational-alert">Informational alert</h3><p>Use status for helpful information that should not interrupt the user.</p><div class="docs-demo" id="alert-primary-focused" data-component-example="alert-primary-focused"><div class="bs-alert bs-alert-primary" role="status">
+  <span><strong class="bs-alert-title">Deployment queued</strong>Your change will start after the active build completes.</span>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Informational status</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Informational status code example"><code class="">&lt;div class="bs-alert bs-alert-primary" role="status"&gt;
+  &lt;span&gt;&lt;strong class="bs-alert-title"&gt;Deployment queued&lt;/strong&gt;Your change will start after the active build completes.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="alerts-success-alert">Success alert</h3><p>Pair the contextual surface with explicit text so success is not communicated by color alone.</p><div class="docs-demo" id="alert-success-focused" data-component-example="alert-success-focused"><div class="bs-alert bs-alert-success" role="status">
+  <span><strong class="bs-alert-title">Changes saved</strong>Your notification settings are up to date.</span>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Success status</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Success status code example"><code class="">&lt;div class="bs-alert bs-alert-success" role="status"&gt;
+  &lt;span&gt;&lt;strong class="bs-alert-title"&gt;Changes saved&lt;/strong&gt;Your notification settings are up to date.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-api">
+              <h3 id="alerts-alert-api">Alert API</h3>
+              <p>The visual variant describes emphasis; the ARIA role describes announcement behavior. Choose each independently.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-alert</code></td><td>Neutral alert layout, spacing, border, and surface.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-alert-title</code></td><td>High-contrast summary placed before supporting copy.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-alert-primary</code></td><td>Brand-highlighted guidance or informational emphasis.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-alert-success</code></td><td>Successful completion or confirmation feedback.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
