@@ -112,6 +112,8 @@
             <a class="bs-nav-link" href="/docs/components/sidebar">Sidebar</a>
             <a class="bs-nav-link" href="/docs/components/badges">Badges</a>
             <a class="bs-nav-link" href="/docs/components/cards">Cards</a>
+            <a class="bs-nav-link" href="/docs/components/dialogs">Dialogs</a>
+            <a class="bs-nav-link" href="/docs/components/drawers">Drawers</a>
             <div class="docs-nav-disclosure" data-nav-disclosure data-nav-prefix="/docs/components/tables">
               <div class="docs-nav-disclosure-row">
                 <a class="bs-nav-link" href="/docs/components/tables">Tables</a>
@@ -224,6 +226,8 @@
                 <a href="/docs/components/sidebar"><strong>Sidebar</strong><small>Application shells, menus, drawers, and collapse modes</small></a>
                 <a href="/docs/components/badges"><strong>Badges</strong><small>Status and metadata labels</small></a>
                 <a href="/docs/components/cards"><strong>Cards</strong><small>Flexible content surfaces</small></a>
+                <a href="/docs/components/dialogs"><strong>Dialogs</strong><small>Modal workflows, forms, sizing, and scrolling</small></a>
+                <a href="/docs/components/drawers"><strong>Drawers</strong><small>Start/end panels with fixed regions and scrolling bodies</small></a>
                 <a href="/docs/components/tables"><strong>Tables</strong><small>Responsive structured data</small></a>
                 <a href="/docs/components/tables/fundamentals"><strong>Table fundamentals</strong><small>Semantics, overflow, sorting, and empty states</small></a>
                 <a href="/docs/components/tables/styles"><strong>Table styles</strong><small>Stripes, hover rows, borders, and density</small></a>
@@ -979,6 +983,65 @@
                 <tr><td><code>.bs-card-body</code></td><td>Backward-compatible padded content region.</td></tr>
                 <tr><td><code>.bs-card-text</code></td><td>Backward-compatible muted supporting-copy treatment.</td></tr>
               </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="dialogs">
+            <div class="docs-kicker">Components</div>
+            <h2>Dialogs</h2>
+            <p>Dialogs use the native <code>&lt;dialog&gt;</code> element for modal semantics, focus containment, and background inertness. Compose an optional header and footer around the independently scrolling body, then choose a size or override the component properties.</p>
+            <div class="docs-callout"><strong>Use a dialog for focused, interruptive work.</strong><p>Keep routine content in the page. A modal should ask for a decision, collect a short form, or present a task that must be completed or dismissed before returning to the page.</p></div>
+            <div class="docs-api">
+              <h3>Dialog class API</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-dialog</code></td><td>Creates the centered native modal surface and defines its width and maximum height.</td></tr>
+                <tr><td><code>.bs-dialog-header</code></td><td>Optional fixed header grid for the title, description, and close control.</td></tr>
+                <tr><td><code>.bs-dialog-title</code></td><td>Names the dialog and connects through <code>aria-labelledby</code>.</td></tr>
+                <tr><td><code>.bs-dialog-description</code></td><td>Optional supporting copy connected through <code>aria-describedby</code>.</td></tr>
+                <tr><td><code>.bs-dialog-close</code></td><td>Optional icon-sized close control placed in the header.</td></tr>
+                <tr><td><code>.bs-dialog-body</code></td><td>Flexible content region that scrolls independently when content exceeds the available height.</td></tr>
+                <tr><td><code>.bs-dialog-footer</code></td><td>Optional fixed, wrapping footer for task actions.</td></tr>
+                <tr><td><code>.bs-dialog-sm</code> / <code>.bs-dialog-lg</code> / <code>.bs-dialog-xl</code></td><td>Selects 24rem, 48rem, or 64rem width; the unmodified dialog is 36rem.</td></tr>
+                <tr><td><code>.bs-dialog-height-sm</code> / <code>.bs-dialog-height-lg</code></td><td>Constrains the dialog to a 24rem or 48rem responsive height.</td></tr>
+                <tr><td><code>.bs-dialog-fullscreen</code></td><td>Expands the dialog to the viewport inset while preserving its regions.</td></tr>
+                <tr><td><code>.bs-dialog-open</code></td><td>Locks document scrolling while a controlled modal or drawer is open.</td></tr>
+              </tbody></table></div>
+              <h3>Behavior and customization</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>data-bs-dialog</code></td><td>Initializes the native dialog with Boobstrap behavior.</td></tr>
+                <tr><td><code>data-bs-toggle="dialog"</code></td><td>Opens or closes the dialog named by <code>aria-controls</code>.</td></tr>
+                <tr><td><code>data-bs-dialog-dismiss</code></td><td>Closes from an explicit button inside the dialog.</td></tr>
+                <tr><td><code>data-bs-dialog-close-on-backdrop="false"</code></td><td>Keeps outside clicks from discarding the current task.</td></tr>
+                <tr><td><code>--bs-dialog-width</code></td><td>Overrides the modal width at the component boundary.</td></tr>
+                <tr><td><code>--bs-dialog-max-height</code></td><td>Overrides the responsive maximum height before the body scrolls.</td></tr>
+                <tr><td><code>show()</code> / <code>hide()</code> / <code>toggle()</code></td><td>Controls the same instance imperatively from application JavaScript.</td></tr>
+                <tr><td><code>bs:dialog:show</code> / <code>bs:dialog:hide</code></td><td>Cancelable before-events for application coordination.</td></tr>
+                <tr><td><code>bs:dialog:shown</code> / <code>bs:dialog:hidden</code></td><td>Completed events emitted after visible state and focus are synchronized.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>
+
+          <section class="docs-section" id="drawers">
+            <div class="docs-kicker">Components</div>
+            <h2>Drawers</h2>
+            <p>Drawers use the same native dialog controller and lifecycle as modals, but fill the viewport height and enter from the logical start or end edge. Their optional header and footer remain visible while the body scrolls.</p>
+            <div class="docs-note"><strong>Drawer versus sidebar:</strong> use a drawer for a temporary task or contextual panel at any viewport. Use the <a href="/docs/components/sidebar">Sidebar</a> component for persistent application navigation that becomes a drawer only at responsive breakpoints.</div>
+            <div class="docs-api">
+              <h3>Drawer class API</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code>.bs-drawer</code></td><td>Creates a full-height native dialog panel with a customizable width.</td></tr>
+                <tr><td><code>.bs-drawer-start</code> / <code>.bs-drawer-end</code></td><td>Places the drawer on a logical edge and follows right-to-left document direction.</td></tr>
+                <tr><td><code>.bs-drawer-header</code></td><td>Optional fixed header grid for the title, description, and close control.</td></tr>
+                <tr><td><code>.bs-drawer-title</code></td><td>Names the drawer and connects through <code>aria-labelledby</code>.</td></tr>
+                <tr><td><code>.bs-drawer-description</code></td><td>Optional supporting copy connected through <code>aria-describedby</code>.</td></tr>
+                <tr><td><code>.bs-drawer-close</code></td><td>Optional icon-sized close control placed in the header.</td></tr>
+                <tr><td><code>.bs-drawer-body</code></td><td>Flexible content region that independently scrolls to its final item.</td></tr>
+                <tr><td><code>.bs-drawer-footer</code></td><td>Optional fixed, wrapping footer for persistent actions or status.</td></tr>
+                <tr><td><code>.bs-drawer-sm</code> / <code>.bs-drawer-lg</code> / <code>.bs-drawer-xl</code></td><td>Selects 20rem, 36rem, or 48rem width; the unmodified drawer is 28rem.</td></tr>
+                <tr><td><code>--bs-drawer-width</code></td><td>Overrides the drawer width with any product-specific length.</td></tr>
+              </tbody></table></div>
+              <h3>Shared dialog behavior</h3>
+              <p>Drawers use <code>data-bs-dialog</code>, <code>data-bs-toggle="dialog"</code>, <code>data-bs-dialog-dismiss</code>, the optional backdrop setting, the <code>Dialog</code> JavaScript class, and the <code>bsDialog</code> Alpine provider. This keeps focus, Escape, scroll locking, events, and imperative control identical between presentations.</p>
             </div>
           </section>
 
