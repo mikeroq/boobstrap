@@ -45,7 +45,7 @@ const wrapText = (value, maximumCharacters, maximumLines) => {
 };
 
 const renderTextLines = ({ lines, x, y, lineHeight, fontSize, fill, weight = 400 }) => lines
-  .map((line, index) => `<text x="${x}" y="${y + (index * lineHeight)}" fill="${fill}" font-family="Inter, Arial, sans-serif" font-size="${fontSize}" font-weight="${weight}">${escapeXml(line)}</text>`)
+  .map((line, index) => `<text x="${x}" y="${y + (index * lineHeight)}" fill="${fill}" font-family="DejaVu Sans, Arial, sans-serif" font-size="${fontSize}" font-weight="${weight}">${escapeXml(line)}</text>`)
   .join("");
 
 const cardSvg = (card) => {
@@ -93,21 +93,21 @@ const cardSvg = (card) => {
     <path d="M50 3c8 9 7 25-4 33-5 4-11 5-17 3 8-4 14-12 14-21 0-6-2-11-6-15 5 0 9 0 13 0Z" fill="#fff9fc"/>
     <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="${palette.accent}"/>
   </g>
-  <text x="142" y="87" fill="#fff9fc" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">Boobstrap</text>
-  <text x="306" y="87" fill="#ffffff" fill-opacity="0.42" font-family="Inter, Arial, sans-serif" font-size="26">v0.4.0</text>
+  <text x="142" y="87" fill="#fff9fc" font-family="DejaVu Sans, Arial, sans-serif" font-size="32" font-weight="700">Boobstrap</text>
+  <text x="350" y="87" fill="#ffffff" fill-opacity="0.42" font-family="DejaVu Sans, Arial, sans-serif" font-size="26">v0.4.0</text>
 
   <rect x="70" y="137" width="${categoryWidth}" height="46" rx="23" fill="${palette.strong}" fill-opacity="0.2" stroke="${palette.accent}" stroke-opacity="0.48"/>
   <circle cx="94" cy="160" r="5" fill="${palette.accent}"/>
-  <text x="110" y="168" fill="${palette.accent}" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="0.4">${escapeXml(card.category.toUpperCase())}</text>
+  <text x="110" y="168" fill="${palette.accent}" font-family="DejaVu Sans, Arial, sans-serif" font-size="22" font-weight="700" letter-spacing="0.4">${escapeXml(card.category.toUpperCase())}</text>
 
   ${renderTextLines({ lines: titleLines, x: 70, y: 266, lineHeight: 78, fontSize: titleSize, fill: "#fff9fc", weight: 760 })}
   ${renderTextLines({ lines: descriptionLines, x: 72, y: descriptionY, lineHeight: 36, fontSize: 25, fill: "#eadce4", weight: 400 })}
 
   <line x1="70" y1="535" x2="1130" y2="535" stroke="#ffffff" stroke-opacity="0.12"/>
-  <text x="70" y="580" fill="#ffffff" fill-opacity="0.62" font-family="Inter, Arial, sans-serif" font-size="22">${escapeXml(routeLabel)}</text>
+  <text x="70" y="580" fill="#ffffff" fill-opacity="0.62" font-family="DejaVu Sans, Arial, sans-serif" font-size="22">${escapeXml(routeLabel)}</text>
   <g transform="translate(1000 558)">
     <rect width="130" height="38" rx="19" fill="url(#accent)"/>
-    <text x="65" y="26" text-anchor="middle" fill="${palette.background}" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800">OPEN DOCS</text>
+    <text x="65" y="26" text-anchor="middle" fill="${palette.background}" font-family="DejaVu Sans, Arial, sans-serif" font-size="18" font-weight="800">OPEN DOCS</text>
   </g>
 </svg>`;
 };

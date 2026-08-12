@@ -2,6 +2,9 @@
 
 FROM node:22-alpine AS build
 
+RUN apk add --no-cache fontconfig font-dejavu \
+  && fc-match "DejaVu Sans" | grep -q "DejaVuSans"
+
 WORKDIR /app
 
 COPY package.json package-lock.json ./
