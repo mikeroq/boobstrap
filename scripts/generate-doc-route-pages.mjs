@@ -18,6 +18,21 @@ const replaceMeta = (html, attribute, name, content) => html.replace(
   `$1${escapeHtml(content)}$2`,
 );
 
+const renderNavigationState = (html, path) => {
+  let rendered = html.replace(`href="${path}"`, `href="${path}" aria-current="page"`);
+  const disclosure = ["tables", "forms"].find((section) => path === `/docs/components/${section}` || path.startsWith(`/docs/components/${section}/`));
+  if (!disclosure) return rendered;
+
+  rendered = rendered.replace(
+    `aria-expanded="false" aria-controls="docs-${disclosure}-submenu"`,
+    `aria-expanded="true" aria-controls="docs-${disclosure}-submenu"`,
+  );
+  return rendered.replace(
+    `id="docs-${disclosure}-submenu" data-nav-submenu hidden`,
+    `id="docs-${disclosure}-submenu" data-nav-submenu`,
+  );
+};
+
 const renderRoutePage = (config) => {
   const pageTitle = `${config.title} — Boobstrap`;
   const canonicalUrl = `https://boobstrap.org${config.path}`;
@@ -30,7 +45,7 @@ const renderRoutePage = (config) => {
   html = replaceMeta(html, "property", "og:url", canonicalUrl);
   html = replaceMeta(html, "name", "twitter:title", pageTitle);
   html = replaceMeta(html, "name", "twitter:description", config.description);
-  return html;
+  return renderNavigationState(html, config.path);
 };
 
 let generatedCount = 0;

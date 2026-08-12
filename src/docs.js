@@ -11,10 +11,6 @@ import { highlightCodeBlocks, highlightCodeElement } from "./syntax-highlighting
 initDevelopmentBanner();
 enhanceDocumentation();
 
-document.querySelectorAll(".docs-nav a, .docs-on-this-page a").forEach((link) => {
-  link.classList.add("bs-nav-link");
-  if (link.classList.contains("docs-nav-subitem")) link.classList.add("bs-nav-link-subitem");
-});
 document.querySelectorAll(".docs-code-block").forEach((block) => {
   block.classList.add("bs-code-window");
   block.querySelector(":scope > .docs-code-label")?.classList.add("bs-code-header");
