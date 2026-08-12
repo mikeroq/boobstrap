@@ -343,7 +343,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.3.1 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.4.0 npm package", exact: true }).getAttribute("href");
     const docsUrl = await page.getByRole("link", { name: "Read the docs", exact: true }).getAttribute("href");
     const playgroundUrl = await page.getByRole("link", { name: "Open playground", exact: true }).getAttribute("href");
     const dimensions = await dimensionsFor(page);

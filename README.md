@@ -13,7 +13,7 @@ npm run dev
 
 Day-to-day work is integrated through the `dev` branch and previewed with the framework's matching `dev` branch without publishing interim npm packages. See [DEVELOPMENT.md](DEVELOPMENT.md) for the branch, preview deployment, and release workflow.
 
-The site imports `@boobstrap/boobstrap@0.3.1` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
+The site imports `@boobstrap/boobstrap@0.4.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
 Vite serves the landing page at `/`, the React documentation application at `/docs`, 41 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
 

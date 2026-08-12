@@ -72,7 +72,7 @@ function DocsHeader({ theme, onThemeToggle }) {
         <a href="/playground" className="docs-header-link bs-navbar-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" className="docs-header-link bs-navbar-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" className="docs-header-link bs-navbar-link">GitHub</a>
-        <span className="docs-version">v0.3.1</span>
+        <span className="docs-version">v0.4.0</span>
         <button className="docs-icon-button bs-navbar-toggle" type="button" data-theme-toggle aria-label={`Switch to ${nextTheme} theme`} title="Toggle color theme" onClick={onThemeToggle}>
           <svg className="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
           <svg className="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>
@@ -107,7 +107,7 @@ function PagePagination({ route, onPreload }) {
 function DocsFooter() {
   return (
     <footer className="docs-footer">
-      <p><span className="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.3.1 · MIT licensed.</p>
+      <p><span className="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.4.0 · MIT licensed.</p>
       <div className="docs-footer-links">
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View on npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework">View source →</a>
