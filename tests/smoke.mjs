@@ -377,6 +377,19 @@ try {
     if (viewport.name === "desktop") {
       if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
       if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
+      const desktopSidebarGeometry = await docsPage.locator("#docs-sidebar").evaluate((sidebar) => {
+        const content = sidebar.querySelector(":scope > .bs-sidebar-content");
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+        return {
+          shellClipsRegions: getComputedStyle(sidebar).overflowY === "hidden",
+          navigationOwnsScroll: ["auto", "scroll"].includes(getComputedStyle(content).overflowY),
+          scrollbarMeetsSidebarEdge: Math.abs(sidebarRect.right - contentRect.right) <= 1,
+        };
+      });
+      if (!Object.values(desktopSidebarGeometry).every(Boolean)) {
+        failures.push(`desktop: documentation scrollbar is inset from the sidebar edge (${JSON.stringify(desktopSidebarGeometry)})`);
+      }
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
       const formsDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/forms"]');
       const formsToggle = formsDisclosure.locator("[data-nav-disclosure-toggle]");
@@ -460,11 +473,13 @@ try {
           contentScrolls: content.scrollHeight > content.clientHeight,
           contentReachedBottom: Math.abs(content.scrollHeight - content.clientHeight - content.scrollTop) <= 1,
           lastLinkVisible: lastLinkRect.bottom <= contentRect.bottom + 1,
+          scrollbarMeetsSidebarEdge: Math.abs(sidebarRect.right - contentRect.right) <= 1,
         };
       });
       if (!Object.values(drawerGeometry).every(Boolean)) {
         failures.push(`mobile: docs menu does not expose a complete independent scroll region (${JSON.stringify(drawerGeometry)})`);
       }
+      await docsPage.screenshot({ path: "artifacts/docs-sidebar-mobile-open.png" });
       await docsPage.keyboard.press("Escape");
       if (await mobileSidebar.getAttribute("data-bs-state") !== "closed" || !await menuToggle.evaluate((element) => element === document.activeElement)) failures.push("mobile: docs menu did not close and restore focus on Escape");
     }
