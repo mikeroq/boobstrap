@@ -1,5 +1,8 @@
 import "@boobstrap/boobstrap/dist/boobstrap.css";
 import "./site.css";
+import { initDevelopmentBanner } from "./dev-banner.js";
+
+initDevelopmentBanner();
 
 const installTabs = [...document.querySelectorAll("[data-install-manager]")];
 const installOutput = document.querySelector("[data-install-command-output]");

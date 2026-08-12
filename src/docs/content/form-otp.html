@@ -1,0 +1,62 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>One-time password</span></nav><div class="docs-kicker">Forms</div><h1>One-time password</h1><p class="bs-lead">Build a complete six-digit OTP control with paste, navigation, autocomplete, and a synchronized submitted value.</p><div class="docs-component-meta" aria-label="One-time password documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="form-otp">
+            <div class="docs-kicker">Forms</div>
+            <h2>One-time password</h2>
+            <p>The OTP controller accepts one character per field, advances focus, supports full-code paste, handles arrow and Backspace navigation, and synchronizes one submitted value.</p>
+
+            <h3 aria-level="2" id="form-otp-six-digit-verification-code">Six-digit verification code</h3>
+            <div class="docs-demo" data-component-example="form-otp">
+              <form data-docs-form="">
+                <div class="bs-form-group">
+                  <span class="bs-label" id="otp-label">Six-digit code</span>
+                  <div class="bs-otp" data-bs-otp="" aria-labelledby="otp-label" data-bs-state="empty">
+                    <input class="bs-otp-input" aria-label="Digit 1" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="one-time-code">
+                    <input class="bs-otp-input" aria-label="Digit 2" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="bs-otp-input" aria-label="Digit 3" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="bs-otp-input" aria-label="Digit 4" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="bs-otp-input" aria-label="Digit 5" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input class="bs-otp-input" aria-label="Digit 6" data-bs-otp-input="" maxlength="1" inputmode="numeric" autocomplete="off">
+                    <input type="hidden" name="verification_code" data-bs-otp-value="" value="">
+                  </div>
+                  <span class="bs-form-text">Paste the complete code into any field or enter one digit at a time.</span>
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete six-digit OTP</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete six-digit OTP code example"><code class="">&lt;form&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;span class="bs-label" id="verification-code-label"&gt;
+      Six-digit code
+    &lt;/span&gt;
+    &lt;div
+      class="bs-otp"
+      data-bs-otp
+      aria-labelledby="verification-code-label"
+    &gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 1" data-bs-otp-input /&gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 2" data-bs-otp-input /&gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 3" data-bs-otp-input /&gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 4" data-bs-otp-input /&gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 5" data-bs-otp-input /&gt;
+      &lt;input class="bs-otp-input" aria-label="Digit 6" data-bs-otp-input /&gt;
+      &lt;input
+        type="hidden"
+        name="verification_code"
+        data-bs-otp-value
+      /&gt;
+    &lt;/div&gt;
+    &lt;span class="bs-form-text"&gt;
+      Paste the complete code or enter one digit at a time.
+    &lt;/span&gt;
+  &lt;/div&gt;
+&lt;/form&gt;</code></pre></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize and handle completion</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialize and handle completion code example"><code class="">import "@boobstrap/boobstrap";
+import { initOtps } from "@boobstrap/boobstrap/js/otp";
+
+const [verificationCode] = initOtps(document);
+
+verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
+  console.log("Complete code:", event.detail.value);
+});</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Autocomplete:</strong> the controller applies <code class="bs-code-inline">autocomplete="one-time-code"</code> to the first field and numeric input mode to every field. Use <code class="bs-code-inline">data-bs-otp-pattern</code> only when the code accepts characters other than digits.</span></div>
+          </section>

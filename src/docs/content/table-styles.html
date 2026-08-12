@@ -1,0 +1,79 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Tables</span><span aria-hidden="true">/</span><span>Table styles</span></nav><div class="docs-kicker">Tables</div><h1>Table styles</h1><p class="bs-lead">Choose striped, hoverable, bordered, borderless, compact, and caption treatments that fit the shape of your dataset.</p><div class="docs-component-meta" aria-label="Table styles documentation summary"><span class="bs-badge bs-text-xs"><strong>Tables</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="table-styles">
+            <div class="docs-kicker">Tables</div>
+            <h2>Table styles</h2>
+            <p>Choose row treatments, borders, caption placement, and density from the shape of the dataset. Combine modifiers sparingly so the data remains the strongest visual signal.</p>
+            <h3 aria-level="2" id="table-styles-striped-hoverable-data-table">Striped, hoverable data table</h3><p>Combine stripes with hover and focus-within feedback for operational records. Status remains readable as text, and each row’s action is a real control.</p><div class="docs-demo" id="table-database-records" data-component-example="table-database-records"><div class="bs-table-responsive" role="region" tabindex="0" aria-label="Customer database records">
+  <table class="bs-table bs-table-striped bs-table-hover">
+    <caption>Recently active customer accounts</caption>
+    <thead><tr><th scope="col">Customer</th><th scope="col">Status</th><th scope="col">Plan</th><th scope="col">Last active</th><th class="bs-table-cell-actions" scope="col">Action</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Avery Morgan</th><td><span class="bs-badge bs-badge-primary">Active</span></td><td>Team</td><td>2 min ago</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
+      <tr><th scope="row">Kai Patel</th><td><span class="bs-badge">Invited</span></td><td>Starter</td><td>Yesterday</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
+      <tr><th scope="row">Sam Rivera</th><td><span class="bs-badge bs-badge-primary">Active</span></td><td>Business</td><td>3 days ago</td><td class="bs-table-cell-actions"><button class="bs-btn bs-btn-ghost bs-btn-sm" type="button">View</button></td></tr>
+    </tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Operational data table</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Operational data table code example"><code class="">&lt;div class="bs-table-responsive" role="region" tabindex="0" aria-label="Customer database records"&gt;
+  &lt;table class="bs-table bs-table-striped bs-table-hover"&gt;
+    &lt;caption&gt;Recently active customer accounts&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Customer&lt;/th&gt;&lt;th scope="col"&gt;Status&lt;/th&gt;&lt;th scope="col"&gt;Plan&lt;/th&gt;&lt;th scope="col"&gt;Last active&lt;/th&gt;&lt;th class="bs-table-cell-actions" scope="col"&gt;Action&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Avery Morgan&lt;/th&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Team&lt;/td&gt;&lt;td&gt;2 min ago&lt;/td&gt;&lt;td class="bs-table-cell-actions"&gt;&lt;button class="bs-btn bs-btn-ghost bs-btn-sm" type="button"&gt;View&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Kai Patel&lt;/th&gt;&lt;td&gt;&lt;span class="bs-badge"&gt;Invited&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Starter&lt;/td&gt;&lt;td&gt;Yesterday&lt;/td&gt;&lt;td class="bs-table-cell-actions"&gt;&lt;button class="bs-btn bs-btn-ghost bs-btn-sm" type="button"&gt;View&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Sam Rivera&lt;/th&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;td&gt;Business&lt;/td&gt;&lt;td&gt;3 days ago&lt;/td&gt;&lt;td class="bs-table-cell-actions"&gt;&lt;button class="bs-btn bs-btn-ghost bs-btn-sm" type="button"&gt;View&lt;/button&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="table-styles-bordered-and-compact">Bordered and compact</h3><p>Use cell borders when readers need to trace values across a dense matrix. Compact spacing keeps repeated numeric data scannable.</p><div class="docs-demo" id="table-bordered-compact" data-component-example="table-bordered-compact"><div class="bs-table-responsive" role="region" tabindex="0" aria-label="Quarterly revenue matrix">
+  <table class="bs-table bs-table-bordered bs-table-compact">
+    <caption>Revenue by region, USD thousands</caption>
+    <thead><tr><th scope="col">Region</th><th class="bs-table-cell-numeric" scope="col">Q1</th><th class="bs-table-cell-numeric" scope="col">Q2</th><th class="bs-table-cell-numeric" scope="col">Q3</th><th class="bs-table-cell-numeric" scope="col">Q4</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">North</th><td class="bs-table-cell-numeric">184</td><td class="bs-table-cell-numeric">201</td><td class="bs-table-cell-numeric">218</td><td class="bs-table-cell-numeric">236</td></tr>
+      <tr><th scope="row">South</th><td class="bs-table-cell-numeric">142</td><td class="bs-table-cell-numeric">156</td><td class="bs-table-cell-numeric">164</td><td class="bs-table-cell-numeric">179</td></tr>
+    </tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Bordered compact table</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Bordered compact table code example"><code class="">&lt;div class="bs-table-responsive" role="region" tabindex="0" aria-label="Quarterly revenue matrix"&gt;
+  &lt;table class="bs-table bs-table-bordered bs-table-compact"&gt;
+    &lt;caption&gt;Revenue by region, USD thousands&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Region&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Q1&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Q2&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Q3&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;Q4&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;North&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;184&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;201&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;218&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;236&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;South&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;142&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;156&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;164&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;179&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="table-styles-borderless-comparison">Borderless comparison</h3><p>Remove internal rules when the dataset is short and spacing alone provides enough separation. A bottom caption works well for a source or freshness note.</p><div class="docs-demo" id="table-borderless" data-component-example="table-borderless"><div class="bs-table-responsive" role="region" tabindex="0" aria-label="Package size comparison">
+  <table class="bs-table bs-table-borderless bs-table-caption-bottom">
+    <caption>Minified package sizes from the current release.</caption>
+    <thead><tr><th scope="col">Entry</th><th class="bs-table-cell-numeric" scope="col">CSS</th><th class="bs-table-cell-numeric" scope="col">JavaScript</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Core</th><td class="bs-table-cell-numeric">70 kB</td><td class="bs-table-cell-numeric">14 kB</td></tr>
+      <tr><th scope="row">React adapter</th><td class="bs-table-cell-numeric">—</td><td class="bs-table-cell-numeric">9 kB</td></tr>
+    </tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Borderless table</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Borderless table code example"><code class="">&lt;div class="bs-table-responsive" role="region" tabindex="0" aria-label="Package size comparison"&gt;
+  &lt;table class="bs-table bs-table-borderless bs-table-caption-bottom"&gt;
+    &lt;caption&gt;Minified package sizes from the current release.&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Entry&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;CSS&lt;/th&gt;&lt;th class="bs-table-cell-numeric" scope="col"&gt;JavaScript&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Core&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;70 kB&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;14 kB&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;React adapter&lt;/th&gt;&lt;td class="bs-table-cell-numeric"&gt;—&lt;/td&gt;&lt;td class="bs-table-cell-numeric"&gt;9 kB&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="table styles guidance"><div><h3>Row aids</h3><p>Stripes and hover feedback help scanning but do not communicate selection, status, or validation. Keep those meanings in text and controls.</p></div><div><h3>Density</h3><p>Use compact cells for repeated operational values, not as a substitute for removing low-value columns or supporting responsive overflow.</p></div><div><h3>Borders</h3><p>Use full borders for matrices that require tracing in two directions. Prefer default dividers or borderless treatment for shorter comparisons.</p></div></div><div class="docs-api">
+              <h3 id="table-styles-table-style-api">Table style API</h3>
+              <p>Style modifiers compose on <code class="bs-code-inline">.bs-table</code>. Keep wide variants inside <code class="bs-code-inline">.bs-table-responsive</code> and use alignment helpers consistently across each column.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Table style class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">Table style classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th></tr></thead><tbody>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-striped</code></th><td>Adds an alternating surface to even body rows.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-hover</code></th><td>Highlights body rows on pointer hover and when a descendant has keyboard focus.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-bordered</code></th><td>Adds vertical cell borders to the default horizontal row dividers.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-borderless</code></th><td>Removes internal cell borders for short, low-density comparisons.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-compact</code></th><td>Reduces cell padding for dense operational datasets.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-caption-bottom</code></th><td>Moves the native caption below the table for a source or freshness note.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-cell-numeric</code></th><td>Right-aligns numeric columns.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-cell-actions</code></th><td>Right-aligns row actions and keeps them together.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-responsive</code></th><td>Contains a styled table when its columns exceed the available width.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table</code></th><td>Required base presentation for every table variant.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

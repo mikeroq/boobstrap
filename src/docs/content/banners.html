@@ -1,0 +1,126 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Banners</span></nav><div class="docs-kicker">Components</div><h1>Banners</h1><p class="bs-lead">Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior.</p><div class="docs-component-meta" aria-label="Banners documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="banners">
+            <div class="docs-kicker">Components</div>
+            <h2>Banners</h2>
+            <p>Banners span their containing page and keep an icon, message, optional action, and dismiss control aligned in a responsive inner layout.</p>
+
+            <h3 aria-level="2" id="banners-contextual-variants">Contextual variants</h3>
+            <div class="docs-demo docs-banner-demo" data-component-example="banner-variants">
+              <div class="bs-banner bs-banner-primary" role="status">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Primary</strong><span class="bs-banner-message">Highlight an important product announcement.</span></div>
+                </div>
+              </div>
+              <div class="bs-banner bs-banner-info" role="status">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7h.01"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Information</strong><span class="bs-banner-message">Scheduled maintenance begins at 02:00 UTC.</span></div>
+                </div>
+              </div>
+              <div class="bs-banner bs-banner-success" role="status">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Success</strong><span class="bs-banner-message">The new release is available in every region.</span></div>
+                </div>
+              </div>
+              <div class="bs-banner bs-banner-warning" role="status">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Warning</strong><span class="bs-banner-message">This environment contains unreleased changes.</span></div>
+                </div>
+              </div>
+              <div class="bs-banner bs-banner-danger" role="alert">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 17h.01"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Danger</strong><span class="bs-banner-message">Publishing is temporarily unavailable.</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete contextual banner</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete contextual banner code example"><code class="">&lt;div class="bs-banner bs-banner-info" role="status"&gt;
+  &lt;div class="bs-banner-inner"&gt;
+    &lt;svg
+      class="bs-banner-icon bs-icon"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    &gt;
+      &lt;circle cx="12" cy="12" r="9"&gt;&lt;/circle&gt;
+      &lt;path d="M12 11v6M12 7h.01"&gt;&lt;/path&gt;
+    &lt;/svg&gt;
+    &lt;div class="bs-banner-content"&gt;
+      &lt;strong class="bs-banner-title"&gt;Scheduled maintenance&lt;/strong&gt;
+      &lt;span class="bs-banner-message"&gt;
+        Maintenance begins at 02:00 UTC and should take 15 minutes.
+      &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;a class="bs-banner-action" href="/status"&gt;View status&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="banners-dismissible-banner">Dismissible banner</h3>
+            <div class="docs-demo docs-banner-demo" data-component-example="banner-dismissible">
+              <div class="bs-banner bs-banner-warning" role="status" data-bs-banner="" data-bs-state="visible">
+                <div class="bs-banner-inner">
+                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <div class="bs-banner-content"><strong class="bs-banner-title">Development preview</strong><span class="bs-banner-message">You are viewing unreleased changes.</span></div>
+                  <a class="bs-banner-action" href="https://boobstrap.org/">Visit live site</a>
+                  <button class="bs-banner-dismiss" type="button" data-bs-banner-dismiss="" aria-label="Dismiss development preview banner">
+                    <svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete dismissible banner</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete dismissible banner code example"><code class="">&lt;div
+  class="bs-banner bs-banner-warning"
+  role="status"
+  data-bs-banner
+&gt;
+  &lt;div class="bs-banner-inner"&gt;
+    &lt;svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
+      &lt;path d="M12 3 2 21h20L12 3Z"&gt;&lt;/path&gt;
+      &lt;path d="M12 9v5M12 18h.01"&gt;&lt;/path&gt;
+    &lt;/svg&gt;
+    &lt;div class="bs-banner-content"&gt;
+      &lt;strong class="bs-banner-title"&gt;Development preview&lt;/strong&gt;
+      &lt;span class="bs-banner-message"&gt;You are viewing unreleased changes.&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;a class="bs-banner-action" href="https://example.com/"&gt;Visit live site&lt;/a&gt;
+    &lt;button
+      class="bs-banner-dismiss"
+      type="button"
+      data-bs-banner-dismiss
+      aria-label="Dismiss development preview banner"
+    &gt;
+      &lt;svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"&gt;
+        &lt;path d="m6 6 12 12M18 6 6 18"&gt;&lt;/path&gt;
+      &lt;/svg&gt;
+    &lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialize banners</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialize banners code example"><code class="">import "@boobstrap/boobstrap";
+import { initBanners } from "@boobstrap/boobstrap/js/banner";
+
+const banners = initBanners(document);
+
+// A banner can be restored later through its controller.
+banners[0].show();</code></pre></div>
+
+            <div class="docs-example-guidance" aria-label="Banner guidance">
+              <div><h3>Placement</h3><p>Place the banner outside the page container for a viewport-wide background. <code class="bs-code-inline">.bs-banner-inner</code> constrains and aligns its contents.</p></div>
+              <div><h3>Semantics</h3><p>Use <code class="bs-code-inline">role="status"</code> for non-urgent information. Reserve <code class="bs-code-inline">role="alert"</code> for urgent content that should be announced immediately.</p></div>
+              <div><h3>Dismissal</h3><p>Dismissal is optional. Add <code class="bs-code-inline">data-bs-banner</code> and a named <code class="bs-code-inline">data-bs-banner-dismiss</code> button only when hiding the message is safe.</p></div>
+            </div>
+            <div class="docs-api">
+              <h3 id="banners-banner-api">Banner API</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class or hook</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-banner</code></td><td>Full-width contextual background and boundary.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-banner-inner</code></td><td>Responsive icon, content, action, and dismissal layout.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-banner-{primary|info|success|warning|danger}</code></td><td>Contextual accent, background, and focus colors.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-banner-icon</code></td><td>Decorative or contextual icon slot.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-banner-content</code>, <code class="bs-code-inline">.bs-banner-title</code>, <code class="bs-code-inline">.bs-banner-message</code></td><td>Flexible message content.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-banner-action</code></td><td>Optional destination or recovery action.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-banner</code>, <code class="bs-code-inline">data-bs-banner-dismiss</code></td><td>Optional dismiss/show controller and trigger.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

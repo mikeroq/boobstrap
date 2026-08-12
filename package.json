@@ -6,9 +6,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "framework:dev": "node scripts/use-framework-dev.mjs",
+    "framework:sync": "node scripts/use-framework-dev.mjs --sync",
+    "build": "vite build && node scripts/generate-doc-route-pages.mjs && node scripts/generate-social-images.mjs",
     "preview": "vite preview",
-    "test": "npm run build && node tests/smoke.mjs"
+    "test": "npm run build && node tests/smoke.mjs && node tests/dev-banner.mjs"
   },
   "keywords": [
     "boobstrap",
@@ -16,10 +18,18 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@boobstrap/boobstrap": "0.3.1"
+    "@boobstrap/boobstrap": "0.4.0",
+    "datatables.net": "3.0.1",
+    "highlight.js": "^11.11.1",
+    "html-react-parser": "^6.1.5",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "react-router-dom": "^7.18.2"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.2.0",
     "playwright": "^1.62.1",
+    "sharp": "^0.35.3",
     "vite": "^7.1.1"
   }
 }

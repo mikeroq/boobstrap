@@ -1,0 +1,85 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Tables</span><span aria-hidden="true">/</span><span>DataTables.net</span></nav><div class="docs-kicker">Tables</div><h1>DataTables.net</h1><p class="bs-lead">Install and initialize the Boobstrap DataTables 3 adapter with a fully functional search, sorting, page-length, and pagination example.</p><div class="docs-component-meta" aria-label="DataTables.net documentation summary"><span class="bs-badge bs-text-xs"><strong>Tables</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="table-datatables">
+            <div class="docs-kicker">Tables</div>
+            <h2>DataTables.net</h2>
+            <p>Add DataTables 3 search, ordering, paging, and result updates to a semantic Boobstrap table without loading a second visual theme. The example below is live and fully functional.</p>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Compatibility:</strong> use the dependency-free <a href="https://datatables.net/">DataTables 3</a> package. Do not load <code class="bs-code-inline">datatables.net-dt</code> or its default CSS alongside the Boobstrap adapter.</span></div>
+            <h3 aria-level="2" id="table-datatables-fully-functional-datatables-net-integration">Fully functional DataTables.net integration</h3><p>This live DataTables 3 example supports client-side search, column sorting, page-length changes, result counts, and pagination. Try every control: the generated interface is styled entirely by Boobstrap tokens.</p><div class="docs-demo" id="datatable-customer-directory" data-component-example="datatable-customer-directory"><div class="bs-datatable">
+  <table class="bs-table bs-table-striped bs-table-hover" id="customer-directory" data-datatables-demo="">
+    <caption>Customer directory</caption>
+    <thead><tr><th scope="col">Customer</th><th scope="col">Role</th><th scope="col">Office</th><th scope="col">Joined</th><th scope="col">Status</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">Avery Morgan</th><td>Engineering lead</td><td>London</td><td data-order="2026-07-28">Jul 28, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Kai Patel</th><td>Product designer</td><td>Toronto</td><td data-order="2026-07-22">Jul 22, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Sam Rivera</th><td>Support manager</td><td>Austin</td><td data-order="2026-07-19">Jul 19, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Jordan Lee</th><td>Data analyst</td><td>Singapore</td><td data-order="2026-07-14">Jul 14, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Noor Hassan</th><td>Security engineer</td><td>Berlin</td><td data-order="2026-07-09">Jul 9, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Taylor Brooks</th><td>Account executive</td><td>New York</td><td data-order="2026-06-30">Jun 30, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Emi Tanaka</th><td>Frontend engineer</td><td>Tokyo</td><td data-order="2026-06-24">Jun 24, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Robin Clarke</th><td>Content strategist</td><td>Dublin</td><td data-order="2026-06-18">Jun 18, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Priya Shah</th><td>Product manager</td><td>Mumbai</td><td data-order="2026-06-11">Jun 11, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Casey Nguyen</th><td>QA engineer</td><td>Sydney</td><td data-order="2026-06-03">Jun 3, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Morgan Okafor</th><td>Finance director</td><td>Lagos</td><td data-order="2026-05-27">May 27, 2026</td><td><span class="bs-badge">Invited</span></td></tr>
+      <tr><th scope="row">Alexis Martin</th><td>Solutions architect</td><td>Paris</td><td data-order="2026-05-16">May 16, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+      <tr><th scope="row">Drew Wilson</th><td>Operations lead</td><td>Chicago</td><td data-order="2026-05-08">May 8, 2026</td><td><span class="bs-badge bs-badge-primary">Active</span></td></tr>
+    </tbody>
+  </table>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · DataTables customer directory</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · DataTables customer directory code example"><code class="">&lt;div class="bs-datatable"&gt;
+  &lt;table class="bs-table bs-table-striped bs-table-hover" id="customer-directory" data-datatables-demo&gt;
+    &lt;caption&gt;Customer directory&lt;/caption&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th scope="col"&gt;Customer&lt;/th&gt;&lt;th scope="col"&gt;Role&lt;/th&gt;&lt;th scope="col"&gt;Office&lt;/th&gt;&lt;th scope="col"&gt;Joined&lt;/th&gt;&lt;th scope="col"&gt;Status&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Avery Morgan&lt;/th&gt;&lt;td&gt;Engineering lead&lt;/td&gt;&lt;td&gt;London&lt;/td&gt;&lt;td data-order="2026-07-28"&gt;Jul 28, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Kai Patel&lt;/th&gt;&lt;td&gt;Product designer&lt;/td&gt;&lt;td&gt;Toronto&lt;/td&gt;&lt;td data-order="2026-07-22"&gt;Jul 22, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Sam Rivera&lt;/th&gt;&lt;td&gt;Support manager&lt;/td&gt;&lt;td&gt;Austin&lt;/td&gt;&lt;td data-order="2026-07-19"&gt;Jul 19, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge"&gt;Invited&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Jordan Lee&lt;/th&gt;&lt;td&gt;Data analyst&lt;/td&gt;&lt;td&gt;Singapore&lt;/td&gt;&lt;td data-order="2026-07-14"&gt;Jul 14, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Noor Hassan&lt;/th&gt;&lt;td&gt;Security engineer&lt;/td&gt;&lt;td&gt;Berlin&lt;/td&gt;&lt;td data-order="2026-07-09"&gt;Jul 9, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge"&gt;Invited&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Taylor Brooks&lt;/th&gt;&lt;td&gt;Account executive&lt;/td&gt;&lt;td&gt;New York&lt;/td&gt;&lt;td data-order="2026-06-30"&gt;Jun 30, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Emi Tanaka&lt;/th&gt;&lt;td&gt;Frontend engineer&lt;/td&gt;&lt;td&gt;Tokyo&lt;/td&gt;&lt;td data-order="2026-06-24"&gt;Jun 24, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Robin Clarke&lt;/th&gt;&lt;td&gt;Content strategist&lt;/td&gt;&lt;td&gt;Dublin&lt;/td&gt;&lt;td data-order="2026-06-18"&gt;Jun 18, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge"&gt;Invited&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Priya Shah&lt;/th&gt;&lt;td&gt;Product manager&lt;/td&gt;&lt;td&gt;Mumbai&lt;/td&gt;&lt;td data-order="2026-06-11"&gt;Jun 11, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Casey Nguyen&lt;/th&gt;&lt;td&gt;QA engineer&lt;/td&gt;&lt;td&gt;Sydney&lt;/td&gt;&lt;td data-order="2026-06-03"&gt;Jun 3, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Morgan Okafor&lt;/th&gt;&lt;td&gt;Finance director&lt;/td&gt;&lt;td&gt;Lagos&lt;/td&gt;&lt;td data-order="2026-05-27"&gt;May 27, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge"&gt;Invited&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Alexis Martin&lt;/th&gt;&lt;td&gt;Solutions architect&lt;/td&gt;&lt;td&gt;Paris&lt;/td&gt;&lt;td data-order="2026-05-16"&gt;May 16, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+      &lt;tr&gt;&lt;th scope="row"&gt;Drew Wilson&lt;/th&gt;&lt;td&gt;Operations lead&lt;/td&gt;&lt;td&gt;Chicago&lt;/td&gt;&lt;td data-order="2026-05-08"&gt;May 8, 2026&lt;/td&gt;&lt;td&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Active&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="table-datatables-install-datatables-3">Install DataTables 3</h3><p>Install the dependency-free DataTables core. Do not import its default styling package—the Boobstrap adapter supplies the complete presentation layer.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · Install DataTables</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · Install DataTables code example"><code data-language="bash" class="">npm install @boobstrap/boobstrap datatables.net</code></pre></div><h3 aria-level="2" id="table-datatables-initialize-the-live-table">Initialize the live table</h3><p>DataTables owns search, ordering, paging, and result updates. After initialization, name the generated overflow cell so keyboard users can reach columns beyond the viewport.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · DataTables initialization</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · DataTables initialization code example"><code data-language="javascript" class="">import "@boobstrap/boobstrap/dist/boobstrap.css";
+import DataTable from "datatables.net";
+
+const table = document.querySelector("#customer-directory");
+
+new DataTable(table, {
+  pageLength: 5,
+  lengthMenu: [5, 10, 25],
+  order: [[3, "desc"]],
+  layout: {
+    topStart: { pageLength: { menu: [5, 10, 25] } },
+    topEnd: { search: { placeholder: "Name, role, or office" } },
+    bottomStart: "info",
+    bottomEnd: { paging: { buttons: 3 } },
+  },
+  language: {
+    entries: { _: "customers", 1: "customer" },
+    search: "Search customers:",
+    zeroRecords: "No customers match that search.",
+  },
+});
+
+const region = table.closest(".dt-layout-table")
+  ?.querySelector(":scope &gt; .dt-layout-cell");
+
+region?.setAttribute("role", "region");
+region?.setAttribute("tabindex", "0");
+region?.setAttribute("aria-label", "Customer directory results");</code></pre></div><div class="docs-example-guidance" aria-label="table datatables guidance"><div><h3>Version</h3><p>The adapter targets dependency-free DataTables 3. Import <code class="bs-code-inline">datatables.net</code> and do not load the package’s default visual theme.</p></div><div><h3>Class map</h3><p>Wrap the source table in <code class="bs-code-inline">.bs-datatable</code> and keep <code class="bs-code-inline">.bs-table</code> plus any table modifiers on the table itself.</p></div><div><h3>Accessibility</h3><p>DataTables maintains control state and result information. Give its generated overflow cell a region role, keyboard target, and accessible name after initialization.</p></div></div><div class="docs-api">
+              <h3 id="table-datatables-datatables-adapter-api">DataTables adapter API</h3>
+              <p>Boobstrap owns presentation; DataTables owns generated controls, data state, and ARIA updates. Keep the source table semantic before initialization.</p>
+              <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="DataTables adapter class reference"><table class="docs-table bs-table"><caption class="bs-sr-only">DataTables adapter classes and their purposes</caption><thead><tr><th scope="col">Class</th><th scope="col">Purpose</th><th scope="col">Use it on</th></tr></thead><tbody>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-datatable</code></th><td>Scopes token-driven presentation for generated search, page-length, information, sorting, overflow, processing, and pagination controls.</td><td>A wrapper around the source table before initialization.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table</code></th><td>Preserves the framework table treatment after DataTables enhances the markup.</td><td>The source table.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-striped</code></th><td>Optionally adds alternating row surfaces.</td><td>The source table.</td></tr>
+                <tr><th scope="row"><code class="bs-code-inline">.bs-table-hover</code></th><td>Optionally adds pointer and keyboard-focus row feedback.</td><td>The source table.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

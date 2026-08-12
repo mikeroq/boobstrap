@@ -1,0 +1,93 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Input groups and icons</span></nav><div class="docs-kicker">Forms</div><h1>Input groups and icons</h1><p class="bs-lead">Compose inputs with prefixed or suffixed text, buttons, selects, and inline icons.</p><div class="docs-component-meta" aria-label="Input groups and icons documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="form-input-groups">
+            <div class="docs-kicker">Forms</div>
+            <h2>Input groups and icons</h2>
+            <p>Attach contextual text, controls, or actions to an input, or place decorative icons inside the control boundary.</p>
+
+            <h3 aria-level="2" id="form-input-groups-text-prefix-and-suffix">Text prefix and suffix</h3>
+            <div class="docs-demo" data-component-example="form-input-group-text">
+              <form data-docs-form="">
+                <div class="bs-form-group">
+                  <label class="bs-label" for="group-price">Price</label>
+                  <div class="bs-input-group">
+                    <span class="bs-input-group-text" aria-hidden="true">$</span>
+                    <input class="bs-input" id="group-price" name="price" inputmode="decimal" value="49.00" aria-describedby="group-price-currency">
+                    <span class="bs-input-group-text" id="group-price-currency">USD</span>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Text prefix and suffix code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="price"&gt;Price&lt;/label&gt;
+  &lt;div class="bs-input-group"&gt;
+    &lt;span class="bs-input-group-text" aria-hidden="true"&gt;$&lt;/span&gt;
+    &lt;input
+      class="bs-input"
+      id="price"
+      name="price"
+      inputmode="decimal"
+      aria-describedby="price-currency"
+    /&gt;
+    &lt;span class="bs-input-group-text" id="price-currency"&gt;USD&lt;/span&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-input-groups-button-add-on">Button add-on</h3>
+            <div class="docs-demo" data-component-example="form-input-group-button"><div class="bs-form-group"><label class="bs-label" for="group-domain">Domain</label><div class="bs-input-group"><span class="bs-input-group-text">https://</span><input class="bs-input" id="group-domain" name="domain" value="example.com"><button class="bs-btn bs-btn-secondary" type="button">Verify</button></div></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Button add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Button add-on code example"><code class="">&lt;div class="bs-input-group"&gt;
+  &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
+  &lt;input class="bs-input" aria-label="Domain" /&gt;
+  &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-input-groups-select-add-on">Select add-on</h3>
+            <div class="docs-demo" data-component-example="form-input-group-select"><div class="bs-form-group"><label class="bs-label" for="group-search">Repository</label><div class="bs-input-group"><select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select><input class="bs-input" id="group-search" name="repository" placeholder="Repository name"></div></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Select add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Select add-on code example"><code class="">&lt;div class="bs-input-group"&gt;
+  &lt;select class="bs-select" aria-label="Repository owner"&gt;&lt;option&gt;mikeroq&lt;/option&gt;&lt;/select&gt;
+  &lt;input class="bs-input" aria-label="Repository name" /&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-input-groups-start-icon">Start icon</h3>
+            <div class="docs-demo" data-component-example="form-input-icon-start">
+              <form data-docs-form="">
+                <div class="bs-form-group">
+                  <label class="bs-label" for="icon-search">Search projects</label>
+                  <div class="bs-input-wrap">
+                    <svg class="bs-input-icon bs-input-icon-start" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.35-4.35"></path></svg>
+                    <input class="bs-input bs-input-has-icon-start" id="icon-search" name="query" type="search" placeholder="Search projects">
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Start icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Start icon code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="search"&gt;Search projects&lt;/label&gt;
+  &lt;div class="bs-input-wrap"&gt;
+    &lt;svg
+      class="bs-input-icon bs-input-icon-start"
+      viewBox="0 0 24 24"
+      aria-hidden="true"
+    &gt;
+      &lt;circle cx="11" cy="11" r="8"&gt;&lt;/circle&gt;
+      &lt;path d="m21 21-4.35-4.35"&gt;&lt;/path&gt;
+    &lt;/svg&gt;
+    &lt;input
+      class="bs-input bs-input-has-icon-start"
+      id="search"
+      name="query"
+      type="search"
+      placeholder="Search projects"
+    /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-input-groups-end-icon">End icon</h3>
+            <div class="docs-demo" data-component-example="form-input-icon-end"><div class="bs-form-group"><label class="bs-label" for="icon-email">Verified email</label><div class="bs-input-wrap"><input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com"><svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg></div></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · End icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · End icon code example"><code class="">&lt;div class="bs-input-wrap"&gt;
+  &lt;input class="bs-input bs-input-has-icon-end" type="email" aria-label="Verified email" /&gt;
+  &lt;svg class="bs-input-icon bs-input-icon-end" viewBox="0 0 24 24" aria-hidden="true"&gt;
+    &lt;path d="m5 12 4 4L19 6"&gt;&lt;/path&gt;
+  &lt;/svg&gt;
+&lt;/div&gt;</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Icon responsibility:</strong> decorative icons use <code class="bs-code-inline">aria-hidden="true"</code>; the visible label still names the control. When the icon communicates status, pair it with visible or screen-reader text outside the SVG.</span></div>
+          </section>

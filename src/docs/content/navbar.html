@@ -1,0 +1,114 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Navigation</span></nav><div class="docs-kicker">Components</div><h1>Navigation</h1><p class="bs-lead">Build semantic headers, vertical navigation, breadcrumb trails, and previous/next page navigation with Boobstrap components.</p><div class="docs-component-meta" aria-label="Navigation documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="navbar">
+            <div class="docs-kicker">Components</div>
+            <h2>Navigation</h2>
+            <p>Boobstrap provides complementary navigation patterns for application headers, vertical link groups, breadcrumb trails, and previous/next article links. Use the dedicated Sidebar component when navigation becomes an application shell, drawer, or collapsible rail.</p>
+            <div class="docs-demo" data-component-example="navbar">
+              <header class="bs-navbar bs-card bs-card-subtle bs-card-compact">
+                <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#navbar">
+                  <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z"></path></svg>
+                  Acme
+                </a>
+                <nav class="bs-flex bs-items-center bs-gap-2" aria-label="Example primary navigation">
+                  <a class="bs-navbar-link" href="#features-example">Features</a>
+                  <a class="bs-navbar-link" href="/docs/components/forms/inputs">Forms</a>
+                </nav>
+                <button class="bs-navbar-toggle" type="button" aria-label="Open navigation menu"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+              </header>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="navbar" data-copy="&lt;header class=&quot;bs-navbar&quot;&gt;
+  &lt;a class=&quot;bs-navbar-brand&quot; href=&quot;/&quot;&gt;Acme&lt;/a&gt;
+  &lt;nav class=&quot;bs-flex bs-items-center bs-gap-2&quot; aria-label=&quot;Primary navigation&quot;&gt;
+    &lt;a class=&quot;bs-navbar-link&quot; href=&quot;#features&quot;&gt;Features&lt;/a&gt;
+    &lt;a class=&quot;bs-navbar-link&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;button class=&quot;bs-navbar-toggle&quot; type=&quot;button&quot; aria-label=&quot;Open navigation menu&quot;&gt;…&lt;/button&gt;
+&lt;/header&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete example code example"><code class="">&lt;header class="bs-navbar"&gt;
+  &lt;a class="bs-navbar-brand" href="/"&gt;Acme&lt;/a&gt;
+  &lt;nav class="bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation"&gt;
+    &lt;a class="bs-navbar-link" href="#features"&gt;Features&lt;/a&gt;
+  &lt;/nav&gt;
+  &lt;button class="bs-navbar-toggle" aria-label="Open navigation menu"&gt;…&lt;/button&gt;
+&lt;/header&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance" aria-label="Navigation guidance">
+              <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, a vertical nav for a short destination list, breadcrumbs for hierarchy, and page navigation for a linear reading sequence. Use <a href="/docs/components/sidebar">Sidebar</a> for an application rail or drawer.</p></div>
+              <div><h3>Current state</h3><p>Add <code class="bs-code-inline">aria-current="page"</code> to the current destination. Do not rely on color or font weight alone to communicate which page is active.</p></div>
+              <div><h3>Landmarks</h3><p>Keep destinations as real links. Give each <code class="bs-code-inline">&lt;nav&gt;</code> a distinct accessible label when the page contains multiple navigation landmarks.</p></div>
+            </div>
+            <h3 aria-level="2" id="navbar-grouped-vertical-navigation">Grouped vertical navigation</h3><p>Use grouped navigation for persistent sidebars. Mark the current destination with aria-current and indent only true child destinations.</p><div class="docs-demo" id="nav-vertical" data-component-example="nav-vertical"><nav class="bs-nav" aria-label="Project navigation">
+  <div class="bs-nav-group">
+    <p class="bs-nav-heading">Workspace</p>
+    <a class="bs-nav-link" href="#navbar" aria-current="page">Overview</a>
+    <a class="bs-nav-link bs-nav-link-subitem" href="#navbar">Members</a>
+    <a class="bs-nav-link bs-nav-link-subitem" href="#navbar">Settings</a>
+  </div>
+  <div class="bs-nav-group">
+    <p class="bs-nav-heading">Resources</p>
+    <a class="bs-nav-link" href="#navbar">Documentation</a>
+  </div>
+</nav></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Grouped vertical navigation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Grouped vertical navigation code example"><code class="">&lt;nav class="bs-nav" aria-label="Project navigation"&gt;
+  &lt;div class="bs-nav-group"&gt;
+    &lt;p class="bs-nav-heading"&gt;Workspace&lt;/p&gt;
+    &lt;a class="bs-nav-link" href="#navbar" aria-current="page"&gt;Overview&lt;/a&gt;
+    &lt;a class="bs-nav-link bs-nav-link-subitem" href="#navbar"&gt;Members&lt;/a&gt;
+    &lt;a class="bs-nav-link bs-nav-link-subitem" href="#navbar"&gt;Settings&lt;/a&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-nav-group"&gt;
+    &lt;p class="bs-nav-heading"&gt;Resources&lt;/p&gt;
+    &lt;a class="bs-nav-link" href="#navbar"&gt;Documentation&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/nav&gt;</code></pre></div><h3 aria-level="2" id="navbar-breadcrumb-trail">Breadcrumb trail</h3><p>Breadcrumbs show the current page's position in a hierarchy. Keep the final item as plain text and identify the landmark with an accessible label.</p><div class="docs-demo" id="nav-breadcrumb" data-component-example="nav-breadcrumb"><nav class="bs-breadcrumb" aria-label="Breadcrumb">
+  <a href="/docs">Docs</a>
+  <span aria-hidden="true">/</span>
+  <a href="/docs/components">Components</a>
+  <span aria-hidden="true">/</span>
+  <span aria-current="page">Navigation</span>
+</nav></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Breadcrumb</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Breadcrumb code example"><code class="">&lt;nav class="bs-breadcrumb" aria-label="Breadcrumb"&gt;
+  &lt;a href="/docs"&gt;Docs&lt;/a&gt;
+  &lt;span aria-hidden="true"&gt;/&lt;/span&gt;
+  &lt;a href="/docs/components"&gt;Components&lt;/a&gt;
+  &lt;span aria-hidden="true"&gt;/&lt;/span&gt;
+  &lt;span aria-current="page"&gt;Navigation&lt;/span&gt;
+&lt;/nav&gt;</code></pre></div><h3 aria-level="2" id="navbar-previous-and-next-page-navigation">Previous and next page navigation</h3><p>Place page navigation after the article so readers can continue in either direction without returning to the sidebar.</p><div class="docs-demo" id="nav-page" data-component-example="nav-page"><nav class="bs-page-nav" aria-label="Documentation pages">
+  <a class="bs-page-nav-link" href="/docs/components/cards">
+    <span class="bs-page-nav-context">Previous</span>
+    <span class="bs-page-nav-title">Cards</span>
+  </a>
+  <a class="bs-page-nav-link" href="/docs/components/tables">
+    <span class="bs-page-nav-context">Next</span>
+    <span class="bs-page-nav-title">Tables</span>
+  </a>
+</nav></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Previous and next pages</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Previous and next pages code example"><code class="">&lt;nav class="bs-page-nav" aria-label="Documentation pages"&gt;
+  &lt;a class="bs-page-nav-link" href="/docs/components/cards"&gt;
+    &lt;span class="bs-page-nav-context"&gt;Previous&lt;/span&gt;
+    &lt;span class="bs-page-nav-title"&gt;Cards&lt;/span&gt;
+  &lt;/a&gt;
+  &lt;a class="bs-page-nav-link" href="/docs/components/tables"&gt;
+    &lt;span class="bs-page-nav-context"&gt;Next&lt;/span&gt;
+    &lt;span class="bs-page-nav-title"&gt;Tables&lt;/span&gt;
+  &lt;/a&gt;
+&lt;/nav&gt;</code></pre></div><div class="docs-api">
+              <h3 id="navbar-navigation-class-api">Navigation class API</h3>
+              <p>All navigation classes are CSS-only. Add application behavior to <code class="bs-code-inline">.bs-navbar-toggle</code> when it reveals or hides a responsive menu, including synchronized <code class="bs-code-inline">aria-expanded</code> and focus handling.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-navbar</code></td><td>Aligns the brand, navigation, and menu control in a full-width header row.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-navbar-brand</code></td><td>Styles the product or site identity link.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-navbar-link</code></td><td>Styles navigation destinations with hover and current-page states.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-navbar-toggle</code></td><td>Provides an icon-sized menu control with visible interaction states.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-nav</code></td><td>Creates a vertical navigation stack with consistent spacing.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-nav-group</code></td><td>Groups related destinations and separates adjacent groups.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-nav-heading</code></td><td>Styles a non-interactive label for a navigation group.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-nav-link</code></td><td>Styles a vertical destination and its <code class="bs-code-inline">aria-current</code> state.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-nav-link-subitem</code></td><td>Indents a destination that is conceptually nested under another item.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-breadcrumb</code></td><td>Arranges a compact hierarchy trail with wrapping and muted separators.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-page-nav</code></td><td>Lays out previous and next article links in a responsive pair.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-page-nav-link</code></td><td>Creates a bordered page destination with hover and focus treatment.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-page-nav-context</code></td><td>Styles the short directional label, such as “Previous” or “Next.”</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-page-nav-title</code></td><td>Styles the destination page title as the primary link text.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

@@ -1,0 +1,156 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Tabs</span></nav><div class="docs-kicker">Interactivity</div><h1>Tabs</h1><p class="bs-lead">Organize related panels with automatic activation, roving focus, and synchronized ARIA state.</p><div class="docs-component-meta" aria-label="Tabs documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="tabs">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Tabs</h2>
+            <p>Tabs use automatic activation and a roving <code class="bs-code-inline">tabindex</code>. Horizontal lists use Left/Right; vertical lists use Up/Down. Both support <kbd>Home</kbd> and <kbd>End</kbd>.</p>
+            <div class="docs-demo interaction-demo" data-component-example="tabs">
+              <div class="bs-tabs" role="tablist" aria-label="Account settings" data-bs-tabs="">
+                <button class="bs-tab" id="docs-profile-tab" type="button" role="tab" aria-controls="docs-profile-panel" aria-selected="true" tabindex="0" data-bs-state="active">Profile</button>
+                <button class="bs-tab" id="docs-security-tab" type="button" role="tab" aria-controls="docs-security-panel" aria-selected="false" tabindex="-1" data-bs-state="inactive">Security</button>
+              </div>
+              <div class="bs-tab-panel" id="docs-profile-panel" role="tabpanel" aria-labelledby="docs-profile-tab" data-bs-state="active">Profile settings</div>
+              <div class="bs-tab-panel" id="docs-security-panel" role="tabpanel" aria-labelledby="docs-security-tab" hidden="" data-bs-state="inactive">Security settings</div>
+            </div>
+            <div class="docs-code-block bs-code-window" data-code-variants="">
+              <div class="docs-code-label bs-code-header"><span data-code-label="">HTML · Boobstrap JS</span><button type="button" data-copy-example="tabs" data-copy="&lt;div class=&quot;bs-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;Account&quot; data-bs-tabs&gt;
+  &lt;button class=&quot;bs-tab&quot; id=&quot;profile-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;profile-panel&quot; aria-selected=&quot;true&quot;&gt;Profile&lt;/button&gt;
+  &lt;button class=&quot;bs-tab&quot; id=&quot;security-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;security-panel&quot;&gt;Security&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot;&gt;Profile settings&lt;/div&gt;
+&lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;security-tab&quot; hidden&gt;Security settings&lt;/div&gt;" class="bs-code-action" data-copy-variant="js">Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Tabs code framework">
+                <button id="tabs-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="tabs-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
+                <button id="tabs-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
+                <button id="tabs-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+              </div>
+              <div id="tabs-js-code-panel" role="tabpanel" aria-labelledby="tabs-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;div class=&quot;bs-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;Account&quot; data-bs-tabs&gt;
+  &lt;button class=&quot;bs-tab&quot; id=&quot;profile-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;profile-panel&quot; aria-selected=&quot;true&quot;&gt;Profile&lt;/button&gt;
+  &lt;button class=&quot;bs-tab&quot; id=&quot;security-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;security-panel&quot;&gt;Security&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot;&gt;Profile settings&lt;/div&gt;
+&lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;security-tab&quot; hidden&gt;Security settings&lt;/div&gt;">
+                <pre><code class="">&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
+  &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
+    aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
+  &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
+    aria-controls="security-panel"&gt;Security&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel"
+  aria-labelledby="profile-tab"&gt;Profile settings&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="security-panel" role="tabpanel"
+  aria-labelledby="security-tab" hidden&gt;Security settings&lt;/div&gt;</code></pre>
+              </div>
+              <div id="tabs-alpine-code-panel" role="tabpanel" aria-labelledby="tabs-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source="&lt;section x-data=&quot;bsTabs&quot;&gt;
+  &lt;div class=&quot;bs-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;Account&quot; x-bind=&quot;tablist&quot;&gt;
+    &lt;button class=&quot;bs-tab&quot; id=&quot;profile-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; x-bind=&quot;tab&quot; aria-controls=&quot;profile-panel&quot; aria-selected=&quot;true&quot;&gt;Profile&lt;/button&gt;
+    &lt;button class=&quot;bs-tab&quot; id=&quot;security-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; x-bind=&quot;tab&quot; aria-controls=&quot;security-panel&quot;&gt;Security&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot; x-bind=&quot;panel&quot;&gt;Profile settings&lt;/div&gt;
+  &lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;security-tab&quot; x-bind=&quot;panel&quot; hidden&gt;Security settings&lt;/div&gt;
+&lt;/section&gt;" hidden="">
+                <pre><code class="">&lt;section x-data="bsTabs"&gt;
+  &lt;div class="bs-tabs" role="tablist" aria-label="Account" x-bind="tablist"&gt;
+    &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
+      x-bind="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
+    &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
+      x-bind="tab" aria-controls="security-panel"&gt;Security&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="profile-panel" role="tabpanel"
+    aria-labelledby="profile-tab" x-bind="panel"&gt;Profile settings&lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="security-panel" role="tabpanel"
+    aria-labelledby="security-tab" x-bind="panel" hidden&gt;Security settings&lt;/div&gt;
+&lt;/section&gt;</code></pre>
+              </div>
+              <div id="tabs-react-code-panel" role="tabpanel" aria-labelledby="tabs-react-code-tab" data-code-variant-panel="react" data-copy-source="function Account() {
+  const tabs = useTabs({ defaultSelectedId: &quot;profile-tab&quot; });
+
+  return (
+    &lt;&gt;
+      &lt;div className=&quot;bs-tabs&quot; aria-label=&quot;Account&quot; {...tabs.getTablistProps()}&gt;
+        &lt;button className=&quot;bs-tab&quot; {...tabs.getTabProps({ id: &quot;profile-tab&quot;, controls: &quot;profile-panel&quot; })}&gt;Profile&lt;/button&gt;
+        &lt;button className=&quot;bs-tab&quot; {...tabs.getTabProps({ id: &quot;security-tab&quot;, controls: &quot;security-panel&quot; })}&gt;Security&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div className=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; {...tabs.getPanelProps({ tabId: &quot;profile-tab&quot; })}&gt;Profile settings&lt;/div&gt;
+      &lt;div className=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; {...tabs.getPanelProps({ tabId: &quot;security-tab&quot; })}&gt;Security settings&lt;/div&gt;
+    &lt;/&gt;
+  );
+}" hidden="">
+                <pre><code class="">function Account() {
+  const tabs = useTabs({ defaultSelectedId: "profile-tab" });
+
+  return (
+    &lt;&gt;
+      &lt;div className="bs-tabs" aria-label="Account" {...tabs.getTablistProps()}&gt;
+        &lt;button className="bs-tab" {...tabs.getTabProps({
+          id: "profile-tab", controls: "profile-panel"
+        })}&gt;Profile&lt;/button&gt;
+        &lt;button className="bs-tab" {...tabs.getTabProps({
+          id: "security-tab", controls: "security-panel"
+        })}&gt;Security&lt;/button&gt;
+      &lt;/div&gt;
+      &lt;div className="bs-tab-panel" id="profile-panel"
+        {...tabs.getPanelProps({ tabId: "profile-tab" })}&gt;
+        Profile settings
+      &lt;/div&gt;
+      &lt;div className="bs-tab-panel" id="security-panel"
+        {...tabs.getPanelProps({ tabId: "security-tab" })}&gt;
+        Security settings
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>Each tab's <code class="bs-code-inline">aria-controls</code> and panel's <code class="bs-code-inline">aria-labelledby</code> form a two-way relationship.</p></div>
+              <div><h3>State</h3><p>The selected tab gets <code class="bs-code-inline">aria-selected="true"</code>; every inactive panel uses <code class="bs-code-inline">hidden</code>.</p></div>
+              <div><h3>Accessibility</h3><p>Use tabs only when panels are peer views. Preserve meaningful headings inside complex panels.</p></div>
+            </div>
+            <h3 aria-level="2" id="tabs-pill-tabs">Pill tabs</h3><p>Use the pills modifier for a compact view switcher. It changes presentation only; the same tab roles, relationships, and controller behavior still apply.</p><div class="docs-demo" id="tabs-pills" data-component-example="tabs-pills"><div class="bs-tabs bs-tabs-pills" role="tablist" aria-label="Report period" data-bs-tabs="">
+  <button class="bs-tab" id="pill-week-tab" type="button" role="tab" aria-controls="pill-week-panel" aria-selected="true" tabindex="0" data-bs-state="active">Week</button>
+  <button class="bs-tab" id="pill-month-tab" type="button" role="tab" aria-controls="pill-month-panel" aria-selected="false" tabindex="-1" data-bs-state="inactive">Month</button>
+</div>
+<div class="bs-tab-panel" id="pill-week-panel" role="tabpanel" aria-labelledby="pill-week-tab" data-bs-state="active">7-day report</div>
+<div class="bs-tab-panel" id="pill-month-panel" role="tabpanel" aria-labelledby="pill-month-tab" hidden="" data-bs-state="inactive">30-day report</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Pill tabs</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Pill tabs code example"><code class="">&lt;div class="bs-tabs bs-tabs-pills" role="tablist" aria-label="Report period" data-bs-tabs&gt;
+  &lt;button class="bs-tab" id="pill-week-tab" type="button" role="tab" aria-controls="pill-week-panel" aria-selected="true"&gt;Week&lt;/button&gt;
+  &lt;button class="bs-tab" id="pill-month-tab" type="button" role="tab" aria-controls="pill-month-panel"&gt;Month&lt;/button&gt;
+&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="pill-week-panel" role="tabpanel" aria-labelledby="pill-week-tab"&gt;7-day report&lt;/div&gt;
+&lt;div class="bs-tab-panel" id="pill-month-panel" role="tabpanel" aria-labelledby="pill-month-tab" hidden&gt;30-day report&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="tabs-contained-tabs-and-panels">Contained tabs and panels</h3><p>Pair contained tabs with contained panels when the selector and content should read as one bordered surface.</p><div class="docs-demo" id="tabs-contained" data-component-example="tabs-contained"><section aria-label="Deployment details">
+  <div class="bs-tabs bs-tabs-contained" role="tablist" aria-label="Deployment detail" data-bs-tabs="">
+    <button class="bs-tab" id="contained-summary-tab" type="button" role="tab" aria-controls="contained-summary-panel" aria-selected="true" tabindex="0" data-bs-state="active">Summary</button>
+    <button class="bs-tab" id="contained-log-tab" type="button" role="tab" aria-controls="contained-log-panel" aria-selected="false" tabindex="-1" data-bs-state="inactive">Build log</button>
+  </div>
+  <div class="bs-tab-panel bs-tab-panel-contained" id="contained-summary-panel" role="tabpanel" aria-labelledby="contained-summary-tab" data-bs-state="active">Deployment completed successfully.</div>
+  <div class="bs-tab-panel bs-tab-panel-contained" id="contained-log-panel" role="tabpanel" aria-labelledby="contained-log-tab" hidden="" data-bs-state="inactive">Build finished in 42 seconds.</div>
+</section></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Contained tabs</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Contained tabs code example"><code class="">&lt;section aria-label="Deployment details"&gt;
+  &lt;div class="bs-tabs bs-tabs-contained" role="tablist" aria-label="Deployment detail" data-bs-tabs&gt;
+    &lt;button class="bs-tab" id="contained-summary-tab" type="button" role="tab" aria-controls="contained-summary-panel" aria-selected="true"&gt;Summary&lt;/button&gt;
+    &lt;button class="bs-tab" id="contained-log-tab" type="button" role="tab" aria-controls="contained-log-panel"&gt;Build log&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-tab-panel bs-tab-panel-contained" id="contained-summary-panel" role="tabpanel" aria-labelledby="contained-summary-tab"&gt;Deployment completed successfully.&lt;/div&gt;
+  &lt;div class="bs-tab-panel bs-tab-panel-contained" id="contained-log-panel" role="tabpanel" aria-labelledby="contained-log-tab" hidden&gt;Build finished in 42 seconds.&lt;/div&gt;
+&lt;/section&gt;</code></pre></div><h3 aria-level="2" id="tabs-initialize-and-observe-tabs">Initialize and observe tabs</h3><p>The tabs controller synchronizes selection, panel visibility, roving focus, and change events.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialization and events</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialization and events code example"><code data-language="javascript" class="">import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const boobstrap = initBoobstrap(document);
+const tablist = document.querySelector("[data-bs-tabs]");
+
+tablist.addEventListener("bs:tabs:changed", (event) =&gt; {
+  console.log("Selected tab", event.detail.tab.id);
+});
+
+// Later: boobstrap.destroy();</code></pre></div><div class="docs-api">
+              <h3 id="tabs-tab-presentation-classes">Tab presentation classes</h3>
+              <p>Presentation modifiers do not change tab semantics or behavior. Apply them to the base tablist and panel classes while keeping every ARIA relationship intact.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-tabs-pills</code></td><td>Turns the base tablist into a compact pill-style view switcher.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-tabs-contained</code></td><td>Connects the tablist visually to a bordered content surface.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-tab-panel-contained</code></td><td>Adds the matching border, surface, radius, and padding to each controlled panel.</td></tr>
+              </tbody></table></div>
+              <h3 id="tabs-javascript-api">JavaScript API</h3><p>Import <code class="bs-code-inline">Tabs</code> from <code class="bs-code-inline">@boobstrap/boobstrap/js/tabs</code>.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">activate(tab)</code></td><td>Select a tab element and synchronize all controlled panels.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:tabs:change</code></td><td>Cancelable before-event with previous and next tab/panel detail.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:tabs:changed</code></td><td>Bubbling event after the completed transition.</td></tr>
+            </tbody></table></div></div>
+          </section>

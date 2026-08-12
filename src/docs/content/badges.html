@@ -1,0 +1,35 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Badges</span></nav><div class="docs-kicker">Components</div><h1>Badges</h1><p class="bs-lead">Add compact labels for status, categories, counts, and metadata.</p><div class="docs-component-meta" aria-label="Badges documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="badges">
+            <div class="docs-kicker">Components</div>
+            <h2>Badges</h2>
+            <p>Badges are compact status and metadata labels. Use the base class alone for a neutral badge or add the primary modifier.</p>
+            <div class="docs-demo bs-flex bs-flex-wrap bs-gap-3">
+              <span class="bs-badge">Draft</span>
+              <span class="bs-badge bs-badge-primary">New release</span>
+              <span class="bs-badge bs-badge-primary"><span aria-hidden="true">♥</span> Loved</span>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML</span><button type="button" data-copy="&lt;span class=&quot;bs-badge bs-badge-primary&quot;&gt;New release&lt;/span&gt;" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML code example"><code class="">&lt;span class="bs-badge bs-badge-primary"&gt;New release&lt;/span&gt;</code></pre></div>
+          <h3 aria-level="2" id="badges-default-and-primary-badges">Default and primary badges</h3><p>Use the default badge for neutral metadata and the primary variant when a label needs brand emphasis.</p><div class="docs-demo" id="badge-variants" data-component-example="badge-variants"><div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
+  <span class="bs-badge">Draft</span>
+  <span class="bs-badge bs-badge-primary">New release</span>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Badge variants</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Badge variants code example"><code class="">&lt;div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3"&gt;
+  &lt;span class="bs-badge"&gt;Draft&lt;/span&gt;
+  &lt;span class="bs-badge bs-badge-primary"&gt;New release&lt;/span&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="badges-badges-in-context">Badges in context</h3><p>Place badges beside a clear label or heading; the badge should supplement the surrounding text rather than replace it.</p><div class="docs-demo" id="badge-context" data-component-example="badge-context"><article class="bs-card">
+  <div class="bs-card-body">
+    <div class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-3">
+      <h4 class="bs-card-title bs-mb-0">API deployment</h4>
+      <span class="bs-badge bs-badge-primary">3 changes</span>
+    </div>
+    <p class="bs-card-text bs-mt-3 bs-mb-0">Ready for review by the infrastructure team.</p>
+  </div>
+</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Badge with card heading</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Badge with card heading code example"><code class="">&lt;article class="bs-card"&gt;
+  &lt;div class="bs-card-body"&gt;
+    &lt;div class="bs-flex bs-flex-wrap bs-items-center bs-justify-between bs-gap-3"&gt;
+      &lt;h4 class="bs-card-title bs-mb-0"&gt;API deployment&lt;/h4&gt;
+      &lt;span class="bs-badge bs-badge-primary"&gt;3 changes&lt;/span&gt;
+    &lt;/div&gt;
+    &lt;p class="bs-card-text bs-mt-3 bs-mb-0"&gt;Ready for review by the infrastructure team.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div><div class="docs-example-guidance" aria-label="badges guidance"><div><h3>Meaning</h3><p>Use short nouns, counts, or states. A badge is supporting metadata, not a substitute for an actionable control.</p></div><div><h3>Context</h3><p>Make the surrounding sentence or heading understandable without depending on the badge color.</p></div><div><h3>Semantics</h3><p>A plain <code class="bs-code-inline">&lt;span&gt;</code> is appropriate for static metadata. Use a button or link only when the label itself is interactive.</p></div></div></section>

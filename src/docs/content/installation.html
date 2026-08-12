@@ -1,0 +1,45 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>Installation</span></nav><div class="docs-kicker">Get started</div><h1>Installation</h1><p class="bs-lead">Install Boobstrap with npm, pnpm, Yarn, Bun, a CDN, or self-hosted assets.</p><div class="docs-component-meta" aria-label="Installation documentation summary"><span class="bs-badge bs-text-xs"><strong>Get started</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="installation">
+            <div class="docs-kicker">Get started</div>
+            <h2>Installation</h2>
+            <p>Install the same npm registry package with your preferred package manager, then import the compiled stylesheet once at your application entry point.</p>
+
+            <div class="docs-package-tabs bs-tabs bs-tabs-pills" role="tablist" aria-label="Package manager">
+              <button class="docs-package-tab bs-tab" type="button" role="tab" aria-selected="true" tabindex="0" data-package-name="npm" data-package-command="npm install @boobstrap/boobstrap">npm</button>
+              <button class="docs-package-tab bs-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-package-name="Yarn" data-package-command="yarn add @boobstrap/boobstrap">Yarn</button>
+              <button class="docs-package-tab bs-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-package-name="pnpm" data-package-command="pnpm add @boobstrap/boobstrap">pnpm</button>
+              <button class="docs-package-tab bs-tab" type="button" role="tab" aria-selected="false" tabindex="-1" data-package-name="Bun" data-package-command="bun add @boobstrap/boobstrap">Bun</button>
+            </div>
+
+            <div class="docs-code-block bs-code-window" role="tabpanel" aria-label="Installation command">
+              <div class="docs-code-label bs-code-header"><span><span data-package-label="">npm</span> · Terminal</span><button type="button" data-package-copy="" data-copy="npm install @boobstrap/boobstrap" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="npm · Terminal code example"><code data-package-command-output="" class="">npm install @boobstrap/boobstrap</code></pre>
+            </div>
+
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>JavaScript</span><button type="button" data-copy="import &quot;@boobstrap/boobstrap/dist/boobstrap.css&quot;;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="JavaScript code example"><code class="">import "@boobstrap/boobstrap/dist/boobstrap.css";</code></pre>
+            </div>
+
+            <h3 aria-level="2" id="installation-use-from-a-cdn">Use from a CDN</h3>
+            <p>For a plain HTML project, load the version-pinned stylesheet directly from jsDelivr:</p>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · jsDelivr</span><button type="button" data-copy="&lt;link rel=&quot;stylesheet&quot; href=&quot;https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.4.0/dist/boobstrap.css&quot; /&gt;" class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · jsDelivr code example"><code class="">&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.4.0/dist/boobstrap.css" /&gt;</code></pre>
+            </div>
+            <p>To self-host instead, copy <code class="bs-code-inline">dist/boobstrap.css</code> from the installed package into your assets.</p>
+
+            <div class="docs-callout bs-alert bs-alert-primary"><span>
+              <strong>Prefix guarantee</strong>
+              <p>Every public framework class starts with <code class="bs-code-inline">bs-</code>. Boobstrap does apply a small element reset and base typography, but component and utility styles stay namespaced.</p>
+            </span></div>
+          <h3 aria-level="2" id="installation-add-optional-behavior">Add optional behavior</h3><p>CSS is enough for visual components. Import the initializer only when the page uses controllers such as collapse, dropdown, tabs, masks, OTP, or dismissible banners.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Application entry</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Application entry code example"><code data-language="javascript" class="">import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const boobstrap = initBoobstrap(document);
+
+// Call when your application is torn down.
+boobstrap.destroy();</code></pre></div><h3 aria-level="2" id="installation-use-a-framework-adapter">Use a framework adapter</h3><p>Choose one owner for interactive state. Alpine and React adapters are separate packages so CSS-only projects do not download code they never execute.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · Adapter packages</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · Adapter packages code example"><code data-language="bash" class="">npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs
+# or
+npm install @boobstrap/boobstrap @boobstrap/react react</code></pre></div><div class="docs-example-guidance" aria-label="installation guidance"><div><h3>CSS first</h3><p>Import <code class="bs-code-inline">dist/boobstrap.css</code> once. Component and utility classes work without JavaScript.</p></div><div><h3>Versioning</h3><p>Pin an exact version for CDN URLs and production lockfiles so a deploy cannot silently change its visual contract.</p></div><div><h3>Behavior</h3><p>Use the core initializer, a direct controller import, or one official adapter. Do not initialize two behavior layers on the same element.</p></div></div></section>

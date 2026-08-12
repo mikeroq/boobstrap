@@ -3,6 +3,7 @@ import { mkdir, readFile } from "node:fs/promises";
 import { createServer } from "node:net";
 import { chromium } from "playwright";
 import { docsPages } from "../src/docs-pages.js";
+import { socialCardForPath, socialCards } from "../src/social-cards.js";
 
 const port = await new Promise((resolve, reject) => {
   const probe = createServer();
@@ -44,18 +45,206 @@ const expectedClasses = new Set(
     .filter((name) => name.startsWith("bs-")),
 );
 const tokenBlock = frameworkCss.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
-const expectedTokens = [...tokenBlock.matchAll(/--bs-[a-z0-9-]+\s*:/g)].length;
+const expectedTokenNames = [...tokenBlock.matchAll(/(--bs-[a-z0-9-]+)\s*:/g)].map(([, name]) => name);
+const expectedTokens = expectedTokenNames.length;
+const expectedBrandTokens = expectedTokenNames.filter((name) => name.startsWith("--bs-brand-"));
+const expectedSemanticColorTokens = expectedTokenNames.filter((name) => name.startsWith("--bs-color-"));
+const expectedThemeColorRows = expectedBrandTokens.length + (expectedSemanticColorTokens.length * 2);
+const expectedThemeColorCells = expectedThemeColorRows * 5;
 const npmPackageUrl = "https://www.npmjs.com/package/@boobstrap/boobstrap";
-const ogImageUrl = "https://boobstrap.org/og-image.jpg";
+const landingSocialCard = socialCardForPath("/");
+const escapeHtml = (value) => value
+  .replaceAll("&", "&amp;")
+  .replaceAll("<", "&lt;")
+  .replaceAll(">", "&gt;")
+  .replaceAll('"', "&quot;");
+const expectedFormExampleCounts = {
+  forms: 2,
+  "form-inputs": 7,
+  "form-input-groups": 5,
+  "form-selects": 4,
+  "form-searchable-select": 1,
+  "form-date-time": 5,
+  "form-passwords-masks": 4,
+  "form-checks-radios": 4,
+  "form-otp": 1,
+};
+const expectedTableExampleCounts = {
+  tables: 1,
+  "table-fundamentals": 2,
+  "table-styles": 3,
+  "table-pagination": 2,
+  "table-datatables": 1,
+};
+const promotedComponentCoverage = {
+  navbar: [
+    "bs-breadcrumb",
+    "bs-nav",
+    "bs-nav-group",
+    "bs-nav-heading",
+    "bs-nav-link",
+    "bs-nav-link-subitem",
+    "bs-navbar",
+    "bs-navbar-brand",
+    "bs-navbar-link",
+    "bs-navbar-toggle",
+    "bs-page-nav",
+    "bs-page-nav-context",
+    "bs-page-nav-link",
+    "bs-page-nav-title",
+  ],
+  sidebars: [
+    "bs-sidebar",
+    "bs-sidebar-backdrop",
+    "bs-sidebar-collapsible",
+    "bs-sidebar-content",
+    "bs-sidebar-drawer",
+    "bs-sidebar-end",
+    "bs-sidebar-floating",
+    "bs-sidebar-footer",
+    "bs-sidebar-group",
+    "bs-sidebar-group-action",
+    "bs-sidebar-group-content",
+    "bs-sidebar-group-label",
+    "bs-sidebar-header",
+    "bs-sidebar-inset",
+    "bs-sidebar-label",
+    "bs-sidebar-layout",
+    "bs-sidebar-main",
+    "bs-sidebar-menu",
+    "bs-sidebar-menu-action",
+    "bs-sidebar-menu-badge",
+    "bs-sidebar-menu-button",
+    "bs-sidebar-menu-button-lg",
+    "bs-sidebar-menu-button-sm",
+    "bs-sidebar-menu-item",
+    "bs-sidebar-menu-sub",
+    "bs-sidebar-menu-sub-button",
+    "bs-sidebar-menu-sub-item",
+    "bs-sidebar-open",
+    "bs-sidebar-rail",
+    "bs-sidebar-separator",
+    "bs-sidebar-skeleton",
+    "bs-sidebar-start",
+    "bs-sidebar-toc",
+    "bs-sidebar-trigger",
+  ],
+  cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-subtle"],
+  dialogs: ["bs-dialog", "bs-dialog-body", "bs-dialog-close", "bs-dialog-description", "bs-dialog-footer", "bs-dialog-fullscreen", "bs-dialog-header", "bs-dialog-height-lg", "bs-dialog-height-sm", "bs-dialog-lg", "bs-dialog-open", "bs-dialog-sm", "bs-dialog-title", "bs-dialog-xl"],
+  drawers: ["bs-drawer", "bs-drawer-body", "bs-drawer-close", "bs-drawer-description", "bs-drawer-end", "bs-drawer-footer", "bs-drawer-header", "bs-drawer-lg", "bs-drawer-sm", "bs-drawer-start", "bs-drawer-title", "bs-drawer-xl"],
+  "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
+  tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
+  "table-fundamentals": [
+    "bs-table",
+    "bs-table-cell-actions",
+    "bs-table-cell-numeric",
+    "bs-table-empty",
+    "bs-table-responsive",
+    "bs-table-sort",
+    "bs-table-sticky-header",
+  ],
+  "table-styles": [
+    "bs-table",
+    "bs-table-bordered",
+    "bs-table-borderless",
+    "bs-table-caption-bottom",
+    "bs-table-cell-actions",
+    "bs-table-cell-numeric",
+    "bs-table-compact",
+    "bs-table-hover",
+    "bs-table-responsive",
+    "bs-table-striped",
+  ],
+  "table-pagination": [
+    "bs-pagination",
+    "bs-pagination-ellipsis",
+    "bs-pagination-item",
+    "bs-pagination-lg",
+    "bs-pagination-link",
+    "bs-pagination-optional",
+    "bs-pagination-sm",
+  ],
+  "table-datatables": [
+    "bs-datatable",
+    "bs-table",
+    "bs-table-hover",
+    "bs-table-striped",
+  ],
+  lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
+  tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
+};
+const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
+if (promotedComponentClasses.size !== 117) {
+  throw new Error(`Expected documentation coverage for 117 promoted component classes; found ${promotedComponentClasses.size}`);
+}
+const documentationQualityMinimums = {
+  introduction: { examples: 1, code: 1 },
+  installation: { code: 5, guidance: true },
+  starter: { code: 3, guidance: true },
+  theming: { examples: 2, code: 6, guidance: true },
+  typography: { examples: 2, code: 3, guidance: true },
+  layout: { examples: 2, code: 3, guidance: true },
+  "responsive-composition": { examples: 1, code: 1, guidance: true },
+  buttons: { examples: 8, code: 8 },
+  navbar: { examples: 4, code: 4, guidance: true },
+  sidebars: { examples: 8, code: 15, guidance: true },
+  badges: { examples: 2, code: 3, guidance: true },
+  cards: { examples: 5, code: 5, guidance: true },
+  dialogs: { examples: 4, code: 6, guidance: true },
+  drawers: { examples: 4, code: 6, guidance: true },
+  tables: { examples: 1, code: 1, guidance: true },
+  "table-fundamentals": { examples: 2, code: 2, guidance: true },
+  "table-styles": { examples: 3, code: 3, guidance: true },
+  "table-pagination": { examples: 2, code: 2, guidance: true },
+  "table-datatables": { examples: 1, code: 3, guidance: true },
+  lists: { examples: 2, code: 2, guidance: true },
+  alerts: { examples: 3, code: 3, guidance: true },
+  banners: { examples: 2, code: 3, guidance: true },
+  forms: { examples: 2, code: 2 },
+  "form-inputs": { examples: 7, code: 7, guidance: true },
+  "form-input-groups": { examples: 5, code: 5 },
+  "form-selects": { examples: 4, code: 4 },
+  "form-searchable-select": { examples: 1, code: 5 },
+  "form-date-time": { examples: 5, code: 5 },
+  "form-passwords-masks": { examples: 4, code: 6 },
+  "form-checks-radios": { examples: 4, code: 4 },
+  "form-otp": { examples: 1, code: 2 },
+  "code-windows": { examples: 2, code: 2, guidance: true },
+  icons: { examples: 2, code: 4, guidance: true },
+  "behavior-layers": { code: 3, guidance: true },
+  collapse: { examples: 1, code: 2, guidance: true },
+  dropdown: { examples: 1, code: 2, guidance: true },
+  tabs: { examples: 3, code: 4, guidance: true },
+  utilities: { examples: 3, code: 3, guidance: true },
+  tokens: { examples: 1, code: 1, guidance: true },
+  "class-reference": { examples: 1, code: 1, guidance: true },
+  accessibility: { examples: 3, code: 3, guidance: true },
+};
 
 try {
   await waitForServer();
   await mkdir("artifacts", { recursive: true });
 
-  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/og-image.jpg", "/boobstrap-starter.zip"]) {
+  for (const asset of ["/favicon.svg", "/apple-touch-icon.png", "/boobstrap-starter.zip"]) {
     const response = await fetch(`${baseUrl}${asset}`);
     if (!response.ok) failures.push(`${asset}: returned HTTP ${response.status}`);
   }
+
+  const socialImageBodies = new Set();
+  for (const card of socialCards) {
+    const response = await fetch(`${baseUrl}${card.imagePath}`);
+    if (!response.ok) {
+      failures.push(`${card.imagePath}: returned HTTP ${response.status}`);
+      continue;
+    }
+    const body = Buffer.from(await response.arrayBuffer());
+    socialImageBodies.add(body.toString("base64"));
+    if (response.headers.get("content-type") !== "image/png") failures.push(`${card.imagePath}: is not served as image/png`);
+    if (body.readUInt32BE(16) !== 1200 || body.readUInt32BE(20) !== 630) {
+      failures.push(`${card.imagePath}: is not 1200×630`);
+    }
+  }
+  if (socialImageBodies.size !== socialCards.length) failures.push("social images: one or more routes share identical image output");
 
   for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"]]) {
     const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
@@ -64,14 +253,75 @@ try {
     }
   }
 
-  for (const { path } of docsPages) {
+  const docsOverviewSource = await (await fetch(`${baseUrl}/docs`)).text();
+  const docsOverviewSocialCard = socialCardForPath("/docs");
+  if (!new RegExp(`<strong[^>]*data-token-count(?:="")?[^>]*>${expectedTokens}</strong> tokens`).test(docsOverviewSource)) {
+    failures.push(`docs overview: static token count does not match the installed framework (${expectedTokens})`);
+  }
+  if (!docsOverviewSource.includes(`<meta property="og:image" content="${docsOverviewSocialCard.imageUrl}"`)
+    || !docsOverviewSource.includes(`<meta name="twitter:image" content="${docsOverviewSocialCard.imageUrl}"`)) {
+    failures.push("docs overview: route-specific social image metadata is missing");
+  }
+
+  const playgroundSource = await (await fetch(`${baseUrl}/playground`)).text();
+  const playgroundSocialCard = socialCardForPath("/playground");
+  if (!playgroundSource.includes(`<meta property="og:image" content="${playgroundSocialCard.imageUrl}"`)
+    || !playgroundSource.includes(`<meta name="twitter:image" content="${playgroundSocialCard.imageUrl}"`)) {
+    failures.push("playground: route-specific social image metadata is missing");
+  }
+
+  for (const { path, title, description } of docsPages) {
     const response = await fetch(`${baseUrl}${path}`);
     if (!response.ok) failures.push(`${path}: returned HTTP ${response.status}`);
+    const source = await response.text();
+    const pageTitle = `${title} — Boobstrap`;
+    const canonicalUrl = `https://boobstrap.org${path}`;
+    const socialCard = socialCardForPath(path);
+    if (!source.includes(`<title>${escapeHtml(pageTitle)}</title>`)) failures.push(`${path}: raw HTML has the wrong page title`);
+    if (!source.includes(`<meta property="og:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph title`);
+    if (!source.includes(`<meta property="og:description" content="${escapeHtml(description)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph description`);
+    if (!source.includes(`<meta property="og:url" content="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph URL`);
+    if (!source.includes(`<meta property="og:image" content="${socialCard.imageUrl}"`)) failures.push(`${path}: raw HTML has the wrong route-specific Open Graph image`);
+    if (!source.includes(`<meta property="og:image:alt" content="${escapeHtml(socialCard.imageAlt)}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph image alt text`);
+    if (!source.includes(`<meta name="twitter:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter title`);
+    if (!source.includes(`<meta name="twitter:image" content="${socialCard.imageUrl}"`)) failures.push(`${path}: raw HTML has the wrong route-specific Twitter image`);
+    if (!source.includes(`<meta name="twitter:image:alt" content="${escapeHtml(socialCard.imageAlt)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter image alt text`);
+    if (!source.includes(`<link rel="canonical" href="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong canonical URL`);
+    const currentLinkPattern = new RegExp(`<a[^>]*(?:href="${path}"[^>]*aria-current="page"|aria-current="page"[^>]*href="${path}")[^>]*>`);
+    if (!currentLinkPattern.test(source)) failures.push(`${path}: raw HTML does not identify the current navigation link before JavaScript`);
+    const disclosure = ["tables", "forms"].find((section) => path === `/docs/components/${section}` || path.startsWith(`/docs/components/${section}/`));
+    if (disclosure && (!source.includes(`aria-expanded="true" aria-controls="docs-${disclosure}-submenu"`)
+      || source.includes(`id="docs-${disclosure}-submenu" data-nav-submenu hidden`))) {
+      failures.push(`${path}: raw HTML does not expose its active navigation submenu before JavaScript`);
+    }
     const slashResponse = await fetch(`${baseUrl}${path}/`, { redirect: "manual" });
     if (slashResponse.status !== 308 || slashResponse.headers.get("location") !== path) {
       failures.push(`${path}/: expected a 308 redirect to ${path}`);
     }
   }
+
+  const noScriptContext = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1680, height: 940 } });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto(`${baseUrl}/docs/components/tables/styles`, { waitUntil: "load" });
+  const initialNavigationStyle = await noScriptPage.locator(".docs-nav a").first().evaluate((link) => ({
+    display: getComputedStyle(link).display,
+    minBlockSize: getComputedStyle(link).minBlockSize,
+    paddingInline: getComputedStyle(link).paddingInline,
+  }));
+  if (await noScriptPage.locator(".docs-nav a:not(.bs-nav-link)").count() !== 0
+    || initialNavigationStyle.display !== "flex"
+    || initialNavigationStyle.minBlockSize !== "36px"
+    || initialNavigationStyle.paddingInline === "0px") {
+    failures.push(`docs initial render: navigation links are unstyled before JavaScript (${JSON.stringify(initialNavigationStyle)})`);
+  }
+  if (!await noScriptPage.locator("#docs-tables-submenu").isVisible()
+    || await noScriptPage.locator('.docs-nav a[href="/docs/components/tables/styles"]').getAttribute("aria-current") !== "page") {
+    failures.push("docs initial render: current table navigation state is missing before JavaScript");
+  }
+  if ((await noScriptPage.locator(".docs-content > .docs-component-hero > h1").textContent())?.trim() !== "Table styles") {
+    failures.push("docs initial render: route content is not server-rendered before JavaScript");
+  }
+  await noScriptContext.close();
 
   for (const viewport of [
     { name: "desktop", width: 1680, height: 940 },
@@ -93,7 +343,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.3.1 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.4.0 npm package", exact: true }).getAttribute("href");
     const docsUrl = await page.getByRole("link", { name: "Read the docs", exact: true }).getAttribute("href");
     const playgroundUrl = await page.getByRole("link", { name: "Open playground", exact: true }).getAttribute("href");
     const dimensions = await dimensionsFor(page);
@@ -101,7 +351,7 @@ try {
     if (!titleVisible) failures.push(`${viewport.name}: hero title is not visible`);
     if (canonicalUrl !== "https://boobstrap.org/") failures.push(`${viewport.name}: landing canonical URL is incorrect`);
     if (faviconUrl !== "/favicon.svg") failures.push(`${viewport.name}: landing favicon is incorrect`);
-    if (ogImage !== ogImageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
+    if (ogImage !== landingSocialCard.imageUrl) failures.push(`${viewport.name}: landing OG image is incorrect`);
     if (twitterCard !== "summary_large_image") failures.push(`${viewport.name}: landing Twitter card is incorrect`);
     if (npmUrl !== npmPackageUrl) failures.push(`${viewport.name}: landing npm link is incorrect`);
     if (docsUrl !== "/docs/getting-started/installation") failures.push(`${viewport.name}: landing docs CTA is incorrect`);
@@ -112,6 +362,7 @@ try {
     if (await page.locator(".component-catalog > a").count() !== 6) failures.push(`${viewport.name}: landing component catalog is incomplete`);
     if (await page.locator(".behavior-grid > a").count() !== 4) failures.push(`${viewport.name}: landing behavior choices are incomplete`);
     if (await page.locator("[data-signup-form]").count() !== 0) failures.push(`${viewport.name}: simulated signup form remains on landing page`);
+    if (await page.locator("[data-dev-banner]").count() !== 0) failures.push(`${viewport.name}: development banner remains in the production build`);
     if (!await page.locator("[data-starter-download]").isVisible()) failures.push(`${viewport.name}: starter download is not visible`);
     if (dimensions.scrollWidth > dimensions.clientWidth + 1) {
       failures.push(`${viewport.name}: horizontal overflow (${dimensions.scrollWidth}px > ${dimensions.clientWidth}px)`);
@@ -152,6 +403,7 @@ try {
     if (!await docsPage.getByRole("heading", { name: "Browse by topic", level: 2 }).isVisible()) {
       failures.push(`${viewport.name}: docs directory is not visible`);
     }
+    if (await docsPage.locator("[data-dev-banner]").count() !== 0) failures.push(`${viewport.name}: development banner remains in production docs`);
     if (await docsPage.locator(".docs-directory-grid a").count() !== docsPages.length) {
       failures.push(`${viewport.name}: docs directory does not link every topic`);
     }
@@ -165,6 +417,38 @@ try {
       failures.push(`${viewport.name}: docs overview horizontal overflow`);
     }
     if (viewport.name === "desktop") {
+      if (await docsPage.locator("#docs-sidebar.bs-sidebar.bs-sidebar-start.bs-sidebar-drawer").count() !== 1) failures.push("desktop: documentation sidebar is not using the framework component");
+      if (await docsPage.locator("#docs-sidebar > .bs-sidebar-header").count() !== 1 || await docsPage.locator("#docs-sidebar > .bs-sidebar-content").count() !== 1) failures.push("desktop: documentation sidebar is not using fixed header and scrolling content regions");
+      const desktopSidebarGeometry = await docsPage.locator("#docs-sidebar").evaluate((sidebar) => {
+        const content = sidebar.querySelector(":scope > .bs-sidebar-content");
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+        return {
+          shellClipsRegions: getComputedStyle(sidebar).overflowY === "hidden",
+          navigationOwnsScroll: ["auto", "scroll"].includes(getComputedStyle(content).overflowY),
+          scrollbarMeetsSidebarEdge: Math.abs(sidebarRect.right - contentRect.right) <= 1,
+        };
+      });
+      if (!Object.values(desktopSidebarGeometry).every(Boolean)) {
+        failures.push(`desktop: documentation scrollbar is inset from the sidebar edge (${JSON.stringify(desktopSidebarGeometry)})`);
+      }
+      if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
+      const formsDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/forms"]');
+      const formsToggle = formsDisclosure.locator("[data-nav-disclosure-toggle]");
+      const tablesDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/tables"]');
+      const tablesToggle = tablesDisclosure.locator("[data-nav-disclosure-toggle]");
+      if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
+        failures.push("desktop: Forms navigation is expanded outside the Forms section");
+      }
+      if (await tablesToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-tables-submenu").isVisible()) {
+        failures.push("desktop: Tables navigation is expanded outside the Tables section");
+      }
+      const docsNavRhythm = await docsPage.locator(".docs-nav-group > a, .docs-nav-group > .docs-nav-disclosure > .docs-nav-disclosure-row > a").evaluateAll((links) => ({
+        heights: links.map((link) => link.getBoundingClientRect().height),
+        gaps: links.slice(1).map((link, index) => link.getBoundingClientRect().top - links[index].getBoundingClientRect().bottom),
+      }));
+      if (docsNavRhythm.heights.length < 2 || docsNavRhythm.heights.some((height) => Math.abs(height - docsNavRhythm.heights[0]) > 0.5)) failures.push("desktop: documentation links do not share one sidebar row height");
+      if (docsNavRhythm.gaps.some((gap) => gap < 1)) failures.push("desktop: documentation links do not preserve visible row spacing");
       await docsPage.keyboard.press("/");
       await docsPage.getByLabel("Filter documentation sections").fill("cards");
       if (!await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').isVisible()) {
@@ -174,13 +458,81 @@ try {
         failures.push("desktop: multi-page docs filter retained a non-match");
       }
       await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      await docsPage.getByLabel("Filter documentation sections").fill("one-time password");
+      if (!await docsPage.locator('.docs-nav a[href="/docs/components/forms/otp"]').isVisible()
+        || await formsToggle.getAttribute("aria-expanded") !== "true") {
+        failures.push("desktop: docs filter did not reveal a matching Forms child page");
+      }
+      await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      if (await formsToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-forms-submenu").isVisible()) {
+        failures.push("desktop: clearing the docs filter did not restore the Forms disclosure state");
+      }
+      await docsPage.keyboard.press("/");
+      await docsPage.getByLabel("Filter documentation sections").fill("DataTables.net");
+      if (!await docsPage.locator('.docs-nav a[href="/docs/components/tables/datatables"]').isVisible()
+        || await tablesToggle.getAttribute("aria-expanded") !== "true") {
+        failures.push("desktop: docs filter did not reveal the DataTables.net child page");
+      }
+      await docsPage.getByLabel("Filter documentation sections").press("Escape");
+      if (await tablesToggle.getAttribute("aria-expanded") !== "false" || await docsPage.locator("#docs-tables-submenu").isVisible()) {
+        failures.push("desktop: clearing the docs filter did not restore the Tables disclosure state");
+      }
       await docsPage.getByRole("button", { name: "Switch to light theme" }).click();
       if (await docsPage.locator("html").getAttribute("data-bs-theme") !== "light") {
         failures.push("desktop: docs theme toggle did not enable light theme");
       }
+      const stylesheetCount = await docsPage.locator('link[rel="stylesheet"]').count();
+      await docsPage.locator(".docs-header").evaluate((header) => { header.dataset.spaShellMarker = "retained"; });
+      await docsPage.locator('.docs-nav a[href="/docs/components/cards"]').click();
+      await docsPage.waitForURL(`${baseUrl}/docs/components/cards`);
+      await docsPage.getByRole("heading", { name: "Cards", level: 1 }).waitFor();
+      if (await docsPage.locator('.docs-header[data-spa-shell-marker="retained"]').count() !== 1
+        || await docsPage.locator('link[rel="stylesheet"]').count() !== stylesheetCount) {
+        failures.push("desktop: React documentation navigation reloaded the shell or its styles");
+      }
     } else {
-      await docsPage.getByRole("button", { name: "Open documentation menu" }).click();
-      if (!await docsPage.locator("#docs-sidebar").isVisible()) failures.push("mobile: docs menu did not open");
+      const menuToggle = docsPage.getByRole("button", { name: "Open documentation menu" });
+      const mobileSidebar = docsPage.locator("#docs-sidebar");
+      if (!await docsPage.locator("[data-nav-disclosure-toggle]").evaluateAll((toggles) => toggles.every((toggle) => toggle.getAttribute("aria-expanded") === "false"))) {
+        failures.push("mobile: a nested navigation family is expanded outside its section");
+      }
+      await docsPage.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+      await menuToggle.click();
+      if (!await mobileSidebar.isVisible() || await mobileSidebar.getAttribute("data-bs-state") !== "open") failures.push("mobile: docs menu did not open through the sidebar controller");
+      if (await menuToggle.getAttribute("aria-expanded") !== "true" || !await docsPage.locator("body").evaluate((element) => element.classList.contains("bs-sidebar-open"))) failures.push("mobile: docs menu state did not synchronize");
+      const closeButton = docsPage.locator(".docs-sidebar-close");
+      await docsPage.waitForFunction(() => document.activeElement?.getAttribute("aria-label") === "Close documentation menu");
+      if (!await closeButton.evaluate((element) => element === document.activeElement)
+        || await docsPage.getByLabel("Filter documentation sections").evaluate((element) => element === document.activeElement)) {
+        failures.push("mobile: opening the docs menu focused search instead of the close control");
+      }
+      const drawerGeometry = await mobileSidebar.evaluate((sidebar) => {
+        const content = sidebar.querySelector(":scope > .bs-sidebar-content");
+        const lastLink = [...content.querySelectorAll("a")].filter((link) => !link.hidden).at(-1);
+        const header = document.querySelector(".docs-header");
+        content.scrollTop = content.scrollHeight;
+        const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+        const headerRect = header.getBoundingClientRect();
+        const sidebarRect = sidebar.getBoundingClientRect();
+        const contentRect = content.getBoundingClientRect();
+        const lastLinkRect = lastLink.getBoundingClientRect();
+        return {
+          headerRemainsVisible: headerRect.top >= -1 && headerRect.bottom > 0,
+          headerIsFixedWhileScrollLocked: getComputedStyle(header).position === "fixed",
+          sidebarMeetsHeader: Math.abs(headerRect.bottom - sidebarRect.top) <= 1,
+          sidebarFitsViewport: sidebarRect.bottom <= viewportHeight + 1,
+          contentScrolls: content.scrollHeight > content.clientHeight,
+          contentReachedBottom: Math.abs(content.scrollHeight - content.clientHeight - content.scrollTop) <= 1,
+          lastLinkVisible: lastLinkRect.bottom <= contentRect.bottom + 1,
+          scrollbarMeetsSidebarEdge: Math.abs(sidebarRect.right - contentRect.right) <= 1,
+        };
+      });
+      if (!Object.values(drawerGeometry).every(Boolean)) {
+        failures.push(`mobile: docs menu does not expose a complete independent scroll region (${JSON.stringify(drawerGeometry)})`);
+      }
+      await docsPage.screenshot({ path: "artifacts/docs-sidebar-mobile-open.png" });
+      await docsPage.keyboard.press("Escape");
+      if (await mobileSidebar.getAttribute("data-bs-state") !== "closed" || !await menuToggle.evaluate((element) => element === document.activeElement)) failures.push("mobile: docs menu did not close and restore focus on Escape");
     }
     if (docsConsoleErrors.length) failures.push(`${viewport.name}: docs overview ${docsConsoleErrors.join("; ")}`);
     await docsPage.close();
@@ -200,6 +552,8 @@ try {
       const routeDimensions = await dimensionsFor(routePage);
       const visibleHeading = routePage.locator(".docs-content > .docs-component-hero > h1:visible, .docs-content > .docs-hero > h1:visible");
       const previews = routePage.locator("[data-component-example]:visible");
+      const genericVisibleDemos = routePage.locator(".docs-demo:visible:not([data-theme-configurator])");
+      const renderedCode = routePage.locator(".docs-content .docs-code-block pre code");
 
       if (response?.status() !== 200) failures.push(`${viewport.name}: ${config.path} did not return 200`);
       if (await visibleHeading.count() !== 1 || (await visibleHeading.textContent())?.trim() !== config.title) {
@@ -214,31 +568,381 @@ try {
       if (await routePage.locator(`.docs-nav a[href="${config.path}"]`).getAttribute("aria-current") !== "page") {
         failures.push(`${viewport.name}: ${config.path} is not current in the docs navigation`);
       }
+      for (const prefix of ["/docs/components/tables", "/docs/components/forms"]) {
+        const disclosureExpanded = await routePage.locator(`[data-nav-prefix="${prefix}"] [data-nav-disclosure-toggle]`).getAttribute("aria-expanded");
+        const expectsDisclosure = config.path === prefix || config.path.startsWith(`${prefix}/`);
+        if (disclosureExpanded !== String(expectsDisclosure)) {
+          failures.push(`${viewport.name}: ${config.path} has the wrong ${prefix.split("/").at(-1)} navigation disclosure state`);
+        }
+      }
+      if (config.sectionId === "theming" && await routePage.locator("[data-theme-color-reference] [data-color-token-cell]").count() !== expectedThemeColorCells) {
+        failures.push(`${viewport.name}: complete theme color reference does not render all ${expectedThemeColorCells} palette values`);
+      }
       if (await routePage.locator("[data-page-nav] a").count() < 1) {
         failures.push(`${viewport.name}: ${config.path} has no local page outline`);
       }
       if (await routePage.locator(".docs-component-pagination a").count() !== 2) {
         failures.push(`${viewport.name}: ${config.path} is missing previous/next documentation links`);
       }
+      if (await routePage.locator(".docs-header.bs-navbar").count() !== 1 || await routePage.locator(".docs-nav a:not(.bs-nav-link)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} is not using the framework navigation components`);
+      }
+      if (await routePage.locator(".docs-code-block:not(.bs-code-window), .docs-code-label:not(.bs-code-header), .docs-code-label button:not(.bs-code-action), .docs-code-block > pre:not(.bs-code-body)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a code sample outside the framework code components`);
+      }
+      if (await routePage.locator(".docs-table-wrap:not(.bs-table-responsive), .docs-table:not(.bs-table)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a reference table outside the framework table components`);
+      }
+      if (await routePage.locator(".docs-component-pagination:not(.bs-page-nav), .docs-component-pagination > a:not(.bs-page-nav-link)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} is not using the framework page-navigation component`);
+      }
       if (await routePage.getByRole("tab", { name: "Preview", exact: true }).count() !== 0 || await routePage.getByRole("tab", { name: "Code", exact: true }).count() !== 0) {
         failures.push(`${viewport.name}: ${config.path} retained preview/code tabs`);
+      }
+      if (await renderedCode.count() > 0 && !await renderedCode.evaluateAll((elements) => elements.every((code) => (
+        code.classList.contains("hljs")
+        && code.dataset.highlighted === "yes"
+        && Boolean(code.dataset.highlightLanguage)
+      )))) {
+        failures.push(`${viewport.name}: ${config.path} has an unhighlighted code block`);
       }
       const pairedExamples = await previews.evaluateAll((elements) => elements.every((preview) => {
         const code = preview.nextElementSibling;
         return code?.classList.contains("docs-code-block") && getComputedStyle(code).display !== "none";
       }));
       if (!pairedExamples) failures.push(`${viewport.name}: ${config.path} does not place visible code below every preview`);
+      const qualityMinimums = documentationQualityMinimums[config.sectionId];
+      if (!qualityMinimums) {
+        failures.push(`${viewport.name}: ${config.path} is missing a documentation quality contract`);
+      } else {
+        const exampleCount = await previews.count();
+        const codeCount = await renderedCode.count();
+        if (exampleCount < (qualityMinimums.examples ?? 0)) {
+          failures.push(`${viewport.name}: ${config.path} has ${exampleCount} focused examples; expected at least ${qualityMinimums.examples}`);
+        }
+        if (codeCount < (qualityMinimums.code ?? 0)) {
+          failures.push(`${viewport.name}: ${config.path} has ${codeCount} code examples; expected at least ${qualityMinimums.code}`);
+        }
+        if (qualityMinimums.guidance && await routePage.locator(".docs-example-guidance:visible").count() === 0) {
+          failures.push(`${viewport.name}: ${config.path} is missing structured usage guidance`);
+        }
+      }
+      const promotedClasses = promotedComponentCoverage[config.sectionId];
+      if (promotedClasses) {
+        const apiText = (await routePage.locator(".docs-api").allTextContents()).join(" ");
+        const missingClasses = promotedClasses.filter((className) => !apiText.includes(`.${className}`));
+        if (missingClasses.length) {
+          failures.push(`${viewport.name}: ${config.path} API reference is missing ${missingClasses.map((name) => `.${name}`).join(", ")}`);
+        }
+      }
+      if (await genericVisibleDemos.count() > 0 && !await genericVisibleDemos.evaluateAll((elements) => elements.every((preview) => (
+        ["light", "dark"].includes(preview.dataset.bsTheme)
+        && preview.querySelectorAll(":scope > [data-preview-theme-controls]").length === 1
+        && preview.querySelectorAll(":scope > [data-preview-theme-controls] [data-preview-theme-option]").length === 2
+      )))) {
+        failures.push(`${viewport.name}: ${config.path} has a preview without independent light/dark controls`);
+      }
+      if (config.sectionId in expectedFormExampleCounts && await previews.count() !== expectedFormExampleCounts[config.sectionId]) {
+        failures.push(`${viewport.name}: ${config.path} does not expose the expected focused form examples`);
+      }
+      if (config.sectionId in expectedTableExampleCounts && await previews.count() !== expectedTableExampleCounts[config.sectionId]) {
+        failures.push(`${viewport.name}: ${config.path} does not expose the expected focused table examples`);
+      }
+      if (config.sectionId.startsWith("form") && await routePage.locator('.docs-code-label:has-text("Complete labeled controls"), .docs-code-label:has-text("Complete input groups"), .docs-code-label:has-text("Complete native selects"), .docs-code-label:has-text("Complete date and time controls"), .docs-code-label:has-text("Complete mask examples"), .docs-code-label:has-text("Complete selection controls")').count() > 0) {
+        failures.push(`${viewport.name}: ${config.path} retains a grouped form code block`);
+      }
       if (routeDimensions.scrollWidth > routeDimensions.clientWidth + 1) {
-        failures.push(`${viewport.name}: ${config.path} has horizontal overflow`);
+        failures.push(`${viewport.name}: ${config.path} has horizontal overflow (${routeDimensions.scrollWidth}px > ${routeDimensions.clientWidth}px)`);
       }
       if (routeErrors.length) failures.push(`${viewport.name}: ${config.path} ${routeErrors.join("; ")}`);
 
+      if (config.sectionId.startsWith("form-") && viewport.name === "mobile") {
+        await routePage.screenshot({ path: `artifacts/${config.sectionId}-mobile.png`, fullPage: true });
+      }
+
+      if (config.sectionId === "sidebars" && viewport.name === "mobile") {
+        const drawerTrigger = routePage.getByRole("button", { name: "Toggle documentation menu" });
+        const drawer = routePage.locator("#example-sidebar");
+        await drawerTrigger.click();
+        if (await drawer.getAttribute("data-bs-state") !== "open" || await drawer.getAttribute("role") !== "dialog" || await drawerTrigger.getAttribute("aria-expanded") !== "true") {
+          failures.push("mobile: sidebar reference drawer did not synchronize dialog state");
+        }
+        await routePage.keyboard.press("Escape");
+        if (await drawer.getAttribute("data-bs-state") !== "closed" || !await drawerTrigger.evaluate((element) => element === document.activeElement)) {
+          failures.push("mobile: sidebar reference drawer did not dismiss and restore focus");
+        }
+        await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
+      }
+
+      if (config.sectionId === "sidebars") {
+        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push(`${viewport.name}: complete application shell relies on CSP-blocked inline styles`);
+        const shellSidebar = routePage.locator("#sidebar-shell > .bs-sidebar-layout > .bs-sidebar");
+        const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
+          const sidebarRect = sidebar.getBoundingClientRect();
+          const mainRect = sidebar.nextElementSibling.getBoundingClientRect();
+          const headerRect = sidebar.querySelector(":scope > .bs-sidebar-header").getBoundingClientRect();
+          const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
+          return Math.abs(sidebarRect.height - 480) <= 1
+            && Math.abs(mainRect.top - sidebarRect.top) <= 1
+            && Math.abs(headerRect.width - sidebarRect.width) <= 1
+            && Math.abs(footerRect.width - sidebarRect.width) <= 1
+            && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
+        });
+        if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
+      }
+
+      if (config.sectionId === "cards") {
+        const completeCard = routePage.locator("#card-action > .bs-card");
+        if (await completeCard.locator(":scope > .bs-card-header + .bs-card-content + .bs-card-footer").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-title").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-description").count() !== 1
+          || await completeCard.locator(":scope > .bs-card-header > .bs-card-action").count() !== 1) {
+          failures.push(`${viewport.name}: complete card does not expose the header, title, description, action, content, and footer contract`);
+        }
+        if (await routePage.locator("#card-basic .bs-card-header, #card-basic .bs-card-footer").count() !== 0
+          || await routePage.locator("#card-header-content .bs-card-footer").count() !== 0) {
+          failures.push(`${viewport.name}: optional card header or footer regions are rendered when omitted`);
+        }
+        const structuredCardLayout = await completeCard.evaluate((card) => {
+          const header = card.querySelector(".bs-card-header");
+          const action = card.querySelector(".bs-card-action");
+          const content = card.querySelector(".bs-card-content");
+          const footer = card.querySelector(".bs-card-footer");
+          return {
+            cardDisplay: getComputedStyle(card).display,
+            headerDisplay: getComputedStyle(header).display,
+            actionArea: getComputedStyle(action).gridArea,
+            footerDisplay: getComputedStyle(footer).display,
+            contentPaddingInline: getComputedStyle(content).paddingInline,
+            footerPaddingInline: getComputedStyle(footer).paddingInline,
+          };
+        });
+        if (structuredCardLayout.cardDisplay !== "flex"
+          || structuredCardLayout.headerDisplay !== "grid"
+          || structuredCardLayout.actionArea !== "action"
+          || structuredCardLayout.footerDisplay !== "flex"
+          || structuredCardLayout.contentPaddingInline === "0px"
+          || structuredCardLayout.contentPaddingInline !== structuredCardLayout.footerPaddingInline) {
+          failures.push(`${viewport.name}: structured card layout did not render correctly (${JSON.stringify(structuredCardLayout)})`);
+        }
+        await routePage.screenshot({ path: `artifacts/cards-${viewport.name}.png`, fullPage: true });
+      }
+
+      if (config.sectionId === "dialogs") {
+        const trigger = routePage.getByRole("button", { name: "Edit profile" });
+        const dialog = routePage.locator("#profile-dialog");
+        await trigger.click();
+        const dialogLayout = await dialog.evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          const header = element.querySelector(":scope > .bs-dialog-header");
+          const body = element.querySelector(":scope > .bs-dialog-body");
+          const footer = element.querySelector(":scope > .bs-dialog-footer");
+          return {
+            open: element.open && element.dataset.bsState === "open",
+            centered: Math.abs((rect.left + rect.width / 2) - (window.innerWidth / 2)) <= 1,
+            headerFixed: getComputedStyle(header).flexShrink === "0",
+            bodyScrolls: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
+            footerFixed: getComputedStyle(footer).flexShrink === "0",
+            named: element.getAttribute("aria-labelledby") === "profile-dialog-title" && element.getAttribute("aria-describedby") === "profile-dialog-description",
+          };
+        });
+        if (!Object.values(dialogLayout).every(Boolean)) failures.push(`${viewport.name}: complete dialog layout is incomplete (${JSON.stringify(dialogLayout)})`);
+        if (!await routePage.locator("body").evaluate((element) => element.classList.contains("bs-dialog-open"))) failures.push(`${viewport.name}: dialog did not lock document scrolling`);
+        await routePage.screenshot({ path: `artifacts/dialog-open-${viewport.name}.png` });
+        await routePage.keyboard.press("Escape");
+        await routePage.waitForFunction(() => !document.querySelector("#profile-dialog").open);
+        if (!await trigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: dialog did not restore focus after Escape`);
+
+        const staticTrigger = routePage.getByRole("button", { name: "Archive project" });
+        const staticDialog = routePage.locator("#archive-dialog");
+        await staticTrigger.click();
+        await routePage.mouse.click(1, 1);
+        if (!await staticDialog.evaluate((element) => element.open)) failures.push(`${viewport.name}: static-backdrop dialog closed from an outside click`);
+        await staticDialog.getByRole("button", { name: "Keep project" }).click();
+        await routePage.waitForFunction(() => !document.querySelector("#archive-dialog").open);
+
+        const scrollTrigger = routePage.getByRole("button", { name: "Review release" });
+        const scrollDialog = routePage.locator("#release-dialog");
+        await scrollTrigger.click();
+        const scrollRegions = await scrollDialog.evaluate((element) => {
+          const body = element.querySelector(".bs-dialog-body");
+          body.scrollTop = body.scrollHeight;
+          return {
+            constrained: element.clientHeight <= (24 * parseFloat(getComputedStyle(document.documentElement).fontSize)) + 1,
+            scrollable: body.scrollHeight > body.clientHeight,
+            reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+          };
+        });
+        if (!Object.values(scrollRegions).every(Boolean)) failures.push(`${viewport.name}: constrained dialog body does not scroll independently (${JSON.stringify(scrollRegions)})`);
+        await scrollDialog.getByRole("button", { name: "Checklist complete" }).click();
+      }
+
+      if (config.sectionId === "drawers") {
+        const endTrigger = routePage.getByRole("button", { name: "Edit account" });
+        const endDrawer = routePage.locator("#account-drawer");
+        await endTrigger.click();
+        await endDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+        const endLayout = await endDrawer.evaluate((element) => {
+          const rect = element.getBoundingClientRect();
+          const body = element.querySelector(":scope > .bs-drawer-body");
+          const footer = element.querySelector(":scope > .bs-drawer-footer");
+          return {
+            open: element.open && element.dataset.bsState === "open",
+            meetsEnd: Math.abs(rect.right - document.documentElement.clientWidth) <= 1,
+            fillsViewport: Math.abs(rect.height - window.innerHeight) <= 1,
+            bodyOwnsScroll: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
+            footerFixed: getComputedStyle(footer).flexShrink === "0" && footer.getBoundingClientRect().bottom <= rect.bottom + 1,
+            checkDescriptionStacks: getComputedStyle(element.querySelector(".bs-check-description")).gridColumnStart === "2",
+          };
+        });
+        if (!Object.values(endLayout).every(Boolean)) failures.push(`${viewport.name}: end drawer layout is incomplete (${JSON.stringify(endLayout)})`);
+        await routePage.screenshot({ path: `artifacts/drawer-open-${viewport.name}.png` });
+        await routePage.mouse.click(1, Math.floor(viewport.height / 2));
+        if (!await endDrawer.evaluate((element) => element.open)) failures.push(`${viewport.name}: form drawer closed despite disabled backdrop dismissal`);
+        await endDrawer.getByRole("button", { name: "Cancel" }).click();
+        await routePage.waitForFunction(() => !document.querySelector("#account-drawer").open);
+        if (!await endTrigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: drawer dismiss control did not restore focus`);
+
+        const startTrigger = routePage.getByRole("button", { name: "Filter results" });
+        const startDrawer = routePage.locator("#filter-drawer");
+        await startTrigger.click();
+        await startDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+        if (!await startDrawer.evaluate((element) => Math.abs(element.getBoundingClientRect().left) <= 1)) failures.push(`${viewport.name}: start drawer does not meet the logical start edge`);
+        await routePage.keyboard.press("Escape");
+
+        const activityTrigger = routePage.getByRole("button", { name: "View activity" });
+        const activityDrawer = routePage.locator("#activity-drawer");
+        await activityTrigger.click();
+        const activityScroll = await activityDrawer.evaluate((element) => {
+          const body = element.querySelector(".bs-drawer-body");
+          body.scrollTop = body.scrollHeight;
+          return {
+            scrollable: body.scrollHeight > body.clientHeight,
+            reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+          };
+        });
+        if (!Object.values(activityScroll).every(Boolean)) failures.push(`${viewport.name}: long drawer body does not scroll to its final item (${JSON.stringify(activityScroll)})`);
+        await routePage.mouse.click(1, Math.floor(viewport.height / 2));
+        await routePage.waitForFunction(() => !document.querySelector("#activity-drawer").open);
+        if (!await activityTrigger.evaluate((element) => element === document.activeElement)) failures.push(`${viewport.name}: dismissible drawer backdrop did not close and restore focus`);
+
+        for (const [name, expectedRem] of [["Small", 20], ["Large", 36], ["Custom 32rem", 32]]) {
+          await routePage.getByRole("button", { name, exact: true }).click();
+          const openDrawer = routePage.locator("dialog.bs-drawer[open]");
+          await openDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
+          const width = await openDrawer.evaluate((element) => element.getBoundingClientRect().width);
+          const sizing = await routePage.evaluate(() => {
+            const styles = getComputedStyle(document.documentElement);
+            const rootFontSize = parseFloat(styles.fontSize);
+            return { rootFontSize, mobileInset: parseFloat(styles.getPropertyValue("--bs-space-8")) * rootFontSize };
+          });
+          const maximumWidth = viewport.width <= 640 ? viewport.width - sizing.mobileInset : Infinity;
+          if (Math.abs(width - Math.min(expectedRem * sizing.rootFontSize, maximumWidth)) > 2) failures.push(`${viewport.name}: ${name} drawer width is ${width}px`);
+          await openDrawer.getByRole("button", { name: "Done" }).click();
+        }
+      }
+
+      if (config.sectionId in expectedTableExampleCounts) {
+        const activeTableSection = routePage.locator(`#${config.sectionId}`);
+        const exampleTables = activeTableSection.locator("[data-component-example] table.bs-table");
+        const responsiveExamples = activeTableSection.locator("[data-component-example] .bs-table-responsive");
+        if (!await exampleTables.evaluateAll((tables) => tables.every((table) => (
+          table.querySelector(":scope > caption")
+          && [...table.querySelectorAll("th")].every((header) => ["col", "row"].includes(header.getAttribute("scope")))
+        )))) {
+          failures.push(`${viewport.name}: a table example is missing a caption or scoped header`);
+        }
+        if (!await responsiveExamples.evaluateAll((wrappers) => wrappers.every((wrapper) => (
+          wrapper.getAttribute("role") === "region"
+          && wrapper.getAttribute("tabindex") === "0"
+          && Boolean(wrapper.getAttribute("aria-label"))
+        )))) {
+          failures.push(`${viewport.name}: a scrollable table example is not a named keyboard-focusable region`);
+        }
+      }
+
+      if (config.sectionId === "table-fundamentals") {
+        const stickyPosition = await routePage.locator("#table-sticky-sortable thead th").first().evaluate((header) => getComputedStyle(header).position);
+        if (stickyPosition !== "sticky") failures.push(`${viewport.name}: sticky table headers did not render`);
+      }
+
+      if (config.sectionId === "table-pagination") {
+        const paginationPresentation = await routePage.locator("#pagination-dataset").evaluate((example) => {
+          const currentPage = example.querySelector('[aria-current="page"]');
+          const optionalPage = example.querySelector(".bs-pagination-optional");
+          return {
+            currentPageBackground: getComputedStyle(currentPage).backgroundColor,
+            optionalPageDisplay: getComputedStyle(optionalPage).display,
+          };
+        });
+        if (paginationPresentation.currentPageBackground === "rgba(0, 0, 0, 0)") failures.push(`${viewport.name}: pagination current state did not render`);
+        if ((viewport.name === "mobile") !== (paginationPresentation.optionalPageDisplay === "none")) {
+          failures.push(`${viewport.name}: optional pagination pages did not follow the mobile visibility contract`);
+        }
+        if (await routePage.locator("#table-pagination [data-component-example] .bs-pagination").count() !== 3) {
+          failures.push(`${viewport.name}: pagination guide does not expose default, small, and large compositions`);
+        }
+      }
+
+      if (config.sectionId === "table-datatables") {
+        const dataTable = routePage.locator("#datatable-customer-directory");
+        await dataTable.locator(".dt-container").waitFor();
+        const dataTableSearch = dataTable.locator(".dt-search input");
+        const dataTableLength = dataTable.locator(".dt-length select");
+        const dataTableRows = dataTable.locator("tbody tr");
+        const dataTableRegion = dataTable.locator(".dt-layout-table > .dt-layout-cell");
+        if (await dataTableRows.count() !== 5 || await dataTable.locator(".dt-info").getAttribute("role") !== "status") {
+          failures.push(`${viewport.name}: DataTables did not initialize with five visible rows and live result information`);
+        }
+        if (await dataTableRegion.getAttribute("role") !== "region"
+          || await dataTableRegion.getAttribute("tabindex") !== "0"
+          || await dataTableRegion.getAttribute("aria-label") !== "Customer directory results") {
+          failures.push(`${viewport.name}: DataTables overflow region is not keyboard accessible and named`);
+        }
+        await dataTableSearch.fill("Berlin");
+        if (await dataTableRows.count() !== 1 || !await dataTableRows.first().textContent().then((text) => text.includes("Noor Hassan"))) {
+          failures.push(`${viewport.name}: DataTables search did not filter to the matching customer`);
+        }
+        await dataTableSearch.fill("");
+        await dataTableLength.selectOption("10");
+        if (await dataTableRows.count() !== 10) failures.push(`${viewport.name}: DataTables page-length control did not show ten rows`);
+        await dataTableLength.selectOption("5");
+        await dataTable.locator("thead .dt-column-order").first().click();
+        await dataTable.locator("thead th").first().waitFor();
+        await routePage.waitForFunction(() => document.querySelector("#datatable-customer-directory thead th")?.getAttribute("aria-sort") === "ascending");
+        if (!await dataTableRows.first().textContent().then((text) => text.includes("Alexis Martin"))) {
+          failures.push(`${viewport.name}: DataTables column sorting did not reorder customer names`);
+        }
+        await dataTable.locator('[aria-label="Next"]').click();
+        if (!await dataTable.locator(".dt-info").textContent().then((text) => text.includes("6 to 10"))) {
+          failures.push(`${viewport.name}: DataTables pagination did not advance to the second page`);
+        }
+        await routePage.screenshot({ path: `artifacts/table-datatables-${viewport.name}.png`, fullPage: true });
+      }
+
       if (viewport.name !== "desktop") continue;
+
+      if (config.sectionId === "sidebars") {
+        const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
+        const collapsible = routePage.locator("#collapse-example-sidebar");
+        await collapseTrigger.click();
+        await routePage.waitForTimeout(300);
+        if (await collapsible.getAttribute("data-bs-state") !== "collapsed" || await collapseTrigger.getAttribute("aria-expanded") !== "false") {
+          failures.push("desktop: sidebar reference did not collapse through its public controller");
+        }
+        if (await collapsible.locator(".bs-sidebar-label").first().evaluate((element) => getComputedStyle(element).display) !== "none") {
+          failures.push("desktop: icon-collapse mode did not hide sidebar labels");
+        }
+        await routePage.screenshot({ path: "artifacts/sidebar-desktop.png", fullPage: true });
+      }
 
       if (config.sectionId === "installation") {
         await routePage.getByRole("tab", { name: "pnpm", exact: true }).click();
         if (await routePage.locator("[data-package-command-output]").textContent() !== "pnpm add @boobstrap/boobstrap") {
           failures.push("desktop: installation package tabs did not update");
+        }
+        if (await routePage.locator("[data-package-command-output]").getAttribute("data-highlight-language") !== "bash") {
+          failures.push("desktop: dynamic package command was not re-highlighted");
         }
       }
 
@@ -252,8 +956,136 @@ try {
         }
       }
 
-      if (config.sectionId === "tokens" && await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
-        failures.push("desktop: token reference does not match the installed stylesheet");
+      if (config.sectionId === "tokens") {
+        if (await routePage.locator("#tokens .reference-row").count() !== expectedTokens) {
+          failures.push("desktop: token reference does not match the installed stylesheet");
+        }
+        if (await routePage.locator('#tokens a[href="/docs/getting-started/theming#theming-complete-color-token-reference"]').count() !== 1) {
+          failures.push("desktop: token index does not link to the complete theme color reference");
+        }
+      }
+
+      if (config.sectionId === "theming" && viewport.name === "desktop") {
+        const configurator = routePage.locator("[data-theme-configurator]");
+        const initialThemeTokens = await configurator.evaluate((element) => ({
+          primary: getComputedStyle(element).getPropertyValue("--bs-color-primary").trim(),
+          radius: getComputedStyle(element).getPropertyValue("--bs-radius-lg").trim(),
+        }));
+
+        if (await configurator.count() !== 1) failures.push("desktop: theming guide is missing its configurator");
+        if (await configurator.locator('[data-theme-axis="theme"]').count() !== 2
+          || await configurator.locator('[data-theme-axis="palette"]').count() !== 5
+          || await configurator.locator('[data-theme-axis="radius"]').count() !== 2) {
+          failures.push("desktop: theming configurator does not expose every supported option");
+        }
+
+        const colorReference = routePage.locator("[data-theme-color-reference]");
+        if (await routePage.locator("#theming-complete-color-token-reference").count() !== 1) {
+          failures.push("desktop: complete theme color reference is not directly linkable");
+        }
+        if (await colorReference.locator(".docs-color-reference-group").count() !== 3
+          || await colorReference.locator("tbody tr").count() !== expectedThemeColorRows) {
+          failures.push(`desktop: complete theme color reference does not cover every palette token (${expectedThemeColorRows} rows expected)`);
+        }
+        const colorReferenceMismatch = await colorReference.locator("[data-color-token-cell]").evaluateAll((cells) => {
+          const mismatch = cells.find((cell) => {
+            const displayedValue = cell.querySelector("code")?.textContent.trim();
+            const resolvedValue = getComputedStyle(cell).getPropertyValue(cell.dataset.token).trim();
+            return !displayedValue || displayedValue !== resolvedValue || !cell.querySelector(".docs-color-token-swatch");
+          });
+          return mismatch?.dataset.token ?? null;
+        });
+        if (colorReferenceMismatch) failures.push(`desktop: theme color reference has a stale or missing value for ${colorReferenceMismatch}`);
+        if ((await colorReference.locator('[data-bs-theme="light"][data-bs-palette="blue"][data-token="--bs-color-primary"] code').textContent())?.trim() !== "#1d4ed8"
+          || (await colorReference.locator('[data-bs-theme="dark"][data-bs-palette="amber"][data-token="--bs-color-primary"] code').textContent())?.trim() !== "#fbbf24") {
+          failures.push("desktop: theme color reference does not expose expected light and dark palette hex values");
+        }
+        if (await colorReference.locator("[style]").count() !== 0) failures.push("desktop: theme color reference relies on CSP-blocked inline styles");
+
+        for (const theme of ["dark", "light"]) {
+          await configurator.locator(`[data-theme-axis="theme"][data-theme-value="${theme}"]`).click();
+          for (const palette of ["rose", "violet", "blue", "teal", "amber"]) {
+            await configurator.locator(`[data-theme-axis="palette"][data-theme-value="${palette}"]`).click();
+            const buttonSeparation = await configurator.evaluate((element) => {
+              const stage = element.querySelector(".docs-theme-stage");
+              const primary = element.querySelector(".docs-theme-actions .bs-btn-primary");
+              const secondary = element.querySelector(".docs-theme-actions .bs-btn-secondary");
+              return {
+                stage: getComputedStyle(stage).backgroundColor,
+                primary: getComputedStyle(primary).backgroundColor,
+                secondary: getComputedStyle(secondary).backgroundColor,
+                secondaryBorder: getComputedStyle(secondary).borderColor,
+              };
+            });
+            if (buttonSeparation.primary === buttonSeparation.stage
+              || buttonSeparation.secondary === buttonSeparation.stage
+              || buttonSeparation.secondaryBorder === "rgba(0, 0, 0, 0)") {
+              failures.push(`desktop: ${theme}/${palette} theme preview does not separate actions from their canvas (${JSON.stringify(buttonSeparation)})`);
+            }
+          }
+        }
+
+        await configurator.locator('[data-theme-axis="theme"][data-theme-value="light"]').click();
+        await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').click();
+        await configurator.locator('[data-theme-axis="radius"][data-theme-value="square"]').click();
+
+        const configuredTheme = await configurator.evaluate((element) => ({
+          theme: element.dataset.bsTheme,
+          palette: element.dataset.bsPalette,
+          radiusPreset: element.dataset.bsRadius,
+          primary: getComputedStyle(element).getPropertyValue("--bs-color-primary").trim(),
+          radius: getComputedStyle(element).getPropertyValue("--bs-radius-lg").trim(),
+        }));
+        if (configuredTheme.theme !== "light" || configuredTheme.palette !== "blue" || configuredTheme.radiusPreset !== "square") {
+          failures.push(`desktop: theming configurator did not apply the selected attributes (${JSON.stringify(configuredTheme)})`);
+        }
+        if (configuredTheme.primary === initialThemeTokens.primary || Number.parseFloat(configuredTheme.radius) !== 0 || Number.parseFloat(initialThemeTokens.radius) === 0) {
+          failures.push(`desktop: theming configurator did not resolve palette and radius tokens (${JSON.stringify({ initialThemeTokens, configuredTheme })})`);
+        }
+        if (await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').getAttribute("aria-pressed") !== "true"
+          || await configurator.locator('[data-theme-axis="radius"][data-theme-value="rounded"]').getAttribute("aria-pressed") !== "false") {
+          failures.push("desktop: theming configurator did not expose its selected state accessibly");
+        }
+        if ((await configurator.locator("[data-theme-summary]").textContent())?.trim() !== "Light · Blue · Square") {
+          failures.push("desktop: theming configurator summary did not update");
+        }
+
+        const expectedThemeMarkup = '<html\n  data-bs-theme="light"\n  data-bs-palette="blue"\n  data-bs-radius="square"\n>';
+        if ((await routePage.locator("[data-theme-markup]").textContent())?.trim() !== expectedThemeMarkup) {
+          failures.push("desktop: theming configurator did not update its copy-ready markup");
+        }
+        await routePage.locator("[data-theme-copy]").click();
+        if (await routePage.evaluate(() => navigator.clipboard.readText()) !== expectedThemeMarkup) {
+          failures.push("desktop: theming configurator copied stale markup");
+        }
+
+        const themingText = await routePage.locator("#theming").textContent();
+        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "--bs-color-primary-contrast", "--bs-color-focus-ring"]) {
+          if (!themingText.includes(publicContract)) failures.push(`desktop: theming guide is missing ${publicContract}`);
+        }
+      }
+
+      if (config.sectionId === "banners") {
+        const contextualBanners = routePage.locator('[data-component-example="banner-variants"] .bs-banner');
+        if (await contextualBanners.count() !== 5) failures.push("desktop: banner reference is missing contextual variants");
+
+        const backgrounds = await contextualBanners.evaluateAll((elements) => elements.map((element) => getComputedStyle(element).backgroundColor));
+        if (new Set(backgrounds).size !== 5) failures.push("desktop: banner contextual variants do not have distinct backgrounds");
+
+        const dismissible = routePage.locator('[data-component-example="banner-dismissible"] [data-bs-banner]');
+        await dismissible.locator("[data-bs-banner-dismiss]").click();
+        if (await dismissible.isVisible() || await dismissible.getAttribute("data-bs-state") !== "dismissed") {
+          failures.push("desktop: dismissible banner did not synchronize its hidden state");
+        }
+
+        const bannerSource = await routePage.locator("#banners .docs-code-block").allTextContents();
+        if (!bannerSource.some((source) => source.includes("initBanners"))) {
+          failures.push("desktop: banner documentation is missing its JavaScript initialization example");
+        }
+        if (await routePage.locator('#banners .docs-code-block code .hljs-tag').count() === 0
+          || await routePage.locator('#banners .docs-code-block code .hljs-keyword').count() === 0) {
+          failures.push("desktop: banner HTML and JavaScript examples are missing syntax tokens");
+        }
       }
 
       if (["collapse", "dropdown", "tabs"].includes(config.sectionId)) {
@@ -271,6 +1103,78 @@ try {
 
       if (config.sectionId === "behavior-layers" && await routePage.locator("[data-framework-tab]").count() !== 3) {
         failures.push("desktop: behavior overview does not preserve all framework tabs");
+      }
+
+      if (config.sectionId === "form-inputs") {
+        const [smallHeight, largeHeight] = await Promise.all([
+          routePage.locator("#input-small").evaluate((element) => element.getBoundingClientRect().height),
+          routePage.locator("#input-large").evaluate((element) => element.getBoundingClientRect().height),
+        ]);
+        if (smallHeight >= largeHeight) failures.push("desktop: form size examples are not ordered");
+
+        const emailPreview = routePage.locator('[data-component-example="form-input-email"]');
+        const textareaPreview = routePage.locator('[data-component-example="form-textarea"]');
+        await emailPreview.getByRole("button", { name: "Use light theme for this preview" }).click();
+        await routePage.waitForTimeout(250);
+        const independentThemeState = await routePage.evaluate(() => ({
+          page: document.documentElement.dataset.bsTheme,
+          email: document.querySelector('[data-component-example="form-input-email"]')?.dataset.bsTheme,
+          emailBackground: getComputedStyle(document.querySelector("#input-email")).backgroundColor,
+          textarea: document.querySelector('[data-component-example="form-textarea"]')?.dataset.bsTheme,
+          textareaBackground: getComputedStyle(document.querySelector("#input-message")).backgroundColor,
+        }));
+        if (independentThemeState.page !== "dark" || independentThemeState.email !== "light" || independentThemeState.textarea !== "dark") {
+          failures.push("desktop: a preview theme control changed the page or another preview");
+        }
+        if (independentThemeState.emailBackground !== "rgb(255, 255, 255)" || independentThemeState.emailBackground === independentThemeState.textareaBackground) {
+          failures.push("desktop: light form preview does not use a distinct white control background");
+        }
+
+        await routePage.getByRole("button", { name: "Switch to light theme" }).click();
+        if (await textareaPreview.getAttribute("data-bs-theme") !== "dark" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
+          failures.push("desktop: page theme toggle overrode an independent preview theme");
+        }
+      }
+
+      if (config.sectionId === "form-passwords-masks") {
+        const password = routePage.locator("#password-current");
+        await routePage.locator("[data-bs-password-toggle]").click();
+        if (await password.getAttribute("type") !== "text") failures.push("desktop: password example did not reveal its value");
+
+        const phone = routePage.locator("#mask-phone");
+        await phone.fill("4155550123");
+        if (await phone.inputValue() !== "(415) 555-0123") failures.push("desktop: mask example did not format its value");
+      }
+
+      if (config.sectionId === "form-otp") {
+        const otpInputs = routePage.locator("#form-otp [data-bs-otp-input]");
+        for (let index = 0; index < 6; index += 1) await otpInputs.nth(index).fill(String(index + 1));
+        if (await routePage.locator("#form-otp [data-bs-otp-value]").inputValue() !== "123456") failures.push("desktop: OTP example did not synchronize its value");
+        const otpSource = await routePage.locator("#form-otp .docs-code-block").allTextContents();
+        if (otpSource.some((source) => source.includes("Repeat through")) || !otpSource.some((source) => source.match(/data-bs-otp-input/g)?.length === 6)) {
+          failures.push("desktop: OTP documentation is not a complete six-input example");
+        }
+      }
+
+      if (config.sectionId === "form-searchable-select") {
+        const comboboxInput = routePage.locator("#combobox-role");
+        await comboboxInput.fill("eng");
+        const comboboxState = await routePage.locator('[data-component-example="form-combobox"]').evaluate((element) => ({
+          open: !element.querySelector("[data-bs-combobox-listbox]").hidden,
+          visibleOptions: [...element.querySelectorAll("[data-bs-combobox-option]")].filter((option) => !option.hidden).length,
+        }));
+        if (!comboboxState.open || comboboxState.visibleOptions !== 1) failures.push("desktop: searchable select did not filter");
+        await comboboxInput.press("Enter");
+        if (await routePage.locator('[name="team_role"]').inputValue() !== "engineer") failures.push("desktop: searchable select did not submit its selected value");
+
+        const formSource = await routePage.locator("#form-searchable-select .docs-code-block").allTextContents();
+        if (!formSource.some((source) => source.includes("initComboboxes")) || !formSource.some((source) => source.includes("Alpine.plugin")) || !formSource.some((source) => source.includes("useCombobox"))) {
+          failures.push("desktop: searchable select is missing complete JS, Alpine, or React documentation");
+        }
+        await routePage.locator("#form-searchable-select [data-copy-code]").first().click();
+        if (!await routePage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes("data-bs-combobox-value"))) {
+          failures.push("desktop: form code examples did not copy their displayed source");
+        }
       }
 
       if (config.sectionId === "collapse") {
@@ -406,6 +1310,38 @@ try {
     if (playgroundConsoleErrors.length) failures.push(`${viewport.name}: playground ${playgroundConsoleErrors.join("; ")}`);
     await playgroundPage.close();
   }
+
+  const compactDesktopPage = await browser.newPage({ viewport: { width: 980, height: 844 } });
+  const compactDesktopErrors = [];
+  compactDesktopPage.on("console", (message) => {
+    if (message.type() === "error") compactDesktopErrors.push(message.text());
+  });
+  compactDesktopPage.on("pageerror", (error) => compactDesktopErrors.push(error.message));
+  await compactDesktopPage.goto(`${baseUrl}/docs/getting-started/introduction`, { waitUntil: "networkidle" });
+  const compactSidebar = compactDesktopPage.locator("#docs-sidebar");
+  const compactMenuToggle = compactDesktopPage.getByRole("button", { name: "Open documentation menu" });
+  const compactSidebarState = await compactSidebar.evaluate((sidebar) => ({
+    state: sidebar.dataset.bsState,
+    position: getComputedStyle(sidebar).position,
+    transform: getComputedStyle(sidebar).transform,
+    visible: sidebar.getBoundingClientRect().width > 0 && sidebar.getBoundingClientRect().height > 0,
+  }));
+  if (!compactSidebarState.visible || compactSidebarState.state !== "expanded"
+    || compactSidebarState.position !== "sticky" || compactSidebarState.transform !== "none"
+    || await compactMenuToggle.isVisible()) {
+    failures.push(`980px desktop view: documentation sidebar did not remain persistent (${JSON.stringify(compactSidebarState)})`);
+  }
+
+  await compactDesktopPage.setViewportSize({ width: 390, height: 844 });
+  await compactDesktopPage.waitForFunction(() => document.querySelector("#docs-sidebar")?.dataset.bsState === "closed");
+  if (!await compactMenuToggle.isVisible()) failures.push("responsive sidebar: menu control did not appear after switching to mobile view");
+  await compactDesktopPage.setViewportSize({ width: 980, height: 844 });
+  await compactDesktopPage.waitForFunction(() => document.querySelector("#docs-sidebar")?.dataset.bsState === "expanded");
+  if (!await compactSidebar.isVisible() || await compactMenuToggle.isVisible()) {
+    failures.push("responsive sidebar: persistent navigation did not return after switching to desktop view");
+  }
+  if (compactDesktopErrors.length) failures.push(`980px desktop view: ${compactDesktopErrors.join("; ")}`);
+  await compactDesktopPage.close();
 } finally {
   await browser.close();
   server.kill("SIGTERM");

@@ -129,7 +129,7 @@ document.querySelector("[data-reset]").addEventListener("click", reset);
 document.querySelector("[data-copy-html]").addEventListener("click", () => copy(htmlEditor.value, "HTML copied"));
 document.querySelector("[data-copy-css]").addEventListener("click", () => copy(cssEditor.value, "CSS copied"));
 document.querySelector("[data-copy-page]").addEventListener("click", () => {
-  const pageSource = `<!doctype html>\n<html lang="en" data-bs-theme="dark">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.3.1/dist/boobstrap.css" />\n  <style>\n${cssEditor.value}\n  </style>\n</head>\n<body>\n${htmlEditor.value}\n</body>\n</html>`;
+  const pageSource = `<!doctype html>\n<html lang="en" data-bs-theme="dark">\n<head>\n  <meta charset="UTF-8" />\n  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\n  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@boobstrap/boobstrap@0.4.0/dist/boobstrap.css" />\n  <style>\n${cssEditor.value}\n  </style>\n</head>\n<body>\n${htmlEditor.value}\n</body>\n</html>`;
   copy(pageSource, "Current page copied");
 });
 

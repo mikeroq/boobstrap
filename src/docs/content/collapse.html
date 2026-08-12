@@ -1,0 +1,113 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Collapse</span></nav><div class="docs-kicker">Interactivity</div><h1>Collapse</h1><p class="bs-lead">Reveal and hide content with synchronized state, lifecycle events, and keyboard-friendly controls.</p><div class="docs-component-meta" aria-label="Collapse documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="collapse">
+            <div class="docs-kicker">Interactivity</div>
+            <h2>Collapse</h2>
+            <p>Reveal supporting content without removing it from the document. The controller synchronizes the native <code class="bs-code-inline">hidden</code> attribute, <code class="bs-code-inline">aria-expanded</code>, and <code class="bs-code-inline">data-bs-state</code>.</p>
+            <div class="docs-demo interaction-demo" data-component-example="collapse">
+              <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="docs-collapse-panel" aria-expanded="false">Toggle details</button>
+              <div class="bs-collapse bs-card bs-mt-4" id="docs-collapse-panel" hidden="" data-bs-state="closed">
+                <div class="bs-card-body"><strong>Progressive by design.</strong><p class="bs-card-text bs-mb-0">The panel remains semantic HTML before and after enhancement.</p></div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window" data-code-variants="">
+              <div class="docs-code-label bs-code-header"><span data-code-label="">HTML · Boobstrap JS</span><button type="button" data-copy-example="collapse" data-copy="&lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; data-bs-toggle=&quot;collapse&quot; aria-controls=&quot;details&quot;&gt;
+  Toggle details
+&lt;/button&gt;
+
+&lt;div class=&quot;bs-collapse&quot; id=&quot;details&quot; hidden&gt;
+  Progressive by design.
+&lt;/div&gt;" class="bs-code-action" data-copy-variant="js">Copy</button></div>
+              <div class="docs-code-variant-tabs bs-code-tabs" role="tablist" aria-label="Collapse code framework">
+                <button id="collapse-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="collapse-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
+                <button id="collapse-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
+                <button id="collapse-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+              </div>
+              <div id="collapse-js-code-panel" role="tabpanel" aria-labelledby="collapse-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; data-bs-toggle=&quot;collapse&quot; aria-controls=&quot;details&quot;&gt;
+  Toggle details
+&lt;/button&gt;
+
+&lt;div class=&quot;bs-collapse&quot; id=&quot;details&quot; hidden&gt;
+  Progressive by design.
+&lt;/div&gt;">
+                <pre><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button"
+  data-bs-toggle="collapse" aria-controls="details"&gt;
+  Toggle details
+&lt;/button&gt;
+
+&lt;div class="bs-collapse" id="details" hidden&gt;
+  Progressive by design.
+&lt;/div&gt;</code></pre>
+              </div>
+              <div id="collapse-alpine-code-panel" role="tabpanel" aria-labelledby="collapse-alpine-code-tab" data-code-variant-panel="alpine" data-copy-source="&lt;div x-data=&quot;bsCollapse&quot;&gt;
+  &lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; x-bind=&quot;trigger&quot; aria-controls=&quot;details&quot;&gt;
+    Toggle details
+  &lt;/button&gt;
+
+  &lt;div class=&quot;bs-collapse&quot; id=&quot;details&quot; x-bind=&quot;panel&quot; hidden&gt;
+    Progressive by design.
+  &lt;/div&gt;
+&lt;/div&gt;" hidden="">
+                <pre><code class="">&lt;div x-data="bsCollapse"&gt;
+  &lt;button class="bs-btn bs-btn-secondary" type="button"
+    x-bind="trigger" aria-controls="details"&gt;
+    Toggle details
+  &lt;/button&gt;
+
+  &lt;div class="bs-collapse" id="details" x-bind="panel" hidden&gt;
+    Progressive by design.
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+              </div>
+              <div id="collapse-react-code-panel" role="tabpanel" aria-labelledby="collapse-react-code-tab" data-code-variant-panel="react" data-copy-source="function Details() {
+  const collapse = useCollapse({ id: &quot;details&quot; });
+
+  return (
+    &lt;&gt;
+      &lt;button className=&quot;bs-btn bs-btn-secondary&quot; {...collapse.getTriggerProps()}&gt;
+        Toggle details
+      &lt;/button&gt;
+      &lt;div className=&quot;bs-collapse&quot; {...collapse.getPanelProps()}&gt;
+        Progressive by design.
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}" hidden="">
+                <pre><code class="">function Details() {
+  const collapse = useCollapse({ id: "details" });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn bs-btn-secondary"
+        {...collapse.getTriggerProps()}&gt;
+        Toggle details
+      &lt;/button&gt;
+      &lt;div className="bs-collapse" {...collapse.getPanelProps()}&gt;
+        Progressive by design.
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+              </div>
+            </div>
+            <div class="docs-example-guidance">
+              <div><h3>Structure</h3><p>Give the panel a unique <code class="bs-code-inline">id</code> and reference it from the trigger's <code class="bs-code-inline">aria-controls</code>.</p></div>
+              <div><h3>State</h3><p><code class="bs-code-inline">.bs-collapse</code> supplies the visual contract; <code class="bs-code-inline">hidden</code> is the readable initial state.</p></div>
+              <div><h3>Accessibility</h3><p>Use a real button. The controller maintains <code class="bs-code-inline">aria-expanded</code> and fires cancelable show/hide events.</p></div>
+            </div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Navigation drawers:</strong> use the <a href="/docs/components/sidebar">Sidebar component</a> for an off-canvas menu. Sidebar adds a backdrop, focus containment and restoration, <kbd>Escape</kbd> handling, a persistent desktop rail, and document scroll locking; Collapse intentionally remains a lightweight inline disclosure.</span></div>
+            <h3 aria-level="2" id="collapse-initialize-and-observe-collapse">Initialize and observe collapse</h3><p>The aggregate initializer discovers declarative collapse markup. Lifecycle events let application code observe or cancel a transition.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Initialization and events</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Initialization and events code example"><code data-language="javascript" class="">import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const boobstrap = initBoobstrap(document);
+const panel = document.querySelector("#details-panel");
+
+panel.addEventListener("bs:collapse:shown", () =&gt; {
+  panel.querySelector("a, button, input")?.focus();
+});
+
+// Later: boobstrap.destroy();</code></pre></div><div class="docs-api"><h3 id="collapse-collapse-api">Collapse API</h3><p>Import <code class="bs-code-inline">Collapse</code> from <code class="bs-code-inline">@boobstrap/boobstrap/js/collapse</code> for direct control.</p><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">show()</code> / <code class="bs-code-inline">hide()</code></td><td>Change visibility and synchronized public state.</td></tr>
+              <tr><td><code class="bs-code-inline">toggle()</code></td><td>Invert the current panel state.</td></tr>
+              <tr><td><code class="bs-code-inline">bs:collapse:*</code></td><td>Cancelable before-events and bubbling completed-events.</td></tr>
+            </tbody></table></div></div>
+          </section>

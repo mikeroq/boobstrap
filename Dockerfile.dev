@@ -2,18 +2,27 @@
 
 FROM node:22-alpine AS build
 
+RUN apk add --no-cache git
+
 WORKDIR /app
+
+ENV VITE_SITE_ENV=development
 
 COPY package.json package-lock.json ./
 RUN npm ci
 
+# Copy the site before resolving the floating framework branch so a new site
+# revision always refreshes the integration dependency instead of reusing an
+# older Docker layer.
 COPY index.html vite.config.js ./
 COPY docs ./docs
 COPY playground ./playground
 COPY src ./src
 COPY public ./public
 COPY scripts ./scripts
+COPY .framework-dev-ref ./
 
+RUN npm run framework:dev
 RUN npm run build
 
 FROM nginxinc/nginx-unprivileged:1.27-alpine AS runtime

@@ -1,0 +1,86 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Checkboxes and radios</span></nav><div class="docs-kicker">Forms</div><h1>Checkboxes and radios</h1><p class="bs-lead">Build checkboxes, descriptions, inline choices, radio groups, switches, and disabled states.</p><div class="docs-component-meta" aria-label="Checkboxes and radios documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="form-checks-radios">
+            <div class="docs-kicker">Forms</div>
+            <h2>Checkboxes and radios</h2>
+            <p>Use checkboxes for independent choices, radios for one choice from a set, and switches for immediate binary settings.</p>
+
+            <h3 aria-level="2" id="form-checks-radios-checkbox-group">Checkbox group</h3>
+            <div class="docs-demo" data-component-example="form-checkbox-group">
+              <fieldset class="bs-check-group">
+                <legend class="bs-label">Notifications</legend>
+                <label class="bs-check">
+                  <input class="bs-check-input" type="checkbox" name="notifications" value="product" checked="">
+                  <span class="bs-check-label">Product updates</span>
+                  <span class="bs-check-description">Monthly release notes and migration guidance.</span>
+                </label>
+                <label class="bs-check">
+                  <input class="bs-check-input" type="checkbox" name="notifications" value="events">
+                  <span class="bs-check-label">Event invitations</span>
+                </label>
+                <label class="bs-check">
+                  <input class="bs-check-input" type="checkbox" name="notifications" value="legacy" disabled="">
+                  <span class="bs-check-label">Legacy notices</span>
+                </label>
+              </fieldset>
+            </div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Checkbox group</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Checkbox group code example"><code class="">&lt;fieldset class="bs-check-group"&gt;
+  &lt;legend class="bs-label"&gt;Notifications&lt;/legend&gt;
+  &lt;label class="bs-check"&gt;
+    &lt;input
+      class="bs-check-input"
+      type="checkbox"
+      name="notifications"
+      value="events"
+    /&gt;
+    &lt;span class="bs-check-label"&gt;Event invitations&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class="bs-check"&gt;
+    &lt;input
+      class="bs-check-input"
+      type="checkbox"
+      name="notifications"
+      value="product"
+      checked
+    /&gt;
+    &lt;span class="bs-check-label"&gt;Product updates&lt;/span&gt;
+    &lt;span class="bs-check-description"&gt;
+      Monthly release notes and migration guidance.
+    &lt;/span&gt;
+  &lt;/label&gt;
+  &lt;label class="bs-check"&gt;
+    &lt;input
+      class="bs-check-input"
+      type="checkbox"
+      name="notifications"
+      value="legacy"
+      disabled
+    /&gt;
+    &lt;span class="bs-check-label"&gt;Legacy notices&lt;/span&gt;
+  &lt;/label&gt;
+&lt;/fieldset&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-checks-radios-radio-group">Radio group</h3>
+            <div class="docs-demo" data-component-example="form-radio-group"><fieldset class="bs-check-group"><legend class="bs-label">Billing cycle</legend><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="monthly" checked=""><span class="bs-check-label">Monthly</span></label><label class="bs-check"><input class="bs-check-input" type="radio" name="billing_cycle_demo" value="yearly"><span class="bs-check-label">Yearly</span><span class="bs-check-description">Save 20% with annual billing.</span></label></fieldset></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Radio group</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Radio group code example"><code class="">&lt;fieldset class="bs-check-group"&gt;
+  &lt;legend class="bs-label"&gt;Billing cycle&lt;/legend&gt;
+  &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="monthly" checked /&gt;&lt;span class="bs-check-label"&gt;Monthly&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="bs-check"&gt;&lt;input class="bs-check-input" type="radio" name="billing_cycle" value="yearly" /&gt;&lt;span class="bs-check-label"&gt;Yearly&lt;/span&gt;&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-checks-radios-switch">Switch</h3>
+            <div class="docs-demo" data-component-example="form-switch"><label class="bs-check bs-switch"><input class="bs-check-input" type="checkbox" name="security_alerts" checked=""><span class="bs-check-label">Security alerts</span></label></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Switch</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Switch code example"><code class="">&lt;label class="bs-check bs-switch"&gt;
+  &lt;input class="bs-check-input" type="checkbox" name="security_alerts" checked /&gt;
+  &lt;span class="bs-check-label"&gt;Security alerts&lt;/span&gt;
+&lt;/label&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-checks-radios-inline-radio-choices">Inline radio choices</h3>
+            <div class="docs-demo" data-component-example="form-radio-inline"><fieldset><legend class="bs-label">Density</legend><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="comfortable" checked=""><span class="bs-check-label">Comfortable</span></label><label class="bs-check bs-check-inline"><input class="bs-check-input" type="radio" name="density_demo" value="compact"><span class="bs-check-label">Compact</span></label></fieldset></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Inline radios</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Inline radios code example"><code class="">&lt;fieldset&gt;
+  &lt;legend class="bs-label"&gt;Density&lt;/legend&gt;
+  &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="comfortable" checked /&gt;&lt;span class="bs-check-label"&gt;Comfortable&lt;/span&gt;&lt;/label&gt;
+  &lt;label class="bs-check bs-check-inline"&gt;&lt;input class="bs-check-input" type="radio" name="density" value="compact" /&gt;&lt;span class="bs-check-label"&gt;Compact&lt;/span&gt;&lt;/label&gt;
+&lt;/fieldset&gt;</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Group choices:</strong> wrap related controls in <code class="bs-code-inline">&lt;fieldset&gt;</code> and name the set with <code class="bs-code-inline">&lt;legend&gt;</code>. Radios in one set must share the same <code class="bs-code-inline">name</code>.</span></div>
+          </section>
