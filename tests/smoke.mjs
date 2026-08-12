@@ -249,11 +249,37 @@ try {
     if (!source.includes(`<meta property="og:url" content="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong Open Graph URL`);
     if (!source.includes(`<meta name="twitter:title" content="${escapeHtml(pageTitle)}"`)) failures.push(`${path}: raw HTML has the wrong Twitter title`);
     if (!source.includes(`<link rel="canonical" href="${canonicalUrl}"`)) failures.push(`${path}: raw HTML has the wrong canonical URL`);
+    if (!source.includes(`href="${path}" aria-current="page"`)) failures.push(`${path}: raw HTML does not identify the current navigation link before JavaScript`);
+    const disclosure = ["tables", "forms"].find((section) => path === `/docs/components/${section}` || path.startsWith(`/docs/components/${section}/`));
+    if (disclosure && (!source.includes(`aria-expanded="true" aria-controls="docs-${disclosure}-submenu"`)
+      || source.includes(`id="docs-${disclosure}-submenu" data-nav-submenu hidden`))) {
+      failures.push(`${path}: raw HTML does not expose its active navigation submenu before JavaScript`);
+    }
     const slashResponse = await fetch(`${baseUrl}${path}/`, { redirect: "manual" });
     if (slashResponse.status !== 308 || slashResponse.headers.get("location") !== path) {
       failures.push(`${path}/: expected a 308 redirect to ${path}`);
     }
   }
+
+  const noScriptContext = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 1680, height: 940 } });
+  const noScriptPage = await noScriptContext.newPage();
+  await noScriptPage.goto(`${baseUrl}/docs/components/tables/styles`, { waitUntil: "load" });
+  const initialNavigationStyle = await noScriptPage.locator(".docs-nav a").first().evaluate((link) => ({
+    display: getComputedStyle(link).display,
+    minBlockSize: getComputedStyle(link).minBlockSize,
+    paddingInline: getComputedStyle(link).paddingInline,
+  }));
+  if (await noScriptPage.locator(".docs-nav a:not(.bs-nav-link)").count() !== 0
+    || initialNavigationStyle.display !== "flex"
+    || initialNavigationStyle.minBlockSize !== "36px"
+    || initialNavigationStyle.paddingInline === "0px") {
+    failures.push(`docs initial render: navigation links are unstyled before JavaScript (${JSON.stringify(initialNavigationStyle)})`);
+  }
+  if (!await noScriptPage.locator("#docs-tables-submenu").isVisible()
+    || await noScriptPage.locator('.docs-nav a[href="/docs/components/tables/styles"]').getAttribute("aria-current") !== "page") {
+    failures.push("docs initial render: current table navigation state is missing before JavaScript");
+  }
+  await noScriptContext.close();
 
   for (const viewport of [
     { name: "desktop", width: 1680, height: 940 },
