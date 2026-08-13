@@ -121,7 +121,51 @@ element.addEventListener("bs:dialog:hide", (event) =&gt; {
     &lt;/header&gt;
     &lt;div class="bs-dialog-body"&gt;...&lt;/div&gt;
   &lt;/dialog&gt;
-&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="dialogs guidance"><div><h3>Semantics</h3><p>Use a native <code class="bs-code-inline">&lt;dialog&gt;</code>, connect a visible title with <code class="bs-code-inline">aria-labelledby</code>, and connect supporting copy with <code class="bs-code-inline">aria-describedby</code>.</p></div><div><h3>Dismissal</h3><p>Keep Escape and at least one explicit dismiss control. Disable backdrop dismissal for destructive decisions or forms where an outside click could lose work.</p></div><div><h3>Scrolling</h3><p>Place overflow-prone content only in <code class="bs-code-inline">.bs-dialog-body</code>. Header and footer are fixed flex regions, so do not add competing page-level scroll containers.</p></div><div><h3>State ownership</h3><p>Use Boobstrap JS or an adapter on one instance, never both. All layers expose the same open/close state and lifecycle events.</p></div></div><div class="docs-api">
+&lt;/div&gt;</code></pre></div>
+            <h3 id="dialogs-react">React</h3>
+            <p><code class="bs-code-inline">useDialog</code> synchronizes a native dialog with React state, handles Escape, restores trigger focus, and composes consumer handlers. Spread dialog props onto <code class="bs-code-inline">&lt;dialog&gt;</code> itself.</p>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React dialog</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React dialog code example"><code data-language="jsx">import { useDialog } from "@boobstrap/react";
+
+export function AccountDialog() {
+  const dialog = useDialog({ id: "react-account-dialog" });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn" {...dialog.getTriggerProps()}&gt;Open dialog&lt;/button&gt;
+      &lt;dialog className="bs-dialog" aria-labelledby="react-account-title"
+        {...dialog.getDialogProps()}&gt;
+        &lt;header className="bs-dialog-header"&gt;
+          &lt;h2 className="bs-dialog-title" id="react-account-title"&gt;Account details&lt;/h2&gt;
+          &lt;button className="bs-dialog-close" aria-label="Close account details"
+            {...dialog.getDismissProps()}&gt;&amp;times;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;div className="bs-dialog-body"&gt;Profile and security settings.&lt;/div&gt;
+      &lt;/dialog&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+            <h3 id="dialogs-vue">Vue</h3>
+            <p><code class="bs-code-inline">useDialog</code> exposes the same native-dialog and focus contract through computed state and prop objects. Bind the returned props to the trigger, dialog, and every explicit dismiss button.</p>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Dialog composable</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Dialog composable code example"><code data-language="vue">&lt;script setup&gt;
+import { useDialog } from "@boobstrap/vue";
+
+const dialog = useDialog({ id: "vue-account-dialog" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn" v-bind="dialog.getTriggerProps()"&gt;Open dialog&lt;/button&gt;
+  &lt;dialog class="bs-dialog" aria-labelledby="vue-account-title"
+    v-bind="dialog.getDialogProps()"&gt;
+    &lt;header class="bs-dialog-header"&gt;
+      &lt;h2 class="bs-dialog-title" id="vue-account-title"&gt;Account details&lt;/h2&gt;
+      &lt;button class="bs-dialog-close" aria-label="Close account details"
+        v-bind="dialog.getDismissProps()"&gt;&amp;times;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="bs-dialog-body"&gt;Profile and security settings.&lt;/div&gt;
+  &lt;/dialog&gt;
+&lt;/template&gt;</code></pre></div>
+            <p class="docs-package-note">Read the <a href="/docs/interactivity/react">React adapter guide</a> or <a href="/docs/interactivity/vue">Vue adapter guide</a> for controlled state, SSR, and shared lifecycle rules.</p>
+            <div class="docs-example-guidance" aria-label="dialogs guidance"><div><h3>Semantics</h3><p>Use a native <code class="bs-code-inline">&lt;dialog&gt;</code>, connect a visible title with <code class="bs-code-inline">aria-labelledby</code>, and connect supporting copy with <code class="bs-code-inline">aria-describedby</code>.</p></div><div><h3>Dismissal</h3><p>Keep Escape and at least one explicit dismiss control. Disable backdrop dismissal for destructive decisions or forms where an outside click could lose work.</p></div><div><h3>Scrolling</h3><p>Place overflow-prone content only in <code class="bs-code-inline">.bs-dialog-body</code>. Header and footer are fixed flex regions, so do not add competing page-level scroll containers.</p></div><div><h3>State ownership</h3><p>Use Boobstrap JS or an adapter on one instance, never both. All layers expose the same open/close state and lifecycle events.</p></div></div><div class="docs-api">
               <h3 id="dialogs-dialog-class-api">Dialog class API</h3>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code class="bs-code-inline">.bs-dialog</code></td><td>Creates the centered native modal surface and defines its width and maximum height.</td></tr>

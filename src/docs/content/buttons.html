@@ -269,6 +269,7 @@
                 <button id="button-detail-js-tab" type="button" role="tab" aria-selected="true" aria-controls="button-detail-js-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
                 <button id="button-detail-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-alpine-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
                 <button id="button-detail-react-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-react-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+                <button id="button-detail-vue-tab" type="button" role="tab" aria-selected="false" aria-controls="button-detail-vue-panel" tabindex="-1" data-code-variant="vue" class="bs-code-tab">Vue</button>
               </div>
               <div id="button-detail-js-panel" role="tabpanel" aria-labelledby="button-detail-js-tab" data-code-variant-panel="js" data-copy-source="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot; data-bs-button data-bs-loading data-bs-loading-label=&quot;Saving changes&quot;&gt;
   &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
@@ -312,7 +313,9 @@
   &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
 &lt;/button&gt;</code></pre>
               </div>
-              <div id="button-detail-react-panel" role="tabpanel" aria-labelledby="button-detail-react-tab" data-code-variant-panel="react" data-copy-source="function SaveButton() {
+              <div id="button-detail-react-panel" role="tabpanel" aria-labelledby="button-detail-react-tab" data-code-variant-panel="react" data-copy-source="import { useButton } from &quot;@boobstrap/react&quot;;
+
+function SaveButton() {
   const save = useButton({ loadingLabel: &quot;Saving changes&quot; });
   const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
 
@@ -323,7 +326,9 @@
     &lt;/button&gt;
   );
 }" hidden="">
-                <pre><code class="">function SaveButton() {
+                <pre><code class="">import { useButton } from "@boobstrap/react";
+
+function SaveButton() {
   const save = useButton({ loadingLabel: "Saving changes" });
   const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
 
@@ -335,6 +340,35 @@
     &lt;/button&gt;
   );
 }</code></pre>
+              </div>
+              <div id="button-detail-vue-panel" role="tabpanel" aria-labelledby="button-detail-vue-tab" data-code-variant-panel="vue" data-copy-source="&lt;script setup&gt;
+import { useButton } from &quot;@boobstrap/vue&quot;;
+
+const save = useButton({ loadingLabel: &quot;Saving changes&quot; });
+const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class=&quot;bs-btn bs-btn-primary&quot;
+    v-bind=&quot;save.getButtonProps({ onClick: persist })&quot;&gt;
+    &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
+    &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/template&gt;" hidden="">
+                <pre><code data-language="vue">&lt;script setup&gt;
+import { useButton } from "@boobstrap/vue";
+
+const save = useButton({ loadingLabel: "Saving changes" });
+const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn bs-btn-primary"
+    v-bind="save.getButtonProps({ onClick: persist })"&gt;
+    &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
+    &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
+  &lt;/button&gt;
+&lt;/template&gt;</code></pre>
               </div>
             </div>
             <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Your application owns completion.</strong><p>Boobstrap starts and presents the loading state. Always call <code class="bs-code-inline">stop()</code> in a <code class="bs-code-inline">finally</code> path so failures and cancellations restore the control.</p></span></div>

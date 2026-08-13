@@ -27,6 +27,7 @@
                 <button id="dropdown-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="dropdown-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
                 <button id="dropdown-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
                 <button id="dropdown-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+                <button id="dropdown-vue-code-tab" type="button" role="tab" aria-selected="false" aria-controls="dropdown-vue-code-panel" tabindex="-1" data-code-variant="vue" class="bs-code-tab">Vue</button>
               </div>
               <div id="dropdown-js-code-panel" role="tabpanel" aria-labelledby="dropdown-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; data-bs-dropdown&gt;
   &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
@@ -64,20 +65,24 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
-              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source="function SaveActions() {
+              <div id="dropdown-react-code-panel" role="tabpanel" aria-labelledby="dropdown-react-code-tab" data-code-variant-panel="react" data-copy-source="import { useDropdown } from &quot;@boobstrap/react&quot;;
+
+function SaveActions() {
   const dropdown = useDropdown({ id: &quot;save-menu&quot; });
 
   return (
     &lt;div className=&quot;bs-dropdown bs-btn-group&quot; {...dropdown.getRootProps()}&gt;
       &lt;button className=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
       &lt;button className=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; aria-label=&quot;More save options&quot; {...dropdown.getTriggerProps()} /&gt;
-      &lt;div className=&quot;bs-dropdown-menu&quot; {...dropdown.getMenuProps()}&gt;
+      &lt;div className=&quot;bs-dropdown-menu&quot; {...dropdown.getMenuProps({ &quot;aria-label&quot;: &quot;Save options&quot; })}&gt;
         &lt;button className=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );
 }" hidden="">
-                <pre><code class="">function SaveActions() {
+                <pre><code class="">import { useDropdown } from "@boobstrap/react";
+
+function SaveActions() {
   const dropdown = useDropdown({ id: "save-menu" });
 
   return (
@@ -85,7 +90,8 @@
       &lt;button className="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
       &lt;button className="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
         aria-label="More save options" {...dropdown.getTriggerProps()} /&gt;
-      &lt;div className="bs-dropdown-menu" {...dropdown.getMenuProps()}&gt;
+      &lt;div className="bs-dropdown-menu"
+        {...dropdown.getMenuProps({ "aria-label": "Save options" })}&gt;
         &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
           Save and publish
         &lt;/button&gt;
@@ -93,6 +99,45 @@
     &lt;/div&gt;
   );
 }</code></pre>
+              </div>
+              <div id="dropdown-vue-code-panel" role="tabpanel" aria-labelledby="dropdown-vue-code-tab" data-code-variant-panel="vue" data-copy-source="&lt;script setup&gt;
+import { useDropdown } from &quot;@boobstrap/vue&quot;;
+
+const dropdown = useDropdown({ id: &quot;save-menu&quot; });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class=&quot;bs-dropdown bs-btn-group&quot; v-bind=&quot;dropdown.getRootProps()&quot;&gt;
+    &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
+    &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot;
+      aria-label=&quot;More save options&quot; v-bind=&quot;dropdown.getTriggerProps()&quot;&gt;&lt;/button&gt;
+    &lt;div class=&quot;bs-dropdown-menu&quot;
+      v-bind=&quot;dropdown.getMenuProps({ 'aria-label': 'Save options' })&quot;&gt;
+      &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;
+        Save and publish
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;" hidden="">
+                <pre><code data-language="vue">&lt;script setup&gt;
+import { useDropdown } from "@boobstrap/vue";
+
+const dropdown = useDropdown({ id: "save-menu" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="bs-dropdown bs-btn-group" v-bind="dropdown.getRootProps()"&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+      aria-label="More save options" v-bind="dropdown.getTriggerProps()"&gt;&lt;/button&gt;
+    &lt;div class="bs-dropdown-menu"
+      v-bind="dropdown.getMenuProps({ 'aria-label': 'Save options' })"&gt;
+      &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;
+        Save and publish
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">
