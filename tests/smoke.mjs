@@ -171,6 +171,17 @@ const promotedComponentCoverage = {
     "bs-table-striped",
   ],
   lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
+  accordion: [
+    "bs-accordion",
+    "bs-accordion-item",
+    "bs-accordion-header",
+    "bs-accordion-trigger",
+    "bs-accordion-icon",
+    "bs-accordion-panel",
+    "bs-accordion-body",
+    "bs-accordion-compact",
+    "bs-accordion-flush",
+  ],
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
   progress: [
     "bs-progress",
@@ -185,6 +196,16 @@ const promotedComponentCoverage = {
     "bs-progress-striped",
     "bs-progress-animated",
     "bs-progress-indeterminate",
+  ],
+  skeletons: [
+    "bs-skeleton",
+    "bs-skeleton-text",
+    "bs-skeleton-circle",
+    "bs-skeleton-media",
+    "bs-skeleton-sm",
+    "bs-skeleton-lg",
+    "bs-skeleton-pulse",
+    "bs-skeleton-wave",
   ],
   toasts: [
     "bs-toast-region",
@@ -202,14 +223,16 @@ const promotedComponentCoverage = {
   "tooltips-popovers": ["bs-tooltip", "bs-popover", "bs-popover-header", "bs-popover-body", "bs-floating-arrow"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 145) {
-  throw new Error(`Expected documentation coverage for 145 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 162) {
+  throw new Error(`Expected documentation coverage for 162 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
+  "whats-new": { code: 2, guidance: true },
   installation: { code: 5, guidance: true },
   starter: { code: 3, guidance: true },
   theming: { examples: 2, code: 6, guidance: true },
+  typescript: { code: 7, guidance: true },
   typography: { examples: 2, code: 3, guidance: true },
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
@@ -227,8 +250,10 @@ const documentationQualityMinimums = {
   "table-datatables": { examples: 1, code: 3, guidance: true },
   lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
+  accordion: { examples: 2, code: 8, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
   progress: { examples: 3, code: 3, guidance: true },
+  skeletons: { examples: 4, code: 5, guidance: true },
   toasts: { examples: 2, code: 3, guidance: true },
   forms: { examples: 2, code: 2 },
   "form-inputs": { examples: 7, code: 7, guidance: true },
@@ -1128,6 +1153,64 @@ try {
         }
         if (await routePage.locator('[data-component-example="progress-variants"] .bs-progress-bar').count() !== 5) {
           failures.push("desktop: progress reference is missing contextual variants");
+        }
+      }
+
+      if (config.sectionId === "accordion") {
+        const single = routePage.locator('[data-component-example="accordion"]');
+        const account = single.getByRole("button", { name: /Account settings/ });
+        const billing = single.getByRole("button", { name: /Billing and invoices/ });
+        await billing.click();
+        if (await billing.getAttribute("aria-expanded") !== "true"
+          || await account.getAttribute("aria-expanded") !== "false"
+          || !await single.locator("#accordion-demo-panel-billing").isVisible()
+          || await single.locator("#accordion-demo-panel-account").isVisible()) {
+          failures.push("desktop: accordion single-open example did not close its open sibling");
+        }
+
+        const multiple = routePage.locator('[data-component-example="accordion-always-open"]');
+        const email = multiple.getByRole("button", { name: /Email notifications/ });
+        const push = multiple.getByRole("button", { name: /Push notifications/ });
+        await push.click();
+        if (await email.getAttribute("aria-expanded") !== "true" || await push.getAttribute("aria-expanded") !== "true") {
+          failures.push("desktop: accordion always-open example did not preserve sibling state");
+        }
+
+        const source = (await routePage.locator("#accordion").textContent()) ?? "";
+        for (const contract of ["Accordion.getOrCreateInstance", "bsAccordion", "useAccordion", "@boobstrap/react", "@boobstrap/vue", "bs:collapse:show"]) {
+          if (!source.includes(contract)) failures.push(`desktop: accordion guide is missing ${contract}`);
+        }
+      }
+
+      if (config.sectionId === "skeletons") {
+        const source = (await routePage.locator("#skeletons").textContent()) ?? "";
+        for (const contract of ["--bs-skeleton-width", "--bs-skeleton-height", "aria-busy", "aria-hidden", "prefers-reduced-motion", "role=\"progressbar\""]) {
+          if (!source.includes(contract)) failures.push(`desktop: skeleton guide is missing ${contract}`);
+        }
+        const animated = routePage.locator('[data-component-example="skeletons-text"] .bs-skeleton-pulse').first();
+        if (await animated.evaluate((element) => getComputedStyle(element).animationName) === "none") {
+          failures.push("desktop: skeleton pulse example is not using the framework animation");
+        }
+      }
+
+      if (config.sectionId === "typescript") {
+        const source = (await routePage.locator("#typescript").textContent()) ?? "";
+        for (const contract of ["@boobstrap/boobstrap/js", "@boobstrap/alpine", "@boobstrap/react", "@boobstrap/vue", "@boobstrap/boobstrap/tokens", "moduleResolution", "NodeNext", "Bundler", "DOM"]) {
+          if (!source.includes(contract)) failures.push(`desktop: TypeScript guide is missing ${contract}`);
+        }
+      }
+
+      if (config.sectionId === "tokens") {
+        const source = (await routePage.locator("#tokens").textContent()) ?? "";
+        for (const contract of ["@boobstrap/boobstrap/tokens", "@boobstrap/boobstrap/tokens.json", "{ tokens, modes }", "DTCG-style references"]) {
+          if (!source.includes(contract)) failures.push(`desktop: token guide is missing ${contract}`);
+        }
+      }
+
+      if (config.sectionId === "whats-new") {
+        const source = (await routePage.locator("#whats-new").textContent()) ?? "";
+        for (const contract of ["Accordion", "Skeletons", "TypeScript", "token", "Toast autohide", "dev preview"]) {
+          if (!source.includes(contract)) failures.push(`desktop: v0.5 overview is missing ${contract}`);
         }
       }
 

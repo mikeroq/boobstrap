@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Reference</span><span aria-hidden="true">/</span><span>Design tokens</span></nav><div class="docs-kicker">Reference</div><h1>Design tokens</h1><p class="bs-lead">Browse the semantic color, type, spacing, radius, shadow, container, and motion tokens.</p><div class="docs-component-meta" aria-label="Design tokens documentation summary"><span class="bs-badge bs-text-xs"><strong>Reference</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Reference</span><span aria-hidden="true">/</span><span>Design tokens</span></nav><div class="docs-kicker">Reference</div><h1>Design tokens</h1><p class="bs-lead">Browse runtime CSS variables and consume source-derived token data from JavaScript, JSON, or TypeScript.</p><div class="docs-component-meta" aria-label="Design tokens documentation summary"><span class="bs-badge bs-text-xs"><strong>Reference</strong> guide</span><span class="bs-badge bs-text-xs"><strong>CSS + code</strong> exports</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> dev preview</span></div></header>
 
 <section class="docs-section docs-routed-section" id="tokens">
             <div class="docs-kicker">Reference</div>
@@ -9,7 +9,30 @@
 </div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Scoped token override</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Scoped token override code example"><code class="">&lt;section class="campaign" style="--bs-color-primary: #7c3aed; --bs-color-primary-hover: #8b5cf6;"&gt;
   &lt;span class="bs-badge bs-badge-primary"&gt;Customized&lt;/span&gt;
   &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Continue&lt;/button&gt;
-&lt;/section&gt;</code></pre></div><div class="docs-example-guidance" aria-label="tokens guidance"><div><h3>Semantic first</h3><p>Prefer <code class="bs-code-inline">--bs-color-primary</code> and other semantic variables over raw palette tokens when customizing components.</p></div><div><h3>Scope</h3><p>Override on <code class="bs-code-inline">:root</code> for the whole application, a theme attribute for one palette, or a component ancestor for a local treatment.</p></div><div><h3>Fallbacks</h3><p>Keep every required state token—default, hover, active, focus, border, and text—legible in both light and dark contexts.</p></div></div><div class="docs-filter-row">
+&lt;/section&gt;</code></pre></div><div class="docs-example-guidance" aria-label="tokens guidance"><div><h3>Semantic first</h3><p>Prefer <code class="bs-code-inline">--bs-color-primary</code> and other semantic variables over raw palette tokens when customizing components.</p></div><div><h3>Scope</h3><p>Override on <code class="bs-code-inline">:root</code> for the whole application, a theme attribute for one palette, or a component ancestor for a local treatment.</p></div><div><h3>Fallbacks</h3><p>Keep every required state token—default, hover, active, focus, border, and text—legible in both light and dark contexts.</p></div></div>
+
+            <h3 id="tokens-code-exports">Use tokens in build tools and design tools</h3>
+            <p>Boobstrap v0.5 generates JavaScript, JSON, and TypeScript declarations from the same CSS source used by the framework. Import the ES module when application or build code needs named <code class="bs-code-inline">tokens</code> and <code class="bs-code-inline">modes</code> collections; import JSON when a tool consumes data without executing a module.</p>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Token exports</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Token exports code example"><code>import tokenArtifact, { modes, tokens } from "@boobstrap/boobstrap/tokens";
+import tokenJson from "@boobstrap/boobstrap/tokens.json" with { type: "json" };
+
+const primary = tokens.color.primary.$value;
+const lightOverrides = modes['[data-bs-theme="light"]'];
+
+console.log(tokenArtifact.tokens === tokens); // true
+console.log(tokenJson.tokens.color.primary.$value);</code></pre></div>
+
+            <div class="docs-api"><h3 id="tokens-artifact-contract">Token artifact contract</h3><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Export</th><th>Shape</th><th>Use it for</th></tr></thead><tbody>
+              <tr><td><code class="bs-code-inline">default</code></td><td><code class="bs-code-inline">{ tokens, modes }</code></td><td>Passing the complete source-derived artifact to another tool.</td></tr>
+              <tr><td><code class="bs-code-inline">tokens</code></td><td>Grouped token records with <code class="bs-code-inline">$value</code> and <code class="bs-code-inline">$extensions</code></td><td>Reading base values and their originating <code class="bs-code-inline">--bs-*</code> CSS variable names.</td></tr>
+              <tr><td><code class="bs-code-inline">modes</code></td><td>CSS-selector keys mapped to variable overrides</td><td>Inspecting light mode, palette, and radius remaps without resolving CSS in a browser.</td></tr>
+              <tr><td><code class="bs-code-inline">tokens.json</code></td><td><code class="bs-code-inline">$schema</code> and <code class="bs-code-inline">$description</code> metadata plus <code class="bs-code-inline">tokens</code> and <code class="bs-code-inline">modes</code></td><td>Design-token pipelines, documentation generators, and non-JavaScript consumers that need the complete generated envelope.</td></tr>
+            </tbody></table></div></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Source of truth:</strong> keep styling in CSS custom properties. The code artifacts are generated interoperability data and must not be edited. Exact <code class="bs-code-inline">var()</code> aliases become DTCG-style references such as <code class="bs-code-inline">{brand.500}</code>; CSS-native expressions such as gradients, shadows, <code class="bs-code-inline">clamp()</code>, and font stacks remain lossless strings. See <a href="/docs/getting-started/typescript">TypeScript</a> for the exported declaration shape.</span></div>
+
+            <h3 id="tokens-inventory">Browse runtime CSS variables</h3>
+            <p>The searchable inventory below is generated from the exact framework stylesheet installed by this site. It is the authoritative runtime API for theming in the browser.</p>
+            <div class="docs-filter-row">
               <label for="token-filter">Filter tokens</label>
               <input class="bs-input" id="token-filter" type="search" placeholder="Try color, space, radius…" data-token-filter="">
             </div>
