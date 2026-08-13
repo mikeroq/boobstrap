@@ -177,5 +177,41 @@ export function TeamRoleSelect() {
     &lt;/div&gt;
   );
 }</code></pre></div>
-            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose one owner:</strong> initialize the plain JavaScript controller, Alpine adapter, or React hook—not more than one on the same combobox.</span></div>
+            <h3 aria-level="2" id="form-searchable-select-vue">Vue</h3>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Complete searchable select</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Complete searchable select code example"><code data-language="vue">&lt;script setup&gt;
+import "@boobstrap/boobstrap";
+import { useCombobox } from "@boobstrap/vue";
+
+const roles = [
+  { value: "designer", label: "Designer" },
+  { value: "engineer", label: "Engineer" },
+  { value: "product-manager", label: "Product manager" },
+  { value: "founder", label: "Founder" },
+];
+const role = useCombobox({ options: roles });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="bs-form-group"&gt;
+    &lt;label class="bs-label" for="vue-role"&gt;Team role&lt;/label&gt;
+    &lt;div class="bs-combobox" v-bind="role.getRootProps()"&gt;
+      &lt;input class="bs-combobox-input" id="vue-role" placeholder="Search roles"
+        v-bind="role.getInputProps()" /&gt;
+      &lt;button class="bs-combobox-toggle"
+        v-bind="role.getToggleProps({ 'aria-label': 'Toggle roles' })"&gt;&lt;/button&gt;
+      &lt;input type="hidden" name="team_role" :value="role.value" /&gt;
+      &lt;div class="bs-combobox-listbox" v-bind="role.getListboxProps()"&gt;
+        &lt;div v-for="(option, index) in role.filteredOptions" :key="option.value"
+          class="bs-combobox-option"
+          v-bind="role.getOptionProps(option, index)"&gt;
+          {{ option.label }}
+        &lt;/div&gt;
+        &lt;div v-if="role.filteredOptions.length === 0" class="bs-combobox-empty"&gt;
+          No roles found
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose one owner:</strong> initialize the plain JavaScript controller, Alpine adapter, React hook, or Vue composable—not more than one on the same combobox. See the <a href="/docs/interactivity/react">React</a> and <a href="/docs/interactivity/vue">Vue</a> adapter guides for controlled state and SSR rules.</span></div>
           </section>

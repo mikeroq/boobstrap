@@ -17,6 +17,51 @@ import { initPopovers } from "@boobstrap/boobstrap/js/popover";
 
 const tooltips = initTooltips(document);
 const popovers = initPopovers(document);</code></pre></div>
+  <h3 id="tooltips-popovers-react">React</h3>
+  <p>React hooks keep the floating panel in your JSX. Prop getters connect IDs, visibility, placement, hover/focus or click behavior, Escape dismissal, outside-pointer dismissal, refs, and repositioning.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React tooltip and popover</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React tooltip and popover code example"><code data-language="jsx">import { usePopover, useTooltip } from "@boobstrap/react";
+
+export function ContextHelp() {
+  const tooltip = useTooltip({ id: "copy-tip", placement: "top" });
+  const popover = usePopover({ id: "retention-popover", placement: "bottom" });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn" {...tooltip.getTriggerProps()}&gt;Copy link&lt;/button&gt;
+      &lt;div className="bs-tooltip" {...tooltip.getTooltipProps()}&gt;Copies a shareable URL&lt;/div&gt;
+
+      &lt;button className="bs-btn" {...popover.getTriggerProps()}&gt;Retention details&lt;/button&gt;
+      &lt;div className="bs-popover" aria-labelledby="retention-title"
+        {...popover.getPopoverProps()}&gt;
+        &lt;strong className="bs-popover-header" id="retention-title"&gt;Retention&lt;/strong&gt;
+        &lt;div className="bs-popover-body"&gt;Logs are retained for 30 days.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+  <h3 id="tooltips-popovers-vue">Vue</h3>
+  <p>Vue composables expose the same consumer-owned panels as reactive prop objects. Bind each getter to the exact trigger or panel it describes.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Tooltip and popover composables</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Tooltip and popover composables code example"><code data-language="vue">&lt;script setup&gt;
+import { usePopover, useTooltip } from "@boobstrap/vue";
+
+const tooltip = useTooltip({ id: "copy-tip", placement: "top" });
+const popover = usePopover({ id: "retention-popover", placement: "bottom" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn" v-bind="tooltip.getTriggerProps()"&gt;Copy link&lt;/button&gt;
+  &lt;div class="bs-tooltip" v-bind="tooltip.getTooltipProps()"&gt;
+    Copies a shareable URL
+  &lt;/div&gt;
+
+  &lt;button class="bs-btn" v-bind="popover.getTriggerProps()"&gt;Retention details&lt;/button&gt;
+  &lt;div class="bs-popover" aria-labelledby="retention-title"
+    v-bind="popover.getPopoverProps()"&gt;
+    &lt;strong class="bs-popover-header" id="retention-title"&gt;Retention&lt;/strong&gt;
+    &lt;div class="bs-popover-body"&gt;Logs are retained for 30 days.&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre></div>
+  <p class="docs-package-note">See the <a href="/docs/interactivity/react">React adapter guide</a> and <a href="/docs/interactivity/vue">Vue adapter guide</a> for controlled state, lifecycle events, SSR, and cleanup behavior.</p>
   <div class="docs-example-guidance" aria-label="Floating feedback guidance"><div><h3>Accessible names</h3><p>A tooltip is supplementary. Keep visible button text or another accessible name on the trigger.</p></div><div><h3>Interaction</h3><p>Tooltips open on hover and focus. Popovers open on activation and dismiss with Escape or an outside pointer action.</p></div><div><h3>Content</h3><p>Controller content is plain text by design. Use a dialog for interactive controls, structured content, or a workflow.</p></div></div>
   <div class="docs-api"><h3 id="tooltips-popovers-api">Floating API</h3><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class or hook</th><th>Purpose</th></tr></thead><tbody><tr><td><code class="bs-code-inline">.bs-tooltip</code></td><td>Generated supplemental label with <code class="bs-code-inline">role="tooltip"</code>.</td></tr><tr><td><code class="bs-code-inline">.bs-popover</code>, <code class="bs-code-inline">.bs-popover-header</code>, <code class="bs-code-inline">.bs-popover-body</code></td><td>Generated contextual panel and its structured regions.</td></tr><tr><td><code class="bs-code-inline">.bs-floating-arrow</code></td><td>Placement-aware generated arrow.</td></tr><tr><td><code class="bs-code-inline">data-bs-placement</code></td><td>Prefers <code class="bs-code-inline">top</code>, <code class="bs-code-inline">bottom</code>, <code class="bs-code-inline">start</code>, or <code class="bs-code-inline">end</code>.</td></tr><tr><td><code class="bs-code-inline">bs:tooltip:*</code>, <code class="bs-code-inline">bs:popover:*</code></td><td>Cancelable before-events and completion events.</td></tr></tbody></table></div></div>
 </section>

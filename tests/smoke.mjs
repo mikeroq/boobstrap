@@ -236,12 +236,12 @@ const documentationQualityMinimums = {
   typography: { examples: 2, code: 3, guidance: true },
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
-  buttons: { examples: 8, code: 8 },
+  buttons: { examples: 8, code: 9 },
   navbar: { examples: 4, code: 4, guidance: true },
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   cards: { examples: 5, code: 5, guidance: true },
-  dialogs: { examples: 4, code: 6, guidance: true },
+  dialogs: { examples: 4, code: 8, guidance: true },
   drawers: { examples: 4, code: 6, guidance: true },
   tables: { examples: 1, code: 1, guidance: true },
   "table-fundamentals": { examples: 2, code: 2, guidance: true },
@@ -254,12 +254,12 @@ const documentationQualityMinimums = {
   banners: { examples: 2, code: 3, guidance: true },
   progress: { examples: 3, code: 3, guidance: true },
   skeletons: { examples: 4, code: 5, guidance: true },
-  toasts: { examples: 2, code: 3, guidance: true },
+  toasts: { examples: 2, code: 5, guidance: true },
   forms: { examples: 2, code: 2 },
   "form-inputs": { examples: 7, code: 7, guidance: true },
   "form-input-groups": { examples: 5, code: 5 },
   "form-selects": { examples: 4, code: 4 },
-  "form-searchable-select": { examples: 1, code: 5 },
+  "form-searchable-select": { examples: 1, code: 6 },
   "form-date-time": { examples: 5, code: 5 },
   "form-passwords-masks": { examples: 4, code: 6 },
   "form-checks-radios": { examples: 4, code: 4 },
@@ -267,15 +267,27 @@ const documentationQualityMinimums = {
   "code-windows": { examples: 2, code: 2, guidance: true },
   icons: { examples: 2, code: 4, guidance: true },
   "behavior-layers": { code: 3, guidance: true },
-  collapse: { examples: 1, code: 2, guidance: true },
-  dropdown: { examples: 1, code: 2, guidance: true },
-  tabs: { examples: 3, code: 4, guidance: true },
-  "tooltips-popovers": { examples: 2, code: 3, guidance: true },
-  "vue-adapter": { examples: 1, code: 3, guidance: true },
+  collapse: { examples: 1, code: 5, guidance: true },
+  dropdown: { examples: 1, code: 5, guidance: true },
+  tabs: { examples: 3, code: 7, guidance: true },
+  "tooltips-popovers": { examples: 2, code: 5, guidance: true },
+  "react-adapter": { examples: 1, code: 5, guidance: true },
+  "vue-adapter": { examples: 1, code: 5, guidance: true },
   utilities: { examples: 3, code: 3, guidance: true },
   tokens: { examples: 1, code: 1, guidance: true },
   "class-reference": { examples: 1, code: 1, guidance: true },
   accessibility: { examples: 3, code: 3, guidance: true },
+};
+const adapterComponentCoverage = {
+  accordion: ["useAccordion", "useCollapse"],
+  buttons: ["useButton"],
+  collapse: ["useCollapse"],
+  dialogs: ["useDialog"],
+  dropdown: ["useDropdown"],
+  "form-searchable-select": ["useCombobox"],
+  tabs: ["useTabs"],
+  toasts: ["useToast"],
+  "tooltips-popovers": ["useTooltip", "usePopover"],
 };
 
 try {
@@ -690,6 +702,13 @@ try {
         const missingClasses = promotedClasses.filter((className) => !apiText.includes(`.${className}`));
         if (missingClasses.length) {
           failures.push(`${viewport.name}: ${config.path} API reference is missing ${missingClasses.map((name) => `.${name}`).join(", ")}`);
+        }
+      }
+      const adapterHooks = adapterComponentCoverage[config.sectionId];
+      if (adapterHooks) {
+        const source = (await routePage.locator(".docs-content").textContent()) ?? "";
+        for (const contract of ["@boobstrap/react", "@boobstrap/vue", ...adapterHooks]) {
+          if (!source.includes(contract)) failures.push(`${viewport.name}: ${config.sectionId} is missing colocated adapter contract ${contract}`);
         }
       }
       if (await genericVisibleDemos.count() > 0 && !await genericVisibleDemos.evaluateAll((elements) => elements.every((preview) => (
@@ -1246,7 +1265,7 @@ try {
 
       if (["collapse", "dropdown", "tabs"].includes(config.sectionId)) {
         const variants = routePage.locator("[data-code-variants]:visible");
-        if (await variants.count() !== 1 || await variants.locator("[data-code-variant]").count() !== 3) {
+        if (await variants.count() !== 1 || await variants.locator("[data-code-variant]").count() !== 4) {
           failures.push(`desktop: ${config.sectionId} implementation tabs are incomplete`);
         } else {
           await variants.getByRole("tab", { name: "Alpine.js", exact: true }).click();
@@ -1254,11 +1273,23 @@ try {
           if (!await routePage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes("x-data"))) {
             failures.push(`desktop: ${config.sectionId} Alpine tab did not copy its implementation`);
           }
+          await variants.getByRole("tab", { name: "Vue", exact: true }).click();
+          await variants.locator("[data-copy-example]").click();
+          if (!await routePage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes("@boobstrap/vue") && source.includes("v-bind"))) {
+            failures.push(`desktop: ${config.sectionId} Vue tab did not copy its implementation`);
+          }
         }
       }
 
       if (config.sectionId === "behavior-layers" && await routePage.locator("[data-framework-tab]").count() !== 4) {
         failures.push("desktop: behavior overview does not preserve all framework tabs");
+      }
+
+      if (config.sectionId === "react-adapter") {
+        const source = (await routePage.locator("#react-adapter").textContent()) ?? "";
+        for (const contract of ["@boobstrap/react", "useCollapse", "getTriggerProps", "useDialog", "useToast", "useTooltip", "usePopover"]) {
+          if (!source.includes(contract)) failures.push(`desktop: React adapter guide is missing ${contract}`);
+        }
       }
 
       if (config.sectionId === "vue-adapter") {
@@ -1395,7 +1426,7 @@ try {
         }
 
         const loadingVariants = routePage.locator('[data-code-variants]').filter({ has: routePage.locator('[data-copy-example="button-loading-detail"]') });
-        for (const [tabName, marker] of [["Boobstrap JS", "data-bs-button"], ["Alpine.js", "x-data"], ["React", "useButton"]]) {
+        for (const [tabName, marker] of [["Boobstrap JS", "data-bs-button"], ["Alpine.js", "x-data"], ["React", "useButton"], ["Vue", "@boobstrap/vue"]]) {
           await loadingVariants.getByRole("tab", { name: tabName, exact: true }).click();
           await loadingVariants.locator('[data-copy-example="button-loading-detail"]').click();
           if (!await routePage.evaluate(() => navigator.clipboard.readText()).then((source) => source.includes(marker))) {

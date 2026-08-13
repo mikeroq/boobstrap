@@ -22,6 +22,7 @@
                 <button id="collapse-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="collapse-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
                 <button id="collapse-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
                 <button id="collapse-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+                <button id="collapse-vue-code-tab" type="button" role="tab" aria-selected="false" aria-controls="collapse-vue-code-panel" tabindex="-1" data-code-variant="vue" class="bs-code-tab">Vue</button>
               </div>
               <div id="collapse-js-code-panel" role="tabpanel" aria-labelledby="collapse-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;button class=&quot;bs-btn bs-btn-secondary&quot; type=&quot;button&quot; data-bs-toggle=&quot;collapse&quot; aria-controls=&quot;details&quot;&gt;
   Toggle details
@@ -59,7 +60,9 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
-              <div id="collapse-react-code-panel" role="tabpanel" aria-labelledby="collapse-react-code-tab" data-code-variant-panel="react" data-copy-source="function Details() {
+              <div id="collapse-react-code-panel" role="tabpanel" aria-labelledby="collapse-react-code-tab" data-code-variant-panel="react" data-copy-source="import { useCollapse } from &quot;@boobstrap/react&quot;;
+
+function Details() {
   const collapse = useCollapse({ id: &quot;details&quot; });
 
   return (
@@ -73,7 +76,9 @@
     &lt;/&gt;
   );
 }" hidden="">
-                <pre><code class="">function Details() {
+                <pre><code class="">import { useCollapse } from "@boobstrap/react";
+
+function Details() {
   const collapse = useCollapse({ id: "details" });
 
   return (
@@ -88,6 +93,35 @@
     &lt;/&gt;
   );
 }</code></pre>
+              </div>
+              <div id="collapse-vue-code-panel" role="tabpanel" aria-labelledby="collapse-vue-code-tab" data-code-variant-panel="vue" data-copy-source="&lt;script setup&gt;
+import { useCollapse } from &quot;@boobstrap/vue&quot;;
+
+const details = useCollapse({ id: &quot;details&quot; });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class=&quot;bs-btn bs-btn-secondary&quot; v-bind=&quot;details.getTriggerProps()&quot;&gt;
+    Toggle details
+  &lt;/button&gt;
+  &lt;div class=&quot;bs-collapse&quot; v-bind=&quot;details.getPanelProps()&quot;&gt;
+    Progressive by design.
+  &lt;/div&gt;
+&lt;/template&gt;" hidden="">
+                <pre><code data-language="vue">&lt;script setup&gt;
+import { useCollapse } from "@boobstrap/vue";
+
+const details = useCollapse({ id: "details" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn bs-btn-secondary" v-bind="details.getTriggerProps()"&gt;
+    Toggle details
+  &lt;/button&gt;
+  &lt;div class="bs-collapse" v-bind="details.getPanelProps()"&gt;
+    Progressive by design.
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">

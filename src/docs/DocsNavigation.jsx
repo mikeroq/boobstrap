@@ -5,7 +5,7 @@ import { docsPages, normalizeDocsPath } from "../docs-pages.js";
 const navLabels = {
   "/docs/foundations/layout": "Layout & grid",
   "/docs/components/lists": "Reference lists",
-  "/docs/interactivity/overview": "JS, Alpine & React",
+  "/docs/interactivity/overview": "Behavior layers",
   "/docs/reference/classes": "All classes",
 };
 
