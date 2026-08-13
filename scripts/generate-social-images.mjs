@@ -94,7 +94,7 @@ const cardSvg = (card) => {
     <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="${palette.accent}"/>
   </g>
   <text x="142" y="87" fill="#fff9fc" font-family="DejaVu Sans, Arial, sans-serif" font-size="32" font-weight="700">Boobstrap</text>
-  <text x="350" y="87" fill="#ffffff" fill-opacity="0.42" font-family="DejaVu Sans, Arial, sans-serif" font-size="26">v0.4.0</text>
+  <text x="350" y="87" fill="#ffffff" fill-opacity="0.42" font-family="DejaVu Sans, Arial, sans-serif" font-size="26">v0.5.0</text>
 
   <rect x="70" y="137" width="${categoryWidth}" height="46" rx="23" fill="${palette.strong}" fill-opacity="0.2" stroke="${palette.accent}" stroke-opacity="0.48"/>
   <circle cx="94" cy="160" r="5" fill="${palette.accent}"/>
