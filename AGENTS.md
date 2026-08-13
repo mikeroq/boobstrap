@@ -68,6 +68,8 @@ The smoke suite launches Chromium. If the browser binary is missing, install the
 
 Keep route behavior consistent between the Vite development/preview servers and production Nginx.
 
+Every framework addition or public API change must include the corresponding website documentation in the same integration cycle. Add or update dedicated guides, live examples, adapter snippets, route metadata, navigation, and smoke coverage as applicable. Regenerating the class and token inventories alone does not satisfy this requirement.
+
 ## Validation expectations
 
 - Run `npm run build` after changes to HTML, CSS, JavaScript, assets, routes, or build configuration.

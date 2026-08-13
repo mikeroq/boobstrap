@@ -1,0 +1,42 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Vue adapter</span></nav><div class="docs-kicker">Interactivity</div><h1>Vue adapter</h1><p class="bs-lead">Own Boobstrap interaction state in Vue 3 with SSR-safe headless composables and consumer-controlled markup.</p><div class="docs-component-meta" aria-label="Vue adapter documentation summary"><span class="bs-badge bs-text-xs"><strong>Vue 3.5+</strong></span><span class="bs-badge bs-text-xs"><strong>Headless</strong> composables</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="vue-adapter">
+  <div class="docs-kicker">Interactivity</div><h2>Vue 3 integration</h2><p>The official adapter returns reactive state and prop objects for your own semantic markup. It never initializes the vanilla controller layer on Vue-owned DOM.</p>
+  <h3 id="vue-adapter-install">Install</h3>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · Vue packages</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · Vue packages code example"><code data-language="bash">npm install @boobstrap/boobstrap @boobstrap/vue vue</code></pre></div>
+  <h3 id="vue-adapter-collapse">Compose a collapse</h3>
+  <div class="docs-demo" data-component-example="vue-adapter-contract"><div class="bs-card bs-card-subtle bs-card-body"><strong>Consumer-owned markup</strong><p class="bs-text-muted bs-mb-0">The composable supplies state, events, IDs, and ARIA props; your template chooses the elements and classes.</p></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Collapse composable</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Collapse composable code example"><code data-language="html">&lt;script setup&gt;
+import "@boobstrap/boobstrap";
+import { useCollapse } from "@boobstrap/vue";
+
+const details = useCollapse({ id: "details" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn" v-bind="details.getTriggerProps()"&gt;Details&lt;/button&gt;
+  &lt;div class="bs-collapse" v-bind="details.getPanelProps()"&gt;Progressive content&lt;/div&gt;
+&lt;/template&gt;</code></pre></div>
+  <h3 id="vue-adapter-accordion">Coordinate an accordion</h3>
+  <p>Use <code class="bs-code-inline">useAccordion</code> for group state and pass each item's options into <code class="bs-code-inline">useCollapse</code>. The default keeps one item open; set <code class="bs-code-inline">alwaysOpen: true</code> when multiple panels may remain visible.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Accordion state</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Accordion state code example"><code data-language="javascript">import { useAccordion, useCollapse } from "@boobstrap/vue";
+
+const accordion = useAccordion({ defaultOpenIds: ["profile"] });
+const profile = useCollapse({
+  id: "profile-panel",
+  ...accordion.getItemOptions("profile"),
+});
+const billing = useCollapse({
+  id: "billing-panel",
+  ...accordion.getItemOptions("billing"),
+});</code></pre></div>
+  <p class="docs-package-note">See the <a href="/docs/components/accordion#accordion-vue">complete Vue accordion template</a> for semantic headings, prop binding, and panel relationships.</p>
+  <h3 id="vue-adapter-controlled-state">Controlled state</h3>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Ref-owned dialog</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Ref-owned dialog code example"><code data-language="javascript">import { ref } from "vue";
+import { useDialog } from "@boobstrap/vue";
+
+const open = ref(false);
+const dialog = useDialog({ open, onOpenChange: (next) =&gt; { open.value = next; } });</code></pre></div>
+  <div class="docs-example-guidance" aria-label="Vue adapter guidance"><div><h3>One owner</h3><p>Do not run <code class="bs-code-inline">initBoobstrap</code> inside the same component subtree. Vue owns state and lifecycle there.</p></div><div><h3>SSR</h3><p>Composables avoid DOM access during setup so server markup hydrates with stable relationships and initial state.</p></div><div><h3>Controlled state</h3><p>Use <code class="bs-code-inline">default*</code> options for uncontrolled initial state and refs for reactive controlled ownership. Both expose a computed public state.</p></div><div><h3>Toast parity</h3><p>Autohide pauses while a toast is hovered or contains focus, then resumes on pointer leave or focus exit—the same contract as vanilla, Alpine, and React.</p></div></div>
+  <div class="docs-api"><h3 id="vue-adapter-api">Composable API</h3><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Composable</th><th>Owns</th></tr></thead><tbody><tr><td><code class="bs-code-inline">useAccordion</code></td><td>Single-open or always-open group state and item options.</td></tr><tr><td><code class="bs-code-inline">useButton</code></td><td>Loading state and busy semantics.</td></tr><tr><td><code class="bs-code-inline">useCollapse</code>, <code class="bs-code-inline">useDialog</code>, <code class="bs-code-inline">useDropdown</code></td><td>Open state, IDs, focus, and dismissal.</td></tr><tr><td><code class="bs-code-inline">useCombobox</code>, <code class="bs-code-inline">useTabs</code></td><td>Selection, keyboard navigation, and ARIA relationships.</td></tr><tr><td><code class="bs-code-inline">useToast</code>, <code class="bs-code-inline">useTooltip</code>, <code class="bs-code-inline">usePopover</code></td><td>Feedback visibility and trigger/panel props, including pause-aware toast autohide.</td></tr></tbody></table></div></div>
+</section>

@@ -1,0 +1,150 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Skeletons</span></nav><div class="docs-kicker">Components</div><h1>Skeletons</h1><p class="bs-lead">Shape quiet, theme-aware loading placeholders with text, circle, media, sizing, and motion-safe animation primitives.</p><div class="docs-component-meta" aria-label="Skeletons documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>CSS only</strong> behavior</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="skeletons">
+  <div class="docs-kicker">Components</div>
+  <h2>Loading skeletons</h2>
+  <p>Skeletons reserve the approximate shape of content while a view loads. Start with <code class="bs-code-inline">.bs-skeleton</code>, add one shape modifier, and optionally add a pulse or wave animation. The component has no JavaScript controller: your application decides when to render the placeholders and when to replace them with real content.</p>
+
+  <h3 id="skeletons-text">Text placeholders</h3>
+  <p>Use several text skeletons with varied widths to suggest the line lengths of the final copy. Widths can be set per element with <code class="bs-code-inline">--bs-skeleton-width</code>; avoid making every line identical.</p>
+  <div class="docs-demo" data-component-example="skeletons-text">
+    <div class="bs-stack bs-gap-2" aria-hidden="true">
+      <span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 42%"></span>
+      <span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 100%"></span>
+      <span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 76%"></span>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text placeholders</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Text placeholders code example"><code>&lt;div class="bs-stack bs-gap-2" aria-hidden="true"&gt;
+  &lt;span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse"
+    style="--bs-skeleton-width: 42%"&gt;&lt;/span&gt;
+  &lt;span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse"&gt;&lt;/span&gt;
+  &lt;span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse"
+    style="--bs-skeleton-width: 76%"&gt;&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <h3 id="skeletons-shapes-and-sizes">Shapes and sizes</h3>
+  <p>Choose shapes based on the content they stand in for. Text uses a compact block size, media reserves a ten-rem block by default, and circles need matching width and height values so their aspect ratio resolves to a true circle. The small and large modifiers provide convenient fixed heights for controls, labels, and emphasized blocks.</p>
+  <div class="docs-demo" data-component-example="skeletons-shapes">
+    <div class="bs-grid bs-gap-4" aria-hidden="true">
+      <div class="bs-col-12 bs-col-md-4 bs-stack bs-gap-3">
+        <span class="bs-skeleton bs-skeleton-circle bs-skeleton-wave" style="--bs-skeleton-width: 4rem; --bs-skeleton-height: 4rem"></span>
+        <span class="bs-skeleton bs-skeleton-text bs-skeleton-wave" style="--bs-skeleton-width: 66%"></span>
+      </div>
+      <div class="bs-col-12 bs-col-md-8 bs-stack bs-gap-3">
+        <span class="bs-skeleton bs-skeleton-media bs-skeleton-wave"></span>
+        <span class="bs-skeleton bs-skeleton-sm bs-skeleton-wave" style="--bs-skeleton-width: 58%"></span>
+        <span class="bs-skeleton bs-skeleton-lg bs-skeleton-wave" style="--bs-skeleton-width: 82%"></span>
+      </div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Shape and size modifiers</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Shape and size modifiers code example"><code>&lt;span class="bs-skeleton bs-skeleton-circle bs-skeleton-wave"
+  style="--bs-skeleton-width: 4rem; --bs-skeleton-height: 4rem"&gt;&lt;/span&gt;
+
+&lt;span class="bs-skeleton bs-skeleton-media bs-skeleton-wave"&gt;&lt;/span&gt;
+&lt;span class="bs-skeleton bs-skeleton-sm bs-skeleton-wave"&gt;&lt;/span&gt;
+&lt;span class="bs-skeleton bs-skeleton-lg bs-skeleton-wave"&gt;&lt;/span&gt;</code></pre></div>
+
+  <h3 id="skeletons-card-composition">Card loading state</h3>
+  <p>Match the stable structure of the final card so the page does not jump when its data arrives. Put <code class="bs-code-inline">aria-busy="true"</code> on the region being updated, expose one meaningful loading message, and hide the purely visual placeholder group from assistive technology.</p>
+  <div class="docs-demo" data-component-example="skeletons-card">
+    <p class="bs-sr-only" role="status">Loading project summary…</p>
+    <article class="bs-card bs-card-raised" aria-busy="true" aria-label="Project summary">
+      <div aria-hidden="true">
+        <div class="bs-skeleton bs-skeleton-media bs-skeleton-wave"></div>
+        <div class="bs-card-content bs-stack bs-gap-3">
+          <div class="bs-skeleton bs-skeleton-lg bs-skeleton-wave" style="--bs-skeleton-width: 48%"></div>
+          <div class="bs-skeleton bs-skeleton-text bs-skeleton-wave"></div>
+          <div class="bs-skeleton bs-skeleton-text bs-skeleton-wave" style="--bs-skeleton-width: 72%"></div>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Accessible card loading state</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Accessible card loading state code example"><code>&lt;p class="bs-sr-only" role="status"&gt;Loading project summary…&lt;/p&gt;
+&lt;article class="bs-card" aria-busy="true" aria-label="Project summary"&gt;
+  &lt;div aria-hidden="true"&gt;
+    &lt;div class="bs-skeleton bs-skeleton-media bs-skeleton-wave"&gt;&lt;/div&gt;
+    &lt;div class="bs-card-content bs-stack bs-gap-3"&gt;
+      &lt;div class="bs-skeleton bs-skeleton-lg bs-skeleton-wave"
+        style="--bs-skeleton-width: 48%"&gt;&lt;/div&gt;
+      &lt;div class="bs-skeleton bs-skeleton-text bs-skeleton-wave"&gt;&lt;/div&gt;
+      &lt;div class="bs-skeleton bs-skeleton-text bs-skeleton-wave"
+        style="--bs-skeleton-width: 72%"&gt;&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div>
+
+  <h3 id="skeletons-list-composition">List loading state</h3>
+  <p>Repeat one placeholder pattern when the final view contains repeated records. Keep the real section heading available as context, then hide only the placeholder rows.</p>
+  <div class="docs-demo" data-component-example="skeletons-list">
+    <p class="bs-sr-only" role="status">Loading recent activity…</p>
+    <section aria-busy="true" aria-labelledby="skeletons-activity-title">
+      <h4 id="skeletons-activity-title">Recent activity</h4>
+      <div class="bs-stack bs-gap-4" aria-hidden="true">
+        <div class="bs-flex bs-items-center bs-gap-3">
+          <span class="bs-skeleton bs-skeleton-circle bs-skeleton-pulse" style="--bs-skeleton-width: 3rem; --bs-skeleton-height: 3rem"></span>
+          <span class="bs-stack bs-gap-2 bs-w-full"><span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 54%"></span><span class="bs-skeleton bs-skeleton-sm bs-skeleton-pulse" style="--bs-skeleton-width: 78%"></span></span>
+        </div>
+        <div class="bs-flex bs-items-center bs-gap-3">
+          <span class="bs-skeleton bs-skeleton-circle bs-skeleton-pulse" style="--bs-skeleton-width: 3rem; --bs-skeleton-height: 3rem"></span>
+          <span class="bs-stack bs-gap-2 bs-w-full"><span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 46%"></span><span class="bs-skeleton bs-skeleton-sm bs-skeleton-pulse" style="--bs-skeleton-width: 68%"></span></span>
+        </div>
+        <div class="bs-flex bs-items-center bs-gap-3">
+          <span class="bs-skeleton bs-skeleton-circle bs-skeleton-pulse" style="--bs-skeleton-width: 3rem; --bs-skeleton-height: 3rem"></span>
+          <span class="bs-stack bs-gap-2 bs-w-full"><span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse" style="--bs-skeleton-width: 62%"></span><span class="bs-skeleton bs-skeleton-sm bs-skeleton-pulse" style="--bs-skeleton-width: 74%"></span></span>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Repeated list rows</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Repeated list rows code example"><code>&lt;p class="bs-sr-only" role="status"&gt;Loading recent activity…&lt;/p&gt;
+&lt;section aria-busy="true" aria-labelledby="skeletons-activity-example-title"&gt;
+  &lt;h2 id="skeletons-activity-example-title"&gt;Recent activity&lt;/h2&gt;
+
+  &lt;div class="bs-stack bs-gap-4" aria-hidden="true"&gt;
+    &lt;div class="bs-flex bs-items-center bs-gap-3"&gt;
+      &lt;span class="bs-skeleton bs-skeleton-circle bs-skeleton-pulse"
+        style="--bs-skeleton-width: 3rem; --bs-skeleton-height: 3rem"&gt;&lt;/span&gt;
+      &lt;span class="bs-stack bs-gap-2 bs-w-full"&gt;
+        &lt;span class="bs-skeleton bs-skeleton-text bs-skeleton-pulse"
+          style="--bs-skeleton-width: 54%"&gt;&lt;/span&gt;
+        &lt;span class="bs-skeleton bs-skeleton-sm bs-skeleton-pulse"
+          style="--bs-skeleton-width: 78%"&gt;&lt;/span&gt;
+      &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;!-- Repeat rows to match the expected result count. --&gt;
+  &lt;/div&gt;
+&lt;/section&gt;</code></pre></div>
+
+  <h3 id="skeletons-sizing">Custom dimensions</h3>
+  <p>The base component reads its logical width and height from custom properties. Override either value inline for one placeholder or in application CSS for a reusable shape. Percent widths adapt to their container; fixed block sizes are useful for avatars and media with known dimensions.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>CSS · Reusable thumbnail shape</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="CSS · Reusable thumbnail shape code example"><code>.product-thumbnail-skeleton {
+  --bs-skeleton-width: 6rem;
+  --bs-skeleton-height: 6rem;
+}</code></pre></div>
+
+  <h3 id="skeletons-motion-and-themes">Motion and themes</h3>
+  <p>Use <code class="bs-code-inline">.bs-skeleton-pulse</code> for a restrained opacity change or <code class="bs-code-inline">.bs-skeleton-wave</code> for a directional highlight. One animation is enough to communicate that a view is waiting. Skeleton surfaces and wave highlights use semantic Boobstrap color tokens, so they follow light, dark, and scoped themes without component-specific overrides.</p>
+  <p>Both animations stop automatically under <code class="bs-code-inline">prefers-reduced-motion: reduce</code>. The wave highlight is removed as well, leaving a stable placeholder that preserves layout. Do not add application animation rules that override this fallback.</p>
+
+  <div class="docs-example-guidance" aria-label="Skeleton guidance">
+    <div><h3>Represent the result</h3><p>Approximate the final content's geometry and count. Skeletons should reduce layout shift, not reproduce every visual detail.</p></div>
+    <div><h3>Own the loading state</h3><p>Put <code class="bs-code-inline">aria-busy="true"</code> on the region receiving new content. Remove it—or set it to <code class="bs-code-inline">false</code>—when the replacement is complete.</p></div>
+    <div><h3>Hide decoration</h3><p>Wrap placeholder shapes in <code class="bs-code-inline">aria-hidden="true"</code>. If users need an immediate announcement, expose one concise status message outside both the hidden group and the busy region.</p></div>
+    <div><h3>Choose the right component</h3><p>Skeletons communicate an unmeasured wait and must not use <code class="bs-code-inline">role="progressbar"</code>. Use the <a href="/docs/components/progress">progress component</a> when a real value or task progression matters.</p></div>
+  </div>
+
+  <div class="docs-api">
+    <h3 id="skeletons-api">Skeleton API</h3>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class or property</th><th>Purpose</th><th>Default</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-skeleton</code></td><td>Base placeholder surface, clipping, radius, and logical dimensions.</td><td>Full width by one em</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-text</code></td><td>Text-line shape with compact height and vertical breathing room.</td><td><code class="bs-code-inline">0.8em</code> high</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-circle</code></td><td>Pill-radius placeholder for avatars and circular media. Set equal width and height.</td><td>Uses base dimensions</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-media</code></td><td>Large rectangular image or media placeholder.</td><td><code class="bs-code-inline">10rem</code> high</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-sm</code></td><td>Compact fixed-height placeholder.</td><td><code class="bs-code-inline">0.625rem</code> high</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-lg</code></td><td>Emphasized fixed-height placeholder.</td><td><code class="bs-code-inline">2rem</code> high</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-pulse</code></td><td>Repeating opacity animation with a reduced-motion fallback.</td><td><code class="bs-code-inline">1.4s</code></td></tr>
+      <tr><td><code class="bs-code-inline">.bs-skeleton-wave</code></td><td>Moving highlight animation with a reduced-motion fallback.</td><td><code class="bs-code-inline">1.5s</code></td></tr>
+      <tr><td><code class="bs-code-inline">--bs-skeleton-width</code></td><td>Logical inline size for custom composition.</td><td><code class="bs-code-inline">100%</code></td></tr>
+      <tr><td><code class="bs-code-inline">--bs-skeleton-height</code></td><td>Logical block size for custom composition.</td><td><code class="bs-code-inline">1em</code></td></tr>
+    </tbody></table></div>
+  </div>
+</section>

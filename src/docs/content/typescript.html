@@ -1,0 +1,277 @@
+<header class="docs-component-hero docs-routed-hero">
+  <nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>TypeScript</span></nav>
+  <div class="docs-kicker">Get started</div>
+  <h1>TypeScript</h1>
+  <p class="bs-lead">Use first-party declarations for Boobstrap controllers, adapters, and generated design-token artifacts.</p>
+  <div class="docs-component-meta" aria-label="TypeScript documentation summary"><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span><span class="bs-badge bs-text-xs"><strong>Strict mode</strong> tested</span><span class="bs-badge bs-text-xs"><strong>No</strong> separate types package</span></div>
+</header>
+
+<section class="docs-section docs-routed-section" id="typescript">
+  <div class="docs-kicker">Type-safe integration</div>
+  <h2>Declarations live with each package</h2>
+  <p>Boobstrap v0.5 adds declarations to the dependency-free core JavaScript entry point and the Alpine adapter. The React and Vue adapters continue to publish declarations beside their headless hooks and composables. The generated JavaScript token artifact also includes a declaration file, so an application can inspect design tokens without maintaining a parallel interface.</p>
+
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Version contract:</strong> These declarations ship with v0.5.0 of the core and adapter packages; no separate types package is required. Pin the package version in production and use the <a href="/docs/getting-started/installation">installation guide</a> for release-ready commands.</span></div>
+
+  <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="TypeScript declaration entry points">
+    <table class="docs-table bs-table">
+      <caption class="bs-sr-only">TypeScript declarations provided by Boobstrap package entry points</caption>
+      <thead><tr><th scope="col">Import</th><th scope="col">Declaration coverage</th><th scope="col">Runtime boundary</th></tr></thead>
+      <tbody>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/boobstrap/js</code></th><td>All core controllers, initializers, options, and interaction-contract types.</td><td>Browser behavior; initialize only where DOM globals exist.</td></tr>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/boobstrap/js/*</code></th><td>Typed direct-controller imports for tree-shaken application code.</td><td>Browser behavior for one controller.</td></tr>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/alpine</code></th><td>Plugin, provider factories, provider state, and binding objects.</td><td>Alpine-owned browser behavior.</td></tr>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/react</code></th><td>Hook options, results, prop getters, and adapter transition details.</td><td>SSR-safe headless hooks; React owns the component subtree.</td></tr>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/vue</code></th><td>Composable options, computed results, refs, and prop getters.</td><td>SSR-safe headless composables; Vue owns the component subtree.</td></tr>
+        <tr><th scope="row"><code class="bs-code-inline">@boobstrap/boobstrap/tokens</code></th><td>Named and default exports for tokens and mode overrides.</td><td>Generated ESM data; no DOM access.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>The root export is CSS, not a JavaScript API.</strong> <code class="bs-code-inline">import "@boobstrap/boobstrap";</code> is a side-effect stylesheet import. It does not expose controllers or TypeScript declarations. Import runtime values and types from <code class="bs-code-inline">/js</code>, a <code class="bs-code-inline">/js/*</code> subpath, an adapter package, or <code class="bs-code-inline">/tokens</code>.</span></div>
+
+  <h2 id="typescript-core">Core controllers in strict mode</h2>
+  <p>The aggregate <code class="bs-code-inline">/js</code> entry point is the convenient choice when an application uses several controllers or <code class="bs-code-inline">initBoobstrap</code>. Controllers expose typed DOM elements, readonly state, lifecycle cleanup, and boolean transition results.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TypeScript · Direct core controller</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TypeScript direct core controller code example"><code data-language="typescript">import {
+  Toast,
+  type TransitionOptions,
+} from "@boobstrap/boobstrap/js";
+
+const element = document.querySelector&lt;HTMLElement&gt;("#saved-toast");
+
+if (!element) {
+  throw new Error("Missing #saved-toast");
+}
+
+const toast = Toast.getOrCreateInstance(element);
+const transition: TransitionOptions = { reason: "profile-saved" };
+
+if (!toast.visible) {
+  toast.show(transition);
+}
+
+// Remove listeners owned by this controller when its DOM subtree is discarded.
+toast.destroy();</code></pre>
+  </div>
+
+  <p>Use the aggregate initializer for progressive enhancement across a document or a smaller element boundary. Its result owns every controller it created and provides one teardown method.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TypeScript · Aggregate initializer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TypeScript aggregate initializer code example"><code data-language="typescript">import {
+  initBoobstrap,
+  type InitializerResult,
+  type Root,
+} from "@boobstrap/boobstrap/js";
+
+function enhance(root: Root): InitializerResult {
+  return initBoobstrap(root);
+}
+
+const accountArea = document.querySelector&lt;HTMLElement&gt;("#account-area");
+const enhancement = enhance(accountArea ?? document);
+
+// Call from your router, island, or application teardown path.
+enhancement.destroy();</code></pre>
+  </div>
+
+  <h3 id="typescript-subpath-imports">Prefer a subpath for one controller</h3>
+  <p>Every core controller has a package-export subpath. A direct import keeps intent explicit and lets a bundler include only that controller and its internal dependencies.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TypeScript · Controller subpath</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TypeScript controller subpath code example"><code data-language="typescript">import { Collapse } from "@boobstrap/boobstrap/js/collapse";
+
+const panel = document.querySelector&lt;HTMLElement&gt;("#account-details");
+
+if (panel) {
+  const details = Collapse.getOrCreateInstance(panel);
+  details.show();
+}</code></pre>
+  </div>
+
+  <p class="docs-package-note">Core declarations type controller methods and accepted transition options. They do not currently declare component-specific <code class="bs-code-inline">CustomEvent</code> detail maps. Narrow and validate <code class="bs-code-inline">event.detail</code> in application code instead of assuming an undocumented generic event type.</p>
+
+  <h2 id="typescript-alpine">Alpine provider types</h2>
+  <p>The Alpine package exports its plugin as the default value and exports each provider factory by name. Provider interfaces describe reactive state, methods, and the binding objects returned for <code class="bs-code-inline">x-bind</code>. Register the plugin before <code class="bs-code-inline">Alpine.start()</code>; do not initialize core controllers on the same subtree.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TypeScript · Alpine registration and provider</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TypeScript Alpine provider code example"><code data-language="typescript">import boobstrap, {
+  accordion,
+  type AccordionProvider,
+  type AlpineLike,
+} from "@boobstrap/alpine";
+
+declare const Alpine: AlpineLike;
+boobstrap(Alpine);
+
+const typedFaq = (): AccordionProvider =&gt;
+  accordion(["billing"], {
+    alwaysOpen: false,
+    onOpenIdsChange(ids) {
+      console.info("Open FAQ items", ids);
+    },
+  });
+
+Alpine.data("typedFaq", typedFaq);</code></pre>
+  </div>
+
+  <p>The same entry point declares <code class="bs-code-inline">button</code>, <code class="bs-code-inline">collapse</code>, <code class="bs-code-inline">combobox</code>, <code class="bs-code-inline">dialog</code>, <code class="bs-code-inline">dropdown</code>, <code class="bs-code-inline">popover</code>, <code class="bs-code-inline">tabs</code>, <code class="bs-code-inline">toast</code>, and <code class="bs-code-inline">tooltip</code>. Binding objects intentionally use <code class="bs-code-inline">Record&lt;string, unknown&gt;</code> because Alpine interprets their directive-shaped keys at runtime. Alpine itself does not currently publish declarations in its package, so the strict example types the narrow plugin boundary with Boobstrap's <code class="bs-code-inline">AlpineLike</code> interface; keep application-specific Alpine registration in JavaScript or supply an application-owned ambient declaration when broader Alpine typing is required.</p>
+
+  <h2 id="typescript-react">React hook types</h2>
+  <p>React hooks infer controlled state, callback detail, and element-specific prop getters. Spread the returned props onto the semantic element they name. The adapter’s transition details include the literal discriminator <code class="bs-code-inline">adapter: "react"</code>.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TSX · Controlled collapse</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TSX controlled React collapse code example"><code data-language="tsx">import { useState } from "react";
+import { useCollapse } from "@boobstrap/react";
+
+export function AccountDetails() {
+  const [open, setOpen] = useState(false);
+  const details = useCollapse({
+    id: "account-details",
+    open,
+    onOpenChange(nextOpen, detail) {
+      detail.adapter satisfies "react";
+      setOpen(nextOpen);
+    },
+  });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn" {...details.getTriggerProps()}&gt;
+        Account details
+      &lt;/button&gt;
+      &lt;div className="bs-collapse" {...details.getPanelProps()}&gt;
+        Billing and profile settings
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre>
+  </div>
+
+  <h2 id="typescript-vue">Vue composable types</h2>
+  <p>Vue composables use <code class="bs-code-inline">default*</code> options for uncontrolled initial state. Pass a Vue ref to a controlled field such as <code class="bs-code-inline">open</code> when the adapter should update that state reactively; a plain controlled value remains fixed until its owner supplies a new value. Public state is returned as <code class="bs-code-inline">ComputedRef</code>, and prop getters return objects ready for <code class="bs-code-inline">v-bind</code>. Adapter transition details use <code class="bs-code-inline">adapter: "vue"</code>.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>Vue · Typed setup</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="Vue typed composable code example"><code data-language="typescript">&lt;script setup lang="ts"&gt;
+import { ref } from "vue";
+import { useCollapse } from "@boobstrap/vue";
+
+const open = ref(false);
+const details = useCollapse({
+  id: "account-details",
+  open,
+  onOpenChange(nextOpen, detail) {
+    detail.adapter satisfies "vue";
+    open.value = nextOpen;
+  },
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn" v-bind="details.getTriggerProps()"&gt;
+    Account details
+  &lt;/button&gt;
+  &lt;div class="bs-collapse" v-bind="details.getPanelProps()"&gt;
+    Billing and profile settings
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+  </div>
+
+  <h2 id="typescript-tokens">Typed design-token artifacts</h2>
+  <p>Import generated token data from <code class="bs-code-inline">@boobstrap/boobstrap/tokens</code>. The module exports <code class="bs-code-inline">tokens</code>, selector-keyed <code class="bs-code-inline">modes</code>, and a default object containing both. Each leaf preserves a source-derived value and the originating custom-property name. Exact CSS <code class="bs-code-inline">var()</code> aliases are normalized to Design Tokens Community Group references such as <code class="bs-code-inline">{brand.500}</code>.</p>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>TypeScript · Token inspection</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="TypeScript design token code example"><code data-language="typescript">import artifact, {
+  modes,
+  tokens,
+  type DesignToken,
+} from "@boobstrap/boobstrap/tokens";
+
+function isDesignToken(value: DesignToken | string): value is DesignToken {
+  return typeof value !== "string";
+}
+
+const primary = tokens.color.primary;
+
+if (isDesignToken(primary)) {
+  console.log(primary.$value);
+  console.log(primary.$extensions["org.boobstrap.css-variable"]);
+}
+
+for (const [selector, overrides] of Object.entries(modes)) {
+  console.log(selector, overrides["--bs-color-primary"]);
+}
+
+artifact.tokens === tokens; // true</code></pre>
+  </div>
+
+  <p>Use <code class="bs-code-inline">@boobstrap/boobstrap/tokens.json</code> when a build tool requires raw JSON instead of ESM. JSON import syntax and type inference depend on the host toolchain; the first-party <code class="bs-code-inline">DesignToken</code> and <code class="bs-code-inline">TokenGroups</code> declarations belong to the <code class="bs-code-inline">/tokens</code> ESM entry.</p>
+
+  <h2 id="typescript-tsconfig">Compiler configuration</h2>
+  <p>Boobstrap packages are ESM and use package <code class="bs-code-inline">exports</code> with a <code class="bs-code-inline">types</code> condition. Use a modern module resolver so TypeScript follows the same entry points as the runtime. Core declarations reference browser interfaces including <code class="bs-code-inline">Document</code>, <code class="bs-code-inline">Element</code>, <code class="bs-code-inline">HTMLElement</code>, and <code class="bs-code-inline">Event</code>, so browser projects need the DOM library.</p>
+
+  <div class="docs-framework-switcher" data-framework-tabs="">
+    <div class="docs-framework-tablist bs-tabs bs-tabs-contained" role="tablist" aria-label="TypeScript module resolution">
+      <button id="typescript-bundler-tab" type="button" role="tab" aria-selected="true" aria-controls="typescript-bundler-panel" data-framework-tab="bundler" class="bs-tab">Bundler</button>
+      <button id="typescript-nodenext-tab" type="button" role="tab" aria-selected="false" aria-controls="typescript-nodenext-panel" tabindex="-1" data-framework-tab="nodenext" class="bs-tab">NodeNext</button>
+    </div>
+    <div id="typescript-bundler-panel" role="tabpanel" aria-labelledby="typescript-bundler-tab" data-framework-panel="bundler" class="bs-tab-panel bs-tab-panel-contained">
+      <p>Use bundler resolution with Vite and similar tools that own final module transformation.</p>
+      <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSON · tsconfig.json</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Bundler TypeScript configuration code example"><code data-language="json">{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022", "DOM"]
+  }
+}</code></pre></div>
+    </div>
+    <div id="typescript-nodenext-panel" role="tabpanel" aria-labelledby="typescript-nodenext-tab" data-framework-panel="nodenext" hidden="" class="bs-tab-panel bs-tab-panel-contained">
+      <p>Use matching NodeNext module and resolution settings when TypeScript follows Node’s ESM rules directly.</p>
+      <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSON · tsconfig.json</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="NodeNext TypeScript configuration code example"><code data-language="json">{
+  "compilerOptions": {
+    "strict": true,
+    "target": "ES2022",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "lib": ["ES2022", "DOM"]
+  }
+}</code></pre></div>
+    </div>
+  </div>
+
+  <h2 id="typescript-ssr">SSR and hydration boundaries</h2>
+  <ul class="docs-checklist bs-checklist">
+    <li><strong>CSS and token data:</strong> import them through the normal application or build-tool path. The ESM token artifact performs no DOM initialization.</li>
+    <li><strong>Core and Alpine behavior:</strong> call <code class="bs-code-inline">initBoobstrap</code>, create controllers, and start Alpine only in a browser lifecycle where <code class="bs-code-inline">document</code> exists. Type availability does not make a DOM operation server-safe.</li>
+    <li><strong>React and Vue adapters:</strong> use the headless hooks and composables during framework rendering. They avoid core-controller initialization; keep IDs and the initial controlled or uncontrolled state consistent between server output and hydration.</li>
+    <li><strong>Behavior ownership:</strong> never run core initialization over markup whose state is owned by Alpine, React, or Vue.</li>
+  </ul>
+
+  <h2 id="typescript-troubleshooting">Troubleshooting</h2>
+  <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="TypeScript troubleshooting">
+    <table class="docs-table bs-table">
+      <caption class="bs-sr-only">Common Boobstrap TypeScript problems and corrections</caption>
+      <thead><tr><th scope="col">Symptom</th><th scope="col">Correction</th></tr></thead>
+      <tbody>
+        <tr><th scope="row">“Cannot find module” for <code class="bs-code-inline">/js</code> or <code class="bs-code-inline">/tokens</code></th><td>Confirm the installed package contains the v0.5 export, then use <code class="bs-code-inline">Bundler</code>, <code class="bs-code-inline">Node16</code>, or <code class="bs-code-inline">NodeNext</code> resolution. Legacy <code class="bs-code-inline">node</code> resolution does not understand modern export conditions.</td></tr>
+        <tr><th scope="row">Missing <code class="bs-code-inline">Document</code>, <code class="bs-code-inline">HTMLElement</code>, or <code class="bs-code-inline">Event</code></th><td>Add <code class="bs-code-inline">DOM</code> to <code class="bs-code-inline">compilerOptions.lib</code> for the browser-facing compilation unit.</td></tr>
+        <tr><th scope="row">The root package import has no named exports</th><td>That entry is intentionally the stylesheet. Import values and types from <code class="bs-code-inline">@boobstrap/boobstrap/js</code> or a supported subpath.</td></tr>
+        <tr><th scope="row">React JSX props or Vue refs lose their types</th><td>Install the adapter’s framework peer and its normal TypeScript support, and import from <code class="bs-code-inline">@boobstrap/react</code> or <code class="bs-code-inline">@boobstrap/vue</code> rather than reaching into package source files.</td></tr>
+        <tr><th scope="row">Runtime behavior fires twice</th><td>This is an ownership problem, not a declaration problem. Remove core initialization from an Alpine-, React-, or Vue-owned subtree.</td></tr>
+        <tr><th scope="row">JSON token import is rejected</th><td>Use the typed <code class="bs-code-inline">/tokens</code> ESM entry, or enable the JSON-module behavior required by your compiler and runtime.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="docs-example-guidance" aria-label="TypeScript guidance"><div><h3>Use public subpaths</h3><p>Import only from package exports documented on this page. Internal <code class="bs-code-inline">src/</code> and <code class="bs-code-inline">dist/</code> module layouts are not application APIs.</p></div><div><h3>Keep strict mode on</h3><p>Narrow queried elements and optional values instead of suppressing errors. The framework’s own declaration fixtures compile with strict checking.</p></div><div><h3>Respect runtime ownership</h3><p>Types describe a behavior layer; they do not coordinate multiple layers. Choose core, Alpine, React, or Vue once per component subtree.</p></div></div>
+</section>

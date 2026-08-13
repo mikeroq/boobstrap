@@ -1,0 +1,390 @@
+<header class="docs-component-hero docs-routed-hero">
+  <nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Accordion</span></nav>
+  <div class="docs-kicker">Components</div>
+  <h1>Accordion</h1>
+  <p class="bs-lead">Organize related disclosures into an accessible single-open or always-open group, using Collapse as the state and event layer.</p>
+  <div class="docs-component-meta" aria-label="Accordion documentation summary">
+    <span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span>
+    <span class="bs-badge bs-text-xs"><strong>Vanilla + adapters</strong></span>
+    <span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span>
+  </div>
+</header>
+
+<section class="docs-section docs-routed-section" id="accordion">
+  <div class="docs-kicker">Start here</div>
+  <h2>Single-open accordion</h2>
+  <p>An accordion is a styled group of <a href="/docs/interactivity/collapse">Collapse</a> panels. Add <code class="bs-code-inline">data-bs-accordion</code> to the group and connect every native button to one uniquely identified <code class="bs-code-inline">.bs-collapse</code> panel. Initialize no more than one panel as open in the default mode. After initialization, opening an item closes the open sibling, while closing the active item may leave the whole group closed.</p>
+
+  <div class="docs-demo interaction-demo" data-component-example="accordion">
+    <div class="bs-accordion" data-bs-accordion="" id="accordion-demo-single">
+      <section class="bs-accordion-item">
+        <h3 class="bs-accordion-header">
+          <button class="bs-accordion-trigger" id="accordion-demo-trigger-account" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-account" aria-expanded="true">
+            Account settings <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+          </button>
+        </h3>
+        <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-account" role="region" aria-labelledby="accordion-demo-trigger-account">
+          <div class="bs-accordion-body">Update your profile, password, and sign-in preferences from one place.</div>
+        </div>
+      </section>
+      <section class="bs-accordion-item">
+        <h3 class="bs-accordion-header">
+          <button class="bs-accordion-trigger" id="accordion-demo-trigger-billing" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-billing" aria-expanded="false">
+            Billing and invoices <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+          </button>
+        </h3>
+        <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-billing" role="region" aria-labelledby="accordion-demo-trigger-billing" hidden="">
+          <div class="bs-accordion-body">Manage payment methods, billing contacts, and downloadable invoices.</div>
+        </div>
+      </section>
+      <section class="bs-accordion-item">
+        <h3 class="bs-accordion-header">
+          <button class="bs-accordion-trigger" id="accordion-demo-trigger-security" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-security" aria-expanded="false">
+            Security alerts <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+          </button>
+        </h3>
+        <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-security" role="region" aria-labelledby="accordion-demo-trigger-security" hidden="">
+          <div class="bs-accordion-body">Choose which new-device and account-recovery events should notify you.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>HTML · Single-open group</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="HTML single-open accordion code example"><code data-language="html">&lt;div class="bs-accordion" data-bs-accordion&gt;
+  &lt;section class="bs-accordion-item"&gt;
+    &lt;h2 class="bs-accordion-header"&gt;
+      &lt;button class="bs-accordion-trigger" id="account-trigger" type="button"
+        data-bs-toggle="collapse" aria-controls="account-panel"
+        aria-expanded="true"&gt;
+        Account settings
+        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div class="bs-collapse bs-accordion-panel" id="account-panel"
+      role="region" aria-labelledby="account-trigger"&gt;
+      &lt;div class="bs-accordion-body"&gt;Account settings content.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+
+  &lt;section class="bs-accordion-item"&gt;
+    &lt;h2 class="bs-accordion-header"&gt;
+      &lt;button class="bs-accordion-trigger" id="billing-trigger" type="button"
+        data-bs-toggle="collapse" aria-controls="billing-panel"
+        aria-expanded="false"&gt;
+        Billing and invoices
+        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div class="bs-collapse bs-accordion-panel" id="billing-panel"
+      role="region" aria-labelledby="billing-trigger" hidden&gt;
+      &lt;div class="bs-accordion-body"&gt;Billing content.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="docs-example-guidance">
+    <div><h3>Structure</h3><p>Keep every trigger inside a heading at the correct level for the page. The panel may contain any semantic flow content.</p></div>
+    <div><h3>Initial state</h3><p>Leave an initially open panel without <code class="bs-code-inline">hidden</code>; add <code class="bs-code-inline">hidden</code> to closed panels. Initialization synchronizes <code class="bs-code-inline">aria-expanded</code> and <code class="bs-code-inline">data-bs-state</code>.</p></div>
+    <div><h3>Indicator</h3><p><code class="bs-code-inline">.bs-accordion-icon</code> rotates from the trigger's managed <code class="bs-code-inline">aria-expanded</code> state. Mark a decorative icon <code class="bs-code-inline">aria-hidden="true"</code>.</p></div>
+  </div>
+
+  <h2 id="accordion-always-open">Always-open groups</h2>
+  <p>Add <code class="bs-code-inline">data-bs-accordion-always-open</code> when each item should operate independently. Opening an item no longer closes its siblings, so any number of panels can remain open. The example also combines the optional compact and flush visual treatments.</p>
+
+  <div class="docs-demo interaction-demo" data-component-example="accordion-always-open">
+    <div class="bs-accordion bs-accordion-compact bs-accordion-flush" data-bs-accordion="" data-bs-accordion-always-open="" id="accordion-demo-multiple">
+      <section class="bs-accordion-item">
+        <h3 class="bs-accordion-header">
+          <button class="bs-accordion-trigger" id="accordion-demo-trigger-email" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-email" aria-expanded="true">
+            Email notifications <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+          </button>
+        </h3>
+        <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-email" role="region" aria-labelledby="accordion-demo-trigger-email">
+          <div class="bs-accordion-body">Send a weekly activity summary.</div>
+        </div>
+      </section>
+      <section class="bs-accordion-item">
+        <h3 class="bs-accordion-header">
+          <button class="bs-accordion-trigger" id="accordion-demo-trigger-push" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-push" aria-expanded="false">
+            Push notifications <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+          </button>
+        </h3>
+        <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-push" role="region" aria-labelledby="accordion-demo-trigger-push" hidden="">
+          <div class="bs-accordion-body">Notify this device about time-sensitive changes.</div>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>HTML · Always-open, compact, and flush</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="HTML always-open accordion code example"><code data-language="html">&lt;div class="bs-accordion bs-accordion-compact bs-accordion-flush"
+  data-bs-accordion data-bs-accordion-always-open&gt;
+  &lt;!-- Use the same item, heading, trigger, and panel structure. --&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose the mode by content, not layout.</strong> Use the default when each panel is an alternative view of the same topic. Use always-open when readers may need to compare answers or keep several controls visible.</span></div>
+
+  <h2 id="accordion-visual-variants">Visual variants</h2>
+  <p>Modifiers affect presentation only. They can be used separately or together and do not change state, events, or accessibility behavior.</p>
+  <div class="docs-table-wrap bs-table-responsive">
+    <table class="docs-table bs-table">
+      <thead><tr><th>Class</th><th>Effect</th><th>Good fit</th></tr></thead>
+      <tbody>
+        <tr><td><code class="bs-code-inline">.bs-accordion</code></td><td>Bordered surface with large radius and standard spacing.</td><td>Standalone FAQ and settings groups.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-compact</code></td><td>Reduces trigger and body padding.</td><td>Dense side panels and administrative screens.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-flush</code></td><td>Removes the inline outer borders and corner radius.</td><td>Accordions placed edge-to-edge inside another surface.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h2 id="accordion-accessibility">Accessibility</h2>
+  <ul>
+    <li>Use a native <code class="bs-code-inline">button</code> for every trigger. Native buttons provide <kbd>Enter</kbd> and <kbd>Space</kbd> activation and participate in normal <kbd>Tab</kbd> order.</li>
+    <li>Place each button inside a heading whose level follows the page outline. Do not choose a heading level solely for its visual size.</li>
+    <li>Give each panel a unique <code class="bs-code-inline">id</code> and point the trigger's <code class="bs-code-inline">aria-controls</code> to it. Give the trigger its own <code class="bs-code-inline">id</code> when the panel uses <code class="bs-code-inline">aria-labelledby</code>.</li>
+    <li><code class="bs-code-inline">role="region"</code> can make a small set of important panels easier to discover. Omit it when a page contains many panels so the landmark list does not become noisy.</li>
+    <li>Keep focus on the trigger after a panel changes. Do not move focus into the panel unless a separate user action requires it.</li>
+    <li>Boobstrap does not add arrow-key navigation to accordions. This keeps behavior aligned with native disclosure buttons; users move between triggers with <kbd>Tab</kbd> and <kbd>Shift</kbd>+<kbd>Tab</kbd>.</li>
+  </ul>
+  <p>The icon transition follows <code class="bs-code-inline">prefers-reduced-motion</code>: Boobstrap removes that transition when the user requests reduced motion.</p>
+
+  <h2 id="accordion-initialization">Initialization and lifecycle</h2>
+  <p>The aggregate initializer finds every <code class="bs-code-inline">[data-bs-accordion]</code> group and every identified <code class="bs-code-inline">.bs-collapse</code> panel at or below the supplied root. Repeated calls reuse existing instances. Call <code class="bs-code-inline">destroy()</code> on the returned lifecycle handle before removing or replacing an enhanced subtree.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>JavaScript · Initialize a subtree</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="JavaScript accordion initialization code example"><code data-language="javascript">import { initBoobstrap } from "@boobstrap/boobstrap/js";
+
+const settings = document.querySelector("#settings");
+const boobstrap = initBoobstrap(settings);
+
+// Before replacing or removing #settings:
+boobstrap.destroy();</code></pre>
+  </div>
+
+  <p>For direct control, import both controllers. Creating the Accordion instance also reuses or creates Collapse instances for its child panels; Collapse owns the actual open and closed state.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>JavaScript · Direct controller access</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="JavaScript direct accordion controller code example"><code data-language="javascript">import { Accordion } from "@boobstrap/boobstrap/js/accordion";
+import { Collapse } from "@boobstrap/boobstrap/js/collapse";
+
+const root = document.querySelector("#billing-accordion");
+const group = Accordion.getOrCreateInstance(root);
+const collapses = [...root.querySelectorAll(".bs-collapse[id]")]
+  .map((panel) =&gt; Collapse.getOrCreateInstance(panel));
+const invoice = collapses.find((collapse) =&gt; collapse.element.id === "invoice-panel");
+
+invoice.show();
+
+// Manual teardown owns both layers.
+group.destroy();
+for (const collapse of collapses) collapse.destroy();</code></pre>
+  </div>
+
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Dynamically inserted items:</strong> initialize the new panel with <code class="bs-code-inline">Collapse.getOrCreateInstance(panel)</code>, then recreate the group controller if it must coordinate that item. The Accordion controller captures its panel list when it is constructed.</span></div>
+
+  <h2 id="accordion-events">Vanilla events and cancelation</h2>
+  <p>The vanilla Accordion controller does not introduce a second event family. Its items use the bubbling Collapse lifecycle events on each panel. The two before-events are cancelable; the completed events are observational. Alpine exposes <code class="bs-code-inline">onOpenIdsChange</code> instead. React and Vue expose group change callbacks plus events for transitions initiated through each <code class="bs-code-inline">useCollapse</code> result; do not assume that a group-driven sibling update emits the vanilla hide sequence.</p>
+  <div class="docs-table-wrap bs-table-responsive">
+    <table class="docs-table bs-table">
+      <thead><tr><th>Event</th><th>Cancelable</th><th>When it fires</th></tr></thead>
+      <tbody>
+        <tr><td><code class="bs-code-inline">bs:collapse:show</code></td><td>Yes</td><td>Before a closed panel opens.</td></tr>
+        <tr><td><code class="bs-code-inline">bs:collapse:shown</code></td><td>No</td><td>After the panel is visible and public state is synchronized.</td></tr>
+        <tr><td><code class="bs-code-inline">bs:collapse:hide</code></td><td>Yes</td><td>Before an open panel closes.</td></tr>
+        <tr><td><code class="bs-code-inline">bs:collapse:hidden</code></td><td>No</td><td>After the panel is hidden and public state is synchronized.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>In a single-open group, Accordion handles a panel's <code class="bs-code-inline">bs:collapse:show</code> by asking every open sibling to hide. If any sibling's <code class="bs-code-inline">bs:collapse:hide</code> event is canceled, Accordion also cancels the requested opening. This prevents the group from silently entering a multiple-open state.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>JavaScript · Validate before changing items</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="JavaScript accordion event cancelation code example"><code data-language="javascript">const group = document.querySelector("#profile-accordion");
+
+group.addEventListener("bs:collapse:hide", (event) =&gt; {
+  if (event.target.matches("#unsaved-profile-panel") &amp;&amp; hasUnsavedChanges()) {
+    event.preventDefault();
+  }
+});
+
+group.addEventListener("bs:collapse:shown", (event) =&gt; {
+  console.log("Opened panel", event.target.id, event.detail.controller);
+});</code></pre>
+  </div>
+
+  <h2 id="accordion-adapters">Framework adapters</h2>
+  <p>The Alpine, React, and Vue packages expose matching group-state helpers. Alpine binds the state directly; React and Vue feed each item's controlled state into their Collapse primitive. Keep the same Boobstrap classes and semantic heading-button-panel structure in every adapter.</p>
+
+  <h3 id="accordion-alpine">Alpine.js</h3>
+  <p>The Alpine plugin registers <code class="bs-code-inline">bsAccordion</code>. Pass the initially open IDs first and an options object containing <code class="bs-code-inline">alwaysOpen</code> second. Bind <code class="bs-code-inline">item(id)</code> to the trigger and <code class="bs-code-inline">panel(id)</code> to its panel.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>HTML · Alpine accordion</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="Alpine accordion code example"><code data-language="html">&lt;div class="bs-accordion"
+  x-data="bsAccordion(['shipping'], { alwaysOpen: true })"
+  data-bs-accordion data-bs-accordion-always-open&gt;
+  &lt;section class="bs-accordion-item"&gt;
+    &lt;h2 class="bs-accordion-header"&gt;
+      &lt;button class="bs-accordion-trigger" id="shipping-trigger" type="button"
+        aria-controls="shipping-panel" x-bind="item('shipping')"&gt;
+        Shipping
+        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/h2&gt;
+    &lt;div class="bs-collapse bs-accordion-panel" id="shipping-panel"
+      aria-labelledby="shipping-trigger" x-bind="panel('shipping')"&gt;
+      &lt;div class="bs-accordion-body"&gt;Shipping preferences.&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/section&gt;
+&lt;/div&gt;</code></pre>
+  </div>
+  <p>The provider exposes <code class="bs-code-inline">openIds</code>, <code class="bs-code-inline">isOpen(id)</code>, <code class="bs-code-inline">setOpen(id, open)</code>, <code class="bs-code-inline">toggle(id)</code>, <code class="bs-code-inline">item(id)</code>, and <code class="bs-code-inline">panel(id)</code>. Use <code class="bs-code-inline">onOpenIdsChange(ids)</code> in the options object to observe group changes.</p>
+
+  <h3 id="accordion-react">React</h3>
+  <p><code class="bs-code-inline">useAccordion</code> owns the set of open item IDs. Feed <code class="bs-code-inline">getItemOptions(id)</code> into one <code class="bs-code-inline">useCollapse</code> call per item so Collapse continues to own panel props and lifecycle events.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>JSX · React accordion</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="React accordion code example"><code data-language="jsx">import { useAccordion, useCollapse } from "@boobstrap/react";
+
+function AccordionItem({ accordion, id, title, children }) {
+  const collapse = useCollapse({ id: `${id}-panel`, ...accordion.getItemOptions(id) });
+
+  return (
+    &lt;section className="bs-accordion-item"&gt;
+      &lt;h2 className="bs-accordion-header"&gt;
+        &lt;button className="bs-accordion-trigger"
+          id={`${id}-trigger`} {...collapse.getTriggerProps()}&gt;
+          {title} &lt;span className="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/h2&gt;
+      &lt;div className="bs-collapse bs-accordion-panel"
+        {...collapse.getPanelProps({
+          role: "region",
+          "aria-labelledby": `${id}-trigger`,
+        })}&gt;
+        &lt;div className="bs-accordion-body"&gt;{children}&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  );
+}
+
+export function SettingsAccordion() {
+  const accordion = useAccordion({ defaultOpenIds: ["account"] });
+
+  return (
+    &lt;div className="bs-accordion" {...accordion.getRootProps()}&gt;
+      &lt;AccordionItem accordion={accordion} id="account" title="Account"&gt;
+        Profile and sign-in preferences.
+      &lt;/AccordionItem&gt;
+      &lt;AccordionItem accordion={accordion} id="billing" title="Billing"&gt;
+        Payment methods and invoices.
+      &lt;/AccordionItem&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+  </div>
+  <p>Add <code class="bs-code-inline">alwaysOpen: true</code> for multiple open items. The hook also returns <code class="bs-code-inline">openIds</code>, <code class="bs-code-inline">isOpen</code>, and <code class="bs-code-inline">setOpen</code>; <code class="bs-code-inline">onOpenIdsChange</code> receives the next ID array.</p>
+
+  <h3 id="accordion-vue">Vue</h3>
+  <p>Vue uses the same composition with refs: <code class="bs-code-inline">openIds</code> and each Collapse <code class="bs-code-inline">open</code> value are computed refs. Spread the prop helpers with <code class="bs-code-inline">v-bind</code>.</p>
+  <div class="docs-code-block bs-code-window">
+    <div class="docs-code-label bs-code-header"><span>Vue · Composition API accordion</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+    <pre class="bs-code-body" tabindex="0" aria-label="Vue accordion code example"><code data-language="vue">&lt;script setup&gt;
+import { useAccordion, useCollapse } from "@boobstrap/vue";
+
+const accordion = useAccordion({ defaultOpenIds: ["account"] });
+const account = useCollapse({
+  id: "account-panel",
+  ...accordion.getItemOptions("account"),
+});
+const billing = useCollapse({
+  id: "billing-panel",
+  ...accordion.getItemOptions("billing"),
+});
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="bs-accordion" v-bind="accordion.getRootProps()"&gt;
+    &lt;section class="bs-accordion-item"&gt;
+      &lt;h2 class="bs-accordion-header"&gt;
+        &lt;button class="bs-accordion-trigger" id="account-trigger"
+          v-bind="account.getTriggerProps()"&gt;
+          Account &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/h2&gt;
+      &lt;div class="bs-collapse bs-accordion-panel"
+        v-bind="account.getPanelProps({ 'aria-labelledby': 'account-trigger' })"&gt;
+        &lt;div class="bs-accordion-body"&gt;Profile and sign-in preferences.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+    &lt;section class="bs-accordion-item"&gt;
+      &lt;h2 class="bs-accordion-header"&gt;
+        &lt;button class="bs-accordion-trigger" id="billing-trigger"
+          v-bind="billing.getTriggerProps()"&gt;
+          Billing &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;/button&gt;
+      &lt;/h2&gt;
+      &lt;div class="bs-collapse bs-accordion-panel"
+        v-bind="billing.getPanelProps({ 'aria-labelledby': 'billing-trigger' })"&gt;
+        &lt;div class="bs-accordion-body"&gt;Payment methods and invoices.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
+  </div>
+
+  <div class="docs-api">
+  <h2 id="accordion-reference">Reference</h2>
+  <h3 id="accordion-class-reference">Classes</h3>
+  <div class="docs-table-wrap bs-table-responsive">
+    <table class="docs-table bs-table">
+      <thead><tr><th>Class</th><th>Element</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code class="bs-code-inline">.bs-accordion</code></td><td>Group root</td><td>Creates the bordered accordion surface.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-item</code></td><td>Item wrapper</td><td>Separates adjacent items with a logical block-start border.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-header</code></td><td>Heading</td><td>Removes the heading's default margin while preserving its semantics.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-trigger</code></td><td>Button</td><td>Provides full-width layout, hover treatment, and visible focus.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-icon</code></td><td>Decorative indicator</td><td>Rotates when its trigger has <code class="bs-code-inline">aria-expanded="true"</code>.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-collapse.bs-accordion-panel</code></td><td>Controlled panel</td><td>Combines interactive visibility state with accordion panel styling on the same element.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-body</code></td><td>Panel content wrapper</td><td>Applies inset spacing and muted text color.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-compact</code></td><td>Group root</td><td>Uses denser trigger and body spacing.</td></tr>
+        <tr><td><code class="bs-code-inline">.bs-accordion-flush</code></td><td>Group root</td><td>Removes inline outer borders and radius.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="accordion-data-reference">Data attributes and state</h3>
+  <div class="docs-table-wrap bs-table-responsive">
+    <table class="docs-table bs-table">
+      <thead><tr><th>Attribute</th><th>Element</th><th>Contract</th></tr></thead>
+      <tbody>
+        <tr><td><code class="bs-code-inline">data-bs-accordion</code></td><td>Group root</td><td>Opts the group into vanilla Accordion coordination.</td></tr>
+        <tr><td><code class="bs-code-inline">data-bs-accordion-always-open</code></td><td>Group root</td><td>Allows multiple child panels to remain open.</td></tr>
+        <tr><td><code class="bs-code-inline">data-bs-toggle="collapse"</code></td><td>Trigger</td><td>Connects click activation to the Collapse controller.</td></tr>
+        <tr><td><code class="bs-code-inline">aria-controls="panel-id"</code></td><td>Trigger</td><td>Identifies the controlled panel and associates the vanilla controller.</td></tr>
+        <tr><td><code class="bs-code-inline">aria-expanded</code></td><td>Trigger</td><td>Managed as the string <code class="bs-code-inline">true</code> or <code class="bs-code-inline">false</code>.</td></tr>
+        <tr><td><code class="bs-code-inline">hidden</code></td><td>Panel</td><td>Native source of truth for closed state in the vanilla controller.</td></tr>
+        <tr><td><code class="bs-code-inline">data-bs-state</code></td><td>Panel</td><td>Managed public state: <code class="bs-code-inline">open</code> or <code class="bs-code-inline">closed</code>.</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 id="accordion-javascript-api">JavaScript API</h3>
+  <div class="docs-table-wrap bs-table-responsive">
+    <table class="docs-table bs-table">
+      <thead><tr><th>Contract</th><th>Returns</th><th>Purpose</th></tr></thead>
+      <tbody>
+        <tr><td><code class="bs-code-inline">new Accordion(element)</code></td><td><code class="bs-code-inline">Accordion</code></td><td>Coordinates identified Collapse panels inside one group.</td></tr>
+        <tr><td><code class="bs-code-inline">Accordion.getOrCreateInstance(element)</code></td><td><code class="bs-code-inline">Accordion</code></td><td>Reuses the controller already associated with the element.</td></tr>
+        <tr><td><code class="bs-code-inline">accordion.alwaysOpen</code></td><td><code class="bs-code-inline">boolean</code></td><td>Reads the group's current always-open attribute.</td></tr>
+        <tr><td><code class="bs-code-inline">accordion.destroy()</code></td><td><code class="bs-code-inline">void</code></td><td>Removes group coordination and releases the cached Accordion instance.</td></tr>
+        <tr><td><code class="bs-code-inline">initAccordions(root?)</code></td><td><code class="bs-code-inline">Accordion[]</code></td><td>Initializes matching groups at or below a document or element root.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Use the Collapse controller's <code class="bs-code-inline">show()</code>, <code class="bs-code-inline">hide()</code>, and <code class="bs-code-inline">toggle()</code> methods to change an individual item programmatically. Destroying an Accordion removes only the group listener; independently managed Collapse instances retain their own trigger listeners until they are destroyed.</p>
+  </div>
+</section>

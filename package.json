@@ -8,7 +8,8 @@
     "dev": "vite",
     "framework:dev": "node scripts/use-framework-dev.mjs",
     "framework:sync": "node scripts/use-framework-dev.mjs --sync",
-    "build": "vite build && node scripts/generate-doc-route-pages.mjs && node scripts/generate-social-images.mjs",
+    "docs:sync-reference": "node scripts/generate-framework-reference.mjs",
+    "build": "node scripts/generate-framework-reference.mjs --check && vite build && node scripts/generate-doc-route-pages.mjs && node scripts/generate-social-images.mjs",
     "preview": "vite preview",
     "test": "npm run build && node tests/smoke.mjs && node tests/dev-banner.mjs"
   },
@@ -18,7 +19,7 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@boobstrap/boobstrap": "0.4.0",
+    "@boobstrap/boobstrap": "0.5.0",
     "datatables.net": "3.0.1",
     "highlight.js": "^11.11.1",
     "html-react-parser": "^6.1.5",

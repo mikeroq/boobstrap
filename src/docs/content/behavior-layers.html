@@ -1,24 +1,26 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Behavior layers</span></nav><div class="docs-kicker">Interactivity</div><h1>Behavior layers</h1><p class="bs-lead">Choose CSS only, Boobstrap JS, Alpine, React, or your own application behavior.</p><div class="docs-component-meta" aria-label="Behavior layers documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.4.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Behavior layers</span></nav><div class="docs-kicker">Interactivity</div><h1>Behavior layers</h1><p class="bs-lead">Choose CSS only, Boobstrap JS, Alpine, React, Vue, or your own application behavior.</p><div class="docs-component-meta" aria-label="Behavior layers documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="behavior-layers">
             <div class="docs-kicker">Interactivity</div>
             <h2>Choose your behavior layer</h2>
-            <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can initialize dependency-free controllers or let Alpine or React own the same component contract.</p>
+            <p>Boobstrap never requires a runtime. Static HTML can use the complete visual system by itself; interactive projects can initialize dependency-free controllers or let Alpine, React, or Vue own the same component contract.</p>
 
             <div class="docs-runtime-grid">
               <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Base</span><h3>CSS only</h3><p>Use semantic markup and every <code class="bs-code-inline">bs-</code> class without loading JavaScript.</p></article>
-              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance form helpers, comboboxes, loading buttons, collapse, dropdowns, and tabs through explicit controllers.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official</span><h3>Boobstrap JS</h3><p>Progressively enhance accordions, notifications, overlays, navigation, form helpers, and floating content through explicit controllers.</p></article>
               <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official adapter</span><h3>Alpine.js</h3><p>Keep reactive state in Alpine with reusable <code class="bs-code-inline">x-data</code> providers and <code class="bs-code-inline">x-bind</code> objects.</p></article>
               <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official adapter</span><h3>React</h3><p>Use SSR-safe headless hooks with controlled or uncontrolled React state and consumer-owned markup.</p></article>
+              <article class="docs-runtime-card bs-card bs-card-subtle bs-card-body"><span>Official adapter</span><h3>Vue</h3><p>Use SSR-safe headless composables with refs, computed state, and consumer-owned templates.</p></article>
             </div>
 
-            <p class="docs-package-note">Every interactive example below includes Boobstrap JS, Alpine.js, and React variants. The classes and accessibility contract stay consistent while the selected behavior layer owns state.</p>
+            <p class="docs-package-note">The classes, events, and accessibility contract stay consistent while the selected behavior layer owns state.</p>
 
             <div class="docs-framework-switcher" data-framework-tabs="">
               <div class="docs-framework-tablist bs-tabs bs-tabs-contained" role="tablist" aria-label="Behavior framework">
                 <button id="framework-vanilla-tab" type="button" role="tab" aria-selected="true" aria-controls="framework-vanilla-panel" data-framework-tab="vanilla" class="bs-tab">Boobstrap JS</button>
                 <button id="framework-alpine-tab" type="button" role="tab" aria-selected="false" aria-controls="framework-alpine-panel" tabindex="-1" data-framework-tab="alpine" class="bs-tab">Alpine.js</button>
-                <button id="framework-react-tab" type="button" role="tab" aria-selected="false" aria-controls="react" tabindex="-1" data-framework-tab="react" class="bs-tab">React</button>
+                <button id="framework-react-tab" type="button" role="tab" aria-selected="false" aria-controls="framework-react-panel" tabindex="-1" data-framework-tab="react" class="bs-tab">React</button>
+                <button id="framework-vue-tab" type="button" role="tab" aria-selected="false" aria-controls="framework-vue-panel" tabindex="-1" data-framework-tab="vue" class="bs-tab">Vue</button>
               </div>
               <div id="framework-vanilla-panel" role="tabpanel" aria-labelledby="framework-vanilla-tab" data-framework-panel="vanilla" class="bs-tab-panel bs-tab-panel-contained">
                 <p>Importing the stylesheet remains runtime-free. Initialize all supported controllers, or import one component from a dedicated subpath.</p>
@@ -38,7 +40,7 @@ const boobstrap = initBoobstrap();</code></pre>
                 </div>
               </div>
               <div id="framework-alpine-panel" role="tabpanel" aria-labelledby="framework-alpine-tab" data-framework-panel="alpine" hidden="" class="bs-tab-panel bs-tab-panel-contained">
-                <p>The adapter registers <code class="bs-code-inline">bsButton</code>, <code class="bs-code-inline">bsCollapse</code>, <code class="bs-code-inline">bsCombobox</code>, <code class="bs-code-inline">bsDropdown</code>, and <code class="bs-code-inline">bsTabs</code>. Register it before starting Alpine. The same plugin also supports <code class="bs-code-inline">@alpinejs/csp</code>.</p>
+                <p>The adapter registers providers for accordion, button, collapse, combobox, dialog, dropdown, popover, tabs, toast, and tooltip. Register it before starting Alpine. The same plugin also supports <code class="bs-code-inline">@alpinejs/csp</code>, and v0.5 includes declarations for every exported provider.</p>
                 <div class="docs-code-block bs-code-window">
                   <div class="docs-code-label bs-code-header"><span>JavaScript · Alpine.js</span><button type="button" data-copy="npm install @boobstrap/boobstrap @boobstrap/alpine alpinejs
 
@@ -59,20 +61,45 @@ Alpine.start();</code></pre>
                 </div>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/alpine"><code class="bs-code-inline">@boobstrap/alpine</code> on npm</a>. Alpine remains an application-level peer dependency and is never installed by the core framework.</p>
               </div>
-              <div id="react" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden="" class="bs-tab-panel bs-tab-panel-contained">
-                <p>The adapter provides SSR-safe <code class="bs-code-inline">useButton</code>, <code class="bs-code-inline">useCollapse</code>, <code class="bs-code-inline">useDropdown</code>, and <code class="bs-code-inline">useTabs</code> hooks. Each hook supports controlled and uncontrolled state and returns prop getters for semantic, consumer-owned markup.</p>
+              <div id="framework-react-panel" role="tabpanel" aria-labelledby="framework-react-tab" data-framework-panel="react" hidden="" class="bs-tab-panel bs-tab-panel-contained">
+                <p>The adapter provides SSR-safe headless hooks for accordion, button, collapse, combobox, dialog, dropdown, popover, tabs, toast, and tooltip. State remains controlled or uncontrolled as each hook supports, while prop getters preserve semantic, consumer-owned markup.</p>
                 <div class="docs-code-block bs-code-window">
                   <div class="docs-code-label bs-code-header"><span>JavaScript · React</span><button type="button" data-copy="npm install @boobstrap/boobstrap @boobstrap/react react
 
 import &quot;@boobstrap/boobstrap&quot;;
-import { useButton, useCollapse, useCombobox, useDropdown, useTabs } from &quot;@boobstrap/react&quot;;" class="bs-code-action">Copy</button></div>
+import { useAccordion, useButton, useCollapse, useCombobox, useDialog, useDropdown, usePopover, useTabs, useToast, useTooltip } from &quot;@boobstrap/react&quot;;" class="bs-code-action">Copy</button></div>
                   <pre class="bs-code-body" tabindex="0" aria-label="JavaScript · React code example"><code class="">npm install @boobstrap/boobstrap @boobstrap/react react
 
 import "@boobstrap/boobstrap";
-import { useButton, useCollapse, useCombobox, useDropdown, useTabs } from "@boobstrap/react";</code></pre>
+import { useAccordion, useButton, useCollapse, useCombobox, useDialog, useDropdown, usePopover, useTabs, useToast, useTooltip } from "@boobstrap/react";</code></pre>
                 </div>
                 <p class="docs-package-note">View <a href="https://www.npmjs.com/package/@boobstrap/react"><code class="bs-code-inline">@boobstrap/react</code> on npm</a>. React is a peer dependency; the adapter never initializes Boobstrap JS on React-owned DOM.</p>
               </div>
+              <div id="framework-vue-panel" role="tabpanel" aria-labelledby="framework-vue-tab" data-framework-panel="vue" hidden="" class="bs-tab-panel bs-tab-panel-contained">
+                <p>The adapter provides SSR-safe headless composables. Plain values and Vue refs both work for controlled state, and prop getters bind directly to semantic template elements.</p>
+                <div class="docs-code-block bs-code-window">
+                  <div class="docs-code-label bs-code-header"><span>JavaScript · Vue</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div>
+                  <pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Vue code example"><code class="">npm install @boobstrap/boobstrap @boobstrap/vue vue
+
+import "@boobstrap/boobstrap";
+import { useAccordion, useButton, useCollapse, useCombobox, useDialog, useDropdown, usePopover, useTabs, useToast, useTooltip } from "@boobstrap/vue";</code></pre>
+                </div>
+                <p class="docs-package-note">See the <a href="/docs/interactivity/vue">Vue adapter guide</a> for complete template composition and controlled-state examples.</p>
+              </div>
             </div>
-            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Do not stack behavior layers.</strong> Use Boobstrap JS, Alpine, or React on a component subtree—not more than one. Vue will target this same state, event, and accessibility contract.</span></div>
-          <div class="docs-example-guidance" aria-label="behavior layers guidance"><div><h3>CSS only</h3><p>Choose CSS only for static components and when your application already owns all state and accessibility behavior.</p></div><div><h3>One owner</h3><p>Use Boobstrap JS, Alpine, React, or custom application code for a component—not multiple controllers on the same markup.</p></div><div><h3>Progressive enhancement</h3><p>Start from meaningful HTML and a readable initial state. Add behavior after the content remains usable without script execution.</p></div></div></section>
+            <h3 id="behavior-layers-parity">Adapter parity</h3>
+            <p>The official adapters cover the same stateful component families where application-owned reactivity is useful. Browser-specific progressive enhancements remain core-only. The framework publishes this mapping as <code class="bs-code-inline">interactionContract</code>, and its conformance suite verifies the declared capability and event surface.</p>
+            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Surface</th><th>Boobstrap JS</th><th>Alpine</th><th>React</th><th>Vue</th></tr></thead><tbody>
+              <tr><td>Accordion</td><td><code class="bs-code-inline">Accordion</code></td><td><code class="bs-code-inline">accordion</code></td><td><code class="bs-code-inline">useAccordion</code></td><td><code class="bs-code-inline">useAccordion</code></td></tr>
+              <tr><td>Button</td><td><code class="bs-code-inline">Button</code></td><td><code class="bs-code-inline">button</code></td><td><code class="bs-code-inline">useButton</code></td><td><code class="bs-code-inline">useButton</code></td></tr>
+              <tr><td>Collapse, combobox, dialog, dropdown</td><td>Controllers</td><td>Named providers</td><td><code class="bs-code-inline">use*</code> hooks</td><td><code class="bs-code-inline">use*</code> composables</td></tr>
+              <tr><td>Popover, tabs, toast, tooltip</td><td>Controllers</td><td>Named providers</td><td><code class="bs-code-inline">use*</code> hooks</td><td><code class="bs-code-inline">use*</code> composables</td></tr>
+              <tr><td>Banner, input mask, OTP, password, sidebar</td><td>Controllers</td><td>Use core or application behavior</td><td>Use core or application behavior</td><td>Use core or application behavior</td></tr>
+            </tbody></table></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Inspect the conformance manifest</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Inspect the conformance manifest code example"><code>import { interactionContract } from "@boobstrap/boobstrap/js";
+
+const toast = interactionContract.toast;
+console.log(toast.adapters.vue); // useToast
+console.log(toast.capabilities); // duration, autohide, pointer/focus pause…</code></pre></div>
+            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Do not stack behavior layers.</strong> Use Boobstrap JS, Alpine, React, or Vue on a component subtree—not more than one. See the <a href="/docs/components/accordion">Accordion guide</a> for the same grouped-disclosure contract in all four layers and the <a href="/docs/getting-started/typescript">TypeScript guide</a> for declaration coverage.</span></div>
+          <div class="docs-example-guidance" aria-label="behavior layers guidance"><div><h3>CSS only</h3><p>Choose CSS only for static components and when your application already owns all state and accessibility behavior.</p></div><div><h3>One owner</h3><p>Use Boobstrap JS, Alpine, React, Vue, or custom application code for a component—not multiple controllers on the same markup.</p></div><div><h3>Progressive enhancement</h3><p>Start from meaningful HTML and a readable initial state. Add behavior after the content remains usable without script execution.</p></div></div></section>

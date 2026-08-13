@@ -13,11 +13,11 @@ npm run dev
 
 Day-to-day work is integrated through the `dev` branch and previewed with the framework's matching `dev` branch without publishing interim npm packages. See [DEVELOPMENT.md](DEVELOPMENT.md) for the branch, preview deployment, and release workflow.
 
-The site imports `@boobstrap/boobstrap@0.4.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
+The site imports `@boobstrap/boobstrap@0.5.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/`, the React documentation application at `/docs`, 41 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
+Vite serves the landing page at `/`, the React documentation application at `/docs`, 49 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
 
-The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles.
+The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles. The build also verifies that the class reference matches the installed framework stylesheet; after changing the framework pin, run `npm run docs:sync-reference` to regenerate that committed reference.
 
 The same build generates a distinct 1200×630 PNG social card for the landing page, playground, docs overview, and every guide under `dist/og`. Each route receives matching absolute `og:image` and `twitter:image` metadata; `src/social-cards.js` is the shared URL and palette registry.
 
