@@ -1,0 +1,42 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Progress</span></nav><div class="docs-kicker">Components</div><h1>Progress</h1><p class="bs-lead">Communicate determinate and indeterminate progress with accessible labels, contextual variants, sizes, and motion-safe animation.</p><div class="docs-component-meta" aria-label="Progress documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>CSS only</strong> behavior</span><span class="bs-badge bs-text-xs"><strong>Next release</strong></span></div></header>
+
+<section class="docs-section docs-routed-section" id="progress">
+  <div class="docs-kicker">Components</div>
+  <h2>Progress indicators</h2>
+  <p>Use a native progressbar name and value for determinate work. Set the bar width from the same value your application exposes through ARIA.</p>
+
+  <h3 id="progress-determinate">Determinate progress</h3>
+  <div class="docs-demo" data-component-example="progress-determinate">
+    <div class="bs-stack bs-gap-4">
+      <div><div class="bs-flex bs-justify-between bs-mb-2"><strong id="progress-upload-label">Upload</strong><span>68%</span></div><div class="bs-progress" role="progressbar" aria-labelledby="progress-upload-label" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"><div class="bs-progress-bar" style="width: 68%"></div></div></div>
+      <div class="bs-progress bs-progress-sm" role="progressbar" aria-label="Indexing" aria-valuenow="42" aria-valuemin="0" aria-valuemax="100"><div class="bs-progress-bar bs-progress-info" style="width: 42%"></div></div>
+      <div class="bs-progress bs-progress-lg" role="progressbar" aria-label="Deployment" aria-valuenow="84" aria-valuemin="0" aria-valuemax="100"><div class="bs-progress-bar bs-progress-success" style="width: 84%">84%</div></div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Determinate progress</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Determinate progress code example"><code>&lt;div class="bs-progress" role="progressbar" aria-label="Upload" aria-valuenow="68" aria-valuemin="0" aria-valuemax="100"&gt;
+  &lt;div class="bs-progress-bar" style="width: 68%"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <h3 id="progress-contextual-and-striped">Contextual and striped bars</h3>
+  <div class="docs-demo" data-component-example="progress-variants">
+    <div class="bs-stack bs-gap-3">
+      <div class="bs-progress"><div class="bs-progress-bar bs-progress-primary" style="width: 28%"></div></div>
+      <div class="bs-progress"><div class="bs-progress-bar bs-progress-info bs-progress-striped" style="width: 44%"></div></div>
+      <div class="bs-progress"><div class="bs-progress-bar bs-progress-success" style="width: 60%"></div></div>
+      <div class="bs-progress"><div class="bs-progress-bar bs-progress-warning bs-progress-striped bs-progress-animated" style="width: 76%"></div></div>
+      <div class="bs-progress"><div class="bs-progress-bar bs-progress-danger" style="width: 92%"></div></div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Contextual striped progress</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Contextual striped progress code example"><code>&lt;div class="bs-progress" role="progressbar" aria-label="Import" aria-valuenow="76" aria-valuemin="0" aria-valuemax="100"&gt;
+  &lt;div class="bs-progress-bar bs-progress-warning bs-progress-striped bs-progress-animated" style="width: 76%"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <h3 id="progress-indeterminate">Indeterminate progress</h3>
+  <div class="docs-demo" data-component-example="progress-indeterminate"><div class="bs-progress bs-progress-indeterminate" role="progressbar" aria-label="Preparing export"><div class="bs-progress-bar bs-progress-info"></div></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Indeterminate progress</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Indeterminate progress code example"><code>&lt;div class="bs-progress bs-progress-indeterminate" role="progressbar" aria-label="Preparing export"&gt;
+  &lt;div class="bs-progress-bar bs-progress-info"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <div class="docs-example-guidance" aria-label="Progress guidance"><div><h3>Accessible value</h3><p>Keep <code class="bs-code-inline">aria-valuenow</code> synchronized with the visual width and give every progressbar an accessible name.</p></div><div><h3>Unknown duration</h3><p>Omit value attributes for indeterminate work. Do not invent a percentage when completion cannot be measured.</p></div><div><h3>Motion</h3><p>Striped and indeterminate animations stop automatically when the user requests reduced motion.</p></div></div>
+  <div class="docs-api"><h3 id="progress-api">Progress API</h3><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody><tr><td><code class="bs-code-inline">.bs-progress</code></td><td>Track and accessible progressbar boundary.</td></tr><tr><td><code class="bs-code-inline">.bs-progress-bar</code></td><td>Value bar whose width represents completion.</td></tr><tr><td><code class="bs-code-inline">.bs-progress-sm</code>, <code class="bs-code-inline">.bs-progress-lg</code></td><td>Compact and emphasized track sizes.</td></tr><tr><td><code class="bs-code-inline">.bs-progress-primary</code>, <code class="bs-code-inline">.bs-progress-info</code>, <code class="bs-code-inline">.bs-progress-success</code>, <code class="bs-code-inline">.bs-progress-warning</code>, <code class="bs-code-inline">.bs-progress-danger</code></td><td>Semantic value colors.</td></tr><tr><td><code class="bs-code-inline">.bs-progress-striped</code>, <code class="bs-code-inline">.bs-progress-animated</code></td><td>Optional striped treatment and motion.</td></tr><tr><td><code class="bs-code-inline">.bs-progress-indeterminate</code></td><td>Unknown-duration state with reduced-motion fallback.</td></tr></tbody></table></div></div>
+</section>

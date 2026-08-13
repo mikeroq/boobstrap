@@ -3,7 +3,7 @@ export const docsOverview = {
   sectionId: "overview",
   category: "Documentation",
   title: "Documentation",
-  description: "Complete Boobstrap documentation: CSS, optional JavaScript, Alpine and React integrations, components, utilities, themes, and design tokens.",
+  description: "Complete Boobstrap documentation: CSS, optional JavaScript, Alpine, React, and Vue integrations, components, utilities, themes, and design tokens.",
 };
 
 export const docsPages = [
@@ -29,6 +29,8 @@ export const docsPages = [
   { path: "/docs/components/lists", sectionId: "lists", category: "Components", title: "Reference lists and checklists", description: "Build dense key-value references and scannable completion checklists with accessible semantic markup." },
   { path: "/docs/components/alerts", sectionId: "alerts", category: "Components", title: "Alerts", description: "Communicate success, warning, danger, and informational messages with appropriate semantics." },
   { path: "/docs/components/banners", sectionId: "banners", category: "Components", title: "Banners", description: "Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior." },
+  { path: "/docs/components/progress", sectionId: "progress", category: "Components", title: "Progress", description: "Communicate determinate and indeterminate progress with accessible labels, contextual variants, sizes, and motion-safe animation." },
+  { path: "/docs/components/toasts", sectionId: "toasts", category: "Components", title: "Toasts", description: "Deliver temporary status notifications with contextual styles, pause-aware autohide, dismissal, and lifecycle events." },
   { path: "/docs/components/forms", sectionId: "forms", category: "Components", title: "Forms", description: "Choose a focused form guide with complete, copy-ready examples for every control family." },
   { path: "/docs/components/forms/inputs", sectionId: "form-inputs", category: "Forms", title: "Inputs and textareas", description: "Build labeled text controls with help text, validation feedback, disabled and read-only states, and three sizes." },
   { path: "/docs/components/forms/input-groups", sectionId: "form-input-groups", category: "Forms", title: "Input groups and icons", description: "Compose inputs with prefixed or suffixed text, buttons, selects, and inline icons." },
@@ -44,6 +46,8 @@ export const docsPages = [
   { path: "/docs/interactivity/collapse", sectionId: "collapse", category: "Interactivity", title: "Collapse", description: "Reveal and hide content with synchronized state, lifecycle events, and keyboard-friendly controls." },
   { path: "/docs/interactivity/dropdown", sectionId: "dropdown", category: "Interactivity", title: "Dropdown", description: "Build accessible action menus with focus management and complete keyboard navigation." },
   { path: "/docs/interactivity/tabs", sectionId: "tabs", category: "Interactivity", title: "Tabs", description: "Organize related panels with automatic activation, roving focus, and synchronized ARIA state." },
+  { path: "/docs/interactivity/tooltips-popovers", sectionId: "tooltips-popovers", category: "Interactivity", title: "Tooltips and popovers", description: "Add automatically positioned supplemental labels and click-triggered contextual content with accessible state." },
+  { path: "/docs/interactivity/vue", sectionId: "vue-adapter", category: "Interactivity", title: "Vue adapter", description: "Own Boobstrap interaction state in Vue 3 with SSR-safe headless composables and consumer-controlled markup." },
   { path: "/docs/reference/utilities", sectionId: "utilities", category: "Reference", title: "Utilities", description: "Use composable layout, spacing, typography, display, and accessibility utilities." },
   { path: "/docs/reference/tokens", sectionId: "tokens", category: "Reference", title: "Design tokens", description: "Browse the semantic color, type, spacing, radius, shadow, container, and motion tokens." },
   { path: "/docs/reference/classes", sectionId: "class-reference", category: "Reference", title: "Class reference", description: "Search every public Boobstrap class generated from the exact installed stylesheet." },

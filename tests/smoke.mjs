@@ -172,10 +172,38 @@ const promotedComponentCoverage = {
   ],
   lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
   tabs: ["bs-tab-panel-contained", "bs-tabs-contained", "bs-tabs-pills"],
+  progress: [
+    "bs-progress",
+    "bs-progress-bar",
+    "bs-progress-sm",
+    "bs-progress-lg",
+    "bs-progress-primary",
+    "bs-progress-info",
+    "bs-progress-success",
+    "bs-progress-warning",
+    "bs-progress-danger",
+    "bs-progress-striped",
+    "bs-progress-animated",
+    "bs-progress-indeterminate",
+  ],
+  toasts: [
+    "bs-toast-region",
+    "bs-toast-region-bottom",
+    "bs-toast-region-start",
+    "bs-toast",
+    "bs-toast-info",
+    "bs-toast-success",
+    "bs-toast-warning",
+    "bs-toast-danger",
+    "bs-toast-title",
+    "bs-toast-message",
+    "bs-toast-dismiss",
+  ],
+  "tooltips-popovers": ["bs-tooltip", "bs-popover", "bs-popover-header", "bs-popover-body", "bs-floating-arrow"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 117) {
-  throw new Error(`Expected documentation coverage for 117 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 145) {
+  throw new Error(`Expected documentation coverage for 145 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -200,6 +228,8 @@ const documentationQualityMinimums = {
   lists: { examples: 2, code: 2, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
+  progress: { examples: 3, code: 3, guidance: true },
+  toasts: { examples: 2, code: 3, guidance: true },
   forms: { examples: 2, code: 2 },
   "form-inputs": { examples: 7, code: 7, guidance: true },
   "form-input-groups": { examples: 5, code: 5 },
@@ -215,6 +245,8 @@ const documentationQualityMinimums = {
   collapse: { examples: 1, code: 2, guidance: true },
   dropdown: { examples: 1, code: 2, guidance: true },
   tabs: { examples: 3, code: 4, guidance: true },
+  "tooltips-popovers": { examples: 2, code: 3, guidance: true },
+  "vue-adapter": { examples: 1, code: 3, guidance: true },
   utilities: { examples: 3, code: 3, guidance: true },
   tokens: { examples: 1, code: 1, guidance: true },
   "class-reference": { examples: 1, code: 1, guidance: true },
@@ -1088,6 +1120,47 @@ try {
         }
       }
 
+      if (config.sectionId === "progress") {
+        const determinate = routePage.locator('[data-component-example="progress-determinate"] [role="progressbar"]').first();
+        const valueWidth = await determinate.locator(".bs-progress-bar").evaluate((element) => element.getBoundingClientRect().width / element.parentElement.getBoundingClientRect().width);
+        if (await determinate.getAttribute("aria-valuenow") !== "68" || Math.abs(valueWidth - 0.68) > 0.02) {
+          failures.push("desktop: determinate progress does not synchronize its accessible and visual values");
+        }
+        if (await routePage.locator('[data-component-example="progress-variants"] .bs-progress-bar').count() !== 5) {
+          failures.push("desktop: progress reference is missing contextual variants");
+        }
+      }
+
+      if (config.sectionId === "toasts") {
+        const trigger = routePage.getByRole("button", { name: "Show notification" });
+        const toast = routePage.locator("#docs-toast");
+        await trigger.click();
+        await routePage.waitForFunction(() => document.querySelector("#docs-toast")?.dataset.bsState === "shown");
+        if (!await toast.isVisible() || await trigger.getAttribute("aria-expanded") !== "true") {
+          failures.push("desktop: toast trigger did not synchronize notification state");
+        }
+        await toast.getByRole("button", { name: "Dismiss deployment notification" }).click();
+        await routePage.waitForFunction(() => document.querySelector("#docs-toast")?.hidden === true);
+        if (await trigger.getAttribute("aria-expanded") !== "false") failures.push("desktop: toast dismissal did not synchronize its trigger");
+      }
+
+      if (config.sectionId === "tooltips-popovers") {
+        const tooltipTrigger = routePage.getByRole("button", { name: "Copy link" });
+        await tooltipTrigger.focus();
+        const tooltip = routePage.locator("body > .bs-tooltip");
+        if (!await tooltip.isVisible() || !await tooltipTrigger.getAttribute("aria-describedby")) {
+          failures.push("desktop: tooltip did not expose its generated accessible description");
+        }
+        await tooltipTrigger.press("Escape");
+        const popoverTrigger = routePage.getByRole("button", { name: "Retention details" });
+        await popoverTrigger.click();
+        if (await popoverTrigger.getAttribute("aria-expanded") !== "true" || !await routePage.locator("body > .bs-popover").isVisible()) {
+          failures.push("desktop: popover did not synchronize its generated panel");
+        }
+        await popoverTrigger.press("Escape");
+        if (await popoverTrigger.getAttribute("aria-expanded") !== "false") failures.push("desktop: popover did not dismiss with Escape");
+      }
+
       if (["collapse", "dropdown", "tabs"].includes(config.sectionId)) {
         const variants = routePage.locator("[data-code-variants]:visible");
         if (await variants.count() !== 1 || await variants.locator("[data-code-variant]").count() !== 3) {
@@ -1101,8 +1174,22 @@ try {
         }
       }
 
-      if (config.sectionId === "behavior-layers" && await routePage.locator("[data-framework-tab]").count() !== 3) {
+      if (config.sectionId === "behavior-layers" && await routePage.locator("[data-framework-tab]").count() !== 4) {
         failures.push("desktop: behavior overview does not preserve all framework tabs");
+      }
+
+      if (config.sectionId === "vue-adapter") {
+        const source = (await routePage.locator("#vue-adapter").textContent()) ?? "";
+        for (const contract of ["@boobstrap/vue", "useCollapse", "v-bind", "useToast", "useTooltip", "usePopover"]) {
+          if (!source.includes(contract)) failures.push(`desktop: Vue adapter guide is missing ${contract}`);
+        }
+      }
+
+      if (config.sectionId === "utilities") {
+        const source = (await routePage.locator("#utilities").textContent()) ?? "";
+        for (const contract of [".bs-sm-block", ".bs-md-flex-row", ".bs-lg-order-last"]) {
+          if (!source.includes(contract)) failures.push(`desktop: utilities guide is missing ${contract}`);
+        }
       }
 
       if (config.sectionId === "form-inputs") {
