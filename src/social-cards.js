@@ -1,6 +1,10 @@
 import { docsOverview, docsPages, normalizeDocsPath } from "./docs-pages.js";
 
-const siteOrigin = "https://boobstrap.org";
+export const productionSiteOrigin = "https://boobstrap.org";
+export const developmentSiteOrigin = "https://dev.boobstrap.org";
+
+const siteEnvironment = import.meta.env?.VITE_SITE_ENV ?? globalThis.process?.env?.VITE_SITE_ENV;
+export const socialSiteOrigin = siteEnvironment === "development" ? developmentSiteOrigin : productionSiteOrigin;
 
 const paletteForCategory = (category) => ({
   Documentation: "rose",
@@ -22,7 +26,7 @@ const createCard = (page) => ({
   ...page,
   palette: page.palette ?? paletteForCategory(page.category),
   imagePath: socialImagePathFor(page.path),
-  imageUrl: `${siteOrigin}${socialImagePathFor(page.path)}`,
+  imageUrl: `${socialSiteOrigin}${socialImagePathFor(page.path)}`,
   imageAlt: `${page.title} — Boobstrap ${page.category.toLowerCase()}`,
 });
 
@@ -47,5 +51,5 @@ export const socialCards = [
 
 export const socialCardForPath = (pathname) => {
   const normalizedPath = pathname === "/" ? "/" : normalizeDocsPath(pathname);
-  return socialCards.find(({ path }) => path === normalizedPath);
+  return socialCards.find(({ path }) => path === normalizedPath) ?? socialCards[0];
 };

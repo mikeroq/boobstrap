@@ -2,6 +2,7 @@ import { spawn } from "node:child_process";
 import { mkdir } from "node:fs/promises";
 import { createServer } from "node:net";
 import { chromium } from "playwright";
+import { developmentSiteOrigin, socialCards } from "../src/social-cards.js";
 
 const run = (command, args, options = {}) => new Promise((resolve, reject) => {
   const child = spawn(command, args, { stdio: "inherit", ...options });
@@ -12,7 +13,7 @@ const run = (command, args, options = {}) => new Promise((resolve, reject) => {
   });
 });
 
-await run("./node_modules/.bin/vite", ["build"], {
+await run("npm", ["run", "build"], {
   env: { ...process.env, VITE_SITE_ENV: "development" },
 });
 
@@ -48,6 +49,24 @@ const failures = [];
 try {
   await waitForServer();
   await mkdir("artifacts", { recursive: true });
+
+  for (const card of socialCards) {
+    const response = await fetch(`${baseUrl}${card.path}`);
+    if (!response.ok) {
+      failures.push(`${card.path}: development social metadata page returned HTTP ${response.status}`);
+      continue;
+    }
+    const source = await response.text();
+    const expectedImageUrl = `${developmentSiteOrigin}${card.imagePath}`;
+    if (!source.includes(`<meta property="og:image" content="${expectedImageUrl}"`)
+      || !source.includes(`<meta name="twitter:image" content="${expectedImageUrl}"`)) {
+      failures.push(`${card.path}: development social image metadata does not use dev.boobstrap.org`);
+    }
+    const imageResponse = await fetch(`${baseUrl}${card.imagePath}`);
+    if (!imageResponse.ok || imageResponse.headers.get("content-type") !== "image/png") {
+      failures.push(`${card.path}: development social image is not available as PNG`);
+    }
+  }
 
   for (const viewport of [
     { name: "desktop", width: 1680, height: 940 },

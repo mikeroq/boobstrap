@@ -332,6 +332,23 @@ try {
   }
   if (socialImageBodies.size !== socialCards.length) failures.push("social images: one or more routes share identical image output");
 
+  if (socialCardForPath("/not-a-public-route") !== landingSocialCard) {
+    failures.push("social metadata: unknown routes do not fall back to the main social image");
+  }
+
+  for (const card of socialCards) {
+    const response = await fetch(`${baseUrl}${card.path}`);
+    if (!response.ok) {
+      failures.push(`${card.path}: social metadata page returned HTTP ${response.status}`);
+      continue;
+    }
+    const source = await response.text();
+    if (!source.includes(`<meta property="og:image" content="${card.imageUrl}"`)
+      || !source.includes(`<meta name="twitter:image" content="${card.imageUrl}"`)) {
+      failures.push(`${card.path}: complete production social image metadata is missing`);
+    }
+  }
+
   for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"]]) {
     const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
     if (response.status !== 308 || response.headers.get("location") !== cleanPath) {

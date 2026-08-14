@@ -19,7 +19,7 @@ Vite serves the landing page at `/`, the React documentation application at `/do
 
 The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles. The build also verifies that the class reference matches the installed framework stylesheet; after changing the framework pin, run `npm run docs:sync-reference` to regenerate that committed reference.
 
-The same build generates a distinct 1200×630 PNG social card for the landing page, playground, docs overview, and every guide under `dist/og`. Each route receives matching absolute `og:image` and `twitter:image` metadata; `src/social-cards.js` is the shared URL and palette registry.
+The same build generates a distinct 1200×630 PNG social card for the landing page, playground, docs overview, and every guide under `dist/og`. Each route receives matching absolute `og:image` and `twitter:image` metadata on the active production or development hostname, while unregistered routes fall back to the landing-page card. `src/social-cards.js` is the shared URL and palette registry.
 
 ## Validation
 
