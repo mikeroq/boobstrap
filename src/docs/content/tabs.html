@@ -23,6 +23,7 @@
                 <button id="tabs-js-code-tab" type="button" role="tab" aria-selected="true" aria-controls="tabs-js-code-panel" data-code-variant="js" class="bs-code-tab" tabindex="0">Boobstrap JS</button>
                 <button id="tabs-alpine-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-alpine-code-panel" tabindex="-1" data-code-variant="alpine" class="bs-code-tab">Alpine.js</button>
                 <button id="tabs-react-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-react-code-panel" tabindex="-1" data-code-variant="react" class="bs-code-tab">React</button>
+                <button id="tabs-vue-code-tab" type="button" role="tab" aria-selected="false" aria-controls="tabs-vue-code-panel" tabindex="-1" data-code-variant="vue" class="bs-code-tab">Vue</button>
               </div>
               <div id="tabs-js-code-panel" role="tabpanel" aria-labelledby="tabs-js-code-tab" data-code-variant-panel="js" data-copy-source="&lt;div class=&quot;bs-tabs&quot; role=&quot;tablist&quot; aria-label=&quot;Account&quot; data-bs-tabs&gt;
   &lt;button class=&quot;bs-tab&quot; id=&quot;profile-tab&quot; type=&quot;button&quot; role=&quot;tab&quot; aria-controls=&quot;profile-panel&quot; aria-selected=&quot;true&quot;&gt;Profile&lt;/button&gt;
@@ -62,7 +63,9 @@
     aria-labelledby="security-tab" x-bind="panel" hidden&gt;Security settings&lt;/div&gt;
 &lt;/section&gt;</code></pre>
               </div>
-              <div id="tabs-react-code-panel" role="tabpanel" aria-labelledby="tabs-react-code-tab" data-code-variant-panel="react" data-copy-source="function Account() {
+              <div id="tabs-react-code-panel" role="tabpanel" aria-labelledby="tabs-react-code-tab" data-code-variant-panel="react" data-copy-source="import { useTabs } from &quot;@boobstrap/react&quot;;
+
+function Account() {
   const tabs = useTabs({ defaultSelectedId: &quot;profile-tab&quot; });
 
   return (
@@ -76,7 +79,9 @@
     &lt;/&gt;
   );
 }" hidden="">
-                <pre><code class="">function Account() {
+                <pre><code class="">import { useTabs } from "@boobstrap/react";
+
+function Account() {
   const tabs = useTabs({ defaultSelectedId: "profile-tab" });
 
   return (
@@ -100,6 +105,47 @@
     &lt;/&gt;
   );
 }</code></pre>
+              </div>
+              <div id="tabs-vue-code-panel" role="tabpanel" aria-labelledby="tabs-vue-code-tab" data-code-variant-panel="vue" data-copy-source="&lt;script setup&gt;
+import { useTabs } from &quot;@boobstrap/vue&quot;;
+
+const tabs = useTabs({ defaultSelectedId: &quot;profile-tab&quot; });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class=&quot;bs-tabs&quot; aria-label=&quot;Account&quot; v-bind=&quot;tabs.getTablistProps()&quot;&gt;
+    &lt;button class=&quot;bs-tab&quot; v-bind=&quot;tabs.getTabProps({ id: 'profile-tab', controls: 'profile-panel' })&quot;&gt;Profile&lt;/button&gt;
+    &lt;button class=&quot;bs-tab&quot; v-bind=&quot;tabs.getTabProps({ id: 'security-tab', controls: 'security-panel' })&quot;&gt;Security&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot;
+    v-bind=&quot;tabs.getPanelProps({ tabId: 'profile-tab' })&quot;&gt;Profile settings&lt;/div&gt;
+  &lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot;
+    v-bind=&quot;tabs.getPanelProps({ tabId: 'security-tab' })&quot;&gt;Security settings&lt;/div&gt;
+&lt;/template&gt;" hidden="">
+                <pre><code data-language="vue">&lt;script setup&gt;
+import { useTabs } from "@boobstrap/vue";
+
+const tabs = useTabs({ defaultSelectedId: "profile-tab" });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;div class="bs-tabs" aria-label="Account" v-bind="tabs.getTablistProps()"&gt;
+    &lt;button class="bs-tab" v-bind="tabs.getTabProps({
+      id: 'profile-tab', controls: 'profile-panel'
+    })"&gt;Profile&lt;/button&gt;
+    &lt;button class="bs-tab" v-bind="tabs.getTabProps({
+      id: 'security-tab', controls: 'security-panel'
+    })"&gt;Security&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="profile-panel"
+    v-bind="tabs.getPanelProps({ tabId: 'profile-tab' })"&gt;
+    Profile settings
+  &lt;/div&gt;
+  &lt;div class="bs-tab-panel" id="security-panel"
+    v-bind="tabs.getPanelProps({ tabId: 'security-tab' })"&gt;
+    Security settings
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre>
               </div>
             </div>
             <div class="docs-example-guidance">

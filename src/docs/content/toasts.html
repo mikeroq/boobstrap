@@ -20,6 +20,45 @@
 
 const toasts = initToasts(document);
 Toast.getOrCreateInstance(document.querySelector("#saved-toast")).show();</code></pre></div>
+  <h3 id="toasts-react">React</h3>
+  <p><code class="bs-code-inline">useToast</code> owns visibility and the autohide timer. The returned toast props pause the remaining duration while the notification is hovered or contains focus, then resume it afterward.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React toast</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React toast code example"><code data-language="jsx">import { useToast } from "@boobstrap/react";
+
+export function SavedToast() {
+  const toast = useToast({ duration: 5000 });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn" {...toast.getTriggerProps()}&gt;Save changes&lt;/button&gt;
+      &lt;div className="bs-toast-region"&gt;
+        &lt;div className="bs-toast bs-toast-success" {...toast.getToastProps()}&gt;
+          &lt;div&gt;&lt;strong className="bs-toast-title"&gt;Saved&lt;/strong&gt;
+            &lt;p className="bs-toast-message"&gt;Your changes are live.&lt;/p&gt;&lt;/div&gt;
+          &lt;button className="bs-toast-dismiss" {...toast.getDismissProps()}&gt;&amp;times;&lt;/button&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+  <h3 id="toasts-vue">Vue</h3>
+  <p>Vue exposes the same timer, announcement, and dismissal contract through <code class="bs-code-inline">useToast</code>. Template refs and pause/resume handlers are included in the prop objects.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Toast composable</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Toast composable code example"><code data-language="vue">&lt;script setup&gt;
+import { useToast } from "@boobstrap/vue";
+
+const toast = useToast({ duration: 5000 });
+&lt;/script&gt;
+
+&lt;template&gt;
+  &lt;button class="bs-btn" v-bind="toast.getTriggerProps()"&gt;Save changes&lt;/button&gt;
+  &lt;div class="bs-toast-region"&gt;
+    &lt;div class="bs-toast bs-toast-success" v-bind="toast.getToastProps()"&gt;
+      &lt;div&gt;&lt;strong class="bs-toast-title"&gt;Saved&lt;/strong&gt;
+        &lt;p class="bs-toast-message"&gt;Your changes are live.&lt;/p&gt;&lt;/div&gt;
+      &lt;button class="bs-toast-dismiss" v-bind="toast.getDismissProps()"&gt;&amp;times;&lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;</code></pre></div>
+  <p class="docs-package-note">See the <a href="/docs/interactivity/react">React adapter guide</a> and <a href="/docs/interactivity/vue">Vue adapter guide</a> for controlled visibility, transition detail, SSR, and the one-owner rule.</p>
   <div class="docs-example-guidance" aria-label="Toast guidance"><div><h3>Announcements</h3><p>The controller supplies <code class="bs-code-inline">role="status"</code> and <code class="bs-code-inline">aria-live="polite"</code> unless you provide a more appropriate live-region contract.</p></div><div><h3>Autohide</h3><p>Set <code class="bs-code-inline">data-bs-toast-duration</code> in milliseconds or disable automatic dismissal with <code class="bs-code-inline">data-bs-toast-autohide="false"</code>.</p></div><div><h3>Important actions</h3><p>Do not use a temporary toast for destructive confirmations or information the user must retain.</p></div></div>
   <div class="docs-api"><h3 id="toasts-api">Toast API</h3><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class or hook</th><th>Purpose</th></tr></thead><tbody><tr><td><code class="bs-code-inline">.bs-toast-region</code>, <code class="bs-code-inline">.bs-toast-region-bottom</code>, <code class="bs-code-inline">.bs-toast-region-start</code></td><td>Fixed, pointer-safe notification stack and logical placement.</td></tr><tr><td><code class="bs-code-inline">.bs-toast</code></td><td>Notification surface and transition state.</td></tr><tr><td><code class="bs-code-inline">.bs-toast-info</code>, <code class="bs-code-inline">.bs-toast-success</code>, <code class="bs-code-inline">.bs-toast-warning</code>, <code class="bs-code-inline">.bs-toast-danger</code></td><td>Contextual accents.</td></tr><tr><td><code class="bs-code-inline">.bs-toast-title</code>, <code class="bs-code-inline">.bs-toast-message</code>, <code class="bs-code-inline">.bs-toast-dismiss</code></td><td>Structured content and dismissal control.</td></tr><tr><td><code class="bs-code-inline">data-bs-toast</code></td><td>Initializes the controller.</td></tr><tr><td><code class="bs-code-inline">data-bs-toast-dismiss</code></td><td>Dismisses the containing toast.</td></tr><tr><td><code class="bs-code-inline">bs:toast:{show|shown|hide|hidden}</code></td><td>Cancelable before-events and completion events.</td></tr></tbody></table></div></div>
 </section>

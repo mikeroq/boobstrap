@@ -1,0 +1,108 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>React adapter</span></nav><div class="docs-kicker">Interactivity</div><h1>React adapter</h1><p class="bs-lead">Compose Boobstrap’s visual system with SSR-safe headless hooks while React owns state, markup, refs, and lifecycle.</p><div class="docs-component-meta" aria-label="React adapter documentation summary"><span class="bs-badge bs-text-xs"><strong>React 18–19</strong></span><span class="bs-badge bs-text-xs"><strong>Headless</strong> hooks</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="react-adapter">
+  <div class="docs-kicker">React integration</div>
+  <h2>Install and import</h2>
+  <p>Install the core framework, React adapter, and React peer together. Import the compiled stylesheet once at your application entry point, then import only the hooks used by a component.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · React packages</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · React packages code example"><code data-language="bash">npm install @boobstrap/boobstrap @boobstrap/react react react-dom</code></pre></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Application entry</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React application entry code example"><code data-language="jsx">import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { useCollapse } from "@boobstrap/react";</code></pre></div>
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Use one behavior owner.</strong> Do not call <code class="bs-code-inline">initBoobstrap</code> on React-owned markup. The hook supplies state, ARIA attributes, event handlers, and refs; your JSX supplies the semantic elements and <code class="bs-code-inline">bs-*</code> classes.</span></div>
+
+  <h2 id="react-adapter-compose">Compose a component</h2>
+  <p>Prop getters merge consumer handlers with the adapter contract. The preview is the rendered result of the JSX directly below it: the hook supplies the button type, relationship, expanded state, panel ID, visibility, and public state while your component supplies the content and classes.</p>
+  <div class="docs-demo interaction-demo" data-component-example="react-adapter-collapse">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="account-details" aria-expanded="true">Account details</button>
+    <div class="bs-collapse bs-card bs-mt-4" id="account-details" data-bs-state="open">
+      <div class="bs-card-body">Profile and security settings.</div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Collapse hook</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React Collapse hook code example"><code data-language="jsx">import { useCollapse } from "@boobstrap/react";
+
+export function Details() {
+  const details = useCollapse({ id: "account-details", defaultOpen: true });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn bs-btn-secondary"
+        {...details.getTriggerProps()}&gt;
+        Account details
+      &lt;/button&gt;
+      &lt;div className="bs-collapse bs-card bs-mt-4"
+        {...details.getPanelProps()}&gt;
+        &lt;div className="bs-card-body"&gt;Profile and security settings.&lt;/div&gt;
+      &lt;/div&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+
+  <h2 id="react-adapter-state">Controlled and uncontrolled state</h2>
+  <p>Use <code class="bs-code-inline">defaultOpen</code>, <code class="bs-code-inline">defaultLoading</code>, or <code class="bs-code-inline">defaultSelectedId</code> when the hook should own state. Pass the corresponding controlled value and change callback when application state is authoritative.</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Controlled dialog</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · Controlled React dialog code example"><code data-language="jsx">import { useState } from "react";
+import { useDialog } from "@boobstrap/react";
+
+export function AccountDialog() {
+  const [open, setOpen] = useState(false);
+  const dialog = useDialog({
+    id: "account-dialog",
+    open,
+    onOpenChange: setOpen,
+  });
+
+  return (
+    &lt;&gt;
+      &lt;button className="bs-btn" {...dialog.getTriggerProps()}&gt;Edit account&lt;/button&gt;
+      &lt;dialog className="bs-dialog" aria-labelledby="account-dialog-title"
+        {...dialog.getDialogProps()}&gt;
+        &lt;header className="bs-dialog-header"&gt;
+          &lt;h2 className="bs-dialog-title" id="account-dialog-title"&gt;Account&lt;/h2&gt;
+          &lt;button className="bs-dialog-close" aria-label="Close account"
+            {...dialog.getDismissProps()}&gt;&amp;times;&lt;/button&gt;
+        &lt;/header&gt;
+        &lt;div className="bs-dialog-body"&gt;Account settings.&lt;/div&gt;
+      &lt;/dialog&gt;
+    &lt;/&gt;
+  );
+}</code></pre></div>
+
+  <h2 id="react-adapter-events">Events, cancelation, and SSR</h2>
+  <p>Hooks emit the same cancelable before-events and completed lifecycle events as core controllers. Change callbacks receive the next value plus a detail object containing <code class="bs-code-inline">adapter: "react"</code>, a transition reason, and the source event when one exists.</p>
+  <ul>
+    <li>Prevent a <code class="bs-code-inline">bs:*:show</code>, <code class="bs-code-inline">bs:*:hide</code>, <code class="bs-code-inline">bs:tabs:change</code>, or button before-event to cancel its transition.</li>
+    <li>Hooks avoid DOM reads during render. Stable generated IDs come from React’s <code class="bs-code-inline">useId</code>, so server output can hydrate without replacing relationships.</li>
+    <li>DOM work such as native dialog synchronization, focus restoration, outside-click handling, and floating placement runs after mounting and cleans up with the component.</li>
+  </ul>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Observe transition detail</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React transition detail code example"><code data-language="jsx">const menu = useDropdown({
+  onOpenChange(nextOpen, detail) {
+    console.log(nextOpen, detail.adapter, detail.reason);
+  },
+});</code></pre></div>
+  <div class="docs-example-guidance" aria-label="React adapter guidance"><div><h3>One owner</h3><p>Use React hooks or core controllers on a subtree, never both. Hooks do not initialize or search the document.</p></div><div><h3>SSR</h3><p>Render-time work is DOM-free. Effects synchronize dialogs, focus, listeners, timers, and floating placement after mount.</p></div><div><h3>State</h3><p>Choose uncontrolled <code class="bs-code-inline">default*</code> options for local ownership or controlled values plus change callbacks for application ownership.</p></div><div><h3>Props</h3><p>Pass consumer handlers into a prop getter so the adapter can compose them. Preserve the returned refs, IDs, ARIA attributes, and keyboard handlers.</p></div></div>
+
+  <h2 id="react-adapter-components">Component guides</h2>
+  <p>Use the adapter reference for shared ownership rules, then use each component guide for copy-ready JSX and its component-specific semantics.</p>
+  <div class="docs-reference-grid">
+    <a href="/docs/components/accordion#accordion-react"><strong>Accordion</strong><span>Coordinate grouped collapse state.</span></a>
+    <a href="/docs/components/buttons#loading"><strong>Loading button</strong><span>Prevent repeats and expose busy state.</span></a>
+    <a href="/docs/interactivity/collapse"><strong>Collapse</strong><span>Bind one trigger to one panel.</span></a>
+    <a href="/docs/components/dialogs#dialogs-react"><strong>Dialog</strong><span>Synchronize native modal and focus behavior.</span></a>
+    <a href="/docs/interactivity/dropdown"><strong>Dropdown</strong><span>Compose keyboard-accessible action menus.</span></a>
+    <a href="/docs/components/forms/searchable-select#form-searchable-select-react"><strong>Searchable select</strong><span>Render filtered options from hook state.</span></a>
+    <a href="/docs/interactivity/tabs"><strong>Tabs</strong><span>Bind tab and panel relationships.</span></a>
+    <a href="/docs/components/toasts#toasts-react"><strong>Toast</strong><span>Use pause-aware autohide notifications.</span></a>
+    <a href="/docs/interactivity/tooltips-popovers#tooltips-popovers-react"><strong>Floating feedback</strong><span>Position tooltips and popovers.</span></a>
+  </div>
+
+  <div class="docs-api"><h2 id="react-adapter-api">Hook API</h2><div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Hook</th><th>Public contract</th></tr></thead><tbody>
+    <tr><td><code class="bs-code-inline">useAccordion</code></td><td>Open ID collection, single-open or always-open coordination, item options, and root props.</td></tr>
+    <tr><td><code class="bs-code-inline">useButton</code></td><td>Loading state, start/stop/toggle methods, busy semantics, and composed button props.</td></tr>
+    <tr><td><code class="bs-code-inline">useCollapse</code></td><td>Open state, stable panel ID, show/hide/toggle methods, and trigger/panel props.</td></tr>
+    <tr><td><code class="bs-code-inline">useDialog</code></td><td>Native modal synchronization, dismissal, Escape handling, focus restoration, and dialog props.</td></tr>
+    <tr><td><code class="bs-code-inline">useDropdown</code></td><td>Menu state, outside dismissal, action-menu keyboard behavior, focus restoration, and root/trigger/menu props.</td></tr>
+    <tr><td><code class="bs-code-inline">useCombobox</code></td><td>Query, selection, filtered options, active index, keyboard behavior, and input/listbox/option props.</td></tr>
+    <tr><td><code class="bs-code-inline">useTabs</code></td><td>Selected tab state, activation, roving focus, and synchronized tablist/tab/panel props.</td></tr>
+    <tr><td><code class="bs-code-inline">useToast</code></td><td>Open state, pause-aware autohide, trigger/dismiss props, and polite live-region defaults.</td></tr>
+    <tr><td><code class="bs-code-inline">useTooltip</code></td><td>Hover/focus visibility, Escape dismissal, placement, and descriptive relationships.</td></tr>
+    <tr><td><code class="bs-code-inline">usePopover</code></td><td>Activation state, outside/Escape dismissal, placement, and trigger/panel relationships.</td></tr>
+  </tbody></table></div></div>
+</section>
