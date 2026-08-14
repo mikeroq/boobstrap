@@ -42,8 +42,9 @@
     &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
   &lt;/footer&gt;
 &lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-focused-confirmation-without-a-header-close-button">Focused confirmation without a header close button</h3><p>Header controls and footers are optional independently. This destructive decision disables backdrop dismissal so an accidental outside click cannot discard the choice.</p><div class="docs-demo" id="dialog-confirmation" data-component-example="dialog-confirmation"><button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog" aria-expanded="false">Archive project</button>
-<dialog class="bs-dialog bs-dialog-sm" id="archive-dialog" data-bs-dialog="" data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description" data-bs-state="closed">
+<dialog class="bs-dialog bs-alert-dialog bs-alert-dialog-danger" id="archive-dialog" role="alertdialog" data-bs-dialog="" data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description" data-bs-state="closed">
   <header class="bs-dialog-header">
+    <span class="bs-alert-dialog-icon" aria-hidden="true">!</span>
     <h4 class="bs-dialog-title" id="archive-dialog-title">Archive this project?</h4>
     <p class="bs-dialog-description" id="archive-dialog-description">Members will lose access until the project is restored.</p>
   </header>
@@ -53,8 +54,9 @@
     <button class="bs-btn bs-btn-primary" type="button" data-bs-dialog-dismiss="">Archive project</button>
   </footer>
 </dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Static-backdrop confirmation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Static-backdrop confirmation code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog"&gt;Archive project&lt;/button&gt;
-&lt;dialog class="bs-dialog bs-dialog-sm" id="archive-dialog" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description"&gt;
+&lt;dialog class="bs-dialog bs-alert-dialog bs-alert-dialog-danger" id="archive-dialog" role="alertdialog" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description"&gt;
   &lt;header class="bs-dialog-header"&gt;
+    &lt;span class="bs-alert-dialog-icon" aria-hidden="true"&gt;!&lt;/span&gt;
     &lt;h4 class="bs-dialog-title" id="archive-dialog-title"&gt;Archive this project?&lt;/h4&gt;
     &lt;p class="bs-dialog-description" id="archive-dialog-description"&gt;Members will lose access until the project is restored.&lt;/p&gt;
   &lt;/header&gt;
@@ -169,6 +171,8 @@ const dialog = useDialog({ id: "vue-account-dialog" });
               <h3 id="dialogs-dialog-class-api">Dialog class API</h3>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code class="bs-code-inline">.bs-dialog</code></td><td>Creates the centered native modal surface and defines its width and maximum height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-alert-dialog</code> / <code class="bs-code-inline">.bs-alert-dialog-danger</code> / <code class="bs-code-inline">.bs-alert-dialog-success</code></td><td>Constrains a focused confirmation and selects contextual icon treatment.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-alert-dialog-icon</code></td><td>Places a compact contextual icon beside the alert-dialog title and description.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-dialog-header</code></td><td>Optional fixed header grid for the title, description, and close control.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-dialog-title</code></td><td>Names the dialog and connects through <code class="bs-code-inline">aria-labelledby</code>.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-dialog-description</code></td><td>Optional supporting copy connected through <code class="bs-code-inline">aria-describedby</code>.</td></tr>

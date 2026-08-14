@@ -65,6 +65,7 @@ const expectedFormExampleCounts = {
   "form-selects": 4,
   "form-searchable-select": 1,
   "form-date-time": 5,
+  "form-native-controls": 3,
   "form-passwords-masks": 4,
   "form-checks-radios": 4,
   "form-otp": 1,
@@ -77,6 +78,8 @@ const expectedTableExampleCounts = {
   "table-datatables": 1,
 };
 const promotedComponentCoverage = {
+  links: ["bs-link", "bs-link-muted", "bs-link-plain", "bs-link-subtle"],
+  "native-elements": ["bs-details"],
   navbar: [
     "bs-breadcrumb",
     "bs-nav",
@@ -87,6 +90,11 @@ const promotedComponentCoverage = {
     "bs-navbar",
     "bs-navbar-brand",
     "bs-navbar-link",
+    "bs-navbar-menu",
+    "bs-navbar-nav",
+    "bs-navbar-actions",
+    "bs-navbar-backdrop",
+    "bs-navbar-open",
     "bs-navbar-toggle",
     "bs-page-nav",
     "bs-page-nav-context",
@@ -130,7 +138,7 @@ const promotedComponentCoverage = {
     "bs-sidebar-trigger",
   ],
   cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-subtle"],
-  dialogs: ["bs-dialog", "bs-dialog-body", "bs-dialog-close", "bs-dialog-description", "bs-dialog-footer", "bs-dialog-fullscreen", "bs-dialog-header", "bs-dialog-height-lg", "bs-dialog-height-sm", "bs-dialog-lg", "bs-dialog-open", "bs-dialog-sm", "bs-dialog-title", "bs-dialog-xl"],
+  dialogs: ["bs-alert-dialog", "bs-alert-dialog-danger", "bs-alert-dialog-icon", "bs-alert-dialog-success", "bs-dialog", "bs-dialog-body", "bs-dialog-close", "bs-dialog-description", "bs-dialog-footer", "bs-dialog-fullscreen", "bs-dialog-header", "bs-dialog-height-lg", "bs-dialog-height-sm", "bs-dialog-lg", "bs-dialog-open", "bs-dialog-sm", "bs-dialog-title", "bs-dialog-xl"],
   drawers: ["bs-drawer", "bs-drawer-body", "bs-drawer-close", "bs-drawer-description", "bs-drawer-end", "bs-drawer-footer", "bs-drawer-header", "bs-drawer-lg", "bs-drawer-sm", "bs-drawer-start", "bs-drawer-title", "bs-drawer-xl"],
   "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
   tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
@@ -170,7 +178,8 @@ const promotedComponentCoverage = {
     "bs-table-hover",
     "bs-table-striped",
   ],
-  lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist"],
+  lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist", "bs-list-group", "bs-list-group-compact", "bs-list-group-content", "bs-list-group-description", "bs-list-group-flush", "bs-list-group-item", "bs-list-group-item-action", "bs-list-group-leading", "bs-list-group-title", "bs-list-group-trailing"],
+  avatars: ["bs-avatar", "bs-avatar-excess", "bs-avatar-fallback", "bs-avatar-group", "bs-avatar-image", "bs-avatar-lg", "bs-avatar-sm", "bs-avatar-status", "bs-avatar-status-danger", "bs-avatar-status-warning", "bs-avatar-xl"],
   accordion: [
     "bs-accordion",
     "bs-accordion-item",
@@ -207,6 +216,8 @@ const promotedComponentCoverage = {
     "bs-skeleton-pulse",
     "bs-skeleton-wave",
   ],
+  "empty-state": ["bs-empty", "bs-empty-actions", "bs-empty-compact", "bs-empty-description", "bs-empty-icon", "bs-empty-title"],
+  "form-native-controls": ["bs-color", "bs-file", "bs-file-lg", "bs-file-sm", "bs-range"],
   toasts: [
     "bs-toast-region",
     "bs-toast-region-bottom",
@@ -223,8 +234,8 @@ const promotedComponentCoverage = {
   "tooltips-popovers": ["bs-tooltip", "bs-popover", "bs-popover-header", "bs-popover-body", "bs-floating-arrow"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 162) {
-  throw new Error(`Expected documentation coverage for 162 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 208) {
+  throw new Error(`Expected documentation coverage for 208 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -234,12 +245,15 @@ const documentationQualityMinimums = {
   theming: { examples: 2, code: 6, guidance: true },
   typescript: { code: 7, guidance: true },
   typography: { examples: 2, code: 3, guidance: true },
+  links: { examples: 3, code: 3, guidance: true },
+  "native-elements": { examples: 4, code: 4, guidance: true },
   layout: { examples: 2, code: 3, guidance: true },
   "responsive-composition": { examples: 1, code: 1, guidance: true },
   buttons: { examples: 8, code: 9 },
   navbar: { examples: 4, code: 4, guidance: true },
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
+  avatars: { examples: 3, code: 3, guidance: true },
   cards: { examples: 5, code: 5, guidance: true },
   dialogs: { examples: 4, code: 8, guidance: true },
   drawers: { examples: 4, code: 6, guidance: true },
@@ -248,12 +262,13 @@ const documentationQualityMinimums = {
   "table-styles": { examples: 3, code: 3, guidance: true },
   "table-pagination": { examples: 2, code: 2, guidance: true },
   "table-datatables": { examples: 1, code: 3, guidance: true },
-  lists: { examples: 2, code: 2, guidance: true },
+  lists: { examples: 3, code: 3, guidance: true },
   alerts: { examples: 3, code: 3, guidance: true },
   accordion: { examples: 2, code: 8, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
   progress: { examples: 3, code: 3, guidance: true },
   skeletons: { examples: 4, code: 5, guidance: true },
+  "empty-state": { examples: 3, code: 3, guidance: true },
   toasts: { examples: 2, code: 5, guidance: true },
   forms: { examples: 2, code: 2 },
   "form-inputs": { examples: 7, code: 7, guidance: true },
@@ -261,6 +276,7 @@ const documentationQualityMinimums = {
   "form-selects": { examples: 4, code: 4 },
   "form-searchable-select": { examples: 1, code: 6 },
   "form-date-time": { examples: 5, code: 5 },
+  "form-native-controls": { examples: 3, code: 3, guidance: true },
   "form-passwords-masks": { examples: 4, code: 6 },
   "form-checks-radios": { examples: 4, code: 4 },
   "form-otp": { examples: 1, code: 2 },
@@ -284,6 +300,7 @@ const adapterComponentCoverage = {
   collapse: ["useCollapse"],
   dialogs: ["useDialog"],
   dropdown: ["useDropdown"],
+  navbar: ["useNavbar", "bsNavbar"],
   "form-searchable-select": ["useCombobox"],
   tabs: ["useTabs"],
   toasts: ["useToast"],

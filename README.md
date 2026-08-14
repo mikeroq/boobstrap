@@ -15,7 +15,7 @@ Day-to-day work is integrated through the `dev` branch and previewed with the fr
 
 The site imports `@boobstrap/boobstrap@0.5.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/`, the React documentation application at `/docs`, 50 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
+Vite serves the landing page at `/`, the React documentation application at `/docs`, 55 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
 
 The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles. The build also verifies that the class reference matches the installed framework stylesheet; after changing the framework pin, run `npm run docs:sync-reference` to regenerate that committed reference.
 
