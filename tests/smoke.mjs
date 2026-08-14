@@ -1299,6 +1299,39 @@ try {
         }
       }
 
+      if (["react-adapter", "vue-adapter"].includes(config.sectionId)) {
+        const adapter = config.sectionId.replace("-adapter", "");
+        const preview = routePage.locator(`[data-component-example="${adapter}-adapter-collapse"]`);
+        const code = preview.locator("xpath=following-sibling::*[1]");
+        const trigger = preview.getByRole("button", { name: "Account details", exact: true });
+        const panel = preview.locator("#account-details");
+        const codeSource = (await code.locator("pre code").textContent()) ?? "";
+        if (await preview.count() !== 1 || !codeSource.includes("Account details") || !codeSource.includes("Profile and security settings.")) {
+          failures.push(`desktop: ${adapter} adapter preview content does not match its adjacent component code`);
+        }
+        const initialContract = await routePage.evaluate(({ sectionId }) => {
+          const root = document.querySelector(`[data-component-example="${sectionId}"]`);
+          const button = root?.querySelector("button[aria-controls]");
+          const controlledPanel = button ? root.querySelector(`#${CSS.escape(button.getAttribute("aria-controls"))}`) : null;
+          return {
+            expanded: button?.getAttribute("aria-expanded"),
+            hidden: controlledPanel?.hidden,
+            state: controlledPanel?.dataset.bsState,
+          };
+        }, { sectionId: `${adapter}-adapter-collapse` });
+        if (initialContract.expanded !== "true" || initialContract.hidden !== false || initialContract.state !== "open" || !codeSource.includes("defaultOpen: true")) {
+          failures.push(`desktop: ${adapter} adapter preview does not begin in the state produced by useCollapse`);
+        }
+        await trigger.click();
+        await panel.waitFor({ state: "hidden" });
+        if (await trigger.getAttribute("aria-expanded") !== "false" || await panel.getAttribute("data-bs-state") !== "closed") {
+          failures.push(`desktop: ${adapter} adapter preview does not demonstrate the adjacent collapse behavior`);
+        }
+        if (adapter === "vue" && codeSource.includes('import "@boobstrap/boobstrap";')) {
+          failures.push("desktop: Vue adapter component example imports a second behavior owner");
+        }
+      }
+
       if (config.sectionId === "utilities") {
         const source = (await routePage.locator("#utilities").textContent()) ?? "";
         for (const contract of [".bs-sm-block", ".bs-md-flex-row", ".bs-lg-order-last"]) {

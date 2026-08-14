@@ -10,12 +10,17 @@ import { useCollapse } from "@boobstrap/react";</code></pre></div>
   <div class="docs-note bs-alert bs-alert-primary"><span><strong>Use one behavior owner.</strong> Do not call <code class="bs-code-inline">initBoobstrap</code> on React-owned markup. The hook supplies state, ARIA attributes, event handlers, and refs; your JSX supplies the semantic elements and <code class="bs-code-inline">bs-*</code> classes.</span></div>
 
   <h2 id="react-adapter-compose">Compose a component</h2>
-  <p>Prop getters merge consumer handlers with the adapter contract. Spread them onto the intended semantic element, and pass custom props into a getter when they must be composed with adapter behavior.</p>
-  <div class="docs-demo" data-component-example="react-adapter-contract"><div class="bs-card bs-card-subtle bs-card-body"><strong>Consumer-owned JSX</strong><p class="bs-text-muted bs-mb-0">Hooks return state, transition methods, stable IDs, and prop getters without rendering a component tree.</p></div></div>
+  <p>Prop getters merge consumer handlers with the adapter contract. The preview is the rendered result of the JSX directly below it: the hook supplies the button type, relationship, expanded state, panel ID, visibility, and public state while your component supplies the content and classes.</p>
+  <div class="docs-demo interaction-demo" data-component-example="react-adapter-collapse">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="account-details" aria-expanded="true">Account details</button>
+    <div class="bs-collapse bs-card bs-mt-4" id="account-details" data-bs-state="open">
+      <div class="bs-card-body">Profile and security settings.</div>
+    </div>
+  </div>
   <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · Collapse hook</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSX · React Collapse hook code example"><code data-language="jsx">import { useCollapse } from "@boobstrap/react";
 
 export function Details() {
-  const details = useCollapse({ id: "account-details" });
+  const details = useCollapse({ id: "account-details", defaultOpen: true });
 
   return (
     &lt;&gt;
@@ -23,7 +28,7 @@ export function Details() {
         {...details.getTriggerProps()}&gt;
         Account details
       &lt;/button&gt;
-      &lt;div className="bs-collapse bs-card"
+      &lt;div className="bs-collapse bs-card bs-mt-4"
         {...details.getPanelProps()}&gt;
         &lt;div className="bs-card-body"&gt;Profile and security settings.&lt;/div&gt;
       &lt;/div&gt;
