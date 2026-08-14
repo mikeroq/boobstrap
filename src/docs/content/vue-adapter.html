@@ -8,17 +8,26 @@
 import { useCollapse } from "@boobstrap/vue";</code></pre></div>
   <div class="docs-note bs-alert bs-alert-primary"><span><strong>Use one behavior owner.</strong> Do not call <code class="bs-code-inline">initBoobstrap</code> on Vue-owned markup. A composable supplies reactive state, ARIA attributes, event handlers, and template refs; your template supplies semantic elements and <code class="bs-code-inline">bs-*</code> classes.</span></div>
   <h3 id="vue-adapter-collapse">Compose a collapse</h3>
-  <div class="docs-demo" data-component-example="vue-adapter-contract"><div class="bs-card bs-card-subtle bs-card-body"><strong>Consumer-owned markup</strong><p class="bs-text-muted bs-mb-0">The composable supplies state, events, IDs, and ARIA props; your template chooses the elements and classes.</p></div></div>
+  <p>The preview is the rendered result of the Vue single-file component directly below it. The composable supplies the button type, relationship, expanded state, panel ID, visibility, and public state while your template supplies the content and classes.</p>
+  <div class="docs-demo interaction-demo" data-component-example="vue-adapter-collapse">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="account-details" aria-expanded="true">Account details</button>
+    <div class="bs-collapse bs-card bs-mt-4" id="account-details" data-bs-state="open">
+      <div class="bs-card-body">Profile and security settings.</div>
+    </div>
+  </div>
   <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Vue · Collapse composable</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Vue · Collapse composable code example"><code data-language="html">&lt;script setup&gt;
-import "@boobstrap/boobstrap";
 import { useCollapse } from "@boobstrap/vue";
 
-const details = useCollapse({ id: "details" });
+const details = useCollapse({ id: "account-details", defaultOpen: true });
 &lt;/script&gt;
 
 &lt;template&gt;
-  &lt;button class="bs-btn" v-bind="details.getTriggerProps()"&gt;Details&lt;/button&gt;
-  &lt;div class="bs-collapse" v-bind="details.getPanelProps()"&gt;Progressive content&lt;/div&gt;
+  &lt;button class="bs-btn bs-btn-secondary" v-bind="details.getTriggerProps()"&gt;
+    Account details
+  &lt;/button&gt;
+  &lt;div class="bs-collapse bs-card bs-mt-4" v-bind="details.getPanelProps()"&gt;
+    &lt;div class="bs-card-body"&gt;Profile and security settings.&lt;/div&gt;
+  &lt;/div&gt;
 &lt;/template&gt;</code></pre></div>
   <h3 id="vue-adapter-accordion">Coordinate an accordion</h3>
   <p>Use <code class="bs-code-inline">useAccordion</code> for group state and pass each item's options into <code class="bs-code-inline">useCollapse</code>. The default keeps one item open; set <code class="bs-code-inline">alwaysOpen: true</code> when multiple panels may remain visible.</p>
