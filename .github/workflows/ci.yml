@@ -38,8 +38,14 @@ jobs:
     steps:
       - name: Check out repository
         uses: actions/checkout@v7
-      - name: Build production container
-        run: docker build --tag boobstrap-site:test .
+      - name: Build site container
+        shell: bash
+        run: |
+          dockerfile="Dockerfile"
+          if [[ "${GITHUB_BASE_REF:-}" == "dev" || "$GITHUB_REF" == "refs/heads/dev" ]]; then
+            dockerfile="Dockerfile.dev"
+          fi
+          docker build --file "$dockerfile" --tag boobstrap-site:test .
       - name: Verify generated social card
         shell: bash
         run: |

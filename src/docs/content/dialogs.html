@@ -10,7 +10,7 @@
   <header class="bs-dialog-header">
     <h4 class="bs-dialog-title" id="profile-dialog-title">Edit profile</h4>
     <p class="bs-dialog-description" id="profile-dialog-description">Update the information visible to your workspace.</p>
-    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close profile dialog">×</button>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close profile dialog"><i data-lucide="x" class="bs-icon" aria-hidden="true"></i></button>
   </header>
   <div class="bs-dialog-body">
     <form class="bs-stack bs-gap-4">
@@ -44,7 +44,7 @@
 &lt;/dialog&gt;</code></pre></div><h3 aria-level="2" id="dialogs-focused-confirmation-without-a-header-close-button">Focused confirmation without a header close button</h3><p>Header controls and footers are optional independently. This destructive decision disables backdrop dismissal so an accidental outside click cannot discard the choice.</p><div class="docs-demo" id="dialog-confirmation" data-component-example="dialog-confirmation"><button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog" aria-expanded="false">Archive project</button>
 <dialog class="bs-dialog bs-alert-dialog bs-alert-dialog-danger" id="archive-dialog" role="alertdialog" data-bs-dialog="" data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description" data-bs-state="closed">
   <header class="bs-dialog-header">
-    <span class="bs-alert-dialog-icon" aria-hidden="true"><svg class="bs-icon" viewBox="0 0 24 24"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg></span>
+    <span class="bs-alert-dialog-icon" aria-hidden="true"><i data-lucide="triangle-alert" class="bs-icon" aria-hidden="true"></i></span>
     <h4 class="bs-dialog-title" id="archive-dialog-title">Archive this project?</h4>
     <p class="bs-dialog-description" id="archive-dialog-description">Members will lose access until the project is restored.</p>
   </header>
@@ -56,7 +56,7 @@
 </dialog></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Static-backdrop confirmation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Static-backdrop confirmation code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" aria-controls="archive-dialog"&gt;Archive project&lt;/button&gt;
 &lt;dialog class="bs-dialog bs-alert-dialog bs-alert-dialog-danger" id="archive-dialog" role="alertdialog" data-bs-dialog data-bs-dialog-close-on-backdrop="false" aria-labelledby="archive-dialog-title" aria-describedby="archive-dialog-description"&gt;
   &lt;header class="bs-dialog-header"&gt;
-    &lt;span class="bs-alert-dialog-icon" aria-hidden="true"&gt;&lt;svg class="bs-icon" viewBox="0 0 24 24"&gt;&lt;path d="M12 3 2 21h20L12 3Z"&gt;&lt;/path&gt;&lt;path d="M12 9v5M12 18h.01"&gt;&lt;/path&gt;&lt;/svg&gt;&lt;/span&gt;
+    &lt;span class="bs-alert-dialog-icon" aria-hidden="true"&gt;&lt;i data-lucide="triangle-alert" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/span&gt;
     &lt;h4 class="bs-dialog-title" id="archive-dialog-title"&gt;Archive this project?&lt;/h4&gt;
     &lt;p class="bs-dialog-description" id="archive-dialog-description"&gt;Members will lose access until the project is restored.&lt;/p&gt;
   &lt;/header&gt;
@@ -69,7 +69,7 @@
 <dialog class="bs-dialog bs-dialog-height-sm" id="release-dialog" data-bs-dialog="" aria-labelledby="release-dialog-title" data-bs-state="closed">
   <header class="bs-dialog-header">
     <h4 class="bs-dialog-title" id="release-dialog-title">Release checklist</h4>
-    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close release checklist">×</button>
+    <button class="bs-dialog-close" type="button" data-bs-dialog-dismiss="" aria-label="Close release checklist"><i data-lucide="x" class="bs-icon" aria-hidden="true"></i></button>
   </header>
   <div class="bs-dialog-body">
     <ul class="bs-checklist"><li>Accessibility review</li><li>Responsive layout review</li><li>Cross-browser verification</li><li>Migration notes</li><li>Package integrity</li><li>Security scan</li><li>Performance budget</li><li>Rollback plan</li><li>Stakeholder approval</li><li>Production monitoring</li></ul>
