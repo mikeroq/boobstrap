@@ -1,4 +1,28 @@
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
+import {
+  BookOpen,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Diamond,
+  Ellipsis,
+  Heart,
+  Info,
+  LayoutDashboard,
+  Menu,
+  PanelsTopLeft,
+  Plus,
+  Redo2,
+  Search,
+  Settings,
+  Star,
+  Trash2,
+  TriangleAlert,
+  Undo2,
+  Upload,
+  X,
+  createIcons,
+} from "lucide";
 import { initDataTablesDemo } from "../datatables-demo.js";
 import { highlightCodeBlocks, highlightCodeElement } from "../syntax-highlighting.js";
 
@@ -7,6 +31,29 @@ const themeAxes = {
   theme: ["dark", "light"],
   palette: ["rose", "violet", "blue", "teal", "amber"],
   radius: ["small", "normal", "large", "rounded", "square"],
+};
+const docsIcons = {
+  BookOpen,
+  Check,
+  ChevronDown,
+  ChevronRight,
+  Diamond,
+  Ellipsis,
+  Heart,
+  Info,
+  LayoutDashboard,
+  Menu,
+  PanelsTopLeft,
+  Plus,
+  Redo2,
+  Search,
+  Settings,
+  Star,
+  Trash2,
+  TriangleAlert,
+  Undo2,
+  Upload,
+  X,
 };
 
 const titleCase = (value) => value[0].toUpperCase() + value.slice(1);
@@ -266,6 +313,7 @@ const setupHeadingAnchors = (root, outline) => {
 export const initDocsPageRuntime = (root, { route, outline }) => {
   if (!root) return () => {};
   const cleanups = [];
+  createIcons({ icons: docsIcons, root });
   setupHeadingAnchors(root, outline);
   cleanups.push(setupPreviewThemes(root));
   cleanups.push(setupThemeConfigurator(root));

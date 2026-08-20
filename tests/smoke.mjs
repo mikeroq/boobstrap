@@ -1,5 +1,5 @@
 import { spawn } from "node:child_process";
-import { mkdir, readFile } from "node:fs/promises";
+import { mkdir, readFile, readdir } from "node:fs/promises";
 import { createServer } from "node:net";
 import { chromium } from "playwright";
 import { docsPages } from "../src/docs-pages.js";
@@ -38,6 +38,14 @@ const dimensionsFor = (page) => page.evaluate(() => ({
 
 const browser = await chromium.launch({ headless: true });
 const failures = [];
+const docsContentFiles = await readdir("src/docs/content");
+const docsWithIntentionalDiagrams = new Set(["native-elements.html"]);
+for (const file of docsContentFiles.filter((name) => name.endsWith(".html"))) {
+  const source = await readFile(`src/docs/content/${file}`, "utf8");
+  if (!docsWithIntentionalDiagrams.has(file) && /(?:<svg\b|&lt;svg\b)/iu.test(source)) {
+    failures.push(`${file}: hand-authored SVG found; documentation interface icons must use Lucide`);
+  }
+}
 const frameworkCss = await readFile("node_modules/@boobstrap/boobstrap/dist/boobstrap.css", "utf8");
 const expectedClasses = new Set(
   [...frameworkCss.matchAll(/\.([a-z][a-z0-9-]*)/gi)]
@@ -692,6 +700,12 @@ try {
       if (await routePage.locator(".docs-header.bs-navbar").count() !== 1 || await routePage.locator(".docs-nav a:not(.bs-nav-link)").count() !== 0) {
         failures.push(`${viewport.name}: ${config.path} is not using the framework navigation components`);
       }
+      if (await routePage.locator(".docs-content [data-lucide]:not(svg)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a Lucide marker that was not rendered`);
+      }
+      if (await routePage.locator(".docs-header svg:not(.docs-brand-mark):not(.lucide), .docs-nav svg:not(.lucide), .docs-component-pagination svg:not(.lucide), .docs-footer svg:not(.lucide)").count() !== 0) {
+        failures.push(`${viewport.name}: ${config.path} has a hand-authored interface icon in the documentation shell`);
+      }
       if (await routePage.locator('.docs-code-block:not(.bs-code-window), .docs-code-label:not(.bs-code-header), .docs-code-label button:not(.bs-code-action), .docs-code-block pre:not(.bs-code-body), pre.bs-code-body:not([tabindex="0"]), pre.bs-code-body:not([aria-label])').count() !== 0) {
         failures.push(`${viewport.name}: ${config.path} has a code sample outside the framework code components`);
       }
@@ -1061,7 +1075,7 @@ try {
 
       if (config.sectionId === "installation") {
         await routePage.getByRole("tab", { name: "pnpm", exact: true }).click();
-        if (await routePage.locator("[data-package-command-output]").textContent() !== "pnpm add @boobstrap/boobstrap") {
+        if (await routePage.locator("[data-package-command-output]").textContent() !== "pnpm add @boobstrap/boobstrap lucide") {
           failures.push("desktop: installation package tabs did not update");
         }
         if (await routePage.locator("[data-package-command-output]").getAttribute("data-highlight-language") !== "bash") {

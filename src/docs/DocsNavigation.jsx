@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { Link } from "react-router-dom";
+import { ChevronDown, Search, X } from "lucide-react";
 import { docsPages, normalizeDocsPath } from "../docs-pages.js";
 
 const navLabels = {
@@ -72,7 +73,7 @@ function DocsDisclosure({ family, activePath, query, open, onToggle, onPreload }
           aria-label={`${expanded ? "Hide" : "Show"} ${family.parent.title} pages`}
           onClick={() => onToggle(!open)}
         >
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m5 6 3 3 3-3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+          <ChevronDown width="16" height="16" aria-hidden="true" />
         </button>
       </div>
       <div className="docs-nav-submenu" id={family.id} data-nav-submenu hidden={!expanded}>
@@ -136,11 +137,11 @@ export function DocsNavigation({ pathname, onPreload }) {
         <div className="docs-sidebar-mobile-header">
           <strong>Documentation</strong>
           <button className="docs-sidebar-close docs-icon-button" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+            <X width="20" height="20" aria-hidden="true" />
           </button>
         </div>
         <div className="docs-nav-search">
-          <svg className="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
+          <Search className="bs-icon" aria-hidden="true" />
           <label className="bs-sr-only" htmlFor="docs-nav-filter">Filter documentation sections</label>
           <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autoComplete="off" data-nav-filter value={filter} onChange={(event) => setFilter(event.target.value)} onKeyDown={handleFilterKeyDown} />
           <kbd>/</kbd>
