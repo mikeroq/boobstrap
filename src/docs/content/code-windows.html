@@ -23,7 +23,7 @@ npm run build</code></pre>
 npm run build&lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;</code></pre></div><h3 aria-level="2" id="code-windows-tabbed-source-window">Tabbed source window</h3><p>Use code tabs and panels for equivalent implementations or languages. The tab controller keeps selection, focus, and panel visibility synchronized.</p><div class="docs-demo" id="code-window-source" data-component-example="code-window-source"><div class="bs-code-window">
   <div class="bs-code-header"><span>Install</span><button class="bs-code-action" type="button">Copy</button></div>
-  <div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs="">
+  <div class="bs-code-tabs bs-code-tabs-underline" role="tablist" aria-label="Package manager" data-bs-tabs="">
     <button class="bs-code-tab" id="code-npm-tab" type="button" role="tab" aria-controls="code-npm-panel" aria-selected="true" tabindex="0" data-bs-state="active">npm</button>
     <button class="bs-code-tab" id="code-pnpm-tab" type="button" role="tab" aria-controls="code-pnpm-panel" aria-selected="false" tabindex="-1" data-bs-state="inactive">pnpm</button>
   </div>
@@ -34,7 +34,7 @@ npm run build&lt;/code&gt;&lt;/pre&gt;
     &lt;span&gt;Install&lt;/span&gt;
     &lt;button class="bs-code-action" type="button"&gt;Copy&lt;/button&gt;
   &lt;/div&gt;
-  &lt;div class="bs-code-tabs" role="tablist" aria-label="Package manager" data-bs-tabs&gt;
+  &lt;div class="bs-code-tabs bs-code-tabs-underline" role="tablist" aria-label="Package manager" data-bs-tabs&gt;
     &lt;button class="bs-code-tab" id="npm-tab" type="button" role="tab"
       aria-controls="npm-panel" aria-selected="true"&gt;npm&lt;/button&gt;
     &lt;button class="bs-code-tab" id="pnpm-tab" type="button" role="tab"
@@ -56,6 +56,7 @@ npm run build&lt;/code&gt;&lt;/pre&gt;
                 <tr><td><code class="bs-code-inline">.bs-code-body</code></td><td>Scrollable, formatted code content.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-code-inline</code></td><td>Inline code inside prose, tables, and labels.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-code-tabs</code></td><td>Tablist layout for implementation, package-manager, or language variants.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-code-tabs-underline</code></td><td>Uses a full-width underline for the selected tab instead of pill-shaped states.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-code-tab</code></td><td>Individual variant tab with selected, hover, and keyboard-focus states.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-code-panel</code></td><td>Variant panel that hides cleanly with the native <code class="bs-code-inline">hidden</code> attribute and resets nested code-body margins.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-code-tag</code></td><td>HTML tags and selectors.</td></tr>

@@ -137,10 +137,10 @@ const promotedComponentCoverage = {
     "bs-sidebar-toc",
     "bs-sidebar-trigger",
   ],
-  cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-subtle"],
+  cards: ["bs-card-action", "bs-card-compact", "bs-card-content", "bs-card-description", "bs-card-footer", "bs-card-header", "bs-card-link", "bs-card-separated", "bs-card-subtle"],
   dialogs: ["bs-alert-dialog", "bs-alert-dialog-danger", "bs-alert-dialog-icon", "bs-alert-dialog-success", "bs-dialog", "bs-dialog-body", "bs-dialog-close", "bs-dialog-description", "bs-dialog-footer", "bs-dialog-fullscreen", "bs-dialog-header", "bs-dialog-height-lg", "bs-dialog-height-sm", "bs-dialog-lg", "bs-dialog-open", "bs-dialog-sm", "bs-dialog-title", "bs-dialog-xl"],
   drawers: ["bs-drawer", "bs-drawer-body", "bs-drawer-close", "bs-drawer-description", "bs-drawer-end", "bs-drawer-footer", "bs-drawer-header", "bs-drawer-lg", "bs-drawer-sm", "bs-drawer-start", "bs-drawer-title", "bs-drawer-xl"],
-  "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs"],
+  "code-windows": ["bs-code-action", "bs-code-header", "bs-code-inline", "bs-code-panel", "bs-code-tab", "bs-code-tabs", "bs-code-tabs-underline"],
   tables: ["bs-table", "bs-table-cell-numeric", "bs-table-responsive"],
   "table-fundamentals": [
     "bs-table",
@@ -232,17 +232,18 @@ const promotedComponentCoverage = {
     "bs-toast-dismiss",
   ],
   "tooltips-popovers": ["bs-tooltip", "bs-popover", "bs-popover-header", "bs-popover-body", "bs-floating-arrow"],
+  theming: ["bs-scrollbar"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 208) {
-  throw new Error(`Expected documentation coverage for 208 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 211) {
+  throw new Error(`Expected documentation coverage for 211 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
   "whats-new": { code: 2, guidance: true },
   installation: { code: 5, guidance: true },
   starter: { code: 3, guidance: true },
-  theming: { examples: 2, code: 6, guidance: true },
+  theming: { examples: 3, code: 7, guidance: true },
   typescript: { code: 7, guidance: true },
   typography: { examples: 2, code: 3, guidance: true },
   links: { examples: 3, code: 3, guidance: true },
@@ -826,17 +827,23 @@ try {
           const footer = card.querySelector(".bs-card-footer");
           return {
             cardDisplay: getComputedStyle(card).display,
+            separated: card.classList.contains("bs-card-separated"),
             headerDisplay: getComputedStyle(header).display,
+            headerBorder: getComputedStyle(header).borderBottomStyle,
             actionArea: getComputedStyle(action).gridArea,
             footerDisplay: getComputedStyle(footer).display,
+            footerBorder: getComputedStyle(footer).borderTopStyle,
             contentPaddingInline: getComputedStyle(content).paddingInline,
             footerPaddingInline: getComputedStyle(footer).paddingInline,
           };
         });
         if (structuredCardLayout.cardDisplay !== "flex"
+          || !structuredCardLayout.separated
           || structuredCardLayout.headerDisplay !== "grid"
+          || structuredCardLayout.headerBorder === "none"
           || structuredCardLayout.actionArea !== "action"
           || structuredCardLayout.footerDisplay !== "flex"
+          || structuredCardLayout.footerBorder === "none"
           || structuredCardLayout.contentPaddingInline === "0px"
           || structuredCardLayout.contentPaddingInline !== structuredCardLayout.footerPaddingInline) {
           failures.push(`${viewport.name}: structured card layout did not render correctly (${JSON.stringify(structuredCardLayout)})`);
@@ -1091,7 +1098,7 @@ try {
         if (await configurator.count() !== 1) failures.push("desktop: theming guide is missing its configurator");
         if (await configurator.locator('[data-theme-axis="theme"]').count() !== 2
           || await configurator.locator('[data-theme-axis="palette"]').count() !== 5
-          || await configurator.locator('[data-theme-axis="radius"]').count() !== 2) {
+          || await configurator.locator('[data-theme-axis="radius"]').count() !== 4) {
           failures.push("desktop: theming configurator does not expose every supported option");
         }
 
@@ -1143,6 +1150,14 @@ try {
 
         await configurator.locator('[data-theme-axis="theme"][data-theme-value="light"]').click();
         await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').click();
+        const configuredRadii = {};
+        for (const radius of ["small", "normal", "large"]) {
+          await configurator.locator(`[data-theme-axis="radius"][data-theme-value="${radius}"]`).click();
+          configuredRadii[radius] = await configurator.evaluate((element) => Number.parseFloat(getComputedStyle(element).getPropertyValue("--bs-radius-lg")));
+        }
+        if (!(configuredRadii.small < configuredRadii.normal && configuredRadii.normal < configuredRadii.large)) {
+          failures.push(`desktop: theming radius presets are not ordered from small through large (${JSON.stringify(configuredRadii)})`);
+        }
         await configurator.locator('[data-theme-axis="radius"][data-theme-value="square"]').click();
 
         const configuredTheme = await configurator.evaluate((element) => ({
@@ -1159,7 +1174,7 @@ try {
           failures.push(`desktop: theming configurator did not resolve palette and radius tokens (${JSON.stringify({ initialThemeTokens, configuredTheme })})`);
         }
         if (await configurator.locator('[data-theme-axis="palette"][data-theme-value="blue"]').getAttribute("aria-pressed") !== "true"
-          || await configurator.locator('[data-theme-axis="radius"][data-theme-value="rounded"]').getAttribute("aria-pressed") !== "false") {
+          || await configurator.locator('[data-theme-axis="radius"][data-theme-value="normal"]').getAttribute("aria-pressed") !== "false") {
           failures.push("desktop: theming configurator did not expose its selected state accessibly");
         }
         if ((await configurator.locator("[data-theme-summary]").textContent())?.trim() !== "Light · Blue · Square") {
@@ -1176,8 +1191,29 @@ try {
         }
 
         const themingText = await routePage.locator("#theming").textContent();
-        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "--bs-color-primary-contrast", "--bs-color-focus-ring"]) {
+        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "data-bs-scrollbars", "--bs-color-primary-contrast", "--bs-color-focus-ring", "--bs-scrollbar-thumb", ".bs-scrollbar"]) {
           if (!themingText.includes(publicContract)) failures.push(`desktop: theming guide is missing ${publicContract}`);
+        }
+        const scrollbarStyle = await routePage.locator(".docs-scrollbar-demo.bs-scrollbar").evaluate((element) => ({
+          color: getComputedStyle(element).scrollbarColor,
+          overflow: getComputedStyle(element).overflowY,
+        }));
+        if (scrollbarStyle.color === "auto" || scrollbarStyle.overflow !== "auto") {
+          failures.push(`desktop: themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
+        }
+      }
+
+      if (config.sectionId === "code-windows") {
+        const underlineTabs = routePage.locator("#code-window-source .bs-code-tabs-underline");
+        const underlineStyle = await underlineTabs.locator('[role="tab"][aria-selected="true"]').evaluate((element) => {
+          const after = getComputedStyle(element, "::after");
+          return {
+            radius: getComputedStyle(element).borderRadius,
+            indicator: after.backgroundColor,
+          };
+        });
+        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)") {
+          failures.push(`${viewport.name}: code tab underline variant did not render correctly (${JSON.stringify(underlineStyle)})`);
         }
       }
 
@@ -1308,6 +1344,11 @@ try {
         if (await popoverTrigger.getAttribute("aria-expanded") !== "true" || !await routePage.locator("body > .bs-popover").isVisible()) {
           failures.push("desktop: popover did not synchronize its generated panel");
         }
+        await routePage.evaluate(() => window.dispatchEvent(new Event("scroll")));
+        if (await popoverTrigger.getAttribute("aria-expanded") !== "false" || await routePage.locator("body > .bs-popover").isVisible()) {
+          failures.push("desktop: popover did not dismiss when the page scrolled");
+        }
+        await popoverTrigger.click();
         await popoverTrigger.press("Escape");
         if (await popoverTrigger.getAttribute("aria-expanded") !== "false") failures.push("desktop: popover did not dismiss with Escape");
       }

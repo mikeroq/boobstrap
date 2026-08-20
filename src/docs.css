@@ -854,6 +854,12 @@ body.docs-page {
 
 .docs-theme-actions .bs-btn-secondary { background: var(--bs-color-surface-hover); }
 
+.docs-scrollbar-demo {
+  max-block-size: 12rem;
+  overflow: auto;
+  padding-inline-end: var(--bs-space-3);
+}
+
 .docs-theme-sample-card {
   align-self: center;
   background: var(--bs-color-surface-raised);
@@ -1134,7 +1140,7 @@ body.docs-page {
   .docs-theme-control-grid { grid-template-columns: 1fr; }
   .docs-theme-control-palette { grid-column: auto; grid-row: auto; }
   .docs-theme-stage { padding: var(--bs-space-4); }
-  .docs-theme-stage-copy { padding: var(--bs-space-2); }
+.docs-theme-stage-copy { padding: var(--bs-space-2); }
   .docs-color-token-table :is(th, td):first-child {
     width: 11rem;
     min-width: 11rem;
