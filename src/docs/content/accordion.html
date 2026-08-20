@@ -20,7 +20,7 @@
       <section class="bs-accordion-item">
         <h3 class="bs-accordion-header">
           <button class="bs-accordion-trigger" id="accordion-demo-trigger-account" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-account" aria-expanded="true">
-            Account settings <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+            Account settings <svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
         </h3>
         <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-account" role="region" aria-labelledby="accordion-demo-trigger-account">
@@ -30,7 +30,7 @@
       <section class="bs-accordion-item">
         <h3 class="bs-accordion-header">
           <button class="bs-accordion-trigger" id="accordion-demo-trigger-billing" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-billing" aria-expanded="false">
-            Billing and invoices <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+            Billing and invoices <svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
         </h3>
         <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-billing" role="region" aria-labelledby="accordion-demo-trigger-billing" hidden="">
@@ -40,7 +40,7 @@
       <section class="bs-accordion-item">
         <h3 class="bs-accordion-header">
           <button class="bs-accordion-trigger" id="accordion-demo-trigger-security" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-security" aria-expanded="false">
-            Security alerts <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+            Security alerts <svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
         </h3>
         <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-security" role="region" aria-labelledby="accordion-demo-trigger-security" hidden="">
@@ -59,7 +59,7 @@
         data-bs-toggle="collapse" aria-controls="account-panel"
         aria-expanded="true"&gt;
         Account settings
-        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6"&gt;&lt;/path&gt;&lt;/svg&gt;
       &lt;/button&gt;
     &lt;/h2&gt;
     &lt;div class="bs-collapse bs-accordion-panel" id="account-panel"
@@ -74,7 +74,7 @@
         data-bs-toggle="collapse" aria-controls="billing-panel"
         aria-expanded="false"&gt;
         Billing and invoices
-        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6"&gt;&lt;/path&gt;&lt;/svg&gt;
       &lt;/button&gt;
     &lt;/h2&gt;
     &lt;div class="bs-collapse bs-accordion-panel" id="billing-panel"
@@ -99,7 +99,7 @@
       <section class="bs-accordion-item">
         <h3 class="bs-accordion-header">
           <button class="bs-accordion-trigger" id="accordion-demo-trigger-email" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-email" aria-expanded="true">
-            Email notifications <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+            Email notifications <svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
         </h3>
         <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-email" role="region" aria-labelledby="accordion-demo-trigger-email">
@@ -109,7 +109,7 @@
       <section class="bs-accordion-item">
         <h3 class="bs-accordion-header">
           <button class="bs-accordion-trigger" id="accordion-demo-trigger-push" type="button" data-bs-toggle="collapse" aria-controls="accordion-demo-panel-push" aria-expanded="false">
-            Push notifications <span class="bs-accordion-icon" aria-hidden="true">⌄</span>
+            Push notifications <svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 9 6 6 6-6"></path></svg>
           </button>
         </h3>
         <div class="bs-collapse bs-accordion-panel" id="accordion-demo-panel-push" role="region" aria-labelledby="accordion-demo-trigger-push" hidden="">
@@ -231,7 +231,7 @@ group.addEventListener("bs:collapse:shown", (event) =&gt; {
       &lt;button class="bs-accordion-trigger" id="shipping-trigger" type="button"
         aria-controls="shipping-panel" x-bind="item('shipping')"&gt;
         Shipping
-        &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6"&gt;&lt;/path&gt;&lt;/svg&gt;
       &lt;/button&gt;
     &lt;/h2&gt;
     &lt;div class="bs-collapse bs-accordion-panel" id="shipping-panel"
@@ -257,7 +257,7 @@ function AccordionItem({ accordion, id, title, children }) {
       &lt;h2 className="bs-accordion-header"&gt;
         &lt;button className="bs-accordion-trigger"
           id={`${id}-trigger`} {...collapse.getTriggerProps()}&gt;
-          {title} &lt;span className="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+          {title} &lt;svg className="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6" /&gt;&lt;/svg&gt;
         &lt;/button&gt;
       &lt;/h2&gt;
       &lt;div className="bs-collapse bs-accordion-panel"
@@ -312,7 +312,7 @@ const billing = useCollapse({
       &lt;h2 class="bs-accordion-header"&gt;
         &lt;button class="bs-accordion-trigger" id="account-trigger"
           v-bind="account.getTriggerProps()"&gt;
-          Account &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+          Account &lt;svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6"&gt;&lt;/path&gt;&lt;/svg&gt;
         &lt;/button&gt;
       &lt;/h2&gt;
       &lt;div class="bs-collapse bs-accordion-panel"
@@ -324,7 +324,7 @@ const billing = useCollapse({
       &lt;h2 class="bs-accordion-header"&gt;
         &lt;button class="bs-accordion-trigger" id="billing-trigger"
           v-bind="billing.getTriggerProps()"&gt;
-          Billing &lt;span class="bs-accordion-icon" aria-hidden="true"&gt;⌄&lt;/span&gt;
+          Billing &lt;svg class="bs-accordion-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;&lt;path d="m6 9 6 6 6-6"&gt;&lt;/path&gt;&lt;/svg&gt;
         &lt;/button&gt;
       &lt;/h2&gt;
       &lt;div class="bs-collapse bs-accordion-panel"

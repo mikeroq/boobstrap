@@ -88,21 +88,21 @@
     &lt;span class="bs-page-nav-title"&gt;Tables&lt;/span&gt;
   &lt;/a&gt;
 &lt;/nav&gt;</code></pre></div><h3 id="navbar-behavior-layers">Behavior layers</h3><p>Choose exactly one owner for a navbar instance. Every layer uses the same open/closed presentation states and lifecycle event names.</p>
-<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Core controller</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body"><code data-language="javascript">import { Navbar } from "@boobstrap/boobstrap/js/navbar";
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Core controller</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { Navbar } from "@boobstrap/boobstrap/js/navbar";
 
 const navbar = Navbar.getOrCreateInstance(document.querySelector("[data-bs-navbar]"));
 navbar.show();
 navbar.hide();</code></pre></div>
-<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Alpine adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body"><code>&lt;header class="bs-navbar" x-data="bsNavbar"&gt;
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Alpine adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code>&lt;header class="bs-navbar" x-data="bsNavbar"&gt;
   &lt;button class="bs-navbar-toggle" x-bind="trigger" aria-controls="menu"&gt;Menu&lt;/button&gt;
   &lt;div class="bs-navbar-menu" id="menu" x-ref="navbar" x-bind="menu"&gt;…&lt;/div&gt;
   &lt;button class="bs-navbar-backdrop" x-bind="dismiss" aria-label="Close navigation"&gt;&lt;/button&gt;
 &lt;/header&gt;</code></pre></div>
-<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body"><code data-language="javascript">import { useNavbar } from "@boobstrap/react";
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { useNavbar } from "@boobstrap/react";
 
 const navbar = useNavbar({ id: "primary-menu" });
 return &lt;&gt;&lt;button {...navbar.getTriggerProps()}&gt;Menu&lt;/button&gt;&lt;div className="bs-navbar-menu" {...navbar.getMenuProps()}&gt;…&lt;/div&gt;&lt;button className="bs-navbar-backdrop" {...navbar.getDismissProps()} /&gt;&lt;/&gt;;</code></pre></div>
-<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Vue adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body"><code data-language="javascript">import { useNavbar } from "@boobstrap/vue";
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Vue adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { useNavbar } from "@boobstrap/vue";
 
 const navbar = useNavbar({ id: "primary-menu" });
 // Bind navbar.getTriggerProps(), getMenuProps(), and getDismissProps().</code></pre></div>
