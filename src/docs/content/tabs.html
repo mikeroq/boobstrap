@@ -31,7 +31,7 @@
 &lt;/div&gt;
 &lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot;&gt;Profile settings&lt;/div&gt;
 &lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;security-tab&quot; hidden&gt;Security settings&lt;/div&gt;">
-                <pre><code class="">&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div class="bs-tabs" role="tablist" aria-label="Account" data-bs-tabs&gt;
   &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
     aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
   &lt;button class="bs-tab" id="security-tab" type="button" role="tab"
@@ -50,7 +50,7 @@
   &lt;div class=&quot;bs-tab-panel&quot; id=&quot;profile-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;profile-tab&quot; x-bind=&quot;panel&quot;&gt;Profile settings&lt;/div&gt;
   &lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot; role=&quot;tabpanel&quot; aria-labelledby=&quot;security-tab&quot; x-bind=&quot;panel&quot; hidden&gt;Security settings&lt;/div&gt;
 &lt;/section&gt;" hidden="">
-                <pre><code class="">&lt;section x-data="bsTabs"&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;section x-data="bsTabs"&gt;
   &lt;div class="bs-tabs" role="tablist" aria-label="Account" x-bind="tablist"&gt;
     &lt;button class="bs-tab" id="profile-tab" type="button" role="tab"
       x-bind="tab" aria-controls="profile-panel" aria-selected="true"&gt;Profile&lt;/button&gt;
@@ -79,7 +79,7 @@ function Account() {
     &lt;/&gt;
   );
 }" hidden="">
-                <pre><code class="">import { useTabs } from "@boobstrap/react";
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">import { useTabs } from "@boobstrap/react";
 
 function Account() {
   const tabs = useTabs({ defaultSelectedId: "profile-tab" });
@@ -122,7 +122,7 @@ const tabs = useTabs({ defaultSelectedId: &quot;profile-tab&quot; });
   &lt;div class=&quot;bs-tab-panel&quot; id=&quot;security-panel&quot;
     v-bind=&quot;tabs.getPanelProps({ tabId: 'security-tab' })&quot;&gt;Security settings&lt;/div&gt;
 &lt;/template&gt;" hidden="">
-                <pre><code data-language="vue">&lt;script setup&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code data-language="vue">&lt;script setup&gt;
 import { useTabs } from "@boobstrap/vue";
 
 const tabs = useTabs({ defaultSelectedId: "profile-tab" });

@@ -235,6 +235,20 @@ const setupReferenceFilter = (root, inputSelector, targetSelector) => {
   });
 };
 
+const setupNativeControlOutputs = (root) => {
+  const cleanups = [];
+  root.querySelectorAll("[data-native-output]").forEach((input) => {
+    const output = root.querySelector(`#${CSS.escape(input.dataset.nativeOutput)}`);
+    if (!output) return;
+    const render = () => {
+      output.value = input.type === "range" ? `${input.value}%` : input.value.toUpperCase();
+    };
+    cleanups.push(listen(input, "input", render));
+    render();
+  });
+  return () => cleanups.forEach((cleanup) => cleanup());
+};
+
 const setupHeadingAnchors = (root, outline) => {
   outline.forEach(({ id, label }) => {
     const target = root.querySelector(`#${CSS.escape(id)}`);
@@ -261,6 +275,7 @@ export const initDocsPageRuntime = (root, { route, outline }) => {
   cleanups.push(setupPackageTabs(root));
   cleanups.push(setupReferenceFilter(root, "[data-class-filter]", "[data-class-reference]"));
   cleanups.push(setupReferenceFilter(root, "[data-token-filter]", "[data-token-reference]"));
+  cleanups.push(setupNativeControlOutputs(root));
   root.querySelectorAll("[data-docs-form]").forEach((form) => cleanups.push(listen(form, "submit", (event) => event.preventDefault())));
   root.querySelectorAll("[data-demo-loading]").forEach((button) => cleanups.push(listen(button, "bs:button:started", (event) => {
     window.setTimeout(() => event.detail.controller.stop({ reason: "demo" }), 1200);

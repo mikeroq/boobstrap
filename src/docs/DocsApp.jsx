@@ -222,7 +222,10 @@ export function DocsApp({ initialPath, initialContent, development = false }) {
       const atPageEnd = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2;
       let active = targets[0];
       if (atPageEnd) active = targets.at(-1);
-      else targets.forEach((target) => { if (target.offsetTop <= readingLine) active = target; });
+      else targets.forEach((target) => {
+        const documentTop = target.getBoundingClientRect().top + window.scrollY;
+        if (documentTop <= readingLine) active = target;
+      });
       links.forEach((link) => {
         if (active && link.hash === `#${active.id}`) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");
