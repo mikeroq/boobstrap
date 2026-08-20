@@ -75,7 +75,7 @@
     &lt;h4 class="bs-card-title" id="basic-card-title"&gt;Release notes&lt;/h4&gt;
     &lt;p class="bs-card-text bs-mb-0"&gt;A concise summary belongs inside the same content surface.&lt;/p&gt;
   &lt;/div&gt;
-&lt;/article&gt;</code></pre></div><h3 aria-level="2" id="cards-complete-structured-card">Complete structured card</h3><p>Compose an optional header and footer around the content region. The header aligns its title and description with an independent action slot; the footer wraps related actions naturally.</p><div class="docs-demo" id="card-action" data-component-example="card-action"><article class="bs-card bs-card-raised" aria-labelledby="workspace-card-title">
+&lt;/article&gt;</code></pre></div><h3 aria-level="2" id="cards-complete-structured-card">Complete structured card with dividers</h3><p>Compose an optional header and footer around the content region. Add <code class="bs-code-inline">.bs-card-separated</code> when each region should have a visible divider; the header action and footer controls keep their normal alignment.</p><div class="docs-demo" id="card-action" data-component-example="card-action"><article class="bs-card bs-card-raised bs-card-separated" aria-labelledby="workspace-card-title">
   <header class="bs-card-header">
     <h4 class="bs-card-title" id="workspace-card-title">Workspace usage</h4>
     <p class="bs-card-description">Review current storage and manage plan capacity.</p>
@@ -89,7 +89,7 @@
     <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">Upgrade plan</button>
     <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">View usage</button>
   </footer>
-</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Header, content, and footer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Header, content, and footer code example"><code class="">&lt;article class="bs-card bs-card-raised" aria-labelledby="workspace-card-title"&gt;
+</article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Separated header, content, and footer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Separated header, content, and footer code example"><code class="">&lt;article class="bs-card bs-card-raised bs-card-separated" aria-labelledby="workspace-card-title"&gt;
   &lt;header class="bs-card-header"&gt;
     &lt;h4 class="bs-card-title" id="workspace-card-title"&gt;Workspace usage&lt;/h4&gt;
     &lt;p class="bs-card-description"&gt;Review current storage and manage plan capacity.&lt;/p&gt;
@@ -141,6 +141,7 @@
                 <tr><td><code class="bs-code-inline">.bs-card-content</code></td><td>Primary padded content region; works with or without a header and footer.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-footer</code></td><td>Optional wrapping row for related actions, metadata, or status.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-raised</code></td><td>Stronger shadow for elevated or featured content.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-separated</code></td><td>Adds dividers between adjacent header, content, and footer regions.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-subtle</code></td><td>Quieter surface and border treatment for secondary or nested content.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-compact</code></td><td>Reduces inset spacing consistently across simple or structured card regions.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-link</code></td><td>Makes a single-destination anchor behave and focus like an interactive card surface.</td></tr>

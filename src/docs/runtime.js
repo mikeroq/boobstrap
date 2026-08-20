@@ -6,7 +6,7 @@ const previewThemes = ["light", "dark"];
 const themeAxes = {
   theme: ["dark", "light"],
   palette: ["rose", "violet", "blue", "teal", "amber"],
-  radius: ["rounded", "square"],
+  radius: ["small", "normal", "large", "rounded", "square"],
 };
 
 const titleCase = (value) => value[0].toUpperCase() + value.slice(1);
@@ -64,7 +64,7 @@ const setupThemeConfigurator = (root) => {
     const state = {
       theme: themeAxes.theme.includes(configurator.dataset.bsTheme) ? configurator.dataset.bsTheme : "dark",
       palette: themeAxes.palette.includes(configurator.dataset.bsPalette) ? configurator.dataset.bsPalette : "rose",
-      radius: themeAxes.radius.includes(configurator.dataset.bsRadius) ? configurator.dataset.bsRadius : "rounded",
+      radius: themeAxes.radius.includes(configurator.dataset.bsRadius) ? configurator.dataset.bsRadius : "normal",
     };
 
     const render = () => {

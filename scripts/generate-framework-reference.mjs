@@ -4,6 +4,8 @@ import { resolve } from "node:path";
 const root = resolve(import.meta.dirname, "..");
 const cssPath = resolve(root, "node_modules/@boobstrap/boobstrap/dist/boobstrap.css");
 const referencePath = resolve(root, "src/docs/content/class-reference.html");
+const tokenReferencePath = resolve(root, "src/docs/content/tokens.html");
+const themingPath = resolve(root, "src/docs/content/theming.html");
 const countPaths = [
   resolve(root, "src/docs/content/overview.html"),
   resolve(root, "src/docs/content/introduction.html"),
@@ -22,6 +24,9 @@ const classes = [...new Set(
     .map((match) => match[1])
     .filter((name) => name.startsWith("bs-")),
 )].sort();
+const tokenBlock = css.match(/:root\s*,\s*\[data-bs-theme=["']dark["']\]\s*\{([\s\S]*?)\}/)?.[1] ?? "";
+const tokens = [...tokenBlock.matchAll(/^\s*(--bs-[a-z0-9-]+)\s*:\s*([^;]+);/gmi)]
+  .map(([, name, value]) => ({ name, value: value.trim() }));
 
 const declarations = new Map();
 for (const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
@@ -40,6 +45,30 @@ const rows = classes.map((className) => {
   return `<div class="reference-row bs-reference-row"><div class="reference-name bs-reference-name"><code class="bs-code-inline">.${className}</code></div><div class="reference-value bs-reference-value">${escapeHtml(declaration)}</div></div>`;
 }).join("");
 const generatedReference = `<div class="docs-class-groups" data-class-reference=""><section class="reference-group"><h3>All public classes<span class="reference-count">${classes.length}</span></h3><div class="reference-list bs-reference-list">${rows}</div></section></div>`;
+const tokenGroups = [
+  ["Palette", (name) => name === "--bs-white" || name.startsWith("--bs-brand-") || name.startsWith("--bs-plum-")],
+  ["Semantic colors", (name) => name.startsWith("--bs-color-")],
+  ["Typography", (name) => name.startsWith("--bs-font-") || name.startsWith("--bs-line-height-")],
+  ["Spacing", (name) => name.startsWith("--bs-space-")],
+  ["Radius", (name) => name.startsWith("--bs-radius-")],
+  ["Effects", (name) => name.startsWith("--bs-shadow-") || name.startsWith("--bs-gradient-")],
+  ["Containers", (name) => name.startsWith("--bs-container-")],
+  ["Motion", (name) => name.startsWith("--bs-duration-") || name.startsWith("--bs-ease-")],
+  ["Scrollbars", (name) => name.startsWith("--bs-scrollbar-")],
+];
+const tokenHasSwatch = (name) => name === "--bs-white"
+  || name.startsWith("--bs-brand-")
+  || name.startsWith("--bs-plum-")
+  || name.startsWith("--bs-color-")
+  || name.startsWith("--bs-gradient-");
+const generatedTokenReference = `<div class="docs-token-groups" data-token-reference="">${tokenGroups.map(([title, includes]) => {
+  const groupTokens = tokens.filter(({ name }) => includes(name));
+  const tokenRows = groupTokens.map(({ name, value }) => {
+    const swatch = tokenHasSwatch(name) ? `<span class="token-swatch token-swatch-${name.slice(5)}"></span>` : "";
+    return `<div class="reference-row bs-reference-row"><div class="reference-name bs-reference-name">${swatch}<code class="bs-code-inline">${name}</code></div><div class="reference-value bs-reference-value">${escapeHtml(value)}</div></div>`;
+  }).join("");
+  return `<section class="reference-group"><h3>${title}<span class="reference-count">${groupTokens.length}</span></h3><div class="reference-list bs-reference-list">${tokenRows}</div></section>`;
+}).join("")}</div>`;
 
 const synchronize = async (path, transform) => {
   const current = await readFile(path, "utf8");
@@ -59,11 +88,28 @@ await synchronize(referencePath, (source) => {
   return `${source.slice(0, start)}${generatedReference}${source.slice(end)}`;
 });
 
+await synchronize(tokenReferencePath, (source) => {
+  const startMarker = '<div class="docs-token-groups" data-token-reference="">';
+  const endMarker = "\n          </section>";
+  const start = source.indexOf(startMarker);
+  const end = source.indexOf(endMarker, start);
+  if (start < 0 || end < 0) throw new Error("Could not find the token-reference generation boundary.");
+  return `${source.slice(0, start)}${generatedTokenReference}${source.slice(end)}`;
+});
+
+await synchronize(themingPath, (source) => source.replace(
+  /(<td data-bs-theme="dark" data-bs-palette="[^"]+" data-color-token-cell="" data-token="--bs-color-primary-contrast">[\s\S]*?<code>)[^<]+(<\/code>)/g,
+  "$1#ffffff$2",
+));
+
 for (const path of countPaths) {
   await synchronize(path, (source) => source.replace(
     /(<strong data-class-count="">)\d+(<\/strong> classes)/,
     `$1${classes.length}$2`,
+  ).replace(
+    /(<strong data-token-count="">)\d+(<\/strong> tokens)/,
+    `$1${tokens.length}$2`,
   ));
 }
 
-console.log(`${checkOnly ? "Verified" : "Generated"} documentation for ${classes.length} framework classes.`);
+console.log(`${checkOnly ? "Verified" : "Generated"} documentation for ${classes.length} framework classes and ${tokens.length} tokens.`);
