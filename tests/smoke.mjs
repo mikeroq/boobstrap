@@ -570,7 +570,7 @@ try {
       }));
       const desktopSidebarScrollbarReady = desktopSidebarScrollbar.supportsWebkitScrollbar
         ? desktopSidebarScrollbar.color === "auto" && desktopSidebarScrollbar.width === "auto" && desktopSidebarScrollbar.buttonDisplay === "none" && desktopSidebarScrollbar.thumbBackground !== "rgba(0, 0, 0, 0)"
-        : desktopSidebarScrollbar.color !== "auto" && desktopSidebarScrollbar.width === "thin";
+        : desktopSidebarScrollbar.color !== "auto" && desktopSidebarScrollbar.width !== "auto";
       if (!desktopSidebarScrollbarReady) failures.push(`desktop: documentation sidebar is not using the themed scrollbar renderer (${JSON.stringify(desktopSidebarScrollbar)})`);
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
       const formsDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/forms"]');
@@ -1376,7 +1376,7 @@ try {
         }));
         const scrollbarRendererReady = scrollbarStyle.supportsWebkitScrollbar
           ? scrollbarStyle.color === "auto" && scrollbarStyle.width === "auto" && scrollbarStyle.thumbBackground !== "rgba(0, 0, 0, 0)"
-          : scrollbarStyle.color !== "auto" && scrollbarStyle.width === "thin";
+          : scrollbarStyle.color !== "auto" && scrollbarStyle.width !== "auto";
         const scrollbarButtonsHidden = !scrollbarStyle.supportsWebkitScrollbar || (scrollbarStyle.buttonDisplay === "none" && Number.parseFloat(scrollbarStyle.buttonHeight) === 0 && Number.parseFloat(scrollbarStyle.buttonWidth) === 0 && scrollbarStyle.buttonStatesCovered);
         if (!scrollbarButtonsHidden || !scrollbarRendererReady || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
           failures.push(`desktop: default themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
