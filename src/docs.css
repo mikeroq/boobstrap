@@ -505,6 +505,8 @@ body.docs-page {
   text-align: center;
 }
 
+.docs-standalone-preview-status h1 { color: var(--bs-color-text); }
+
 .docs-standalone-preview > .docs-sidebar-shell-preview {
   min-block-size: 100vh;
   min-block-size: 100dvh;

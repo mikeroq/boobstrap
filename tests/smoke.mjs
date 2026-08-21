@@ -391,7 +391,10 @@ try {
 
   const previewResponse = await fetch(`${baseUrl}/preview`);
   const previewSource = await previewResponse.text();
-  if (!previewResponse.ok || !previewSource.includes('<meta name="robots" content="noindex"')) {
+  if (!previewResponse.ok
+    || !previewSource.includes('<meta name="robots" content="noindex"')
+    || !previewSource.includes('<main class="docs-standalone-preview-status">')
+    || !previewSource.includes("<h1>Boobstrap component preview</h1>")) {
     failures.push("standalone preview: clean noindex entry is not available");
   }
 

@@ -21,7 +21,7 @@ if (key?.startsWith(previewStoragePrefix)) {
 }
 
 if (!preview?.html || (!previewFromSession && Date.now() - preview.createdAt > 60_000)) {
-  document.querySelector(".docs-standalone-preview-status").textContent = "This preview is no longer available. Open it again from the documentation example.";
+  document.querySelector(".docs-standalone-preview-status p").textContent = "This preview is no longer available. Open it again from the documentation example.";
 } else {
   document.title = `${preview.title} preview — Boobstrap`;
   document.documentElement.dataset.bsTheme = preview.theme;
@@ -29,7 +29,16 @@ if (!preview?.html || (!previewFromSession && Date.now() - preview.createdAt > 6
   document.body.id = preview.id;
   document.body.className = ["docs-standalone-preview", preview.className].filter(Boolean).join(" ");
   if (preview.componentExample) document.body.dataset.componentExample = preview.componentExample;
-  document.body.innerHTML = preview.html;
+  document.body.replaceChildren();
+  const heading = document.createElement("h1");
+  heading.className = "bs-sr-only";
+  heading.textContent = `${preview.title} preview`;
+  document.body.append(heading);
+  document.body.insertAdjacentHTML("beforeend", preview.html);
+  if (!document.body.querySelector("main")) {
+    document.body.setAttribute("role", "main");
+    document.body.setAttribute("aria-label", `${preview.title} preview`);
+  }
   initBoobstrap(document.body);
   document.documentElement.dataset.previewReady = "";
 }
