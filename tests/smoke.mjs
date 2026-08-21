@@ -45,6 +45,13 @@ for (const file of docsContentFiles.filter((name) => name.endsWith(".html"))) {
   if (!docsWithIntentionalDiagrams.has(file) && /(?:<svg\b|&lt;svg\b)/iu.test(source)) {
     failures.push(`${file}: hand-authored SVG found; documentation interface icons must use Lucide`);
   }
+  const copyReadyButtons = source.match(/&lt;button\b(?:(?!&lt;\/button&gt;)[\s\S])*?&lt;\/button&gt;/giu) ?? [];
+  if (copyReadyButtons.some((button) => (
+    /(?:\bdata-bs-[a-z0-9-]*dismiss\b|\baria-label="(?:close|dismiss)\b)/iu.test(button)
+    && /&gt;\s*×\s*&lt;\/button&gt;/u.test(button)
+  ))) {
+    failures.push(`${file}: hand-authored close glyph found; copy-ready documentation buttons must use Lucide`);
+  }
 }
 const frameworkCss = await readFile("node_modules/@boobstrap/boobstrap/dist/boobstrap.css", "utf8");
 const expectedClasses = new Set(
@@ -1475,12 +1482,29 @@ try {
       }
 
       if (config.sectionId === "form-input-groups") {
+        if (await routePage.locator("html").getAttribute("data-bs-theme") !== "dark") {
+          await routePage.getByRole("button", { name: "Switch to dark theme" }).click();
+        }
+        const iconPreviews = routePage.locator('[data-component-example="form-input-icon-start"], [data-component-example="form-input-icon-end"]');
+        for (const preview of await iconPreviews.all()) {
+          if (await preview.getAttribute("data-bs-theme") !== "dark") {
+            await preview.getByRole("button", { name: "Use dark theme for this preview" }).click();
+          }
+        }
         const iconContracts = await routePage.locator(".bs-input-icon").evaluateAll((icons) => icons.map((icon) => ({
+          pageTheme: document.documentElement.dataset.bsTheme,
+          previewTheme: icon.closest("[data-component-example]")?.dataset.bsTheme,
           usesIconClass: icon.classList.contains("bs-icon"),
           color: getComputedStyle(icon).color,
           stroke: getComputedStyle(icon.querySelector("path, circle")).stroke,
         })));
-        if (iconContracts.length !== 2 || iconContracts.some(({ usesIconClass, color, stroke }) => !usesIconClass || color === "rgba(0, 0, 0, 0)" || stroke === "none")) {
+        if (iconContracts.length !== 2 || iconContracts.some(({ pageTheme, previewTheme, usesIconClass, color, stroke }) => (
+          pageTheme !== "dark"
+          || previewTheme !== "dark"
+          || !usesIconClass
+          || color === "rgba(0, 0, 0, 0)"
+          || stroke === "none"
+        ))) {
           failures.push(`desktop: form input icons are not visible Lucide-style SVGs (${JSON.stringify(iconContracts)})`);
         }
       }
