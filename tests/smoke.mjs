@@ -1349,12 +1349,18 @@ try {
         const scrollbarStyle = await routePage.locator("[data-scrollbar-default]").evaluate((element) => ({
           buttonDisplay: getComputedStyle(element, "::-webkit-scrollbar-button").display,
           buttonHeight: getComputedStyle(element, "::-webkit-scrollbar-button").height,
+          buttonStatesCovered: (() => {
+            const rule = [...document.styleSheets]
+              .flatMap((sheet) => [...sheet.cssRules])
+              .find((candidate) => candidate.selectorText?.includes("::-webkit-scrollbar-button:vertical:decrement"));
+            return [":single-button", ":double-button", ":vertical:decrement", ":vertical:increment", ":horizontal:decrement", ":horizontal:increment"].every((state) => rule?.selectorText.includes(state));
+          })(),
           buttonWidth: getComputedStyle(element, "::-webkit-scrollbar-button").width,
           color: getComputedStyle(element).scrollbarColor,
           explicitlyOptedIn: element.classList.contains("bs-scrollbar"),
           overflow: getComputedStyle(element).overflowY,
         }));
-        if (scrollbarStyle.buttonDisplay !== "none" || Number.parseFloat(scrollbarStyle.buttonHeight) !== 0 || Number.parseFloat(scrollbarStyle.buttonWidth) !== 0 || scrollbarStyle.color === "auto" || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
+        if (scrollbarStyle.buttonDisplay !== "none" || Number.parseFloat(scrollbarStyle.buttonHeight) !== 0 || Number.parseFloat(scrollbarStyle.buttonWidth) !== 0 || !scrollbarStyle.buttonStatesCovered || scrollbarStyle.color === "auto" || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
           failures.push(`desktop: default themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
         }
         const nativeScrollbarColor = await routePage.locator("[data-scrollbar-native]").evaluate((element) => getComputedStyle(element).scrollbarColor);
