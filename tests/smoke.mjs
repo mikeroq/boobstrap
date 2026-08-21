@@ -904,6 +904,8 @@ try {
             open: element.open && element.dataset.bsState === "open",
             centered: Math.abs((rect.left + rect.width / 2) - (window.innerWidth / 2)) <= 1,
             headerFixed: getComputedStyle(header).flexShrink === "0",
+            headerRows: getComputedStyle(header).gridTemplateRows.split(" ").length === 2,
+            headerSpacing: Number.parseFloat(getComputedStyle(header).paddingBottom) < Number.parseFloat(getComputedStyle(header).paddingTop),
             bodyScrolls: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
             footerFixed: getComputedStyle(footer).flexShrink === "0",
             named: element.getAttribute("aria-labelledby") === "profile-dialog-title" && element.getAttribute("aria-describedby") === "profile-dialog-description",
@@ -934,6 +936,13 @@ try {
             constrained: element.clientHeight <= (24 * parseFloat(getComputedStyle(document.documentElement).fontSize)) + 1,
             scrollable: body.scrollHeight > body.clientHeight,
             reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+            compactHeader: (() => {
+              const headerStyle = getComputedStyle(element.querySelector(".bs-dialog-header"));
+              return headerStyle.gridTemplateRows.split(" ").length === 1
+                && headerStyle.alignItems === "center"
+                && headerStyle.paddingTop === headerStyle.paddingBottom
+                && Number.parseFloat(headerStyle.paddingTop) <= 12;
+            })(),
           };
         });
         if (!Object.values(scrollRegions).every(Boolean)) failures.push(`${viewport.name}: constrained dialog body does not scroll independently (${JSON.stringify(scrollRegions)})`);
@@ -953,6 +962,11 @@ try {
             open: element.open && element.dataset.bsState === "open",
             meetsEnd: Math.abs(rect.right - document.documentElement.clientWidth) <= 1,
             fillsViewport: Math.abs(rect.height - window.innerHeight) <= 1,
+            headerSpacing: (() => {
+              const headerStyle = getComputedStyle(element.querySelector(".bs-drawer-header"));
+              return headerStyle.gridTemplateRows.split(" ").length === 2
+                && Number.parseFloat(headerStyle.paddingBottom) < Number.parseFloat(headerStyle.paddingTop);
+            })(),
             bodyOwnsScroll: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
             footerFixed: getComputedStyle(footer).flexShrink === "0" && footer.getBoundingClientRect().bottom <= rect.bottom + 1,
             checkDescriptionStacks: getComputedStyle(element.querySelector(".bs-check-description")).gridColumnStart === "2",
@@ -971,6 +985,14 @@ try {
         await startTrigger.click();
         await startDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
         if (!await startDrawer.evaluate((element) => Math.abs(element.getBoundingClientRect().left) <= 1)) failures.push(`${viewport.name}: start drawer does not meet the logical start edge`);
+        const compactDrawerHeader = await startDrawer.locator(".bs-drawer-header").evaluate((header) => {
+          const style = getComputedStyle(header);
+          return style.gridTemplateRows.split(" ").length === 1
+            && style.alignItems === "center"
+            && style.paddingTop === style.paddingBottom
+            && Number.parseFloat(style.paddingTop) <= 12;
+        });
+        if (!compactDrawerHeader) failures.push(`${viewport.name}: descriptionless drawer header retains empty space or misaligned content`);
         await routePage.keyboard.press("Escape");
 
         const activityTrigger = routePage.getByRole("button", { name: "View activity" });
@@ -1321,28 +1343,42 @@ try {
         }
 
         const themingText = await routePage.locator("#theming").textContent();
-        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "data-bs-scrollbars", "--bs-color-primary-contrast", "--bs-color-focus-ring", "--bs-scrollbar-thumb", ".bs-scrollbar"]) {
+        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "data-bs-scrollbars", "native", "--bs-color-primary-contrast", "--bs-color-focus-ring", "--bs-scrollbar-thumb", "--bs-radius-pill", ".bs-scrollbar"]) {
           if (!themingText.includes(publicContract)) failures.push(`desktop: theming guide is missing ${publicContract}`);
         }
-        const scrollbarStyle = await routePage.locator(".docs-scrollbar-demo.bs-scrollbar").evaluate((element) => ({
+        const scrollbarStyle = await routePage.locator("[data-scrollbar-default]").evaluate((element) => ({
           color: getComputedStyle(element).scrollbarColor,
+          explicitlyOptedIn: element.classList.contains("bs-scrollbar"),
           overflow: getComputedStyle(element).overflowY,
         }));
-        if (scrollbarStyle.color === "auto" || scrollbarStyle.overflow !== "auto") {
-          failures.push(`desktop: themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
+        if (scrollbarStyle.color === "auto" || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
+          failures.push(`desktop: default themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
+        }
+        const nativeScrollbarColor = await routePage.locator("[data-scrollbar-native]").evaluate((element) => getComputedStyle(element).scrollbarColor);
+        if (nativeScrollbarColor !== "auto") failures.push(`desktop: native scrollbar opt-out did not restore browser styling (${nativeScrollbarColor})`);
+        const squareScrollbarRadius = await routePage.locator("[data-scrollbar-default]").evaluate((element) => {
+          element.dataset.bsRadius = "square";
+          return getComputedStyle(element, "::-webkit-scrollbar-thumb").borderRadius;
+        });
+        if (Number.parseFloat(squareScrollbarRadius) !== 0) {
+          failures.push(`desktop: square radius did not remove scrollbar thumb corners (${squareScrollbarRadius})`);
         }
       }
 
       if (config.sectionId === "code-windows") {
         const underlineTabs = routePage.locator("#code-window-source .bs-code-tabs-underline");
-        const underlineStyle = await underlineTabs.locator('[role="tab"][aria-selected="true"]').evaluate((element) => {
+        const underlineStyle = await underlineTabs.evaluate((tablist) => {
+          const element = tablist.querySelector('[role="tab"][aria-selected="true"]');
           const after = getComputedStyle(element, "::after");
           return {
             radius: getComputedStyle(element).borderRadius,
             indicator: after.backgroundColor,
+            overflowY: getComputedStyle(tablist).overflowY,
+            paddingLeft: getComputedStyle(tablist).paddingLeft,
+            scrollbarWidth: getComputedStyle(tablist).scrollbarWidth,
           };
         });
-        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)") {
+        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.paddingLeft !== "0px" || underlineStyle.scrollbarWidth !== "none") {
           failures.push(`${viewport.name}: code tab underline variant did not render correctly (${JSON.stringify(underlineStyle)})`);
         }
       }
@@ -1616,6 +1652,10 @@ try {
         ))) {
           failures.push(`desktop: form input icons are not visible Lucide-style SVGs (${JSON.stringify(iconContracts)})`);
         }
+        const buttonAddonLineHeights = await routePage.locator('[data-component-example="form-input-group-button"] .bs-input-group').evaluate((group) => [...group.children].map((element) => getComputedStyle(element).lineHeight));
+        if (new Set(buttonAddonLineHeights).size !== 1) {
+          failures.push(`desktop: button input-group add-ons do not share the input baseline (${JSON.stringify(buttonAddonLineHeights)})`);
+        }
       }
 
       if (config.sectionId === "form-native-controls") {
@@ -1760,6 +1800,23 @@ try {
         }
         if (!await linkButton.evaluate((element) => getComputedStyle(element).display.includes("flex"))) {
           failures.push("desktop: anchor button does not receive button styling");
+        }
+
+        const iconButton = routePage.locator('[data-component-example="button-icons"] .bs-btn-primary');
+        const iconAlignment = await iconButton.evaluate((button) => {
+          const buttonRect = button.getBoundingClientRect();
+          const iconRect = button.querySelector(".bs-icon").getBoundingClientRect();
+          return Math.abs((buttonRect.top + (buttonRect.height / 2)) - (iconRect.top + (iconRect.height / 2)));
+        });
+        if (iconAlignment > 1) failures.push(`desktop: button icon is not vertically centered with its label (${iconAlignment}px)`);
+        await iconButton.hover();
+        const primaryHoverPaint = await iconButton.evaluate((button) => ({
+          background: getComputedStyle(button).backgroundImage,
+          color: getComputedStyle(button).backgroundColor,
+          filter: getComputedStyle(button).filter,
+        }));
+        if (primaryHoverPaint.background === "none" || primaryHoverPaint.color === "rgba(0, 0, 0, 0)" || primaryHoverPaint.filter === "none") {
+          failures.push(`desktop: primary button hover loses its painted background or state feedback (${JSON.stringify(primaryHoverPaint)})`);
         }
 
         const variantsCopy = routePage.locator('[data-copy-example="button-variants"]');

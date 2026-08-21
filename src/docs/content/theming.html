@@ -3,7 +3,7 @@
 <section class="docs-section docs-routed-section" id="theming">
             <div class="docs-kicker">Foundations</div>
             <h2>Theming</h2>
-            <p>Boobstrap themes have three independent axes: color mode, palette, and corner shape. Combine their data attributes on <code class="bs-code-inline">&lt;html&gt;</code> for an application-wide theme or on a component boundary for a scoped preview.</p>
+            <p>Boobstrap themes have four independent axes: color mode, palette, corner shape, and scrollbar presentation. Combine their data attributes on <code class="bs-code-inline">&lt;html&gt;</code> for an application-wide theme or on a component boundary for a scoped preview.</p>
 
             <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="Theme attribute reference">
               <table class="docs-table bs-table">
@@ -13,7 +13,7 @@
                   <tr><td>Color mode</td><td><code class="bs-code-inline">data-bs-theme</code></td><td><code class="bs-code-inline">dark</code>, <code class="bs-code-inline">light</code></td><td><code class="bs-code-inline">dark</code></td></tr>
                   <tr><td>Palette</td><td><code class="bs-code-inline">data-bs-palette</code></td><td><code class="bs-code-inline">rose</code>, <code class="bs-code-inline">violet</code>, <code class="bs-code-inline">blue</code>, <code class="bs-code-inline">teal</code>, <code class="bs-code-inline">amber</code></td><td><code class="bs-code-inline">rose</code></td></tr>
                   <tr><td>Corner scale</td><td><code class="bs-code-inline">data-bs-radius</code></td><td><code class="bs-code-inline">small</code>, <code class="bs-code-inline">normal</code>, <code class="bs-code-inline">large</code>, <code class="bs-code-inline">rounded</code>, <code class="bs-code-inline">square</code></td><td><code class="bs-code-inline">normal</code></td></tr>
-                  <tr><td>Scrollbars</td><td><code class="bs-code-inline">data-bs-scrollbars</code></td><td><code class="bs-code-inline">themed</code></td><td>Browser default</td></tr>
+                  <tr><td>Scrollbars</td><td><code class="bs-code-inline">data-bs-scrollbars</code></td><td><code class="bs-code-inline">themed</code>, <code class="bs-code-inline">native</code></td><td><code class="bs-code-inline">themed</code></td></tr>
                 </tbody>
               </table>
             </div>
@@ -97,15 +97,21 @@
             <div class="docs-example-guidance">
               <div><h3>Mode</h3><p>Mode remaps surfaces, text, borders, controls, shadows, and contrast for dark or light environments.</p></div>
               <div><h3>Palette</h3><p>Palette remaps the brand scale and every connected semantic accent, including primary states, focus rings, gradients, and brand shadows.</p></div>
-              <div><h3>Corners</h3><p>Small, normal, and large presets remap the complete radius scale. <code class="bs-code-inline">rounded</code> aliases normal for compatibility; square sets the scale to zero.</p></div>
+              <div><h3>Corners</h3><p>Small, normal, and large presets remap the complete radius scale, including scrollbar thumbs. <code class="bs-code-inline">rounded</code> aliases normal for compatibility; square sets every corner to zero.</p></div>
             </div>
 
             <div class="docs-api"><h3 aria-level="2" id="theming-themed-scrollbars">Themed scrollbars</h3>
-            <p>Keep browser scrollbars by default. Add <code class="bs-code-inline">.bs-scrollbar</code> to one scroll container, or set <code class="bs-code-inline">data-bs-scrollbars="themed"</code> on a subtree, to opt into colors and geometry driven by tokens such as <code class="bs-code-inline">--bs-scrollbar-thumb</code>, <code class="bs-code-inline">--bs-scrollbar-track</code>, and <code class="bs-code-inline">--bs-scrollbar-size</code>.</p>
-            <div class="docs-demo" data-component-example="themed-scrollbar"><div class="docs-scrollbar-demo bs-scrollbar" role="region" tabindex="0" aria-label="Themed scrollbar example"><div class="bs-stack bs-gap-3"><div class="bs-card bs-card-compact">Theme-aware track and thumb</div><div class="bs-card bs-card-compact">Keyboard-scrollable region</div><div class="bs-card bs-card-compact">Scoped without changing the page</div><div class="bs-card bs-card-compact">Hover the thumb for the accent state</div></div></div></div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Scoped themed scrollbars</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Scoped themed scrollbars code example"><code>&lt;div class="bs-scrollbar" tabindex="0"&gt;...scrolling content...&lt;/div&gt;
+            <p>Boobstrap applies theme-aware scrollbars by default, using <code class="bs-code-inline">--bs-scrollbar-thumb</code>, <code class="bs-code-inline">--bs-scrollbar-track</code>, and <code class="bs-code-inline">--bs-scrollbar-size</code>. Set <code class="bs-code-inline">data-bs-scrollbars="native"</code> on <code class="bs-code-inline">&lt;html&gt;</code> or a subtree to restore the browser presentation. Inside a native subtree, <code class="bs-code-inline">.bs-scrollbar</code> opts one scroll container back into the themed treatment. The legacy <code class="bs-code-inline">themed</code> value remains compatible but is no longer required.</p>
+            <p>Scrollbar thumb corners consume <code class="bs-code-inline">--bs-radius-pill</code>, so radius presets apply consistently: <code class="bs-code-inline">data-bs-radius="square"</code> produces square scrollbar thumbs instead of rounded ones.</p>
+            <div class="docs-demo docs-scrollbar-examples" data-component-example="themed-scrollbar"><div><span class="docs-demo-label">Themed by default</span><div class="docs-scrollbar-demo" data-scrollbar-default="" role="region" tabindex="0" aria-label="Default themed scrollbar example"><div class="bs-stack bs-gap-3"><div class="bs-card bs-card-compact">Theme-aware track and thumb</div><div class="bs-card bs-card-compact">Keyboard-scrollable region</div><div class="bs-card bs-card-compact">Radius-aware thumb corners</div><div class="bs-card bs-card-compact">Hover for the accent state</div></div></div></div><div><span class="docs-demo-label">Native opt-out</span><div class="docs-scrollbar-demo" data-scrollbar-native="" data-bs-scrollbars="native" role="region" tabindex="0" aria-label="Browser-native scrollbar example"><div class="bs-stack bs-gap-3"><div class="bs-card bs-card-compact">Browser-controlled track and thumb</div><div class="bs-card bs-card-compact">Scoped to this region</div><div class="bs-card bs-card-compact">No framework geometry</div><div class="bs-card bs-card-compact">Platform-native behavior</div></div></div></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Native opt-out</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Native scrollbar opt-out code example"><code>&lt;html data-bs-scrollbars="native"&gt;
+  ...browser-native scrollbars throughout the document...
+&lt;/html&gt;
 
-&lt;main data-bs-scrollbars="themed"&gt;...all descendant scroll containers...&lt;/main&gt;</code></pre></div></div>
+&lt;section data-bs-scrollbars="native"&gt;
+  ...browser-native scrollbars in this subtree...
+  &lt;div class="bs-scrollbar"&gt;...one themed exception...&lt;/div&gt;
+&lt;/section&gt;</code></pre></div></div>
 
             <h3 aria-level="2" id="theming-complete-color-token-reference">Complete color token reference</h3>
             <p>The tables below are generated from the compiled framework stylesheet used by this site. They list the complete brand ramp and every <code class="bs-code-inline">--bs-color-*</code> token for all five palettes in both modes, including exact hex and alpha-channel values.</p>
