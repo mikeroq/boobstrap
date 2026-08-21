@@ -825,7 +825,7 @@ try {
       }
 
       if (config.sectionId === "sidebars") {
-        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push(`${viewport.name}: complete application shell relies on CSP-blocked inline styles`);
+        if (await routePage.locator('#sidebars .docs-demo [style]').count() !== 0) failures.push(`${viewport.name}: sidebar examples rely on CSP-blocked inline styles`);
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
@@ -840,9 +840,11 @@ try {
         });
         if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
         if (await routePage.locator("#sidebar-shell .docs-sidebar-shell-header.bs-navbar").count() !== 1
+          || await routePage.locator("#sidebar-shell .docs-sidebar-shell-brand-mark").count() !== 1
+          || await shellSidebar.locator(":scope > .bs-sidebar-header .docs-sidebar-shell-brand-mark").count() !== 0
           || await routePage.locator("#sidebar-shell .bs-sidebar-end.bs-sidebar-toc").count() !== 1
           || await routePage.locator("#sidebar-shell svg.bs-icon").count() < 5) {
-          failures.push(`${viewport.name}: complete application shell does not mirror the documentation header, rails, and Lucide icon treatment`);
+          failures.push(`${viewport.name}: complete application shell does not expose one header brand with the expected rails and Lucide icon treatment`);
         }
       }
 
@@ -902,6 +904,8 @@ try {
             open: element.open && element.dataset.bsState === "open",
             centered: Math.abs((rect.left + rect.width / 2) - (window.innerWidth / 2)) <= 1,
             headerFixed: getComputedStyle(header).flexShrink === "0",
+            headerRows: getComputedStyle(header).gridTemplateRows.split(" ").length === 2,
+            headerSpacing: Number.parseFloat(getComputedStyle(header).paddingBottom) < Number.parseFloat(getComputedStyle(header).paddingTop),
             bodyScrolls: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
             footerFixed: getComputedStyle(footer).flexShrink === "0",
             named: element.getAttribute("aria-labelledby") === "profile-dialog-title" && element.getAttribute("aria-describedby") === "profile-dialog-description",
@@ -932,6 +936,13 @@ try {
             constrained: element.clientHeight <= (24 * parseFloat(getComputedStyle(document.documentElement).fontSize)) + 1,
             scrollable: body.scrollHeight > body.clientHeight,
             reachedBottom: Math.abs(body.scrollHeight - body.clientHeight - body.scrollTop) <= 1,
+            compactHeader: (() => {
+              const headerStyle = getComputedStyle(element.querySelector(".bs-dialog-header"));
+              return headerStyle.gridTemplateRows.split(" ").length === 1
+                && headerStyle.alignItems === "center"
+                && headerStyle.paddingTop === headerStyle.paddingBottom
+                && Number.parseFloat(headerStyle.paddingTop) <= 12;
+            })(),
           };
         });
         if (!Object.values(scrollRegions).every(Boolean)) failures.push(`${viewport.name}: constrained dialog body does not scroll independently (${JSON.stringify(scrollRegions)})`);
@@ -951,6 +962,11 @@ try {
             open: element.open && element.dataset.bsState === "open",
             meetsEnd: Math.abs(rect.right - document.documentElement.clientWidth) <= 1,
             fillsViewport: Math.abs(rect.height - window.innerHeight) <= 1,
+            headerSpacing: (() => {
+              const headerStyle = getComputedStyle(element.querySelector(".bs-drawer-header"));
+              return headerStyle.gridTemplateRows.split(" ").length === 2
+                && Number.parseFloat(headerStyle.paddingBottom) < Number.parseFloat(headerStyle.paddingTop);
+            })(),
             bodyOwnsScroll: getComputedStyle(body).overflowY === "auto" && getComputedStyle(body).flexGrow === "1",
             footerFixed: getComputedStyle(footer).flexShrink === "0" && footer.getBoundingClientRect().bottom <= rect.bottom + 1,
             checkDescriptionStacks: getComputedStyle(element.querySelector(".bs-check-description")).gridColumnStart === "2",
@@ -969,6 +985,14 @@ try {
         await startTrigger.click();
         await startDrawer.evaluate((element) => Promise.all(element.getAnimations().map((animation) => animation.finished)));
         if (!await startDrawer.evaluate((element) => Math.abs(element.getBoundingClientRect().left) <= 1)) failures.push(`${viewport.name}: start drawer does not meet the logical start edge`);
+        const compactDrawerHeader = await startDrawer.locator(".bs-drawer-header").evaluate((header) => {
+          const style = getComputedStyle(header);
+          return style.gridTemplateRows.split(" ").length === 1
+            && style.alignItems === "center"
+            && style.paddingTop === style.paddingBottom
+            && Number.parseFloat(style.paddingTop) <= 12;
+        });
+        if (!compactDrawerHeader) failures.push(`${viewport.name}: descriptionless drawer header retains empty space or misaligned content`);
         await routePage.keyboard.press("Escape");
 
         const activityTrigger = routePage.getByRole("button", { name: "View activity" });
@@ -1084,6 +1108,51 @@ try {
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "sidebars") {
+        const sidebarExamples = routePage.locator("#sidebars .docs-demo[data-component-example]");
+        if (await sidebarExamples.count() !== 8) failures.push("desktop: sidebar guide is missing rendered examples");
+
+        const variantGeometry = await routePage.locator("#sidebar-variants").evaluate((preview) => ({
+          clientWidth: preview.clientWidth,
+          scrollWidth: preview.scrollWidth,
+          sidebarsContained: [...preview.querySelectorAll(".bs-sidebar")].every((sidebar) => {
+            const previewRect = preview.getBoundingClientRect();
+            const sidebarRect = sidebar.getBoundingClientRect();
+            return sidebarRect.left >= previewRect.left - 1 && sidebarRect.right <= previewRect.right + 1;
+          }),
+        }));
+        if (variantGeometry.scrollWidth > variantGeometry.clientWidth + 1 || !variantGeometry.sidebarsContained) {
+          failures.push(`desktop: sidebar variants overflow their preview (${JSON.stringify(variantGeometry)})`);
+        }
+
+        const standaloneGeometry = await routePage.evaluate(() => {
+          const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const menu = document.querySelector("#sidebar-menu-anatomy > .bs-sidebar").getBoundingClientRect();
+          const loading = document.querySelector("#sidebar-loading > .bs-sidebar").getBoundingClientRect();
+          const tocPreviewElement = document.querySelector("#sidebar-toc");
+          const tocPreview = tocPreviewElement.getBoundingClientRect();
+          const tocPreviewStyle = getComputedStyle(tocPreviewElement);
+          const toc = document.querySelector("#sidebar-toc > .bs-sidebar").getBoundingClientRect();
+          return {
+            menuWidth: menu.width,
+            expectedMenuWidth: 21 * rootSize,
+            loadingWidth: loading.width,
+            expectedLoadingWidth: 20 * rootSize,
+            tocMeetsEnd: Math.abs(toc.right - (tocPreview.right - Number.parseFloat(tocPreviewStyle.paddingRight))) <= 1,
+          };
+        });
+        if (Math.abs(standaloneGeometry.menuWidth - standaloneGeometry.expectedMenuWidth) > 1
+          || Math.abs(standaloneGeometry.loadingWidth - standaloneGeometry.expectedLoadingWidth) > 1
+          || !standaloneGeometry.tocMeetsEnd) {
+          failures.push(`desktop: standalone sidebar examples ignore their intended width or placement (${JSON.stringify(standaloneGeometry)})`);
+        }
+
+        const responsiveExample = routePage.locator("#sidebar-responsive");
+        if (await responsiveExample.getByRole("button", { name: "Toggle documentation menu" }).isVisible()
+          || await responsiveExample.getByRole("button", { name: "Close documentation menu" }).first().isVisible()
+          || !await responsiveExample.getByRole("main", { name: "Example application content" }).isVisible()) {
+          failures.push("desktop: responsive sidebar example exposes drawer-only controls or omits application content");
+        }
+
         const shellPreview = routePage.locator("#sidebar-shell");
         const expandShell = shellPreview.getByRole("button", { name: "Expand Complete application shell preview", exact: true });
         await expandShell.click();
@@ -1274,28 +1343,42 @@ try {
         }
 
         const themingText = await routePage.locator("#theming").textContent();
-        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "data-bs-scrollbars", "--bs-color-primary-contrast", "--bs-color-focus-ring", "--bs-scrollbar-thumb", ".bs-scrollbar"]) {
+        for (const publicContract of ["data-bs-theme", "data-bs-palette", "data-bs-radius", "data-bs-scrollbars", "native", "--bs-color-primary-contrast", "--bs-color-focus-ring", "--bs-scrollbar-thumb", "--bs-radius-pill", ".bs-scrollbar"]) {
           if (!themingText.includes(publicContract)) failures.push(`desktop: theming guide is missing ${publicContract}`);
         }
-        const scrollbarStyle = await routePage.locator(".docs-scrollbar-demo.bs-scrollbar").evaluate((element) => ({
+        const scrollbarStyle = await routePage.locator("[data-scrollbar-default]").evaluate((element) => ({
           color: getComputedStyle(element).scrollbarColor,
+          explicitlyOptedIn: element.classList.contains("bs-scrollbar"),
           overflow: getComputedStyle(element).overflowY,
         }));
-        if (scrollbarStyle.color === "auto" || scrollbarStyle.overflow !== "auto") {
-          failures.push(`desktop: themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
+        if (scrollbarStyle.color === "auto" || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
+          failures.push(`desktop: default themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
+        }
+        const nativeScrollbarColor = await routePage.locator("[data-scrollbar-native]").evaluate((element) => getComputedStyle(element).scrollbarColor);
+        if (nativeScrollbarColor !== "auto") failures.push(`desktop: native scrollbar opt-out did not restore browser styling (${nativeScrollbarColor})`);
+        const squareScrollbarRadius = await routePage.locator("[data-scrollbar-default]").evaluate((element) => {
+          element.dataset.bsRadius = "square";
+          return getComputedStyle(element, "::-webkit-scrollbar-thumb").borderRadius;
+        });
+        if (Number.parseFloat(squareScrollbarRadius) !== 0) {
+          failures.push(`desktop: square radius did not remove scrollbar thumb corners (${squareScrollbarRadius})`);
         }
       }
 
       if (config.sectionId === "code-windows") {
         const underlineTabs = routePage.locator("#code-window-source .bs-code-tabs-underline");
-        const underlineStyle = await underlineTabs.locator('[role="tab"][aria-selected="true"]').evaluate((element) => {
+        const underlineStyle = await underlineTabs.evaluate((tablist) => {
+          const element = tablist.querySelector('[role="tab"][aria-selected="true"]');
           const after = getComputedStyle(element, "::after");
           return {
             radius: getComputedStyle(element).borderRadius,
             indicator: after.backgroundColor,
+            overflowY: getComputedStyle(tablist).overflowY,
+            paddingLeft: getComputedStyle(tablist).paddingLeft,
+            scrollbarWidth: getComputedStyle(tablist).scrollbarWidth,
           };
         });
-        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)") {
+        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.paddingLeft !== "0px" || underlineStyle.scrollbarWidth !== "none") {
           failures.push(`${viewport.name}: code tab underline variant did not render correctly (${JSON.stringify(underlineStyle)})`);
         }
       }
@@ -1569,6 +1652,10 @@ try {
         ))) {
           failures.push(`desktop: form input icons are not visible Lucide-style SVGs (${JSON.stringify(iconContracts)})`);
         }
+        const buttonAddonLineHeights = await routePage.locator('[data-component-example="form-input-group-button"] .bs-input-group').evaluate((group) => [...group.children].map((element) => getComputedStyle(element).lineHeight));
+        if (new Set(buttonAddonLineHeights).size !== 1) {
+          failures.push(`desktop: button input-group add-ons do not share the input baseline (${JSON.stringify(buttonAddonLineHeights)})`);
+        }
       }
 
       if (config.sectionId === "form-native-controls") {
@@ -1583,6 +1670,17 @@ try {
         });
         if ((await routePage.locator("#native-color-value").textContent())?.trim() !== "#123456") {
           failures.push("desktop: color example did not synchronize its displayed value");
+        }
+        const colorValueAlignment = await routePage.locator('[data-component-example="form-color"] .bs-flex').evaluate((row) => {
+          const input = row.querySelector(".bs-color").getBoundingClientRect();
+          const output = row.querySelector("output").getBoundingClientRect();
+          return {
+            inputCenter: input.top + (input.height / 2),
+            outputCenter: output.top + (output.height / 2),
+          };
+        });
+        if (Math.abs(colorValueAlignment.inputCenter - colorValueAlignment.outputCenter) > 1) {
+          failures.push(`desktop: color value is not centered beside its picker (${JSON.stringify(colorValueAlignment)})`);
         }
       }
 
@@ -1702,6 +1800,23 @@ try {
         }
         if (!await linkButton.evaluate((element) => getComputedStyle(element).display.includes("flex"))) {
           failures.push("desktop: anchor button does not receive button styling");
+        }
+
+        const iconButton = routePage.locator('[data-component-example="button-icons"] .bs-btn-primary');
+        const iconAlignment = await iconButton.evaluate((button) => {
+          const buttonRect = button.getBoundingClientRect();
+          const iconRect = button.querySelector(".bs-icon").getBoundingClientRect();
+          return Math.abs((buttonRect.top + (buttonRect.height / 2)) - (iconRect.top + (iconRect.height / 2)));
+        });
+        if (iconAlignment > 1) failures.push(`desktop: button icon is not vertically centered with its label (${iconAlignment}px)`);
+        await iconButton.hover();
+        const primaryHoverPaint = await iconButton.evaluate((button) => ({
+          background: getComputedStyle(button).backgroundImage,
+          color: getComputedStyle(button).backgroundColor,
+          filter: getComputedStyle(button).filter,
+        }));
+        if (primaryHoverPaint.background === "none" || primaryHoverPaint.color === "rgba(0, 0, 0, 0)" || primaryHoverPaint.filter === "none") {
+          failures.push(`desktop: primary button hover loses its painted background or state feedback (${JSON.stringify(primaryHoverPaint)})`);
         }
 
         const variantsCopy = routePage.locator('[data-copy-example="button-variants"]');
