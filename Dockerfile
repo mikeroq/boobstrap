@@ -13,6 +13,7 @@ RUN npm ci
 COPY index.html vite.config.js ./
 COPY docs ./docs
 COPY playground ./playground
+COPY preview ./preview
 COPY src ./src
 COPY public ./public
 COPY scripts ./scripts
