@@ -561,6 +561,17 @@ try {
       if (!Object.values(desktopSidebarGeometry).every(Boolean)) {
         failures.push(`desktop: documentation scrollbar is inset from the sidebar edge (${JSON.stringify(desktopSidebarGeometry)})`);
       }
+      const desktopSidebarScrollbar = await docsPage.locator("#docs-sidebar > .bs-sidebar-content").evaluate((content) => ({
+        buttonDisplay: getComputedStyle(content, "::-webkit-scrollbar-button").display,
+        color: getComputedStyle(content).scrollbarColor,
+        supportsWebkitScrollbar: CSS.supports("selector(::-webkit-scrollbar)"),
+        thumbBackground: getComputedStyle(content, "::-webkit-scrollbar-thumb").backgroundColor,
+        width: getComputedStyle(content).scrollbarWidth,
+      }));
+      const desktopSidebarScrollbarReady = desktopSidebarScrollbar.supportsWebkitScrollbar
+        ? desktopSidebarScrollbar.color === "auto" && desktopSidebarScrollbar.width === "auto" && desktopSidebarScrollbar.buttonDisplay === "none" && desktopSidebarScrollbar.thumbBackground !== "rgba(0, 0, 0, 0)"
+        : desktopSidebarScrollbar.color !== "auto" && desktopSidebarScrollbar.width === "thin";
+      if (!desktopSidebarScrollbarReady) failures.push(`desktop: documentation sidebar is not using the themed scrollbar renderer (${JSON.stringify(desktopSidebarScrollbar)})`);
       if (await docsPage.locator(".docs-on-this-page.bs-sidebar.bs-sidebar-end.bs-sidebar-toc").count() !== 1) failures.push("desktop: on-this-page rail is not using the framework component");
       const formsDisclosure = docsPage.locator('[data-nav-prefix="/docs/components/forms"]');
       const formsToggle = formsDisclosure.locator("[data-nav-disclosure-toggle]");
