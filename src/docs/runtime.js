@@ -164,7 +164,7 @@ const setupExpandedPreviews = (root) => {
     preview.removeAttribute("data-preview-expanded");
     marker.replaceWith(preview);
     activePreview = undefined;
-    requestAnimationFrame(() => trigger.isConnected && trigger.focus());
+    if (trigger.isConnected) trigger.focus({ preventScroll: true });
   };
 
   const closePreview = () => {
