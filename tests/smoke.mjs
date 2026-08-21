@@ -1556,13 +1556,25 @@ try {
 
       if (config.sectionId === "form-otp") {
         const otpInputs = routePage.locator("#form-otp [data-bs-otp-input]");
-        await otpInputs.first().focus();
-        await otpInputs.first().evaluate((input) => {
+        const pasteOtp = (value) => otpInputs.first().evaluate((input, pastedValue) => {
           const clipboardData = new DataTransfer();
-          clipboardData.setData("text/plain", "1234567");
+          clipboardData.setData("text/plain", pastedValue);
           input.dispatchEvent(new ClipboardEvent("paste", { bubbles: true, cancelable: true, clipboardData }));
-        });
-        if (await routePage.locator("#form-otp [data-bs-otp-value]").inputValue() !== "123456") failures.push("desktop: OTP example did not synchronize its value");
+        }, value);
+        await pasteOtp("1234567");
+        const rejectedOtp = await routePage.locator("#form-otp [data-bs-otp]").evaluate((element) => ({
+          inputs: [...element.querySelectorAll("[data-bs-otp-input]")].map((input) => input.value),
+          value: element.querySelector("[data-bs-otp-value]").value,
+          state: element.dataset.bsState,
+        }));
+        if (rejectedOtp.inputs.some(Boolean) || rejectedOtp.value !== "" || rejectedOtp.state !== "empty") failures.push(`desktop: OTP example did not reject an overlength paste atomically (${JSON.stringify(rejectedOtp)})`);
+        await pasteOtp("123456");
+        const acceptedOtp = await routePage.locator("#form-otp [data-bs-otp]").evaluate((element) => ({
+          inputs: [...element.querySelectorAll("[data-bs-otp-input]")].map((input) => input.value),
+          value: element.querySelector("[data-bs-otp-value]").value,
+          state: element.dataset.bsState,
+        }));
+        if (acceptedOtp.inputs.join("") !== "123456" || acceptedOtp.value !== "123456" || acceptedOtp.state !== "complete") failures.push(`desktop: OTP example did not synchronize its exact six-digit paste (${JSON.stringify(acceptedOtp)})`);
         const otpSource = await routePage.locator("#form-otp .docs-code-block").allTextContents();
         if (otpSource.some((source) => source.includes("Repeat through")) || !otpSource.some((source) => source.match(/data-bs-otp-input/g)?.length === 6)) {
           failures.push("desktop: OTP documentation is not a complete six-input example");
