@@ -15,7 +15,7 @@ Day-to-day work is integrated through the `dev` branch and previewed with the fr
 
 The site imports `@boobstrap/boobstrap@0.5.0` from npm, keeping local development and production builds reproducible while exercising the same public package available to framework users.
 
-Vite serves the landing page at `/`, the React documentation application at `/docs`, 55 focused documentation routes, and the playground at `/playground`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
+Vite serves the landing page at `/`, the React documentation application at `/docs`, 55 focused documentation routes, the playground at `/playground`, and ephemeral clean documentation previews at `/preview`. Route metadata and navigation live in `src/docs-pages.js`. Each guide is a separately loaded content module under `src/docs/content`, while the shared React shell, navigation, pagination, outline, and behavior live under `src/docs`.
 
 The production build server-renders every documentation URL into its own HTML file. This preserves route-specific metadata, useful no-JavaScript content, and a fully styled current navigation state on first paint; React then hydrates the page and provides in-app routing without reloading the shell or its styles. The build also verifies that the class reference matches the installed framework stylesheet; after changing the framework pin, run `npm run docs:sync-reference` to regenerate that committed reference.
 
@@ -58,6 +58,7 @@ The runtime container serves the Vite production build from unprivileged Nginx o
 - Documentation client and server entries: `src/docs/entry-client.jsx`, `src/docs/entry-server.jsx`
 - Documentation route registry: `src/docs-pages.js`
 - Documentation example behavior: `src/docs/runtime.js`
+- Standalone documentation preview entry: `preview/index.html`, `src/docs/preview-client.js`
 - Static route renderer: `scripts/generate-doc-route-pages.mjs`
 - Social-card registry and image renderer: `src/social-cards.js`, `scripts/generate-social-images.mjs`
 - Documentation presentation: `src/docs.css`

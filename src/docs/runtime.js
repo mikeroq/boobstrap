@@ -6,9 +6,11 @@ import {
   ChevronRight,
   Diamond,
   Ellipsis,
+  ExternalLink,
   Heart,
   Info,
   LayoutDashboard,
+  Maximize2,
   Menu,
   PanelsTopLeft,
   Plus,
@@ -39,9 +41,11 @@ const docsIcons = {
   ChevronRight,
   Diamond,
   Ellipsis,
+  ExternalLink,
   Heart,
   Info,
   LayoutDashboard,
+  Maximize2,
   Menu,
   PanelsTopLeft,
   Plus,
@@ -99,6 +103,135 @@ const setupPreviewThemes = (root) => {
     cleanups.push(() => controls.remove());
   });
   return () => cleanups.forEach((cleanup) => cleanup());
+};
+
+const previewStoragePrefix = "boobstrap-docs-preview:";
+const standalonePreviewIds = new Set(["sidebar-shell", "sidebar-icon-collapse", "sidebar-responsive"]);
+
+const previewLabelFor = (preview) => {
+  if (preview.dataset.previewLabel) return preview.dataset.previewLabel;
+  let sibling = preview.previousElementSibling;
+  while (sibling && !sibling.matches("h2, h3")) sibling = sibling.previousElementSibling;
+  if (sibling) {
+    const heading = sibling.cloneNode(true);
+    heading.querySelectorAll(".docs-heading-anchor").forEach((anchor) => anchor.remove());
+    if (heading.textContent.trim()) return heading.textContent.trim();
+  }
+  const componentName = preview.dataset.componentExample?.replaceAll("-", " ");
+  return componentName ? titleCase(componentName) : "Component";
+};
+
+const serializeStandalonePreview = (preview, title) => {
+  const clone = preview.cloneNode(true);
+  clone.querySelectorAll(":scope > [data-preview-actions], :scope > [data-preview-theme-controls]").forEach((control) => control.remove());
+  return {
+    title,
+    html: clone.innerHTML,
+    id: preview.id,
+    className: [...preview.classList].filter((className) => className !== "docs-demo").join(" "),
+    theme: preview.dataset.bsTheme === "light" ? "light" : "dark",
+    componentExample: preview.dataset.componentExample ?? "",
+    createdAt: Date.now(),
+  };
+};
+
+const setupExpandedPreviews = (root) => {
+  const previews = [...root.querySelectorAll(".docs-demo")];
+  if (!previews.length) return () => {};
+
+  const dialog = document.createElement("dialog");
+  dialog.className = "docs-preview-dialog";
+  dialog.setAttribute("aria-labelledby", "docs-preview-dialog-title");
+  dialog.innerHTML = `
+    <div class="docs-preview-dialog-header">
+      <strong id="docs-preview-dialog-title">Expanded preview</strong>
+      <button class="docs-preview-dialog-close bs-btn bs-btn-secondary bs-btn-sm bs-btn-icon" type="button" aria-label="Close expanded preview"><i data-lucide="x" class="bs-icon" aria-hidden="true"></i></button>
+    </div>
+    <div class="docs-preview-dialog-viewport" data-expanded-preview-viewport></div>
+  `;
+  document.body.append(dialog);
+  createIcons({ icons: docsIcons, root: dialog });
+
+  const dialogTitle = dialog.querySelector("#docs-preview-dialog-title");
+  const dialogViewport = dialog.querySelector("[data-expanded-preview-viewport]");
+  const closeButton = dialog.querySelector(".docs-preview-dialog-close");
+  const cleanups = [];
+  let activePreview;
+
+  const restorePreview = () => {
+    if (!activePreview) return;
+    const { marker, preview, trigger } = activePreview;
+    preview.removeAttribute("data-preview-expanded");
+    marker.replaceWith(preview);
+    activePreview = undefined;
+    requestAnimationFrame(() => trigger.isConnected && trigger.focus());
+  };
+
+  const closePreview = () => {
+    if (dialog.open) dialog.close();
+    else restorePreview();
+  };
+
+  cleanups.push(listen(closeButton, "click", closePreview));
+  cleanups.push(listen(dialog, "close", restorePreview));
+
+  previews.forEach((preview) => {
+    const label = previewLabelFor(preview);
+    const actions = document.createElement("span");
+    actions.className = "docs-preview-actions";
+    actions.dataset.previewActions = "";
+    actions.setAttribute("role", "group");
+    actions.setAttribute("aria-label", `${label} preview actions`);
+
+    const expandButton = document.createElement("button");
+    expandButton.className = "docs-preview-action bs-btn bs-btn-secondary bs-btn-sm";
+    expandButton.type = "button";
+    expandButton.setAttribute("aria-label", `Expand ${label} preview`);
+    expandButton.innerHTML = '<i data-lucide="maximize-2" class="bs-icon bs-icon-sm" aria-hidden="true"></i><span>Expand</span>';
+    actions.append(expandButton);
+
+    cleanups.push(listen(expandButton, "click", () => {
+      const marker = document.createComment("expanded preview position");
+      preview.before(marker);
+      preview.dataset.previewExpanded = "";
+      dialogTitle.textContent = `${label} preview`;
+      dialogViewport.replaceChildren(preview);
+      activePreview = { marker, preview, trigger: expandButton };
+      dialog.showModal();
+      closeButton.focus();
+    }));
+
+    if (preview.hasAttribute("data-preview-standalone") || standalonePreviewIds.has(preview.id)) {
+      const standaloneButton = document.createElement("button");
+      standaloneButton.className = "docs-preview-action bs-btn bs-btn-secondary bs-btn-sm";
+      standaloneButton.type = "button";
+      standaloneButton.setAttribute("aria-label", `Open ${label} preview in a new tab`);
+      standaloneButton.innerHTML = '<i data-lucide="external-link" class="bs-icon bs-icon-sm" aria-hidden="true"></i><span>New tab</span>';
+      actions.append(standaloneButton);
+      cleanups.push(listen(standaloneButton, "click", () => {
+        const key = `${previewStoragePrefix}${crypto.randomUUID()}`;
+        localStorage.setItem(key, JSON.stringify(serializeStandalonePreview(preview, label)));
+        const previewUrl = new URL("/preview", window.location.origin);
+        previewUrl.searchParams.set("key", key);
+        window.open(previewUrl, "_blank", "noopener");
+        window.setTimeout(() => localStorage.removeItem(key), 60_000);
+      }));
+    }
+
+    preview.dataset.previewActionsReady = "";
+    preview.prepend(actions);
+    createIcons({ icons: docsIcons, root: actions });
+    cleanups.push(() => {
+      delete preview.dataset.previewActionsReady;
+      actions.remove();
+    });
+  });
+
+  return () => {
+    closePreview();
+    cleanups.reverse().forEach((cleanup) => cleanup());
+    dialog.remove();
+  };
 };
 
 const setupThemeConfigurator = (root) => {
@@ -316,6 +449,7 @@ export const initDocsPageRuntime = (root, { route, outline }) => {
   createIcons({ icons: docsIcons, root });
   setupHeadingAnchors(root, outline);
   cleanups.push(setupPreviewThemes(root));
+  cleanups.push(setupExpandedPreviews(root));
   cleanups.push(setupThemeConfigurator(root));
   cleanups.push(setupCopyControls(root));
   cleanups.push(setupFrameworkTabs(root));

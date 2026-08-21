@@ -8,6 +8,7 @@ const routeFiles = (useGeneratedDocs) => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
     ["/playground", "/playground/index.html"],
+    ["/preview", "/preview/index.html"],
   ]);
   docsPages.forEach(({ path }) => {
     const file = useGeneratedDocs ? `${path}/index.html` : "/docs/index.html";
@@ -22,6 +23,7 @@ const cleanRoutes = () => {
     ["/docs/", "/docs"],
     ["/playground.html", "/playground"],
     ["/playground/", "/playground"],
+    ["/preview/", "/preview"],
   ]);
   docsPages.forEach(({ path }) => {
     legacyRoutes.set(`${path}/`, path);
@@ -70,6 +72,7 @@ export default defineConfig({
         main: resolve(import.meta.dirname, "index.html"),
         docs: resolve(import.meta.dirname, "docs/index.html"),
         playground: resolve(import.meta.dirname, "playground/index.html"),
+        preview: resolve(import.meta.dirname, "preview/index.html"),
       },
     },
   },

@@ -365,7 +365,7 @@ try {
     }
   }
 
-  for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"]]) {
+  for (const [legacyPath, cleanPath] of [["/docs.html", "/docs"], ["/playground.html", "/playground"], ["/preview/", "/preview"]]) {
     const response = await fetch(`${baseUrl}${legacyPath}`, { redirect: "manual" });
     if (response.status !== 308 || response.headers.get("location") !== cleanPath) {
       failures.push(`${legacyPath}: expected a 308 redirect to ${cleanPath}`);
@@ -387,6 +387,15 @@ try {
   if (!playgroundSource.includes(`<meta property="og:image" content="${playgroundSocialCard.imageUrl}"`)
     || !playgroundSource.includes(`<meta name="twitter:image" content="${playgroundSocialCard.imageUrl}"`)) {
     failures.push("playground: route-specific social image metadata is missing");
+  }
+
+  const previewResponse = await fetch(`${baseUrl}/preview`);
+  const previewSource = await previewResponse.text();
+  if (!previewResponse.ok
+    || !previewSource.includes('<meta name="robots" content="noindex"')
+    || !previewSource.includes('<main class="docs-standalone-preview-status">')
+    || !previewSource.includes("<h1>Boobstrap component preview</h1>")) {
+    failures.push("standalone preview: clean noindex entry is not available");
   }
 
   for (const { path, title, description } of docsPages) {
@@ -672,6 +681,7 @@ try {
       const routeDimensions = await dimensionsFor(routePage);
       const visibleHeading = routePage.locator(".docs-content > .docs-component-hero > h1:visible, .docs-content > .docs-hero > h1:visible");
       const previews = routePage.locator("[data-component-example]:visible");
+      const allVisibleDemos = routePage.locator(".docs-demo:visible");
       const genericVisibleDemos = routePage.locator(".docs-demo:visible:not([data-theme-configurator])");
       const renderedCode = routePage.locator(".docs-content .docs-code-block pre code");
 
@@ -774,6 +784,13 @@ try {
         && preview.querySelectorAll(":scope > [data-preview-theme-controls] [data-preview-theme-option]").length === 2
       )))) {
         failures.push(`${viewport.name}: ${config.path} has a preview without independent light/dark controls`);
+      }
+      if (await allVisibleDemos.count() > 0 && !await allVisibleDemos.evaluateAll((elements) => elements.every((preview) => (
+        preview.querySelectorAll(":scope > [data-preview-actions]").length === 1
+        && preview.querySelectorAll(":scope > [data-preview-actions] [aria-label^='Expand ']").length === 1
+        && preview.querySelectorAll(":scope > [data-preview-actions] svg.lucide-maximize-2").length === 1
+      )))) {
+        failures.push(`${viewport.name}: ${config.path} has a preview without an accessible Lucide expand action`);
       }
       if (config.sectionId in expectedFormExampleCounts && await previews.count() !== expectedFormExampleCounts[config.sectionId]) {
         failures.push(`${viewport.name}: ${config.path} does not expose the expected focused form examples`);
@@ -1067,6 +1084,51 @@ try {
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "sidebars") {
+        const shellPreview = routePage.locator("#sidebar-shell");
+        const expandShell = shellPreview.getByRole("button", { name: "Expand Complete application shell preview", exact: true });
+        await expandShell.click();
+        const expandedDialog = routePage.locator(".docs-preview-dialog");
+        if (!await expandedDialog.evaluate((dialog) => dialog.open)
+          || await expandedDialog.locator("[data-expanded-preview-viewport] > #sidebar-shell").count() !== 1) {
+          failures.push("desktop: application shell did not open in the expanded preview dialog");
+        }
+        const expandedDimensions = await expandedDialog.evaluate((dialog) => ({
+          width: dialog.getBoundingClientRect().width,
+          height: dialog.getBoundingClientRect().height,
+          viewportWidth: window.innerWidth,
+          viewportHeight: window.innerHeight,
+        }));
+        if (Math.abs(expandedDimensions.width - expandedDimensions.viewportWidth) > 1
+          || Math.abs(expandedDimensions.height - expandedDimensions.viewportHeight) > 1) {
+          failures.push(`desktop: expanded preview is not full viewport (${JSON.stringify(expandedDimensions)})`);
+        }
+        await routePage.keyboard.press("Escape");
+        await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
+        if (await routePage.locator("#sidebar-shell + .docs-code-block").count() !== 1 || !await expandShell.evaluate((button) => button === document.activeElement)) {
+          failures.push("desktop: expanded preview did not restore its source position and trigger focus");
+        }
+
+        const standalonePagePromise = routePage.context().waitForEvent("page");
+        await shellPreview.getByRole("button", { name: "Open Complete application shell preview in a new tab", exact: true }).click();
+        const standalonePage = await standalonePagePromise;
+        await standalonePage.waitForFunction(() => document.documentElement.hasAttribute("data-preview-ready"));
+        const standaloneContract = await standalonePage.evaluate(() => ({
+          pathname: window.location.pathname,
+          title: document.title,
+          directShell: Boolean(document.querySelector("body#sidebar-shell > .docs-sidebar-shell-preview")),
+          docsWrapper: Boolean(document.querySelector(".docs-layout, .docs-header, .docs-demo, [data-preview-actions]")),
+          shellHeight: document.querySelector(".docs-sidebar-shell-preview")?.getBoundingClientRect().height,
+          viewportHeight: window.innerHeight,
+        }));
+        if (standaloneContract.pathname !== "/preview"
+          || standaloneContract.title !== "Complete application shell preview — Boobstrap"
+          || !standaloneContract.directShell
+          || standaloneContract.docsWrapper
+          || Math.abs(standaloneContract.shellHeight - standaloneContract.viewportHeight) > 1) {
+          failures.push(`desktop: clean application shell preview contract failed (${JSON.stringify(standaloneContract)})`);
+        }
+        await standalonePage.close();
+
         const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
         const collapsible = routePage.locator("#collapse-example-sidebar");
         await collapseTrigger.click();
