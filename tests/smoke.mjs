@@ -825,7 +825,7 @@ try {
       }
 
       if (config.sectionId === "sidebars") {
-        if (await routePage.locator('#sidebar-shell [style]').count() !== 0) failures.push(`${viewport.name}: complete application shell relies on CSP-blocked inline styles`);
+        if (await routePage.locator('#sidebars .docs-demo [style]').count() !== 0) failures.push(`${viewport.name}: sidebar examples rely on CSP-blocked inline styles`);
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
@@ -840,9 +840,11 @@ try {
         });
         if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
         if (await routePage.locator("#sidebar-shell .docs-sidebar-shell-header.bs-navbar").count() !== 1
+          || await routePage.locator("#sidebar-shell .docs-sidebar-shell-brand-mark").count() !== 1
+          || await shellSidebar.locator(":scope > .bs-sidebar-header .docs-sidebar-shell-brand-mark").count() !== 0
           || await routePage.locator("#sidebar-shell .bs-sidebar-end.bs-sidebar-toc").count() !== 1
           || await routePage.locator("#sidebar-shell svg.bs-icon").count() < 5) {
-          failures.push(`${viewport.name}: complete application shell does not mirror the documentation header, rails, and Lucide icon treatment`);
+          failures.push(`${viewport.name}: complete application shell does not expose one header brand with the expected rails and Lucide icon treatment`);
         }
       }
 
@@ -1084,6 +1086,51 @@ try {
       if (viewport.name !== "desktop") continue;
 
       if (config.sectionId === "sidebars") {
+        const sidebarExamples = routePage.locator("#sidebars .docs-demo[data-component-example]");
+        if (await sidebarExamples.count() !== 8) failures.push("desktop: sidebar guide is missing rendered examples");
+
+        const variantGeometry = await routePage.locator("#sidebar-variants").evaluate((preview) => ({
+          clientWidth: preview.clientWidth,
+          scrollWidth: preview.scrollWidth,
+          sidebarsContained: [...preview.querySelectorAll(".bs-sidebar")].every((sidebar) => {
+            const previewRect = preview.getBoundingClientRect();
+            const sidebarRect = sidebar.getBoundingClientRect();
+            return sidebarRect.left >= previewRect.left - 1 && sidebarRect.right <= previewRect.right + 1;
+          }),
+        }));
+        if (variantGeometry.scrollWidth > variantGeometry.clientWidth + 1 || !variantGeometry.sidebarsContained) {
+          failures.push(`desktop: sidebar variants overflow their preview (${JSON.stringify(variantGeometry)})`);
+        }
+
+        const standaloneGeometry = await routePage.evaluate(() => {
+          const rootSize = Number.parseFloat(getComputedStyle(document.documentElement).fontSize);
+          const menu = document.querySelector("#sidebar-menu-anatomy > .bs-sidebar").getBoundingClientRect();
+          const loading = document.querySelector("#sidebar-loading > .bs-sidebar").getBoundingClientRect();
+          const tocPreviewElement = document.querySelector("#sidebar-toc");
+          const tocPreview = tocPreviewElement.getBoundingClientRect();
+          const tocPreviewStyle = getComputedStyle(tocPreviewElement);
+          const toc = document.querySelector("#sidebar-toc > .bs-sidebar").getBoundingClientRect();
+          return {
+            menuWidth: menu.width,
+            expectedMenuWidth: 21 * rootSize,
+            loadingWidth: loading.width,
+            expectedLoadingWidth: 20 * rootSize,
+            tocMeetsEnd: Math.abs(toc.right - (tocPreview.right - Number.parseFloat(tocPreviewStyle.paddingRight))) <= 1,
+          };
+        });
+        if (Math.abs(standaloneGeometry.menuWidth - standaloneGeometry.expectedMenuWidth) > 1
+          || Math.abs(standaloneGeometry.loadingWidth - standaloneGeometry.expectedLoadingWidth) > 1
+          || !standaloneGeometry.tocMeetsEnd) {
+          failures.push(`desktop: standalone sidebar examples ignore their intended width or placement (${JSON.stringify(standaloneGeometry)})`);
+        }
+
+        const responsiveExample = routePage.locator("#sidebar-responsive");
+        if (await responsiveExample.getByRole("button", { name: "Toggle documentation menu" }).isVisible()
+          || await responsiveExample.getByRole("button", { name: "Close documentation menu" }).first().isVisible()
+          || !await responsiveExample.getByRole("main", { name: "Example application content" }).isVisible()) {
+          failures.push("desktop: responsive sidebar example exposes drawer-only controls or omits application content");
+        }
+
         const shellPreview = routePage.locator("#sidebar-shell");
         const expandShell = shellPreview.getByRole("button", { name: "Expand Complete application shell preview", exact: true });
         await expandShell.click();
@@ -1583,6 +1630,17 @@ try {
         });
         if ((await routePage.locator("#native-color-value").textContent())?.trim() !== "#123456") {
           failures.push("desktop: color example did not synchronize its displayed value");
+        }
+        const colorValueAlignment = await routePage.locator('[data-component-example="form-color"] .bs-flex').evaluate((row) => {
+          const input = row.querySelector(".bs-color").getBoundingClientRect();
+          const output = row.querySelector("output").getBoundingClientRect();
+          return {
+            inputCenter: input.top + (input.height / 2),
+            outputCenter: output.top + (output.height / 2),
+          };
+        });
+        if (Math.abs(colorValueAlignment.inputCenter - colorValueAlignment.outputCenter) > 1) {
+          failures.push(`desktop: color value is not centered beside its picker (${JSON.stringify(colorValueAlignment)})`);
         }
       }
 
