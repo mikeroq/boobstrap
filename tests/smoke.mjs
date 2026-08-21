@@ -1359,8 +1359,14 @@ try {
           color: getComputedStyle(element).scrollbarColor,
           explicitlyOptedIn: element.classList.contains("bs-scrollbar"),
           overflow: getComputedStyle(element).overflowY,
+          supportsWebkitScrollbar: CSS.supports("selector(::-webkit-scrollbar)"),
+          thumbBackground: getComputedStyle(element, "::-webkit-scrollbar-thumb").backgroundColor,
+          width: getComputedStyle(element).scrollbarWidth,
         }));
-        if (scrollbarStyle.buttonDisplay !== "none" || Number.parseFloat(scrollbarStyle.buttonHeight) !== 0 || Number.parseFloat(scrollbarStyle.buttonWidth) !== 0 || !scrollbarStyle.buttonStatesCovered || scrollbarStyle.color === "auto" || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
+        const scrollbarRendererReady = scrollbarStyle.supportsWebkitScrollbar
+          ? scrollbarStyle.color === "auto" && scrollbarStyle.width === "auto" && scrollbarStyle.thumbBackground !== "rgba(0, 0, 0, 0)"
+          : scrollbarStyle.color !== "auto" && scrollbarStyle.width === "thin";
+        if (scrollbarStyle.buttonDisplay !== "none" || Number.parseFloat(scrollbarStyle.buttonHeight) !== 0 || Number.parseFloat(scrollbarStyle.buttonWidth) !== 0 || !scrollbarStyle.buttonStatesCovered || !scrollbarRendererReady || scrollbarStyle.explicitlyOptedIn || scrollbarStyle.overflow !== "auto") {
           failures.push(`desktop: default themed scrollbar example is not active (${JSON.stringify(scrollbarStyle)})`);
         }
         const nativeScrollbarColor = await routePage.locator("[data-scrollbar-native]").evaluate((element) => getComputedStyle(element).scrollbarColor);
