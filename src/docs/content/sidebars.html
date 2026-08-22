@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Sidebar</span></nav><div class="docs-kicker">Components</div><h1>Sidebar</h1><p class="bs-lead">Build composable application sidebars with fixed regions, nested menus, responsive drawers, variants, and desktop collapse modes.</p><div class="docs-component-meta" aria-label="Sidebar documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Sidebar</span></nav><div class="docs-kicker">Components</div><h1>Sidebar</h1><p class="bs-lead">Build composable application sidebars with fixed regions, nested menus, responsive drawers, variants, and desktop collapse modes.</p><div class="docs-component-meta" aria-label="Sidebar documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="sidebars">
             <div class="docs-kicker">Components</div>
@@ -20,11 +20,13 @@
 │   │                   └── SidebarMenuSub
 │   ├── SidebarFooter
 │   └── SidebarRail
-└── SidebarMain + SidebarTrigger</code></pre></div><h3 aria-level="2" id="sidebars-complete-application-shell">Complete application shell</h3><p>Compose a fixed identity region, independently scrolling navigation, account footer, and primary surface. The source order stays meaningful when the layout stacks on a narrow viewport.</p><div class="docs-demo" id="sidebar-shell" data-component-example="sidebar-shell"><div class="bs-sidebar-layout">
-  <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Acme workspace">
+└── SidebarMain + SidebarTrigger</code></pre></div><h3 aria-level="2" id="sidebars-complete-application-shell">Complete application shell</h3><p>Compose a shared header with start and end rails around a flexible reading surface. This example mirrors the documentation shell: fixed identity and search regions, independently scrolling navigation, page content, and a compact table of contents.</p><div class="docs-demo" id="sidebar-shell" data-component-example="sidebar-shell"><div class="docs-sidebar-shell-preview">
+  <header class="docs-sidebar-shell-header bs-navbar"><div class="docs-sidebar-shell-brand"><span class="docs-sidebar-shell-brand-mark">B</span><span>Boobstrap</span><span class="docs-sidebar-shell-context">/ Docs</span></div><button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button></header>
+  <div class="bs-sidebar-layout docs-sidebar-shell-body">
+  <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
     <div class="bs-sidebar-header">
       <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
-        <span aria-hidden="true">◆</span><span class="bs-sidebar-label">Acme, Inc.</span><span aria-hidden="true">⌄</span>
+        <span class="bs-sidebar-label">Boobstrap Docs</span><i data-lucide="chevron-right" class="bs-icon" aria-hidden="true"></i>
       </button>
     </div>
     <div class="bs-sidebar-content">
@@ -32,9 +34,9 @@
         <div class="bs-sidebar-group-label" id="shell-workspace-label">Workspace</div>
         <div class="bs-sidebar-group-content">
           <ul class="bs-sidebar-menu">
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">Dashboard</span></a></li>
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">□</span><span class="bs-sidebar-label">Projects</span><span class="bs-sidebar-menu-badge">8</span></a></li>
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">♧</span><span class="bs-sidebar-label">Team</span></a></li>
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Overview</span></a></li>
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="book-open" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Foundations</span><span class="bs-sidebar-menu-badge">8</span></a></li>
+            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Components</span></a></li>
           </ul>
         </div>
       </section>
@@ -42,18 +44,20 @@
       <section class="bs-sidebar-group" aria-labelledby="shell-tools-label">
         <div class="bs-sidebar-group-label" id="shell-tools-label">Tools</div>
         <div class="bs-sidebar-group-content">
-          <ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><span aria-hidden="true">⚙</span><span class="bs-sidebar-label">Settings</span></a></li></ul>
+          <ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="settings" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Settings</span></a></li></ul>
         </div>
       </section>
     </div>
-    <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span aria-hidden="true">●</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
+    <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span class="bs-avatar bs-avatar-sm" aria-hidden="true">AL</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
   </aside>
-  <div class="bs-sidebar-main bs-p-6" role="region" aria-label="Example main content"><span class="bs-badge bs-badge-primary">Main content</span><h4 class="bs-mt-4">Project overview</h4><p class="bs-text-muted">Your application content lives in the flexible main region.</p></div>
-</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete sidebar shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete sidebar shell code example"><code class="">&lt;div class="bs-sidebar-layout"&gt;
-  &lt;aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Acme workspace"&gt;
+  <main class="bs-sidebar-main docs-sidebar-shell-main" aria-label="Example documentation article"><nav class="bs-breadcrumb" aria-label="Example breadcrumb"><a href="#sidebar-shell">Docs</a><span aria-hidden="true">/</span><span>Components</span></nav><span class="bs-badge bs-badge-primary">Components</span><h4>Sidebar</h4><p class="bs-text-muted">Build composable application sidebars with fixed regions, nested menus, responsive drawers, and compact page outlines.</p><div class="docs-sidebar-shell-summary"><div><strong>CSS first</strong><span>Sticky layout and visual regions</span></div><div><strong>Behavior optional</strong><span>Drawers and collapse modes</span></div></div></main>
+  <aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page example"><p class="bs-nav-heading">On this page</p><nav class="bs-nav"><a class="bs-nav-link" href="#sidebar-shell" aria-current="location">Overview</a><a class="bs-nav-link" href="#sidebar-shell">Examples</a><a class="bs-nav-link" href="#sidebar-shell">API</a></nav></aside>
+</div></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete documentation shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete documentation shell code example"><code class="">&lt;header class="bs-navbar"&gt;...brand and global actions...&lt;/header&gt;
+&lt;div class="bs-sidebar-layout"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation"&gt;
     &lt;div class="bs-sidebar-header"&gt;
       &lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;
-        &lt;span aria-hidden="true"&gt;◆&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Acme, Inc.&lt;/span&gt;&lt;span aria-hidden="true"&gt;⌄&lt;/span&gt;
+        &lt;span class="bs-sidebar-label"&gt;Boobstrap Docs&lt;/span&gt;
       &lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="bs-sidebar-content"&gt;
@@ -61,9 +65,9 @@
         &lt;div class="bs-sidebar-group-label" id="shell-workspace-label"&gt;Workspace&lt;/div&gt;
         &lt;div class="bs-sidebar-group-content"&gt;
           &lt;ul class="bs-sidebar-menu"&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"&gt;&lt;span aria-hidden="true"&gt;⌂&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;span aria-hidden="true"&gt;□&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Projects&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;8&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;span aria-hidden="true"&gt;♧&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Team&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Overview&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="book-open" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Foundations&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;8&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Components&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
         &lt;/div&gt;
       &lt;/section&gt;
@@ -71,29 +75,32 @@
       &lt;section class="bs-sidebar-group" aria-labelledby="shell-tools-label"&gt;
         &lt;div class="bs-sidebar-group-label" id="shell-tools-label"&gt;Tools&lt;/div&gt;
         &lt;div class="bs-sidebar-group-content"&gt;
-          &lt;ul class="bs-sidebar-menu"&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;span aria-hidden="true"&gt;⚙&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Settings&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
+          &lt;ul class="bs-sidebar-menu"&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="settings" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Settings&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         &lt;/div&gt;
       &lt;/section&gt;
     &lt;/div&gt;
-    &lt;div class="bs-sidebar-footer"&gt;&lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;&lt;span aria-hidden="true"&gt;●&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Ada Lovelace&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
+    &lt;div class="bs-sidebar-footer"&gt;&lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;&lt;span class="bs-avatar bs-avatar-sm" aria-hidden="true"&gt;AL&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Ada Lovelace&lt;/span&gt;&lt;/button&gt;&lt;/div&gt;
   &lt;/aside&gt;
-  &lt;div class="bs-sidebar-main bs-p-6" role="region" aria-label="Example main content"&gt;&lt;span class="bs-badge bs-badge-primary"&gt;Main content&lt;/span&gt;&lt;h4 class="bs-mt-4"&gt;Project overview&lt;/h4&gt;&lt;p class="bs-text-muted"&gt;Your application content lives in the flexible main region.&lt;/p&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-menu-actions-badges-and-nested-destinations">Menu actions, badges, and nested destinations</h3><p>A menu item can combine one primary destination with an independently named action, count, or nested list. Keep links for navigation and buttons for commands.</p><div class="docs-demo" id="sidebar-menu-anatomy" data-component-example="sidebar-menu-anatomy"><aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 21rem" aria-label="Project navigation">
+  &lt;main class="bs-sidebar-main"&gt;...documentation article...&lt;/main&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page"&gt;
+    &lt;p class="bs-nav-heading"&gt;On this page&lt;/p&gt;&lt;nav class="bs-nav"&gt;...section links...&lt;/nav&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-menu-actions-badges-and-nested-destinations">Menu actions, badges, and nested destinations</h3><p>A menu item can combine one primary destination with an independently named action, count, or nested list. Keep links for navigation and buttons for commands.</p><div class="docs-demo" id="sidebar-menu-anatomy" data-component-example="sidebar-menu-anatomy"><aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-menu" aria-label="Project navigation">
   <div class="bs-sidebar-content">
     <section class="bs-sidebar-group" aria-labelledby="projects-label">
       <div class="bs-sidebar-group-label" id="projects-label">Projects</div>
-      <button class="bs-sidebar-group-action" type="button" aria-label="Add project">+</button>
+      <button class="bs-sidebar-group-action" type="button" aria-label="Add project"><i data-lucide="plus" class="bs-icon" aria-hidden="true"></i></button>
       <div class="bs-sidebar-group-content">
         <ul class="bs-sidebar-menu">
           <li class="bs-sidebar-menu-item">
-            <a class="bs-sidebar-menu-button" href="#sidebar-menu-anatomy" data-active="true"><span aria-hidden="true">◇</span><span class="bs-sidebar-label">Website redesign</span><span class="bs-sidebar-menu-badge">3</span></a>
-            <button class="bs-sidebar-menu-action" type="button" aria-label="Website redesign actions">•••</button>
+            <a class="bs-sidebar-menu-button" href="#sidebar-menu-anatomy" data-active="true"><i data-lucide="diamond" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Website redesign</span><span class="bs-sidebar-menu-badge">3</span></a>
+            <button class="bs-sidebar-menu-action" type="button" aria-label="Website redesign actions"><i data-lucide="ellipsis" class="bs-icon" aria-hidden="true"></i></button>
             <ul class="bs-sidebar-menu-sub">
               <li class="bs-sidebar-menu-sub-item"><a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy" aria-current="page">Overview</a></li>
               <li class="bs-sidebar-menu-sub-item"><a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy">Activity</a></li>
             </ul>
           </li>
-          <li class="bs-sidebar-menu-item"><button class="bs-sidebar-menu-button" type="button" disabled=""><span aria-hidden="true">◇</span><span class="bs-sidebar-label">Archived project</span></button></li>
+          <li class="bs-sidebar-menu-item"><button class="bs-sidebar-menu-button" type="button" disabled><i data-lucide="diamond" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Archived project</span></button></li>
         </ul>
       </div>
     </section>
@@ -102,51 +109,52 @@
   &lt;div class="bs-sidebar-content"&gt;
     &lt;section class="bs-sidebar-group" aria-labelledby="projects-label"&gt;
       &lt;div class="bs-sidebar-group-label" id="projects-label"&gt;Projects&lt;/div&gt;
-      &lt;button class="bs-sidebar-group-action" type="button" aria-label="Add project"&gt;+&lt;/button&gt;
+      &lt;button class="bs-sidebar-group-action" type="button" aria-label="Add project"&gt;&lt;i data-lucide="plus" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
       &lt;div class="bs-sidebar-group-content"&gt;
         &lt;ul class="bs-sidebar-menu"&gt;
           &lt;li class="bs-sidebar-menu-item"&gt;
-            &lt;a class="bs-sidebar-menu-button" href="#sidebar-menu-anatomy" data-active="true"&gt;&lt;span aria-hidden="true"&gt;◇&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Website redesign&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;3&lt;/span&gt;&lt;/a&gt;
-            &lt;button class="bs-sidebar-menu-action" type="button" aria-label="Website redesign actions"&gt;•••&lt;/button&gt;
+            &lt;a class="bs-sidebar-menu-button" href="#sidebar-menu-anatomy" data-active="true"&gt;&lt;i data-lucide="diamond" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Website redesign&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;3&lt;/span&gt;&lt;/a&gt;
+            &lt;button class="bs-sidebar-menu-action" type="button" aria-label="Website redesign actions"&gt;&lt;i data-lucide="ellipsis" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
             &lt;ul class="bs-sidebar-menu-sub"&gt;
               &lt;li class="bs-sidebar-menu-sub-item"&gt;&lt;a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy" aria-current="page"&gt;Overview&lt;/a&gt;&lt;/li&gt;
               &lt;li class="bs-sidebar-menu-sub-item"&gt;&lt;a class="bs-sidebar-menu-sub-button" href="#sidebar-menu-anatomy"&gt;Activity&lt;/a&gt;&lt;/li&gt;
             &lt;/ul&gt;
           &lt;/li&gt;
-          &lt;li class="bs-sidebar-menu-item"&gt;&lt;button class="bs-sidebar-menu-button" type="button" disabled&gt;&lt;span aria-hidden="true"&gt;◇&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Archived project&lt;/span&gt;&lt;/button&gt;&lt;/li&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;button class="bs-sidebar-menu-button" type="button" disabled&gt;&lt;i data-lucide="diamond" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Archived project&lt;/span&gt;&lt;/button&gt;&lt;/li&gt;
         &lt;/ul&gt;
       &lt;/div&gt;
     &lt;/section&gt;
   &lt;/div&gt;
-&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-default-floating-and-inset-variants">Default, floating, and inset variants</h3><p>Use the default bordered rail for dense products, floating for an elevated panel, and inset when the main surface should read as a distinct workspace.</p><div class="docs-demo" id="sidebar-variants" data-component-example="sidebar-variants"><div class="bs-grid bs-gap-6">
-  <div class="bs-col-12 bs-col-lg-4"><aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Default sidebar example"><div class="bs-sidebar-header"><strong>Default</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside></div>
-  <div class="bs-col-12 bs-col-lg-4"><aside class="bs-sidebar bs-sidebar-start bs-sidebar-floating" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Floating sidebar example"><div class="bs-sidebar-header"><strong>Floating</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside></div>
-  <div class="bs-col-12 bs-col-lg-4"><div class="bs-sidebar-layout" style="min-block-size: 12rem"><aside class="bs-sidebar bs-sidebar-start bs-sidebar-inset" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Inset sidebar example"><div class="bs-sidebar-header"><strong>Inset</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside><div class="bs-sidebar-main bs-p-4">Content</div></div></div>
+&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-default-floating-and-inset-variants">Default, floating, and inset variants</h3><p>Use the default bordered rail for dense products, floating for an elevated panel, and inset when the main surface should read as a distinct workspace.</p><div class="docs-demo" id="sidebar-variants" data-component-example="sidebar-variants"><div class="docs-sidebar-variant-grid">
+  <aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-variant" aria-label="Default sidebar example"><div class="bs-sidebar-header"><strong>Default</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside>
+  <aside class="bs-sidebar bs-sidebar-start bs-sidebar-floating docs-sidebar-example docs-sidebar-example-variant" aria-label="Floating sidebar example"><div class="bs-sidebar-header"><strong>Floating</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside>
+  <div class="bs-sidebar-layout docs-sidebar-example-inset"><aside class="bs-sidebar bs-sidebar-start bs-sidebar-inset docs-sidebar-example" aria-label="Inset sidebar example"><div class="bs-sidebar-header"><strong>Inset</strong></div><div class="bs-sidebar-content"><a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page">Overview</a></div></aside><div class="bs-sidebar-main bs-p-4">Content</div></div>
 </div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Sidebar variants</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Sidebar variants code example"><code class="">&lt;div class="bs-grid bs-gap-6"&gt;
   &lt;div class="bs-col-12 bs-col-lg-4"&gt;&lt;aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Default sidebar example"&gt;&lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;Default&lt;/strong&gt;&lt;/div&gt;&lt;div class="bs-sidebar-content"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page"&gt;Overview&lt;/a&gt;&lt;/div&gt;&lt;/aside&gt;&lt;/div&gt;
   &lt;div class="bs-col-12 bs-col-lg-4"&gt;&lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-floating" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Floating sidebar example"&gt;&lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;Floating&lt;/strong&gt;&lt;/div&gt;&lt;div class="bs-sidebar-content"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page"&gt;Overview&lt;/a&gt;&lt;/div&gt;&lt;/aside&gt;&lt;/div&gt;
   &lt;div class="bs-col-12 bs-col-lg-4"&gt;&lt;div class="bs-sidebar-layout" style="min-block-size: 12rem"&gt;&lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-inset" style="position: relative; --bs-sidebar-height: 12rem" aria-label="Inset sidebar example"&gt;&lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;Inset&lt;/strong&gt;&lt;/div&gt;&lt;div class="bs-sidebar-content"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-variants" aria-current="page"&gt;Overview&lt;/a&gt;&lt;/div&gt;&lt;/aside&gt;&lt;div class="bs-sidebar-main bs-p-4"&gt;Content&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-icon-collapse-mode">Icon-collapse mode</h3><p>Use icon mode when destinations remain recognizable without labels. The edge rail and any external trigger share the same aria-controls target; Control/Command+B is enabled by the declared shortcut.</p><div class="docs-demo" id="sidebar-icon-collapse" data-component-example="sidebar-icon-collapse"><button class="bs-sidebar-trigger bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar" aria-expanded="true">☰</button>
-<div class="bs-sidebar-layout" style="min-block-size: 22rem">
-  <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible" id="collapse-example-sidebar" style="position: relative; --bs-sidebar-height: 22rem" data-bs-sidebar="" data-bs-sidebar-collapse="icon" data-bs-sidebar-media="(max-width: 0px)" data-bs-sidebar-shortcut="b" data-bs-state="expanded" aria-label="Collapsible example navigation" data-bs-overlay="closed">
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-icon-collapse-mode">Icon-collapse mode</h3><p>Use icon mode when destinations remain recognizable without labels. The edge rail and any external trigger share the same aria-controls target; Control/Command+B is enabled by the declared shortcut.</p><div class="docs-demo" id="sidebar-icon-collapse" data-component-example="sidebar-icon-collapse"><button class="bs-sidebar-trigger bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar" aria-expanded="true"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
+<div class="bs-sidebar-layout docs-sidebar-example-collapse-layout">
+  <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible docs-sidebar-example docs-sidebar-example-collapse" id="collapse-example-sidebar" data-bs-sidebar="" data-bs-sidebar-collapse="icon" data-bs-sidebar-media="(max-width: 0px)" data-bs-sidebar-shortcut="b" data-bs-state="expanded" aria-label="Collapsible example navigation" data-bs-overlay="closed">
     <div class="bs-sidebar-header"><strong class="bs-sidebar-label">Acme</strong></div>
-    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">Dashboard</span></a></li><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse"><span aria-hidden="true">□</span><span class="bs-sidebar-label">Projects</span><span class="bs-sidebar-menu-badge">8</span></a></li></ul></div>
+    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Dashboard</span></a></li><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Projects</span><span class="bs-sidebar-menu-badge">8</span></a></li></ul></div>
     <button class="bs-sidebar-rail" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar width" aria-expanded="true"></button>
   </aside>
   <div class="bs-sidebar-main bs-p-5" role="region" aria-label="Collapse mode result">Toggle the rail to compare expanded and icon states.</div>
-</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Collapsible icon rail</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Collapsible icon rail code example"><code class="">&lt;button class="bs-sidebar-trigger bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar"&gt;☰&lt;/button&gt;
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Collapsible icon rail</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Collapsible icon rail code example"><code class="">&lt;button class="bs-sidebar-trigger bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar"&gt;&lt;i data-lucide="menu" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
 &lt;div class="bs-sidebar-layout" style="min-block-size: 22rem"&gt;
   &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible" id="collapse-example-sidebar" style="position: relative; --bs-sidebar-height: 22rem" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-sidebar-media="(max-width: 0px)" data-bs-sidebar-shortcut="b" data-bs-state="expanded" aria-label="Collapsible example navigation"&gt;
     &lt;div class="bs-sidebar-header"&gt;&lt;strong class="bs-sidebar-label"&gt;Acme&lt;/strong&gt;&lt;/div&gt;
-    &lt;div class="bs-sidebar-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse" aria-current="page"&gt;&lt;span aria-hidden="true"&gt;⌂&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse"&gt;&lt;span aria-hidden="true"&gt;□&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;Projects&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;8&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
+    &lt;div class="bs-sidebar-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-icon-collapse"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Projects&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;8&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/div&gt;
     &lt;button class="bs-sidebar-rail" type="button" data-bs-toggle="sidebar" aria-controls="collapse-example-sidebar" aria-label="Toggle example sidebar width"&gt;&lt;/button&gt;
   &lt;/aside&gt;
   &lt;div class="bs-sidebar-main bs-p-5" role="region" aria-label="Collapse mode result"&gt;Toggle the rail to compare expanded and icon states.&lt;/div&gt;
 &lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-choose-a-collapse-mode">Choose a collapse mode</h3><p>Icon retains the narrow rail, offcanvas removes it completely on desktop, and none keeps it persistent. Mobile drawer behavior remains independent when the drawer class is present.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Collapse modes</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Collapse modes code example"><code class="">&lt;aside class="bs-sidebar bs-sidebar-collapsible" data-bs-sidebar-collapse="icon"&gt;...&lt;/aside&gt;
 &lt;aside class="bs-sidebar bs-sidebar-collapsible" data-bs-sidebar-collapse="offcanvas"&gt;...&lt;/aside&gt;
-&lt;aside class="bs-sidebar" data-bs-sidebar-collapse="none"&gt;...&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-responsive-navigation-sidebar">Responsive navigation sidebar</h3><p>The sidebar remains a sticky rail at large widths and becomes an accessible off-canvas drawer below 64rem. The optional controller owns the backdrop, focus, Escape, ARIA state, and scroll lock.</p><div class="docs-demo" id="sidebar-responsive" data-component-example="sidebar-responsive"><button class="bs-sidebar-trigger" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar" aria-label="Toggle documentation menu" aria-expanded="true">☰</button>
-<aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="example-sidebar" style="--bs-sidebar-height: 20rem" data-bs-sidebar="" data-bs-state="expanded" aria-label="Example documentation navigation" data-bs-overlay="closed">
-  <div class="bs-sidebar-header"><div class="bs-flex bs-items-center bs-justify-between bs-gap-3"><strong>Documentation</strong><button class="bs-sidebar-trigger" type="button" data-bs-sidebar-dismiss="" aria-label="Close documentation menu">×</button></div></div>
+&lt;aside class="bs-sidebar" data-bs-sidebar-collapse="none"&gt;...&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-responsive-navigation-sidebar">Responsive navigation sidebar</h3><p>The sidebar remains a sticky rail at large widths and becomes an accessible off-canvas drawer below 64rem. The optional controller owns the backdrop, focus, Escape, ARIA state, and scroll lock.</p><div class="docs-demo" id="sidebar-responsive" data-component-example="sidebar-responsive"><button class="bs-sidebar-trigger bs-lg-hidden bs-mb-4" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar" aria-label="Toggle documentation menu" aria-expanded="true"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
+<div class="bs-sidebar-layout docs-sidebar-example-responsive-layout">
+<aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer docs-sidebar-example docs-sidebar-example-responsive" id="example-sidebar" data-bs-sidebar="" data-bs-state="expanded" aria-label="Example documentation navigation" data-bs-overlay="closed">
+  <div class="bs-sidebar-header"><div class="bs-flex bs-items-center bs-justify-between bs-gap-3"><strong>Documentation</strong><button class="bs-sidebar-trigger bs-lg-hidden" type="button" data-bs-sidebar-dismiss aria-label="Close documentation menu"><i data-lucide="x" class="bs-icon" aria-hidden="true"></i></button></div></div>
   <div class="bs-sidebar-content">
     <nav class="bs-sidebar-group" aria-label="Documentation sections">
       <div class="bs-sidebar-group-label">Get started</div>
@@ -157,9 +165,12 @@
     </nav>
   </div>
 </aside>
-<button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss="" aria-controls="example-sidebar" aria-label="Close documentation menu" data-bs-state="closed"></button></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive sidebar drawer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Responsive sidebar drawer code example"><code class="">&lt;button class="bs-sidebar-trigger" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar" aria-label="Toggle documentation menu"&gt;☰&lt;/button&gt;
+<main class="bs-sidebar-main bs-p-5" aria-label="Example application content"><strong>Workspace overview</strong><p class="bs-text-muted bs-mb-0 bs-mt-2">The navigation stays persistent here and becomes a drawer below the configured breakpoint.</p></main>
+</div>
+<button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss="" aria-controls="example-sidebar" aria-label="Close documentation menu" data-bs-state="closed"></button></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive sidebar drawer</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Responsive sidebar drawer code example"><code class="">&lt;button class="bs-sidebar-trigger bs-lg-hidden" type="button" data-bs-toggle="sidebar" aria-controls="example-sidebar" aria-label="Toggle documentation menu"&gt;&lt;i data-lucide="menu" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;div class="bs-sidebar-layout"&gt;
 &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-drawer" id="example-sidebar" style="--bs-sidebar-height: 20rem" data-bs-sidebar data-bs-state="closed" aria-label="Example documentation navigation"&gt;
-  &lt;div class="bs-sidebar-header"&gt;&lt;div class="bs-flex bs-items-center bs-justify-between bs-gap-3"&gt;&lt;strong&gt;Documentation&lt;/strong&gt;&lt;button class="bs-sidebar-trigger" type="button" data-bs-sidebar-dismiss aria-label="Close documentation menu"&gt;×&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
+  &lt;div class="bs-sidebar-header"&gt;&lt;div class="bs-flex bs-items-center bs-justify-between bs-gap-3"&gt;&lt;strong&gt;Documentation&lt;/strong&gt;&lt;button class="bs-sidebar-trigger bs-lg-hidden" type="button" data-bs-sidebar-dismiss aria-label="Close documentation menu"&gt;&lt;i data-lucide="x" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;
   &lt;div class="bs-sidebar-content"&gt;
     &lt;nav class="bs-sidebar-group" aria-label="Documentation sections"&gt;
       &lt;div class="bs-sidebar-group-label"&gt;Get started&lt;/div&gt;
@@ -170,7 +181,9 @@
     &lt;/nav&gt;
   &lt;/div&gt;
 &lt;/aside&gt;
-&lt;button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="example-sidebar" aria-label="Close documentation menu"&gt;&lt;/button&gt;</code></pre></div><h3 aria-level="2" id="sidebars-right-hand-table-of-contents">Right-hand table of contents</h3><p>Use the end and table-of-contents modifiers for compact in-page navigation. The page layout decides when to hide the rail so the reading column keeps enough width.</p><div class="docs-demo" id="sidebar-toc" data-component-example="sidebar-toc"><aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" style="--bs-sidebar-height: auto" aria-label="On this page">
+&lt;main class="bs-sidebar-main bs-p-5"&gt;...application content...&lt;/main&gt;
+&lt;/div&gt;
+&lt;button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="example-sidebar" aria-label="Close documentation menu"&gt;&lt;/button&gt;</code></pre></div><h3 aria-level="2" id="sidebars-right-hand-table-of-contents">Right-hand table of contents</h3><p>Use the end and table-of-contents modifiers for compact in-page navigation. The page layout decides when to hide the rail so the reading column keeps enough width.</p><div class="docs-demo" id="sidebar-toc" data-component-example="sidebar-toc"><aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc docs-sidebar-example docs-sidebar-example-toc" aria-label="On this page">
   <p class="bs-nav-heading">On this page</p>
   <nav class="bs-nav">
     <a class="bs-nav-link" href="#sidebar-toc" aria-current="location">Overview</a>
@@ -193,13 +206,13 @@ element.addEventListener("bs:sidebar:shown", () =&gt; {
   console.log("Navigation drawer opened");
 });
 
-// Later: boobstrap.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-loading-state">Loading state</h3><p>Skeleton rows preserve menu rhythm while destinations load. Change each placeholder's text width locally and let the framework disable pulsing when reduced motion is preferred.</p><div class="docs-demo" id="sidebar-loading" data-component-example="sidebar-loading"><aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="Loading navigation">
+// Later: boobstrap.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-loading-state">Loading state</h3><p>Skeleton rows preserve menu rhythm while destinations load. Change each placeholder's text width locally and let the framework disable pulsing when reduced motion is preferred.</p><div class="docs-demo" id="sidebar-loading" data-component-example="sidebar-loading"><aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-loading" aria-label="Loading navigation">
   <div class="bs-sidebar-header"><strong>Loading workspace</strong></div>
   <div class="bs-sidebar-content">
     <div class="bs-sidebar-group"><div class="bs-sidebar-group-label">Projects</div><div class="bs-sidebar-group-content">
-      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 72%" aria-hidden="true"></div>
-      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 55%" aria-hidden="true"></div>
-      <div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 63%" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-wide" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-narrow" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-medium" aria-hidden="true"></div>
     </div></div>
   </div>
 </aside></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Loading placeholders</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Loading placeholders code example"><code class="">&lt;aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="Loading navigation"&gt;
@@ -212,19 +225,19 @@ element.addEventListener("bs:sidebar:shown", () =&gt; {
     &lt;/div&gt;&lt;/div&gt;
   &lt;/div&gt;
 &lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-right-to-left-and-end-placement">Right-to-left and end placement</h3><p>Start/end placement, borders, nested-menu indentation, actions, and badges use logical properties, so the same markup follows document direction without mirrored class names.</p><div class="docs-demo" id="sidebar-rtl" data-component-example="sidebar-rtl"><div dir="rtl">
-  <aside class="bs-sidebar bs-sidebar-end" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="التنقل في المشروع">
+  <aside class="bs-sidebar bs-sidebar-end docs-sidebar-example docs-sidebar-example-rtl" aria-label="التنقل في المشروع">
     <div class="bs-sidebar-header"><strong>مساحة العمل</strong></div>
     <div class="bs-sidebar-content"><ul class="bs-sidebar-menu">
-      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"><span aria-hidden="true">⌂</span><span class="bs-sidebar-label">لوحة التحكم</span><span class="bs-sidebar-menu-badge">٤</span></a></li>
-      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl"><span aria-hidden="true">□</span><span class="bs-sidebar-label">المشاريع</span></a></li>
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">لوحة التحكم</span><span class="bs-sidebar-menu-badge">٤</span></a></li>
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">المشاريع</span></a></li>
     </ul></div>
   </aside>
 </div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Logical end sidebar</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Logical end sidebar code example"><code class="">&lt;div dir="rtl"&gt;
   &lt;aside class="bs-sidebar bs-sidebar-end" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="التنقل في المشروع"&gt;
     &lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;مساحة العمل&lt;/strong&gt;&lt;/div&gt;
     &lt;div class="bs-sidebar-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;
-      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"&gt;&lt;span aria-hidden="true"&gt;⌂&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;لوحة التحكم&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;٤&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl"&gt;&lt;span aria-hidden="true"&gt;□&lt;/span&gt;&lt;span class="bs-sidebar-label"&gt;المشاريع&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;لوحة التحكم&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;٤&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;المشاريع&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
     &lt;/ul&gt;&lt;/div&gt;
   &lt;/aside&gt;
 &lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-direct-controller-api">Direct controller API</h3><p>Use the component entry point when application code needs imperative control. Toggle automatically selects mobile show/hide or desktop expand/collapse for the current media query.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Controller methods</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Controller methods code example"><code data-language="javascript" class="">import { Sidebar } from "@boobstrap/boobstrap/js/sidebar";

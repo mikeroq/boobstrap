@@ -91,50 +91,42 @@
 <section class="docs-section" id="icons">
             <div class="docs-kicker">Visual cues</div>
             <h2>Icons</h2>
-            <p>Place an inline SVG before or after the label; <code class="bs-code-inline">.bs-btn</code> handles spacing. Add <code class="bs-code-inline">.bs-btn-icon</code> only when the icon is the complete visible label.</p>
+            <p>Place a Lucide icon before or after the label; <code class="bs-code-inline">.bs-btn</code> handles spacing. Add <code class="bs-code-inline">.bs-btn-icon</code> only when the icon is the complete visible label.</p>
             <div class="docs-demo" data-component-example="button-icons">
               <div class="bs-flex bs-flex-wrap bs-items-center bs-gap-3">
                 <button class="bs-btn bs-btn-primary" type="button">
-                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14"></path></svg>
+                  <i data-lucide="plus" class="bs-icon" aria-hidden="true"></i>
                   Create
                 </button>
                 <button class="bs-btn bs-btn-secondary" type="button">
                   Export
-                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12m0-12 4 4m-4-4L8 7M5 13v6h14v-6"></path></svg>
+                  <i data-lucide="upload" class="bs-icon" aria-hidden="true"></i>
                 </button>
                 <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Add to favorites">
-                  <svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
+                  <i data-lucide="heart" class="bs-icon" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
             <div class="docs-code-block bs-code-window">
-              <div class="docs-code-label bs-code-header"><span>HTML · Inline SVG</span><button type="button" data-copy-example="button-icons" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;
-  &lt;svg class=&quot;bs-icon&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
-    &lt;path d=&quot;M12 5v14M5 12h14&quot; /&gt;
-  &lt;/svg&gt;
+              <div class="docs-code-label bs-code-header"><span>HTML · Lucide icons</span><button type="button" data-copy-example="button-icons" data-copy="&lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;
+  &lt;i data-lucide=&quot;plus&quot; class=&quot;bs-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
   Create
 &lt;/button&gt;
 
 &lt;button class=&quot;bs-btn bs-btn-secondary bs-btn-icon&quot; type=&quot;button&quot; aria-label=&quot;Add to favorites&quot;&gt;
-  &lt;svg class=&quot;bs-icon&quot; viewBox=&quot;0 0 24 24&quot; aria-hidden=&quot;true&quot;&gt;
-    &lt;path d=&quot;M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z&quot; /&gt;
-  &lt;/svg&gt;
+  &lt;i data-lucide=&quot;heart&quot; class=&quot;bs-icon&quot; aria-hidden=&quot;true&quot;&gt;&lt;/i&gt;
 &lt;/button&gt;" class="bs-code-action">Copy</button></div>
-              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Inline SVG code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"&gt;
-  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
-    &lt;path d="M12 5v14M5 12h14" /&gt;
-  &lt;/svg&gt;
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Lucide icons code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"&gt;
+  &lt;i data-lucide="plus" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;
   Create
 &lt;/button&gt;
 
 &lt;button class="bs-btn bs-btn-secondary bs-btn-icon" type="button"
   aria-label="Add to favorites"&gt;
-  &lt;svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
-    &lt;path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z" /&gt;
-  &lt;/svg&gt;
+  &lt;i data-lucide="heart" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;
 &lt;/button&gt;</code></pre>
             </div>
-            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Icons stay optional.</strong><p>Boobstrap does not ship an icon library. Use dependency-free SVG markup, Lucide, or your preferred icon set. Decorative icons need <code class="bs-code-inline">aria-hidden="true"</code>; icon-only buttons need an accessible name.</p></span></div>
+            <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Lucide is recommended.</strong><p>Boobstrap does not bundle an icon library, so install Lucide separately and keep using <code class="bs-code-inline">.bs-icon</code> for sizing. Decorative icons need <code class="bs-code-inline">aria-hidden="true"</code>; icon-only buttons need an accessible name.</p></span></div>
           </section>
 
 <section class="docs-section" id="states">
@@ -174,8 +166,8 @@
                   <button class="bs-btn bs-btn-secondary" type="button" aria-pressed="false">Right</button>
                 </div>
                 <div class="bs-btn-group bs-btn-group-sm" role="group" aria-label="History">
-                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Undo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 7-5 5 5 5M4 12h9a6 6 0 0 1 6 6"></path></svg></button>
-                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Redo"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m15 7 5 5-5 5m5-5h-9a6 6 0 0 0-6 6"></path></svg></button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Undo"><i data-lucide="undo-2" class="bs-icon" aria-hidden="true"></i></button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-icon" type="button" aria-label="Redo"><i data-lucide="redo-2" class="bs-icon" aria-hidden="true"></i></button>
                 </div>
               </div>
             </div>
@@ -207,29 +199,26 @@
             <h2>Split dropdown buttons</h2>
             <p>Keep the main action on the first button and attach a compact trigger for related alternatives. Split dropdown behavior is available through Boobstrap JS, Alpine, or React.</p>
             <div class="docs-demo interaction-demo" data-component-example="button-split-dropdown">
-              <div class="bs-dropdown bs-btn-group" data-bs-dropdown="" data-bs-state="closed">
-                <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
-                <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="button-docs-save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="button-docs-save-menu" aria-label="More save options" aria-haspopup="menu" aria-expanded="false"></button>
-                <div class="bs-dropdown-menu bs-dropdown-menu-end" id="button-docs-save-menu" role="menu" aria-labelledby="button-docs-save-toggle" data-bs-dropdown-menu="" hidden="" data-bs-state="closed">
+              <div class="bs-dropdown" data-bs-dropdown data-bs-state="closed">
+                <div class="bs-btn-group">
+                  <button class="bs-btn bs-btn-primary" type="button">Save changes</button>
+                  <button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret" id="button-docs-save-toggle" type="button" data-bs-toggle="dropdown" aria-controls="button-docs-save-menu" aria-label="More save options" aria-haspopup="menu" aria-expanded="false"></button>
+                </div>
+                <div class="bs-dropdown-menu bs-dropdown-menu-end" id="button-docs-save-menu" role="menu" aria-labelledby="button-docs-save-toggle" data-bs-dropdown-menu hidden data-bs-state="closed">
                   <button class="bs-dropdown-item" type="button" role="menuitem">Save and publish</button>
                   <button class="bs-dropdown-item" type="button" role="menuitem">Save as draft</button>
                 </div>
               </div>
             </div>
             <div class="docs-code-block bs-code-window">
-              <div class="docs-code-label bs-code-header"><span>HTML · Boobstrap JS</span><button type="button" data-copy-example="button-split-dropdown" data-copy="&lt;div class=&quot;bs-dropdown bs-btn-group&quot; data-bs-dropdown&gt;
-  &lt;button class=&quot;bs-btn bs-btn-primary&quot; type=&quot;button&quot;&gt;Save changes&lt;/button&gt;
-  &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
-  &lt;div class=&quot;bs-dropdown-menu bs-dropdown-menu-end&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu hidden&gt;
-    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
-    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save as draft&lt;/button&gt;
+              <div class="docs-code-label bs-code-header"><span>HTML · End-aligned split menu</span><button type="button" data-copy-code class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · End-aligned split menu code example"><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
+  &lt;div class="bs-btn-group"&gt;
+    &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
+      id="save-toggle" type="button" data-bs-toggle="dropdown"
+      aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
   &lt;/div&gt;
-&lt;/div&gt;" class="bs-code-action">Copy</button></div>
-              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Boobstrap JS code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
-  &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
-  &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
-    id="save-toggle" type="button" data-bs-toggle="dropdown"
-    aria-controls="save-menu" aria-label="More save options"&gt;&lt;/button&gt;
   &lt;div class="bs-dropdown-menu bs-dropdown-menu-end" id="save-menu"
     role="menu" aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;
     &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
@@ -238,6 +227,36 @@
 &lt;/div&gt;</code></pre>
             </div>
             <div class="docs-note bs-alert bs-alert-primary"><span><strong>Keyboard behavior:</strong> Arrow Down opens the menu and focuses its first enabled item. Arrow keys, Home, and End move through items; Escape closes the menu and restores focus to the trigger.</span></div>
+            <h3>Start-aligned split menu</h3>
+            <p>Omit <code class="bs-code-inline">.bs-dropdown-menu-end</code> when the menu should align with the logical start edge of the compound action.</p>
+            <div class="docs-demo interaction-demo" data-component-example="button-split-dropdown-start">
+              <div class="bs-dropdown" data-bs-dropdown data-bs-state="closed">
+                <div class="bs-btn-group">
+                  <button class="bs-btn bs-btn-secondary" type="button">Export report</button>
+                  <button class="bs-btn bs-btn-secondary bs-btn-split bs-btn-caret" id="button-docs-export-toggle" type="button" data-bs-toggle="dropdown" aria-controls="button-docs-export-menu" aria-label="More export options" aria-haspopup="menu" aria-expanded="false"></button>
+                </div>
+                <div class="bs-dropdown-menu" id="button-docs-export-menu" role="menu" aria-labelledby="button-docs-export-toggle" data-bs-dropdown-menu hidden data-bs-state="closed">
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Export as CSV</button>
+                  <button class="bs-dropdown-item" type="button" role="menuitem">Export as PDF</button>
+                </div>
+              </div>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Start-aligned split menu</span><button type="button" data-copy-code class="bs-code-action">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Start-aligned split menu code example"><code>&lt;div class="bs-dropdown" data-bs-dropdown&gt;
+  &lt;div class="bs-btn-group"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Export report&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-secondary bs-btn-split bs-btn-caret"
+      id="export-toggle" type="button" data-bs-toggle="dropdown"
+      aria-controls="export-menu" aria-label="More export options"&gt;&lt;/button&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-dropdown-menu" id="export-menu" role="menu"
+    aria-labelledby="export-toggle" data-bs-dropdown-menu hidden&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Export as CSV&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Export as PDF&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+            </div>
           </section>
 
 <section class="docs-section" id="loading">
@@ -285,7 +304,7 @@
     save.stop();
   });
 &lt;/script&gt;">
-                <pre><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
   data-bs-button data-bs-loading data-bs-loading-label="Saving changes"&gt;
   &lt;span class="bs-btn-label"&gt;Save changes&lt;/span&gt;
   &lt;span class="bs-spinner bs-btn-spinner" aria-hidden="true"&gt;&lt;/span&gt;
@@ -305,7 +324,7 @@
   &lt;span class=&quot;bs-btn-label&quot;&gt;Save changes&lt;/span&gt;
   &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
 &lt;/button&gt;" hidden="">
-                <pre><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;button class="bs-btn bs-btn-primary" type="button"
   x-data="bsButton" x-bind="root" data-bs-loading
   data-bs-loading-label="Saving changes"
   @click="persistChanges().finally(() =&gt; stop())"&gt;
@@ -326,7 +345,7 @@ function SaveButton() {
     &lt;/button&gt;
   );
 }" hidden="">
-                <pre><code class="">import { useButton } from "@boobstrap/react";
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">import { useButton } from "@boobstrap/react";
 
 function SaveButton() {
   const save = useButton({ loadingLabel: "Saving changes" });
@@ -355,7 +374,7 @@ const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
     &lt;span class=&quot;bs-spinner bs-btn-spinner&quot; aria-hidden=&quot;true&quot;&gt;&lt;/span&gt;
   &lt;/button&gt;
 &lt;/template&gt;" hidden="">
-                <pre><code data-language="vue">&lt;script setup&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code data-language="vue">&lt;script setup&gt;
 import { useButton } from "@boobstrap/vue";
 
 const save = useButton({ loadingLabel: "Saving changes" });

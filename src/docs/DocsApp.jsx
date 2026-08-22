@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import parse from "html-react-parser";
+import { ChevronLeft, ChevronRight, ExternalLink, Heart, Menu, Moon, Sun, TriangleAlert, X } from "lucide-react";
 import { initBanners } from "@boobstrap/boobstrap/js/banner";
 import { initSidebars } from "@boobstrap/boobstrap/js/sidebar";
 import { docsPages, normalizeDocsPath } from "../docs-pages.js";
@@ -39,14 +40,14 @@ function DevelopmentBanner({ enabled }) {
   return (
     <div className="bs-banner bs-banner-warning" role="status" data-bs-banner data-dev-banner>
       <div className="bs-banner-inner">
-        <svg className="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z" /><path d="M12 9v5M12 18h.01" /></svg>
+        <TriangleAlert className="bs-banner-icon bs-icon" aria-hidden="true" />
         <div className="bs-banner-content">
           <strong className="bs-banner-title">Development preview</strong>
           <span className="bs-banner-message">You are viewing dev.boobstrap.org, not the live Boobstrap site.</span>
         </div>
         <a className="bs-banner-action" href="https://boobstrap.org/">Visit live site</a>
         <button className="bs-banner-dismiss" type="button" data-bs-banner-dismiss aria-label="Dismiss development preview banner">
-          <svg className="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18" /></svg>
+          <X className="bs-icon bs-icon-sm" aria-hidden="true" />
         </button>
       </div>
     </div>
@@ -72,13 +73,13 @@ function DocsHeader({ theme, onThemeToggle }) {
         <a href="/playground" className="docs-header-link bs-navbar-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" className="docs-header-link bs-navbar-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" className="docs-header-link bs-navbar-link">GitHub</a>
-        <span className="docs-version">v0.5.0</span>
+        <span className="docs-version">v0.6.0</span>
         <button className="docs-icon-button bs-navbar-toggle" type="button" data-theme-toggle aria-label={`Switch to ${nextTheme} theme`} title="Toggle color theme" onClick={onThemeToggle}>
-          <svg className="theme-sun" width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="4" stroke="currentColor" strokeWidth="1.8" /><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
-          <svg className="theme-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20.2 15.1A8.5 8.5 0 0 1 8.9 3.8 8.5 8.5 0 1 0 20.2 15Z" stroke="currentColor" strokeWidth="1.8" strokeLinejoin="round" /></svg>
+          <Sun className="theme-sun" width="19" height="19" aria-hidden="true" />
+          <Moon className="theme-moon" width="18" height="18" aria-hidden="true" />
         </button>
         <button className="docs-menu-button docs-icon-button bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-expanded="false" aria-controls="docs-sidebar" aria-label="Open documentation menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
+          <Menu width="20" height="20" aria-hidden="true" />
         </button>
       </nav>
     </header>
@@ -94,11 +95,11 @@ function PagePagination({ route, onPreload }) {
     <nav className="docs-component-pagination bs-page-nav" aria-label="Documentation pagination">
       <Link className="bs-page-nav-link" to={previous.path} onMouseEnter={() => onPreload(previous.sectionId)} onFocus={() => onPreload(previous.sectionId)}>
         <span className="bs-page-nav-context">Previous · {previous.category}</span>
-        <strong className="bs-page-nav-title">← {previous.title}</strong>
+        <strong className="bs-page-nav-title"><ChevronLeft className="bs-icon" aria-hidden="true" /> {previous.title}</strong>
       </Link>
       <Link className="bs-page-nav-link" to={next.path} onMouseEnter={() => onPreload(next.sectionId)} onFocus={() => onPreload(next.sectionId)}>
         <span className="bs-page-nav-context">Next · {next.category}</span>
-        <strong className="bs-page-nav-title">{next.title} →</strong>
+        <strong className="bs-page-nav-title">{next.title} <ChevronRight className="bs-icon" aria-hidden="true" /></strong>
       </Link>
     </nav>
   );
@@ -107,10 +108,10 @@ function PagePagination({ route, onPreload }) {
 function DocsFooter() {
   return (
     <footer className="docs-footer">
-      <p><span className="bs-text-primary" aria-hidden="true">♥</span> Boobstrap v0.5.0 · MIT licensed.</p>
+      <p><Heart className="bs-icon bs-text-primary" aria-hidden="true" /> Boobstrap v0.5.0 · MIT licensed.</p>
       <div className="docs-footer-links">
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap">View on npm</a>
-        <a href="https://github.com/mikeroq/boobstrap-framework">View source →</a>
+        <a href="https://github.com/mikeroq/boobstrap-framework">View source <ExternalLink className="bs-icon" aria-hidden="true" /></a>
       </div>
     </footer>
   );
@@ -222,7 +223,10 @@ export function DocsApp({ initialPath, initialContent, development = false }) {
       const atPageEnd = Math.ceil(window.scrollY + window.innerHeight) >= document.documentElement.scrollHeight - 2;
       let active = targets[0];
       if (atPageEnd) active = targets.at(-1);
-      else targets.forEach((target) => { if (target.offsetTop <= readingLine) active = target; });
+      else targets.forEach((target) => {
+        const documentTop = target.getBoundingClientRect().top + window.scrollY;
+        if (documentTop <= readingLine) active = target;
+      });
       links.forEach((link) => {
         if (active && link.hash === `#${active.id}`) link.setAttribute("aria-current", "location");
         else link.removeAttribute("aria-current");

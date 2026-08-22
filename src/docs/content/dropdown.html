@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Dropdown</span></nav><div class="docs-kicker">Interactivity</div><h1>Dropdown</h1><p class="bs-lead">Build accessible action menus with focus management and complete keyboard navigation.</p><div class="docs-component-meta" aria-label="Dropdown documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Dropdown</span></nav><div class="docs-kicker">Interactivity</div><h1>Dropdown</h1><p class="bs-lead">Build accessible action menus with focus management and complete keyboard navigation.</p><div class="docs-component-meta" aria-label="Dropdown documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="dropdown">
             <div class="docs-kicker">Interactivity</div>
@@ -36,7 +36,7 @@
     &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;">
-                <pre><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
   &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
   &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
     id="save-toggle" type="button" data-bs-toggle="dropdown"
@@ -54,7 +54,7 @@
     &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;" hidden="">
-                <pre><code class="">&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;
   &lt;button class="bs-btn bs-btn-primary" type="button"&gt;Save changes&lt;/button&gt;
   &lt;button class="bs-btn bs-btn-primary bs-btn-split bs-btn-caret"
     id="save-toggle" type="button" data-bs-toggle="dropdown" x-bind="trigger"
@@ -80,7 +80,7 @@ function SaveActions() {
     &lt;/div&gt;
   );
 }" hidden="">
-                <pre><code class="">import { useDropdown } from "@boobstrap/react";
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">import { useDropdown } from "@boobstrap/react";
 
 function SaveActions() {
   const dropdown = useDropdown({ id: "save-menu" });
@@ -119,7 +119,7 @@ const dropdown = useDropdown({ id: &quot;save-menu&quot; });
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;" hidden="">
-                <pre><code data-language="vue">&lt;script setup&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code data-language="vue">&lt;script setup&gt;
 import { useDropdown } from "@boobstrap/vue";
 
 const dropdown = useDropdown({ id: "save-menu" });

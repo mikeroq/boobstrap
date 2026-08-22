@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Banners</span></nav><div class="docs-kicker">Components</div><h1>Banners</h1><p class="bs-lead">Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior.</p><div class="docs-component-meta" aria-label="Banners documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Banners</span></nav><div class="docs-kicker">Components</div><h1>Banners</h1><p class="bs-lead">Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior.</p><div class="docs-component-meta" aria-label="Banners documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="banners">
             <div class="docs-kicker">Components</div>
@@ -9,45 +9,38 @@
             <div class="docs-demo docs-banner-demo" data-component-example="banner-variants">
               <div class="bs-banner bs-banner-primary" role="status">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <i data-lucide="triangle-alert" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Primary</strong><span class="bs-banner-message">Highlight an important product announcement.</span></div>
                 </div>
               </div>
               <div class="bs-banner bs-banner-info" role="status">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 11v6M12 7h.01"></path></svg>
+                  <i data-lucide="info" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Information</strong><span class="bs-banner-message">Scheduled maintenance begins at 02:00 UTC.</span></div>
                 </div>
               </div>
               <div class="bs-banner bs-banner-success" role="status">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="m5 12 4 4L19 6"></path></svg>
+                  <i data-lucide="check" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Success</strong><span class="bs-banner-message">The new release is available in every region.</span></div>
                 </div>
               </div>
               <div class="bs-banner bs-banner-warning" role="status">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <i data-lucide="triangle-alert" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Warning</strong><span class="bs-banner-message">This environment contains unreleased changes.</span></div>
                 </div>
               </div>
               <div class="bs-banner bs-banner-danger" role="alert">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v6M12 17h.01"></path></svg>
+                  <i data-lucide="info" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Danger</strong><span class="bs-banner-message">Publishing is temporarily unavailable.</span></div>
                 </div>
               </div>
             </div>
             <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete contextual banner</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete contextual banner code example"><code class="">&lt;div class="bs-banner bs-banner-info" role="status"&gt;
   &lt;div class="bs-banner-inner"&gt;
-    &lt;svg
-      class="bs-banner-icon bs-icon"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    &gt;
-      &lt;circle cx="12" cy="12" r="9"&gt;&lt;/circle&gt;
-      &lt;path d="M12 11v6M12 7h.01"&gt;&lt;/path&gt;
-    &lt;/svg&gt;
+    &lt;i data-lucide="info" class="bs-banner-icon bs-icon" aria-hidden="true"&gt;&lt;/i&gt;
     &lt;div class="bs-banner-content"&gt;
       &lt;strong class="bs-banner-title"&gt;Scheduled maintenance&lt;/strong&gt;
       &lt;span class="bs-banner-message"&gt;
@@ -62,11 +55,11 @@
             <div class="docs-demo docs-banner-demo" data-component-example="banner-dismissible">
               <div class="bs-banner bs-banner-warning" role="status" data-bs-banner="" data-bs-state="visible">
                 <div class="bs-banner-inner">
-                  <svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5M12 18h.01"></path></svg>
+                  <i data-lucide="triangle-alert" class="bs-banner-icon bs-icon" aria-hidden="true"></i>
                   <div class="bs-banner-content"><strong class="bs-banner-title">Development preview</strong><span class="bs-banner-message">You are viewing unreleased changes.</span></div>
                   <a class="bs-banner-action" href="https://boobstrap.org/">Visit live site</a>
                   <button class="bs-banner-dismiss" type="button" data-bs-banner-dismiss="" aria-label="Dismiss development preview banner">
-                    <svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"></path></svg>
+                    <i data-lucide="x" class="bs-icon bs-icon-sm" aria-hidden="true"></i>
                   </button>
                 </div>
               </div>
@@ -77,10 +70,7 @@
   data-bs-banner
 &gt;
   &lt;div class="bs-banner-inner"&gt;
-    &lt;svg class="bs-banner-icon bs-icon" viewBox="0 0 24 24" aria-hidden="true"&gt;
-      &lt;path d="M12 3 2 21h20L12 3Z"&gt;&lt;/path&gt;
-      &lt;path d="M12 9v5M12 18h.01"&gt;&lt;/path&gt;
-    &lt;/svg&gt;
+    &lt;i data-lucide="triangle-alert" class="bs-banner-icon bs-icon" aria-hidden="true"&gt;&lt;/i&gt;
     &lt;div class="bs-banner-content"&gt;
       &lt;strong class="bs-banner-title"&gt;Development preview&lt;/strong&gt;
       &lt;span class="bs-banner-message"&gt;You are viewing unreleased changes.&lt;/span&gt;
@@ -92,9 +82,7 @@
       data-bs-banner-dismiss
       aria-label="Dismiss development preview banner"
     &gt;
-      &lt;svg class="bs-icon bs-icon-sm" viewBox="0 0 24 24" aria-hidden="true"&gt;
-        &lt;path d="m6 6 12 12M18 6 6 18"&gt;&lt;/path&gt;
-      &lt;/svg&gt;
+      &lt;i data-lucide="x" class="bs-icon bs-icon-sm" aria-hidden="true"&gt;&lt;/i&gt;
     &lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>

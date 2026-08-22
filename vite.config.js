@@ -2,11 +2,13 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
 import { docsPages } from "./src/docs-pages.js";
+import { socialSiteOrigin } from "./src/social-cards.js";
 
 const routeFiles = (useGeneratedDocs) => {
   const routeFiles = new Map([
     ["/docs", "/docs/index.html"],
     ["/playground", "/playground/index.html"],
+    ["/preview", "/preview/index.html"],
   ]);
   docsPages.forEach(({ path }) => {
     const file = useGeneratedDocs ? `${path}/index.html` : "/docs/index.html";
@@ -21,6 +23,7 @@ const cleanRoutes = () => {
     ["/docs/", "/docs"],
     ["/playground.html", "/playground"],
     ["/playground/", "/playground"],
+    ["/preview/", "/preview"],
   ]);
   docsPages.forEach(({ path }) => {
     legacyRoutes.set(`${path}/`, path);
@@ -51,14 +54,25 @@ const cleanRoutes = () => {
   };
 };
 
+const socialMetadata = () => ({
+  name: "boobstrap-social-metadata",
+  transformIndexHtml(html) {
+    return html.replace(
+      /(<meta\s+(?:property="og:image"|name="twitter:image")\s+content=")https:\/\/(?:dev\.)?boobstrap\.org(\/og\/[^"?]+)(")/g,
+      `$1${socialSiteOrigin}$2$3`,
+    );
+  },
+});
+
 export default defineConfig({
-  plugins: [react(), cleanRoutes()],
+  plugins: [react(), socialMetadata(), cleanRoutes()],
   build: {
     rollupOptions: {
       input: {
         main: resolve(import.meta.dirname, "index.html"),
         docs: resolve(import.meta.dirname, "docs/index.html"),
         playground: resolve(import.meta.dirname, "playground/index.html"),
+        preview: resolve(import.meta.dirname, "preview/index.html"),
       },
     },
   },

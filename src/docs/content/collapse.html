@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Collapse</span></nav><div class="docs-kicker">Interactivity</div><h1>Collapse</h1><p class="bs-lead">Reveal and hide content with synchronized state, lifecycle events, and keyboard-friendly controls.</p><div class="docs-component-meta" aria-label="Collapse documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Collapse</span></nav><div class="docs-kicker">Interactivity</div><h1>Collapse</h1><p class="bs-lead">Reveal and hide content with synchronized state, lifecycle events, and keyboard-friendly controls.</p><div class="docs-component-meta" aria-label="Collapse documentation summary"><span class="bs-badge bs-text-xs"><strong>Interactivity</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="collapse">
             <div class="docs-kicker">Interactivity</div>
@@ -31,7 +31,7 @@
 &lt;div class=&quot;bs-collapse&quot; id=&quot;details&quot; hidden&gt;
   Progressive by design.
 &lt;/div&gt;">
-                <pre><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button"
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;button class="bs-btn bs-btn-secondary" type="button"
   data-bs-toggle="collapse" aria-controls="details"&gt;
   Toggle details
 &lt;/button&gt;
@@ -49,7 +49,7 @@
     Progressive by design.
   &lt;/div&gt;
 &lt;/div&gt;" hidden="">
-                <pre><code class="">&lt;div x-data="bsCollapse"&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div x-data="bsCollapse"&gt;
   &lt;button class="bs-btn bs-btn-secondary" type="button"
     x-bind="trigger" aria-controls="details"&gt;
     Toggle details
@@ -76,7 +76,7 @@ function Details() {
     &lt;/&gt;
   );
 }" hidden="">
-                <pre><code class="">import { useCollapse } from "@boobstrap/react";
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">import { useCollapse } from "@boobstrap/react";
 
 function Details() {
   const collapse = useCollapse({ id: "details" });
@@ -108,7 +108,7 @@ const details = useCollapse({ id: &quot;details&quot; });
     Progressive by design.
   &lt;/div&gt;
 &lt;/template&gt;" hidden="">
-                <pre><code data-language="vue">&lt;script setup&gt;
+                <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code data-language="vue">&lt;script setup&gt;
 import { useCollapse } from "@boobstrap/vue";
 
 const details = useCollapse({ id: "details" });

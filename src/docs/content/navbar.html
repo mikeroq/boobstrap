@@ -1,4 +1,4 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Navigation</span></nav><div class="docs-kicker">Components</div><h1>Navigation</h1><p class="bs-lead">Build semantic headers, vertical navigation, breadcrumb trails, and previous/next page navigation with Boobstrap components.</p><div class="docs-component-meta" aria-label="Navigation documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.5.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Navigation</span></nav><div class="docs-kicker">Components</div><h1>Navigation</h1><p class="bs-lead">Build semantic headers, vertical navigation, breadcrumb trails, and previous/next page navigation with Boobstrap components.</p><div class="docs-component-meta" aria-label="Navigation documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="navbar">
             <div class="docs-kicker">Components</div>
@@ -7,32 +7,28 @@
             <div class="docs-demo" data-component-example="navbar">
               <header class="bs-navbar bs-card bs-card-subtle bs-card-compact">
                 <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#navbar">
-                  <svg class="bs-icon bs-icon-lg bs-text-primary" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-4.35-9.33-8.5C.75 9.08 2.16 5 6.25 5A6.2 6.2 0 0 1 12 8.75 6.2 6.2 0 0 1 17.75 5c4.09 0 5.5 4.08 3.58 7.5C19 16.65 12 21 12 21Z"></path></svg>
+                  <i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"></i>
                   Acme
                 </a>
-                <nav class="bs-flex bs-items-center bs-gap-2" aria-label="Example primary navigation">
-                  <a class="bs-navbar-link" href="#features-example">Features</a>
-                  <a class="bs-navbar-link" href="/docs/components/forms/inputs">Forms</a>
-                </nav>
-                <button class="bs-navbar-toggle" type="button" aria-label="Open navigation menu"><svg class="bs-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"></path></svg></button>
+                <button class="bs-navbar-toggle" type="button" data-bs-toggle="navbar" aria-controls="example-navbar-menu" aria-label="Toggle navigation menu"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
+                <div class="bs-navbar-menu" id="example-navbar-menu" data-bs-navbar data-bs-state="closed" aria-label="Example navigation menu">
+                  <nav class="bs-navbar-nav" aria-label="Example primary navigation"><a class="bs-navbar-link" href="#navbar" data-bs-navbar-close>Features</a><a class="bs-navbar-link" href="/docs/components/forms/inputs" data-bs-navbar-close>Forms</a></nav>
+                  <div class="bs-navbar-actions"><a class="bs-btn bs-btn-primary bs-btn-sm" href="#navbar">Get started</a><button class="bs-btn bs-btn-secondary bs-btn-sm" type="button" data-bs-navbar-dismiss>Close</button></div>
+                </div>
               </header>
+              <button class="bs-navbar-backdrop" type="button" data-bs-navbar-dismiss aria-controls="example-navbar-menu" aria-label="Close example navigation"></button>
             </div>
             <div class="docs-code-block bs-code-window">
-              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-example="navbar" data-copy="&lt;header class=&quot;bs-navbar&quot;&gt;
-  &lt;a class=&quot;bs-navbar-brand&quot; href=&quot;/&quot;&gt;Acme&lt;/a&gt;
-  &lt;nav class=&quot;bs-flex bs-items-center bs-gap-2&quot; aria-label=&quot;Primary navigation&quot;&gt;
-    &lt;a class=&quot;bs-navbar-link&quot; href=&quot;#features&quot;&gt;Features&lt;/a&gt;
-    &lt;a class=&quot;bs-navbar-link&quot; href=&quot;#contact&quot;&gt;Contact&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;button class=&quot;bs-navbar-toggle&quot; type=&quot;button&quot; aria-label=&quot;Open navigation menu&quot;&gt;…&lt;/button&gt;
-&lt;/header&gt;" class="bs-code-action">Copy</button></div>
+              <div class="docs-code-label bs-code-header"><span>HTML · Complete example</span><button type="button" data-copy-code class="bs-code-action">Copy</button></div>
               <pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete example code example"><code class="">&lt;header class="bs-navbar"&gt;
   &lt;a class="bs-navbar-brand" href="/"&gt;Acme&lt;/a&gt;
-  &lt;nav class="bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation"&gt;
-    &lt;a class="bs-navbar-link" href="#features"&gt;Features&lt;/a&gt;
-  &lt;/nav&gt;
-  &lt;button class="bs-navbar-toggle" aria-label="Open navigation menu"&gt;…&lt;/button&gt;
-&lt;/header&gt;</code></pre>
+  &lt;button class="bs-navbar-toggle" data-bs-toggle="navbar" aria-controls="primary-menu" aria-label="Toggle navigation"&gt;…&lt;/button&gt;
+  &lt;div class="bs-navbar-menu" id="primary-menu" data-bs-navbar data-bs-state="closed" aria-label="Primary navigation"&gt;
+    &lt;nav class="bs-navbar-nav" aria-label="Primary"&gt;&lt;a class="bs-navbar-link" href="#features" data-bs-navbar-close&gt;Features&lt;/a&gt;&lt;/nav&gt;
+    &lt;div class="bs-navbar-actions"&gt;&lt;a class="bs-btn bs-btn-primary" href="/signup"&gt;Get started&lt;/a&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/header&gt;
+&lt;button class="bs-navbar-backdrop" data-bs-navbar-dismiss aria-controls="primary-menu" aria-label="Close navigation"&gt;&lt;/button&gt;</code></pre>
             </div>
             <div class="docs-example-guidance" aria-label="Navigation guidance">
               <div><h3>Choose a pattern</h3><p>Use the navbar for a global header, a vertical nav for a short destination list, breadcrumbs for hierarchy, and page navigation for a linear reading sequence. Use <a href="/docs/components/sidebar">Sidebar</a> for an application rail or drawer.</p></div>
@@ -91,14 +87,35 @@
     &lt;span class="bs-page-nav-context"&gt;Next&lt;/span&gt;
     &lt;span class="bs-page-nav-title"&gt;Tables&lt;/span&gt;
   &lt;/a&gt;
-&lt;/nav&gt;</code></pre></div><div class="docs-api">
+&lt;/nav&gt;</code></pre></div><h3 id="navbar-behavior-layers">Behavior layers</h3><p>Choose exactly one owner for a navbar instance. Every layer uses the same open/closed presentation states and lifecycle event names.</p>
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Core controller</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { Navbar } from "@boobstrap/boobstrap/js/navbar";
+
+const navbar = Navbar.getOrCreateInstance(document.querySelector("[data-bs-navbar]"));
+navbar.show();
+navbar.hide();</code></pre></div>
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Alpine adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code>&lt;header class="bs-navbar" x-data="bsNavbar"&gt;
+  &lt;button class="bs-navbar-toggle" x-bind="trigger" aria-controls="menu"&gt;Menu&lt;/button&gt;
+  &lt;div class="bs-navbar-menu" id="menu" x-ref="navbar" x-bind="menu"&gt;…&lt;/div&gt;
+  &lt;button class="bs-navbar-backdrop" x-bind="dismiss" aria-label="Close navigation"&gt;&lt;/button&gt;
+&lt;/header&gt;</code></pre></div>
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSX · React adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { useNavbar } from "@boobstrap/react";
+
+const navbar = useNavbar({ id: "primary-menu" });
+return &lt;&gt;&lt;button {...navbar.getTriggerProps()}&gt;Menu&lt;/button&gt;&lt;div className="bs-navbar-menu" {...navbar.getMenuProps()}&gt;…&lt;/div&gt;&lt;button className="bs-navbar-backdrop" {...navbar.getDismissProps()} /&gt;&lt;/&gt;;</code></pre></div>
+<div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Vue adapter</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code data-language="javascript">import { useNavbar } from "@boobstrap/vue";
+
+const navbar = useNavbar({ id: "primary-menu" });
+// Bind navbar.getTriggerProps(), getMenuProps(), and getDismissProps().</code></pre></div>
+<div class="docs-example-guidance" aria-label="Responsive navbar guidance"><div><h3>Responsive semantics</h3><p>The core controller applies dialog semantics only below the configured media query and returns the menu to ordinary navigation on desktop.</p></div><div><h3>Selection dismissal</h3><p>Add <code class="bs-code-inline">data-bs-navbar-close</code> to destinations that should close the mobile menu without restoring focus to the toggle.</p></div><div><h3>One behavior owner</h3><p>Do not initialize core JavaScript on markup already controlled by Alpine, React, or Vue.</p></div></div><div class="docs-api">
               <h3 id="navbar-navigation-class-api">Navigation class API</h3>
-              <p>All navigation classes are CSS-only. Add application behavior to <code class="bs-code-inline">.bs-navbar-toggle</code> when it reveals or hides a responsive menu, including synchronized <code class="bs-code-inline">aria-expanded</code> and focus handling.</p>
+              <p>The navigation presentation remains CSS-first. Add <code class="bs-code-inline">data-bs-navbar</code> to opt a menu into the responsive controller, or use the matching <code class="bs-code-inline">bsNavbar</code>, <code class="bs-code-inline">useNavbar</code>, or <code class="bs-code-inline">useNavbar</code> adapter API when Alpine, React, or Vue owns state.</p>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code class="bs-code-inline">.bs-navbar</code></td><td>Aligns the brand, navigation, and menu control in a full-width header row.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-navbar-brand</code></td><td>Styles the product or site identity link.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-navbar-link</code></td><td>Styles navigation destinations with hover and current-page states.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-navbar-toggle</code></td><td>Provides an icon-sized menu control with visible interaction states.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-navbar-menu</code> / <code class="bs-code-inline">.bs-navbar-nav</code> / <code class="bs-code-inline">.bs-navbar-actions</code></td><td>Compose inline desktop navigation and the responsive off-canvas menu.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-navbar-backdrop</code> / <code class="bs-code-inline">.bs-navbar-open</code></td><td>Provide mobile dismissal and document scroll locking while the menu is open.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-nav</code></td><td>Creates a vertical navigation stack with consistent spacing.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-nav-group</code></td><td>Groups related destinations and separates adjacent groups.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-nav-heading</code></td><td>Styles a non-interactive label for a navigation group.</td></tr>
