@@ -8,7 +8,7 @@ export const docsOverview = {
 
 export const docsPages = [
   { path: "/docs/getting-started/introduction", sectionId: "introduction", category: "Get started", title: "Introduction", description: "Learn what Boobstrap includes, how its CSS-first architecture works, and which optional behavior layer fits your project." },
-  { path: "/docs/getting-started/whats-new", sectionId: "whats-new", category: "Get started", title: "What's new in v0.6", description: "Explore the v0.6 release: responsive grid completeness, full spacing grammar, layout utilities, semantic variants, structural tokens, RTL coverage, adapter parity, scrollspy, and one breaking change to form validity." },
+  { path: "/docs/getting-started/whats-new", sectionId: "whats-new", category: "Get started", title: "What's new in v0.7", description: "Explore the v0.7 release: hardened controller destroy paths, sidebar shortcut guards, controlled usePassword, dialog backdrop-click parity, new bs-text-start and bs-text-end utilities, tightened focus styles, and TypeScript surface widening." },
   { path: "/docs/getting-started/installation", sectionId: "installation", category: "Get started", title: "Installation", description: "Install Boobstrap with npm, pnpm, Yarn, Bun, a CDN, or self-hosted assets." },
   { path: "/docs/getting-started/starter-template", sectionId: "starter", category: "Get started", title: "Starter template", description: "Download and run the minimal Vite starter with theme tokens, components, icons, and production validation." },
   { path: "/docs/getting-started/theming", sectionId: "theming", category: "Get started", title: "Theming", description: "Compose light and dark modes, five color palettes, rounded or square corners, and semantic design-token overrides." },
