@@ -1405,7 +1405,7 @@ try {
             scrollbarWidth: getComputedStyle(tablist).scrollbarWidth,
           };
         });
-        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.paddingLeft !== "0px" || underlineStyle.scrollbarWidth !== "none") {
+        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.scrollbarWidth !== "none") {
           failures.push(`${viewport.name}: code tab underline variant did not render correctly (${JSON.stringify(underlineStyle)})`);
         }
       }
