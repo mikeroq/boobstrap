@@ -471,7 +471,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.6.0 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.7.0 npm package", exact: true }).getAttribute("href");
     const docsUrl = await page.getByRole("link", { name: "Read the docs", exact: true }).getAttribute("href");
     const playgroundUrl = await page.getByRole("link", { name: "Open playground", exact: true }).getAttribute("href");
     const dimensions = await dimensionsFor(page);
@@ -1506,8 +1506,8 @@ try {
 
       if (config.sectionId === "whats-new") {
         const source = (await routePage.locator("#whats-new").textContent()) ?? "";
-        for (const contract of ["Responsive grid", "Spacing utility", "Semantic component", "Breaking change", "Available now"]) {
-          if (!source.includes(contract)) failures.push(`desktop: v0.6 overview is missing ${contract}`);
+        for (const contract of ["destroy path", "Adapter parity", "bs-text-start", "Focus styles", "Available now"]) {
+          if (!source.includes(contract)) failures.push(`desktop: v0.7 overview is missing ${contract}`);
         }
       }
 

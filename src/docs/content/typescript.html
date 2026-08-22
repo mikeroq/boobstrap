@@ -3,7 +3,7 @@
   <div class="docs-kicker">Get started</div>
   <h1>TypeScript</h1>
   <p class="bs-lead">Use first-party declarations for Boobstrap controllers, adapters, and generated design-token artifacts.</p>
-  <div class="docs-component-meta" aria-label="TypeScript documentation summary"><span class="bs-badge bs-text-xs"><strong>v0.6.0</strong> current</span><span class="bs-badge bs-text-xs"><strong>Strict mode</strong> tested</span><span class="bs-badge bs-text-xs"><strong>No</strong> separate types package</span></div>
+  <div class="docs-component-meta" aria-label="TypeScript documentation summary"><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span><span class="bs-badge bs-text-xs"><strong>Strict mode</strong> tested</span><span class="bs-badge bs-text-xs"><strong>No</strong> separate types package</span></div>
 </header>
 
 <section class="docs-section docs-routed-section" id="typescript">
@@ -11,7 +11,7 @@
   <h2>Declarations live with each package</h2>
   <p>Boobstrap v0.5 adds declarations to the dependency-free core JavaScript entry point and the Alpine adapter. The React and Vue adapters continue to publish declarations beside their headless hooks and composables. The generated JavaScript token artifact also includes a declaration file, so an application can inspect design tokens without maintaining a parallel interface.</p>
 
-  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Version contract:</strong> These declarations ship with v0.5.0 of the core and adapter packages; no separate types package is required. Pin the package version in production and use the <a href="/docs/getting-started/installation">installation guide</a> for release-ready commands.</span></div>
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Version contract:</strong> These declarations ship with v0.7.0 of the core and adapter packages; no separate types package is required. Pin the package version in production and use the <a href="/docs/getting-started/installation">installation guide</a> for release-ready commands.</span></div>
 
   <div class="docs-table-wrap bs-table-responsive" role="region" tabindex="0" aria-label="TypeScript declaration entry points">
     <table class="docs-table bs-table">
@@ -263,7 +263,7 @@ artifact.tokens === tokens; // true</code></pre>
       <caption class="bs-sr-only">Common Boobstrap TypeScript problems and corrections</caption>
       <thead><tr><th scope="col">Symptom</th><th scope="col">Correction</th></tr></thead>
       <tbody>
-        <tr><th scope="row">“Cannot find module” for <code class="bs-code-inline">/js</code> or <code class="bs-code-inline">/tokens</code></th><td>Confirm the installed package contains the v0.5 export, then use <code class="bs-code-inline">Bundler</code>, <code class="bs-code-inline">Node16</code>, or <code class="bs-code-inline">NodeNext</code> resolution. Legacy <code class="bs-code-inline">node</code> resolution does not understand modern export conditions.</td></tr>
+        <tr><th scope="row">“Cannot find module” for <code class="bs-code-inline">/js</code> or <code class="bs-code-inline">/tokens</code></th><td>Confirm the installed package exposes the entry, then use <code class="bs-code-inline">Bundler</code>, <code class="bs-code-inline">Node16</code>, or <code class="bs-code-inline">NodeNext</code> resolution. Legacy <code class="bs-code-inline">node</code> resolution does not understand modern export conditions.</td></tr>
         <tr><th scope="row">Missing <code class="bs-code-inline">Document</code>, <code class="bs-code-inline">HTMLElement</code>, or <code class="bs-code-inline">Event</code></th><td>Add <code class="bs-code-inline">DOM</code> to <code class="bs-code-inline">compilerOptions.lib</code> for the browser-facing compilation unit.</td></tr>
         <tr><th scope="row">The root package import has no named exports</th><td>That entry is intentionally the stylesheet. Import values and types from <code class="bs-code-inline">@boobstrap/boobstrap/js</code> or a supported subpath.</td></tr>
         <tr><th scope="row">React JSX props or Vue refs lose their types</th><td>Install the adapter’s framework peer and its normal TypeScript support, and import from <code class="bs-code-inline">@boobstrap/react</code> or <code class="bs-code-inline">@boobstrap/vue</code> rather than reaching into package source files.</td></tr>
