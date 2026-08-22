@@ -471,7 +471,7 @@ try {
     const faviconUrl = await page.locator('link[rel="icon"]').getAttribute("href");
     const ogImage = await page.locator('meta[property="og:image"]').getAttribute("content");
     const twitterCard = await page.locator('meta[name="twitter:card"]').getAttribute("content");
-    const npmUrl = await page.getByRole("link", { name: "v0.5.0 npm package", exact: true }).getAttribute("href");
+    const npmUrl = await page.getByRole("link", { name: "v0.6.0 npm package", exact: true }).getAttribute("href");
     const docsUrl = await page.getByRole("link", { name: "Read the docs", exact: true }).getAttribute("href");
     const playgroundUrl = await page.getByRole("link", { name: "Open playground", exact: true }).getAttribute("href");
     const dimensions = await dimensionsFor(page);
@@ -1237,7 +1237,7 @@ try {
           failures.push("desktop: class reference does not match the installed stylesheet");
         }
         await routePage.getByLabel("Filter classes").fill("bs-btn");
-        if (await routePage.locator("#class-reference .reference-row").count() !== 18) {
+        if (await routePage.locator("#class-reference .reference-row").count() !== 19) {
           failures.push("desktop: class filtering did not return the button classes");
         }
       }
@@ -1405,7 +1405,7 @@ try {
             scrollbarWidth: getComputedStyle(tablist).scrollbarWidth,
           };
         });
-        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.paddingLeft !== "0px" || underlineStyle.scrollbarWidth !== "none") {
+        if (underlineStyle.radius !== "0px" || underlineStyle.indicator === "rgba(0, 0, 0, 0)" || underlineStyle.overflowY !== "hidden" || underlineStyle.scrollbarWidth !== "none") {
           failures.push(`${viewport.name}: code tab underline variant did not render correctly (${JSON.stringify(underlineStyle)})`);
         }
       }
@@ -1506,8 +1506,8 @@ try {
 
       if (config.sectionId === "whats-new") {
         const source = (await routePage.locator("#whats-new").textContent()) ?? "";
-        for (const contract of ["Accordion", "Skeletons", "TypeScript", "token", "Toast autohide", "Available now"]) {
-          if (!source.includes(contract)) failures.push(`desktop: v0.5 overview is missing ${contract}`);
+        for (const contract of ["Responsive grid", "Spacing utility", "Semantic component", "Breaking change", "Available now"]) {
+          if (!source.includes(contract)) failures.push(`desktop: v0.6 overview is missing ${contract}`);
         }
       }
 

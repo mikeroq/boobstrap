@@ -73,7 +73,7 @@ function DocsHeader({ theme, onThemeToggle }) {
         <a href="/playground" className="docs-header-link bs-navbar-link">Playground</a>
         <a href="https://www.npmjs.com/package/@boobstrap/boobstrap" className="docs-header-link bs-navbar-link">npm</a>
         <a href="https://github.com/mikeroq/boobstrap-framework" className="docs-header-link bs-navbar-link">GitHub</a>
-        <span className="docs-version">v0.5.0</span>
+        <span className="docs-version">v0.6.0</span>
         <button className="docs-icon-button bs-navbar-toggle" type="button" data-theme-toggle aria-label={`Switch to ${nextTheme} theme`} title="Toggle color theme" onClick={onThemeToggle}>
           <Sun className="theme-sun" width="19" height="19" aria-hidden="true" />
           <Moon className="theme-moon" width="18" height="18" aria-hidden="true" />
