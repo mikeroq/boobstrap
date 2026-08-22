@@ -1184,6 +1184,7 @@ try {
         }
         await routePage.keyboard.press("Escape");
         await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
+        await routePage.waitForFunction((triggerHandle) => document.activeElement === triggerHandle, await expandShell.elementHandle());
         if (await routePage.locator("#sidebar-shell + .docs-code-block").count() !== 1 || !await expandShell.evaluate((button) => button === document.activeElement)) {
           failures.push("desktop: expanded preview did not restore its source position and trigger focus");
         }
