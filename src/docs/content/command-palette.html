@@ -1,0 +1,57 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Command palette</span></nav><div class="docs-kicker">Interactivity</div><h1>Command palette</h1><p class="bs-lead">Build accessible, keyboard-first Cmd+K / Ctrl+K search and action modals with real-time query filtering across vanilla JS and all framework adapters.</p><div class="docs-component-meta" aria-label="Command palette documentation summary"><span class="bs-badge bs-text-xs"><strong>Cmd+K / Ctrl+K</strong></span><span class="bs-badge bs-text-xs"><strong>Universal parity</strong></span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="command-palette">
+  <div class="docs-kicker">Interactivity</div><h2>Command palette architecture</h2><p>The command palette is an accessible dialog with search input, group headers, icons, keyboard shortcuts, and live filtering.</p>
+
+  <h3 id="command-palette-demo">Example</h3>
+  <div class="docs-demo interaction-demo" data-component-example="command-palette-demo">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" data-bs-target="#demo-command-palette" aria-controls="demo-command-palette">
+      <kbd class="bs-badge bs-badge-subtle">Cmd+K</kbd> Open command palette
+    </button>
+    <dialog class="bs-dialog bs-command-palette" id="demo-command-palette" aria-label="Command palette demo">
+      <div class="bs-command-palette-header">
+        <input class="bs-input bs-command-palette-input" type="search" placeholder="Type a command or search..." />
+      </div>
+      <div class="bs-command-palette-list" role="listbox">
+        <div class="bs-command-palette-group">
+          <div class="bs-command-palette-group-title">Navigation</div>
+          <button class="bs-command-palette-item" type="button" role="option">
+            <span class="bs-command-palette-item-label">Go to Documentation</span>
+            <kbd class="bs-command-palette-item-shortcut">G D</kbd>
+          </button>
+          <button class="bs-command-palette-item" type="button" role="option">
+            <span class="bs-command-palette-item-label">Go to Components</span>
+            <kbd class="bs-command-palette-item-shortcut">G C</kbd>
+          </button>
+        </div>
+        <div class="bs-command-palette-group">
+          <div class="bs-command-palette-group-title">Actions</div>
+          <button class="bs-command-palette-item" type="button" role="option">
+            <span class="bs-command-palette-item-label">Toggle Dark Mode</span>
+            <kbd class="bs-command-palette-item-shortcut">Cmd+T</kbd>
+          </button>
+        </div>
+      </div>
+    </dialog>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Command palette</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Command palette code example"><code data-language="html">&lt;button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="dialog" data-bs-target="#my-command-palette"&gt;
+  &lt;kbd class="bs-badge bs-badge-subtle"&gt;Cmd+K&lt;/kbd&gt; Open command palette
+&lt;/button&gt;
+
+&lt;dialog class="bs-dialog bs-command-palette" id="my-command-palette" aria-label="Command palette"&gt;
+  &lt;div class="bs-command-palette-header"&gt;
+    &lt;input class="bs-input bs-command-palette-input" type="search" placeholder="Type a command or search..." /&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-command-palette-list" role="listbox"&gt;
+    &lt;div class="bs-command-palette-group"&gt;
+      &lt;div class="bs-command-palette-group-title"&gt;Navigation&lt;/div&gt;
+      &lt;button class="bs-command-palette-item" type="button" role="option"&gt;
+        &lt;span class="bs-command-palette-item-label"&gt;Documentation&lt;/span&gt;
+      &lt;/button&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre></div>
+
+  <h3 id="command-palette-adapters">Framework adapters</h3>
+  <p>Available as <code class="bs-code-inline">initCommandPalettes()</code> in vanilla JS, <code class="bs-code-inline">x-data="commandPalette()"</code> in Alpine, <code class="bs-code-inline">useCommandPalette()</code> in React and Vue, and <code class="bs-code-inline">createCommandPalette()</code> in Svelte.</p>
+</section>

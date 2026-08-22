@@ -1,0 +1,51 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Get started</span><span aria-hidden="true">/</span><span>Custom CSS Compiler</span></nav><div class="docs-kicker">Get started</div><h1>Custom CSS Compiler</h1><p class="bs-lead">Generate optimized, tree-shaken, customized Boobstrap CSS bundles with token overrides, palette cherry-picking, custom breakpoints, and static inlining.</p><div class="docs-component-meta" aria-label="Compiler documentation summary"><span class="bs-badge bs-text-xs"><strong>CLI & API</strong></span><span class="bs-badge bs-text-xs"><strong>Tree-shaking</strong></span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="compiler">
+  <div class="docs-kicker">Get started</div><h2>Custom compiler overview</h2><p>Boobstrap provides a programmatic Node.js API (<code class="bs-code-inline">@boobstrap/boobstrap/compiler</code>) and an executable CLI tool (<code class="bs-code-inline">npx boobstrap build</code>) to produce custom stylesheets tailored specifically to your design requirements.</p>
+
+  <h3 id="compiler-cli">CLI Usage</h3>
+  <p>Run the build command to generate a customized stylesheet directly:</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · CLI build</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · CLI build example"><code data-language="bash"># Build minimal bundle with only button and card components
+npx boobstrap build -c button,card -p violet -o src/boobstrap-custom.css
+
+# Build full bundle with minification and static token inlining
+npx boobstrap build --minify --static -o dist/custom.min.css</code></pre></div>
+
+  <h3 id="compiler-config">Configuration file</h3>
+  <p>Place a <code class="bs-code-inline">boobstrap.config.json</code> (or <code class="bs-code-inline">.mjs</code> / <code class="bs-code-inline">.ts</code>) in your project root. Use the official JSON Schema or TypeScript helper for instant IDE autocompletion:</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JSON · boobstrap.config.json</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JSON · boobstrap.config.json code example"><code data-language="json">{
+  "$schema": "./node_modules/@boobstrap/boobstrap/schema.json",
+  "palettes": ["violet", "rose"],
+  "radii": ["md"],
+  "components": ["button", "card", "dialog", "navbar", "form"],
+  "tokens": {
+    "--bs-color-primary": "#8b5cf6",
+    "--bs-radius-md": "0.5rem"
+  },
+  "minify": true,
+  "output": "src/styles/boobstrap.css"
+}</code></pre></div>
+
+  <h3 id="compiler-api">Programmatic API</h3>
+  <p>Import <code class="bs-code-inline">compileCss</code> in build scripts, Vite plugins, or custom server setups:</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Programmatic compiler</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Programmatic compiler example"><code data-language="javascript">import { compileCss } from "@boobstrap/boobstrap/compiler";
+
+const { css, minified, gzipBytes, classCount } = await compileCss({
+  palettes: ["violet"],
+  components: ["button", "card", "dialog"],
+  tokens: {
+    "--bs-color-primary": "#7c3aed"
+  },
+  minify: true
+});
+
+console.log(`Generated ${classCount} classes (${gzipBytes} bytes gzipped)`);</code></pre></div>
+
+  <h3 id="compiler-ide">Developer tooling</h3>
+  <p>Boobstrap includes built-in commands for project setup and editor integration:</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · Tooling commands</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · Tooling commands example"><code data-language="bash"># Interactive project initializer
+npx boobstrap init
+
+# Generate VS Code and Cursor HTML/CSS custom data
+npx boobstrap custom-data</code></pre></div>
+</section>

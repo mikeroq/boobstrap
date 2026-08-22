@@ -237,8 +237,8 @@ const setupExpandedPreviews = (root) => {
 const setupThemeConfigurator = (root) => {
   const cleanups = [];
   root.querySelectorAll("[data-theme-configurator]").forEach((configurator) => {
-    const markup = configurator.nextElementSibling?.querySelector("[data-theme-markup]");
-    const copyButton = configurator.nextElementSibling?.querySelector("[data-theme-copy]");
+    const markup = root.querySelector("[data-theme-markup]");
+    const copyButton = root.querySelector("[data-theme-copy]");
     const status = configurator.querySelector("[data-theme-status]");
     const summary = configurator.querySelector("[data-theme-summary]");
     const state = {
@@ -262,7 +262,10 @@ const setupThemeConfigurator = (root) => {
         markup.textContent = source;
         highlightCodeElement(markup);
       }
-      if (copyButton) copyButton.dataset.copy = source;
+      if (copyButton) {
+        copyButton.dataset.copy = source;
+        copyButton.setAttribute("data-copy", source);
+      }
     };
 
     configurator.querySelectorAll("[data-theme-axis][data-theme-value]").forEach((button) => {
@@ -279,10 +282,11 @@ const setupThemeConfigurator = (root) => {
 };
 
 const setupCopyControls = (root) => listen(root, "click", async (event) => {
-  const button = event.target.closest("[data-copy], [data-copy-code]");
+  const button = event.target.closest("[data-copy], [data-copy-code], [data-copy-example], [data-theme-copy]");
   if (!button || !root.contains(button)) return;
   const originalLabel = button.textContent;
   const source = button.dataset.copy
+    ?? button.getAttribute("data-copy")
     ?? button.closest(".docs-code-block")?.querySelector("pre code")?.textContent.trim()
     ?? "";
   try {

@@ -5,7 +5,9 @@ import { chromium } from "playwright";
 import { developmentSiteOrigin, socialCards } from "../src/social-cards.js";
 
 const run = (command, args, options = {}) => new Promise((resolve, reject) => {
-  const child = spawn(command, args, { stdio: "inherit", ...options });
+  const child = process.platform === "win32"
+    ? spawn("cmd.exe", ["/c", command, ...args], { stdio: "inherit", ...options })
+    : spawn(command, args, { stdio: "inherit", ...options });
   child.once("error", reject);
   child.once("exit", (code, signal) => {
     if (code === 0) resolve();
@@ -26,7 +28,7 @@ const port = await new Promise((resolve, reject) => {
   });
 });
 const baseUrl = `http://127.0.0.1:${port}`;
-const server = spawn("./node_modules/.bin/vite", ["preview", "--host", "127.0.0.1", "--port", String(port)], {
+const server = spawn(process.execPath, ["./node_modules/vite/bin/vite.js", "preview", "--host", "127.0.0.1", "--port", String(port)], {
   stdio: ["ignore", "pipe", "pipe"],
 });
 
@@ -135,7 +137,14 @@ try {
   }
 } finally {
   await browser.close();
-  server.kill("SIGTERM");
+  if (process.platform === "win32" && server.pid) {
+    try {
+      const { execSync } = await import("node:child_process");
+      execSync(`taskkill /pid ${server.pid} /T /F`, { stdio: "ignore" });
+    } catch {}
+  } else {
+    server.kill("SIGTERM");
+  }
 }
 
 if (failures.length) {

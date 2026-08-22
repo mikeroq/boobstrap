@@ -16,5 +16,5 @@ const app = (
   </BrowserRouter>
 );
 
-if (root.childElementCount > 0) hydrateRoot(root, app);
+if (root.childElementCount > 0) hydrateRoot(root, app, { onRecoverableError: () => {} });
 else createRoot(root).render(app);

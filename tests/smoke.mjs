@@ -14,7 +14,7 @@ const port = await new Promise((resolve, reject) => {
   });
 });
 const baseUrl = `http://127.0.0.1:${port}`;
-const server = spawn("./node_modules/.bin/vite", ["preview", "--host", "127.0.0.1", "--port", String(port)], {
+const server = spawn(process.execPath, ["./node_modules/vite/bin/vite.js", "preview", "--host", "127.0.0.1", "--port", String(port)], {
   stdio: ["ignore", "pipe", "pipe"],
 });
 
@@ -299,12 +299,15 @@ const documentationQualityMinimums = {
   "code-windows": { examples: 2, code: 2, guidance: true },
   icons: { examples: 2, code: 4, guidance: true },
   "behavior-layers": { code: 3, guidance: true },
+  compiler: { code: 4 },
+  "command-palette": { examples: 1, code: 1 },
   collapse: { examples: 1, code: 5, guidance: true },
   dropdown: { examples: 1, code: 5, guidance: true },
   tabs: { examples: 3, code: 7, guidance: true },
   "tooltips-popovers": { examples: 2, code: 5, guidance: true },
   "react-adapter": { examples: 1, code: 5, guidance: true },
   "vue-adapter": { examples: 1, code: 5, guidance: true },
+  "svelte-adapter": { examples: 1, code: 3, guidance: true },
   utilities: { examples: 3, code: 3, guidance: true },
   tokens: { examples: 1, code: 1, guidance: true },
   "class-reference": { examples: 1, code: 1, guidance: true },
@@ -1350,7 +1353,8 @@ try {
           failures.push("desktop: theming configurator did not update its copy-ready markup");
         }
         await routePage.locator("[data-theme-copy]").click();
-        if (await routePage.evaluate(() => navigator.clipboard.readText()) !== expectedThemeMarkup) {
+        await routePage.waitForFunction(() => document.querySelector("[data-theme-copy]")?.textContent === "Copied");
+        if ((await routePage.evaluate(() => navigator.clipboard.readText()))?.replace(/\r\n/g, "\n") !== expectedThemeMarkup) {
           failures.push("desktop: theming configurator copied stale markup");
         }
 
@@ -1362,8 +1366,9 @@ try {
           buttonDisplay: getComputedStyle(element, "::-webkit-scrollbar-button").display,
           buttonHeight: getComputedStyle(element, "::-webkit-scrollbar-button").height,
           buttonStatesCovered: (() => {
+            const allRules = (rules) => [...rules].flatMap((r) => r.cssRules ? [r, ...allRules(r.cssRules)] : [r]);
             const rule = [...document.styleSheets]
-              .flatMap((sheet) => [...sheet.cssRules])
+              .flatMap((sheet) => allRules(sheet.cssRules))
               .find((candidate) => candidate.selectorText?.includes("::-webkit-scrollbar-button:vertical:decrement"));
             return [":single-button", ":double-button", ":vertical:decrement", ":vertical:increment", ":horizontal:decrement", ":horizontal:increment"].every((state) => rule?.selectorText.includes(state));
           })(),
@@ -1534,6 +1539,7 @@ try {
         }
         await tooltipTrigger.press("Escape");
         const popoverTrigger = routePage.getByRole("button", { name: "Retention details" });
+        await popoverTrigger.scrollIntoViewIfNeeded();
         await popoverTrigger.click();
         if (await popoverTrigger.getAttribute("aria-expanded") !== "true" || !await routePage.locator("body > .bs-popover").isVisible()) {
           failures.push("desktop: popover did not synchronize its generated panel");
@@ -1850,7 +1856,8 @@ try {
         const variantsCopy = routePage.locator('[data-copy-example="button-variants"]');
         const variantsMarkup = await variantsCopy.getAttribute("data-copy");
         await variantsCopy.click();
-        if (await routePage.evaluate(() => navigator.clipboard.readText()) !== variantsMarkup) {
+        await routePage.waitForFunction(() => document.querySelector('[data-copy-example="button-variants"]')?.textContent === "Copied");
+        if ((await routePage.evaluate(() => navigator.clipboard.readText()))?.replace(/\r\n/g, "\n") !== variantsMarkup?.replace(/\r\n/g, "\n")) {
           failures.push("desktop: always-visible button source did not copy complete markup");
         }
 
@@ -1992,7 +1999,14 @@ try {
   await compactDesktopPage.close();
 } finally {
   await browser.close();
-  server.kill("SIGTERM");
+  if (process.platform === "win32" && server.pid) {
+    try {
+      const { execSync } = await import("node:child_process");
+      execSync(`taskkill /pid ${server.pid} /T /F`, { stdio: "ignore" });
+    } catch {}
+  } else {
+    server.kill("SIGTERM");
+  }
 }
 
 if (failures.length) {

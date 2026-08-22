@@ -268,7 +268,7 @@ export function DocsApp({ initialPath, initialContent, development = false }) {
         <DocsNavigation pathname={pathname} onPreload={loadCachedContent} />
         <button className="docs-backdrop bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu" />
         <main className="docs-main" id="docs-content">
-          <article className="docs-content" ref={articleRef} aria-busy={!content}>
+          <article className="docs-content" ref={articleRef} aria-busy={!content} suppressHydrationWarning>
             {content ? parse(content) : <div className="docs-route-loading" role="status">Loading documentation…</div>}
             {content && <PagePagination route={route} onPreload={loadCachedContent} />}
             <DocsFooter />

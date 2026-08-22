@@ -1,0 +1,55 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Interactivity</span><span aria-hidden="true">/</span><span>Svelte adapter</span></nav><div class="docs-kicker">Interactivity</div><h1>Svelte adapter</h1><p class="bs-lead">Own Boobstrap interaction state in Svelte 5 with SSR-safe runes, headless action directives, and consumer-controlled markup.</p><div class="docs-component-meta" aria-label="Svelte adapter documentation summary"><span class="bs-badge bs-text-xs"><strong>Svelte 5.0+</strong></span><span class="bs-badge bs-text-xs"><strong>Runes & Actions</strong></span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="svelte-adapter">
+  <div class="docs-kicker">Interactivity</div><h2>Svelte 5 integration</h2><p>The official <code class="bs-code-inline">@boobstrap/svelte</code> adapter gives you complete ownership of your semantic HTML. Primitives support both dual action directives (<code class="bs-code-inline">use:dialog.dialog</code>) and prop-getter spreading (<code class="bs-code-inline">{...dialog.getDialogProps()}</code>).</p>
+  <h3 id="svelte-adapter-install">Install</h3>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Terminal · Svelte packages</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Terminal · Svelte packages code example"><code data-language="bash">npm install @boobstrap/boobstrap @boobstrap/svelte svelte</code></pre></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Application entry</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Svelte application entry code example"><code data-language="javascript">import "@boobstrap/boobstrap/dist/boobstrap.css";
+import { createCollapse } from "@boobstrap/svelte";</code></pre></div>
+  <div class="docs-note bs-alert bs-alert-primary"><span><strong>Use one behavior owner.</strong> Do not call <code class="bs-code-inline">initBoobstrap</code> on Svelte-owned markup. A primitive supplies reactive runes state, ARIA attributes, event handlers, and actions; your template supplies semantic elements and <code class="bs-code-inline">bs-*</code> classes.</span></div>
+  <h3 id="svelte-adapter-collapse">Compose a collapse</h3>
+  <p>The preview below demonstrates a Svelte 5 component. The primitive manages expanded state, panel relationships, and transitions.</p>
+  <div class="docs-demo interaction-demo" data-component-example="svelte-adapter-collapse">
+    <button class="bs-btn bs-btn-secondary" type="button" data-bs-toggle="collapse" aria-controls="svelte-account-details" aria-expanded="true">Account details</button>
+    <div class="bs-collapse bs-card bs-mt-4" id="svelte-account-details" data-bs-state="open">
+      <div class="bs-card-body">Profile, security, and notification settings.</div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Svelte · Collapse primitive</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Svelte · Collapse primitive code example"><code data-language="html">&lt;script&gt;
+import { createCollapse } from "@boobstrap/svelte";
+
+const details = createCollapse({ id: "svelte-account-details", defaultOpen: true });
+&lt;/script&gt;
+
+&lt;button class="bs-btn bs-btn-secondary" {...details.getTriggerProps()}&gt;
+  Account details
+&lt;/button&gt;
+&lt;div class="bs-collapse bs-card bs-mt-4" {...details.getPanelProps()}&gt;
+  &lt;div class="bs-card-body"&gt;Profile, security, and notification settings.&lt;/div&gt;
+&lt;/div&gt;</code></pre></div>
+  <h3 id="svelte-adapter-dialog">Dialog with action directives</h3>
+  <p>You can also attach behavior via Svelte actions directly to DOM elements:</p>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>Svelte · Action directives</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Svelte · Action directives code example"><code data-language="html">&lt;script&gt;
+import { createDialog } from "@boobstrap/svelte";
+
+const dialog = createDialog({ id: "profile-dialog" });
+&lt;/script&gt;
+
+&lt;button class="bs-btn bs-btn-primary" use:dialog.trigger&gt;Edit profile&lt;/button&gt;
+
+&lt;dialog class="bs-dialog" use:dialog.dialog&gt;
+  &lt;div class="bs-dialog-header"&gt;
+    &lt;h3 class="bs-dialog-title"&gt;Edit Profile&lt;/h3&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-dialog-body"&gt;
+    &lt;p&gt;Update your account details.&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div class="bs-dialog-footer"&gt;
+    &lt;button class="bs-btn bs-btn-secondary" onclick={() =&gt; dialog.hide("cancel")}&gt;Cancel&lt;/button&gt;
+    &lt;button class="bs-btn bs-btn-primary" onclick={() =&gt; dialog.hide("save")}&gt;Save&lt;/button&gt;
+  &lt;/div&gt;
+&lt;/dialog&gt;</code></pre></div>
+  <h3 id="svelte-adapter-events">Events and lifecycle</h3>
+  <p>All primitives emit cancelable before-events and completed lifecycle events. Detail payloads include <code class="bs-code-inline">adapter: "svelte"</code>, transition reasons, and native source events.</p>
+  <div class="docs-example-guidance" aria-label="Svelte adapter guidance"><div><h3>Runes support</h3><p>Designed natively for Svelte 5 runes and backward compatible with Svelte 4 options.</p></div><div><h3>SSR-safe</h3><p>Avoids DOM mutation during import and initialization for seamless SSR hydration.</p></div><div><h3>Dual ergonomics</h3><p>Choose between prop getters (<code class="bs-code-inline">{...getProps()}</code>) or action directives (<code class="bs-code-inline">use:action</code>).</p></div><div><h3>Full parity</h3><p>All 18 Boobstrap interactive components are fully supported.</p></div></div>
+</section>
