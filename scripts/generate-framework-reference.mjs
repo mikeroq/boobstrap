@@ -53,6 +53,12 @@ const tokenGroups = [
   ["Radius", (name) => name.startsWith("--bs-radius-")],
   ["Effects", (name) => name.startsWith("--bs-shadow-") || name.startsWith("--bs-gradient-")],
   ["Containers", (name) => name.startsWith("--bs-container-")],
+  ["Breakpoints", (name) => name.startsWith("--bs-breakpoint-")],
+  ["Z-index", (name) => name.startsWith("--bs-z-")],
+  ["Control sizes", (name) => name.startsWith("--bs-control-size-") || name.startsWith("--bs-control-block-size") || name.startsWith("--bs-control-padding") || name.startsWith("--bs-control-radius")],
+  ["Button sizes", (name) => name.startsWith("--bs-btn-size-") || name.startsWith("--bs-btn-block-size") || name.startsWith("--bs-btn-padding-inline") || name.startsWith("--bs-btn-radius")],
+  ["Component customization", (name) => name.startsWith("--bs-card-") || name.startsWith("--bs-dialog-") || name.startsWith("--bs-drawer-") || name.startsWith("--bs-alert-") || name.startsWith("--bs-banner-") || name.startsWith("--bs-toast-") || name.startsWith("--bs-sidebar-") || name.startsWith("--bs-progress-") || name.startsWith("--bs-skeleton-") || name.startsWith("--bs-avatar-") || name.startsWith("--bs-badge-") || name.startsWith("--bs-floating-") || name.startsWith("--bs-table-")],
+  ["Overlay", (name) => name.startsWith("--bs-overlay-")],
   ["Motion", (name) => name.startsWith("--bs-duration-") || name.startsWith("--bs-ease-")],
   ["Scrollbars", (name) => name.startsWith("--bs-scrollbar-")],
 ];
