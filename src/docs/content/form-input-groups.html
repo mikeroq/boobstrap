@@ -1,24 +1,24 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Input groups and icons</span></nav><div class="docs-kicker">Forms</div><h1>Input groups and icons</h1><p class="bs-lead">Compose inputs with prefixed or suffixed text, buttons, selects, and inline icons.</p><div class="docs-component-meta" aria-label="Input groups and icons documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Forms</span><span aria-hidden="true">/</span><span>Input groups and icons</span></nav><div class="docs-kicker">Forms</div><h1>Input groups and icons</h1><p class="bs-lead">Compose inputs with prefixed or suffixed text, buttons, selects, inline icons, and validation feedback.</p><div class="docs-component-meta" aria-label="Input groups and icons documentation summary"><span class="bs-badge bs-text-xs"><strong>Forms</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
 
 <section class="docs-section docs-routed-section" id="form-input-groups">
-            <div class="docs-kicker">Forms</div>
-            <h2>Input groups and icons</h2>
-            <p>Attach contextual text, controls, or actions to an input, or place decorative icons inside the control boundary.</p>
+  <div class="docs-kicker">Forms</div>
+  <h2>Input groups and icons</h2>
+  <p>Attach contextual text, controls, or actions to an input, or place decorative icons inside the control boundary.</p>
 
-            <h3 aria-level="2" id="form-input-groups-text-prefix-and-suffix">Text prefix and suffix</h3>
-            <div class="docs-demo" data-component-example="form-input-group-text">
-              <form data-docs-form="">
-                <div class="bs-form-group">
-                  <label class="bs-label" for="group-price">Price</label>
-                  <div class="bs-input-group">
-                    <span class="bs-input-group-text" aria-hidden="true">$</span>
-                    <input class="bs-input" id="group-price" name="price" inputmode="decimal" value="49.00" aria-describedby="group-price-currency">
-                    <span class="bs-input-group-text" id="group-price-currency">USD</span>
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Text prefix and suffix code example"><code class="">&lt;div class="bs-form-group"&gt;
+  <h3 aria-level="2" id="form-input-groups-text-prefix-and-suffix">Text prefix and suffix</h3>
+  <div class="docs-demo" data-component-example="form-input-group-text">
+    <form data-docs-form="">
+      <div class="bs-form-group">
+        <label class="bs-label" for="group-price">Price</label>
+        <div class="bs-input-group">
+          <span class="bs-input-group-text" aria-hidden="true">$</span>
+          <input class="bs-input" id="group-price" name="price" inputmode="decimal" value="49.00" aria-describedby="group-price-currency">
+          <span class="bs-input-group-text" id="group-price-currency">USD</span>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Text prefix and suffix</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Text prefix and suffix code example"><code class="">&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="price"&gt;Price&lt;/label&gt;
   &lt;div class="bs-input-group"&gt;
     &lt;span class="bs-input-group-text" aria-hidden="true"&gt;$&lt;/span&gt;
@@ -27,40 +27,50 @@
       id="price"
       name="price"
       inputmode="decimal"
+      value="49.00"
       aria-describedby="price-currency"
     /&gt;
     &lt;span class="bs-input-group-text" id="price-currency"&gt;USD&lt;/span&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
-            <h3 aria-level="2" id="form-input-groups-button-add-on">Button add-on</h3>
-            <div class="docs-demo" data-component-example="form-input-group-button"><div class="bs-form-group"><label class="bs-label" for="group-domain">Domain</label><div class="bs-input-group"><span class="bs-input-group-text">https://</span><input class="bs-input" id="group-domain" name="domain" value="example.com"><button class="bs-btn bs-btn-secondary" type="button">Verify</button></div></div></div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Button add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Button add-on code example"><code class="">&lt;div class="bs-input-group"&gt;
-  &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
-  &lt;input class="bs-input" aria-label="Domain" /&gt;
-  &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
+  <h3 aria-level="2" id="form-input-groups-button-add-on">Button add-on</h3>
+  <div class="docs-demo" data-component-example="form-input-group-button"><div class="bs-form-group"><label class="bs-label" for="group-domain">Domain</label><div class="bs-input-group"><span class="bs-input-group-text">https://</span><input class="bs-input" id="group-domain" name="domain" value="example.com"><button class="bs-btn bs-btn-secondary" type="button">Verify</button></div></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Button add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Button add-on code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="domain"&gt;Domain&lt;/label&gt;
+  &lt;div class="bs-input-group"&gt;
+    &lt;span class="bs-input-group-text"&gt;https://&lt;/span&gt;
+    &lt;input class="bs-input" id="domain" name="domain" value="example.com" /&gt;
+    &lt;button class="bs-btn bs-btn-secondary" type="button"&gt;Verify&lt;/button&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
-            <h3 aria-level="2" id="form-input-groups-select-add-on">Select add-on</h3>
-            <div class="docs-demo" data-component-example="form-input-group-select"><div class="bs-form-group"><label class="bs-label" for="group-search">Repository</label><div class="bs-input-group"><select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select><input class="bs-input" id="group-search" name="repository" placeholder="Repository name"></div></div></div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Select add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Select add-on code example"><code class="">&lt;div class="bs-input-group"&gt;
-  &lt;select class="bs-select" aria-label="Repository owner"&gt;&lt;option&gt;mikeroq&lt;/option&gt;&lt;/select&gt;
-  &lt;input class="bs-input" aria-label="Repository name" /&gt;
+  <h3 aria-level="2" id="form-input-groups-select-add-on">Select add-on</h3>
+  <div class="docs-demo" data-component-example="form-input-group-select"><div class="bs-form-group"><label class="bs-label" for="group-search">Repository</label><div class="bs-input-group"><select class="bs-select" aria-label="Repository owner"><option>mikeroq</option><option>boobstrap</option></select><input class="bs-input" id="group-search" name="repository" placeholder="Repository name"></div></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Select add-on</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Select add-on code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="repository"&gt;Repository&lt;/label&gt;
+  &lt;div class="bs-input-group"&gt;
+    &lt;select class="bs-select" aria-label="Repository owner"&gt;
+      &lt;option&gt;mikeroq&lt;/option&gt;
+      &lt;option&gt;boobstrap&lt;/option&gt;
+    &lt;/select&gt;
+    &lt;input class="bs-input" id="repository" name="repository" placeholder="Repository name" /&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
-            <h3 aria-level="2" id="form-input-groups-start-icon">Start icon</h3>
-            <div class="docs-demo" data-component-example="form-input-icon-start">
-              <form data-docs-form="">
-                <div class="bs-form-group">
-                  <label class="bs-label" for="icon-search">Search projects</label>
-                  <div class="bs-input-wrap">
-                    <i data-lucide="search" class="bs-icon bs-input-icon bs-input-icon-start" aria-hidden="true"></i>
-                    <input class="bs-input bs-input-has-icon-start" id="icon-search" name="query" type="search" placeholder="Search projects">
-                  </div>
-                </div>
-              </form>
-            </div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Start icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Start icon code example"><code class="">&lt;div class="bs-form-group"&gt;
+  <h3 aria-level="2" id="form-input-groups-start-icon">Start icon</h3>
+  <div class="docs-demo" data-component-example="form-input-icon-start">
+    <form data-docs-form="">
+      <div class="bs-form-group">
+        <label class="bs-label" for="icon-search">Search projects</label>
+        <div class="bs-input-wrap">
+          <i data-lucide="search" class="bs-icon bs-input-icon bs-input-icon-start" aria-hidden="true"></i>
+          <input class="bs-input bs-input-has-icon-start" id="icon-search" name="query" type="search" placeholder="Search projects">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Start icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Start icon code example"><code class="">&lt;div class="bs-form-group"&gt;
   &lt;label class="bs-label" for="search"&gt;Search projects&lt;/label&gt;
   &lt;div class="bs-input-wrap"&gt;
     &lt;i data-lucide="search" class="bs-icon bs-input-icon bs-input-icon-start" aria-hidden="true"&gt;&lt;/i&gt;
@@ -74,11 +84,42 @@
   &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
 
-            <h3 aria-level="2" id="form-input-groups-end-icon">End icon</h3>
-            <div class="docs-demo" data-component-example="form-input-icon-end"><div class="bs-form-group"><label class="bs-label" for="icon-email">Verified email</label><div class="bs-input-wrap"><input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com"><i data-lucide="check" class="bs-icon bs-input-icon bs-input-icon-end" aria-hidden="true"></i></div></div></div>
-            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · End icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · End icon code example"><code class="">&lt;div class="bs-input-wrap"&gt;
-  &lt;input class="bs-input bs-input-has-icon-end" type="email" aria-label="Verified email" /&gt;
-  &lt;i data-lucide="check" class="bs-icon bs-input-icon bs-input-icon-end" aria-hidden="true"&gt;&lt;/i&gt;
+  <h3 aria-level="2" id="form-input-groups-end-icon">End icon</h3>
+  <div class="docs-demo" data-component-example="form-input-icon-end"><div class="bs-form-group"><label class="bs-label" for="icon-email">Verified email</label><div class="bs-input-wrap"><input class="bs-input bs-input-has-icon-end" id="icon-email" name="verified_email" type="email" value="ada@example.com"><i data-lucide="check" class="bs-icon bs-input-icon bs-input-icon-end" aria-hidden="true"></i></div></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · End icon</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · End icon code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="email"&gt;Verified email&lt;/label&gt;
+  &lt;div class="bs-input-wrap"&gt;
+    &lt;input class="bs-input bs-input-has-icon-end" id="email" type="email" value="ada@example.com" /&gt;
+    &lt;i data-lucide="check" class="bs-icon bs-input-icon bs-input-icon-end" aria-hidden="true"&gt;&lt;/i&gt;
+  &lt;/div&gt;
 &lt;/div&gt;</code></pre></div>
-            <div class="docs-note bs-alert bs-alert-primary"><span><strong>Icon responsibility:</strong> decorative icons use <code class="bs-code-inline">aria-hidden="true"</code>; the visible label still names the control. When the icon communicates status, pair it with visible or screen-reader text outside the SVG.</span></div>
-          </section>
+
+  <h3 aria-level="2" id="form-input-groups-invalid-input-group">Invalid input group</h3>
+  <div class="docs-demo" data-component-example="form-input-group-invalid"><div class="bs-form-group"><label class="bs-label" for="group-subdomain">Custom subdomain <span class="bs-label-required" aria-hidden="true">*</span></label><div class="bs-input-group"><input class="bs-input" id="group-subdomain" name="subdomain" value="my invalid site!" aria-invalid="true" aria-describedby="subdomain-error"><span class="bs-input-group-text">.boobstrap.org</span></div><span class="bs-form-feedback bs-form-feedback-invalid" id="subdomain-error">Subdomains may only contain lowercase letters, numbers, and hyphens.</span></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Invalid input group</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Invalid input group code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="subdomain"&gt;
+    Custom subdomain &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="bs-input-group"&gt;
+    &lt;input
+      class="bs-input"
+      id="subdomain"
+      name="subdomain"
+      value="my invalid site!"
+      aria-invalid="true"
+      aria-describedby="subdomain-error"
+    /&gt;
+    &lt;span class="bs-input-group-text"&gt;.boobstrap.org&lt;/span&gt;
+  &lt;/div&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-invalid" id="subdomain-error"&gt;
+    Subdomains may only contain lowercase letters, numbers, and hyphens.
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <div class="docs-example-guidance" aria-label="Input group guidance">
+    <div><h3>Icon responsibility</h3><p>Decorative icons use <code class="bs-code-inline">aria-hidden="true"</code>; the visible label still names the control. When the icon communicates status, pair it with visible or screen-reader text outside the SVG.</p></div>
+    <div><h3>Sizing alignment</h3><p>Group items naturally inherit control height and baseline alignments from the outer form system.</p></div>
+  </div>
+
+  <div class="docs-api"><h3 id="form-input-groups-api">Input groups API</h3><p><code class="bs-code-inline">.bs-input-group</code>, <code class="bs-code-inline">.bs-input-group-text</code>, <code class="bs-code-inline">.bs-input-wrap</code>, <code class="bs-code-inline">.bs-input-icon</code>, <code class="bs-code-inline">.bs-input-icon-start</code>, <code class="bs-code-inline">.bs-input-icon-end</code>, <code class="bs-code-inline">.bs-input-has-icon-start</code>, and <code class="bs-code-inline">.bs-input-has-icon-end</code>.</p></div>
+</section>

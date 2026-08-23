@@ -75,15 +75,18 @@ const escapeHtml = (value) => value
   .replaceAll('"', "&quot;");
 const expectedFormExampleCounts = {
   forms: 2,
-  "form-inputs": 8,
-  "form-input-groups": 5,
+  "form-checkbox": 7,
+  "form-radio": 6,
+  "form-switch": 7,
+  "form-inputs": 7,
+  "form-textarea": 6,
+  "form-input-groups": 6,
   "form-selects": 6,
-  "form-searchable-select": 1,
-  "form-date-time": 5,
-  "form-native-controls": 3,
-  "form-passwords-masks": 4,
-  "form-checks-radios": 5,
-  "form-otp": 1,
+  "form-searchable-select": 2,
+  "form-date-time": 6,
+  "form-native-controls": 4,
+  "form-passwords-masks": 5,
+  "form-otp": 2,
 };
 const expectedTableExampleCounts = {
   tables: 1,
@@ -287,15 +290,18 @@ const documentationQualityMinimums = {
   "empty-state": { examples: 3, code: 3, guidance: true },
   toasts: { examples: 2, code: 5, guidance: true },
   forms: { examples: 2, code: 2 },
-  "form-inputs": { examples: 8, code: 8, guidance: true },
-  "form-input-groups": { examples: 5, code: 5 },
+  "form-checkbox": { examples: 7, code: 7, guidance: true },
+  "form-date-time": { examples: 6, code: 6 },
+  "form-native-controls": { examples: 4, code: 5, guidance: true },
+  "form-input-groups": { examples: 6, code: 6 },
+  "form-inputs": { examples: 7, code: 7, guidance: true },
   "form-selects": { examples: 6, code: 6 },
-  "form-searchable-select": { examples: 1, code: 6 },
-  "form-date-time": { examples: 5, code: 5 },
-  "form-native-controls": { examples: 3, code: 4, guidance: true },
-  "form-passwords-masks": { examples: 4, code: 6 },
-  "form-checks-radios": { examples: 5, code: 5 },
-  "form-otp": { examples: 1, code: 2 },
+  "form-otp": { examples: 2, code: 3 },
+  "form-passwords-masks": { examples: 5, code: 7 },
+  "form-radio": { examples: 6, code: 6, guidance: true },
+  "form-searchable-select": { examples: 2, code: 7 },
+  "form-switch": { examples: 7, code: 7, guidance: true },
+  "form-textarea": { examples: 6, code: 6, guidance: true },
   "code-windows": { examples: 2, code: 2, guidance: true },
   icons: { examples: 2, code: 4, guidance: true },
   "behavior-layers": { code: 3, guidance: true },
@@ -690,6 +696,7 @@ try {
 
     for (const config of docsPages) {
       routeErrors = [];
+      console.log(`[${viewport.name}] Testing route:`, config.path);
       const response = await routePage.goto(`${baseUrl}${config.path}`, { waitUntil: "domcontentloaded" });
       await routePage.waitForFunction(() => document.documentElement.classList.contains("js-ready"));
       const routeDimensions = await dimensionsFor(routePage);
@@ -1651,26 +1658,26 @@ try {
         if (smallHeight >= largeHeight) failures.push("desktop: form size examples are not ordered");
 
         const emailPreview = routePage.locator('[data-component-example="form-input-email"]');
-        const textareaPreview = routePage.locator('[data-component-example="form-textarea"]');
+        const readonlyPreview = routePage.locator('[data-component-example="form-input-readonly"]');
         await emailPreview.getByRole("button", { name: "Use light theme for this preview" }).click();
         await routePage.waitForTimeout(250);
         const independentThemeState = await routePage.evaluate(() => ({
           page: document.documentElement.dataset.bsTheme,
           email: document.querySelector('[data-component-example="form-input-email"]')?.dataset.bsTheme,
           emailBackground: getComputedStyle(document.querySelector("#input-email")).backgroundColor,
-          textarea: document.querySelector('[data-component-example="form-textarea"]')?.dataset.bsTheme,
-          textareaBackground: getComputedStyle(document.querySelector("#input-message")).backgroundColor,
+          readonly: document.querySelector('[data-component-example="form-input-readonly"]')?.dataset.bsTheme,
+          readonlyBackground: getComputedStyle(document.querySelector("#input-readonly")).backgroundColor,
         }));
-        if (independentThemeState.page !== "dark" || independentThemeState.email !== "light" || independentThemeState.textarea !== "dark") {
+        if (independentThemeState.page !== "dark" || independentThemeState.email !== "light" || independentThemeState.readonly !== "dark") {
           failures.push("desktop: a preview theme control changed the page or another preview");
         }
         const isWhiteBackground = (color) => color === "rgb(255, 255, 255)" || color.startsWith("rgba(255, 255, 255");
-        if (!isWhiteBackground(independentThemeState.emailBackground) || independentThemeState.emailBackground === independentThemeState.textareaBackground) {
+        if (!isWhiteBackground(independentThemeState.emailBackground) || independentThemeState.emailBackground === independentThemeState.readonlyBackground) {
           failures.push("desktop: light form preview does not use a distinct white control background");
         }
 
         await routePage.getByRole("button", { name: "Switch to light theme" }).click();
-        if (await textareaPreview.getAttribute("data-bs-theme") !== "light" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
+        if (await readonlyPreview.getAttribute("data-bs-theme") !== "light" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
           failures.push("desktop: page theme toggle did not update non-overridden previews to the new theme");
         }
       }
@@ -1755,7 +1762,7 @@ try {
 
       if (config.sectionId === "form-passwords-masks") {
         const password = routePage.locator("#password-current");
-        await routePage.locator("[data-bs-password-toggle]").click();
+        await routePage.locator("[data-bs-password-toggle]").first().click();
         if (await password.getAttribute("type") !== "text") failures.push("desktop: password example did not reveal its value");
 
         const phone = routePage.locator("#mask-phone");

@@ -213,5 +213,35 @@ const role = useCombobox({ options: roles });
     &lt;/div&gt;
   &lt;/div&gt;
 &lt;/template&gt;</code></pre></div>
+            <h3 aria-level="2" id="form-searchable-select-invalid-state">Invalid combobox state</h3>
+            <div class="docs-demo" data-component-example="form-combobox-invalid"><div class="bs-form-group"><label class="bs-label" for="combobox-invalid-dept">Department <span class="bs-label-required" aria-hidden="true">*</span></label><div class="bs-combobox" data-bs-combobox="" data-bs-state="closed"><input class="bs-combobox-input bs-is-invalid" id="combobox-invalid-dept" data-bs-combobox-input="" placeholder="Search departments" aria-invalid="true" aria-describedby="combobox-error" required=""><button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle="" aria-label="Toggle departments"></button><input type="hidden" name="department" data-bs-combobox-value=""><div class="bs-combobox-listbox" data-bs-combobox-listbox="" hidden=""><div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="engineering">Engineering</div><div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="design">Design</div><div class="bs-combobox-option" data-bs-combobox-option="" data-bs-value="marketing">Marketing</div><div class="bs-combobox-empty" data-bs-combobox-empty="" hidden="">No departments found</div></div></div><span class="bs-form-feedback bs-form-feedback-invalid" id="combobox-error">Please select a valid department from the directory.</span></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Invalid combobox</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Invalid combobox code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="department"&gt;
+    Department &lt;span class="bs-label-required" aria-hidden="true"&gt;*&lt;/span&gt;
+  &lt;/label&gt;
+  &lt;div class="bs-combobox" data-bs-combobox&gt;
+    &lt;input
+      class="bs-combobox-input bs-is-invalid"
+      id="department"
+      data-bs-combobox-input
+      placeholder="Search departments"
+      aria-invalid="true"
+      aria-describedby="dept-error"
+      required
+    /&gt;
+    &lt;button class="bs-combobox-toggle" type="button" data-bs-combobox-toggle aria-label="Toggle departments"&gt;&lt;/button&gt;
+    &lt;input type="hidden" name="department" data-bs-combobox-value /&gt;
+    &lt;div class="bs-combobox-listbox" data-bs-combobox-listbox hidden&gt;
+      &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="engineering"&gt;Engineering&lt;/div&gt;
+      &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="design"&gt;Design&lt;/div&gt;
+      &lt;div class="bs-combobox-option" data-bs-combobox-option data-bs-value="marketing"&gt;Marketing&lt;/div&gt;
+      &lt;div class="bs-combobox-empty" data-bs-combobox-empty hidden&gt;No departments found&lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-invalid" id="dept-error"&gt;
+    Please select a valid department from the directory.
+  &lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
             <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose one owner:</strong> initialize the plain JavaScript controller, Alpine adapter, React hook, or Vue composable—not more than one on the same combobox. See the <a href="/docs/interactivity/react">React</a> and <a href="/docs/interactivity/vue">Vue</a> adapter guides for controlled state and SSR rules.</span></div>
           </section>
