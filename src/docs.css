@@ -510,7 +510,7 @@ body.docs-page {
 #sidebar-shell { overflow-x: auto; }
 
 .docs-sidebar-shell-preview {
-  min-inline-size: 46rem;
+  min-inline-size: 48rem;
   overflow: hidden;
   background: var(--bs-color-background);
   border: 1px solid var(--bs-color-border);
@@ -518,21 +518,51 @@ body.docs-page {
 }
 
 .docs-sidebar-shell-header {
+  padding-inline: var(--bs-space-6);
   border-block-end: 1px solid var(--bs-color-border);
 }
 
 .docs-sidebar-shell-preview .bs-sidebar-layout {
   display: flex;
+  flex-direction: row;
+  block-size: 30rem;
   min-block-size: 30rem;
+  max-block-size: 30rem;
+}
+
+.docs-sidebar-shell-preview .bs-sidebar-main {
+  min-block-size: 0;
+  overflow-y: auto;
 }
 
 .docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar {
   --bs-sidebar-height: 30rem;
+  block-size: 30rem;
   position: relative;
 }
 
-.docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar-start { --bs-sidebar-width: 13rem; }
-.docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar-end { --bs-sidebar-width: 9rem; }
+.docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar-start { --bs-sidebar-width: 16rem; }
+.docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar-end { --bs-sidebar-width: 14rem; }
+
+.docs-standalone-preview #sidebar-shell,
+.docs-standalone-preview .docs-sidebar-shell-preview {
+  min-block-size: 100vh;
+  border: 0;
+  border-radius: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.docs-standalone-preview .docs-sidebar-shell-preview .bs-sidebar-layout {
+  flex: 1 1 auto;
+  min-block-size: calc(100vh - 4rem);
+}
+
+.docs-standalone-preview .docs-sidebar-shell-preview .bs-sidebar-layout > .bs-sidebar {
+  --bs-sidebar-height: calc(100vh - 4rem);
+  position: sticky;
+  top: 4rem;
+}
 
 .docs-sidebar-example {
   --bs-sidebar-height: auto;

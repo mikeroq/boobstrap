@@ -21,61 +21,121 @@
 │   ├── SidebarFooter
 │   └── SidebarRail
 └── SidebarMain + SidebarTrigger</code></pre></div><h3 aria-level="2" id="sidebars-complete-application-shell">Complete application shell</h3><p>Compose a shared header with start and end rails around a flexible reading surface. This example mirrors the documentation shell: fixed identity and search regions, independently scrolling navigation, page content, and a compact table of contents.</p><div class="docs-demo" id="sidebar-shell" data-component-example="sidebar-shell"><div class="docs-sidebar-shell-preview">
-  <header class="docs-sidebar-shell-header bs-navbar"><div class="docs-sidebar-shell-brand bs-navbar-brand"><span class="docs-sidebar-shell-brand-mark bs-avatar bs-avatar-sm bs-avatar-primary">B</span><span>Boobstrap</span><span class="docs-sidebar-shell-context bs-text-muted bs-text-sm">/ Docs</span></div><button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button></header>
+  <header class="docs-sidebar-shell-header bs-navbar bs-px-6">
+    <div class="docs-sidebar-shell-brand bs-navbar-brand bs-inline-flex bs-items-center bs-gap-3">
+      <span class="docs-sidebar-shell-brand-mark bs-avatar bs-avatar-sm bs-avatar-primary">B</span>
+      <span class="bs-font-bold">Boobstrap</span>
+      <span class="bs-text-muted bs-text-sm">/ Docs</span>
+    </div>
+    <nav class="bs-navbar-nav bs-flex bs-items-center bs-gap-2">
+      <a href="#sidebar-shell" class="bs-navbar-link">Home</a>
+      <a href="#sidebar-shell" class="bs-navbar-link">Playground</a>
+      <a href="#sidebar-shell" class="bs-navbar-link">npm</a>
+      <a href="#sidebar-shell" class="bs-navbar-link">GitHub</a>
+      <span class="bs-badge bs-badge-subtle bs-text-xs">v0.7.0</span>
+      <button class="bs-navbar-toggle" type="button" aria-label="Toggle theme"><i data-lucide="sun" class="bs-icon" aria-hidden="true"></i></button>
+      <button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button>
+    </nav>
+  </header>
   <div class="bs-sidebar-layout docs-sidebar-shell-body">
-  <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
-    <div class="bs-sidebar-header">
-      <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
-        <span class="bs-sidebar-label">Boobstrap Docs</span><i data-lucide="chevron-right" class="bs-icon" aria-hidden="true"></i>
-      </button>
-    </div>
-    <div class="bs-sidebar-content">
-      <section class="bs-sidebar-group" aria-labelledby="shell-workspace-label">
-        <div class="bs-sidebar-group-label" id="shell-workspace-label">Workspace</div>
-        <div class="bs-sidebar-group-content">
-          <ul class="bs-sidebar-menu">
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Overview</span></a></li>
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="book-open" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Foundations</span><span class="bs-sidebar-menu-badge">8</span></a></li>
-            <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Components</span></a></li>
-          </ul>
-        </div>
-      </section>
-      <hr class="bs-sidebar-separator">
-      <section class="bs-sidebar-group" aria-labelledby="shell-tools-label">
-        <div class="bs-sidebar-group-label" id="shell-tools-label">Tools</div>
-        <div class="bs-sidebar-group-content">
-          <ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="settings" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Settings</span></a></li></ul>
-        </div>
-      </section>
-    </div>
-    <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span class="bs-avatar bs-avatar-sm" aria-hidden="true">AL</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
-  </aside>
-  <main class="bs-sidebar-main bs-p-6" aria-label="Example documentation article"><nav class="bs-breadcrumb" aria-label="Example breadcrumb"><a href="#sidebar-shell">Docs</a><span aria-hidden="true">/</span><span>Components</span></nav><span class="bs-badge bs-badge-primary">Components</span><h4 class="bs-my-3">Sidebar</h4><p class="bs-text-muted">Build composable application sidebars with fixed regions, nested menus, responsive drawers, and compact page outlines.</p><div class="bs-grid bs-grid-cols-2 bs-gap-3 bs-mt-6"><div class="bs-card bs-card-subtle bs-card-body"><strong class="bs-card-title bs-text-sm">CSS first</strong><span class="bs-card-text bs-text-muted bs-text-xs">Sticky layout and visual regions</span></div><div class="bs-card bs-card-subtle bs-card-body"><strong class="bs-card-title bs-text-sm">Behavior optional</strong><span class="bs-card-text bs-text-muted bs-text-xs">Drawers and collapse modes</span></div></div></main>
-  <aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page example"><p class="bs-nav-heading">On this page</p><nav class="bs-nav"><a class="bs-nav-link" href="#sidebar-shell" aria-current="location">Overview</a><a class="bs-nav-link" href="#sidebar-shell">Examples</a><a class="bs-nav-link" href="#sidebar-shell">API</a></nav></aside>
-</div></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete documentation shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete documentation shell code example"><code class="">&lt;header class="bs-navbar"&gt;...brand and global actions...&lt;/header&gt;
+    <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
+      <div class="bs-sidebar-header">
+        <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
+          <i data-lucide="search" class="bs-icon" aria-hidden="true"></i>
+          <span class="bs-sidebar-label">Search docs...</span>
+          <kbd class="bs-kbd bs-kbd-sm bs-ms-auto">/</kbd>
+        </button>
+      </div>
+      <div class="bs-sidebar-content">
+        <section class="bs-sidebar-group" aria-labelledby="shell-get-started-label">
+          <div class="bs-sidebar-group-label" id="shell-get-started-label">GET STARTED</div>
+          <div class="bs-sidebar-group-content">
+            <ul class="bs-sidebar-menu">
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"><i data-lucide="book-open" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Introduction</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="star" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">What's new in v0.7</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="upload" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Installation</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Starter template</span></a></li>
+            </ul>
+          </div>
+        </section>
+        <hr class="bs-sidebar-separator">
+        <section class="bs-sidebar-group" aria-labelledby="shell-foundations-label">
+          <div class="bs-sidebar-group-label" id="shell-foundations-label">FOUNDATIONS</div>
+          <div class="bs-sidebar-group-content">
+            <ul class="bs-sidebar-menu">
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Typography</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="diamond" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Layout & grid</span></a></li>
+            </ul>
+          </div>
+        </section>
+        <hr class="bs-sidebar-separator">
+        <section class="bs-sidebar-group" aria-labelledby="shell-components-label">
+          <div class="bs-sidebar-group-label" id="shell-components-label">COMPONENTS</div>
+          <div class="bs-sidebar-group-content">
+            <ul class="bs-sidebar-menu">
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="check" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Buttons</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Navigation</span></a></li>
+              <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-shell"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Sidebar</span></a></li>
+            </ul>
+          </div>
+        </section>
+      </div>
+      <div class="bs-sidebar-footer">
+        <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
+          <span class="bs-avatar bs-avatar-sm" aria-hidden="true">AL</span>
+          <span class="bs-sidebar-label">Ada Lovelace</span>
+        </button>
+      </div>
+    </aside>
+    <main class="bs-sidebar-main bs-p-8" aria-label="Example documentation article">
+      <nav class="bs-breadcrumb bs-mb-4" aria-label="Example breadcrumb"><a href="#sidebar-shell">Docs</a><span aria-hidden="true">/</span><span>Introduction</span></nav>
+      <span class="bs-badge bs-badge-primary bs-mb-4">Boobstrap v0.7.0</span>
+      <h1 class="bs-text-3xl bs-font-bold bs-tracking-tight bs-mb-3">Build with <span class="bs-text-primary">Boobstrap.</span></h1>
+      <p class="bs-text-muted bs-lead bs-mb-6">A CSS first framework for responsive layouts, polished components, practical utilities, and optional behavior. Bring your own JavaScript, use Boobstrap's dependency-free controllers, or add an official adapter.</p>
+      <div class="bs-flex bs-gap-3 bs-mb-6"><a class="bs-btn bs-btn-primary" href="#sidebar-shell">Download starter</a><a class="bs-btn bs-btn-secondary" href="#sidebar-shell">Open playground</a></div>
+      <div class="bs-flex bs-gap-2 bs-mb-8"><span class="bs-badge bs-badge-subtle">1135 classes</span><span class="bs-badge bs-badge-subtle">109 tokens</span><span class="bs-badge bs-badge-subtle">0 JavaScript dependencies</span></div>
+      <div class="bs-grid bs-grid-cols-2 bs-gap-3 bs-mb-8">
+        <div class="bs-card bs-card-subtle bs-card-body"><span class="bs-text-primary bs-text-xs bs-font-mono">01</span><strong class="bs-card-title bs-text-sm">Install the package</strong><span class="bs-card-text bs-text-muted bs-text-xs">npm, pnpm, Yarn, Bun, or CDN</span></div>
+        <div class="bs-card bs-card-subtle bs-card-body"><span class="bs-text-primary bs-text-xs bs-font-mono">02</span><strong class="bs-card-title bs-text-sm">Browse components</strong><span class="bs-card-text bs-text-muted bs-text-xs">Semantic, copy-ready examples</span></div>
+        <div class="bs-card bs-card-subtle bs-card-body"><span class="bs-text-primary bs-text-xs bs-font-mono">03</span><strong class="bs-card-title bs-text-sm">Choose behavior</strong><span class="bs-card-text bs-text-muted bs-text-xs">Vanilla JS, Alpine, React, Vue</span></div>
+        <div class="bs-card bs-card-subtle bs-card-body"><span class="bs-text-primary bs-text-xs bs-font-mono">04</span><strong class="bs-card-title bs-text-sm">Customize tokens</strong><span class="bs-card-text bs-text-muted bs-text-xs">Color, type, space, and motion</span></div>
+      </div>
+      <h4 class="bs-h5 bs-font-bold bs-mb-3">What ships in the framework</h4>
+      <div class="bs-grid bs-grid-cols-2 bs-gap-3">
+        <div class="bs-card bs-card-subtle bs-card-body"><strong class="bs-card-title bs-text-sm">CSS foundations</strong><span class="bs-card-text bs-text-muted bs-text-xs">A small reset, semantic theme tokens, responsive containers, a 12-column grid, typography, and composable utilities.</span></div>
+        <div class="bs-card bs-card-subtle bs-card-body"><strong class="bs-card-title bs-text-sm">UI components</strong><span class="bs-card-text bs-text-muted bs-text-xs">Buttons, cards, badges, alerts, banners, form controls, code windows, and interaction presentation classes.</span></div>
+      </div>
+    </main>
+    <aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page example">
+      <p class="bs-nav-heading">ON THIS PAGE</p>
+      <nav class="bs-nav">
+        <a class="bs-nav-link" href="#sidebar-shell" aria-current="location">Browse documentation</a>
+        <a class="bs-nav-link" href="#sidebar-shell">Framework overview</a>
+        <a class="bs-nav-link" href="#sidebar-shell">Quick start</a>
+        <a class="bs-nav-link" href="#sidebar-shell">Core foundations</a>
+        <a class="bs-nav-link" href="#sidebar-shell">Component library</a>
+      </nav>
+    </aside>
+  </div>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete documentation shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete documentation shell code example"><code class="">&lt;header class="bs-navbar"&gt;...brand and global actions...&lt;/header&gt;
 &lt;div class="bs-sidebar-layout"&gt;
   &lt;aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation"&gt;
     &lt;div class="bs-sidebar-header"&gt;
       &lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;
-        &lt;span class="bs-sidebar-label"&gt;Boobstrap Docs&lt;/span&gt;
+        &lt;i data-lucide="search"&gt;&lt;/i&gt;
+        &lt;span class="bs-sidebar-label"&gt;Search docs...&lt;/span&gt;
+        &lt;kbd class="bs-kbd bs-kbd-sm bs-ms-auto"&gt;/&lt;/kbd&gt;
       &lt;/button&gt;
     &lt;/div&gt;
     &lt;div class="bs-sidebar-content"&gt;
-      &lt;section class="bs-sidebar-group" aria-labelledby="shell-workspace-label"&gt;
-        &lt;div class="bs-sidebar-group-label" id="shell-workspace-label"&gt;Workspace&lt;/div&gt;
+      &lt;section class="bs-sidebar-group" aria-labelledby="shell-get-started-label"&gt;
+        &lt;div class="bs-sidebar-group-label" id="shell-get-started-label"&gt;GET STARTED&lt;/div&gt;
         &lt;div class="bs-sidebar-group-content"&gt;
           &lt;ul class="bs-sidebar-menu"&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Overview&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="book-open" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Foundations&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;8&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Components&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell" aria-current="page"&gt;&lt;i data-lucide="book-open"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Introduction&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="star"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;What's new in v0.7&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+            &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="upload"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Installation&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
           &lt;/ul&gt;
-        &lt;/div&gt;
-      &lt;/section&gt;
-      &lt;hr class="bs-sidebar-separator" /&gt;
-      &lt;section class="bs-sidebar-group" aria-labelledby="shell-tools-label"&gt;
-        &lt;div class="bs-sidebar-group-label" id="shell-tools-label"&gt;Tools&lt;/div&gt;
-        &lt;div class="bs-sidebar-group-content"&gt;
-          &lt;ul class="bs-sidebar-menu"&gt;&lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-shell"&gt;&lt;i data-lucide="settings" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Settings&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;&lt;/ul&gt;
         &lt;/div&gt;
       &lt;/section&gt;
     &lt;/div&gt;
@@ -83,7 +143,7 @@
   &lt;/aside&gt;
   &lt;main class="bs-sidebar-main"&gt;...documentation article...&lt;/main&gt;
   &lt;aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page"&gt;
-    &lt;p class="bs-nav-heading"&gt;On this page&lt;/p&gt;&lt;nav class="bs-nav"&gt;...section links...&lt;/nav&gt;
+    &lt;p class="bs-nav-heading"&gt;ON THIS PAGE&lt;/p&gt;&lt;nav class="bs-nav"&gt;...section links...&lt;/nav&gt;
   &lt;/aside&gt;
 &lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-menu-actions-badges-and-nested-destinations">Menu actions, badges, and nested destinations</h3><p>A menu item can combine one primary destination with an independently named action, count, or nested list. Keep links for navigation and buttons for commands.</p><div class="docs-demo" id="sidebar-menu-anatomy" data-component-example="sidebar-menu-anatomy"><aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-menu" aria-label="Project navigation">
   <div class="bs-sidebar-content">
