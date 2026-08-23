@@ -1666,8 +1666,8 @@ try {
         }
 
         await routePage.getByRole("button", { name: "Switch to light theme" }).click();
-        if (await textareaPreview.getAttribute("data-bs-theme") !== "dark" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
-          failures.push("desktop: page theme toggle overrode an independent preview theme");
+        if (await textareaPreview.getAttribute("data-bs-theme") !== "light" || await emailPreview.getAttribute("data-bs-theme") !== "light") {
+          failures.push("desktop: page theme toggle did not update non-overridden previews to the new theme");
         }
       }
 

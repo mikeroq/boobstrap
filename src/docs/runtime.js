@@ -80,8 +80,11 @@ const setupPreviewThemes = (root) => {
     controls.setAttribute("role", "group");
     controls.setAttribute("aria-label", "Preview color theme");
 
-    const setPreviewTheme = (theme) => {
+    const setPreviewTheme = (theme, manual = false) => {
       preview.dataset.bsTheme = theme;
+      if (manual) {
+        preview.dataset.previewThemeManual = "true";
+      }
       controls.querySelectorAll("[data-preview-theme-option]").forEach((button) => {
         button.setAttribute("aria-pressed", String(button.dataset.previewThemeOption === theme));
       });
@@ -94,13 +97,25 @@ const setupPreviewThemes = (root) => {
       button.type = "button";
       button.textContent = titleCase(theme);
       button.setAttribute("aria-label", `Use ${theme} theme for this preview`);
-      cleanups.push(listen(button, "click", () => setPreviewTheme(theme)));
+      cleanups.push(listen(button, "click", () => setPreviewTheme(theme, true)));
       controls.append(button);
     });
 
     preview.prepend(controls);
     setPreviewTheme(initialTheme);
-    cleanups.push(() => controls.remove());
+
+    const observer = new MutationObserver(() => {
+      if (!preview.dataset.previewThemeManual) {
+        const nextDocTheme = document.documentElement.dataset.bsTheme === "light" ? "light" : "dark";
+        setPreviewTheme(nextDocTheme, false);
+      }
+    });
+
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-bs-theme"] });
+    cleanups.push(() => {
+      observer.disconnect();
+      controls.remove();
+    });
   });
   return () => cleanups.forEach((cleanup) => cleanup());
 };
