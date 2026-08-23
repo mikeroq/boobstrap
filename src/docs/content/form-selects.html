@@ -42,9 +42,34 @@
 &lt;select class="bs-select" aria-label="Default select"&gt;&lt;option&gt;Default&lt;/option&gt;&lt;/select&gt;
 &lt;select class="bs-select bs-select-lg" aria-label="Large select"&gt;&lt;option&gt;Prominent&lt;/option&gt;&lt;/select&gt;</code></pre></div>
 
+            <h3 aria-level="2" id="form-selects-valid-select">Valid select</h3>
+            <div class="docs-demo" data-component-example="form-select-valid"><div class="bs-form-group"><label class="bs-label" for="select-valid">Country</label><select class="bs-select bs-is-valid" id="select-valid" name="country" aria-invalid="false" aria-describedby="select-valid-feedback"><option value="ca">Canada</option><option value="mx">Mexico</option><option value="us" selected="">United States</option></select><span class="bs-form-feedback bs-form-feedback-valid" id="select-valid-feedback">Shipping is available for your country.</span></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Valid select</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Valid select code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="country"&gt;Country&lt;/label&gt;
+  &lt;select class="bs-select bs-is-valid" id="country" name="country" aria-invalid="false" aria-describedby="country-feedback"&gt;
+    &lt;option value="ca"&gt;Canada&lt;/option&gt;
+    &lt;option value="mx"&gt;Mexico&lt;/option&gt;
+    &lt;option value="us" selected&gt;United States&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-valid" id="country-feedback"&gt;Shipping is available for your country.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
+            <h3 aria-level="2" id="form-selects-invalid-select">Invalid select</h3>
+            <div class="docs-demo" data-component-example="form-select-invalid"><div class="bs-form-group"><label class="bs-label" for="select-invalid">Subscription plan</label><select class="bs-select" id="select-invalid" name="plan" aria-invalid="true" aria-describedby="select-invalid-feedback"><option value="">Choose a plan...</option><option value="starter">Starter</option><option value="pro">Pro</option></select><span class="bs-form-feedback bs-form-feedback-invalid" id="select-invalid-feedback">Please choose a valid subscription plan.</span></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Invalid select</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Invalid select code example"><code class="">&lt;div class="bs-form-group"&gt;
+  &lt;label class="bs-label" for="plan"&gt;Subscription plan&lt;/label&gt;
+  &lt;select class="bs-select" id="plan" name="plan" aria-invalid="true" aria-describedby="plan-feedback" required&gt;
+    &lt;option value=""&gt;Choose a plan...&lt;/option&gt;
+    &lt;option value="starter"&gt;Starter&lt;/option&gt;
+    &lt;option value="pro"&gt;Pro&lt;/option&gt;
+  &lt;/select&gt;
+  &lt;span class="bs-form-feedback bs-form-feedback-invalid" id="plan-feedback"&gt;Please choose a valid subscription plan.&lt;/span&gt;
+&lt;/div&gt;</code></pre></div>
+
             <h3 aria-level="2" id="form-selects-disabled-select">Disabled select</h3>
             <div class="docs-demo" data-component-example="form-select-disabled"><div class="bs-form-group"><label class="bs-label" for="select-disabled">Region</label><select class="bs-select" id="select-disabled" disabled=""><option>Unavailable</option></select></div></div>
             <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Disabled select</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Disabled select code example"><code class="">&lt;label class="bs-label" for="region"&gt;Region&lt;/label&gt;
 &lt;select class="bs-select" id="region" disabled&gt;&lt;option&gt;Unavailable&lt;/option&gt;&lt;/select&gt;</code></pre></div>
+
             <div class="docs-note bs-alert bs-alert-primary"><span><strong>Prefer native when possible:</strong> use a native select when users choose from a manageable fixed list. It works without JavaScript and inherits platform keyboard, touch, screen-reader, and form-submission behavior.</span></div>
           </section>

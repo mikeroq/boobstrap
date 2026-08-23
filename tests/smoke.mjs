@@ -77,12 +77,12 @@ const expectedFormExampleCounts = {
   forms: 2,
   "form-inputs": 8,
   "form-input-groups": 5,
-  "form-selects": 4,
+  "form-selects": 6,
   "form-searchable-select": 1,
   "form-date-time": 5,
   "form-native-controls": 3,
   "form-passwords-masks": 4,
-  "form-checks-radios": 4,
+  "form-checks-radios": 5,
   "form-otp": 1,
 };
 const expectedTableExampleCounts = {
@@ -194,7 +194,7 @@ const promotedComponentCoverage = {
     "bs-table-striped",
   ],
   lists: ["bs-reference-list", "bs-reference-name", "bs-reference-row", "bs-reference-value", "bs-checklist", "bs-list-group", "bs-list-group-compact", "bs-list-group-content", "bs-list-group-description", "bs-list-group-flush", "bs-list-group-item", "bs-list-group-item-action", "bs-list-group-leading", "bs-list-group-title", "bs-list-group-trailing"],
-  avatars: ["bs-avatar", "bs-avatar-excess", "bs-avatar-fallback", "bs-avatar-group", "bs-avatar-image", "bs-avatar-lg", "bs-avatar-sm", "bs-avatar-status", "bs-avatar-status-danger", "bs-avatar-status-warning", "bs-avatar-xl"],
+  avatars: ["bs-avatar", "bs-avatar-badge", "bs-avatar-badge-bottom", "bs-avatar-excess", "bs-avatar-fallback", "bs-avatar-group", "bs-avatar-icon", "bs-avatar-image", "bs-avatar-lg", "bs-avatar-sm", "bs-avatar-status", "bs-avatar-status-danger", "bs-avatar-status-warning", "bs-avatar-xl"],
   accordion: [
     "bs-accordion",
     "bs-accordion-item",
@@ -250,8 +250,8 @@ const promotedComponentCoverage = {
   theming: ["bs-scrollbar"],
 };
 const promotedComponentClasses = new Set(Object.values(promotedComponentCoverage).flat());
-if (promotedComponentClasses.size !== 211) {
-  throw new Error(`Expected documentation coverage for 211 promoted component classes; found ${promotedComponentClasses.size}`);
+if (promotedComponentClasses.size !== 214) {
+  throw new Error(`Expected documentation coverage for 214 promoted component classes; found ${promotedComponentClasses.size}`);
 }
 const documentationQualityMinimums = {
   introduction: { examples: 1, code: 1 },
@@ -269,7 +269,7 @@ const documentationQualityMinimums = {
   navbar: { examples: 4, code: 4, guidance: true },
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
-  avatars: { examples: 3, code: 3, guidance: true },
+  avatars: { examples: 4, code: 4, guidance: true },
   cards: { examples: 6, code: 6, guidance: true },
   dialogs: { examples: 4, code: 8, guidance: true },
   drawers: { examples: 4, code: 6, guidance: true },
@@ -289,12 +289,12 @@ const documentationQualityMinimums = {
   forms: { examples: 2, code: 2 },
   "form-inputs": { examples: 8, code: 8, guidance: true },
   "form-input-groups": { examples: 5, code: 5 },
-  "form-selects": { examples: 4, code: 4 },
+  "form-selects": { examples: 6, code: 6 },
   "form-searchable-select": { examples: 1, code: 6 },
   "form-date-time": { examples: 5, code: 5 },
   "form-native-controls": { examples: 3, code: 4, guidance: true },
   "form-passwords-masks": { examples: 4, code: 6 },
-  "form-checks-radios": { examples: 4, code: 4 },
+  "form-checks-radios": { examples: 5, code: 5 },
   "form-otp": { examples: 1, code: 2 },
   "code-windows": { examples: 2, code: 2, guidance: true },
   icons: { examples: 2, code: 4, guidance: true },
@@ -1641,6 +1641,9 @@ try {
       }
 
       if (config.sectionId === "form-inputs") {
+        if (await routePage.locator("html").getAttribute("data-bs-theme") !== "dark") {
+          await routePage.getByRole("button", { name: "Switch to dark theme" }).click();
+        }
         const [smallHeight, largeHeight] = await Promise.all([
           routePage.locator("#input-small").evaluate((element) => element.getBoundingClientRect().height),
           routePage.locator("#input-large").evaluate((element) => element.getBoundingClientRect().height),
@@ -1661,7 +1664,8 @@ try {
         if (independentThemeState.page !== "dark" || independentThemeState.email !== "light" || independentThemeState.textarea !== "dark") {
           failures.push("desktop: a preview theme control changed the page or another preview");
         }
-        if (independentThemeState.emailBackground !== "rgb(255, 255, 255)" || independentThemeState.emailBackground === independentThemeState.textareaBackground) {
+        const isWhiteBackground = (color) => color === "rgb(255, 255, 255)" || color.startsWith("rgba(255, 255, 255");
+        if (!isWhiteBackground(independentThemeState.emailBackground) || independentThemeState.emailBackground === independentThemeState.textareaBackground) {
           failures.push("desktop: light form preview does not use a distinct white control background");
         }
 

@@ -1,13 +1,83 @@
-<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Avatars</span></nav><div class="docs-kicker">Components</div><h1>Avatars</h1><p class="bs-lead">Represent people and entities with images, initials, sizes, presence indicators, groups, and overflow counts.</p></header>
-<section class="docs-section docs-routed-section" id="avatars"><div class="docs-kicker">Components</div><h2>Avatars</h2><p>Avatars are supporting identity cues. Always keep the person or entity name available in adjacent text or an accessible label.</p>
-  <h3 id="avatars-image-fallback">Images and fallbacks</h3><div class="docs-demo" data-component-example="avatar-content"><div class="bs-flex bs-items-center bs-gap-4"><span class="bs-avatar"><img class="bs-avatar-image" src="/favicon.svg" alt=""></span><span class="bs-avatar"><span class="bs-avatar-fallback" aria-hidden="true">AL</span></span><span>Ada Lovelace</span></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Image and initials</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code>&lt;span class="bs-avatar"&gt;&lt;img class="bs-avatar-image" src="ada.jpg" alt=""&gt;&lt;/span&gt;
-&lt;span class="bs-avatar"&gt;&lt;span class="bs-avatar-fallback" aria-hidden="true"&gt;AL&lt;/span&gt;&lt;/span&gt;</code></pre></div>
-  <h3 id="avatars-sizes-status">Sizes and status</h3><div class="docs-demo" data-component-example="avatar-sizes"><div class="bs-flex bs-items-center bs-gap-4"><span class="bs-avatar bs-avatar-sm"><span class="bs-avatar-fallback">S</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">M</span><span class="bs-avatar-status" aria-label="Online"></span></span><span class="bs-avatar bs-avatar-lg"><span class="bs-avatar-fallback">L</span><span class="bs-avatar-status bs-avatar-status-warning" aria-label="Away"></span></span><span class="bs-avatar bs-avatar-xl"><span class="bs-avatar-fallback">XL</span><span class="bs-avatar-status bs-avatar-status-danger" aria-label="Busy"></span></span></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Sizes and status</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code>&lt;span class="bs-avatar bs-avatar-sm"&gt;…&lt;/span&gt;
-&lt;span class="bs-avatar bs-avatar-lg"&gt;…&lt;span class="bs-avatar-status" aria-label="Online"&gt;&lt;/span&gt;&lt;/span&gt;</code></pre></div>
-  <h3 id="avatars-groups">Avatar groups</h3><div class="docs-demo" data-component-example="avatar-group"><div class="bs-avatar-group" aria-label="5 project members"><span class="bs-avatar"><span class="bs-avatar-fallback">AL</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">GH</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">MK</span></span><span class="bs-avatar bs-avatar-excess"><span class="bs-avatar-fallback">+2</span></span></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Avatar group</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="Code example"><code>&lt;div class="bs-avatar-group" aria-label="5 project members"&gt;
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Avatars</span></nav><div class="docs-kicker">Components</div><h1>Avatars</h1><p class="bs-lead">Represent people and entities with images, initials, sizes, presence indicators, groups, and overflow counts.</p><div class="docs-component-meta" aria-label="Avatars documentation summary"><span class="bs-badge bs-text-xs"><strong>Components</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Copy-ready</strong> reference</span><span class="bs-badge bs-text-xs"><strong>v0.7.0</strong> current</span></div></header>
+
+<section class="docs-section docs-routed-section" id="avatars">
+  <div class="docs-kicker">Components</div>
+  <h2>Avatars</h2>
+  <p>Avatars are supporting identity cues. Always keep the person or entity name available in adjacent text or an accessible label.</p>
+
+  <h3 aria-level="2" id="avatars-image-fallback">Images and fallbacks</h3>
+  <p>Place an <code class="bs-code-inline">&lt;img&gt;</code> and a fallback inside <code class="bs-code-inline">.bs-avatar</code>. Both occupy the same grid area so the image renders on top and fallback initials or icons display seamlessly if the image is unavailable or loading.</p>
+  <div class="docs-demo" data-component-example="avatar-content"><div class="bs-flex bs-items-center bs-gap-4"><span class="bs-avatar"><img class="bs-avatar-image" src="/favicon.svg" alt=""><span class="bs-avatar-fallback" aria-hidden="true">AL</span></span><span class="bs-avatar"><span class="bs-avatar-fallback" aria-hidden="true">AL</span></span><span class="bs-avatar"><span class="bs-avatar-icon" aria-hidden="true"><i data-lucide="user" class="bs-icon"></i></span></span><span>Ada Lovelace</span></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Image and fallbacks</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Image and fallbacks code example"><code class="">&lt;!-- Combined image and fallback --&gt;
+&lt;span class="bs-avatar"&gt;
+  &lt;img class="bs-avatar-image" src="/images/ada.jpg" alt="" onerror="this.remove()" /&gt;
+  &lt;span class="bs-avatar-fallback" aria-hidden="true"&gt;AL&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Initials fallback --&gt;
+&lt;span class="bs-avatar"&gt;
+  &lt;span class="bs-avatar-fallback" aria-hidden="true"&gt;AL&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Icon fallback --&gt;
+&lt;span class="bs-avatar"&gt;
+  &lt;span class="bs-avatar-icon" aria-hidden="true"&gt;&lt;i data-lucide="user" class="bs-icon"&gt;&lt;/i&gt;&lt;/span&gt;
+&lt;/span&gt;
+&lt;span&gt;Ada Lovelace&lt;/span&gt;</code></pre></div>
+
+  <h3 aria-level="2" id="avatars-sizes-status">Sizes and status</h3>
+  <div class="docs-demo" data-component-example="avatar-sizes"><div class="bs-flex bs-items-center bs-gap-4"><span class="bs-avatar bs-avatar-sm"><span class="bs-avatar-fallback">S</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">M</span><span class="bs-avatar-status" aria-label="Online"></span></span><span class="bs-avatar bs-avatar-lg"><span class="bs-avatar-fallback">L</span><span class="bs-avatar-status bs-avatar-status-warning" aria-label="Away"></span></span><span class="bs-avatar bs-avatar-xl"><span class="bs-avatar-fallback">XL</span><span class="bs-avatar-status bs-avatar-status-danger" aria-label="Busy"></span></span></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Sizes and status</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Sizes and status code example"><code class="">&lt;span class="bs-avatar bs-avatar-sm"&gt;
+  &lt;span class="bs-avatar-fallback"&gt;S&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;span class="bs-avatar"&gt;
+  &lt;span class="bs-avatar-fallback"&gt;M&lt;/span&gt;
+  &lt;span class="bs-avatar-status" aria-label="Online"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;span class="bs-avatar bs-avatar-lg"&gt;
+  &lt;span class="bs-avatar-fallback"&gt;L&lt;/span&gt;
+  &lt;span class="bs-avatar-status bs-avatar-status-warning" aria-label="Away"&gt;&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;span class="bs-avatar bs-avatar-xl"&gt;
+  &lt;span class="bs-avatar-fallback"&gt;XL&lt;/span&gt;
+  &lt;span class="bs-avatar-status bs-avatar-status-danger" aria-label="Busy"&gt;&lt;/span&gt;
+&lt;/span&gt;</code></pre></div>
+
+  <h3 aria-level="2" id="avatars-badges">Badges and icon overlays</h3>
+  <p>Overlay a notification count badge or role icon on the top or bottom corner using <code class="bs-code-inline">.bs-avatar-badge</code> or <code class="bs-code-inline">.bs-avatar-badge-bottom</code>.</p>
+  <div class="docs-demo" data-component-example="avatar-badge"><div class="bs-flex bs-items-center bs-gap-4"><span class="bs-avatar"><span class="bs-avatar-fallback">AL</span><span class="bs-avatar-badge" aria-label="3 notifications">3</span></span><span class="bs-avatar bs-avatar-lg"><img class="bs-avatar-image" src="/favicon.svg" alt=""><span class="bs-avatar-badge bs-avatar-badge-bottom" aria-label="Verified user"><i data-lucide="check" class="bs-icon" style="width: 0.75rem; height: 0.75rem;"></i></span></span><span class="bs-avatar bs-avatar-lg"><span class="bs-avatar-icon"><i data-lucide="bot" class="bs-icon"></i></span><span class="bs-avatar-badge" aria-label="AI assistant">AI</span></span></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Badges and icon overlays</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Badges and icon overlays code example"><code class="">&lt;!-- Notification badge --&gt;
+&lt;span class="bs-avatar"&gt;
+  &lt;span class="bs-avatar-fallback"&gt;AL&lt;/span&gt;
+  &lt;span class="bs-avatar-badge" aria-label="3 notifications"&gt;3&lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Verified icon badge (bottom right) --&gt;
+&lt;span class="bs-avatar bs-avatar-lg"&gt;
+  &lt;img class="bs-avatar-image" src="/favicon.svg" alt="" /&gt;
+  &lt;span class="bs-avatar-badge bs-avatar-badge-bottom" aria-label="Verified user"&gt;
+    &lt;i data-lucide="check" class="bs-icon"&gt;&lt;/i&gt;
+  &lt;/span&gt;
+&lt;/span&gt;
+
+&lt;!-- Role / bot badge --&gt;
+&lt;span class="bs-avatar bs-avatar-lg"&gt;
+  &lt;span class="bs-avatar-icon"&gt;&lt;i data-lucide="bot" class="bs-icon"&gt;&lt;/i&gt;&lt;/span&gt;
+  &lt;span class="bs-avatar-badge" aria-label="AI assistant"&gt;AI&lt;/span&gt;
+&lt;/span&gt;</code></pre></div>
+
+  <h3 aria-level="2" id="avatars-groups">Avatar groups</h3>
+  <div class="docs-demo" data-component-example="avatar-group"><div class="bs-avatar-group" aria-label="5 project members"><span class="bs-avatar"><span class="bs-avatar-fallback">AL</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">GH</span></span><span class="bs-avatar"><span class="bs-avatar-fallback">MK</span></span><span class="bs-avatar bs-avatar-excess"><span class="bs-avatar-fallback">+2</span></span></div></div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Avatar group</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Avatar group code example"><code class="">&lt;div class="bs-avatar-group" aria-label="5 project members"&gt;
   &lt;span class="bs-avatar"&gt;&lt;span class="bs-avatar-fallback"&gt;AL&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="bs-avatar"&gt;&lt;span class="bs-avatar-fallback"&gt;GH&lt;/span&gt;&lt;/span&gt;
+  &lt;span class="bs-avatar"&gt;&lt;span class="bs-avatar-fallback"&gt;MK&lt;/span&gt;&lt;/span&gt;
   &lt;span class="bs-avatar bs-avatar-excess"&gt;&lt;span class="bs-avatar-fallback"&gt;+2&lt;/span&gt;&lt;/span&gt;
 &lt;/div&gt;</code></pre></div>
+
   <div class="docs-example-guidance"><div><h3>Decorative image</h3><p>Use an empty image <code class="bs-code-inline">alt</code> when the visible name already identifies the person.</p></div><div><h3>Status text</h3><p>Do not rely on the status dot’s color alone. Add a label or adjacent status text.</p></div><div><h3>Group label</h3><p>Name the group and expose the actual members elsewhere when the stack summarizes collaboration.</p></div></div>
-  <div class="docs-api"><h3 id="avatars-api">Avatar API</h3><p><code class="bs-code-inline">.bs-avatar</code>, <code class="bs-code-inline">.bs-avatar-sm</code>, <code class="bs-code-inline">.bs-avatar-lg</code>, <code class="bs-code-inline">.bs-avatar-xl</code>, <code class="bs-code-inline">.bs-avatar-image</code>, <code class="bs-code-inline">.bs-avatar-fallback</code>, <code class="bs-code-inline">.bs-avatar-status</code>, <code class="bs-code-inline">.bs-avatar-status-warning</code>, <code class="bs-code-inline">.bs-avatar-status-danger</code>, <code class="bs-code-inline">.bs-avatar-group</code>, and <code class="bs-code-inline">.bs-avatar-excess</code> compose the family.</p></div>
+  <div class="docs-api"><h3 id="avatars-api">Avatar API</h3><p><code class="bs-code-inline">.bs-avatar</code>, <code class="bs-code-inline">.bs-avatar-sm</code>, <code class="bs-code-inline">.bs-avatar-lg</code>, <code class="bs-code-inline">.bs-avatar-xl</code>, <code class="bs-code-inline">.bs-avatar-image</code>, <code class="bs-code-inline">.bs-avatar-fallback</code>, <code class="bs-code-inline">.bs-avatar-icon</code>, <code class="bs-code-inline">.bs-avatar-status</code>, <code class="bs-code-inline">.bs-avatar-status-warning</code>, <code class="bs-code-inline">.bs-avatar-status-danger</code>, <code class="bs-code-inline">.bs-avatar-badge</code>, <code class="bs-code-inline">.bs-avatar-badge-bottom</code>, <code class="bs-code-inline">.bs-avatar-group</code>, and <code class="bs-code-inline">.bs-avatar-excess</code> compose the family.</p></div>
 </section>

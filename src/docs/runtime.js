@@ -1,6 +1,7 @@
 import { initBoobstrap } from "@boobstrap/boobstrap/js";
 import {
   BookOpen,
+  Bot,
   Check,
   ChevronDown,
   ChevronRight,
@@ -24,6 +25,7 @@ import {
   TriangleAlert,
   Undo2,
   Upload,
+  User,
   X,
   createIcons,
 } from "lucide";
@@ -38,6 +40,7 @@ const themeAxes = {
 };
 const docsIcons = {
   BookOpen,
+  Bot,
   Check,
   ChevronDown,
   ChevronRight,
@@ -61,6 +64,7 @@ const docsIcons = {
   TriangleAlert,
   Undo2,
   Upload,
+  User,
   X,
 };
 
