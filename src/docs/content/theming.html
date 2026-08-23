@@ -100,7 +100,7 @@
               <div><h3>Corners</h3><p>Small, normal, and large presets remap the complete radius scale, including scrollbar thumbs. <code class="bs-code-inline">rounded</code> aliases normal for compatibility; square sets every corner to zero.</p></div>
             </div>
 
-            <div class="docs-api"><h3 aria-level="2" id="theming-themed-scrollbars">Themed scrollbars</h3>
+            <h3 aria-level="2" id="theming-themed-scrollbars">Themed scrollbars</h3>
             <p>Boobstrap applies theme-aware scrollbars by default, using <code class="bs-code-inline">--bs-scrollbar-thumb</code>, <code class="bs-code-inline">--bs-scrollbar-track</code>, and <code class="bs-code-inline">--bs-scrollbar-size</code>. The themed presentation contains only the track and draggable thumb; browser arrow buttons are hidden. Set <code class="bs-code-inline">data-bs-scrollbars="native"</code> on <code class="bs-code-inline">&lt;html&gt;</code> or a subtree to restore the browser presentation. Inside a native subtree, <code class="bs-code-inline">.bs-scrollbar</code> opts one scroll container back into the themed treatment. The legacy <code class="bs-code-inline">themed</code> value remains compatible but is no longer required.</p>
             <p>Scrollbar thumb corners consume <code class="bs-code-inline">--bs-radius-pill</code>, so radius presets apply consistently: <code class="bs-code-inline">data-bs-radius="square"</code> produces square scrollbar thumbs instead of rounded ones.</p>
             <div class="docs-demo docs-scrollbar-examples" data-component-example="themed-scrollbar"><div><span class="docs-demo-label">Themed by default</span><div class="docs-scrollbar-demo" data-scrollbar-default="" role="region" tabindex="0" aria-label="Default themed scrollbar example"><div class="bs-stack bs-gap-3"><div class="bs-card bs-card-compact">Track and thumb only—no arrows</div><div class="bs-card bs-card-compact">Keyboard-scrollable region</div><div class="bs-card bs-card-compact">Radius-aware thumb corners</div><div class="bs-card bs-card-compact">Hover for the accent state</div></div></div></div><div><span class="docs-demo-label">Native opt-out</span><div class="docs-scrollbar-demo" data-scrollbar-native="" data-bs-scrollbars="native" role="region" tabindex="0" aria-label="Browser-native scrollbar example"><div class="bs-stack bs-gap-3"><div class="bs-card bs-card-compact">Browser-controlled track and thumb</div><div class="bs-card bs-card-compact">Scoped to this region</div><div class="bs-card bs-card-compact">No framework geometry</div><div class="bs-card bs-card-compact">Platform-native behavior</div></div></div></div></div>
@@ -111,7 +111,7 @@
 &lt;section data-bs-scrollbars="native"&gt;
   ...browser-native scrollbars in this subtree...
   &lt;div class="bs-scrollbar"&gt;...one themed exception...&lt;/div&gt;
-&lt;/section&gt;</code></pre></div></div>
+&lt;/section&gt;</code></pre></div>
 
             <h3 aria-level="2" id="theming-complete-color-token-reference">Complete color token reference</h3>
             <p>The tables below are generated from the compiled framework stylesheet used by this site. They list the complete brand ramp and every <code class="bs-code-inline">--bs-color-*</code> token for all five palettes in both modes, including exact hex and alpha-channel values.</p>
@@ -179,8 +179,21 @@
 &lt;/div&gt;</code></pre></div><h3 aria-level="2" id="theming-persist-a-mode-preference">Persist a mode preference</h3><p>Mode can change without disturbing the selected palette or corner profile. Apply a stored preference before paint when possible to avoid a visual flash.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Mode toggle</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Mode toggle code example"><code data-language="javascript" class="">const root = document.documentElement;
 const toggle = document.querySelector("[data-theme-toggle]");
 
-toggle.addEventListener("click", () =&gt; {
+toggle.addEventListener("click", () => {
   const next = root.dataset.bsTheme === "light" ? "dark" : "light";
   root.dataset.bsTheme = next;
   localStorage.setItem("theme", next);
-});</code></pre></div></section>
+});</code></pre></div>
+
+<div class="docs-api">
+  <h3 id="theming-api">Theming API</h3>
+  <p>Theme attributes and classes configure visual mode, color palette, corner radius scale, and scrollbar behavior across the document or scoped subtrees.</p>
+  <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Attribute / Class</th><th>Allowed Values</th><th>Purpose</th></tr></thead><tbody>
+    <tr><td><code class="bs-code-inline">data-bs-theme</code></td><td><code class="bs-code-inline">dark</code> (default), <code class="bs-code-inline">light</code></td><td>Switches between dark and light color semantics, surfaces, and contrast mappings.</td></tr>
+    <tr><td><code class="bs-code-inline">data-bs-palette</code></td><td><code class="bs-code-inline">rose</code> (default), <code class="bs-code-inline">violet</code>, <code class="bs-code-inline">blue</code>, <code class="bs-code-inline">teal</code>, <code class="bs-code-inline">amber</code></td><td>Selects the primary brand ramp and updates all connected focus rings, gradients, and accent states.</td></tr>
+    <tr><td><code class="bs-code-inline">data-bs-radius</code></td><td><code class="bs-code-inline">sm</code>, <code class="bs-code-inline">normal</code> (default), <code class="bs-code-inline">lg</code>, <code class="bs-code-inline">square</code></td><td>Remaps the geometric corner radius tokens across controls, cards, badges, and scrollbars.</td></tr>
+    <tr><td><code class="bs-code-inline">data-bs-scrollbars</code></td><td><code class="bs-code-inline">themed</code> (default), <code class="bs-code-inline">native</code></td><td>Controls whether customized framework scrollbars or native browser scrollbars are rendered.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-scrollbar</code></td><td>Container class</td><td>Selectively re-enables themed scrollbars inside a native scrollbar subtree.</td></tr>
+  </tbody></table></div>
+</div>
+</section>

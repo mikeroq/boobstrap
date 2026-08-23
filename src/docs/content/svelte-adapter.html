@@ -52,4 +52,23 @@ const dialog = createDialog({ id: "profile-dialog" });
   <h3 id="svelte-adapter-events">Events and lifecycle</h3>
   <p>All primitives emit cancelable before-events and completed lifecycle events. Detail payloads include <code class="bs-code-inline">adapter: "svelte"</code>, transition reasons, and native source events.</p>
   <div class="docs-example-guidance" aria-label="Svelte adapter guidance"><div><h3>Runes support</h3><p>Designed natively for Svelte 5 runes and backward compatible with Svelte 4 options.</p></div><div><h3>SSR-safe</h3><p>Avoids DOM mutation during import and initialization for seamless SSR hydration.</p></div><div><h3>Dual ergonomics</h3><p>Choose between prop getters (<code class="bs-code-inline">{...getProps()}</code>) or action directives (<code class="bs-code-inline">use:action</code>).</p></div><div><h3>Full parity</h3><p>All 18 Boobstrap interactive components are fully supported.</p></div></div>
+
+  <div class="docs-api">
+    <h3 id="svelte-adapter-api">Primitives API</h3>
+    <p>Svelte primitives export reactive runes state, action directives, prop getters, and event dispatchers.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Primitive</th><th>Public contract</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">createAccordion</code></td><td>Coordinates grouped collapse states with single-open or multi-open options.</td></tr>
+      <tr><td><code class="bs-code-inline">createButton</code></td><td>Loading state, busy indicators, start/stop/toggle actions, and keyboard handling.</td></tr>
+      <tr><td><code class="bs-code-inline">createCollapse</code></td><td>Toggleable panel expansion with trigger and panel action bindings.</td></tr>
+      <tr><td><code class="bs-code-inline">createDialog</code></td><td>Native modal synchronization, backdrop dismissal, Escape handling, and focus restoration.</td></tr>
+      <tr><td><code class="bs-code-inline">createDrawer</code></td><td>Slide-out offcanvas drawer panels with focus trapping and gesture dismissal.</td></tr>
+      <tr><td><code class="bs-code-inline">createDropdown</code></td><td>Menu positioning, outside-click dismissal, arrow key navigation, and focus restoration.</td></tr>
+      <tr><td><code class="bs-code-inline">createCombobox</code></td><td>Search query filtering, floating listbox positioning, and option keyboard selection.</td></tr>
+      <tr><td><code class="bs-code-inline">createTabs</code></td><td>Selected tab state, automatic activation, roving keyboard focus, and panel association.</td></tr>
+      <tr><td><code class="bs-code-inline">createToast</code></td><td>Notification auto-hide timers with pause-on-hover and polite screen-reader announcements.</td></tr>
+      <tr><td><code class="bs-code-inline">createTooltip</code></td><td>Floating tooltip positioning on hover and keyboard focus with Escape dismissal.</td></tr>
+      <tr><td><code class="bs-code-inline">createPopover</code></td><td>Floating popover containers with outside-click dismiss and trigger association.</td></tr>
+      <tr><td><code class="bs-code-inline">createCommandPalette</code></td><td>Cmd+K / Ctrl+K keyboard shortcut dialog with query filtering and item selection.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

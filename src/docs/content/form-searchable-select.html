@@ -244,4 +244,20 @@ const role = useCombobox({ options: roles });
 &lt;/div&gt;</code></pre></div>
 
             <div class="docs-note bs-alert bs-alert-primary"><span><strong>Choose one owner:</strong> initialize the plain JavaScript controller, Alpine adapter, React hook, or Vue composable—not more than one on the same combobox. See the <a href="/docs/interactivity/react">React</a> and <a href="/docs/interactivity/vue">Vue</a> adapter guides for controlled state and SSR rules.</span></div>
+
+            <div class="docs-api">
+              <h3 id="form-searchable-select-api">Searchable Select (Combobox) API</h3>
+              <p>Combobox components assemble search inputs, toggle triggers, floating listbox dropdowns, options, and empty states.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class / Data Attribute</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-combobox</code></td><td>Relative container coordinating input, toggle button, and floating listbox.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-combobox-input</code></td><td>Searchable text field with custom autocomplete, focus states, and trailing action space.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-combobox-toggle</code></td><td>Button trigger with animated caret indicating open and closed listbox state.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-combobox-listbox</code></td><td>Floating dropdown panel holding selectable option items and empty state messages.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-combobox-option</code></td><td>Selectable option row supporting active hover, selected checkmarks, and keyboard focus.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-combobox-empty</code></td><td>Fallback message displayed inside the listbox when search query matches zero options.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-combobox</code></td><td>Initializes the vanilla JavaScript combobox controller on the container.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-combobox-value</code></td><td>Hidden input field synchronized with the selected option value for form submission.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-form-feedback-invalid</code></td><td>Error message text describing invalid selection or required field constraints.</td></tr>
+              </tbody></table></div>
+            </div>
           </section>

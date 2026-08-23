@@ -92,4 +92,20 @@ verificationCode.element.addEventListener("bs:otp:complete", (event) =&gt; {
 &lt;/div&gt;</code></pre></div>
 
   <div class="docs-note bs-alert bs-alert-primary"><span><strong>Autocomplete:</strong> the controller applies <code class="bs-code-inline">autocomplete="one-time-code"</code> to the first field and numeric input mode to every field. Use <code class="bs-code-inline">data-bs-otp-pattern</code> only when the code accepts characters other than digits.</span></div>
+
+  <div class="docs-api">
+    <h3 id="form-otp-api">One-Time Password API</h3>
+    <p>OTP classes and data attributes organize segmented verification input boxes with automated focus control and value synchronization.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class / Data Attribute</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-otp</code></td><td>Flex container wrapping segmented character input fields and the hidden synchronized value input.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-otp-input</code></td><td>Individual single-character input box with centered text alignment and focus indicators.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-is-invalid</code></td><td>Negative validation state applied to digit fields when code verification fails.</td></tr>
+      <tr><td><code class="bs-code-inline">data-bs-otp</code></td><td>Initializes the vanilla JavaScript OTP controller on the container.</td></tr>
+      <tr><td><code class="bs-code-inline">data-bs-otp-input</code></td><td>Marks an individual digit field as a participant in the OTP controller.</td></tr>
+      <tr><td><code class="bs-code-inline">data-bs-otp-value</code></td><td>Designates the hidden input where the aggregated code string is synchronized for form submission.</td></tr>
+      <tr><td><code class="bs-code-inline">data-bs-otp-pattern</code></td><td>Custom regular expression pattern string for validating acceptable pasted or typed characters.</td></tr>
+      <tr><td><code class="bs-code-inline">bs:otp:complete</code></td><td>Event fired on the OTP container when all character fields have been filled.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-feedback-invalid</code></td><td>Error feedback message describing expired or incorrect verification codes.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

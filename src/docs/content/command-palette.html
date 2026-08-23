@@ -54,4 +54,21 @@
 
   <h3 id="command-palette-adapters">Framework adapters</h3>
   <p>Available as <code class="bs-code-inline">initCommandPalettes()</code> in vanilla JS, <code class="bs-code-inline">x-data="commandPalette()"</code> in Alpine, <code class="bs-code-inline">useCommandPalette()</code> in React and Vue, and <code class="bs-code-inline">createCommandPalette()</code> in Svelte.</p>
+
+  <div class="docs-api">
+    <h3 id="command-palette-api">Command Palette API</h3>
+    <p>Command palette components combine modal dialog containers, header search inputs, grouped listboxes, and shortcut indicators.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class / Data Attribute</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-command-palette</code></td><td>Modal dialog shell configured with fixed top positioning, max-width constraints, and drop shadows.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-header</code></td><td>Top search bar container holding the query input and optional leading search icon.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-input</code></td><td>Frameless search input field with autofocus and auto-filtering behavior.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-list</code></td><td>Scrollable results listbox holding grouped action items.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-group</code></td><td>Section container organizing related action commands.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-group-title</code></td><td>Category header title text for command groups.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-item</code></td><td>Interactive action option row with hover, active, and keyboard selection states.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-item-label</code></td><td>Primary label text for a command item.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-command-palette-item-shortcut</code></td><td>Keyboard shortcut key combination badge positioned at the end of a command row.</td></tr>
+      <tr><td><code class="bs-code-inline">data-bs-toggle="command-palette"</code></td><td>Declarative trigger attribute to open a targeted command palette modal.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

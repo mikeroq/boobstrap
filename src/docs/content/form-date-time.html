@@ -69,4 +69,20 @@
 &lt;/div&gt;</code></pre></div>
 
   <div class="docs-note bs-alert bs-alert-primary"><span><strong>Server handling:</strong> native date values submit as date-like strings without a timezone. Treat <code class="bs-code-inline">datetime-local</code> as local wall time and collect a timezone separately when the instant matters.</span></div>
+
+  <div class="docs-api">
+    <h3 id="form-date-time-api">Date &amp; Time Controls API</h3>
+    <p>Native date and time pickers inherit standard control styling, focus rings, calendar indicators, and validation states.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class / Type</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-input</code></td><td>Applies standard height, padding, theme background, border, and focus states to date and time controls.</td></tr>
+      <tr><td><code class="bs-code-inline">type="date"</code></td><td>Native calendar date picker formatted as YYYY-MM-DD.</td></tr>
+      <tr><td><code class="bs-code-inline">type="time"</code></td><td>Native 12h or 24h time picker with optional minute and second stepping.</td></tr>
+      <tr><td><code class="bs-code-inline">type="datetime-local"</code></td><td>Combined date and wall-clock time picker without timezone offset.</td></tr>
+      <tr><td><code class="bs-code-inline">type="month"</code></td><td>Year and month selector formatted as YYYY-MM.</td></tr>
+      <tr><td><code class="bs-code-inline">type="week"</code></td><td>Year and week-number selector formatted as YYYY-Www.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-group</code></td><td>Vertical grid layout binding label, date control, helper text, and error messages.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-label</code></td><td>Associated field label for date and time inputs.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-feedback-invalid</code></td><td>Error message text describing invalid date ranges or missing required choices.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

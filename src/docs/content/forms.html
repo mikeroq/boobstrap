@@ -95,4 +95,21 @@
     <a href="/docs/components/forms/otp" class="bs-card bs-card-subtle bs-card-body bs-card-link"><strong>One-time password</strong><span>A complete six-digit code with paste and value synchronization</span></a>
   </div>
   <div class="docs-note bs-alert bs-alert-primary"><span><strong>Start with semantics:</strong> native inputs, selects, textareas, fieldsets, and labels provide the baseline. Add Boobstrap classes for presentation and initialize JavaScript only for behavior such as masks, password reveal, OTP, or searchable selection.</span></div>
+
+  <div class="docs-api">
+    <h3 id="forms-api">Forms Architecture API</h3>
+    <p>The form system coordinates grouping, responsive row grids, labels, control primitives, and validation states.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-form-group</code></td><td>Vertical grid layout binding label, control, helper text, and feedback messages.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-row</code></td><td>Responsive grid row distributing child form groups into multi-column layouts on larger screens.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-label</code></td><td>Associated field label with baseline alignment and bold typography.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-label-required</code></td><td>Required field indicator (renders red asterisk) for required form inputs.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-label-optional</code></td><td>Muted optional tag for non-mandatory form inputs.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-text</code></td><td>Muted descriptive helper text placed below or beside a control.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-is-valid</code></td><td>Explicit positive validation state with green border, focus ring, and icon accent.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-is-invalid</code></td><td>Explicit negative validation state with danger border, focus ring, and icon accent.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-feedback-valid</code></td><td>Success message text associated with valid form input.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-form-feedback-invalid</code></td><td>Error message text describing validation failures.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

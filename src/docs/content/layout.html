@@ -54,4 +54,21 @@
 </div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Responsive visibility</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Responsive visibility code example"><code class="">&lt;div class="bs-stack bs-gap-3"&gt;
   &lt;div class="docs-utility-sample bs-block bs-md-hidden"&gt;Visible below the md breakpoint&lt;/div&gt;
   &lt;div class="docs-utility-sample bs-hidden bs-md-block"&gt;Visible from the md breakpoint&lt;/div&gt;
-&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="layout guidance"><div><h3>Container</h3><p>Use one container to establish page gutters and a readable maximum width. Nesting containers usually creates uneven alignment.</p></div><div><h3>Grid</h3><p>Start with <code class="bs-code-inline">.bs-col-12</code>, then add only the breakpoint spans that materially change the composition.</p></div><div><h3>Source order</h3><p>Keep the DOM in its meaningful mobile reading order. Layout utilities should not create a visual order that disagrees with reading or focus order.</p></div></div></section>
+&lt;/div&gt;</code></pre></div><div class="docs-example-guidance" aria-label="layout guidance"><div><h3>Container</h3><p>Use one container to establish page gutters and a readable maximum width. Nesting containers usually creates uneven alignment.</p></div><div><h3>Grid</h3><p>Start with <code class="bs-code-inline">.bs-col-12</code>, then add only the breakpoint spans that materially change the composition.</p></div><div><h3>Source order</h3><p>Keep the DOM in its meaningful mobile reading order. Layout utilities should not create a visual order that disagrees with reading or focus order.</p></div></div>
+
+<div class="docs-api">
+  <h3 id="layout-api">Layout &amp; Grid API</h3>
+  <p>Containers, responsive grid columns, flex arrangements, and vertical stacks compose fluid interface layouts.</p>
+  <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+    <tr><td><code class="bs-code-inline">.bs-container</code></td><td>Centered page shell with responsive inline padding and max-width ceiling (90rem).</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-container-sm</code> … <code class="bs-code-inline">.bs-container-xl</code></td><td>Container width constraints (sm: 40rem, md: 48rem, lg: 64rem, xl: 76rem).</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-grid</code> / <code class="bs-code-inline">.bs-row</code></td><td>12-column CSS Grid container for responsive columnar layouts.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-col-1</code> … <code class="bs-code-inline">.bs-col-12</code></td><td>Column span definitions spanning 1 to 12 columns across all viewports.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-col-md-1</code> … <code class="bs-code-inline">.bs-col-lg-12</code></td><td>Breakpoint-targeted column spans activating at <code class="bs-code-inline">md</code> (48rem) and <code class="bs-code-inline">lg</code> (64rem).</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-flex</code></td><td>Flexbox layout container for row or column toolbars and alignments.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-stack</code></td><td>Vertical block stack container with customizable gap spacing.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-section</code></td><td>Section container providing fluid vertical margin and padding rhythm.</td></tr>
+    <tr><td><code class="bs-code-inline">.bs-gap-1</code> … <code class="bs-code-inline">.bs-gap-12</code></td><td>Standardized gap spacing tokens between grid and flex items.</td></tr>
+  </tbody></table></div>
+</div>
+</section>

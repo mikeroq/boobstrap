@@ -79,5 +79,24 @@
 &lt;/div&gt;</code></pre></div>
 
   <div class="docs-example-guidance"><div><h3>Decorative image</h3><p>Use an empty image <code class="bs-code-inline">alt</code> when the visible name already identifies the person.</p></div><div><h3>Status text</h3><p>Do not rely on the status dot’s color alone. Add a label or adjacent status text.</p></div><div><h3>Group label</h3><p>Name the group and expose the actual members elsewhere when the stack summarizes collaboration.</p></div></div>
-  <div class="docs-api"><h3 id="avatars-api">Avatar API</h3><p><code class="bs-code-inline">.bs-avatar</code>, <code class="bs-code-inline">.bs-avatar-sm</code>, <code class="bs-code-inline">.bs-avatar-lg</code>, <code class="bs-code-inline">.bs-avatar-xl</code>, <code class="bs-code-inline">.bs-avatar-image</code>, <code class="bs-code-inline">.bs-avatar-fallback</code>, <code class="bs-code-inline">.bs-avatar-icon</code>, <code class="bs-code-inline">.bs-avatar-status</code>, <code class="bs-code-inline">.bs-avatar-status-warning</code>, <code class="bs-code-inline">.bs-avatar-status-danger</code>, <code class="bs-code-inline">.bs-avatar-badge</code>, <code class="bs-code-inline">.bs-avatar-badge-bottom</code>, <code class="bs-code-inline">.bs-avatar-group</code>, and <code class="bs-code-inline">.bs-avatar-excess</code> compose the family.</p></div>
+  <div class="docs-api">
+    <h3 id="avatars-api">Avatar API</h3>
+    <p>Avatar classes compose circular frames, fallback slots, presence indicators, corner badges, and overlapped group collections.</p>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-avatar</code></td><td>Base circular frame (2.5rem / 40px default) with centered grid content and clipping.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-sm</code></td><td>Compact avatar size (1.875rem / 30px) for dense lists and comment threads.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-lg</code></td><td>Large avatar size (3.25rem / 52px) for user profiles and header summaries.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-xl</code></td><td>Extra large avatar size (4.5rem / 72px) for account settings and profile hero sections.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-image</code></td><td>Full-bleed responsive image filling the circular avatar frame.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-fallback</code></td><td>Centered text or initials fallback displayed when an image is loading or omitted.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-icon</code></td><td>Centered SVG icon fallback displayed when user initials or photos are not provided.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-status</code></td><td>Online status dot indicator positioned at the bottom right corner (green by default).</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-status-warning</code></td><td>Away / idle presence status modifier (amber indicator).</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-status-danger</code></td><td>Do not disturb / busy presence status modifier (danger red indicator).</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-badge</code></td><td>Corner count or role label overlaid on the top right edge of the avatar.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-badge-bottom</code></td><td>Positions the corner badge on the bottom right edge of the avatar.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-group</code></td><td>Overlapping horizontal stack for multiple collaborators or members.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-avatar-excess</code></td><td>Counter avatar indicating additional omitted members beyond the visible group limit.</td></tr>
+    </tbody></table></div>
+  </div>
 </section>

@@ -397,55 +397,57 @@ const persist = () =&gt; persistChanges().finally(() =&gt; save.stop());
             <div class="docs-kicker">Reference</div>
             <h2>Class and JavaScript API</h2>
             <p>Button modifiers compose across hierarchy, size, shape, layout, and state. JavaScript is required only for managed loading state and dropdown behavior.</p>
-            <h3>CSS classes</h3>
-            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
-              <tr><td><code class="bs-code-inline">.bs-btn</code></td><td>Base alignment, spacing, typography, focus, and interaction styles.</td><td>Required on every button.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>Prefer one per focused region.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-secondary</code></td><td>Bordered supporting action.</td><td>For alternatives and secondary actions.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-ghost</code></td><td>Transparent, low-emphasis action.</td><td>For tertiary actions and quiet navigation.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-sm</code></td><td>Compact button sizing.</td><td>2.25rem minimum height.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-lg</code></td><td>Large button sizing.</td><td>3.35rem minimum height.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-icon</code></td><td>Square, size-aware icon-only button.</td><td>Requires an accessible name.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-block</code></td><td>Stretches to the container width.</td><td>Useful in narrow forms and panels.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-toolbar</code></td><td>Wraps and spaces groups.</td><td>Add <code class="bs-code-inline">role="toolbar"</code> and a label.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-group</code></td><td>Joins adjacent buttons.</td><td>Add <code class="bs-code-inline">role="group"</code> and a label.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-group-sm</code></td><td>Sizes all group children small.</td><td>Apply to the group.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-group-lg</code></td><td>Sizes all group children large.</td><td>Apply to the group.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-split</code></td><td>Compact attached trigger width.</td><td>Combine with a group and dropdown.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-caret</code></td><td>Draws a CSS-only disclosure caret.</td><td>No icon dependency required.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-active</code></td><td>Persistent active appearance.</td><td>Use <code class="bs-code-inline">aria-pressed</code> for toggles.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-disabled</code></td><td>Disabled appearance for non-button elements.</td><td>Does not prevent events by itself.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-label</code></td><td>Preserves the label width and accessible text during loading.</td><td>Wrap the visible loading-button label.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-spinner</code></td><td>Current-color spinner.</td><td>Use size modifiers as needed.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-spinner-sm</code> / <code class="bs-code-inline">.bs-spinner-lg</code></td><td>Compact or large spinner sizing.</td><td>Can be used inside or outside buttons.</td></tr>
-              <tr><td><code class="bs-code-inline">.bs-btn-spinner</code></td><td>Centers a spinner during button loading state.</td><td>Pair with <code class="bs-code-inline">.bs-spinner</code>.</td></tr>
-            </tbody></table></div>
+            <div class="docs-api">
+              <h3>CSS classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th><th>Notes</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-btn</code></td><td>Base alignment, spacing, typography, focus, and interaction styles.</td><td>Required on every button.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-primary</code></td><td>High-emphasis gradient action.</td><td>Prefer one per focused region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-secondary</code></td><td>Bordered supporting action.</td><td>For alternatives and secondary actions.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-ghost</code></td><td>Transparent, low-emphasis action.</td><td>For tertiary actions and quiet navigation.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-sm</code></td><td>Compact button sizing.</td><td>2.25rem minimum height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-lg</code></td><td>Large button sizing.</td><td>3.35rem minimum height.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-icon</code></td><td>Square, size-aware icon-only button.</td><td>Requires an accessible name.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-block</code></td><td>Stretches to the container width.</td><td>Useful in narrow forms and panels.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-toolbar</code></td><td>Wraps and spaces groups.</td><td>Add <code class="bs-code-inline">role="toolbar"</code> and a label.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-group</code></td><td>Joins adjacent buttons.</td><td>Add <code class="bs-code-inline">role="group"</code> and a label.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-group-sm</code></td><td>Sizes all group children small.</td><td>Apply to the group.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-group-lg</code></td><td>Sizes all group children large.</td><td>Apply to the group.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-split</code></td><td>Compact attached trigger width.</td><td>Combine with a group and dropdown.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-caret</code></td><td>Draws a CSS-only disclosure caret.</td><td>No icon dependency required.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-active</code></td><td>Persistent active appearance.</td><td>Use <code class="bs-code-inline">aria-pressed</code> for toggles.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-disabled</code></td><td>Disabled appearance for non-button elements.</td><td>Does not prevent events by itself.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-label</code></td><td>Preserves the label width and accessible text during loading.</td><td>Wrap the visible loading-button label.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-spinner</code></td><td>Current-color spinner.</td><td>Use size modifiers as needed.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-spinner-sm</code> / <code class="bs-code-inline">.bs-spinner-lg</code></td><td>Compact or large spinner sizing.</td><td>Can be used inside or outside buttons.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-btn-spinner</code></td><td>Centers a spinner during button loading state.</td><td>Pair with <code class="bs-code-inline">.bs-spinner</code>.</td></tr>
+              </tbody></table></div>
 
-            <h3>Button controller</h3>
-            <div class="docs-code-block bs-code-window">
-              <div class="docs-code-label bs-code-header"><span>JavaScript · Component import</span><button type="button" data-copy="import { Button } from &quot;@boobstrap/boobstrap/js/button&quot;;
+              <h3>Button controller</h3>
+              <div class="docs-code-block bs-code-window">
+                <div class="docs-code-label bs-code-header"><span>JavaScript · Component import</span><button type="button" data-copy="import { Button } from &quot;@boobstrap/boobstrap/js/button&quot;;
 
 const save = Button.getOrCreateInstance(document.querySelector(&quot;[data-bs-button]&quot;));
 save.start();
 save.stop();
 save.toggle();
 save.destroy();" class="bs-code-action">Copy</button></div>
-              <pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Component import code example"><code class="">import { Button } from "@boobstrap/boobstrap/js/button";
+                <pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Component import code example"><code class="">import { Button } from "@boobstrap/boobstrap/js/button";
 
 const save = Button.getOrCreateInstance(document.querySelector("[data-bs-button]"));
 save.start();
 save.stop();
 save.toggle();
 save.destroy();</code></pre>
+              </div>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Method or event</th><th>Contract</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">start(options?)</code></td><td>Enters loading state and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
+                <tr><td><code class="bs-code-inline">stop(options?)</code></td><td>Restores the original attributes and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
+                <tr><td><code class="bs-code-inline">toggle(options?)</code></td><td>Starts or stops based on the current state.</td></tr>
+                <tr><td><code class="bs-code-inline">destroy()</code></td><td>Removes listeners, restores loading state, and releases the instance.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:button:start</code> / <code class="bs-code-inline">bs:button:stop</code></td><td>Cancelable before-events. Calling <code class="bs-code-inline">preventDefault()</code> prevents the transition.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:button:started</code> / <code class="bs-code-inline">bs:button:stopped</code></td><td>Bubbling events emitted after a completed transition.</td></tr>
+              </tbody></table></div>
             </div>
-            <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Method or event</th><th>Contract</th></tr></thead><tbody>
-              <tr><td><code class="bs-code-inline">start(options?)</code></td><td>Enters loading state and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
-              <tr><td><code class="bs-code-inline">stop(options?)</code></td><td>Restores the original attributes and returns <code class="bs-code-inline">true</code> when the transition completes.</td></tr>
-              <tr><td><code class="bs-code-inline">toggle(options?)</code></td><td>Starts or stops based on the current state.</td></tr>
-              <tr><td><code class="bs-code-inline">destroy()</code></td><td>Removes listeners, restores loading state, and releases the instance.</td></tr>
-              <tr><td><code class="bs-code-inline">bs:button:start</code> / <code class="bs-code-inline">bs:button:stop</code></td><td>Cancelable before-events. Calling <code class="bs-code-inline">preventDefault()</code> prevents the transition.</td></tr>
-              <tr><td><code class="bs-code-inline">bs:button:started</code> / <code class="bs-code-inline">bs:button:stopped</code></td><td>Bubbling events emitted after a completed transition.</td></tr>
-            </tbody></table></div>
           </section>
 
 <section class="docs-section" id="accessibility">
