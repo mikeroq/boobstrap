@@ -140,11 +140,11 @@ export function DocsNavigation({ pathname, onPreload }) {
             <X width="20" height="20" aria-hidden="true" />
           </button>
         </div>
-        <div className="docs-nav-search">
-          <Search className="bs-icon" aria-hidden="true" />
+        <div className="docs-nav-search bs-input-group">
+          <span className="bs-input-group-text" aria-hidden="true"><Search className="bs-icon bs-icon-sm" /></span>
           <label className="bs-sr-only" htmlFor="docs-nav-filter">Filter documentation sections</label>
-          <input id="docs-nav-filter" type="search" placeholder="Filter docs…" autoComplete="off" data-nav-filter value={filter} onChange={(event) => setFilter(event.target.value)} onKeyDown={handleFilterKeyDown} />
-          <kbd>/</kbd>
+          <input className="bs-input" id="docs-nav-filter" type="search" placeholder="Filter docs…" autoComplete="off" data-nav-filter value={filter} onChange={(event) => setFilter(event.target.value)} onKeyDown={handleFilterKeyDown} />
+          <span className="bs-input-group-text" aria-hidden="true"><kbd>/</kbd></span>
         </div>
       </div>
       <nav className="docs-nav bs-nav bs-sidebar-content" aria-label="Documentation sections" data-bs-sidebar-close>
