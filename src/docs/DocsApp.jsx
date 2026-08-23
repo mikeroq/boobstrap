@@ -65,8 +65,8 @@ function DocsHeader({ theme, onThemeToggle }) {
           <path d="M28 30s-9-5.4-9-11a5.2 5.2 0 0 1 9-3.5 5.2 5.2 0 0 1 9 3.5c0 5.6-9 11-9 11Z" fill="#f28abb" />
         </svg>
         <span>Boobstrap</span>
-        <span className="docs-brand-divider" aria-hidden="true">/</span>
-        <span className="docs-brand-context">Docs</span>
+        <span className="bs-navbar-brand-divider" aria-hidden="true">/</span>
+        <span className="bs-navbar-brand-context">Docs</span>
       </a>
       <nav className="docs-header-links bs-flex bs-items-center bs-gap-2" aria-label="Primary navigation">
         <a href="/" className="docs-header-link bs-navbar-link">Home</a>

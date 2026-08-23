@@ -48,8 +48,6 @@ body.docs-page {
 }
 
 .docs-brand-mark { color: var(--bs-color-primary); }
-.docs-brand-divider { color: var(--bs-color-border-strong); font-weight: 400; }
-.docs-brand-context { color: var(--bs-color-text-muted); font-weight: 600; letter-spacing: -0.01em; }
 
 .docs-version {
   padding: 0.2rem 0.45rem;
