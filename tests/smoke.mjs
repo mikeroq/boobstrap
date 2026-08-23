@@ -282,7 +282,7 @@ const documentationQualityMinimums = {
   alerts: { examples: 3, code: 3, guidance: true },
   accordion: { examples: 2, code: 8, guidance: true },
   banners: { examples: 2, code: 3, guidance: true },
-  progress: { examples: 3, code: 3, guidance: true },
+  progress: { examples: 4, code: 4, guidance: true },
   skeletons: { examples: 4, code: 5, guidance: true },
   "empty-state": { examples: 3, code: 3, guidance: true },
   toasts: { examples: 2, code: 5, guidance: true },

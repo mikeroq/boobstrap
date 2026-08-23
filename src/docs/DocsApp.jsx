@@ -82,6 +82,7 @@ function DocsHeader({ theme, onThemeToggle }) {
           <Menu width="20" height="20" aria-hidden="true" />
         </button>
       </nav>
+      <progress className="bs-navbar-progress bs-navbar-progress-brand" max="100" value="0" aria-label="Documentation reading progress" data-reading-progress />
     </header>
   );
 }
@@ -263,7 +264,6 @@ export function DocsApp({ initialPath, initialContent, development = false }) {
       <a className="docs-skip-link" href="#docs-content">Skip to documentation</a>
       <DevelopmentBanner enabled={development} />
       <DocsHeader theme={theme} onThemeToggle={toggleTheme} />
-      <progress className="docs-reading-progress" max="100" value="0" aria-label="Documentation reading progress" data-reading-progress />
       <div className="docs-layout">
         <DocsNavigation pathname={pathname} onPreload={loadCachedContent} />
         <button className="docs-backdrop bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="docs-sidebar" aria-label="Close documentation menu" />

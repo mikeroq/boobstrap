@@ -67,22 +67,6 @@ body.docs-page {
 [data-bs-theme="light"] .theme-sun { display: none; }
 .docs-menu-button { display: none; }
 
-.docs-reading-progress {
-  position: fixed;
-  z-index: 60;
-  top: calc(var(--docs-header-height) - 2px);
-  left: 0;
-  width: 100%;
-  height: 2px;
-  overflow: hidden;
-  appearance: none;
-  background: transparent;
-  border: 0;
-}
-.docs-reading-progress::-webkit-progress-bar { background: transparent; }
-.docs-reading-progress::-webkit-progress-value { background: var(--bs-gradient-brand); }
-.docs-reading-progress::-moz-progress-bar { background: var(--bs-gradient-brand); }
-
 .docs-layout {
   display: grid;
   min-height: calc(100vh - var(--docs-header-height));
