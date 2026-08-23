@@ -35,6 +35,7 @@ execFileSync(npmCommand, [
 ], {
   cwd: projectRoot,
   stdio: "inherit",
+  shell: process.platform === "win32",
 });
 
 console.log(`Using boobstrap-framework dev commit ${ref}.`);
