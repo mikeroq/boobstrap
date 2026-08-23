@@ -34,6 +34,8 @@
   &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
   &lt;div class=&quot;bs-dropdown-menu&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu hidden&gt;
     &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save as draft&lt;/button&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; disabled&gt;Save as template&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;">
                 <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" data-bs-dropdown&gt;
@@ -44,6 +46,8 @@
   &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
     aria-labelledby="save-toggle" data-bs-dropdown-menu hidden&gt;
     &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem" disabled&gt;Save as template&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
@@ -52,6 +56,8 @@
   &lt;button class=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; id=&quot;save-toggle&quot; type=&quot;button&quot; data-bs-toggle=&quot;dropdown&quot; x-bind=&quot;trigger&quot; aria-controls=&quot;save-menu&quot; aria-label=&quot;More save options&quot;&gt;&lt;/button&gt;
   &lt;div class=&quot;bs-dropdown-menu&quot; id=&quot;save-menu&quot; role=&quot;menu&quot; aria-labelledby=&quot;save-toggle&quot; data-bs-dropdown-menu x-bind=&quot;menu&quot; hidden&gt;
     &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save as draft&lt;/button&gt;
+    &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; disabled&gt;Save as template&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;" hidden="">
                 <pre class="bs-code-body" tabindex="0" aria-label="Implementation code example"><code class="">&lt;div class="bs-dropdown bs-btn-group" x-data="bsDropdown" x-bind="root"&gt;
@@ -62,6 +68,8 @@
   &lt;div class="bs-dropdown-menu" id="save-menu" role="menu"
     aria-labelledby="save-toggle" data-bs-dropdown-menu x-bind="menu" hidden&gt;
     &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save and publish&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem"&gt;Save as draft&lt;/button&gt;
+    &lt;button class="bs-dropdown-item" type="button" role="menuitem" disabled&gt;Save as template&lt;/button&gt;
   &lt;/div&gt;
 &lt;/div&gt;</code></pre>
               </div>
@@ -76,6 +84,8 @@ function SaveActions() {
       &lt;button className=&quot;bs-btn bs-btn-primary bs-btn-split bs-btn-caret&quot; aria-label=&quot;More save options&quot; {...dropdown.getTriggerProps()} /&gt;
       &lt;div className=&quot;bs-dropdown-menu&quot; {...dropdown.getMenuProps({ &quot;aria-label&quot;: &quot;Save options&quot; })}&gt;
         &lt;button className=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save and publish&lt;/button&gt;
+        &lt;button className=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;Save as draft&lt;/button&gt;
+        &lt;button className=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; disabled&gt;Save as template&lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
   );
@@ -94,6 +104,12 @@ function SaveActions() {
         {...dropdown.getMenuProps({ "aria-label": "Save options" })}&gt;
         &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
           Save and publish
+        &lt;/button&gt;
+        &lt;button className="bs-dropdown-item" type="button" role="menuitem"&gt;
+          Save as draft
+        &lt;/button&gt;
+        &lt;button className="bs-dropdown-item" type="button" role="menuitem" disabled&gt;
+          Save as template
         &lt;/button&gt;
       &lt;/div&gt;
     &lt;/div&gt;
@@ -115,6 +131,12 @@ const dropdown = useDropdown({ id: &quot;save-menu&quot; });
       v-bind=&quot;dropdown.getMenuProps({ 'aria-label': 'Save options' })&quot;&gt;
       &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;
         Save and publish
+      &lt;/button&gt;
+      &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot;&gt;
+        Save as draft
+      &lt;/button&gt;
+      &lt;button class=&quot;bs-dropdown-item&quot; type=&quot;button&quot; role=&quot;menuitem&quot; disabled&gt;
+        Save as template
       &lt;/button&gt;
     &lt;/div&gt;
   &lt;/div&gt;

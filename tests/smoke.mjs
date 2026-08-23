@@ -1660,7 +1660,12 @@ try {
         const emailPreview = routePage.locator('[data-component-example="form-input-email"]');
         const readonlyPreview = routePage.locator('[data-component-example="form-input-readonly"]');
         await emailPreview.getByRole("button", { name: "Use light theme for this preview" }).click();
-        await routePage.waitForTimeout(250);
+        await routePage.waitForFunction(() => {
+          const preview = document.querySelector('[data-component-example="form-input-email"]');
+          const input = document.querySelector('#input-email');
+          const bg = input ? getComputedStyle(input).backgroundColor : '';
+          return preview?.dataset.bsTheme === 'light' && (bg === 'rgb(255, 255, 255)' || bg.startsWith('rgba(255, 255, 255'));
+        });
         const independentThemeState = await routePage.evaluate(() => ({
           page: document.documentElement.dataset.bsTheme,
           email: document.querySelector('[data-component-example="form-input-email"]')?.dataset.bsTheme,
