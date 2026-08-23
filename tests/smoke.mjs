@@ -75,7 +75,7 @@ const escapeHtml = (value) => value
   .replaceAll('"', "&quot;");
 const expectedFormExampleCounts = {
   forms: 2,
-  "form-inputs": 7,
+  "form-inputs": 8,
   "form-input-groups": 5,
   "form-selects": 4,
   "form-searchable-select": 1,
@@ -270,7 +270,7 @@ const documentationQualityMinimums = {
   sidebars: { examples: 8, code: 15, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   avatars: { examples: 3, code: 3, guidance: true },
-  cards: { examples: 5, code: 5, guidance: true },
+  cards: { examples: 6, code: 6, guidance: true },
   dialogs: { examples: 4, code: 8, guidance: true },
   drawers: { examples: 4, code: 6, guidance: true },
   tables: { examples: 1, code: 1, guidance: true },
@@ -287,7 +287,7 @@ const documentationQualityMinimums = {
   "empty-state": { examples: 3, code: 3, guidance: true },
   toasts: { examples: 2, code: 5, guidance: true },
   forms: { examples: 2, code: 2 },
-  "form-inputs": { examples: 7, code: 7, guidance: true },
+  "form-inputs": { examples: 8, code: 8, guidance: true },
   "form-input-groups": { examples: 5, code: 5 },
   "form-selects": { examples: 4, code: 4 },
   "form-searchable-select": { examples: 1, code: 6 },
@@ -903,6 +903,17 @@ try {
           failures.push(`${viewport.name}: structured card layout did not render correctly (${JSON.stringify(structuredCardLayout)})`);
         }
         await routePage.screenshot({ path: `artifacts/cards-${viewport.name}.png`, fullPage: true });
+      }
+
+      if (config.sectionId === "command-palette") {
+        const trigger = routePage.getByRole("button", { name: /Open command palette/i });
+        const dialog = routePage.locator("#demo-command-palette");
+        await trigger.click();
+        await routePage.waitForFunction(() => document.querySelector("#demo-command-palette")?.open);
+        const inputFocused = await dialog.locator(".bs-command-palette-input").evaluate((input) => input === document.activeElement);
+        if (!inputFocused) failures.push(`${viewport.name}: command palette trigger did not focus the input on open`);
+        await routePage.keyboard.press("Escape");
+        await routePage.waitForFunction(() => !document.querySelector("#demo-command-palette")?.open);
       }
 
       if (config.sectionId === "dialogs") {

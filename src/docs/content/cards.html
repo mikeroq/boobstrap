@@ -129,13 +129,25 @@
   &lt;span class="bs-text-xs bs-text-muted"&gt;Component guide&lt;/span&gt;
   &lt;strong&gt;Responsive tables&lt;/strong&gt;
   &lt;span class="bs-text-sm bs-text-muted"&gt;Present structured data without widening the page.&lt;/span&gt;
-&lt;/a&gt;</code></pre></div><div class="docs-api">
+&lt;/a&gt;</code></pre></div><h3 aria-level="2" id="cards-header-input">Card header with embedded input</h3><p>Embed borderless text inputs or search bars directly in the card header. Use <code class="bs-code-inline">.bs-card-header-input</code> or <code class="bs-code-inline">.bs-card-title-input</code> for editable titles, or pair <code class="bs-code-inline">.bs-input-flush</code> with a header for seamless search cards.</p><div class="docs-demo" id="card-header-input-demo" data-component-example="card-header-input-demo"><article class="bs-card bs-card-raised bs-card-separated"><header class="bs-card-header"><input class="bs-card-title bs-card-header-input" type="text" value="Q3 Product Roadmap" aria-label="Card title" /><p class="bs-card-description">Click the title to edit directly within the card header.</p><button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button">Save</button></header><div class="bs-card-content"><p class="bs-card-text bs-mb-0">Cards seamlessly support interactive header controls and borderless inputs without extra containers or custom borders.</p></div></article></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Card header input</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Card header input code example"><code class="">&lt;article class="bs-card bs-card-separated"&gt;
+  &lt;header class="bs-card-header"&gt;
+    &lt;input class="bs-card-title bs-card-header-input" type="text" value="Q3 Product Roadmap" aria-label="Card title" /&gt;
+    &lt;p class="bs-card-description"&gt;Click the title to edit directly within the card header.&lt;/p&gt;
+    &lt;button class="bs-btn bs-btn-ghost bs-btn-sm bs-card-action" type="button"&gt;Save&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;div class="bs-card-content"&gt;
+    &lt;p class="bs-card-text bs-mb-0"&gt;Card body copy.&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/article&gt;</code></pre></div><div class="docs-api">
               <h3 id="cards-card-api">Card API</h3>
               <p>Cards use one surface with explicit, composable regions. The header and footer are optional; every card can contain only <code class="bs-code-inline">.bs-card-content</code> when no additional structure is needed.</p>
               <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
                 <tr><td><code class="bs-code-inline">.bs-card</code></td><td>Surface, border, radius, clipping, and default elevation.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-header</code></td><td>Optional responsive grid for the title, description, and action slots.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-header-input</code></td><td>Borderless input styled specifically for editable card titles in the header slot.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-header-flush</code></td><td>Removes default vertical padding from the header for full-bleed search inputs.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-title</code></td><td>Heading slot within a card header or content region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-card-title-input</code></td><td>Borderless input modifier that matches card title typography.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-description</code></td><td>Muted supporting copy associated with the header title.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-action</code></td><td>Optional header action aligned independently at the inline end.</td></tr>
                 <tr><td><code class="bs-code-inline">.bs-card-content</code></td><td>Primary padded content region; works with or without a header and footer.</td></tr>

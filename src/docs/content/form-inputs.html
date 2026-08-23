@@ -53,6 +53,11 @@
             <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Disabled input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Disabled input code example"><code class="">&lt;label class="bs-label" for="unavailable"&gt;Unavailable value&lt;/label&gt;
 &lt;input class="bs-input" id="unavailable" value="Unavailable" disabled /&gt;</code></pre></div>
 
+            <h3 aria-level="2" id="form-inputs-flush-and-borderless">Flush and borderless inputs</h3>
+            <p>Use <code class="bs-code-inline">.bs-input-flush</code> or <code class="bs-code-inline">.bs-input-borderless</code> when inputs are embedded directly into cards, toolbars, headers, or table rows without outer border chrome.</p>
+            <div class="docs-demo" data-component-example="form-input-flush"><div class="bs-form-group"><label class="bs-label" for="input-flush-example">Quick filter</label><input class="bs-input bs-input-flush" id="input-flush-example" type="search" placeholder="Type to filter immediately..."></div></div>
+            <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Flush input</span><button type="button" data-copy-code="" class="bs-code-action">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Flush input code example"><code class="">&lt;input class="bs-input bs-input-flush" type="search" placeholder="Type to filter..." /&gt;</code></pre></div>
+
             <div class="docs-example-guidance" aria-label="Input guidance">
               <div><h3>Labels</h3><p>Use a visible <code class="bs-code-inline">&lt;label&gt;</code> whose <code class="bs-code-inline">for</code> matches the control ID. Required and optional markers supplement the label; the native <code class="bs-code-inline">required</code> attribute remains the actual constraint.</p></div>
               <div><h3>Feedback</h3><p>Connect help and error text with <code class="bs-code-inline">aria-describedby</code>. Set <code class="bs-code-inline">aria-invalid="true"</code> only after validation determines the current value is invalid.</p></div>
