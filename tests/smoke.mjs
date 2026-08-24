@@ -891,7 +891,8 @@ try {
         }
         if (await sidebarFirstExample.locator('.docs-sidebar-first-shell-preview > .bs-sidebar-layout > #sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer.bs-p-0[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
           || await sidebarFirstExample.locator('#sidebar-first-example > .bs-sidebar-header.bs-navbar').count() !== 1
-          || await sidebarFirstExample.locator('#sidebar-first-example .bs-nav-heading').count() !== 1
+          || await sidebarFirstExample.locator('#sidebar-first-example .bs-nav-heading.bs-sidebar-label').count() !== 1
+          || await sidebarFirstExample.locator('#sidebar-first-example .bs-navbar-brand .bs-sidebar-label.bs-whitespace-nowrap').count() !== 1
           || await sidebarFirstExample.locator('#sidebar-first-example .bs-sidebar-group-label').count() !== 0
           || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > [data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
           || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > button').count() !== 1
@@ -930,7 +931,8 @@ try {
           const liveLabels = [...example.querySelectorAll("#sidebar-first-example .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
           const sourceLabels = [...parsed.querySelectorAll("#sidebar-first-example .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
           return JSON.stringify(liveLabels) === JSON.stringify(sourceLabels)
-            && parsed.querySelectorAll("#sidebar-first-example .bs-nav-heading").length === 1
+            && parsed.querySelectorAll("#sidebar-first-example .bs-nav-heading.bs-sidebar-label").length === 1
+            && parsed.querySelectorAll("#sidebar-first-example .bs-navbar-brand .bs-sidebar-label.bs-whitespace-nowrap").length === 1
             && parsed.querySelectorAll(".bs-sidebar-main > .bs-navbar > button").length === 1
             && parsed.querySelectorAll(".bs-sidebar-main > .bs-navbar > .bs-navbar-actions").length === 0
             && parsed.querySelectorAll(".bs-sidebar-main .bs-card").length === example.querySelectorAll(".bs-sidebar-main .bs-card").length;
@@ -1273,6 +1275,28 @@ try {
       if (config.sectionId === "application-shell") {
         const expandedDialog = routePage.locator(".docs-preview-dialog");
         const stackedPreview = routePage.locator("#sidebar-shell");
+        const sidebarFirstPreview = routePage.locator("#sidebar-first-shell");
+        const sidebarFirstSidebar = sidebarFirstPreview.locator("#sidebar-first-example");
+        const sidebarFirstToggle = sidebarFirstPreview.getByRole("button", { name: "Toggle sidebar", exact: true });
+        await sidebarFirstToggle.click();
+        await routePage.waitForFunction(() => document.querySelector("#sidebar-first-example")?.dataset.bsState === "collapsed");
+        const collapsedSidebarContract = await sidebarFirstSidebar.evaluate((sidebar) => {
+          const heading = sidebar.querySelector(".bs-nav-heading");
+          const label = sidebar.querySelector(".bs-navbar-brand .bs-sidebar-label");
+          return {
+            headingDisplay: getComputedStyle(heading).display,
+            brandDisplay: getComputedStyle(label).display,
+            brandWhiteSpace: getComputedStyle(label).whiteSpace,
+          };
+        });
+        if (collapsedSidebarContract.headingDisplay !== "none"
+          || collapsedSidebarContract.brandDisplay !== "none"
+          || collapsedSidebarContract.brandWhiteSpace !== "nowrap") {
+          failures.push(`desktop: sidebar-first icon collapse does not hide its heading and preserve a single-line brand (${JSON.stringify(collapsedSidebarContract)})`);
+        }
+        await sidebarFirstToggle.click();
+        await routePage.waitForFunction(() => document.querySelector("#sidebar-first-example")?.dataset.bsState === "expanded");
+        await routePage.waitForTimeout(300);
         const expandStacked = stackedPreview.getByRole("button", { name: "Expand Stacked application shell preview", exact: true });
         await expandStacked.click();
         if (!await expandedDialog.evaluate((dialog) => dialog.open)
@@ -1293,7 +1317,6 @@ try {
         await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
         await routePage.waitForFunction((triggerHandle) => document.activeElement === triggerHandle, await expandStacked.elementHandle());
 
-        const sidebarFirstPreview = routePage.locator("#sidebar-first-shell");
         const expandSidebarFirst = sidebarFirstPreview.getByRole("button", { name: "Expand Sidebar-first application shell preview", exact: true });
         await expandSidebarFirst.click();
         const expandedSidebarFirstGeometry = await expandedDialog.evaluate((dialog) => {
