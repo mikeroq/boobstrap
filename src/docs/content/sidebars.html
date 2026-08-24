@@ -30,11 +30,6 @@
   </header>
   <div class="bs-sidebar-layout docs-sidebar-shell-body">
   <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
-    <div class="bs-sidebar-header">
-      <button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button">
-        <span class="bs-sidebar-label">Boobstrap Docs</span><i data-lucide="chevron-right" class="bs-icon" aria-hidden="true"></i>
-      </button>
-    </div>
     <div class="bs-sidebar-content">
       <section class="bs-sidebar-group" aria-labelledby="shell-workspace-label">
         <div class="bs-sidebar-group-label" id="shell-workspace-label">Workspace</div>
@@ -70,11 +65,6 @@
 </div></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete documentation shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete documentation shell code example"><code class="">&lt;header class="bs-navbar"&gt;...brand and global actions...&lt;/header&gt;
 &lt;div class="bs-sidebar-layout"&gt;
   &lt;aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation"&gt;
-    &lt;div class="bs-sidebar-header"&gt;
-      &lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;
-        &lt;span class="bs-sidebar-label"&gt;Boobstrap Docs&lt;/span&gt;
-      &lt;/button&gt;
-    &lt;/div&gt;
     &lt;div class="bs-sidebar-content"&gt;
       &lt;section class="bs-sidebar-group" aria-labelledby="shell-workspace-label"&gt;
         &lt;div class="bs-sidebar-group-label" id="shell-workspace-label"&gt;Workspace&lt;/div&gt;
@@ -368,51 +358,53 @@ trigger.addEventListener("click", () =&gt; {
 
             <h3 aria-level="2" id="sidebars-app-shell">Application shells</h3>
             <p>Choose between a stacked layout (global header on top) or a sidebar-first layout (full-height sidebar with a nested header). Use the sidebar-first pattern for complex dashboards where the header acts as a contextual utility bar that scales with the sidebar's state.</p>
-            <div class="docs-demo" data-component-example="sidebar-first-shell">
-              <div class="bs-sidebar-layout docs-sidebar-example-responsive-layout">
-                <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer docs-sidebar-example docs-sidebar-example-responsive" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation">
-                  <div class="bs-sidebar-header">
-                    <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#sidebars">
-                      <i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"></i>
-                      <span class="bs-sidebar-label">Acme Corp</span>
-                    </a>
-                  </div>
-                  <div class="bs-sidebar-content">
-                    <div class="bs-sidebar-group">
-                      <p class="bs-sidebar-group-label">Application</p>
-                      <nav class="bs-sidebar-group-content" aria-label="Application sections"><ul class="bs-sidebar-menu">
-                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" aria-current="page" data-bs-sidebar-close><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Dashboard</span></a></li>
-                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Projects</span></a></li>
-                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="user" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Team</span></a></li>
-                      </ul></nav>
+            <div class="docs-demo" data-component-example="sidebar-first-shell" data-preview-label="Sidebar-first shell">
+              <div class="docs-sidebar-first-shell-preview">
+                <div class="bs-sidebar-layout">
+                  <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer bs-p-0" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation">
+                    <div class="bs-sidebar-header bs-navbar">
+                      <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#sidebars">
+                        <i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"></i>
+                        <span class="bs-sidebar-label">Acme Corp</span>
+                      </a>
                     </div>
-                  </div>
-                </aside>
-                <main class="bs-sidebar-main">
-                  <header class="docs-sidebar-shell-header bs-navbar bs-navbar-sticky">
-                    <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
-                    <div class="bs-navbar-actions">
-                      <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Notifications</button>
-                      <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">New Project</button>
+                    <div class="bs-sidebar-content">
+                      <div class="bs-sidebar-group">
+                        <p class="bs-sidebar-group-label">Application</p>
+                        <nav class="bs-sidebar-group-content" aria-label="Application sections"><ul class="bs-sidebar-menu">
+                          <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" aria-current="page" data-bs-sidebar-close><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Dashboard</span></a></li>
+                          <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Projects</span></a></li>
+                          <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="user" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Team</span></a></li>
+                        </ul></nav>
+                      </div>
                     </div>
-                  </header>
-                  <div class="bs-p-6">
-                    <h4 class="bs-mb-2">Dashboard</h4>
-                    <p class="bs-text-muted bs-mb-4">The brand stays with primary navigation while this header carries contextual actions.</p>
-                    <div class="bs-grid bs-gap-3">
-                      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="active-projects-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Active projects</span><h5 class="bs-card-title" id="active-projects-card-title">12</h5></div></article>
-                      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="team-members-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Team members</span><h5 class="bs-card-title" id="team-members-card-title">24</h5></div></article>
+                  </aside>
+                  <main class="bs-sidebar-main">
+                    <header class="docs-sidebar-shell-header bs-navbar bs-navbar-sticky">
+                      <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
+                      <div class="bs-navbar-actions">
+                        <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Notifications</button>
+                        <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">New Project</button>
+                      </div>
+                    </header>
+                    <div class="bs-p-6">
+                      <h4 class="bs-mb-2">Dashboard</h4>
+                      <p class="bs-text-muted bs-mb-4">The brand stays with primary navigation while this header carries contextual actions.</p>
+                      <div class="bs-grid bs-gap-3">
+                        <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="active-projects-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Active projects</span><h5 class="bs-card-title" id="active-projects-card-title">12</h5></div></article>
+                        <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="team-members-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Team members</span><h5 class="bs-card-title" id="team-members-card-title">24</h5></div></article>
+                      </div>
                     </div>
-                  </div>
-                </main>
+                  </main>
+                </div>
+                <button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"></button>
               </div>
-              <button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"></button>
             </div>
             <div class="docs-code-block bs-code-window">
               <div class="docs-code-label bs-code-header"><span>HTML · Sidebar-first shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
               <pre class="bs-code-body" tabindex="0" aria-label="HTML · Sidebar-first shell code example"><code class="">&lt;div class="bs-sidebar-layout"&gt;
-  &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation"&gt;
-    &lt;div class="bs-sidebar-header"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer bs-p-0" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation"&gt;
+    &lt;div class="bs-sidebar-header bs-navbar"&gt;
       &lt;a class="bs-navbar-brand" href="/"&gt;&lt;i data-lucide="heart" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Acme Corp&lt;/span&gt;&lt;/a&gt;
     &lt;/div&gt;
     &lt;div class="bs-sidebar-content"&gt;

@@ -842,6 +842,13 @@ try {
         if (await drawer.getAttribute("data-bs-state") !== "closed" || !await drawerTrigger.evaluate((element) => element === document.activeElement)) {
           failures.push("mobile: sidebar reference drawer did not dismiss and restore focus");
         }
+        const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
+        const sidebarFirstDrawer = sidebarFirstExample.locator("#sidebar-first-example");
+        await sidebarFirstExample.getByRole("button", { name: "Toggle sidebar" }).click();
+        await sidebarFirstDrawer.getByRole("link", { name: "Dashboard" }).click();
+        if (await sidebarFirstDrawer.getAttribute("data-bs-state") !== "closed") {
+          failures.push("mobile: sidebar-first shell drawer is not interactive above its contained backdrop");
+        }
         await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
       }
 
@@ -864,12 +871,14 @@ try {
         const completeShellExample = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview");
         if (await completeShellExample.locator(".docs-sidebar-shell-brand-mark.bs-avatar.bs-avatar-primary").count() !== 1
           || await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand").count() !== 1
+          || await completeShellExample.locator(".bs-sidebar-start > .bs-sidebar-header").count() !== 0
           || await completeShellExample.locator(".docs-sidebar-shell-main .bs-card > .bs-card-content").count() !== 2
           || await completeShellExample.locator(".docs-sidebar-shell-summary").count() !== 0) {
           failures.push(`${viewport.name}: complete application shell does not use the supported brand and card contracts`);
         }
         const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
-        if (await sidebarFirstExample.locator('#sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
+        if (await sidebarFirstExample.locator('.docs-sidebar-first-shell-preview > .bs-sidebar-layout > #sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer.bs-p-0[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
+          || await sidebarFirstExample.locator('#sidebar-first-example > .bs-sidebar-header.bs-navbar').count() !== 1
           || await sidebarFirstExample.locator('[data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
           || await sidebarFirstExample.locator('.bs-sidebar-menu > .bs-sidebar-menu-item > .bs-sidebar-menu-button').count() !== 3
           || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > .bs-navbar-actions').count() !== 1
@@ -877,15 +886,26 @@ try {
           || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-p-6 .bs-card > .bs-card-content').count() !== 2) {
           failures.push(`${viewport.name}: sidebar-first shell is not wired with the responsive sidebar, navbar, content, and card contracts`);
         }
+        const sidebarFirstHeadersAlign = await sidebarFirstExample.evaluate((example) => {
+          const sidebar = example.querySelector("#sidebar-first-example").getBoundingClientRect();
+          const sidebarHeader = example.querySelector("#sidebar-first-example > .bs-sidebar-header").getBoundingClientRect();
+          const mainHeader = example.querySelector(".bs-sidebar-main > .bs-navbar").getBoundingClientRect();
+          return Math.abs(sidebarHeader.top - sidebar.top) <= 1
+            && Math.abs(sidebarHeader.height - mainHeader.height) <= 1
+            && Math.abs(sidebarHeader.height - 64) <= 1
+            && mainHeader.scrollWidth <= mainHeader.clientWidth + 1
+            && mainHeader.scrollHeight <= mainHeader.clientHeight + 1;
+        });
+        if (!sidebarFirstHeadersAlign) failures.push(`${viewport.name}: sidebar-first shell headers do not share one aligned height`);
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
           const mainRect = sidebar.nextElementSibling.getBoundingClientRect();
-          const headerRect = sidebar.querySelector(":scope > .bs-sidebar-header").getBoundingClientRect();
+          const contentRect = sidebar.querySelector(":scope > .bs-sidebar-content").getBoundingClientRect();
           const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
           return Math.abs(sidebarRect.height - 480) <= 1
             && Math.abs(mainRect.top - sidebarRect.top) <= 1
-            && Math.abs(headerRect.width - sidebarRect.width) <= 1
+            && Math.abs(contentRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });
@@ -1238,6 +1258,35 @@ try {
         await routePage.waitForFunction((triggerHandle) => document.activeElement === triggerHandle, await expandShell.elementHandle());
         if (await routePage.locator("#sidebar-shell + .docs-code-block").count() !== 1 || !await expandShell.evaluate((button) => button === document.activeElement)) {
           failures.push("desktop: expanded preview did not restore its source position and trigger focus");
+        }
+
+        const sidebarFirstPreview = routePage.locator('[data-component-example="sidebar-first-shell"]');
+        const expandSidebarFirst = sidebarFirstPreview.getByRole("button", { name: "Expand Sidebar-first shell preview", exact: true });
+        await expandSidebarFirst.click();
+        const expandedSidebarFirstGeometry = await expandedDialog.evaluate((dialog) => {
+          const viewport = dialog.querySelector("[data-expanded-preview-viewport]").getBoundingClientRect();
+          const preview = dialog.querySelector('[data-component-example="sidebar-first-shell"]').getBoundingClientRect();
+          const frame = dialog.querySelector(".docs-sidebar-first-shell-preview").getBoundingClientRect();
+          const sidebarHeader = dialog.querySelector("#sidebar-first-example > .bs-sidebar-header").getBoundingClientRect();
+          const mainHeader = dialog.querySelector(".bs-sidebar-main > .bs-navbar").getBoundingClientRect();
+          return {
+            previewFillsViewport: Math.abs(preview.width - viewport.width) <= 1 && Math.abs(preview.height - viewport.height) <= 1,
+            frameFillsAvailableShell: Math.abs(frame.left - viewport.left) <= 1
+              && Math.abs(frame.right - viewport.right) <= 1
+              && Math.abs(frame.bottom - viewport.bottom) <= 1,
+            headersAlign: Math.abs(sidebarHeader.top - mainHeader.top) <= 1
+              && Math.abs(sidebarHeader.height - mainHeader.height) <= 1,
+          };
+        });
+        if (!expandedSidebarFirstGeometry.previewFillsViewport
+          || !expandedSidebarFirstGeometry.frameFillsAvailableShell
+          || !expandedSidebarFirstGeometry.headersAlign) {
+          failures.push(`desktop: sidebar-first shell does not fill its expanded preview with aligned headers (${JSON.stringify(expandedSidebarFirstGeometry)})`);
+        }
+        await routePage.keyboard.press("Escape");
+        await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
+        if (await routePage.locator('[data-component-example="sidebar-first-shell"] + .docs-code-block').count() !== 1) {
+          failures.push("desktop: sidebar-first shell did not return to its source position after expansion");
         }
 
         const standalonePagePromise = routePage.context().waitForEvent("page");
