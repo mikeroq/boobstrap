@@ -270,7 +270,8 @@ const documentationQualityMinimums = {
   "responsive-composition": { examples: 1, code: 1, guidance: true },
   buttons: { examples: 9, code: 10 },
   navbar: { examples: 4, code: 4, guidance: true },
-  sidebars: { examples: 8, code: 15, guidance: true },
+  "application-shell": { examples: 2, code: 2, guidance: true },
+  sidebars: { examples: 7, code: 14, guidance: true },
   badges: { examples: 2, code: 3, guidance: true },
   avatars: { examples: 4, code: 4, guidance: true },
   cards: { examples: 6, code: 6, guidance: true },
@@ -842,14 +843,17 @@ try {
         if (await drawer.getAttribute("data-bs-state") !== "closed" || !await drawerTrigger.evaluate((element) => element === document.activeElement)) {
           failures.push("mobile: sidebar reference drawer did not dismiss and restore focus");
         }
+        await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
+      }
+
+      if (config.sectionId === "application-shell" && viewport.name === "mobile") {
         const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
         const sidebarFirstDrawer = sidebarFirstExample.locator("#sidebar-first-example");
         await sidebarFirstExample.getByRole("button", { name: "Toggle sidebar" }).click();
         await sidebarFirstDrawer.getByRole("link", { name: "Dashboard" }).click();
         if (await sidebarFirstDrawer.getAttribute("data-bs-state") !== "closed") {
-          failures.push("mobile: sidebar-first shell drawer is not interactive above its contained backdrop");
+          failures.push("mobile: sidebar-first application shell drawer is not interactive above its contained backdrop");
         }
-        await routePage.screenshot({ path: "artifacts/sidebar-mobile.png", fullPage: true });
       }
 
       if (config.sectionId === "sidebars") {
@@ -868,23 +872,33 @@ try {
         if (numberedSourceArtifacts.length > 0) {
           failures.push(`${viewport.name}: sidebar guide contains pasted source line numbers (${numberedSourceArtifacts.slice(0, 5).join(", ")})`);
         }
+        if (await routePage.locator('#sidebars [data-component-example="sidebar-shell"], #sidebars [data-component-example="sidebar-first-shell"]').count() !== 0
+          || await routePage.locator('#sidebars a[href="/docs/components/application-shell"]').count() < 1) {
+          failures.push(`${viewport.name}: sidebar guide was not separated from application-shell compositions`);
+        }
+      }
+
+      if (config.sectionId === "application-shell") {
         const completeShellExample = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview");
+        const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
         if (await completeShellExample.locator(".docs-sidebar-shell-brand-mark.bs-avatar.bs-avatar-primary").count() !== 1
           || await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand").count() !== 1
           || await completeShellExample.locator(".bs-sidebar-start > .bs-sidebar-header").count() !== 0
-          || await completeShellExample.locator(".docs-sidebar-shell-main .bs-card > .bs-card-content").count() !== 2
-          || await completeShellExample.locator(".docs-sidebar-shell-summary").count() !== 0) {
-          failures.push(`${viewport.name}: complete application shell does not use the supported brand and card contracts`);
+          || await completeShellExample.locator(".bs-sidebar-start .bs-nav-heading").count() !== 2
+          || await completeShellExample.locator(".bs-sidebar-start .bs-sidebar-group-label").count() !== 0
+          || await completeShellExample.locator(".docs-sidebar-shell-main .bs-card > .bs-card-content").count() !== 2) {
+          failures.push(`${viewport.name}: stacked application shell does not use the expected brand, navigation heading, and card contracts`);
         }
-        const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
         if (await sidebarFirstExample.locator('.docs-sidebar-first-shell-preview > .bs-sidebar-layout > #sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer.bs-p-0[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
           || await sidebarFirstExample.locator('#sidebar-first-example > .bs-sidebar-header.bs-navbar').count() !== 1
-          || await sidebarFirstExample.locator('[data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
+          || await sidebarFirstExample.locator('#sidebar-first-example .bs-nav-heading').count() !== 1
+          || await sidebarFirstExample.locator('#sidebar-first-example .bs-sidebar-group-label').count() !== 0
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > [data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > button').count() !== 1
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > .bs-navbar-actions').count() !== 0
           || await sidebarFirstExample.locator('.bs-sidebar-menu > .bs-sidebar-menu-item > .bs-sidebar-menu-button').count() !== 3
-          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > .bs-navbar-actions').count() !== 1
-          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar.bs-card, .bs-sidebar-nav, .bs-sidebar-link, .bs-page-content').count() !== 0
           || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-p-6 .bs-card > .bs-card-content').count() !== 2) {
-          failures.push(`${viewport.name}: sidebar-first shell is not wired with the responsive sidebar, navbar, content, and card contracts`);
+          failures.push(`${viewport.name}: sidebar-first application shell does not match the intended navigation, header, and content contracts`);
         }
         const sidebarFirstHeadersAlign = await sidebarFirstExample.evaluate((example) => {
           const sidebar = example.querySelector("#sidebar-first-example").getBoundingClientRect();
@@ -896,7 +910,7 @@ try {
             && mainHeader.scrollWidth <= mainHeader.clientWidth + 1
             && mainHeader.scrollHeight <= mainHeader.clientHeight + 1;
         });
-        if (!sidebarFirstHeadersAlign) failures.push(`${viewport.name}: sidebar-first shell headers do not share one aligned height`);
+        if (!sidebarFirstHeadersAlign) failures.push(`${viewport.name}: sidebar-first application shell headers do not share one aligned height`);
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
@@ -909,13 +923,21 @@ try {
             && Math.abs(footerRect.width - sidebarRect.width) <= 1
             && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
         });
-        if (!shellRegionsAlign) failures.push(`${viewport.name}: complete application shell regions do not remain side by side`);
-        if (await routePage.locator("#sidebar-shell .docs-sidebar-shell-header.bs-navbar").count() !== 1
-          || await routePage.locator("#sidebar-shell .docs-sidebar-shell-brand-mark").count() !== 1
-          || await shellSidebar.locator(":scope > .bs-sidebar-header .docs-sidebar-shell-brand-mark").count() !== 0
-          || await routePage.locator("#sidebar-shell .bs-sidebar-end.bs-sidebar-toc").count() !== 1
-          || await routePage.locator("#sidebar-shell svg.bs-icon").count() < 5) {
-          failures.push(`${viewport.name}: complete application shell does not expose one header brand with the expected rails and Lucide icon treatment`);
+        if (!shellRegionsAlign) failures.push(`${viewport.name}: stacked application shell regions do not remain side by side`);
+        const sidebarFirstSourceMatches = await sidebarFirstExample.evaluate((example) => {
+          const source = example.nextElementSibling?.querySelector("pre code")?.textContent ?? "";
+          const parsed = new DOMParser().parseFromString(source, "text/html");
+          const liveLabels = [...example.querySelectorAll("#sidebar-first-example .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
+          const sourceLabels = [...parsed.querySelectorAll("#sidebar-first-example .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
+          return JSON.stringify(liveLabels) === JSON.stringify(sourceLabels)
+            && parsed.querySelectorAll("#sidebar-first-example .bs-nav-heading").length === 1
+            && parsed.querySelectorAll(".bs-sidebar-main > .bs-navbar > button").length === 1
+            && parsed.querySelectorAll(".bs-sidebar-main > .bs-navbar > .bs-navbar-actions").length === 0
+            && parsed.querySelectorAll(".bs-sidebar-main .bs-card").length === example.querySelectorAll(".bs-sidebar-main .bs-card").length;
+        });
+        if (!sidebarFirstSourceMatches) failures.push(`${viewport.name}: sidebar-first application shell code does not match its preview`);
+        if (await routePage.locator('#application-shell a[href="/docs/components/sidebar"]').count() < 2) {
+          failures.push(`${viewport.name}: application shell guide does not direct readers to the sidebar reference`);
         }
       }
 
@@ -1191,7 +1213,7 @@ try {
 
       if (config.sectionId === "sidebars") {
         const sidebarExamples = routePage.locator("#sidebars .docs-demo[data-component-example]");
-        if (await sidebarExamples.count() !== 8) failures.push("desktop: sidebar guide is missing rendered examples");
+        if (await sidebarExamples.count() !== 7) failures.push("desktop: sidebar guide is missing rendered examples");
 
         const variantGeometry = await routePage.locator("#sidebar-variants").evaluate((preview) => ({
           clientWidth: preview.clientWidth,
@@ -1235,13 +1257,27 @@ try {
           failures.push("desktop: responsive sidebar example exposes drawer-only controls or omits application content");
         }
 
-        const shellPreview = routePage.locator("#sidebar-shell");
-        const expandShell = shellPreview.getByRole("button", { name: "Expand Complete application shell preview", exact: true });
-        await expandShell.click();
+        const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
+        const collapsible = routePage.locator("#collapse-example-sidebar");
+        await collapseTrigger.click();
+        await routePage.waitForTimeout(300);
+        if (await collapsible.getAttribute("data-bs-state") !== "collapsed" || await collapseTrigger.getAttribute("aria-expanded") !== "false") {
+          failures.push("desktop: sidebar reference did not collapse through its public controller");
+        }
+        if (await collapsible.locator(".bs-sidebar-label").first().evaluate((element) => getComputedStyle(element).display) !== "none") {
+          failures.push("desktop: icon-collapse mode did not hide sidebar labels");
+        }
+        await routePage.screenshot({ path: "artifacts/sidebar-desktop.png", fullPage: true });
+      }
+
+      if (config.sectionId === "application-shell") {
         const expandedDialog = routePage.locator(".docs-preview-dialog");
+        const stackedPreview = routePage.locator("#sidebar-shell");
+        const expandStacked = stackedPreview.getByRole("button", { name: "Expand Stacked application shell preview", exact: true });
+        await expandStacked.click();
         if (!await expandedDialog.evaluate((dialog) => dialog.open)
           || await expandedDialog.locator("[data-expanded-preview-viewport] > #sidebar-shell").count() !== 1) {
-          failures.push("desktop: application shell did not open in the expanded preview dialog");
+          failures.push("desktop: stacked application shell did not open in the expanded preview dialog");
         }
         const expandedDimensions = await expandedDialog.evaluate((dialog) => ({
           width: dialog.getBoundingClientRect().width,
@@ -1251,17 +1287,14 @@ try {
         }));
         if (Math.abs(expandedDimensions.width - expandedDimensions.viewportWidth) > 1
           || Math.abs(expandedDimensions.height - expandedDimensions.viewportHeight) > 1) {
-          failures.push(`desktop: expanded preview is not full viewport (${JSON.stringify(expandedDimensions)})`);
+          failures.push(`desktop: expanded application shell preview is not full viewport (${JSON.stringify(expandedDimensions)})`);
         }
         await routePage.keyboard.press("Escape");
         await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
-        await routePage.waitForFunction((triggerHandle) => document.activeElement === triggerHandle, await expandShell.elementHandle());
-        if (await routePage.locator("#sidebar-shell + .docs-code-block").count() !== 1 || !await expandShell.evaluate((button) => button === document.activeElement)) {
-          failures.push("desktop: expanded preview did not restore its source position and trigger focus");
-        }
+        await routePage.waitForFunction((triggerHandle) => document.activeElement === triggerHandle, await expandStacked.elementHandle());
 
-        const sidebarFirstPreview = routePage.locator('[data-component-example="sidebar-first-shell"]');
-        const expandSidebarFirst = sidebarFirstPreview.getByRole("button", { name: "Expand Sidebar-first shell preview", exact: true });
+        const sidebarFirstPreview = routePage.locator("#sidebar-first-shell");
+        const expandSidebarFirst = sidebarFirstPreview.getByRole("button", { name: "Expand Sidebar-first application shell preview", exact: true });
         await expandSidebarFirst.click();
         const expandedSidebarFirstGeometry = await expandedDialog.evaluate((dialog) => {
           const viewport = dialog.querySelector("[data-expanded-preview-viewport]").getBoundingClientRect();
@@ -1281,19 +1314,16 @@ try {
         if (!expandedSidebarFirstGeometry.previewFillsViewport
           || !expandedSidebarFirstGeometry.frameFillsAvailableShell
           || !expandedSidebarFirstGeometry.headersAlign) {
-          failures.push(`desktop: sidebar-first shell does not fill its expanded preview with aligned headers (${JSON.stringify(expandedSidebarFirstGeometry)})`);
+          failures.push(`desktop: sidebar-first application shell does not fill its expanded preview with aligned headers (${JSON.stringify(expandedSidebarFirstGeometry)})`);
         }
         await routePage.keyboard.press("Escape");
         await routePage.waitForFunction(() => !document.querySelector(".docs-preview-dialog")?.open);
-        if (await routePage.locator('[data-component-example="sidebar-first-shell"] + .docs-code-block').count() !== 1) {
-          failures.push("desktop: sidebar-first shell did not return to its source position after expansion");
-        }
 
-        const standalonePagePromise = routePage.context().waitForEvent("page");
-        await shellPreview.getByRole("button", { name: "Open Complete application shell preview in a new tab", exact: true }).click();
-        const standalonePage = await standalonePagePromise;
-        await standalonePage.waitForFunction(() => document.documentElement.hasAttribute("data-preview-ready"));
-        const standaloneContract = await standalonePage.evaluate(() => ({
+        const stackedStandalonePromise = routePage.context().waitForEvent("page");
+        await stackedPreview.getByRole("button", { name: "Open Stacked application shell preview in a new tab", exact: true }).click();
+        const stackedStandalone = await stackedStandalonePromise;
+        await stackedStandalone.waitForFunction(() => document.documentElement.hasAttribute("data-preview-ready"));
+        const stackedStandaloneContract = await stackedStandalone.evaluate(() => ({
           pathname: window.location.pathname,
           title: document.title,
           directShell: Boolean(document.querySelector("body#sidebar-shell > .docs-sidebar-shell-preview")),
@@ -1301,26 +1331,38 @@ try {
           shellHeight: document.querySelector(".docs-sidebar-shell-preview")?.getBoundingClientRect().height,
           viewportHeight: window.innerHeight,
         }));
-        if (standaloneContract.pathname !== "/preview"
-          || standaloneContract.title !== "Complete application shell preview — Boobstrap"
-          || !standaloneContract.directShell
-          || standaloneContract.docsWrapper
-          || Math.abs(standaloneContract.shellHeight - standaloneContract.viewportHeight) > 1) {
-          failures.push(`desktop: clean application shell preview contract failed (${JSON.stringify(standaloneContract)})`);
+        if (stackedStandaloneContract.pathname !== "/preview"
+          || stackedStandaloneContract.title !== "Stacked application shell preview — Boobstrap"
+          || !stackedStandaloneContract.directShell
+          || stackedStandaloneContract.docsWrapper
+          || Math.abs(stackedStandaloneContract.shellHeight - stackedStandaloneContract.viewportHeight) > 1) {
+          failures.push(`desktop: clean stacked application shell preview contract failed (${JSON.stringify(stackedStandaloneContract)})`);
         }
-        await standalonePage.close();
+        await stackedStandalone.close();
 
-        const collapseTrigger = routePage.getByRole("button", { name: "Toggle example sidebar", exact: true });
-        const collapsible = routePage.locator("#collapse-example-sidebar");
-        await collapseTrigger.click();
-        await routePage.waitForTimeout(300);
-        if (await collapsible.getAttribute("data-bs-state") !== "collapsed" || await collapseTrigger.getAttribute("aria-expanded") !== "false") {
-          failures.push("desktop: sidebar reference did not collapse through its public controller");
+        const sidebarFirstStandalonePromise = routePage.context().waitForEvent("page");
+        await sidebarFirstPreview.getByRole("button", { name: "Open Sidebar-first application shell preview in a new tab", exact: true }).click();
+        const sidebarFirstStandalone = await sidebarFirstStandalonePromise;
+        await sidebarFirstStandalone.waitForFunction(() => document.documentElement.hasAttribute("data-preview-ready"));
+        const sidebarFirstStandaloneContract = await sidebarFirstStandalone.evaluate(() => ({
+          pathname: window.location.pathname,
+          title: document.title,
+          directShell: Boolean(document.querySelector("body#sidebar-first-shell > .docs-sidebar-first-shell-preview")),
+          docsWrapper: Boolean(document.querySelector(".docs-layout, .docs-header, .docs-demo, [data-preview-actions]")),
+          shellHeight: document.querySelector(".docs-sidebar-first-shell-preview")?.getBoundingClientRect().height,
+          viewportHeight: window.innerHeight,
+          headerButtonCount: document.querySelectorAll(".bs-sidebar-main > .bs-navbar > button").length,
+        }));
+        if (sidebarFirstStandaloneContract.pathname !== "/preview"
+          || sidebarFirstStandaloneContract.title !== "Sidebar-first application shell preview — Boobstrap"
+          || !sidebarFirstStandaloneContract.directShell
+          || sidebarFirstStandaloneContract.docsWrapper
+          || sidebarFirstStandaloneContract.headerButtonCount !== 1
+          || Math.abs(sidebarFirstStandaloneContract.shellHeight - sidebarFirstStandaloneContract.viewportHeight) > 1) {
+          failures.push(`desktop: clean sidebar-first application shell preview contract failed (${JSON.stringify(sidebarFirstStandaloneContract)})`);
         }
-        if (await collapsible.locator(".bs-sidebar-label").first().evaluate((element) => getComputedStyle(element).display) !== "none") {
-          failures.push("desktop: icon-collapse mode did not hide sidebar labels");
-        }
-        await routePage.screenshot({ path: "artifacts/sidebar-desktop.png", fullPage: true });
+        await sidebarFirstStandalone.close();
+        await routePage.screenshot({ path: "artifacts/application-shell-desktop.png", fullPage: true });
       }
 
       if (config.sectionId === "installation") {

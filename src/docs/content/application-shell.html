@@ -1,0 +1,175 @@
+<header class="docs-component-hero docs-routed-hero"><nav class="docs-breadcrumb bs-breadcrumb" aria-label="Breadcrumb"><a href="/docs">Docs</a><span aria-hidden="true">/</span><span>Components</span><span aria-hidden="true">/</span><span>Application shell</span></nav><div class="docs-kicker">Components</div><h1>Application shell</h1><p class="bs-lead">Compose a global header, primary navigation, contextual controls, and flexible content into a responsive application frame.</p><div class="docs-component-meta" aria-label="Application shell documentation summary"><span class="bs-badge bs-text-xs"><strong>Composition</strong> guide</span><span class="bs-badge bs-text-xs"><strong>Two</strong> variations</span><span class="bs-badge bs-text-xs"><strong>Full-screen</strong> previews</span></div></header>
+
+<section class="docs-section docs-routed-section" id="application-shell">
+  <div class="docs-kicker">Components</div>
+  <h2>Application shell</h2>
+  <p>An application shell establishes the persistent frame around product content. These patterns compose Boobstrap navigation and layout primitives; they do not replace the underlying components. See the <a href="/docs/components/sidebar">Sidebar guide</a> for sidebar variants, menu anatomy, responsive behavior, controller methods, and the complete class reference.</p>
+  <div class="docs-callout bs-alert bs-alert-primary"><span><strong>Choose where the product identity lives.</strong><p>Use a stacked shell when one global header owns branding across the full viewport. Use a sidebar-first shell when the full-height navigation rail owns the brand and the main header only needs to expose the collapse control.</p></span></div>
+
+  <h3 id="application-shell-variation-reference">Choose a variation</h3>
+  <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Variation</th><th>Brand placement</th><th>Header relationship</th><th>Best fit</th></tr></thead><tbody>
+    <tr><td>Stacked</td><td>Global header</td><td>The navigation rails begin below the full-width header.</td><td>Documentation, admin tools, and products with shared global navigation.</td></tr>
+    <tr><td>Sidebar-first</td><td>Sidebar header</td><td>The sidebar header and main header share one aligned height.</td><td>Dashboards and workspaces where primary navigation defines the product frame.</td></tr>
+  </tbody></table></div>
+
+  <h3 id="application-shell-stacked">Stacked shell</h3>
+  <p>The global header spans the viewport, so the start and end rails begin directly beneath it. The navigation rail has no duplicate sidebar header; section labels use the same <code class="bs-code-inline">.bs-nav-heading</code> treatment as the documentation site.</p>
+  <div class="docs-demo" id="sidebar-shell" data-component-example="sidebar-shell" data-preview-label="Stacked application shell" data-preview-standalone>
+    <div class="docs-sidebar-shell-preview">
+      <header class="docs-sidebar-shell-header bs-navbar">
+        <a class="docs-sidebar-shell-brand bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#application-shell-stacked">
+          <span class="docs-sidebar-shell-brand-mark bs-avatar bs-avatar-sm bs-avatar-primary" aria-hidden="true">B</span>
+          <span>Boobstrap</span><span class="bs-text-muted bs-font-medium">/ Docs</span>
+        </a>
+        <button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button>
+      </header>
+      <div class="bs-sidebar-layout docs-sidebar-shell-body">
+        <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
+          <div class="bs-sidebar-content">
+            <section class="bs-sidebar-group" aria-labelledby="shell-workspace-label">
+              <p class="bs-nav-heading" id="shell-workspace-label">Workspace</p>
+              <div class="bs-sidebar-group-content"><ul class="bs-sidebar-menu">
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-stacked" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Overview</span></a></li>
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-stacked"><i data-lucide="book-open" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Foundations</span><span class="bs-sidebar-menu-badge">8</span></a></li>
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-stacked"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Components</span></a></li>
+              </ul></div>
+            </section>
+            <hr class="bs-sidebar-separator">
+            <section class="bs-sidebar-group" aria-labelledby="shell-tools-label">
+              <p class="bs-nav-heading" id="shell-tools-label">Tools</p>
+              <div class="bs-sidebar-group-content"><ul class="bs-sidebar-menu"><li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-stacked"><i data-lucide="settings" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Settings</span></a></li></ul></div>
+            </section>
+          </div>
+          <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span class="bs-avatar bs-avatar-sm" aria-hidden="true">AL</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
+        </aside>
+        <main class="bs-sidebar-main docs-sidebar-shell-main bs-p-5" aria-label="Example documentation article">
+          <nav class="bs-breadcrumb bs-mb-3" aria-label="Example breadcrumb"><a href="#application-shell-stacked">Docs</a><span aria-hidden="true">/</span><span>Components</span></nav>
+          <span class="bs-badge bs-badge-primary bs-mb-3">Components</span>
+          <h4 class="bs-mb-2">Application shell</h4>
+          <p class="bs-text-muted bs-mb-4">Compose persistent navigation around a flexible reading surface.</p>
+          <div class="bs-grid bs-gap-3">
+            <article class="bs-card bs-card-subtle bs-card-compact bs-col-12" aria-labelledby="shell-layout-card-title"><div class="bs-card-content"><h5 class="bs-card-title" id="shell-layout-card-title">CSS-first layout</h5><p class="bs-card-text bs-text-xs bs-mb-0">Sticky rails and flexible content regions.</p></div></article>
+            <article class="bs-card bs-card-subtle bs-card-compact bs-col-12" aria-labelledby="shell-behavior-card-title"><div class="bs-card-content"><h5 class="bs-card-title" id="shell-behavior-card-title">Optional behavior</h5><p class="bs-card-text bs-text-xs bs-mb-0">Responsive drawers and desktop collapse modes.</p></div></article>
+          </div>
+        </main>
+        <aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page example"><p class="bs-nav-heading">On this page</p><nav class="bs-nav"><a class="bs-nav-link" href="#application-shell-stacked" aria-current="location">Overview</a><a class="bs-nav-link" href="#application-shell-stacked">Examples</a><a class="bs-nav-link" href="#application-shell-stacked">API</a></nav></aside>
+      </div>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Stacked application shell</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Stacked application shell code example"><code class="">&lt;header class="bs-navbar bs-px-6"&gt;
+  &lt;a class="bs-navbar-brand" href="/"&gt;Boobstrap / Docs&lt;/a&gt;
+  &lt;button class="bs-navbar-toggle" type="button" aria-label="Search documentation"&gt;&lt;i data-lucide="search" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
+&lt;/header&gt;
+&lt;div class="bs-sidebar-layout"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation"&gt;
+    &lt;div class="bs-sidebar-content"&gt;
+      &lt;section class="bs-sidebar-group" aria-labelledby="workspace-label"&gt;
+        &lt;p class="bs-nav-heading" id="workspace-label"&gt;Workspace&lt;/p&gt;
+        &lt;div class="bs-sidebar-group-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="/" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Overview&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="/foundations"&gt;&lt;i data-lucide="book-open" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Foundations&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;&lt;/div&gt;
+      &lt;/section&gt;
+    &lt;/div&gt;
+    &lt;div class="bs-sidebar-footer"&gt;&lt;button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"&gt;Account&lt;/button&gt;&lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;main class="bs-sidebar-main bs-p-6"&gt;...documentation article...&lt;/main&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page"&gt;
+    &lt;p class="bs-nav-heading"&gt;On this page&lt;/p&gt;
+    &lt;nav class="bs-nav"&gt;...section links...&lt;/nav&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></div>
+
+  <h3 id="application-shell-sidebar-first">Sidebar-first shell</h3>
+  <p>The navigation rail spans the full viewport and owns the brand. Its header and the main utility header share one 4rem height, and the utility header contains only the sidebar collapse control.</p>
+  <div class="docs-demo" id="sidebar-first-shell" data-component-example="sidebar-first-shell" data-preview-label="Sidebar-first application shell" data-preview-standalone>
+    <div class="docs-sidebar-first-shell-preview">
+      <div class="bs-sidebar-layout">
+        <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer bs-p-0" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation">
+          <div class="bs-sidebar-header bs-navbar">
+            <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#application-shell-sidebar-first"><i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"></i><span class="bs-sidebar-label">Acme Corp</span></a>
+          </div>
+          <div class="bs-sidebar-content">
+            <div class="bs-sidebar-group">
+              <p class="bs-nav-heading">Application</p>
+              <nav class="bs-sidebar-group-content" aria-label="Application sections"><ul class="bs-sidebar-menu">
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" aria-current="page" data-bs-sidebar-close><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Dashboard</span></a></li>
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" data-bs-sidebar-close><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Projects</span></a></li>
+                <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" data-bs-sidebar-close><i data-lucide="user" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Team</span></a></li>
+              </ul></nav>
+            </div>
+          </div>
+        </aside>
+        <main class="bs-sidebar-main">
+          <header class="bs-navbar bs-navbar-sticky bs-px-6">
+            <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
+          </header>
+          <div class="bs-p-6">
+            <h4 class="bs-mb-2">Dashboard</h4>
+            <p class="bs-text-muted bs-mb-4">The brand stays with primary navigation while the main header controls the navigation state.</p>
+            <div class="bs-grid bs-gap-3">
+              <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="active-projects-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Active projects</span><h5 class="bs-card-title" id="active-projects-card-title">12</h5></div></article>
+              <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="team-members-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Team members</span><h5 class="bs-card-title" id="team-members-card-title">24</h5></div></article>
+            </div>
+          </div>
+        </main>
+      </div>
+      <button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"></button>
+    </div>
+  </div>
+  <div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Sidebar-first application shell</span><button class="bs-code-action" type="button" data-copy-code>Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Sidebar-first application shell code example"><code class="">&lt;div class="bs-sidebar-layout"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer bs-p-0" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation"&gt;
+    &lt;div class="bs-sidebar-header bs-navbar"&gt;
+      &lt;a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#application-shell-sidebar-first"&gt;&lt;i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Acme Corp&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="bs-sidebar-content"&gt;
+      &lt;div class="bs-sidebar-group"&gt;
+        &lt;p class="bs-nav-heading"&gt;Application&lt;/p&gt;
+        &lt;nav class="bs-sidebar-group-content" aria-label="Application sections"&gt;&lt;ul class="bs-sidebar-menu"&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" aria-current="page" data-bs-sidebar-close&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" data-bs-sidebar-close&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Projects&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+          &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#application-shell-sidebar-first" data-bs-sidebar-close&gt;&lt;i data-lucide="user" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Team&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;/ul&gt;&lt;/nav&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;main class="bs-sidebar-main"&gt;
+    &lt;header class="bs-navbar bs-navbar-sticky bs-px-6"&gt;
+      &lt;button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"&gt;&lt;i data-lucide="menu" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;/button&gt;
+    &lt;/header&gt;
+    &lt;div class="bs-p-6"&gt;
+      &lt;h4 class="bs-mb-2"&gt;Dashboard&lt;/h4&gt;
+      &lt;p class="bs-text-muted bs-mb-4"&gt;The brand stays with primary navigation while the main header controls the navigation state.&lt;/p&gt;
+      &lt;div class="bs-grid bs-gap-3"&gt;
+        &lt;article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="active-projects-card-title"&gt;&lt;div class="bs-card-content"&gt;&lt;span class="bs-text-xs bs-text-muted"&gt;Active projects&lt;/span&gt;&lt;h5 class="bs-card-title" id="active-projects-card-title"&gt;12&lt;/h5&gt;&lt;/div&gt;&lt;/article&gt;
+        &lt;article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="team-members-card-title"&gt;&lt;div class="bs-card-content"&gt;&lt;span class="bs-text-xs bs-text-muted"&gt;Team members&lt;/span&gt;&lt;h5 class="bs-card-title" id="team-members-card-title"&gt;24&lt;/h5&gt;&lt;/div&gt;&lt;/article&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/div&gt;
+&lt;button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"&gt;&lt;/button&gt;</code></pre></div>
+
+  <div class="docs-example-guidance" aria-label="Application shell guidance">
+    <div><h3>Place the brand once</h3><p>Keep identity in the global header for a stacked shell or in <code class="bs-code-inline">.bs-sidebar-header</code> for a sidebar-first shell. Do not duplicate it across both regions.</p></div>
+    <div><h3>Share one header height</h3><p>Applying <code class="bs-code-inline">.bs-navbar</code> to the sidebar header gives both sidebar-first header regions the same 4rem sizing contract and aligned border.</p></div>
+    <div><h3>Keep mobile behavior complete</h3><p>Pair <code class="bs-code-inline">.bs-sidebar-drawer</code> with a named toggle and backdrop so focus, Escape dismissal, scroll locking, and state remain synchronized.</p></div>
+    <div><h3>Use the component reference</h3><p>For menu variants, collapse modes, custom properties, data attributes, and controller events, continue with the <a href="/docs/components/sidebar">Sidebar guide</a>.</p></div>
+  </div>
+
+  <div class="docs-api">
+    <h3 id="application-shell-composition-reference">Composition reference</h3>
+    <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Role in the shell</th></tr></thead><tbody>
+      <tr><td><code class="bs-code-inline">.bs-navbar</code></td><td>Creates the global or contextual header and establishes the shared sidebar-first header height.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-layout</code></td><td>Places primary navigation beside a flexible main surface.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-main</code></td><td>Allows the application content region to grow and shrink safely.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-header</code></td><td>Holds product identity only in the sidebar-first variation.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-content</code></td><td>Provides the independently scrolling navigation region.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-nav-heading</code></td><td>Labels navigation sections consistently with the documentation shell.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-end.bs-sidebar-toc</code></td><td>Adds an optional compact page-outline rail to a stacked shell.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-collapsible</code></td><td>Enables the sidebar-first rail to collapse on desktop.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-drawer</code></td><td>Turns primary navigation into an off-canvas drawer on smaller viewports.</td></tr>
+      <tr><td><code class="bs-code-inline">.bs-sidebar-backdrop</code></td><td>Provides the drawer's external dismiss target.</td></tr>
+    </tbody></table></div>
+    <p>These are the composition-level contracts used by the examples. The <a href="/docs/components/sidebar">Sidebar guide</a> remains the source of truth for the complete sidebar API.</p>
+  </div>
+</section>

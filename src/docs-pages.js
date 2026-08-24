@@ -26,6 +26,7 @@ export const docsPages = [
   // 03 Components (A-Z)
   { path: "/docs/components/accordion", sectionId: "accordion", category: "Components", title: "Accordion", description: "Group accessible disclosure panels with single-open or always-open behavior and adapters for Alpine, React, and Vue." },
   { path: "/docs/components/alerts", sectionId: "alerts", category: "Components", title: "Alerts", description: "Communicate success, warning, danger, and informational messages with appropriate semantics." },
+  { path: "/docs/components/application-shell", sectionId: "application-shell", category: "Components", title: "Application shell", description: "Compose stacked and sidebar-first application frames with aligned headers, responsive navigation, flexible content, and full-screen previews." },
   { path: "/docs/components/avatars", sectionId: "avatars", category: "Components", title: "Avatars", description: "Represent people and entities with images, initials, sizes, presence indicators, groups, and overflow counts." },
   { path: "/docs/components/badges", sectionId: "badges", category: "Components", title: "Badges", description: "Add compact labels for status, categories, counts, and metadata." },
   { path: "/docs/components/banners", sectionId: "banners", category: "Components", title: "Banners", description: "Place full-width contextual notices at the top of a page with optional icons, actions, and dismiss behavior." },

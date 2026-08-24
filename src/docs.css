@@ -614,6 +614,10 @@ body.docs-page {
 
 .docs-sidebar-first-shell-preview .bs-sidebar-header.bs-navbar { padding-block: 0; }
 
+.docs-sidebar-first-shell-preview .bs-sidebar-main > .bs-navbar {
+  border-block-end: 1px solid var(--bs-color-border);
+}
+
 .docs-sidebar-first-shell-preview .bs-sidebar-main {
   min-block-size: 0;
   overflow-y: auto;
@@ -646,6 +650,21 @@ body.docs-page {
   padding: 0;
 }
 
+.docs-standalone-preview[data-component-example="sidebar-first-shell"],
+.docs-standalone-preview[data-component-example="sidebar-first-shell"] .docs-sidebar-first-shell-preview {
+  block-size: 100vh;
+  block-size: 100dvh;
+  min-block-size: 100vh;
+  min-block-size: 100dvh;
+  max-block-size: 100vh;
+  max-block-size: 100dvh;
+}
+
+.docs-standalone-preview[data-component-example="sidebar-first-shell"] .docs-sidebar-first-shell-preview {
+  border: 0;
+  border-radius: 0;
+}
+
 @media (max-width: calc(64rem - 0.001rem)) {
   .docs-sidebar-first-shell-preview > .bs-sidebar-layout > .bs-sidebar-drawer {
     position: absolute;
@@ -659,25 +678,6 @@ body.docs-page {
     position: absolute;
     inset: 0;
     block-size: 100%;
-  }
-}
-
-@media (max-width: 48rem) {
-  .docs-sidebar-first-shell-preview .bs-sidebar-main > .bs-navbar > .bs-navbar-actions {
-    inline-size: auto;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  .docs-sidebar-first-shell-preview .bs-sidebar-main > .bs-navbar > .bs-navbar-toggle {
-    inline-size: 2.5rem;
-    flex: 0 0 2.5rem;
-  }
-}
-
-@media (max-width: 36rem) {
-  .docs-sidebar-first-shell-preview .bs-sidebar-main > .bs-navbar > .bs-navbar-actions > .bs-btn-secondary {
-    display: none;
   }
 }
 
