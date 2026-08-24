@@ -881,11 +881,13 @@ try {
       if (config.sectionId === "application-shell") {
         const completeShellExample = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview");
         const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
-        if (await completeShellExample.locator(".docs-sidebar-shell-brand-mark.bs-avatar.bs-avatar-primary").count() !== 1
-          || await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand").count() !== 1
+        if (await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand .bs-icon.bs-text-primary").count() !== 1
+          || await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand", { hasText: "Acme Corp" }).count() !== 1
           || await completeShellExample.locator(".bs-sidebar-start > .bs-sidebar-header").count() !== 0
-          || await completeShellExample.locator(".bs-sidebar-start .bs-nav-heading").count() !== 2
+          || await completeShellExample.locator("#stacked-shell-sidebar.bs-sidebar-collapsible[data-bs-sidebar][data-bs-sidebar-collapse='icon']").count() !== 1
+          || await completeShellExample.locator(".bs-sidebar-start .bs-nav-heading.bs-sidebar-label").count() !== 1
           || await completeShellExample.locator(".bs-sidebar-start .bs-sidebar-group-label").count() !== 0
+          || await completeShellExample.locator("[data-bs-toggle='sidebar'][aria-controls='stacked-shell-sidebar']").count() !== 1
           || await completeShellExample.locator(".docs-sidebar-shell-main .bs-card > .bs-card-content").count() !== 2) {
           failures.push(`${viewport.name}: stacked application shell does not use the expected brand, navigation heading, and card contracts`);
         }
@@ -905,26 +907,64 @@ try {
           const sidebar = example.querySelector("#sidebar-first-example").getBoundingClientRect();
           const sidebarHeader = example.querySelector("#sidebar-first-example > .bs-sidebar-header").getBoundingClientRect();
           const mainHeader = example.querySelector(".bs-sidebar-main > .bs-navbar").getBoundingClientRect();
+          const sidebarHeading = example.querySelector("#sidebar-first-example .bs-nav-heading").getBoundingClientRect();
+          const mainHeading = example.querySelector(".bs-sidebar-main > .bs-p-6 > h4").getBoundingClientRect();
           return Math.abs(sidebarHeader.top - sidebar.top) <= 1
             && Math.abs(sidebarHeader.height - mainHeader.height) <= 1
             && Math.abs(sidebarHeader.height - 64) <= 1
+            && Math.abs((sidebarHeading.top - sidebarHeader.bottom) - 24) <= 1
+            && Math.abs((mainHeading.top - mainHeader.bottom) - 24) <= 1
             && mainHeader.scrollWidth <= mainHeader.clientWidth + 1
             && mainHeader.scrollHeight <= mainHeader.clientHeight + 1;
         });
-        if (!sidebarFirstHeadersAlign) failures.push(`${viewport.name}: sidebar-first application shell headers do not share one aligned height`);
+        if (!sidebarFirstHeadersAlign) failures.push(`${viewport.name}: sidebar-first application shell headers and content do not share aligned starts`);
+        const examplesShareContent = await routePage.locator("#application-shell").evaluate((section) => {
+          const contentFor = (selector) => {
+            const example = section.querySelector(selector);
+            return {
+              menu: [...example.querySelectorAll(".bs-sidebar-start .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim()),
+              heading: example.querySelector(".bs-sidebar-main h4")?.textContent.trim(),
+              description: example.querySelector(".bs-sidebar-main h4 + p")?.textContent.trim(),
+              cards: [...example.querySelectorAll(".bs-sidebar-main .bs-card")].map((card) => card.textContent.replace(/\s+/g, " ").trim()),
+            };
+          };
+          return JSON.stringify(contentFor("#sidebar-shell")) === JSON.stringify(contentFor("#sidebar-first-shell"));
+        });
+        if (!examplesShareContent) failures.push(`${viewport.name}: application shell variations do not share comparable navigation and main content`);
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
+          const preview = sidebar.closest(".docs-sidebar-shell-preview");
+          const headerRect = preview.querySelector(":scope > .docs-sidebar-shell-header").getBoundingClientRect();
           const sidebarRect = sidebar.getBoundingClientRect();
-          const mainRect = sidebar.nextElementSibling.getBoundingClientRect();
+          const main = sidebar.nextElementSibling;
+          const end = main.nextElementSibling;
+          const mainRect = main.getBoundingClientRect();
           const contentRect = sidebar.querySelector(":scope > .bs-sidebar-content").getBoundingClientRect();
-          const footerRect = sidebar.querySelector(":scope > .bs-sidebar-footer").getBoundingClientRect();
+          const endRect = end.getBoundingClientRect();
+          const leftHeadingRect = sidebar.querySelector(".bs-nav-heading").getBoundingClientRect();
+          const mainHeadingRect = main.querySelector("h4").getBoundingClientRect();
+          const rightHeadingRect = end.querySelector(".bs-nav-heading").getBoundingClientRect();
+          const contentOffset = leftHeadingRect.top - headerRect.bottom;
           return Math.abs(sidebarRect.height - 480) <= 1
             && Math.abs(mainRect.top - sidebarRect.top) <= 1
+            && Math.abs(endRect.top - sidebarRect.top) <= 1
             && Math.abs(contentRect.width - sidebarRect.width) <= 1
-            && Math.abs(footerRect.width - sidebarRect.width) <= 1
-            && Math.abs(footerRect.bottom - sidebarRect.bottom) <= 1;
+            && Math.abs(contentOffset - 24) <= 1
+            && Math.abs((mainHeadingRect.top - headerRect.bottom) - contentOffset) <= 1
+            && Math.abs((rightHeadingRect.top - headerRect.bottom) - contentOffset) <= 1;
         });
-        if (!shellRegionsAlign) failures.push(`${viewport.name}: stacked application shell regions do not remain side by side`);
+        if (!shellRegionsAlign) failures.push(`${viewport.name}: stacked application shell regions do not align from the bottom of the header`);
+        const stackedSourceMatches = await routePage.locator("#sidebar-shell").evaluate((example) => {
+          const source = example.nextElementSibling?.querySelector("pre code")?.textContent ?? "";
+          const parsed = new DOMParser().parseFromString(source, "text/html");
+          const liveLabels = [...example.querySelectorAll("#stacked-shell-sidebar .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
+          const sourceLabels = [...parsed.querySelectorAll("#stacked-shell-sidebar .bs-sidebar-menu-button .bs-sidebar-label")].map((label) => label.textContent.trim());
+          return JSON.stringify(liveLabels) === JSON.stringify(sourceLabels)
+            && parsed.querySelectorAll("[data-bs-toggle='sidebar'][aria-controls='stacked-shell-sidebar']").length === 1
+            && parsed.querySelectorAll("#stacked-shell-sidebar .bs-nav-heading.bs-sidebar-label").length === 1
+            && parsed.querySelectorAll(".bs-sidebar-main .bs-card").length === example.querySelectorAll(".bs-sidebar-main .bs-card").length;
+        });
+        if (!stackedSourceMatches) failures.push(`${viewport.name}: stacked application shell code does not match its preview`);
         const sidebarFirstSourceMatches = await sidebarFirstExample.evaluate((example) => {
           const source = example.nextElementSibling?.querySelector("pre code")?.textContent ?? "";
           const parsed = new DOMParser().parseFromString(source, "text/html");
@@ -1276,6 +1316,17 @@ try {
         const expandedDialog = routePage.locator(".docs-preview-dialog");
         const stackedPreview = routePage.locator("#sidebar-shell");
         const sidebarFirstPreview = routePage.locator("#sidebar-first-shell");
+        const stackedSidebar = stackedPreview.locator("#stacked-shell-sidebar");
+        const stackedToggle = stackedPreview.getByRole("button", { name: "Toggle primary sidebar", exact: true });
+        await stackedToggle.click();
+        await routePage.waitForFunction(() => document.querySelector("#stacked-shell-sidebar")?.dataset.bsState === "collapsed");
+        if (await stackedToggle.getAttribute("aria-expanded") !== "false"
+          || await stackedSidebar.locator(".bs-nav-heading").evaluate((heading) => getComputedStyle(heading).display) !== "none") {
+          failures.push("desktop: stacked application shell did not collapse through its primary header control");
+        }
+        await stackedToggle.click();
+        await routePage.waitForFunction(() => document.querySelector("#stacked-shell-sidebar")?.dataset.bsState === "expanded");
+        await routePage.waitForTimeout(300);
         const sidebarFirstSidebar = sidebarFirstPreview.locator("#sidebar-first-example");
         const sidebarFirstToggle = sidebarFirstPreview.getByRole("button", { name: "Toggle sidebar", exact: true });
         await sidebarFirstToggle.click();
