@@ -861,12 +861,21 @@ try {
         if (numberedSourceArtifacts.length > 0) {
           failures.push(`${viewport.name}: sidebar guide contains pasted source line numbers (${numberedSourceArtifacts.slice(0, 5).join(", ")})`);
         }
+        const completeShellExample = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview");
+        if (await completeShellExample.locator(".docs-sidebar-shell-brand-mark.bs-avatar.bs-avatar-primary").count() !== 1
+          || await completeShellExample.locator(".docs-sidebar-shell-brand.bs-navbar-brand").count() !== 1
+          || await completeShellExample.locator(".docs-sidebar-shell-main .bs-card > .bs-card-content").count() !== 2
+          || await completeShellExample.locator(".docs-sidebar-shell-summary").count() !== 0) {
+          failures.push(`${viewport.name}: complete application shell does not use the supported brand and card contracts`);
+        }
         const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
         if (await sidebarFirstExample.locator('#sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
           || await sidebarFirstExample.locator('[data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
           || await sidebarFirstExample.locator('.bs-sidebar-menu > .bs-sidebar-menu-item > .bs-sidebar-menu-button').count() !== 3
-          || await sidebarFirstExample.locator('.bs-sidebar-nav, .bs-sidebar-link').count() !== 0) {
-          failures.push(`${viewport.name}: sidebar-first shell is not wired with the responsive sidebar and menu contracts`);
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar > .bs-navbar-actions').count() !== 1
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-navbar.bs-card, .bs-sidebar-nav, .bs-sidebar-link, .bs-page-content').count() !== 0
+          || await sidebarFirstExample.locator('.bs-sidebar-main > .bs-p-6 .bs-card > .bs-card-content').count() !== 2) {
+          failures.push(`${viewport.name}: sidebar-first shell is not wired with the responsive sidebar, navbar, content, and card contracts`);
         }
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {

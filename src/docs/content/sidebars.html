@@ -21,7 +21,13 @@
 │   ├── SidebarFooter
 │   └── SidebarRail
 └── SidebarMain + SidebarTrigger</code></pre></div><h3 aria-level="2" id="sidebars-complete-application-shell">Complete application shell</h3><p>Compose a shared header with start and end rails around a flexible reading surface. This example mirrors the documentation shell: fixed identity and search regions, independently scrolling navigation, page content, and a compact table of contents.</p><div class="docs-demo" id="sidebar-shell" data-component-example="sidebar-shell"><div class="docs-sidebar-shell-preview">
-  <header class="docs-sidebar-shell-header bs-navbar"><div class="docs-sidebar-shell-brand"><span class="docs-sidebar-shell-brand-mark">B</span><span>Boobstrap</span><span class="docs-sidebar-shell-context">/ Docs</span></div><button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button></header>
+  <header class="docs-sidebar-shell-header bs-navbar">
+    <a class="docs-sidebar-shell-brand bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#sidebar-shell">
+      <span class="docs-sidebar-shell-brand-mark bs-avatar bs-avatar-sm bs-avatar-primary" aria-hidden="true">B</span>
+      <span>Boobstrap</span><span class="bs-text-muted bs-font-medium">/ Docs</span>
+    </a>
+    <button class="bs-navbar-toggle" type="button" aria-label="Search documentation"><i data-lucide="search" class="bs-icon" aria-hidden="true"></i></button>
+  </header>
   <div class="bs-sidebar-layout docs-sidebar-shell-body">
   <aside class="bs-sidebar bs-sidebar-start bs-p-0" aria-label="Documentation navigation example">
     <div class="bs-sidebar-header">
@@ -50,7 +56,16 @@
     </div>
     <div class="bs-sidebar-footer"><button class="bs-sidebar-menu-button bs-sidebar-menu-button-lg" type="button"><span class="bs-avatar bs-avatar-sm" aria-hidden="true">AL</span><span class="bs-sidebar-label">Ada Lovelace</span></button></div>
   </aside>
-  <main class="bs-sidebar-main docs-sidebar-shell-main" aria-label="Example documentation article"><nav class="bs-breadcrumb" aria-label="Example breadcrumb"><a href="#sidebar-shell">Docs</a><span aria-hidden="true">/</span><span>Components</span></nav><span class="bs-badge bs-badge-primary">Components</span><h4>Sidebar</h4><p class="bs-text-muted">Build composable application sidebars with fixed regions, nested menus, responsive drawers, and compact page outlines.</p><div class="docs-sidebar-shell-summary"><div><strong>CSS first</strong><span>Sticky layout and visual regions</span></div><div><strong>Behavior optional</strong><span>Drawers and collapse modes</span></div></div></main>
+  <main class="bs-sidebar-main docs-sidebar-shell-main bs-p-5" aria-label="Example documentation article">
+    <nav class="bs-breadcrumb bs-mb-3" aria-label="Example breadcrumb"><a href="#sidebar-shell">Docs</a><span aria-hidden="true">/</span><span>Components</span></nav>
+    <span class="bs-badge bs-badge-primary bs-mb-3">Components</span>
+    <h4 class="bs-mb-2">Sidebar</h4>
+    <p class="bs-text-muted bs-mb-4">Build composable application sidebars with fixed regions, nested menus, responsive drawers, and compact page outlines.</p>
+    <div class="bs-grid bs-gap-3">
+      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12" aria-labelledby="shell-layout-card-title"><div class="bs-card-content"><h5 class="bs-card-title" id="shell-layout-card-title">CSS-first layout</h5><p class="bs-card-text bs-text-xs bs-mb-0">Sticky rails and flexible content regions.</p></div></article>
+      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12" aria-labelledby="shell-behavior-card-title"><div class="bs-card-content"><h5 class="bs-card-title" id="shell-behavior-card-title">Optional behavior</h5><p class="bs-card-text bs-text-xs bs-mb-0">Responsive drawers and desktop collapse modes.</p></div></article>
+    </div>
+  </main>
   <aside class="bs-sidebar bs-sidebar-end bs-sidebar-toc" aria-label="On this page example"><p class="bs-nav-heading">On this page</p><nav class="bs-nav"><a class="bs-nav-link" href="#sidebar-shell" aria-current="location">Overview</a><a class="bs-nav-link" href="#sidebar-shell">Examples</a><a class="bs-nav-link" href="#sidebar-shell">API</a></nav></aside>
 </div></div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Complete documentation shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Complete documentation shell code example"><code class="">&lt;header class="bs-navbar"&gt;...brand and global actions...&lt;/header&gt;
 &lt;div class="bs-sidebar-layout"&gt;
@@ -374,16 +389,20 @@ trigger.addEventListener("click", () =&gt; {
                   </div>
                 </aside>
                 <main class="bs-sidebar-main">
-                  <header class="bs-navbar bs-navbar-sticky bs-card bs-card-subtle bs-card-compact">
-                    <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon"></i></button>
+                  <header class="docs-sidebar-shell-header bs-navbar bs-navbar-sticky">
+                    <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon" aria-hidden="true"></i></button>
                     <div class="bs-navbar-actions">
                       <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Notifications</button>
                       <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">New Project</button>
                     </div>
                   </header>
-                  <div class="bs-page-content">
-                    <h1 class="bs-h2">Dashboard</h1>
-                    <p>Welcome to the sidebar-first application shell. The branding is moved to the sidebar, and the header becomes a sticky utility bar nested within the main content area.</p>
+                  <div class="bs-p-6">
+                    <h4 class="bs-mb-2">Dashboard</h4>
+                    <p class="bs-text-muted bs-mb-4">The brand stays with primary navigation while this header carries contextual actions.</p>
+                    <div class="bs-grid bs-gap-3">
+                      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="active-projects-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Active projects</span><h5 class="bs-card-title" id="active-projects-card-title">12</h5></div></article>
+                      <article class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6" aria-labelledby="team-members-card-title"><div class="bs-card-content"><span class="bs-text-xs bs-text-muted">Team members</span><h5 class="bs-card-title" id="team-members-card-title">24</h5></div></article>
+                    </div>
                   </div>
                 </main>
               </div>
@@ -404,15 +423,19 @@ trigger.addEventListener("click", () =&gt; {
     &lt;/div&gt;
   &lt;/aside&gt;
   &lt;main class="bs-sidebar-main"&gt;
-    &lt;header class="bs-navbar bs-navbar-sticky"&gt;
+    &lt;header class="bs-navbar bs-navbar-sticky bs-px-6"&gt;
       &lt;button class="bs-navbar-toggle" data-bs-toggle="sidebar" aria-controls="sidebar-first-example"&gt;Menu&lt;/button&gt;
       &lt;div class="bs-navbar-actions"&gt;
         &lt;button class="bs-btn bs-btn-primary"&gt;New Project&lt;/button&gt;
       &lt;/div&gt;
     &lt;/header&gt;
-    &lt;div class="bs-page-content"&gt;
+    &lt;div class="bs-p-6"&gt;
       &lt;h1&gt;Dashboard&lt;/h1&gt;
       &lt;p&gt;Main application content goes here.&lt;/p&gt;
+      &lt;div class="bs-grid bs-gap-3"&gt;
+        &lt;div class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6"&gt;&lt;div class="bs-card-content"&gt;Active projects&lt;/div&gt;&lt;/div&gt;
+        &lt;div class="bs-card bs-card-subtle bs-card-compact bs-col-12 bs-col-md-6"&gt;&lt;div class="bs-card-content"&gt;Team members&lt;/div&gt;&lt;/div&gt;
+      &lt;/div&gt;
     &lt;/div&gt;
   &lt;/main&gt;
 &lt;/div&gt;
