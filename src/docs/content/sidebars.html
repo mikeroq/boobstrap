@@ -198,237 +198,239 @@
     &lt;a class="bs-nav-link" href="#sidebar-toc"&gt;JavaScript API&lt;/a&gt;
   &lt;/nav&gt;
 &lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-initialize-and-observe-a-sidebar">Initialize and observe a sidebar</h3><p>The aggregate initializer discovers responsive sidebars, or import the component directly when you need imperative control.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Sidebar lifecycle</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Sidebar lifecycle code example"><code data-language="javascript" class="">import { initBoobstrap } from "@boobstrap/boobstrap/js";
-201	
-202	const boobstrap = initBoobstrap(document);
-203	const element = document.querySelector("[data-bs-sidebar]");
-204	
-205	element.addEventListener("bs:sidebar:shown", () =&gt; {
-206	  console.log("Navigation drawer opened");
-207	});
-208	
-209	// Later: boobstrap.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-loading-state">Loading state</h3><p>Skeleton rows preserve menu rhythm while destinations load. Change each placeholder's text width locally and let the framework disable pulsing when reduced motion is preferred.</p><div class="docs-demo" id="sidebar-loading" data-component-example="sidebar-loading"><aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-loading" aria-label="Loading navigation">
-210	  <div class="bs-sidebar-header"><strong>Loading workspace</strong></div>
-211	  <div class="bs-sidebar-content">
-212	    <div class="bs-sidebar-group"><div class="bs-sidebar-group-label">Projects</div><div class="bs-sidebar-group-content">
-213	      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-wide" aria-hidden="true"></div>
-214	      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-narrow" aria-hidden="true"></div>
-215	      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-medium" aria-hidden="true"></div>
-216	    </div></div>
-217	  </div>
-218	</aside></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Loading placeholders</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Loading placeholders code example"><code class="">&lt;aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="Loading navigation"&gt;
-219	  &lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;Loading workspace&lt;/strong&gt;&lt;/div&gt;
-220	  &lt;div class="bs-sidebar-content"&gt;
-221	    &lt;div class="bs-sidebar-group"&gt;&lt;div class="bs-sidebar-group-label"&gt;Projects&lt;/div&gt;&lt;div class="bs-sidebar-group-content"&gt;
-222	      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 72%" aria-hidden="true"&gt;&lt;/div&gt;
-223	      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 55%" aria-hidden="true"&gt;&lt;/div&gt;
-224	      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 63%" aria-hidden="true"&gt;&lt;/div&gt;
-225	    &lt;/div&gt;&lt;/div&gt;
-226	  &lt;/div&gt;
-227	&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-right-to-left-and-end-placement">Right-to-left and end placement</h3><p>Start/end placement, borders, nested-menu indentation, actions, and badges use logical properties, so the same markup follows document direction without mirrored class names.</p><div class="docs-demo" id="sidebar-rtl" data-component-example="sidebar-rtl"><div dir="rtl">
-228	  <aside class="bs-sidebar bs-sidebar-end docs-sidebar-example docs-sidebar-example-rtl" aria-label="التنقل في المشروع">
-229	    <div class="bs-sidebar-header"><strong>مساحة العمل</strong></div>
-230	    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu">
-231	      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">لوحة التحكم</span><span class="bs-sidebar-menu-badge">٤</span></a></li>
-232	      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">المشاريع</span></a></li>
-233	    </ul></div>
-234	  </aside>
-235	</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Logical end sidebar</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Logical end sidebar code example"><code class="">&lt;div dir="rtl"&gt;
-236	  &lt;aside class="bs-sidebar bs-sidebar-end" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="التنقل في المشروع"&gt;
-237	    &lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;مساحة العمل&lt;/strong&gt;&lt;/div&gt;
-238	    &lt;div class="bs-sidebar-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;
-239	      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;لوحة التحكم&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;٤&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-240	      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;المشاريع&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
-241	    &lt;/ul&gt;&lt;/div&gt;
-242	  &lt;/aside&gt;
-243	&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-direct-controller-api">Direct controller API</h3><p>Use the component entry point when application code needs imperative control. Toggle automatically selects mobile show/hide or desktop expand/collapse for the current media query.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Controller methods</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Controller methods code example"><code data-language="javascript" class="">import { Sidebar } from "@boobstrap/boobstrap/js/sidebar";
-244	
-245	const sidebar = Sidebar.getOrCreateInstance(
-246	  document.querySelector("#app-sidebar"),
-247	);
-248	
-249	sidebar.show();       // mobile drawer
-250	sidebar.hide();       // mobile drawer
-251	sidebar.expand();     // desktop rail
-252	sidebar.collapse();   // desktop rail
-253	sidebar.toggle();     // active responsive mode
-254	
-255	// During application teardown:
-256	sidebar.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-cancelable-lifecycle-events">Cancelable lifecycle events</h3><p>Before-events can veto a transition. After-events are useful for analytics or layout work and include the controller, reason, and original source event in event.detail.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Lifecycle events</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Lifecycle events code example"><code data-language="javascript" class="">const sidebar = document.querySelector("#app-sidebar");
-257	
-258	sidebar.addEventListener("bs:sidebar:collapse", (event) =&gt; {
-259	  if (document.body.dataset.editorBusy === "true") event.preventDefault();
-260	});
-261	
-262	sidebar.addEventListener("bs:sidebar:collapsed", (event) =&gt; {
-263	  console.log(event.detail.reason); // trigger, shortcut, or api
-264	});</code></pre></div><h3 aria-level="2" id="sidebars-size-customization">Size customization</h3><p>Set sizing variables at the sidebar boundary. If an application overrides the controller media query, its own drawer media rules must use the same breakpoint so behavior and presentation remain aligned.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Local configuration</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Local configuration code example"><code class="">&lt;aside
-265	  class="bs-sidebar bs-sidebar-drawer"
-266	  style="--bs-sidebar-offset: 4rem;
-267	         --bs-sidebar-width: 19rem;
-268	         --bs-sidebar-width-mobile: 22rem;
-269	         --bs-sidebar-width-collapsed: 4rem"
-270	  data-bs-sidebar
-271	&gt;...&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-application-owned-state">Application-owned state</h3><p>React, Alpine, or another state layer can use the CSS presentation without the vanilla controller. Synchronize data-bs-state and aria-expanded together, and implement the same focus and dialog responsibilities for mobile drawers.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Controlled presentation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Controlled presentation code example"><code data-language="javascript" class="">const sidebar = document.querySelector("#app-sidebar");
-272	const trigger = document.querySelector('[aria-controls="app-sidebar"]');
-273	
-274	function renderSidebar(expanded) {
-275	  sidebar.dataset.bsState = expanded ? "expanded" : "collapsed";
-276	  trigger.setAttribute("aria-expanded", String(expanded));
-277	}
-278	
-279	trigger.addEventListener("click", () =&gt; {
-280	  renderSidebar(sidebar.dataset.bsState === "collapsed");
-281	});</code></div><div class="docs-example-guidance" aria-label="sidebars guidance"><div><h3>Choose the shell</h3><p>Use <code class="bs-code-inline">.bs-sidebar-layout</code> for product navigation beside a flexible main surface. A standalone <code class="bs-code-inline">.bs-sidebar-end.bs-sidebar-toc</code> is enough for a compact article outline.</p></div><div><h3>Choose collapse deliberately</h3><p>Use <code class="bs-code-inline">icon</code> only when every destination has a recognizable icon and accessible name. Use <code class="bs-code-inline">offcanvas</code> when content needs the full width. Use <code class="bs-code-inline">none</code> for always-visible navigation.</p></div><div><h3>Keep semantics native</h3><p>Use an <code class="bs-code-inline">&lt;aside&gt;</code> landmark, labeled <code class="bs-code-inline">&lt;nav&gt;</code> regions, links for destinations, buttons for actions, and <code class="bs-code-inline">aria-current</code> for the active page.</p></div><div><h3>One state owner</h3><p>Initialize the Boobstrap controller or let your application own state—never both on the same sidebar. Custom mobile behavior must reproduce focus trapping, Escape dismissal, inert state, and focus restoration.</p></div></div><div class="docs-api">
-282	              <h3 id="sidebars-composition-and-layout-classes">Composition and layout classes</h3>
-283	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
-284	                <tr><td><code class="bs-code-inline">.bs-sidebar-layout</code></td><td>Creates the full-height flex shell containing a sidebar and main content region.</td></tr>
-285	                <tr><td><code class="bs-code-inline">.bs-sidebar</code></td><td>Creates the sticky rail and defines its width, height, offset, and responsive custom properties.</td></tr>
-286	                <tr><td><code class="bs-code-inline">.bs-sidebar-main</code></td><td>Allows the primary content surface to shrink safely beside the rail.</td></tr>
-287	                <tr><td><code class="bs-code-inline">.bs-sidebar-start</code></td><td>Places rail spacing and border at the logical start edge.</td></tr>
-288	                <tr><td><code class="bs-code-inline">.bs-sidebar-end</code></td><td>Places rail spacing and border at the logical end edge.</td></tr>
-289	                <tr><td><code class="bs-code-inline">.bs-sidebar-header</code></td><td>Creates a fixed top region for identity, search, or a workspace switcher.</td></tr>
-290	                <tr><td><code class="bs-code-inline">.bs-sidebar-content</code></td><td>Creates the independently scrolling middle region.</td></tr>
-291	                <tr><td><code class="bs-code-inline">.bs-sidebar-footer</code></td><td>Creates a fixed bottom region for account or utility actions.</td></tr>
-292	                <tr><td><code class="bs-code-inline">.bs-sidebar-separator</code></td><td>Divides adjacent sidebar regions or groups.</td></tr>
-293	                <tr><td><code class="bs-code-inline">.bs-sidebar-floating</code></td><td>Adds inset spacing, elevation, border, and rounded corners to the rail.</td></tr>
-294	                <tr><td><code class="bs-code-inline">.bs-sidebar-inset</code></td><td>Coordinates a contained rail with an inset main surface.</td></tr>
-295	              </tbody></table></div>
-296	
-297	              <h3 id="sidebars-group-and-menu-classes">Group and menu classes</h3>
-298	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
-299	                <tr><td><code class="bs-code-inline">.bs-sidebar-group</code></td><td>Groups one related set of controls or destinations.</td></tr>
-300	                <tr><td><code class="bs-code-inline">.bs-sidebar-group-label</code></td><td>Styles the group's non-interactive accessible heading.</td></tr>
-301	                <tr><td><code class="bs-code-inline">.bs-sidebar-group-action</code></td><td>Positions an icon action at the inline end of a group heading.</td></tr>
-302	                <tr><td><code class="bs-code-inline">.bs-sidebar-group-content</code></td><td>Contains the group's menu or custom content without overflow.</td></tr>
-303	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu</code></td><td>Resets and spaces the primary list of menu items.</td></tr>
-304	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-item</code></td><td>Provides the positioning context for a menu button and optional action.</td></tr>
-305	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button</code></td><td>Styles a link or button with active, disabled, icon, label, and badge support.</td></tr>
-306	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button-sm</code></td><td>Creates a compact menu row.</td></tr>
-307	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button-lg</code></td><td>Creates a taller menu row for account or workspace controls.</td></tr>
-308	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-action</code></td><td>Positions a secondary icon action over the menu row's inline end.</td></tr>
-309	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-badge</code></td><td>Aligns a compact count or status at the inline end.</td></tr>
-310	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub</code></td><td>Creates an indented, bordered nested menu list.</td></tr>
-311	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub-item</code></td><td>Provides the nested item positioning context.</td></tr>
-312	                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub-button</code></td><td>Styles a compact nested link or button.</td></tr>
-313	                <tr><td><code class="bs-code-inline">.bs-sidebar-label</code></td><td>Truncates text and hides it when icon-collapse mode is active.</td></tr>
-314	                <tr><td><code class="bs-code-inline">.bs-sidebar-skeleton</code></td><td>Displays a reduced-motion-aware loading placeholder.</td></tr>
-315	              </tbody></table></div>
-316	
-317	              <h3 id="sidebars-behavior-and-utility-classes">Behavior and utility classes</h3>
-318	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
-319	                <tr><td><code class="bs-code-inline">.bs-sidebar-trigger</code></td><td>Styles an accessible icon-sized toggle button.</td></tr>
-320	                <tr><td><code class="bs-code-inline">.bs-sidebar-rail</code></td><td>Creates a narrow edge target that toggles desktop width.</td></tr>
-321	                <tr><td><code class="bs-code-inline">.bs-sidebar-collapsible</code></td><td>Enables animated desktop icon or off-canvas collapse presentation.</td></tr>
-322	                <tr><td><code class="bs-code-inline">.bs-sidebar-drawer</code></td><td>Converts the rail to an off-canvas dialog below the configured media query.</td></tr>
-323	                <tr><td><code class="bs-code-inline">.bs-sidebar-backdrop</code></td><td>Provides the mobile drawer's dimmed external dismiss target.</td></tr>
-324	                <tr><td><code class="bs-code-inline">.bs-sidebar-toc</code></td><td>Compacts a conventional <code class="bs-code-inline">.bs-nav</code> for an “On this page” rail.</td></tr>
-325	                <tr><td><code class="bs-code-inline">.bs-sidebar-open</code></td><td>Locks document scrolling while any controlled mobile drawer is open.</td></tr>
-326	              </tbody></table></div>
-327	
-328	              <h3 id="sidebars-data-attributes">Data attributes</h3>
-329	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Attribute</th><th>Contract</th></tr></thead><tbody>
-330	                <tr><td><code class="bs-code-inline">data-bs-sidebar</code></td><td>Marks an identified sidebar for controller initialization.</td></tr>
-331	                <tr><td><code class="bs-code-inline">data-bs-toggle="sidebar"</code></td><td>Toggles the sidebar named by the same element's <code class="bs-code-inline">aria-controls</code>.</td></tr>
-332	                <tr><td><code class="bs-code-inline">data-bs-sidebar-dismiss</code></td><td>Closes a mobile drawer or collapses a configured desktop rail.</td></tr>
-333	                <tr><td><code class="bs-code-inline">data-bs-sidebar-close</code></td><td>Closes the mobile drawer after a destination is selected.</td></tr>
-334	                <tr><td><code class="bs-code-inline">data-bs-sidebar-collapse</code></td><td>Selects <code class="bs-code-inline">icon</code>, <code class="bs-code-inline">offcanvas</code>, or <code class="bs-code-inline">none</code> desktop behavior.</td></tr>
-335	                <tr><td><code class="bs-code-inline">data-bs-sidebar-media</code></td><td>Overrides the mobile-drawer media query; default is <code class="bs-code-inline">(max-width: 64rem)</code>.</td></tr>
-336	                <tr><td><code class="bs-code-inline">data-bs-sidebar-shortcut</code></td><td>Enables a Control/Command keyboard shortcut using the supplied key.</td></tr>
-337	                <tr><td><code class="bs-code-inline">data-bs-state</code></td><td>Reflects <code class="bs-code-inline">open</code>/<code class="bs-code-inline">closed</code> on mobile and <code class="bs-code-inline">expanded</code>/<code class="bs-code-inline">collapsed</code> on desktop.</td></tr>
-338	              </tbody></table></div>
-339	
-340	              <h3 id="sidebars-javascript-methods-and-events">JavaScript methods and events</h3>
-341	              <p>Import <code class="bs-code-inline">Sidebar</code> from <code class="bs-code-inline">@boobstrap/boobstrap/js/sidebar</code>, or use <code class="bs-code-inline">initBoobstrap(document)</code>. The sidebar needs an <code class="bs-code-inline">id</code>; every external control references it with <code class="bs-code-inline">aria-controls</code>.</p>
-342	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
-343	                <tr><td><code class="bs-code-inline">getOrCreateInstance(element)</code></td><td>Returns the existing controller or initializes one instance.</td></tr>
-344	                <tr><td><code class="bs-code-inline">show()</code> / <code class="bs-code-inline">hide()</code></td><td>Open or close the mobile drawer, including focus and document state.</td></tr>
-345	                <tr><td><code class="bs-code-inline">expand()</code> / <code class="bs-code-inline">collapse()</code></td><td>Expand or collapse a desktop rail when its mode is not <code class="bs-code-inline">none</code>.</td></tr>
-346	                <tr><td><code class="bs-code-inline">toggle()</code></td><td>Toggles the active responsive mode.</td></tr>
-347	                <tr><td><code class="bs-code-inline">destroy()</code></td><td>Removes trigger, dismiss, keyboard, and media-query listeners.</td></tr>
-348	                <tr><td><code class="bs-code-inline">bs:sidebar:show</code> / <code class="bs-code-inline">bs:sidebar:hide</code></td><td>Cancelable mobile before-events.</td></tr>
-349	                <tr><td><code class="bs-code-inline">bs:sidebar:shown</code> / <code class="bs-sidebar-hidden</code></td><td>Mobile after-events dispatched once state and focus are synchronized.</td></tr>
-350	                <tr><td><code class="bs-code-inline">bs:sidebar:expand</code> / <code class="bs-code-inline">bs:sidebar:collapse</code></td><td>Cancelable desktop before-events.</td></tr>
-351	                <tr><td><code class="bs-code-inline">bs:sidebar:expanded</code> / <code class="bs-code-inline">bs-sidebar:collapsed</code></td><td>Desktop after-events dispatched after the rail state changes.</td></tr>
-352	              </tbody></table></div>
-353	
-354	            <h3 aria-level="2" id="sidebars-app-shell">Application shells</h3>
-355	            <p>Choose between a stacked layout (global header on top) or a sidebar-first layout (full-height sidebar with a nested header). Use the sidebar-first pattern for complex dashboards where the header acts as a contextual utility bar that scales with the sidebar's state.</p>
-356	            <div class="docs-demo" data-component-example="sidebar-first-shell">
-357	              <div class="bs-sidebar-layout">
-358	                <aside class="bs-sidebar" id="sidebar-first-example" data-bs-sidebar data-bs-state="expanded">
-359	                  <div class="bs-sidebar-header">
-360	                    <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#sidebars">
-361	                      <i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary"></i>
-362	                      Acme Corp
-363	                    </a>
-364	                  </div>
-365	                  <div class="bs-sidebar-content">
-366	                    <div class="bs-sidebar-group">
-367	                      <p class="bs-sidebar-group-label">Application</p>
-368	                      <nav class="bs-sidebar-nav">
-369	                        <a class="bs-sidebar-link" href="#sidebars" aria-current="page">Dashboard</a>
-370	                        <a class="bs-sidebar-link" href="#sidebars">Projects</a>
-371	                        <a class="bs-sidebar-link" href="#sidebars">Team</a>
-372	                      </nav>
-373	                    </div>
-374	                  </div>
-375	                </aside>
-376	                <main class="bs-sidebar-main">
-377	                  <header class="bs-navbar bs-navbar-sticky bs-card bs-card-subtle bs-card-compact">
-378	                    <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon"></i></button>
-379	                    <div class="bs-navbar-actions">
-380	                      <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Notifications</button>
-381	                      <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">New Project</button>
-382	                    </div>
-383	                  </header>
-384	                  <div class="bs-page-content">
-385	                    <h1 class="bs-h2">Dashboard</h1>
-386	                    <p>Welcome to the sidebar-first application shell. The branding is moved to the sidebar, and the header becomes a sticky utility bar nested within the main content area.</p>
-387	                  </div>
-388	                </main>
-389	              </div>
-390	            </div>
-391	            <div class="docs-code-block bs-code-window">
-392	              <div class="docs-code-label bs-code-header"><span>HTML · Sidebar-first shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
-393	              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Sidebar-first shell code example"><code class="">&lt;div class="bs-sidebar-layout"&gt;
-394	  &lt;aside class="bs-sidebar" id="sidebar-first-example" data-bs-sidebar data-bs-state="expanded"&gt;
-395	    &lt;div class="bs-sidebar-header"&gt;
-396	      &lt;a class="bs-navbar-brand" href="/"&gt;Acme Corp&lt;/a&gt;
-397	    &lt;/div&gt;
-398	    &lt;div class="bs-sidebar-content"&gt;
-399	      &lt;nav class="bs-sidebar-nav"&gt;
-400	        &lt;a class="bs-sidebar-link" href="#dashboard" aria-current="page"&gt;Dashboard&lt;/a&gt;
-401	        &lt;a class="bs-sidebar-link" href="#projects"&gt;Projects&lt;/a&gt;
-402	      &lt;/nav&gt;
-403	    &lt;/div&gt;
-404	  &lt;/aside&gt;
-405	  &lt;main class="bs-sidebar-main"&gt;
-406	    &lt;header class="bs-navbar bs-navbar-sticky"&gt;
-407	      &lt;button class="bs-navbar-toggle" data-bs-toggle="sidebar" aria-controls="sidebar-first-example"&gt;Menu&lt;/button&gt;
-408	      &lt;div class="bs-navbar-actions"&gt;
-409	        &lt;button class="bs-btn bs-btn-primary"&gt;New Project&lt;/button&gt;
-410	      &lt;/div&gt;
-411	    &lt;/header&gt;
-412	    &lt;div class="bs-page-content"&gt;
-413	      &lt;h1&gt;Dashboard&lt;/h1&gt;
-414	      &lt;p&gt;Main application content goes here.&lt;/p&gt;
-415	    &lt;/div&gt;
-416	  &lt;/main&gt;
-417	&lt;/div&gt;</code></pre>
-418	            </div>
-419	            <div class="docs-example-guidance" aria-label="Application shell guidance">
-420	              <div><h3>Branding placement</h3><p>In a sidebar-first layout, move the primary branding from the global navbar to the <code class="bs-code-inline">.bs-sidebar-header</code>. This anchors the application identity to the persistent navigation rail.</p></div>
-421	              <div><h3>Contextual headers</h3><p>Nesting the <code class="bs-code-inline">.bs-navbar</code> within <code class="bs-code-inline">.bs-sidebar-main</code> allows the header to scale and shift as the sidebar expands or collapses, while <code class="bs-code-inline">.bs-navbar-sticky</code> keeps it visible during content scroll.</p></div>
-422	            </div>
-423	
-424	            <h3 id="sidebars-css-custom-properties">CSS custom properties</h3>
-425	              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Property</th><th>Default and purpose</th></tr></thead><tbody>
-426	                <tr><td><code class="bs-code-inline">--bs-sidebar-offset</code></td><td><code class="bs-code-inline">0px</code>; space reserved above a sticky or fixed rail.</td></tr>
-427	                <tr><td><code class="bs-code-inline">--bs-sidebar-height</code></td><td><code class="bs-code-inline">calc(100vh - var(--bs-sidebar-offset))</code>; rail block size.</td></tr>
-428	                <tr><td><code class="bs-code-inline">--bs-sidebar-width</code></td><td><code class="bs-code-inline">17rem</code>; expanded rail width.</td></tr>
-429	                <tr><td><code class="bs-code-inline">--bs-sidebar-width-mobile</code></td><td><code class="bs-code-inline">calc(100vw - 3rem)</code>; maximum drawer width.</td></tr>
-430	                <tr><td><code class="bs-code-inline">--bs-sidebar-width-collapsed</code></td><td><code class="bs-code-inline">3.5rem</code>; desktop icon-rail width.</td></tr>
-431	                <tr><td><code class="bs-code-inline">--bs-sidebar-skeleton-width</code></td><td><code class="bs-code-inline">65%</code>; placeholder text-line width.</td></tr>
-432	              </tbody></table></div>
-433	            </div>
-434	          </section>
+
+const boobstrap = initBoobstrap(document);
+const element = document.querySelector("[data-bs-sidebar]");
+
+element.addEventListener("bs:sidebar:shown", () =&gt; {
+  console.log("Navigation drawer opened");
+});
+
+// Later: boobstrap.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-loading-state">Loading state</h3><p>Skeleton rows preserve menu rhythm while destinations load. Change each placeholder's text width locally and let the framework disable pulsing when reduced motion is preferred.</p><div class="docs-demo" id="sidebar-loading" data-component-example="sidebar-loading"><aside class="bs-sidebar bs-sidebar-start docs-sidebar-example docs-sidebar-example-loading" aria-label="Loading navigation">
+  <div class="bs-sidebar-header"><strong>Loading workspace</strong></div>
+  <div class="bs-sidebar-content">
+    <div class="bs-sidebar-group"><div class="bs-sidebar-group-label">Projects</div><div class="bs-sidebar-group-content">
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-wide" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-narrow" aria-hidden="true"></div>
+      <div class="bs-sidebar-skeleton docs-sidebar-skeleton-medium" aria-hidden="true"></div>
+    </div></div>
+  </div>
+</aside></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Loading placeholders</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Loading placeholders code example"><code class="">&lt;aside class="bs-sidebar bs-sidebar-start" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="Loading navigation"&gt;
+  &lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;Loading workspace&lt;/strong&gt;&lt;/div&gt;
+  &lt;div class="bs-sidebar-content"&gt;
+    &lt;div class="bs-sidebar-group"&gt;&lt;div class="bs-sidebar-group-label"&gt;Projects&lt;/div&gt;&lt;div class="bs-sidebar-group-content"&gt;
+      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 72%" aria-hidden="true"&gt;&lt;/div&gt;
+      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 55%" aria-hidden="true"&gt;&lt;/div&gt;
+      &lt;div class="bs-sidebar-skeleton" style="--bs-sidebar-skeleton-width: 63%" aria-hidden="true"&gt;&lt;/div&gt;
+    &lt;/div&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-right-to-left-and-end-placement">Right-to-left and end placement</h3><p>Start/end placement, borders, nested-menu indentation, actions, and badges use logical properties, so the same markup follows document direction without mirrored class names.</p><div class="docs-demo" id="sidebar-rtl" data-component-example="sidebar-rtl"><div dir="rtl">
+  <aside class="bs-sidebar bs-sidebar-end docs-sidebar-example docs-sidebar-example-rtl" aria-label="التنقل في المشروع">
+    <div class="bs-sidebar-header"><strong>مساحة العمل</strong></div>
+    <div class="bs-sidebar-content"><ul class="bs-sidebar-menu">
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">لوحة التحكم</span><span class="bs-sidebar-menu-badge">٤</span></a></li>
+      <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebar-rtl"><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">المشاريع</span></a></li>
+    </ul></div>
+  </aside>
+</div></div><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Logical end sidebar</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Logical end sidebar code example"><code class="">&lt;div dir="rtl"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-end" style="position: relative; --bs-sidebar-height: auto; --bs-sidebar-width: 20rem" aria-label="التنقل في المشروع"&gt;
+    &lt;div class="bs-sidebar-header"&gt;&lt;strong&gt;مساحة العمل&lt;/strong&gt;&lt;/div&gt;
+    &lt;div class="bs-sidebar-content"&gt;&lt;ul class="bs-sidebar-menu"&gt;
+      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl" aria-current="page"&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;لوحة التحكم&lt;/span&gt;&lt;span class="bs-sidebar-menu-badge"&gt;٤&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#sidebar-rtl"&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;المشاريع&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;&lt;/div&gt;
+  &lt;/aside&gt;
+&lt;/div&gt;</code></pre></div><h3 aria-level="2" id="sidebars-direct-controller-api">Direct controller API</h3><p>Use the component entry point when application code needs imperative control. Toggle automatically selects mobile show/hide or desktop expand/collapse for the current media query.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Controller methods</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Controller methods code example"><code data-language="javascript" class="">import { Sidebar } from "@boobstrap/boobstrap/js/sidebar";
+
+const sidebar = Sidebar.getOrCreateInstance(
+  document.querySelector("#app-sidebar"),
+);
+
+sidebar.show();       // mobile drawer
+sidebar.hide();       // mobile drawer
+sidebar.expand();     // desktop rail
+sidebar.collapse();   // desktop rail
+sidebar.toggle();     // active responsive mode
+
+// During application teardown:
+sidebar.destroy();</code></pre></div><h3 aria-level="2" id="sidebars-cancelable-lifecycle-events">Cancelable lifecycle events</h3><p>Before-events can veto a transition. After-events are useful for analytics or layout work and include the controller, reason, and original source event in event.detail.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Lifecycle events</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Lifecycle events code example"><code data-language="javascript" class="">const sidebar = document.querySelector("#app-sidebar");
+
+sidebar.addEventListener("bs:sidebar:collapse", (event) =&gt; {
+  if (document.body.dataset.editorBusy === "true") event.preventDefault();
+});
+
+sidebar.addEventListener("bs:sidebar:collapsed", (event) =&gt; {
+  console.log(event.detail.reason); // trigger, shortcut, or api
+});</code></pre></div><h3 aria-level="2" id="sidebars-size-customization">Size customization</h3><p>Set sizing variables at the sidebar boundary. If an application overrides the controller media query, its own drawer media rules must use the same breakpoint so behavior and presentation remain aligned.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>HTML · Local configuration</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="HTML · Local configuration code example"><code class="">&lt;aside
+  class="bs-sidebar bs-sidebar-drawer"
+  style="--bs-sidebar-offset: 4rem;
+         --bs-sidebar-width: 19rem;
+         --bs-sidebar-width-mobile: 22rem;
+         --bs-sidebar-width-collapsed: 4rem"
+  data-bs-sidebar
+&gt;...&lt;/aside&gt;</code></pre></div><h3 aria-level="2" id="sidebars-application-owned-state">Application-owned state</h3><p>React, Alpine, or another state layer can use the CSS presentation without the vanilla controller. Synchronize data-bs-state and aria-expanded together, and implement the same focus and dialog responsibilities for mobile drawers.</p><div class="docs-code-block bs-code-window"><div class="docs-code-label bs-code-header"><span>JavaScript · Controlled presentation</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div><pre class="bs-code-body" tabindex="0" aria-label="JavaScript · Controlled presentation code example"><code data-language="javascript" class="">const sidebar = document.querySelector("#app-sidebar");
+const trigger = document.querySelector('[aria-controls="app-sidebar"]');
+
+function renderSidebar(expanded) {
+  sidebar.dataset.bsState = expanded ? "expanded" : "collapsed";
+  trigger.setAttribute("aria-expanded", String(expanded));
+}
+
+trigger.addEventListener("click", () =&gt; {
+  renderSidebar(sidebar.dataset.bsState === "collapsed");
+});</code></pre></div><div class="docs-example-guidance" aria-label="sidebars guidance"><div><h3>Choose the shell</h3><p>Use <code class="bs-code-inline">.bs-sidebar-layout</code> for product navigation beside a flexible main surface. A standalone <code class="bs-code-inline">.bs-sidebar-end.bs-sidebar-toc</code> is enough for a compact article outline.</p></div><div><h3>Choose collapse deliberately</h3><p>Use <code class="bs-code-inline">icon</code> only when every destination has a recognizable icon and accessible name. Use <code class="bs-code-inline">offcanvas</code> when content needs the full width. Use <code class="bs-code-inline">none</code> for always-visible navigation.</p></div><div><h3>Keep semantics native</h3><p>Use an <code class="bs-code-inline">&lt;aside&gt;</code> landmark, labeled <code class="bs-code-inline">&lt;nav&gt;</code> regions, links for destinations, buttons for actions, and <code class="bs-code-inline">aria-current</code> for the active page.</p></div><div><h3>One state owner</h3><p>Initialize the Boobstrap controller or let your application own state—never both on the same sidebar. Custom mobile behavior must reproduce focus trapping, Escape dismissal, inert state, and focus restoration.</p></div></div><div class="docs-api">
+              <h3 id="sidebars-composition-and-layout-classes">Composition and layout classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-layout</code></td><td>Creates the full-height flex shell containing a sidebar and main content region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar</code></td><td>Creates the sticky rail and defines its width, height, offset, and responsive custom properties.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-main</code></td><td>Allows the primary content surface to shrink safely beside the rail.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-start</code></td><td>Places rail spacing and border at the logical start edge.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-end</code></td><td>Places rail spacing and border at the logical end edge.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-header</code></td><td>Creates a fixed top region for identity, search, or a workspace switcher.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-content</code></td><td>Creates the independently scrolling middle region.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-footer</code></td><td>Creates a fixed bottom region for account or utility actions.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-separator</code></td><td>Divides adjacent sidebar regions or groups.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-floating</code></td><td>Adds inset spacing, elevation, border, and rounded corners to the rail.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-inset</code></td><td>Coordinates a contained rail with an inset main surface.</td></tr>
+              </tbody></table></div>
+
+              <h3 id="sidebars-group-and-menu-classes">Group and menu classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-group</code></td><td>Groups one related set of controls or destinations.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-group-label</code></td><td>Styles the group's non-interactive accessible heading.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-group-action</code></td><td>Positions an icon action at the inline end of a group heading.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-group-content</code></td><td>Contains the group's menu or custom content without overflow.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu</code></td><td>Resets and spaces the primary list of menu items.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-item</code></td><td>Provides the positioning context for a menu button and optional action.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button</code></td><td>Styles a link or button with active, disabled, icon, label, and badge support.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button-sm</code></td><td>Creates a compact menu row.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-button-lg</code></td><td>Creates a taller menu row for account or workspace controls.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-action</code></td><td>Positions a secondary icon action over the menu row's inline end.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-badge</code></td><td>Aligns a compact count or status at the inline end.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub</code></td><td>Creates an indented, bordered nested menu list.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub-item</code></td><td>Provides the nested item positioning context.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-menu-sub-button</code></td><td>Styles a compact nested link or button.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-label</code></td><td>Truncates text and hides it when icon-collapse mode is active.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-skeleton</code></td><td>Displays a reduced-motion-aware loading placeholder.</td></tr>
+              </tbody></table></div>
+
+              <h3 id="sidebars-behavior-and-utility-classes">Behavior and utility classes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Class</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-trigger</code></td><td>Styles an accessible icon-sized toggle button.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-rail</code></td><td>Creates a narrow edge target that toggles desktop width.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-collapsible</code></td><td>Enables animated desktop icon or off-canvas collapse presentation.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-drawer</code></td><td>Converts the rail to an off-canvas dialog below the configured media query.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-backdrop</code></td><td>Provides the mobile drawer's dimmed external dismiss target.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-toc</code></td><td>Compacts a conventional <code class="bs-code-inline">.bs-nav</code> for an “On this page” rail.</td></tr>
+                <tr><td><code class="bs-code-inline">.bs-sidebar-open</code></td><td>Locks document scrolling while any controlled mobile drawer is open.</td></tr>
+              </tbody></table></div>
+
+              <h3 id="sidebars-data-attributes">Data attributes</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Attribute</th><th>Contract</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar</code></td><td>Marks an identified sidebar for controller initialization.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-toggle="sidebar"</code></td><td>Toggles the sidebar named by the same element's <code class="bs-code-inline">aria-controls</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar-dismiss</code></td><td>Closes a mobile drawer or collapses a configured desktop rail.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar-close</code></td><td>Closes the mobile drawer after a destination is selected.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar-collapse</code></td><td>Selects <code class="bs-code-inline">icon</code>, <code class="bs-code-inline">offcanvas</code>, or <code class="bs-code-inline">none</code> desktop behavior.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar-media</code></td><td>Overrides the mobile-drawer media query; default is <code class="bs-code-inline">(max-width: 64rem)</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-sidebar-shortcut</code></td><td>Enables a Control/Command keyboard shortcut using the supplied key.</td></tr>
+                <tr><td><code class="bs-code-inline">data-bs-state</code></td><td>Reflects <code class="bs-code-inline">open</code>/<code class="bs-code-inline">closed</code> on mobile and <code class="bs-code-inline">expanded</code>/<code class="bs-code-inline">collapsed</code> on desktop.</td></tr>
+              </tbody></table></div>
+
+              <h3 id="sidebars-javascript-methods-and-events">JavaScript methods and events</h3>
+              <p>Import <code class="bs-code-inline">Sidebar</code> from <code class="bs-code-inline">@boobstrap/boobstrap/js/sidebar</code>, or use <code class="bs-code-inline">initBoobstrap(document)</code>. The sidebar needs an <code class="bs-code-inline">id</code>; every external control references it with <code class="bs-code-inline">aria-controls</code>.</p>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Contract</th><th>Purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">getOrCreateInstance(element)</code></td><td>Returns the existing controller or initializes one instance.</td></tr>
+                <tr><td><code class="bs-code-inline">show()</code> / <code class="bs-code-inline">hide()</code></td><td>Open or close the mobile drawer, including focus and document state.</td></tr>
+                <tr><td><code class="bs-code-inline">expand()</code> / <code class="bs-code-inline">collapse()</code></td><td>Expand or collapse a desktop rail when its mode is not <code class="bs-code-inline">none</code>.</td></tr>
+                <tr><td><code class="bs-code-inline">toggle()</code></td><td>Toggles the active responsive mode.</td></tr>
+                <tr><td><code class="bs-code-inline">destroy()</code></td><td>Removes trigger, dismiss, keyboard, and media-query listeners.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:sidebar:show</code> / <code class="bs-code-inline">bs:sidebar:hide</code></td><td>Cancelable mobile before-events.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:sidebar:shown</code> / <code class="bs-code-inline">bs:sidebar:hidden</code></td><td>Mobile after-events dispatched once state and focus are synchronized.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:sidebar:expand</code> / <code class="bs-code-inline">bs:sidebar:collapse</code></td><td>Cancelable desktop before-events.</td></tr>
+                <tr><td><code class="bs-code-inline">bs:sidebar:expanded</code> / <code class="bs-code-inline">bs:sidebar:collapsed</code></td><td>Desktop after-events dispatched after the rail state changes.</td></tr>
+              </tbody></table></div>
+
+            <h3 aria-level="2" id="sidebars-app-shell">Application shells</h3>
+            <p>Choose between a stacked layout (global header on top) or a sidebar-first layout (full-height sidebar with a nested header). Use the sidebar-first pattern for complex dashboards where the header acts as a contextual utility bar that scales with the sidebar's state.</p>
+            <div class="docs-demo" data-component-example="sidebar-first-shell">
+              <div class="bs-sidebar-layout docs-sidebar-example-responsive-layout">
+                <aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer docs-sidebar-example docs-sidebar-example-responsive" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation">
+                  <div class="bs-sidebar-header">
+                    <a class="bs-navbar-brand bs-inline-flex bs-items-center bs-gap-2" href="#sidebars">
+                      <i data-lucide="heart" class="bs-icon bs-icon-lg bs-text-primary" aria-hidden="true"></i>
+                      <span class="bs-sidebar-label">Acme Corp</span>
+                    </a>
+                  </div>
+                  <div class="bs-sidebar-content">
+                    <div class="bs-sidebar-group">
+                      <p class="bs-sidebar-group-label">Application</p>
+                      <nav class="bs-sidebar-group-content" aria-label="Application sections"><ul class="bs-sidebar-menu">
+                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" aria-current="page" data-bs-sidebar-close><i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Dashboard</span></a></li>
+                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Projects</span></a></li>
+                        <li class="bs-sidebar-menu-item"><a class="bs-sidebar-menu-button" href="#sidebars" data-bs-sidebar-close><i data-lucide="user" class="bs-icon" aria-hidden="true"></i><span class="bs-sidebar-label">Team</span></a></li>
+                      </ul></nav>
+                    </div>
+                  </div>
+                </aside>
+                <main class="bs-sidebar-main">
+                  <header class="bs-navbar bs-navbar-sticky bs-card bs-card-subtle bs-card-compact">
+                    <button class="bs-navbar-toggle" type="button" data-bs-toggle="sidebar" aria-controls="sidebar-first-example" aria-label="Toggle sidebar"><i data-lucide="menu" class="bs-icon"></i></button>
+                    <div class="bs-navbar-actions">
+                      <button class="bs-btn bs-btn-secondary bs-btn-sm" type="button">Notifications</button>
+                      <button class="bs-btn bs-btn-primary bs-btn-sm" type="button">New Project</button>
+                    </div>
+                  </header>
+                  <div class="bs-page-content">
+                    <h1 class="bs-h2">Dashboard</h1>
+                    <p>Welcome to the sidebar-first application shell. The branding is moved to the sidebar, and the header becomes a sticky utility bar nested within the main content area.</p>
+                  </div>
+                </main>
+              </div>
+              <button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"></button>
+            </div>
+            <div class="docs-code-block bs-code-window">
+              <div class="docs-code-label bs-code-header"><span>HTML · Sidebar-first shell</span><button class="bs-code-action" type="button" data-copy-code="">Copy</button></div>
+              <pre class="bs-code-body" tabindex="0" aria-label="HTML · Sidebar-first shell code example"><code class="">&lt;div class="bs-sidebar-layout"&gt;
+  &lt;aside class="bs-sidebar bs-sidebar-start bs-sidebar-collapsible bs-sidebar-drawer" id="sidebar-first-example" data-bs-sidebar data-bs-sidebar-collapse="icon" data-bs-state="expanded" aria-label="Application navigation"&gt;
+    &lt;div class="bs-sidebar-header"&gt;
+      &lt;a class="bs-navbar-brand" href="/"&gt;&lt;i data-lucide="heart" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Acme Corp&lt;/span&gt;&lt;/a&gt;
+    &lt;/div&gt;
+    &lt;div class="bs-sidebar-content"&gt;
+      &lt;nav class="bs-sidebar-group-content" aria-label="Application sections"&gt;&lt;ul class="bs-sidebar-menu"&gt;
+        &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#dashboard" aria-current="page" data-bs-sidebar-close&gt;&lt;i data-lucide="layout-dashboard" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Dashboard&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+        &lt;li class="bs-sidebar-menu-item"&gt;&lt;a class="bs-sidebar-menu-button" href="#projects" data-bs-sidebar-close&gt;&lt;i data-lucide="panels-top-left" class="bs-icon" aria-hidden="true"&gt;&lt;/i&gt;&lt;span class="bs-sidebar-label"&gt;Projects&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+      &lt;/ul&gt;&lt;/nav&gt;
+    &lt;/div&gt;
+  &lt;/aside&gt;
+  &lt;main class="bs-sidebar-main"&gt;
+    &lt;header class="bs-navbar bs-navbar-sticky"&gt;
+      &lt;button class="bs-navbar-toggle" data-bs-toggle="sidebar" aria-controls="sidebar-first-example"&gt;Menu&lt;/button&gt;
+      &lt;div class="bs-navbar-actions"&gt;
+        &lt;button class="bs-btn bs-btn-primary"&gt;New Project&lt;/button&gt;
+      &lt;/div&gt;
+    &lt;/header&gt;
+    &lt;div class="bs-page-content"&gt;
+      &lt;h1&gt;Dashboard&lt;/h1&gt;
+      &lt;p&gt;Main application content goes here.&lt;/p&gt;
+    &lt;/div&gt;
+  &lt;/main&gt;
+&lt;/div&gt;
+&lt;button class="bs-sidebar-backdrop" type="button" data-bs-sidebar-dismiss aria-controls="sidebar-first-example" aria-label="Close application navigation"&gt;&lt;/button&gt;</code></pre>
+            </div>
+            <div class="docs-example-guidance" aria-label="Application shell guidance">
+              <div><h3>Branding placement</h3><p>In a sidebar-first layout, move the primary branding from the global navbar to the <code class="bs-code-inline">.bs-sidebar-header</code>. This anchors the application identity to the persistent navigation rail.</p></div>
+              <div><h3>Contextual headers</h3><p>Nesting the <code class="bs-code-inline">.bs-navbar</code> within <code class="bs-code-inline">.bs-sidebar-main</code> allows the header to scale and shift as the sidebar expands or collapses, while <code class="bs-code-inline">.bs-navbar-sticky</code> keeps it visible during content scroll.</p></div>
+            </div>
+
+            <h3 id="sidebars-css-custom-properties">CSS custom properties</h3>
+              <div class="docs-table-wrap bs-table-responsive"><table class="docs-table bs-table"><thead><tr><th>Property</th><th>Default and purpose</th></tr></thead><tbody>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-offset</code></td><td><code class="bs-code-inline">0px</code>; space reserved above a sticky or fixed rail.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-height</code></td><td><code class="bs-code-inline">calc(100vh - var(--bs-sidebar-offset))</code>; rail block size.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-width</code></td><td><code class="bs-code-inline">17rem</code>; expanded rail width.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-width-mobile</code></td><td><code class="bs-code-inline">calc(100vw - 3rem)</code>; maximum drawer width.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-width-collapsed</code></td><td><code class="bs-code-inline">3.5rem</code>; desktop icon-rail width.</td></tr>
+                <tr><td><code class="bs-code-inline">--bs-sidebar-skeleton-width</code></td><td><code class="bs-code-inline">65%</code>; placeholder text-line width.</td></tr>
+              </tbody></table></div>
+            </div>
+          </section>

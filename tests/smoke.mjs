@@ -847,6 +847,27 @@ try {
 
       if (config.sectionId === "sidebars") {
         if (await routePage.locator('#sidebars .docs-demo [style]').count() !== 0) failures.push(`${viewport.name}: sidebar examples rely on CSP-blocked inline styles`);
+        const numberedSourceArtifacts = await routePage.locator("#sidebars").evaluate((section) => {
+          const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT);
+          const artifacts = [];
+          let node = walker.nextNode();
+          while (node) {
+            const match = node.data.match(/(?:^|\n)(\d{3})\t/);
+            if (match) artifacts.push(match[1]);
+            node = walker.nextNode();
+          }
+          return artifacts;
+        });
+        if (numberedSourceArtifacts.length > 0) {
+          failures.push(`${viewport.name}: sidebar guide contains pasted source line numbers (${numberedSourceArtifacts.slice(0, 5).join(", ")})`);
+        }
+        const sidebarFirstExample = routePage.locator('[data-component-example="sidebar-first-shell"]');
+        if (await sidebarFirstExample.locator('#sidebar-first-example.bs-sidebar-collapsible.bs-sidebar-drawer[data-bs-sidebar][data-bs-sidebar-collapse="icon"]').count() !== 1
+          || await sidebarFirstExample.locator('[data-bs-toggle="sidebar"][aria-controls="sidebar-first-example"]').count() !== 1
+          || await sidebarFirstExample.locator('.bs-sidebar-menu > .bs-sidebar-menu-item > .bs-sidebar-menu-button').count() !== 3
+          || await sidebarFirstExample.locator('.bs-sidebar-nav, .bs-sidebar-link').count() !== 0) {
+          failures.push(`${viewport.name}: sidebar-first shell is not wired with the responsive sidebar and menu contracts`);
+        }
         const shellSidebar = routePage.locator("#sidebar-shell .docs-sidebar-shell-preview > .bs-sidebar-layout > .bs-sidebar-start");
         const shellRegionsAlign = await shellSidebar.evaluate((sidebar) => {
           const sidebarRect = sidebar.getBoundingClientRect();
